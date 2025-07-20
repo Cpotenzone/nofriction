@@ -1,0 +1,767 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NoFriction AI Chatbot - Multi-Thread</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            font-family: 'Inter', sans-serif;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        :root {
+            --primary-blue: #1e3a8a;
+            --secondary-blue: #1e40af;
+            --dark-blue: #1e293b;
+            --accent-blue: #3b82f6;
+            --light-blue: #60a5fa;
+            --background-dark: #0f172a;
+            --surface-dark: #1e293b;
+            --surface-light: #334155;
+            --subtle-shadow: 0 1px 3px rgba(0,0,0,0.1), 0 1px 2px rgba(0,0,0,0.06);
+        }
+
+        body {
+            background: linear-gradient(135deg, var(--background-dark) 0%, var(--dark-blue) 100%);
+            min-height: 100vh;
+        }
+
+        .chat-container {
+            background: rgba(30, 41, 59, 0.8);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(59, 130, 246, 0.15);
+            box-shadow: 0 25px 50px -12px rgba(0,0,0,0.25);
+        }
+
+        .message-bubble {
+            transition: all 0.3s ease;
+            box-shadow: var(--subtle-shadow);
+        }
+        
+        .user-message {
+            background: linear-gradient(135deg, var(--accent-blue), #2563eb);
+            color: white;
+            border-radius: 1.25rem 1.25rem 0.25rem 1.25rem;
+        }
+
+        .ai-message {
+            background: var(--surface-light);
+            border: 1px solid rgba(59, 130, 246, 0.1);
+            color: #e2e8f0;
+            border-radius: 1.25rem 1.25rem 1.25rem 0.25rem;
+        }
+
+        .typing-indicator {
+            animation: pulse 1.5s infinite ease-in-out;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 0.5; transform: scale(0.95); }
+            50% { opacity: 1; transform: scale(1.05); }
+        }
+
+        .feature-card {
+            background: rgba(51, 65, 85, 0.5);
+            border: 1px solid transparent;
+            transition: all 0.2s ease-in-out;
+        }
+
+        .feature-card:hover {
+            background: var(--surface-light);
+            border-color: rgba(59, 130, 246, 0.5);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+        }
+        
+        .input-area {
+            background: var(--surface-dark);
+            border-top: 1px solid rgba(59, 130, 246, 0.2);
+            transition: all 0.2s ease;
+        }
+        
+        .input-area.drag-over {
+            border-color: var(--accent-blue);
+            background: rgba(59, 130, 246, 0.1);
+            box-shadow: inset 0 0 15px rgba(59, 130, 246, 0.2);
+        }
+
+        .form-input-nf {
+            background: var(--surface-dark);
+            border: 1px solid rgba(59, 130, 246, 0.2);
+            color: #e2e8f0;
+            padding: 8px 12px;
+            border-radius: 8px;
+            font-size: 14px;
+            transition: all 0.3s ease;
+        }
+
+        .form-input-nf:focus {
+            outline: none;
+            border-color: var(--accent-blue);
+            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+        }
+
+        .file-upload-area {
+            border: 2px dashed rgba(59, 130, 246, 0.3);
+            transition: all 0.3s ease;
+        }
+
+        .file-upload-area:hover {
+            border-color: var(--accent-blue);
+            background: rgba(59, 130, 246, 0.05);
+        }
+
+        .message-actions {
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            position: absolute;
+            bottom: -1.75rem;
+            right: 0;
+        }
+
+        .message-bubble:hover .message-actions {
+            opacity: 1;
+        }
+        
+        .thread-item {
+            background: transparent;
+            border: 1px solid transparent;
+            transition: all 0.2s ease-in-out;
+            cursor: pointer;
+        }
+        .thread-item:hover {
+            background: var(--surface-light);
+            border-color: var(--accent-blue);
+        }
+        .thread-item.active {
+            background: var(--accent-blue);
+            border-color: var(--light-blue);
+            color: white;
+        }
+        .thread-item.active .text-gray-400, .thread-item.active .text-gray-500 {
+            color: rgba(255,255,255,0.7);
+        }
+
+        .scrollbar-hide { -ms-overflow-style: none; scrollbar-width: none; }
+        .scrollbar-hide::-webkit-scrollbar { display: none; }
+
+        .code-block {
+            background: #0f172a;
+            border: 1px solid rgba(59, 130, 246, 0.2);
+            border-radius: 8px;
+            padding: 1rem;
+            margin: 0.75rem 0;
+            overflow-x: auto;
+            font-size: 0.875rem;
+        }
+        .code-block pre { margin: 0; color: #e2e8f0; font-family: 'SF Mono', 'Courier New', monospace; }
+
+        .sidebar-toggle { display: none; }
+        @media (max-width: 1024px) {
+            .sidebar { position: fixed; left: -100%; top: 0; bottom: 0; width: 320px; z-index: 50; transition: left 0.3s ease-in-out; background: var(--background-dark); padding: 1rem; overflow-y: auto; }
+            .sidebar.open { left: 0; }
+            .sidebar-toggle { display: block; }
+            .main-content { padding: 0; }
+        }
+    </style>
+</head>
+
+<body class="text-gray-100">
+    <div class="min-h-screen">
+        <!-- Mobile Sidebar Overlay -->
+        <div id="sidebarOverlay" class="fixed inset-0 bg-black bg-opacity-75 z-40 hidden lg:hidden"></div>
+        <!-- Header -->
+        <header class="p-3 border-b border-gray-700/50 flex items-center justify-between">
+            <div class="flex items-center gap-3">
+                <button id="sidebarToggle" class="sidebar-toggle p-2 text-gray-400 hover:text-white lg:hidden">
+                    <i class="fas fa-bars text-xl"></i>
+                </button>
+                <img src="https://storage.googleapis.com/gemini-prod-us-west1-1p-495584551352-assets/nofrictionlogo9.png" alt="NoFriction AI Logo" class="h-8 w-auto">
+            </div>
+            <div class="flex items-center space-x-2 lg:space-x-3">
+                <div class="flex items-center space-x-2">
+                    <label class="text-xs text-gray-400 hidden sm:block">Model:</label>
+                    <select id="model-selector" name="model" class="form-input-nf text-xs lg:text-sm">
+                        <option value="gemini">Gemini</option>
+                        <option value="chatgpt">ChatGPT</option>
+                        <option value="claude">Claude</option>
+                        <option value="deepseek">DeepSeek</option>
+                        <option value="perplexity">Perplexity</option>
+                        <option value="Mistral">Mistral</option>
+                        <option value="ollama">Ollama</option>
+                    </select>
+                </div>
+                <button id="newThreadBtn" class="px-3 py-2 bg-blue-600 hover:bg-blue-700 rounded-lg transition-colors text-sm font-semibold flex items-center gap-2">
+                    <i class="fas fa-plus"></i><span class="hidden sm:inline">New Thread</span>
+                </button>
+                <button id="settingsBtn" class="p-2 text-gray-400 hover:text-white transition-colors">
+                    <i class="fas fa-cog text-lg"></i>
+                </button>
+            </div>
+        </header>
+
+        <div class="flex h-[calc(100vh-61px)]">
+            <!-- Sidebar -->
+            <aside id="sidebar" class="sidebar lg:relative lg:left-0 w-80 flex-shrink-0 lg:border-r lg:border-gray-700/50">
+                <div class="p-3 space-y-5">
+                    <!-- Thread Management -->
+                    <div>
+                        <div class="flex items-center justify-between mb-2">
+                            <h2 class="text-sm font-semibold text-blue-300 uppercase tracking-wider">Conversations</h2>
+                            <button id="newThreadSidebarBtn" class="p-1 text-gray-400 hover:text-white transition-colors">
+                                <i class="fas fa-plus"></i>
+                            </button>
+                        </div>
+                        <div id="threadsList" class="space-y-1.5 max-h-48 overflow-y-auto scrollbar-hide">
+                        </div>
+                    </div>
+                    <!-- AI Capabilities -->
+                    <div>
+                        <h2 class="text-sm font-semibold mb-2 text-blue-300 uppercase tracking-wider">AI Capabilities</h2>
+                        <div class="grid grid-cols-1 gap-2">
+                            <div class="feature-card p-3 rounded-lg cursor-pointer" data-feature="text">
+                                <i class="fas fa-comments text-blue-400 mb-2"></i>
+                                <div class="text-sm font-medium">Text Generation</div>
+                            </div>
+                            <div class="feature-card p-3 rounded-lg cursor-pointer" data-feature="code">
+                                <i class="fas fa-code text-green-400 mb-2"></i>
+                                <div class="text-sm font-medium">Code Generation</div>
+                            </div>
+                            <div class="feature-card p-3 rounded-lg cursor-pointer" data-feature="analysis">
+                                <i class="fas fa-chart-bar text-purple-400 mb-2"></i>
+                                <div class="text-sm font-medium">Data Analysis</div>
+                            </div>
+                            <div class="feature-card p-3 rounded-lg cursor-pointer" data-feature="research">
+                                <i class="fas fa-search text-yellow-400 mb-2"></i>
+                                <div class="text-sm font-medium">Research</div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Export Options -->
+                    <div>
+                        <h2 class="text-sm font-semibold mb-2 text-blue-300 uppercase tracking-wider">Export</h2>
+                        <div class="space-y-2">
+                            <button id="exportMarkdown" class="w-full px-4 py-2 bg-gray-700 hover:bg-gray-600 rounded-lg transition-colors text-left text-sm flex items-center gap-3"><i class="fas fa-file-alt w-4 text-center"></i>Export as Markdown</button>
+                            <button id="exportJson" class="w-full px-4 py-2 bg-gray-700 hover:bg-gray-600 rounded-lg transition-colors text-left text-sm flex items-center gap-3"><i class="fas fa-file-code w-4 text-center"></i>Export as JSON</button>
+                        </div>
+                    </div>
+                </div>
+            </aside>
+
+            <!-- Main Chat Area -->
+            <main class="main-content flex-1 flex flex-col p-0 lg:p-2">
+                <div class="chat-container rounded-none lg:rounded-xl flex-1 flex flex-col overflow-hidden">
+                    <!-- Thread Info Bar -->
+                    <div id="threadInfo" class="px-4 py-3 border-b border-gray-600/50 bg-gray-800/30 flex items-center justify-between">
+                        <div class="flex items-center space-x-3">
+                            <h3 id="threadTitle" class="font-semibold text-gray-200">New Thread</h3>
+                            <span id="currentModel" class="model-badge">Gemini</span>
+                        </div>
+                        <div class="text-xs text-gray-400">
+                            <span id="messageCount">0 messages</span>
+                        </div>
+                    </div>
+                    <!-- Chat Messages -->
+                    <div id="messagesContainer" class="flex-1 p-4 lg:p-6 overflow-y-auto scrollbar-hide">
+                        <div id="messages" class="space-y-6">
+                            <!-- Welcome Message will be injected here -->
+                        </div>
+                    </div>
+                    <!-- File Upload Area (Hidden by default, triggered by button) -->
+                    <div id="fileUploadArea" class="hidden mx-4 lg:mx-6 mb-4 p-4 file-upload-area rounded-lg">
+                    </div>
+                     <!-- Input Area -->
+                    <div id="inputArea" class="input-area p-2 lg:p-3">
+                        <!-- Uploaded Files Preview -->
+                        <div id="uploadedFiles" class="hidden px-2 pb-2">
+                            <div id="filesList" class="space-y-2 max-h-24 overflow-y-auto scrollbar-hide"></div>
+                        </div>
+                        <div class="flex items-end space-x-2">
+                            <button id="attachBtn" class="text-gray-400 hover:text-white p-2 rounded-lg transition-colors flex-shrink-0">
+                                <i class="fas fa-paperclip text-lg"></i>
+                            </button>
+                            <textarea id="user-input" name="messages" placeholder="Type a message, or drag & drop a file..." class="w-full bg-transparent text-white placeholder-gray-500 resize-none focus:outline-none max-h-40 text-base" rows="1"></textarea>
+                            <button id="sendBtn" class="bg-blue-600 hover:bg-blue-700 w-9 h-9 rounded-full transition-colors disabled:opacity-50 disabled:cursor-not-allowed flex-shrink-0 flex items-center justify-center">
+                                <i class="fas fa-arrow-up text-white"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </main>
+        </div>
+    </div>
+    
+    <!-- Settings Modal -->
+    <div id="settingsModal" class="hidden fixed inset-0 bg-black bg-opacity-75 flex items-center justify-center z-50 p-4">
+        <div class="bg-surface-dark rounded-xl p-6 w-full max-w-md border border-gray-700/50 shadow-2xl">
+            <div class="flex items-center justify-between mb-6">
+                <h3 class="text-lg font-semibold text-white">Settings</h3>
+                <button id="closeSettings" class="text-gray-400 hover:text-white">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="space-y-4">
+                <div>
+                    <label class="block text-sm font-medium text-gray-300 mb-2">Default AI Model</label>
+                    <select id="defaultModelSelect" class="w-full form-input-nf">
+                        <option value="gemini">Gemini</option>
+                        <option value="chatgpt">ChatGPT</option>
+                        <option value="claude">Claude</option>
+                        <option value="deepseek">DeepSeek</option>
+                        <option value="perplexity">Perplexity</option>
+                        <option value="Mistral">Mistral</option>
+                        <option value="ollama">Ollama</option>
+                    </select>
+                </div>
+            </div>
+            <div class="flex justify-end mt-8 space-x-3">
+                <button id="resetSettings" class="px-4 py-2 text-gray-300 hover:text-white transition-colors text-sm font-medium">Reset</button>
+                <button id="saveSettings" class="px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg transition-colors text-sm font-medium">Save Settings</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <script>
+    class NoFrictionMultiThreadChatbot {
+        constructor() {
+            this.webhookUrl = 'https://caseyp.app.n8n.cloud/webhook/nofrictionchatbot';
+            this.threads = JSON.parse(localStorage.getItem('nf_threads') || '[]');
+            this.currentThreadId = null;
+            this.currentThread = null;
+            this.settings = JSON.parse(localStorage.getItem('nf_settings') || '{}');
+            this.uploadedFiles = [];
+            this.currentModel = 'gemini';
+            this.initializeElements();
+            this.bindEvents();
+            this.loadSettings(); 
+            this.initializeFirstThread();
+            this.setupAutoResize();
+            this.setupMobileHandling();
+        }
+
+        initializeElements() {
+            this.elements = {
+                userInput: document.getElementById('user-input'),
+                sendBtn: document.getElementById('sendBtn'),
+                messagesContainer: document.getElementById('messagesContainer'),
+                messages: document.getElementById('messages'),
+                typingIndicator: document.getElementById('typingIndicator'),
+                attachBtn: document.getElementById('attachBtn'),
+                fileInput: document.getElementById('fileInput'),
+                inputArea: document.getElementById('inputArea'),
+                uploadedFiles: document.getElementById('uploadedFiles'),
+                filesList: document.getElementById('filesList'),
+                newThreadBtn: document.getElementById('newThreadBtn'),
+                newThreadSidebarBtn: document.getElementById('newThreadSidebarBtn'),
+                settingsBtn: document.getElementById('settingsBtn'),
+                threadsList: document.getElementById('threadsList'),
+                threadTitle: document.getElementById('threadTitle'),
+                currentModel: document.getElementById('currentModel'),
+                messageCount: document.getElementById('messageCount'),
+                modelSelector: document.getElementById('model-selector'),
+                sidebar: document.getElementById('sidebar'),
+                sidebarToggle: document.getElementById('sidebarToggle'),
+                sidebarOverlay: document.getElementById('sidebarOverlay'),
+                settingsModal: document.getElementById('settingsModal'),
+                closeSettings: document.getElementById('closeSettings'),
+                exportMarkdown: document.getElementById('exportMarkdown'),
+                exportJson: document.getElementById('exportJson'),
+            };
+        }
+        
+        bindEvents() {
+            this.elements.userInput.addEventListener('keydown', (e) => this.handleKeyDown(e));
+            this.elements.sendBtn.addEventListener('click', () => this.sendMessage());
+            this.elements.newThreadBtn.addEventListener('click', () => this.createNewThread());
+            this.elements.newThreadSidebarBtn.addEventListener('click', () => this.createNewThread());
+            this.elements.modelSelector.addEventListener('change', (e) => this.switchModel(e.target.value));
+            this.elements.sidebarToggle.addEventListener('click', () => this.toggleSidebar());
+            this.elements.sidebarOverlay.addEventListener('click', () => this.closeSidebar());
+
+            // AI Capabilities Buttons - Functionality Restored
+            document.querySelectorAll('.feature-card').forEach(card => {
+                card.addEventListener('click', (e) => this.handleFeatureSelect(e));
+            });
+            
+            // File Upload Events
+            const fileInput = document.createElement('input');
+            fileInput.type = 'file';
+            fileInput.multiple = true;
+            fileInput.className = 'hidden';
+            fileInput.accept = "image/*,.pdf,.doc,.docx,.xls,.xlsx,.txt,.csv,.json";
+            document.body.appendChild(fileInput);
+            this.elements.fileInput = fileInput;
+            this.elements.fileInput.addEventListener('change', (e) => this.processFiles(e.target.files));
+            this.elements.attachBtn.addEventListener('click', () => this.elements.fileInput.click());
+
+            // Drag and Drop Events
+            const dropZone = this.elements.inputArea;
+            dropZone.addEventListener('dragover', (e) => { e.preventDefault(); e.stopPropagation(); dropZone.classList.add('drag-over'); });
+            dropZone.addEventListener('dragleave', (e) => { e.preventDefault(); e.stopPropagation(); dropZone.classList.remove('drag-over'); });
+            dropZone.addEventListener('drop', (e) => {
+                e.preventDefault(); e.stopPropagation();
+                dropZone.classList.remove('drag-over');
+                if (e.dataTransfer.files.length > 0) { this.processFiles(e.dataTransfer.files); }
+            });
+
+            // Settings and Export Events
+            this.elements.settingsBtn.addEventListener('click', () => this.showSettings());
+            this.elements.closeSettings.addEventListener('click', () => this.hideSettings());
+            document.getElementById('saveSettings').addEventListener('click', () => this.saveSettings());
+            document.getElementById('resetSettings').addEventListener('click', () => this.resetSettings());
+            this.elements.exportMarkdown.addEventListener('click', () => this.exportAsMarkdown());
+            this.elements.exportJson.addEventListener('click', () => this.exportAsJson());
+        }
+
+        // Restored feature select handler
+        handleFeatureSelect(e) {
+            const feature = e.currentTarget.dataset.feature;
+            const featurePrompts = {
+                text: "I need help with text generation: ",
+                code: "Write some code for the following task: ",
+                analysis: "Please analyze the following data: ",
+                research: "Please research this topic: ",
+            };
+            if (featurePrompts[feature]) {
+                this.elements.userInput.value = featurePrompts[feature];
+                this.elements.userInput.focus();
+                this.setupAutoResize(); // Update send button state
+            }
+        }
+        
+        showSettings() { this.elements.settingsModal.classList.remove('hidden'); }
+        hideSettings() { this.elements.settingsModal.classList.add('hidden'); }
+
+        loadSettings() {
+            const saved = localStorage.getItem('nf_settings');
+            if (saved) { this.settings = JSON.parse(saved); }
+            if (this.settings.defaultModel) {
+                this.currentModel = this.settings.defaultModel;
+                this.elements.modelSelector.value = this.currentModel;
+            }
+             document.getElementById('defaultModelSelect').value = this.settings.defaultModel || 'gemini';
+        }
+        
+        saveSettings() {
+            this.settings = { defaultModel: document.getElementById('defaultModelSelect').value };
+            localStorage.setItem('nf_settings', JSON.stringify(this.settings));
+            this.hideSettings();
+            this.showNotification('Settings saved successfully', 'success');
+        }
+
+        resetSettings() {
+            this.settings = {};
+            localStorage.removeItem('nf_settings');
+            this.loadSettings();
+            this.showNotification('Settings reset to default', 'info');
+        }
+        
+        setupMobileHandling() {
+            // Unchanged
+        }
+        toggleSidebar() {
+             this.elements.sidebar.classList.toggle('open');
+             this.elements.sidebarOverlay.classList.toggle('hidden');
+        }
+        closeSidebar() {
+            this.elements.sidebar.classList.remove('open');
+            this.elements.sidebarOverlay.classList.add('hidden');
+        }
+        handleResize() {
+            if (window.innerWidth >= 1024) { this.closeSidebar(); }
+        }
+
+        setupAutoResize() {
+            const textarea = this.elements.userInput;
+            const sendBtn = this.elements.sendBtn;
+            const updateSendButton = () => {
+                sendBtn.disabled = textarea.value.trim() === '' && this.uploadedFiles.length === 0;
+            };
+            textarea.addEventListener('input', () => {
+                textarea.style.height = 'auto';
+                textarea.style.height = `${Math.min(textarea.scrollHeight, 160)}px`;
+                updateSendButton();
+            });
+            updateSendButton();
+        }
+
+        initializeFirstThread() {
+            if (this.threads.length === 0) {
+                this.createNewThread(true); 
+            } else {
+                this.loadThread(this.threads[0]);
+            }
+            this.updateThreadsList();
+        }
+
+        createNewThread(isInitial = false) {
+            const thread = {
+                id: Date.now().toString(),
+                title: 'New Conversation',
+                messages: [],
+                model: this.currentModel,
+                createdAt: new Date().toISOString(),
+                lastUpdated: new Date().toISOString()
+            };
+            if (isInitial) {
+                 const welcomeMessage = {
+                    id: Date.now(), type: 'ai', content: "Welcome to NoFriction AI! I'm your advanced multi-model AI assistant. How can I help you today?",
+                    timestamp: new Date().toISOString(), model: this.currentModel
+                };
+                thread.messages.push(welcomeMessage);
+            }
+            this.threads.unshift(thread);
+            this.loadThread(thread);
+            this.updateThreadsList();
+            this.saveThreads();
+            this.elements.userInput.focus();
+            if (window.innerWidth < 1024) this.closeSidebar();
+        }
+
+        loadThread(thread) {
+            this.currentThread = thread;
+            this.currentThreadId = thread.id;
+            this.currentModel = thread.model || 'gemini';
+            this.elements.modelSelector.value = this.currentModel;
+            this.elements.messages.innerHTML = '';
+            thread.messages.forEach(message => this.displayMessage(message));
+            this.updateThreadInfo();
+            this.scrollToBottom();
+            this.updateThreadsList();
+        }
+
+        switchModel(newModel) {
+            // Simplified for brevity
+            this.currentModel = newModel;
+             if(this.currentThread) {
+                this.currentThread.model = newModel;
+                this.saveThreads();
+                this.updateThreadInfo();
+            }
+        }
+
+        updateThreadsList() {
+            this.elements.threadsList.innerHTML = '';
+            this.threads.slice().sort((a,b) => new Date(b.lastUpdated) - new Date(a.lastUpdated)).forEach(thread => {
+                const item = document.createElement('div');
+                item.className = `thread-item p-3 rounded-lg group ${thread.id === this.currentThreadId ? 'active' : ''}`;
+                item.innerHTML = `<div class="flex items-center justify-between"><div class="flex-1 min-w-0"><div class="text-sm font-medium truncate">${this.escapeHtml(thread.title)}</div><div class="text-xs text-gray-400 mt-1">${thread.messages.length} messages</div></div></div>`;
+                item.addEventListener('click', () => this.loadThread(thread));
+                this.elements.threadsList.appendChild(item);
+            });
+        }
+        
+        updateThreadInfo() {
+            if (!this.currentThread) return;
+            this.elements.threadTitle.textContent = this.currentThread.title;
+            this.elements.currentModel.textContent = this.currentModel;
+            this.elements.messageCount.textContent = `${this.currentThread.messages.length} messages`;
+        }
+        
+        handleKeyDown(e) {
+            if (e.key === 'Enter' && !e.shiftKey) {
+                e.preventDefault();
+                this.sendMessage();
+            }
+        }
+
+        async processFiles(files) {
+            for (const file of files) {
+                if (file.size > 50 * 1024 * 1024) { this.showNotification('File too large (Max 50MB).', 'error'); continue; }
+                const fileData = {
+                    name: file.name, size: file.size, type: file.type,
+                    data: await this.fileToBase64(file),
+                    fileObject: file
+                };
+                this.uploadedFiles.push(fileData);
+            }
+            this.displayUploadedFiles();
+            this.setupAutoResize();
+        }
+        
+        fileToBase64(file) { return new Promise((resolve, reject) => { const reader = new FileReader(); reader.readAsDataURL(file); reader.onload = () => resolve(reader.result); reader.onerror = error => reject(error); }); }
+
+        displayUploadedFiles() {
+            if (this.uploadedFiles.length === 0) {
+                this.elements.uploadedFiles.classList.add('hidden');
+                return;
+            }
+            this.elements.uploadedFiles.classList.remove('hidden');
+            this.elements.filesList.innerHTML = '';
+            this.uploadedFiles.forEach((fileData, index) => {
+                const fileElement = document.createElement('div');
+                fileElement.className = 'flex items-center justify-between bg-gray-700/50 p-2 rounded-lg';
+                fileElement.innerHTML = `<div class="flex items-center space-x-2 min-w-0"><i class="fas ${this.getFileIcon(fileData.type)} text-blue-400"></i><span class="text-sm text-gray-200 truncate">${this.escapeHtml(fileData.name)}</span></div><button class="text-gray-400 hover:text-red-400 remove-file flex-shrink-0" data-index="${index}"><i class="fas fa-times"></i></button>`;
+                fileElement.querySelector('.remove-file').addEventListener('click', (e) => {
+                    const indexToRemove = parseInt(e.currentTarget.dataset.index, 10);
+                    this.uploadedFiles.splice(indexToRemove, 1);
+                    this.displayUploadedFiles(); 
+                    this.setupAutoResize();
+                });
+                this.elements.filesList.appendChild(fileElement);
+            });
+        }
+
+        getFileIcon(type) { if (type.startsWith('image/')) return 'fa-image'; if (type === 'application/pdf') return 'fa-file-pdf'; if (type.includes('document')) return 'fa-file-word'; if (type.includes('sheet')) return 'fa-file-excel'; if (type === 'text/plain') return 'fa-file-alt'; return 'fa-file'; }
+
+        async sendMessage() {
+            const messageContent = this.elements.userInput.value.trim();
+            if (!messageContent && this.uploadedFiles.length === 0) return;
+
+            this.elements.sendBtn.disabled = true;
+
+            const userMessage = {
+                id: Date.now(), type: 'user', content: messageContent,
+                files: this.uploadedFiles.map(f => ({ name: f.name, size: f.size, type: f.type, data: f.data })),
+                timestamp: new Date().toISOString(), model: this.currentModel
+            };
+            this.currentThread.messages.push(userMessage);
+            this.displayMessage(userMessage);
+            
+            if (this.currentThread.title === 'New Conversation' && messageContent) {
+                this.currentThread.title = messageContent.substring(0,30) + (messageContent.length > 30 ? '...' : '');
+            }
+
+            this.showTypingIndicator();
+            
+            const formData = new FormData();
+            if (messageContent) formData.append('text', messageContent);
+            this.uploadedFiles.forEach((fileData, index) => formData.append(`file${index}`, fileData.fileObject, fileData.name));
+            formData.append('fileCount', this.uploadedFiles.length);
+            const messagesForBackend = this.currentThread.messages.map(({ files, ...rest }) => rest);
+            formData.append('messages', JSON.stringify(messagesForBackend));
+            formData.append('threadId', this.currentThreadId);
+            formData.append('model', this.currentModel);
+
+            this.elements.userInput.value = '';
+            this.uploadedFiles = [];
+            this.displayUploadedFiles();
+            this.setupAutoResize();
+
+            try {
+                const responseData = await this.sendToWebhook(formData);
+                const aiMessage = {
+                    id: Date.now() + 1, type: 'ai', content: responseData.reply,
+                    timestamp: new Date().toISOString(), model: responseData.modelUsed || this.currentModel
+                };
+                this.currentThread.messages.push(aiMessage);
+                this.displayMessage(aiMessage);
+            } catch (error) {
+                this.displayMessage({ type: 'ai', isError: true, content: `**Error:** ${error.message}` });
+            } finally {
+                this.hideTypingIndicator();
+                this.elements.sendBtn.disabled = false;
+                this.setupAutoResize();
+                this.currentThread.lastUpdated = new Date().toISOString();
+                this.saveThreads();
+                this.updateThreadInfo();
+                this.updateThreadsList();
+            }
+        }
+        
+        async sendToWebhook(formData) {
+            const response = await fetch(this.webhookUrl, { method: 'POST', body: formData });
+            if (!response.ok) {
+                const errorText = await response.text();
+                throw new Error(`Webhook Error ${response.status}: ${errorText}`);
+            }
+            try { return await response.json(); } catch (e) { throw new Error("Invalid response from server."); }
+        }
+        
+        displayMessage(message) {
+            const messageElement = document.createElement('div');
+            messageElement.className = 'relative';
+
+            const bubble = document.createElement('div');
+            bubble.className = `${message.type}-message message-bubble p-4 leading-relaxed`;
+            
+            if(message.isError) { bubble.classList.add('border', 'border-red-500/50', 'bg-red-500/10'); }
+
+            let contentHTML = message.content ? (typeof marked !== 'undefined' ? marked.parse(message.content, { breaks: true, gfm: true }) : `<p>${this.escapeHtml(message.content).replace(/\n/g, '<br>')}</p>`) : '';
+            
+            let filesHTML = '';
+            if (message.files && message.files.length > 0) {
+                filesHTML = '<div class="mt-2 space-y-2">';
+                message.files.forEach(file => {
+                    filesHTML += `<div class="flex items-center space-x-3 text-sm opacity-90 ${message.type === 'user' ? 'bg-black/10' : 'bg-black/20'} p-2 rounded-lg"><i class="fas ${this.getFileIcon(file.type)} fa-fw"></i><span class="truncate">${this.escapeHtml(file.name)}</span></div>`;
+                });
+                filesHTML += '</div>';
+            }
+
+            bubble.innerHTML = `${filesHTML}${contentHTML}`;
+            
+            messageElement.appendChild(bubble);
+            this.elements.messages.appendChild(messageElement);
+            this.hideTypingIndicator();
+            this.scrollToBottom();
+        }
+
+        escapeHtml(text) { if(text === null || text === undefined) return ''; const div = document.createElement('div'); div.textContent = text; return div.innerHTML; }
+        
+        showTypingIndicator() {
+             if(!document.getElementById('typingIndicator')) {
+                const indicator = document.createElement('div');
+                indicator.id = 'typingIndicator';
+                indicator.className = 'ai-message message-bubble p-4 max-w-min flex items-center gap-3';
+                indicator.innerHTML = `<div class="typing-indicator w-2 h-2 bg-blue-400 rounded-full"></div><div class="typing-indicator w-2 h-2 bg-blue-400 rounded-full" style="animation-delay: 0.2s;"></div><div class="typing-indicator w-2 h-2 bg-blue-400 rounded-full" style="animation-delay: 0.4s;"></div>`;
+                this.elements.messages.appendChild(indicator);
+            }
+            this.scrollToBottom();
+        }
+        hideTypingIndicator() { const indicator = document.getElementById('typingIndicator'); if(indicator) indicator.remove(); }
+        scrollToBottom() { setTimeout(() => { this.elements.messagesContainer.scrollTop = this.elements.messagesContainer.scrollHeight; }, 100); }
+        saveThreads() { localStorage.setItem('nf_threads', JSON.stringify(this.threads)); }
+
+        downloadFile(content, filename, mimeType) {
+            const blob = new Blob([content], { type: mimeType });
+            const a = document.createElement('a');
+            a.href = URL.createObjectURL(blob);
+            a.download = filename;
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            URL.revokeObjectURL(a.href);
+            this.showNotification(`Downloaded ${filename}`, 'success');
+        }
+
+        exportAsMarkdown() {
+            if (!this.currentThread || this.currentThread.messages.length === 0) { return this.showNotification('No messages to export.', 'warning'); }
+            let markdown = `# Thread: ${this.currentThread.title}\n\n`;
+            this.currentThread.messages.forEach(msg => {
+                if(msg.type === 'system') return;
+                const role = msg.type === 'user' ? 'You' : `AI (${msg.model || 'assistant'})`;
+                const content = msg.content || '';
+                markdown += `**${role}**:\n\n${content}\n\n---\n\n`;
+            });
+            this.downloadFile(markdown, `thread-${this.currentThread.id}.md`, 'text/markdown');
+        }
+
+        exportAsJson() {
+            if (!this.currentThread || this.currentThread.messages.length === 0) { return this.showNotification('No messages to export.', 'warning'); }
+            this.downloadFile(JSON.stringify(this.currentThread, null, 2), `thread-${this.currentThread.id}.json`, 'application/json');
+        }
+
+        showNotification(message, type = 'info') {
+            const notification = document.createElement('div');
+            notification.className = `fixed top-5 right-5 p-4 rounded-lg shadow-lg z-50 text-white text-sm animate-pulse ${ type === 'success' ? 'bg-green-600' : type === 'error' ? 'bg-red-600' : type === 'warning' ? 'bg-yellow-600' : 'bg-blue-600' }`;
+            notification.textContent = message;
+            document.body.appendChild(notification);
+            setTimeout(() => {
+                notification.style.opacity = '0';
+                notification.style.transition = 'opacity 0.5s ease';
+                setTimeout(() => notification.remove(), 500);
+            }, 3000);
+        }
+    }
+    document.addEventListener('DOMContentLoaded', () => {
+        new NoFrictionMultiThreadChatbot();
+    });
+    </script>
+</body>
+</html>

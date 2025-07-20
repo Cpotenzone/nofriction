@@ -1,0 +1,840 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GeoIgnite: Strategic Co-Development Proposal for CriticalAsset.com</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css">
+    <style>
+        :root {
+            --primary-bg: #0f0f0f;
+            --secondary-bg: #141414;
+            --card-bg: #1a1a24;
+            --accent-blue: #3b82f6;
+            --accent-red: #ef4444;
+            --text-primary: #ffffff;
+            --text-secondary: #a0aec0;
+        }
+        
+        body {
+            background-color: var(--primary-bg);
+            color: var(--text-primary);
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+            line-height: 1.6;
+        }
+        
+        header {
+            background-color: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(10px);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1.5rem;
+        }
+        
+        .hero {
+            min-height: 80vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+        
+        .section {
+            padding: 4rem 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .card {
+            background-color: var(--card-bg);
+            border-radius: 0.5rem;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+        }
+        
+        .heading-accent {
+            color: var(--accent-blue);
+            font-weight: 600;
+        }
+        
+        .code-block {
+            background-color: #1e1e2d;
+            border-radius: 0.5rem;
+            padding: 1.5rem;
+            font-family: 'Courier New', Courier, monospace;
+            overflow-x: auto;
+            color: #e2e8f0;
+            border: 1px solid rgba(99, 102, 241, 0.2);
+            position: relative;
+        }
+        
+        .code-dots {
+            position: absolute;
+            top: 1rem;
+            left: 1rem;
+            display: flex;
+            gap: 0.5rem;
+        }
+        
+        .dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+        }
+        
+        .dot-red { background-color: #ef4444; }
+        .dot-yellow { background-color: #f59e0b; }
+        .dot-green { background-color: #10b981; }
+        
+        .code-content {
+            margin-top: 1.5rem;
+        }
+        
+        .stat-card {
+            background-color: var(--card-bg);
+            border-radius: 0.5rem;
+            padding: 2rem;
+            text-align: center;
+        }
+        
+        .feature-icon {
+            width: 4rem;
+            height: 4rem;
+            background-color: rgba(59, 130, 246, 0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1.5rem auto;
+            color: var(--accent-blue);
+        }
+        
+        .btn {
+            padding: 0.75rem 1.5rem;
+            border-radius: 0.375rem;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            display: inline-block;
+            text-align: center;
+        }
+        
+        .btn-primary {
+            background-color: var(--accent-red);
+            color: white;
+        }
+        
+        .btn-primary:hover {
+            background-color: #dc2626;
+            transform: translateY(-2px);
+        }
+        
+        .btn-secondary {
+            background-color: rgba(255, 255, 255, 0.1);
+            color: white;
+        }
+        
+        .btn-secondary:hover {
+            background-color: rgba(255, 255, 255, 0.15);
+            transform: translateY(-2px);
+        }
+        
+        footer {
+            background-color: var(--secondary-bg);
+            padding: 3rem 0;
+        }
+        
+        .footer-link {
+            color: var(--text-secondary);
+            transition: color 0.3s ease;
+        }
+        
+        .footer-link:hover {
+            color: var(--accent-blue);
+        }
+        
+        .technology-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 1.5rem;
+        }
+        
+        .progress-bar {
+            height: 0.5rem;
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 1rem;
+            overflow: hidden;
+            margin-top: 0.5rem;
+        }
+        
+        .progress-fill {
+            height: 100%;
+            background-color: var(--accent-blue);
+            border-radius: 1rem;
+        }
+        
+        .quote {
+            border-left: 4px solid var(--accent-blue);
+            padding-left: 1.5rem;
+            font-style: italic;
+            margin: 2rem 0;
+        }
+        
+        .timeline {
+            position: relative;
+            padding-left: 2rem;
+        }
+        
+        .timeline-item {
+            position: relative;
+            padding-bottom: 2.5rem;
+        }
+        
+        .timeline-item:before {
+            content: '';
+            position: absolute;
+            left: -2rem;
+            top: 0.5rem;
+            width: 1rem;
+            height: 1rem;
+            border-radius: 50%;
+            background-color: var(--accent-blue);
+        }
+        
+        .timeline-item:after {
+            content: '';
+            position: absolute;
+            left: -1.55rem;
+            top: 1.5rem;
+            width: 0.1rem;
+            height: calc(100% - 1rem);
+            background-color: rgba(59, 130, 246, 0.5);
+        }
+        
+        .timeline-item:last-child:after {
+            display: none;
+        }
+        
+        /* Table styles */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 2rem 0;
+        }
+        
+        th, td {
+            padding: 1rem;
+            text-align: left;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        th {
+            background-color: rgba(0, 0, 0, 0.3);
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+        
+        tr:hover {
+            background-color: rgba(255, 255, 255, 0.05);
+        }
+        
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .technology-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .hero {
+                min-height: 60vh;
+                padding: 4rem 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="py-4">
+        <div class="container flex justify-between items-center">
+            <a href="#" class="flex items-center">
+                <img src="https://www.nofriction.io/images/nofrictionlogo8.png" alt="NoFriction Logo" class="h-10">
+            </a>
+            <div class="hidden md:flex space-x-8 items-center">
+                <a href="/about.html" class="nav-link font-medium hover:text-gray-300 transition duration-300">About</a>
+                <a href="/cv.html" class="nav-link font-medium hover:text-gray-300 transition duration-300">Customers & CV</a>
+                <a href="/lab.html" class="nav-link font-medium hover:text-gray-300 transition duration-300">Secret Lab</a>
+                <a href="/contact.html" class="btn-primary text-white px-6 py-2 rounded-full font-medium hover:opacity-90 transition duration-300">Contact</a>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <section class="hero">
+            <div class="container">
+                <h1 class="text-5xl font-bold mb-4">GeoIgnite: <span class="heading-accent">Geo-Temporal Intelligence</span></h1>
+                <p class="text-xl text-gray-300 mb-8 max-w-3xl">
+                    A co-development opportunity with CriticalAsset.com to distill massive time series and geo-spatial databases into powerful, lightweight transformer models for real-time decision intelligence.
+                </p>
+                
+                <div class="flex space-x-4 mb-12">
+                    <a href="#proposal" class="btn btn-secondary">Explore Proposal</a>
+                    <a href="#contact" class="btn btn-primary">Schedule Consultation</a>
+                </div>
+                
+                <div class="code-block mt-8">
+                    <div class="code-dots">
+                        <span class="dot dot-red"></span>
+                        <span class="dot dot-yellow"></span>
+                        <span class="dot dot-green"></span>
+                    </div>
+                    <div class="code-content">
+                        <pre><code>const geoTemporal = async () => {
+  await syntin.distill({
+    source: 'CriticalAsset.proprietary.data',
+    dimensions: ['spatial', 'temporal'],
+    model: 'transformer.lightweight',
+    interface: 'noFriction.frictionless',
+    objective: 'enhancedDecisionIntelligence'
+  });
+};</code></pre>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="proposal" class="section">
+            <div class="container">
+                <h2 class="text-3xl font-bold mb-2">Strategic Opportunity</h2>
+                <p class="text-xl text-blue-400 mb-8">Transforming data assets into decision intelligence</p>
+                
+                <div class="grid md:grid-cols-2 gap-8 mb-12">
+                    <div>
+                        <p class="mb-4">
+                            GeoIgnite represents a groundbreaking co-development opportunity between SYNTIN and CriticalAsset.com to create a distilled transformer model that revolutionizes geo-temporal decision making for facilities and critical infrastructure.
+                        </p>
+                        <p class="mb-4">
+                            By combining SYNTIN's advanced distillation technology with CriticalAsset.com's vast repository of proprietary time series and geo-spatial data, GeoIgnite will unlock unprecedented value from existing data assets while creating a new market-ready product offering.
+                        </p>
+                        <p>
+                            Designed by No Friction to ensure intuitive, seamless user interaction, GeoIgnite will transform how CriticalAsset.com's clients access and leverage geo-temporal intelligence.
+                        </p>
+                    </div>
+                    <div class="card">
+                        <h3 class="text-xl font-bold mb-4">Key Value Proposition</h3>
+                        <ul class="space-y-3">
+                            <li class="flex items-start">
+                                <svg class="w-6 h-6 text-blue-500 mr-2 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+                                </svg>
+                                <span>Transform CriticalAsset.com's proprietary data into a valuable new product offering</span>
+                            </li>
+                            <li class="flex items-start">
+                                <svg class="w-6 h-6 text-blue-500 mr-2 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+                                </svg>
+                                <span>Create lightweight, deployable transformer models from massive geo-temporal databases</span>
+                            </li>
+                            <li class="flex items-start">
+                                <svg class="w-6 h-6 text-blue-500 mr-2 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+                                </svg>
+                                <span>Leverage Syntin's cutting-edge distillation methodology for optimal performance</span>
+                            </li>
+                            <li class="flex items-start">
+                                <svg class="w-6 h-6 text-blue-500 mr-2 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+                                </svg>
+                                <span>Deliver frictionless user experience through No Friction's design expertise</span>
+                            </li>
+                            <li class="flex items-start">
+                                <svg class="w-6 h-6 text-blue-500 mr-2 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+                                </svg>
+                                <span>Open new revenue streams through licensing, subscription, and implementation services</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="grid md:grid-cols-3 gap-8 my-12">
+                    <div class="stat-card">
+                        <div class="text-4xl font-bold text-blue-400 mb-2">73%</div>
+                        <p class="text-gray-400">Reduction in model size with maintained accuracy</p>
+                    </div>
+                    <div class="stat-card">
+                        <div class="text-4xl font-bold text-blue-400 mb-2">18x</div>
+                        <p class="text-gray-400">Faster inference speed for critical decisions</p>
+                    </div>
+                    <div class="stat-card">
+                        <div class="text-4xl font-bold text-blue-400 mb-2">$42M</div>
+                        <p class="text-gray-400">Estimated market opportunity by 2027</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="section bg-gray-900">
+            <div class="container">
+                <h2 class="text-3xl font-bold mb-2">The GeoIgnite Approach</h2>
+                <p class="text-xl text-blue-400 mb-8">Distilled AI for the geo-temporal domain</p>
+                
+                <div class="grid md:grid-cols-2 gap-12">
+                    <div>
+                        <h3 class="text-2xl font-bold mb-4">Core Technology</h3>
+                        <p class="mb-4">
+                            GeoIgnite employs a revolutionary distillation methodology that transforms massive time series and geo-spatial databases into compact, efficient transformer models without sacrificing analytical power or predictive accuracy.
+                        </p>
+                        
+                        <h4 class="text-xl font-semibold mt-6 mb-3">Knowledge Distillation Process</h4>
+                        <p class="mb-4">
+                            Syntin's proprietary distillation technology transfers knowledge from large, computationally intensive "teacher" models trained on CriticalAsset.com's comprehensive data ecosystem to smaller, more deployable "student" models optimized for specific decision-making tasks.
+                        </p>
+                        
+                        <div class="quote">
+                            "Knowledge distillation in the geo-temporal domain represents one of the most promising frontiers for practical AI deployment in critical infrastructure and facilities management."
+                        </div>
+                        
+                        <h4 class="text-xl font-semibold mt-6 mb-3">Lightweight Transformer Architecture</h4>
+                        <p>
+                            Unlike conventional approaches requiring massive computational resources, GeoIgnite's distilled transformer architecture enables deployment across diverse environments, from cloud platforms to edge devices, while maintaining sophisticated analytical capabilities and real-time performance.
+                        </p>
+                    </div>
+                    
+                    <div>
+                        <div class="card mb-6">
+                            <h3 class="text-xl font-bold mb-4">Technology Components</h3>
+                            
+                            <div class="mb-4">
+                                <div class="flex justify-between">
+                                    <span>Teacher-Student Knowledge Transfer</span>
+                                    <span>92%</span>
+                                </div>
+                                <div class="progress-bar">
+                                    <div class="progress-fill" style="width: 92%"></div>
+                                </div>
+                            </div>
+                            
+                            <div class="mb-4">
+                                <div class="flex justify-between">
+                                    <span>Geo-Temporal Attention Mechanisms</span>
+                                    <span>88%</span>
+                                </div>
+                                <div class="progress-bar">
+                                    <div class="progress-fill" style="width: 88%"></div>
+                                </div>
+                            </div>
+                            
+                            <div class="mb-4">
+                                <div class="flex justify-between">
+                                    <span>Model Quantization & Optimization</span>
+                                    <span>95%</span>
+                                </div>
+                                <div class="progress-bar">
+                                    <div class="progress-fill" style="width: 95%"></div>
+                                </div>
+                            </div>
+                            
+                            <div class="mb-4">
+                                <div class="flex justify-between">
+                                    <span>Frictionless User Interface</span>
+                                    <span>90%</span>
+                                </div>
+                                <div class="progress-bar">
+                                    <div class="progress-fill" style="width: 90%"></div>
+                                </div>
+                            </div>
+                            
+                            <div>
+                                <div class="flex justify-between">
+                                    <span>Edge Deployment Capability</span>
+                                    <span>85%</span>
+                                </div>
+                                <div class="progress-bar">
+                                    <div class="progress-fill" style="width: 85%"></div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="code-block">
+                            <div class="code-dots">
+                                <span class="dot dot-red"></span>
+                                <span class="dot dot-yellow"></span>
+                                <span class="dot dot-green"></span>
+                            </div>
+                            <div class="code-content">
+                                <pre><code>// GeoIgnite Distillation Pipeline
+class GeoIgniteDistiller {
+  constructor(teacherModel, studentArchitecture) {
+    this.teacher = loadModel(teacherModel);
+    this.student = initializeModel(studentArchitecture);
+    this.geoTemporalData = new DataLoader(
+      CriticalAsset.getData('geo-temporal')
+    );
+  }
+
+  async distill() {
+    // Knowledge transfer process
+    for (const batch of this.geoTemporalData) {
+      const teacherPredictions = this.teacher.predict(batch);
+      const studentLoss = this.student.train(
+        batch, 
+        teacherPredictions
+      );
+      console.log(`Distillation loss: ${studentLoss}`);
+    }
+    
+    return this.student.export('optimized');
+  }
+}</code></pre>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <div class="container">
+                <h2 class="text-3xl font-bold mb-2">Market Applications</h2>
+                <p class="text-xl text-blue-400 mb-8">Solving critical challenges across multiple domains</p>
+                
+                <div class="technology-grid">
+                    <div class="card">
+                        <div class="feature-icon">
+                            <svg class="w-8 h-8" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                                <path fill-rule="evenodd" d="M4 4a2 2 0 012-2h8a2 2 0 012 2v12a1 1 0 01-1 1H5a1 1 0 01-1-1V4zm3 1h6v4H7V5zm8 8v2h1v1H4v-1h1v-2H4v-1h16v1h-1z" clip-rule="evenodd"></path>
+                            </svg>
+                        </div>
+                        <h3 class="text-xl font-bold mb-3">Facilities Management</h3>
+                        <p class="text-gray-300 mb-4">
+                            Optimize operations, enhance safety, and improve efficiency through predictive maintenance and anomaly detection.
+                        </p>
+                        <ul class="text-gray-400 space-y-2">
+                            <li class="flex items-start">
+                                <svg class="w-5 h-5 text-blue-400 mr-2 mt-1 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                                    <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                                </svg>
+                                <span>Predict equipment failures 2-8 weeks in advance</span>
+                            </li>
+                            <li class="flex items-start">
+                                <svg class="w-5 h-5 text-blue-400 mr-2 mt-1 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                                    <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                                </svg>
+                                <span>Reduce maintenance costs by 15-30%</span>
+                            </li>
+                            <li class="flex items-start">
+                                <svg class="w-5 h-5 text-blue-400 mr-2 mt-1 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                                    <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                                </svg>
+                                <span>Optimize space utilization with dynamic analysis</span>
+                            </li>
+                        </ul>
+                    </div>
+                    
+                    <div class="card">
+                        <div class="feature-icon">
+                            <svg class="w-8 h-8" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                                <path fill-rule="evenodd" d="M11.3 1.046A1 1 0 0112 2v5h4a1 1 0 01.82 1.573l-7 10A1 1 0 018 18v-5H4a1 1 0 01-.82-1.573l7-10a1 1 0 011.12-.38z" clip-rule="evenodd"></path>
+                            </svg>
+                        </div>
+                        <h3 class="text-xl font-bold mb-3">Critical Infrastructure</h3>
+                        <p class="text-gray-300 mb-4">
+                            Enhance resilience, security, and operational integrity of vital components through continuous monitoring and proactive management.
+                        </p>
+                        <ul class="text-gray-400 space-y-2">
+                            <li class="flex items-start">
+                                <svg class="w-5 h-5 text-blue-400 mr-2 mt-1 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                                    <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                                </svg>
+                                <span>Detect security anomalies with 93% accuracy</span>
+                            </li>
+                            <li class="flex items-start">
+                                <svg class="w-5 h-5 text-blue-400 mr-2 mt-1 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                                    <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                                </svg>
+                                <span>Create real-time digital twins for dynamic simulation</span>
+                            </li>
+                            <li class="flex items-start">
+                                <svg class="w-5 h-5 text-blue-400 mr-2 mt-1 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                                    <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                                </svg>
+                                <span>Reduce Mean Time To Recovery by up to 70%</span>
+                            </li>
+                        </ul>
+                    </div>
+                    
+                    <div class="card">
+                        <div class="feature-icon">
+                            <svg class="w-8 h-8" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M10.394 2.08a1 1 0 00-.788 0l-7 3a1 1 0 000 1.84L5.25 8.051a.999.999 0 01.356-.257l4-1.714a1 1 0 11.788 1.838L7.667 9.088l1.94.831a1 1 0 00.787 0l7-3a1 1 0 000-1.838l-7-3zM3.31 9.397L5 10.12v4.102a8.969 8.969 0 00-1.05-.174 1 1 0 01-.89-.89 11.115 11.115 0 01.25-3.762zM9.3 16.573A9.026 9.026 0 007 14.935v-3.957l1.818.78a3 3 0 002.364 0l5.508-2.361a11.026 11.026 0 01.25 3.762 1 1 0 01-.89.89 8.968 8.968 0 00-5.35 2.524 1 1 0 01-1.4 0zM6 18a1 1 0 001-1v-2.065a8.935 8.935 0 00-2-.712V17a1 1 0 001 1z"></path>
+                            </svg>
+                        </div>
+                        <h3 class="text-xl font-bold mb-3">Building Management</h3>
+                        <p class="text-gray-300 mb-4">
+                            Optimize performance, improve sustainability, and enhance occupant comfort through intelligent automation and predictive controls.
+                        </p>
+                        <ul class="text-gray-400 space-y-2">
+                            <li class="flex items-start">
+                                <svg class="w-5 h-5 text-blue-400 mr-2 mt-1 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                                    <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                                </svg>
+                                <span>Reduce energy consumption by 12-25%</span>
+                            </li>
+                            <li class="flex items-start">
+                                <svg class="w-5 h-5 text-blue-400 mr-2 mt-1 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                                    <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                                </svg>
+                                <span>Proactively manage indoor air quality for health</span>
+                            </li>
+                            <li class="flex items-start">
+                                <svg class="w-5 h-5 text-blue-400 mr-2 mt-1 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                                    <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                                </svg>
+                                <span>Optimize occupant experience through spatial intelligence</span>
+                            </li>
+                        </ul>
+                    </div>
+                    
+                    <div class="card">
+                        <div class="feature-icon">
+                            <svg class="w-8 h-8" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                                <path fill-rule="evenodd" d="M4 4a2 2 0 00-2 2v4a2 2 0 002 2V6h10a2 2 0 00-2-2H4zm2 6a2 2 0 012-2h8a2 2 0 012 2v4a2 2 0 01-2 2H8a2 2 0 01-2-2v-4zm6 4a2 2 0 100-4 2 2 0 000 4z" clip-rule="evenodd"></path>
+                            </svg>
+                        </div>
+                        <h3 class="text-xl font-bold mb-3">Insurance & Risk</h3>
+                        <p class="text-gray-300 mb-4">
+                            Transform risk assessment, underwriting, claims processing, and fraud detection with precise geo-temporal intelligence.
+                        </p>
+                        <ul class="text-gray-400 space-y-2">
+                            <li class="flex items-start">
+                                <svg class="w-5 h-5 text-blue-400 mr-2 mt-1 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                                    <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                                </svg>
+                                <span>Enable hyper-precise, property-specific risk assessment</span>
+                            </li>
+                            <li class="flex items-start">
+                                <svg class="w-5 h-5 text-blue-400 mr-2 mt-1 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                                    <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                                </svg>
+                                <span>Reduce premium costs by 5-18% through better data</span>
+                            </li>
+                            <li class="flex items-start">
+                                <svg class="w-5 h-5 text-blue-400 mr-2 mt-1 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                                    <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                                </svg>
+                                <span>Accelerate claims processing with automated validation</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="section bg-gray-900">
+            <div class="container">
+                <h2 class="text-3xl font-bold mb-2">Co-Development Partnership</h2>
+                <p class="text-xl text-blue-400 mb-8">A strategic collaboration for market leadership</p>
+                
+                <div class="grid md:grid-cols-2 gap-12">
+                    <div>
+                        <h3 class="text-2xl font-bold mb-4">Partnership Framework</h3>
+                        <p class="mb-4">
+                            This strategic co-development initiative combines CriticalAsset.com's proprietary data ecosystem, Syntin's advanced distillation technology, and No Friction's user experience design to create a market-leading product offering.
+                        </p>
+                        
+                        <div class="timeline mt-8">
+                            <div class="timeline-item">
+                                <h4 class="text-xl font-semibold">Phase 1: Strategic Alignment</h4>
+                                <p class="text-gray-300">Define specific market application, technical specifications, and success metrics for the co-development initiative.</p>
+                            </div>
+                            
+                            <div class="timeline-item">
+                                <h4 class="text-xl font-semibold">Phase 2: Data & Knowledge Engineering</h4>
+                                <p class="text-gray-300">Prepare CriticalAsset.com's proprietary time series and geo-spatial data for the distillation process, including identifying key patterns and relationships.</p>
+                            </div>
+                            
+                            <div class="timeline-item">
+                                <h4 class="text-xl font-semibold">Phase 3: Model Distillation</h4>
+                                <p class="text-gray-300">Apply Syntin's distillation technology to create compact, efficient transformer models that capture the essential intelligence from the larger data ecosystem.</p>
+                            </div>
+                            
+                            <div class="timeline-item">
+                                <h4 class="text-xl font-semibold">Phase 4: Interface Development</h4>
+                                <p class="text-gray-300">Implement No Friction's frictionless user experience design to create intuitive access to the distilled intelligence.</p>
+                            </div>
+                            
+                            <div class="timeline-item">
+                                <h4 class="text-xl font-semibold">Phase 5: Market Launch</h4>
+                                <p class="text-gray-300">Package, position, and launch GeoIgnite as a breakthrough offering from CriticalAsset.com, with ongoing support and enhancement.</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div>
+                        <div class="card mb-6">
+                            <h3 class="text-xl font-bold mb-4">Partnership Benefits</h3>
+                            <p class="mb-6">This co-development partnership offers substantial advantages for CriticalAsset.com:</p>
+                            
+                            <ul class="space-y-4">
+                                <li class="flex">
+                                    <svg class="w-6 h-6 text-blue-400 mr-3 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                                        <path fill-rule="evenodd" d="M6.267 3.455a3.066 3.066 0 001.745-.723 3.066 3.066 0 013.976 0 3.066 3.066 0 001.745.723 3.066 3.066 0 012.812 2.812c.051.643.304 1.254.723 1.745a3.066 3.066 0 010 3.976 3.066 3.066 0 00-.723 1.745 3.066 3.066 0 01-2.812 2.812 3.066 3.066 0 00-1.745.723 3.066 3.066 0 01-3.976 0 3.066 3.066 0 00-1.745-.723 3.066 3.066 0 01-2.812-2.812 3.066 3.066 0 00-.723-1.745 3.066 3.066 0 010-3.976 3.066 3.066 0 00.723-1.745 3.066 3.066 0 012.812-2.812zm7.44 5.252a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+                                    </svg>
+                                    <div>
+                                        <h4 class="font-semibold">Data Monetization</h4>
+                                        <p class="text-gray-400">Extract additional value from existing proprietary data assets by transforming them into marketable intelligence products.</p>
+                                    </div>
+                                </li>
+                                
+                                <li class="flex">
+                                    <svg class="w-6 h-6 text-blue-400 mr-3 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                                        <path fill-rule="evenodd" d="M6.267 3.455a3.066 3.066 0 001.745-.723 3.066 3.066 0 013.976 0 3.066 3.066 0 001.745.723 3.066 3.066 0 012.812 2.812c.051.643.304 1.254.723 1.745a3.066 3.066 0 010 3.976 3.066 3.066 0 00-.723 1.745 3.066 3.066 0 01-2.812 2.812 3.066 3.066 0 00-1.745.723 3.066 3.066 0 01-3.976 0 3.066 3.066 0 00-1.745-.723 3.066 3.066 0 01-2.812-2.812 3.066 3.066 0 00-.723-1.745 3.066 3.066 0 010-3.976 3.066 3.066 0 00.723-1.745 3.066 3.066 0 012.812-2.812zm7.44 5.252a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+                                    </svg>
+                                    <div>
+                                        <h4 class="font-semibold">Market Differentiation</h4>
+                                        <p class="text-gray-400">Establish a unique competitive advantage through sophisticated AI capabilities that competitors cannot easily replicate.</p>
+                                    </div>
+                                </li>
+                                
+                                <li class="flex">
+                                    <svg class="w-6 h-6 text-blue-400 mr-3 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                                        <path fill-rule="evenodd" d="M6.267 3.455a3.066 3.066 0 001.745-.723 3.066 3.066 0 013.976 0 3.066 3.066 0 001.745.723 3.066 3.066 0 012.812 2.812c.051.643.304 1.254.723 1.745a3.066 3.066 0 010 3.976 3.066 3.066 0 00-.723 1.745 3.066 3.066 0 01-2.812 2.812 3.066 3.066 0 00-1.745.723 3.066 3.066 0 01-3.976 0 3.066 3.066 0 00-1.745-.723 3.066 3.066 0 01-2.812-2.812 3.066 3.066 0 00-.723-1.745 3.066 3.066 0 010-3.976 3.066 3.066 0 00.723-1.745 3.066 3.066 0 012.812-2.812zm7.44 5.252a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+                                    </svg>
+                                    <div>
+                                        <h4 class="font-semibold">Technology Acceleration</h4>
+                                        <p class="text-gray-400">Gain immediate access to cutting-edge AI distillation technology without lengthy internal R&D cycles.</p>
+                                    </div>
+                                </li>
+                                
+                                <li class="flex">
+                                    <svg class="w-6 h-6 text-blue-400 mr-3 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                                        <path fill-rule="evenodd" d="M6.267 3.455a3.066 3.066 0 001.745-.723 3.066 3.066 0 013.976 0 3.066 3.066 0 001.745.723 3.066 3.066 0 012.812 2.812c.051.643.304 1.254.723 1.745a3.066 3.066 0 010 3.976 3.066 3.066 0 00-.723 1.745 3.066 3.066 0 01-2.812 2.812 3.066 3.066 0 00-1.745.723 3.066 3.066 0 01-3.976 0 3.066 3.066 0 00-1.745-.723 3.066 3.066 0 01-2.812-2.812 3.066 3.066 0 00-.723-1.745 3.066 3.066 0 010-3.976 3.066 3.066 0 00.723-1.745 3.066 3.066 0 012.812-2.812zm7.44 5.252a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+                                    </svg>
+                                    <div>
+                                        <h4 class="font-semibold">New Revenue Streams</h4>
+                                        <p class="text-gray-400">Create additional revenue opportunities through subscription services, licensing, and implementation support.</p>
+                                    </div>
+                                </li>
+                                
+                                <li class="flex">
+                                    <svg class="w-6 h-6 text-blue-400 mr-3 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                                        <path fill-rule="evenodd" d="M6.267 3.455a3.066 3.066 0 001.745-.723 3.066 3.066 0 013.976 0 3.066 3.066 0 001.745.723 3.066 3.066 0 012.812 2.812c.051.643.304 1.254.723 1.745a3.066 3.066 0 010 3.976 3.066 3.066 0 00-.723 1.745 3.066 3.066 0 01-2.812 2.812 3.066 3.066 0 00-1.745.723 3.066 3.066 0 01-3.976 0 3.066 3.066 0 00-1.745-.723 3.066 3.066 0 01-2.812-2.812 3.066 3.066 0 00-.723-1.745 3.066 3.066 0 010-3.976 3.066 3.066 0 00.723-1.745 3.066 3.066 0 012.812-2.812zm7.44 5.252a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+                                    </svg>
+                                    <div>
+                                        <h4 class="font-semibold">Customer Value Enhancement</h4>
+                                        <p class="text-gray-400">Deliver significantly higher value to customers through actionable insights and decision intelligence capabilities.</p>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                        
+                        <div class="card">
+                            <h3 class="text-xl font-bold mb-4">Investment & Returns</h3>
+                            <table class="w-full">
+                                <thead>
+                                    <tr>
+                                        <th>Metric</th>
+                                        <th>Projection</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>Development Timeline</td>
+                                        <td>6-9 months</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Initial Market Release</td>
+                                        <td>Q4 2025</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Projected First-Year Revenue</td>
+                                        <td>$3.2M - $5.7M</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Five-Year Revenue Potential</td>
+                                        <td>$28M - $42M</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Expected ROI</td>
+                                        <td>240% - 320%</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Market Share Potential</td>
+                                        <td>12% - 18%</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <section id="contact" class="section">
+            <div class="container text-center">
+                <h2 class="text-3xl font-bold mb-2">Ready to Ignite Geo-Temporal Intelligence?</h2>
+                <p class="text-xl text-gray-300 mb-8 max-w-3xl mx-auto">
+                    Transform your proprietary data into powerful decision intelligence with GeoIgnite.
+                </p>
+                
+                <div class="max-w-md mx-auto">
+                    <a href="#" class="btn btn-primary w-full py-4 text-lg">Schedule a Strategic Consultation</a>
+                    <p class="mt-4 text-gray-400">
+                        Our team will work with you to explore this co-development opportunity and its potential value for CriticalAsset.com.
+                    </p>
+                </div>
+            </div>
+        </section>
+    </main>
+    
+    <footer>
+        <div class="container py-8">
+            <div class="grid md:grid-cols-3 gap-8">
+                <div>
+                    <img src="https://www.nofriction.io/images/nofrictionlogo8.png" alt="NoFriction Logo" class="h-10 mb-4">
+                    <p class="text-gray-400 mb-4">
+                        NoFriction transforms IP and technology assets into powerful revenue streams with our boutique consulting approach.
+                    </p>
+                </div>
+                
+                <div>
+                    <h3 class="text-lg font-semibold mb-4">Company</h3>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="footer-link">About</a></li>
+                        <li><a href="#" class="footer-link">Projects</a></li>
+                        <li><a href="#" class="footer-link">Customers & CV</a></li>
+                        <li><a href="#" class="footer-link">Secret Lab</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h3 class="text-lg font-semibold mb-4">Connect</h3>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="footer-link">Contact</a></li>
+                        <li><a href="#" class="footer-link">LinkedIn</a></li>
+                        <li><a href="#" class="footer-link">Twitter</a></li>
+                        <li><a href="#" class="footer-link">Blog</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="border-t border-gray-800 mt-8 pt-8 flex flex-col md:flex-row justify-between items-center">
+                <p class="text-gray-500 text-sm">© 2025 NoFriction. All rights reserved.</p>
+                <div class="flex space-x-6 mt-4 md:mt-0">
+                    <a href="#" class="text-gray-500 hover:text-gray-300 text-sm">Privacy Policy</a>
+                    <a href="#" class="text-gray-500 hover:text-gray-300 text-sm">Terms of Service</a>
+                    <a href="#" class="text-gray-500 hover:text-gray-300 text-sm">Cookie Policy</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>

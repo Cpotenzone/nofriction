@@ -1,0 +1,1451 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Critical Asset AI Hub - Smart Building Intelligence</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        * {
+            font-family: 'Inter', sans-serif;
+        }
+        
+        :root {
+            --primary-orange: #ff6b35;
+            --secondary-orange: #ff8c66;
+            --dark-blue: #1e293b;
+            --accent-blue: #3b82f6;
+            --light-blue: #60a5fa;
+            --background-dark: #0f172a;
+            --surface-dark: #1e293b;
+            --surface-light: #334155;
+            --critical-teal: #14b8a6;
+            --critical-green: #10b981;
+        }
+
+        body {
+            background: linear-gradient(135deg, var(--background-dark) 0%, var(--dark-blue) 100%);
+            min-height: 100vh;
+        }
+
+        .chat-container {
+            background: rgba(30, 41, 59, 0.8);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 107, 53, 0.2);
+        }
+
+        .message-bubble {
+            transition: all 0.3s ease;
+            padding: 12px 16px;
+        }
+
+        .message-bubble:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 4px 12px rgba(255, 107, 53, 0.2);
+        }
+
+        .user-message {
+            background: linear-gradient(135deg, var(--primary-orange), var(--secondary-orange));
+            color: white;
+        }
+
+        .ai-message {
+            background: var(--surface-dark);
+            border: 1px solid rgba(255, 107, 53, 0.2);
+            color: #e2e8f0;
+        }
+
+        .typing-indicator {
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 0.4; }
+            50% { opacity: 1; }
+        }
+
+        .feature-card {
+            background: rgba(30, 41, 59, 0.6);
+            border: 1px solid rgba(255, 107, 53, 0.2);
+            transition: all 0.3s ease;
+            padding: 12px;
+        }
+
+        .feature-card:hover {
+            background: rgba(30, 41, 59, 0.8);
+            border-color: var(--primary-orange);
+            transform: translateY(-1px);
+        }
+
+        .scenario-button {
+            background: linear-gradient(135deg, var(--primary-orange), var(--secondary-orange));
+            border: none;
+            padding: 16px 20px;
+            border-radius: 12px;
+            color: white;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            text-align: left;
+            width: 100%;
+        }
+
+        .scenario-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(255, 107, 53, 0.3);
+        }
+
+        .metrics-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 8px;
+            margin-top: 12px;
+        }
+
+        .metric-card {
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 8px;
+            padding: 8px 12px;
+            border: 1px solid rgba(255, 107, 53, 0.2);
+        }
+
+        .input-area {
+            background: var(--surface-dark);
+            border: 1px solid rgba(255, 107, 53, 0.2);
+            padding: 12px 16px;
+        }
+
+        .form-input-ca {
+            background: var(--surface-dark);
+            border: 1px solid rgba(255, 107, 53, 0.2);
+            color: #e2e8f0;
+            padding: 8px 12px;
+            border-radius: 6px;
+            font-size: 14px;
+            transition: all 0.3s ease;
+        }
+
+        .form-input-ca:focus {
+            outline: none;
+            border-color: var(--primary-orange);
+            box-shadow: 0 0 0 2px rgba(255, 107, 53, 0.1);
+        }
+
+        .critical-button {
+            background: var(--primary-orange);
+            border: none;
+            border-radius: 6px;
+            padding: 8px 16px;
+            font-weight: 500;
+            transition: all 0.2s ease;
+            font-size: 14px;
+            color: white;
+        }
+
+        .critical-button:hover {
+            background: var(--secondary-orange);
+            transform: translateY(-0.5px);
+        }
+
+        .sidebar {
+            background: rgba(15, 23, 42, 0.95);
+            backdrop-filter: blur(10px);
+            border-right: 1px solid rgba(255, 107, 53, 0.2);
+        }
+
+        .critical-logo {
+            height: 32px;
+            width: auto;
+        }
+
+        .performance-chart {
+            height: 200px;
+            background: rgba(30, 41, 59, 0.6);
+            border: 1px solid rgba(255, 107, 53, 0.2);
+            border-radius: 12px;
+            padding: 16px;
+            margin-top: 12px;
+        }
+
+        .alert-banner {
+            background: linear-gradient(90deg, rgba(239, 68, 68, 0.1), rgba(245, 158, 11, 0.1));
+            border: 1px solid rgba(239, 68, 68, 0.3);
+            border-radius: 8px;
+            padding: 12px;
+            margin-bottom: 16px;
+        }
+
+        .system-status {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 12px;
+            background: rgba(30, 41, 59, 0.6);
+            border-radius: 6px;
+            border: 1px solid rgba(255, 107, 53, 0.2);
+            margin-bottom: 8px;
+        }
+
+        .status-online { border-left: 4px solid #10b981; }
+        .status-warning { border-left: 4px solid #f59e0b; }
+        .status-offline { border-left: 4px solid #ef4444; }
+
+        /* Mobile optimizations */
+        @media (max-width: 1024px) {
+            .sidebar {
+                position: fixed;
+                left: -100%;
+                top: 0;
+                bottom: 0;
+                width: 320px;
+                z-index: 50;
+                transition: left 0.3s ease;
+                padding: 16px;
+                overflow-y: auto;
+            }
+
+            .sidebar.open {
+                left: 0;
+            }
+
+            .main-content {
+                width: 100%;
+                height: calc(100vh - 60px);
+                display: flex;
+                flex-direction: column;
+            }
+
+            .metrics-grid {
+                grid-template-columns: repeat(1, 1fr);
+            }
+
+            .scenario-button {
+                padding: 12px 16px;
+                font-size: 14px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .message-bubble {
+                padding: 8px 12px;
+            }
+
+            .performance-chart {
+                height: 150px;
+                padding: 12px;
+            }
+        }
+
+        .scrollbar-hide {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+
+        .scrollbar-hide::-webkit-scrollbar {
+            display: none;
+        }
+    </style>
+</head>
+<body class="text-gray-100">
+    <div class="main-layout min-h-screen flex flex-col">
+        <!-- Mobile Sidebar Overlay -->
+        <div id="sidebarOverlay" class="fixed inset-0 bg-black bg-opacity-50 z-40 hidden lg:hidden"></div>
+
+        <!-- Header -->
+        <header class="border-b border-gray-700 flex-shrink-0 p-4">
+            <div class="flex items-center justify-between">
+                <div class="flex items-center">
+                    <button id="sidebarToggle" class="mr-3 p-2 text-gray-400 hover:text-white lg:hidden">
+                        <i class="fas fa-bars text-lg"></i>
+                    </button>
+                    <img src="https://page1.genspark.site/v1/base64_upload/0b8aab1ef1a091935d20912efa81ccd1" alt="Critical Asset" class="critical-logo mr-3">
+                    <h1 class="text-xl font-bold text-white">Critical Asset AI Hub</h1>
+                </div>
+                <div class="flex items-center space-x-3">
+                    <div class="flex items-center space-x-2">
+                        <label class="text-sm text-gray-400 hidden sm:block">Model:</label>
+                        <select name="model" class="form-input-ca text-sm"> 
+                            <option value="gemini">Gemini Pro</option>
+                            <option value="chatgpt">ChatGPT</option>
+                            <option value="claude">Claude</option>
+                            <option value="deepseek">DeepSeek</option>
+                        </select>
+                    </div>
+                    <button id="newThreadBtn" class="critical-button">
+                        <i class="fas fa-plus mr-1"></i><span class="hidden sm:inline">New Thread</span>
+                    </button>
+                </div>
+            </div>
+        </header>
+
+        <div class="flex-1 flex overflow-hidden">
+            <!-- Sidebar -->
+            <aside id="sidebar" class="sidebar w-80 flex-shrink-0 p-4 overflow-y-auto scrollbar-hide">
+                <div class="space-y-6">
+                    <!-- Smart Building Status -->
+                    <div>
+                        <h2 class="text-lg font-semibold text-orange-300 mb-3 flex items-center">
+                            <i class="fas fa-building mr-2"></i>Building Status
+                        </h2>
+                        <div class="space-y-2">
+                            <div class="system-status status-online">
+                                <i class="fas fa-thermometer-half text-green-400"></i>
+                                <span class="text-sm">HVAC Systems: Online</span>
+                            </div>
+                            <div class="system-status status-warning">
+                                <i class="fas fa-bolt text-yellow-400"></i>
+                                <span class="text-sm">Electrical: Warning</span>
+                            </div>
+                            <div class="system-status status-online">
+                                <i class="fas fa-tint text-blue-400"></i>
+                                <span class="text-sm">Plumbing: Online</span>
+                            </div>
+                            <div class="system-status status-online">
+                                <i class="fas fa-wifi text-teal-400"></i>
+                                <span class="text-sm">IoT Sensors: 47/50 Active</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Smart Building Scenarios -->
+                    <div>
+                        <h2 class="text-lg font-semibold text-orange-300 mb-3 flex items-center">
+                            <i class="fas fa-cogs mr-2"></i>Smart Building Scenarios
+                        </h2>
+                        <div class="space-y-3">
+                            <button class="scenario-button" data-scenario="mep-analysis">
+                                <div class="flex items-center justify-between">
+                                    <div>
+                                        <div class="font-semibold">MEP System Analysis</div>
+                                        <div class="text-sm opacity-80">Comprehensive building systems assessment</div>
+                                    </div>
+                                    <i class="fas fa-wrench text-xl"></i>
+                                </div>
+                            </button>
+                            
+                            <button class="scenario-button" data-scenario="predictive-maintenance">
+                                <div class="flex items-center justify-between">
+                                    <div>
+                                        <div class="font-semibold">Predictive Maintenance</div>
+                                        <div class="text-sm opacity-80">AI-powered maintenance scheduling</div>
+                                    </div>
+                                    <i class="fas fa-calendar-check text-xl"></i>
+                                </div>
+                            </button>
+                            
+                            <button class="scenario-button" data-scenario="energy-optimization">
+                                <div class="flex items-center justify-between">
+                                    <div>
+                                        <div class="font-semibold">Energy Optimization</div>
+                                        <div class="text-sm opacity-80">Smart energy management & cost reduction</div>
+                                    </div>
+                                    <i class="fas fa-leaf text-xl"></i>
+                                </div>
+                            </button>
+                            
+                            <button class="scenario-button" data-scenario="asset-lifecycle">
+                                <div class="flex items-center justify-between">
+                                    <div>
+                                        <div class="font-semibold">Asset Lifecycle Management</div>
+                                        <div class="text-sm opacity-80">Equipment tracking & replacement planning</div>
+                                    </div>
+                                    <i class="fas fa-chart-line text-xl"></i>
+                                </div>
+                            </button>
+                            
+                            <button class="scenario-button" data-scenario="emergency-response">
+                                <div class="flex items-center justify-between">
+                                    <div>
+                                        <div class="font-semibold">Emergency Response</div>
+                                        <div class="text-sm opacity-80">Crisis management & system recovery</div>
+                                    </div>
+                                    <i class="fas fa-exclamation-triangle text-xl"></i>
+                                </div>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Performance Metrics -->
+                    <div>
+                        <h2 class="text-lg font-semibold text-orange-300 mb-3 flex items-center">
+                            <i class="fas fa-chart-bar mr-2"></i>Live Performance
+                        </h2>
+                        <div class="metrics-grid">
+                            <div class="metric-card">
+                                <div class="text-xs text-gray-400">Energy Efficiency</div>
+                                <div class="text-lg font-bold text-green-400">87.3%</div>
+                            </div>
+                            <div class="metric-card">
+                                <div class="text-xs text-gray-400">System Uptime</div>
+                                <div class="text-lg font-bold text-blue-400">99.7%</div>
+                            </div>
+                            <div class="metric-card">
+                                <div class="text-xs text-gray-400">Cost Savings</div>
+                                <div class="text-lg font-bold text-yellow-400">$47.2K</div>
+                            </div>
+                            <div class="metric-card">
+                                <div class="text-xs text-gray-400">Asset Health</div>
+                                <div class="text-lg font-bold text-purple-400">92.1%</div>
+                            </div>
+                        </div>
+                        <div class="performance-chart">
+                            <canvas id="performanceChart" width="100%" height="100"></canvas>
+                        </div>
+                    </div>
+
+                    <!-- Thread Management -->
+                    <div>
+                        <h2 class="text-lg font-semibold text-orange-300 mb-3 flex items-center">
+                            <i class="fas fa-comments mr-2"></i>Conversation Threads
+                        </h2>
+                        <div id="threadsList" class="space-y-2 max-h-60 overflow-y-auto scrollbar-hide">
+                            <!-- Threads will be populated here -->
+                        </div>
+                    </div>
+                </div>
+            </aside>
+
+            <!-- Main Chat Area -->
+            <main class="flex-1 flex flex-col overflow-hidden">
+                <div class="chat-container flex-1 flex flex-col m-4 rounded-xl">
+                    <!-- Alert Banner -->
+                    <div class="alert-banner">
+                        <div class="flex items-center space-x-2">
+                            <i class="fas fa-exclamation-triangle text-yellow-400"></i>
+                            <span class="text-sm text-yellow-200">System Alert: HVAC Unit #3 scheduled for maintenance in 2 hours</span>
+                        </div>
+                    </div>
+
+                    <!-- Thread Info -->
+                    <div id="threadInfo" class="border-b border-gray-600 bg-gray-800 bg-opacity-50 p-4">
+                        <div class="flex items-center justify-between">
+                            <div class="flex items-center space-x-3">
+                                <h3 id="threadTitle" class="text-lg font-semibold text-gray-200">Smart Building Analysis</h3>
+                                <span id="currentModel" class="px-2 py-1 bg-orange-600 text-white text-xs rounded-full">Gemini Pro</span>
+                            </div>
+                            <div class="text-sm text-gray-400">
+                                <span id="messageCount">0 messages</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Chat Messages -->
+                    <div id="messagesContainer" class="flex-1 overflow-y-auto p-4 scrollbar-hide">
+                        <div id="messages" class="space-y-4">
+                            <!-- Welcome Message -->
+                            <div class="ai-message message-bubble rounded-lg max-w-full">
+                                <div class="flex items-start space-x-3">
+                                    <div class="w-8 h-8 bg-orange-600 rounded-full flex items-center justify-center flex-shrink-0">
+                                        <i class="fas fa-building text-white text-sm"></i>
+                                    </div>
+                                    <div class="flex-1 min-w-0">
+                                        <div class="text-sm text-orange-300 mb-2 font-semibold">Critical Asset AI</div>
+                                        <div class="text-gray-100 leading-relaxed">
+                                            <h4 class="font-semibold mb-2">Welcome to Critical Asset AI Hub!</h4>
+                                            <p class="mb-3">I'm your intelligent assistant for smart building management and MEP systems optimization. I can help you with:</p>
+                                            <div class="grid grid-cols-1 md:grid-cols-2 gap-2 mb-3 text-sm">
+                                                <div class="flex items-center space-x-2">
+                                                    <i class="fas fa-map text-orange-400"></i>
+                                                    <span>Smart Interactive Floor Plans™</span>
+                                                </div>
+                                                <div class="flex items-center space-x-2">
+                                                    <i class="fas fa-bolt text-yellow-400"></i>
+                                                    <span>Smart Electrical Panels™</span>
+                                                </div>
+                                                <div class="flex items-center space-x-2">
+                                                    <i class="fas fa-calendar-alt text-blue-400"></i>
+                                                    <span>Smart Maintenance Scheduling™</span>
+                                                </div>
+                                                <div class="flex items-center space-x-2">
+                                                    <i class="fas fa-folder text-green-400"></i>
+                                                    <span>Smart Document Storage™</span>
+                                                </div>
+                                                <div class="flex items-center space-x-2">
+                                                    <i class="fas fa-thermometer-half text-red-400"></i>
+                                                    <span>MEP System Analysis</span>
+                                                </div>
+                                                <div class="flex items-center space-x-2">
+                                                    <i class="fas fa-leaf text-teal-400"></i>
+                                                    <span>Energy Optimization</span>
+                                                </div>
+                                                <div class="flex items-center space-x-2">
+                                                    <i class="fas fa-wifi text-purple-400"></i>
+                                                    <span>IoT Integration</span>
+                                                </div>
+                                                <div class="flex items-center space-x-2">
+                                                    <i class="fas fa-shield-alt text-pink-400"></i>
+                                                    <span>Compliance Support</span>
+                                                </div>
+                                            </div>
+                                            <p class="text-gray-300">Select a scenario from the sidebar or ask me anything about your building systems, maintenance schedules, energy optimization, or asset management!</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Typing Indicator -->
+                        <div id="typingIndicator" class="hidden ai-message message-bubble rounded-lg max-w-full mt-4">
+                            <div class="flex items-center space-x-3">
+                                <div class="w-8 h-8 bg-orange-600 rounded-full flex items-center justify-center">
+                                    <i class="fas fa-building text-white text-sm"></i>
+                                </div>
+                                <div class="flex items-center space-x-2">
+                                    <div class="typing-indicator w-2 h-2 bg-orange-400 rounded-full"></div>
+                                    <div class="typing-indicator w-2 h-2 bg-orange-400 rounded-full" style="animation-delay: 0.2s;"></div>
+                                    <div class="typing-indicator w-2 h-2 bg-orange-400 rounded-full" style="animation-delay: 0.4s;"></div>
+                                    <span class="text-gray-400 text-sm ml-2">Analyzing building systems...</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Input Area -->
+                    <div class="p-4">
+                        <div class="input-area rounded-lg">
+                            <div class="flex items-end space-x-3">
+                                <button id="attachBtn" class="text-gray-400 hover:text-orange-400 p-2 rounded-lg transition-colors flex-shrink-0">
+                                    <i class="fas fa-paperclip text-lg"></i>
+                                </button>
+                                <div class="flex-1">
+                                    <textarea 
+                                        name="messages"
+                                        placeholder="Ask about MEP systems, maintenance schedules, energy optimization... (Shift+Enter for new line, Enter to send)"
+                                        class="w-full bg-transparent text-white placeholder-gray-400 resize-none focus:outline-none max-h-32 min-h-[40px] leading-relaxed"
+                                        rows="1"
+                                    ></textarea>
+                                </div>
+                                <button id="sendBtn" class="critical-button p-3 flex-shrink-0">
+                                    <i class="fas fa-paper-plane text-white"></i>
+                                </button>
+                            </div>
+                            
+                            <!-- Quick Actions -->
+                            <div class="flex items-center justify-between mt-3 pt-3 border-t border-gray-600">
+                                <div class="flex items-center flex-wrap gap-2">
+                                    <button class="quick-action px-3 py-1 bg-gray-700 hover:bg-gray-600 rounded-full text-xs transition-colors" data-action="system-status">
+                                        System Status
+                                    </button>
+                                    <button class="quick-action px-3 py-1 bg-gray-700 hover:bg-gray-600 rounded-full text-xs transition-colors" data-action="energy-report">
+                                        Energy Report
+                                    </button>
+                                    <button class="quick-action px-3 py-1 bg-gray-700 hover:bg-gray-600 rounded-full text-xs transition-colors" data-action="maintenance-schedule">
+                                        Maintenance Schedule
+                                    </button>
+                                    <button class="quick-action px-3 py-1 bg-gray-700 hover:bg-gray-600 rounded-full text-xs transition-colors" data-action="asset-health">
+                                        Asset Health
+                                    </button>
+                                </div>
+                                <div class="flex items-center space-x-2 text-xs text-gray-500">
+                                    <span id="charCount">0</span>
+                                    <span>/</span>
+                                    <span>10000</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </main>
+        </div>
+    </div>
+
+    <!-- File Upload Area (Hidden) -->
+    <div id="fileUploadArea" class="hidden fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
+        <div class="bg-gray-800 rounded-xl p-6 w-full max-w-md">
+            <div class="text-center">
+                <i class="fas fa-cloud-upload-alt text-orange-400 text-4xl mb-4"></i>
+                <h3 class="text-lg font-semibold text-white mb-2">Upload Building Documents</h3>
+                <p class="text-gray-400 mb-4">Floor plans, equipment manuals, inspection reports</p>
+                <input type="file" id="fileInput" multiple class="hidden" accept="image/*,.pdf,.doc,.docx,.dwg,.txt">
+                <button class="critical-button w-full mb-2" onclick="document.getElementById('fileInput').click()">
+                    Choose Files
+                </button>
+                <button id="closeUpload" class="w-full px-4 py-2 text-gray-400 hover:text-white transition-colors">
+                    Cancel
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        class CriticalAssetAI {
+            constructor() {
+                this.webhookUrl = 'https://caseyp.app.n8n.cloud/webhook/nofrictionchatbot';
+                this.threads = JSON.parse(localStorage.getItem('ca_threads') || '[]');
+                this.currentThreadId = null;
+                this.currentThread = null;
+                this.settings = JSON.parse(localStorage.getItem('ca_settings') || '{}');
+                this.currentModel = 'gemini';
+                
+                this.buildingScenarios = {
+                    'mep-analysis': {
+                        title: 'MEP System Analysis',
+                        prompt: `Please analyze our MEP systems for Building Complex Alpha (450,000 sq ft mixed-use facility):
+
+**Current Building Data:**
+- **HVAC Systems:** 12 rooftop units (RTUs), 3 chillers (2 operational, 1 standby), 47 VAV boxes, central BAS control
+- **Electrical:** 2000A main service, 6 distribution panels, LED conversion 78% complete, emergency generator testing monthly
+- **Plumbing:** 4 domestic water pumps, 2 fire pumps, backflow prevention systems, water heater efficiency at 82%
+- **Recent Issues:** HVAC Unit #3 showing temperature variance, electrical Panel B-2 had minor fault last week
+- **Energy Consumption:** Average 2.1M kWh monthly, trending 15% above baseline
+- **Maintenance Budget:** $125K quarterly allocated
+
+**Analysis Request:**
+1. Identify potential system optimization opportunities
+2. Recommend predictive maintenance priorities
+3. Calculate potential energy savings from system improvements
+4. Assess current system interdependencies and failure risks
+5. Provide 90-day action plan with cost-benefit analysis
+
+Please provide comprehensive analysis with specific recommendations, expected costs, ROI projections, and implementation timeline.`
+                    },
+                    'predictive-maintenance': {
+                        title: 'Predictive Maintenance Hub',
+                        prompt: `Generate a comprehensive predictive maintenance analysis and scheduling plan for our facility:
+
+**Current Equipment Inventory & Status:**
+- **HVAC Equipment:** 12 RTUs (avg age 8 years), 3 chillers (ages: 12, 15, 6 years), 250+ dampers, 180 sensors
+- **Electrical Systems:** 45 circuit breakers, 12 transformers, 350+ light fixtures, UPS systems, emergency lighting
+- **Plumbing Systems:** 8 pumps total, 45 valves, water treatment systems, 12 backflow preventers
+- **Fire Safety:** Sprinkler system with 890 heads, 23 fire extinguishers, smoke detection network
+- **Recent Maintenance:** Last major HVAC service 3 months ago, electrical inspection 6 months ago
+
+**IoT Sensor Data (Last 30 Days):**
+- Temperature variations: 15 sensors showing irregular patterns
+- Vibration analysis: Pump #2 showing increased vibration (trending upward)
+- Energy consumption spikes: Noted on Tuesdays and Fridays consistently
+- Water pressure fluctuations: Building zones 3 & 7 experiencing variations
+
+**Maintenance History:**
+- Emergency repairs: 8 incidents in last quarter ($23,400 total cost)
+- Preventive maintenance completion rate: 87%
+- Average repair response time: 4.2 hours
+- Parts inventory turnover: 2.1x annually
+
+**Request:**
+Create a 6-month predictive maintenance schedule including:
+1. Risk-prioritized equipment ranking
+2. Optimal maintenance windows to minimize disruption
+3. Parts procurement timeline and budget requirements
+4. Integration with existing BAS and IoT sensors
+5. Expected reduction in emergency repairs and costs
+6. Staff training requirements for new procedures
+
+Include specific dates, cost projections, and expected performance improvements.`
+                    },
+                    'energy-optimization': {
+                        title: 'Energy Management System',
+                        prompt: `Develop a comprehensive energy optimization strategy for our smart building portfolio:
+
+**Current Energy Profile:**
+- **Total Consumption:** 2.8M kWh monthly across 4 buildings (Main: 1.2M, North: 0.8M, South: 0.5M, West: 0.3M)
+- **Peak Demand:** 1,850 kW (typically occurring 2-4 PM weekdays)
+- **Energy Costs:** $287,000 monthly average ($0.102/kWh base, $18.50/kW demand charges)
+- **Current Utility Rate:** Time-of-use pricing with peak/off-peak differential
+- **Power Factor:** 0.87 average (incurring penalty charges)
+
+**Building Systems Performance:**
+- **HVAC Load:** 68% of total consumption, setpoints currently 72°F cooling/68°F heating
+- **Lighting Systems:** 78% LED conversion complete, occupancy sensors in 45% of spaces
+- **IT Equipment:** 24/7 server rooms, 150+ workstations, network infrastructure
+- **Process Equipment:** Lab equipment, elevators, kitchen facilities, water heating
+
+**Renewable Energy Assets:**
+- **Solar Installation:** 250kW rooftop system producing avg 28,000 kWh monthly
+- **Battery Storage:** 100kWh system, currently underutilized
+- **EV Charging:** 8 Level 2 chargers, usage averaging 60% capacity
+
+**Historical Data Insights:**
+- Summer peak usage increased 23% over last 3 years
+- Weekend consumption still at 65% of weekday levels (opportunity identified)
+- Weather correlation shows 15% variance per degree change
+
+**Optimization Goals:**
+1. Reduce overall consumption by 20% over 18 months
+2. Shift 35% of non-critical loads to off-peak hours
+3. Improve power factor to 0.95+
+4. Maximize solar + storage utilization
+5. Achieve ENERGY STAR score of 85+
+
+Please provide detailed strategy including:
+- Specific equipment upgrades and ROI calculations
+- Demand response program recommendations
+- Smart controls implementation plan with automation sequences
+- Staff behavioral change programs
+- Monthly savings projections and payback periods
+- Integration with existing BAS and IoT infrastructure`
+                    },
+                    'asset-lifecycle': {
+                        title: 'Asset Lifecycle Intelligence',
+                        prompt: `Create a comprehensive asset lifecycle management strategy and replacement planning analysis:
+
+**Current Asset Inventory & Status:**
+
+**HVAC Assets:**
+- RTU #1-6: Installed 2015, excellent condition, estimated 15-year life (7 years remaining)
+- RTU #7-12: Installed 2011, showing wear, estimated 2-3 years remaining useful life
+- Chiller A: Installed 2008, major overhaul 2019, estimated 5 years remaining
+- Chiller B: Installed 2022, new installation, 18+ years remaining
+- Chiller C: Installed 2006, standby unit, needs replacement evaluation
+
+**Electrical Assets:**
+- Main Distribution Panel: Installed 2010, good condition, 10+ years remaining
+- Secondary Panels (6): Mixed ages 2008-2018, 2 panels need upgrades
+- UPS Systems: 3 units, ages 4, 7, and 9 years respectively
+- Emergency Generator: 2017 installation, excellent maintenance record
+- LED Lighting: 78% conversion complete, ongoing replacement program
+
+**Plumbing/Fire Safety:**
+- Water Pumps: 4 units, ages ranging 6-14 years, Pump #3 scheduled for replacement
+- Fire Pumps: 2 units, 12 and 8 years old, both in good condition
+- Boiler System: 2019 installation, high efficiency, minimal maintenance
+- Backflow Preventers: Annual testing, 3 units need valve replacements
+
+**Building Automation:**
+- BAS Controllers: Installed 2016, current on software updates
+- Sensors/Actuators: Mixed ages, 25% beyond manufacturer recommendations
+- Network Infrastructure: Last major upgrade 2020, planning refresh 2025
+
+**Financial Data:**
+- Current asset book value: $2.8M
+- Annual maintenance budget: $485K
+- Emergency repair costs (last 12 months): $73K
+- Planned capital improvements budget: $650K over next 3 years
+
+**Performance Metrics:**
+- Overall equipment availability: 97.3%
+- Mean time between failures: 18 months average
+- Maintenance cost as % of asset value: 17% (industry benchmark: 12-15%)
+- Energy efficiency degradation: 3-5% annually on aging equipment
+
+**Requirements:**
+Develop a 10-year asset lifecycle strategy including:
+
+1. **Risk Assessment Matrix:** Prioritize assets by failure probability and business impact
+2. **Replacement Timeline:** Optimal replacement schedules to minimize downtime and costs
+3. **Technology Upgrades:** Integration of IoT sensors, smart controls, and efficiency improvements
+4. **Financial Planning:** CapEx requirements, financing options, and budget smoothing strategies
+5. **Sustainability Goals:** Energy efficiency improvements, carbon footprint reduction targets
+6. **Vendor Management:** Preferred vendor relationships, service contracts, warranty optimization
+7. **Obsolescence Planning:** Address end-of-life equipment and parts availability issues
+8. **Performance Monitoring:** KPIs and metrics to track asset health and lifecycle costs
+
+Include specific recommendations with costs, timelines, expected ROI, and risk mitigation strategies.`
+                    },
+                    'emergency-response': {
+                        title: 'Emergency Response Protocol',
+                        prompt: `Develop comprehensive emergency response and crisis management protocols for our smart building complex:
+
+**Facility Overview:**
+- **Building Complex:** 4 interconnected buildings, 1,200 total occupants during peak hours
+- **Critical Systems:** Data center, laboratory facilities, executive offices, public assembly areas
+- **Operating Hours:** 24/7 operations with reduced staffing nights/weekends
+- **Special Considerations:** Clean room environments, hazardous material storage, high-value equipment
+
+**Current Emergency Systems Status:**
+- **Fire Safety:** Full sprinkler coverage, smoke detection network, 6 fire pumps, monthly testing protocol
+- **Security:** Card access system, 47 security cameras, intrusion detection, 24/7 monitoring
+- **Life Safety:** Emergency lighting, exit signage, public address system, AED units at 8 locations
+- **Building Systems:** Emergency generator (750kW), UPS systems, emergency elevators
+- **Communication:** Emergency notification system, two-way radios, cellular boosters
+
+**Recent Incidents & Lessons Learned:**
+- Power outage (6 months ago): Generator performed well, but BAS recovery took 45 minutes
+- Water leak (3 months ago): Detection system worked, but response coordination needs improvement
+- Fire alarm (false - 2 months ago): Evacuation took 12 minutes, exceeded target of 8 minutes
+- Severe weather (1 month ago): HVAC systems maintained pressure, minor roof damage
+
+**Emergency Scenarios to Address:**
+1. **Fire Emergency:** Detection, suppression, evacuation, system shutdowns
+2. **Power Outage:** Extended utility loss, generator operation, critical system prioritization
+3. **Water/Flood Events:** Pipe bursts, roof leaks, external flooding, equipment protection
+4. **HVAC Failure:** Total system loss, temperature control, air quality, equipment protection
+5. **Security Breach:** Unauthorized access, workplace violence, lockdown procedures
+6. **Natural Disasters:** Severe weather, seismic events, extended facility closure
+7. **Hazmat Incidents:** Chemical spills, gas leaks, contamination response
+8. **Cyber Security:** System compromises, data protection, operational continuity
+
+**Critical Assets Requiring Protection:**
+- Server rooms and data centers (environmental controls critical)
+- Laboratory equipment ($2.1M value, temperature sensitive)
+- Research data and intellectual property
+- Executive office suite and conference facilities
+- Manufacturing/production equipment
+- Life safety systems and infrastructure
+
+**Current Response Team:**
+- Facility Manager (primary emergency coordinator)
+- 4 Building Engineers (rotating on-call schedule)
+- Security team (outsourced, 24/7 coverage)
+- Maintenance staff (2 day shift, 1 night shift)
+- External partners: Fire dept, police, utilities, service contractors
+
+**Integration Requirements:**
+- Building Automation System emergency protocols
+- IoT sensor network for early detection
+- Smart building controls for automated responses
+- Mobile apps for emergency communication
+- Cloud-based monitoring and remote management
+
+**Request Comprehensive Emergency Response Plan Including:**
+
+1. **Automated Response Protocols:** BAS integration, sensor triggers, system shutdowns/startups
+2. **Communication Plans:** Notification systems, chain of command, external coordination
+3. **Evacuation Procedures:** Primary/secondary routes, assembly points, special needs assistance
+4. **System Recovery Plans:** Step-by-step restoration procedures, priority sequences
+5. **Training Programs:** Staff training schedules, drill procedures, competency assessments
+6. **Vendor Coordination:** Emergency service providers, parts suppliers, temporary equipment
+7. **Business Continuity:** Alternative work arrangements, critical operations maintenance
+8. **Documentation:** Emergency contact lists, system diagrams, procedure checklists
+
+Include specific response times, responsible parties, decision trees, and integration with smart building technologies. Address both automated responses and human intervention protocols.`
+                    }
+                };
+
+                this.initializeElements();
+                this.bindEvents();
+                this.initializeChart();
+                this.initializeFirstThread();
+                this.setupAutoResize();
+            }
+
+            initializeElements() {
+                this.elements = {
+                    userInput: document.querySelector('textarea[name="messages"]'),
+                    modelSelector: document.querySelector('select[name="model"]'),
+                    sendBtn: document.getElementById('sendBtn'),
+                    messagesContainer: document.getElementById('messagesContainer'),
+                    messages: document.getElementById('messages'),
+                    typingIndicator: document.getElementById('typingIndicator'),
+                    attachBtn: document.getElementById('attachBtn'),
+                    fileUploadArea: document.getElementById('fileUploadArea'),
+                    closeUpload: document.getElementById('closeUpload'),
+                    charCount: document.getElementById('charCount'),
+                    newThreadBtn: document.getElementById('newThreadBtn'),
+                    threadsList: document.getElementById('threadsList'),
+                    threadInfo: document.getElementById('threadInfo'),
+                    threadTitle: document.getElementById('threadTitle'),
+                    currentModel: document.getElementById('currentModel'),
+                    messageCount: document.getElementById('messageCount'),
+                    sidebar: document.getElementById('sidebar'),
+                    sidebarToggle: document.getElementById('sidebarToggle'),
+                    sidebarOverlay: document.getElementById('sidebarOverlay')
+                };
+            }
+
+            bindEvents() {
+                // Message input events
+                this.elements.userInput.addEventListener('keydown', (e) => this.handleKeyDown(e));
+                this.elements.userInput.addEventListener('input', () => this.updateCharCount());
+                this.elements.sendBtn.addEventListener('click', () => this.sendMessage());
+
+                // Model selector
+                this.elements.modelSelector.addEventListener('change', (e) => this.switchModel(e.target.value));
+
+                // Thread management
+                this.elements.newThreadBtn.addEventListener('click', () => this.createNewThread());
+
+                // Sidebar mobile handling
+                this.elements.sidebarToggle.addEventListener('click', () => this.toggleSidebar());
+                this.elements.sidebarOverlay.addEventListener('click', () => this.closeSidebar());
+
+                // File upload
+                this.elements.attachBtn.addEventListener('click', () => this.showFileUpload());
+                this.elements.closeUpload.addEventListener('click', () => this.hideFileUpload());
+
+                // Scenario buttons
+                document.querySelectorAll('.scenario-button').forEach(btn => {
+                    btn.addEventListener('click', (e) => this.handleScenario(e));
+                });
+
+                // Quick actions
+                document.querySelectorAll('.quick-action').forEach(btn => {
+                    btn.addEventListener('click', (e) => this.handleQuickAction(e));
+                });
+
+                // Window resize
+                window.addEventListener('resize', () => this.handleResize());
+            }
+
+            initializeChart() {
+                const ctx = document.getElementById('performanceChart').getContext('2d');
+                new Chart(ctx, {
+                    type: 'line',
+                    data: {
+                        labels: ['6h', '12h', '18h', '24h', '30h', '36h'],
+                        datasets: [{
+                            label: 'Energy Efficiency',
+                            data: [85.2, 87.1, 86.8, 87.3, 86.9, 87.5],
+                            borderColor: '#10b981',
+                            tension: 0.1,
+                            fill: false
+                        }, {
+                            label: 'System Health',
+                            data: [91.5, 92.8, 92.1, 92.5, 91.9, 92.1],
+                            borderColor: '#3b82f6',
+                            tension: 0.1,
+                            fill: false
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        plugins: {
+                            legend: {
+                                labels: {
+                                    color: '#e2e8f0',
+                                    font: { size: 11 }
+                                }
+                            }
+                        },
+                        scales: {
+                            x: {
+                                ticks: { color: '#9ca3af', font: { size: 10 } },
+                                grid: { color: 'rgba(156, 163, 175, 0.1)' }
+                            },
+                            y: {
+                                ticks: { color: '#9ca3af', font: { size: 10 } },
+                                grid: { color: 'rgba(156, 163, 175, 0.1)' }
+                            }
+                        }
+                    }
+                });
+            }
+
+            setupAutoResize() {
+                const textarea = this.elements.userInput;
+                textarea.addEventListener('input', () => {
+                    textarea.style.height = 'auto';
+                    textarea.style.height = Math.min(textarea.scrollHeight, 128) + 'px';
+                });
+            }
+
+            toggleSidebar() {
+                this.elements.sidebar.classList.toggle('open');
+                this.elements.sidebarOverlay.classList.toggle('hidden');
+            }
+
+            closeSidebar() {
+                this.elements.sidebar.classList.remove('open');
+                this.elements.sidebarOverlay.classList.add('hidden');
+            }
+
+            handleResize() {
+                if (window.innerWidth >= 1024) {
+                    this.closeSidebar();
+                }
+            }
+
+            showFileUpload() {
+                this.elements.fileUploadArea.classList.remove('hidden');
+            }
+
+            hideFileUpload() {
+                this.elements.fileUploadArea.classList.add('hidden');
+            }
+
+            initializeFirstThread() {
+                if (this.threads.length === 0) {
+                    this.createNewThread();
+                } else {
+                    this.loadThread(this.threads[0]);
+                }
+                this.updateThreadsList();
+            }
+
+            createNewThread() {
+                const thread = {
+                    id: Date.now().toString(),
+                    title: 'Smart Building Analysis',
+                    messages: [],
+                    model: this.currentModel,
+                    createdAt: new Date().toISOString(),
+                    lastUpdated: new Date().toISOString()
+                };
+
+                this.threads.unshift(thread);
+                this.loadThread(thread);
+                this.updateThreadsList();
+                this.saveThreads();
+                this.elements.userInput.focus();
+
+                if (window.innerWidth < 1024) {
+                    this.closeSidebar();
+                }
+            }
+
+            loadThread(thread) {
+                this.currentThread = thread;
+                this.currentThreadId = thread.id;
+                this.currentModel = thread.model || 'gemini';
+                
+                this.elements.modelSelector.value = this.currentModel;
+                this.elements.messages.innerHTML = '';
+                
+                thread.messages.forEach(message => this.displayMessage(message));
+                this.updateThreadInfo();
+                this.scrollToBottom();
+                this.updateThreadsList();
+            }
+
+            switchModel(newModel) {
+                this.currentModel = newModel;
+                
+                if (this.currentThread) {
+                    this.currentThread.model = newModel;
+                    this.saveThreads();
+                }
+
+                this.updateThreadInfo();
+            }
+
+            updateThreadsList() {
+                this.elements.threadsList.innerHTML = '';
+                
+                this.threads.forEach(thread => {
+                    const item = document.createElement('div');
+                    item.className = `p-3 bg-gray-800 rounded-lg cursor-pointer border border-gray-700 hover:border-orange-400 transition-colors ${thread.id === this.currentThreadId ? 'border-orange-400 bg-gray-700' : ''}`;
+                    item.innerHTML = `
+                        <div class="flex items-center justify-between">
+                            <div class="flex-1 min-w-0">
+                                <div class="text-sm font-medium text-gray-200 truncate">${thread.title}</div>
+                                <div class="text-xs text-gray-400 mt-1">
+                                    ${thread.messages.length} messages • ${thread.model}
+                                </div>
+                            </div>
+                            <button class="delete-thread ml-2 p-1 text-gray-400 hover:text-red-400 transition-colors" data-thread-id="${thread.id}">
+                                <i class="fas fa-trash text-xs"></i>
+                            </button>
+                        </div>
+                    `;
+                    
+                    item.addEventListener('click', (e) => {
+                        if (!e.target.closest('.delete-thread')) {
+                            this.loadThread(thread);
+                            if (window.innerWidth < 1024) {
+                                this.closeSidebar();
+                            }
+                        }
+                    });
+
+                    const deleteBtn = item.querySelector('.delete-thread');
+                    deleteBtn.addEventListener('click', (e) => {
+                        e.stopPropagation();
+                        this.deleteThread(thread.id);
+                    });
+                    
+                    this.elements.threadsList.appendChild(item);
+                });
+            }
+
+            deleteThread(threadId) {
+                if (this.threads.length <= 1) return;
+
+                const threadIndex = this.threads.findIndex(t => t.id === threadId);
+                if (threadIndex === -1) return;
+
+                this.threads.splice(threadIndex, 1);
+                
+                if (threadId === this.currentThreadId) {
+                    const newThread = this.threads[0] || this.threads[Math.max(0, threadIndex - 1)];
+                    this.loadThread(newThread);
+                }
+                
+                this.updateThreadsList();
+                this.saveThreads();
+            }
+
+            updateThreadInfo() {
+                if (this.currentThread) {
+                    this.elements.threadTitle.textContent = this.currentThread.title;
+                    this.elements.currentModel.textContent = this.currentModel;
+                    this.elements.messageCount.textContent = `${this.currentThread.messages.length} messages`;
+                }
+            }
+
+            handleKeyDown(e) {
+                if (e.key === 'Enter' && !e.shiftKey) {
+                    e.preventDefault();
+                    this.sendMessage();
+                }
+            }
+
+            updateCharCount() {
+                const count = this.elements.userInput.value.length;
+                this.elements.charCount.textContent = count;
+                
+                if (count > 8000) {
+                    this.elements.charCount.style.color = '#ef4444';
+                } else if (count > 6000) {
+                    this.elements.charCount.style.color = '#f59e0b';
+                } else {
+                    this.elements.charCount.style.color = '#6b7280';
+                }
+            }
+
+            handleScenario(e) {
+                const scenarioKey = e.currentTarget.dataset.scenario;
+                const scenario = this.buildingScenarios[scenarioKey];
+                
+                if (scenario) {
+                    this.elements.userInput.value = scenario.prompt;
+                    this.elements.userInput.style.height = 'auto';
+                    this.elements.userInput.style.height = Math.min(this.elements.userInput.scrollHeight, 128) + 'px';
+                    this.elements.userInput.focus();
+                    this.updateCharCount();
+                    
+                    if (window.innerWidth < 1024) {
+                        this.closeSidebar();
+                    }
+                }
+            }
+
+            handleQuickAction(e) {
+                const action = e.target.dataset.action;
+                const quickPrompts = {
+                    'system-status': 'Please provide a comprehensive status report of all building systems including HVAC, electrical, plumbing, fire safety, and IoT sensors. Include any alerts, maintenance needs, or performance issues.',
+                    'energy-report': 'Generate a detailed energy consumption analysis for the past 30 days including usage patterns, cost breakdown, efficiency metrics, and recommendations for optimization.',
+                    'maintenance-schedule': 'Show me the current maintenance schedule for all building systems, upcoming due dates, overdue items, and recommended scheduling adjustments based on system performance.',
+                    'asset-health': 'Provide an asset health assessment including equipment condition scores, remaining useful life estimates, replacement priorities, and recommended actions for all major building systems.'
+                };
+                
+                if (quickPrompts[action]) {
+                    this.elements.userInput.value = quickPrompts[action];
+                    this.elements.userInput.focus();
+                    this.updateCharCount();
+                }
+            }
+
+            async sendMessage() {
+                const message = this.elements.userInput.value.trim();
+                if (!message) return;
+
+                this.elements.sendBtn.disabled = true;
+                this.elements.userInput.disabled = true;
+
+                const userMessage = {
+                    id: Date.now(),
+                    type: 'user',
+                    content: message,
+                    timestamp: new Date().toISOString(),
+                    model: this.currentModel
+                };
+
+                this.currentThread.messages.push(userMessage);
+                this.displayMessage(userMessage);
+
+                if (this.currentThread.title === 'Smart Building Analysis') {
+                    this.generateThreadTitle();
+                    this.updateThreadInfo();
+                    this.updateThreadsList();
+                }
+
+                this.elements.userInput.value = '';
+                this.elements.userInput.style.height = 'auto';
+                this.updateCharCount();
+                this.showTypingIndicator();
+
+                try {
+                    const response = await this.sendToWebhook(userMessage);
+                    
+                    let aiResponseContent = '';
+                    
+                    if (typeof response === 'string') {
+                        aiResponseContent = response;
+                    } else if (response && typeof response === 'object') {
+                        aiResponseContent = response.response || 
+                                         response.content || 
+                                         response.message || 
+                                         response.reply || 
+                                         response.output || 
+                                         response.text ||
+                                         response.data ||
+                                         JSON.stringify(response, null, 2);
+                    } else {
+                        aiResponseContent = 'I received your message and processed it successfully, but the response format was unexpected.';
+                    }
+
+                    const aiMessage = {
+                        id: Date.now() + 1,
+                        type: 'ai',
+                        content: aiResponseContent,
+                        timestamp: new Date().toISOString(),
+                        model: this.currentModel
+                    };
+
+                    this.currentThread.messages.push(aiMessage);
+                    this.hideTypingIndicator();
+                    this.displayMessage(aiMessage);
+
+                } catch (error) {
+                    console.error('Error sending message:', error);
+                    this.hideTypingIndicator();
+                    
+                    const errorMessage = {
+                        id: Date.now() + 1,
+                        type: 'ai',
+                        content: `I apologize, but I encountered an error processing your request: ${error.message}. Please check your connection and try again.`,
+                        timestamp: new Date().toISOString(),
+                        isError: true,
+                        model: this.currentModel
+                    };
+
+                    this.currentThread.messages.push(errorMessage);
+                    this.displayMessage(errorMessage);
+                }
+
+                this.elements.sendBtn.disabled = false;
+                this.elements.userInput.disabled = false;
+                this.elements.userInput.focus();
+
+                this.currentThread.lastUpdated = new Date().toISOString();
+                this.saveThreads();
+                this.updateThreadInfo();
+                this.updateThreadsList();
+            }
+
+            async sendToWebhook(message) {
+                const payload = {
+                    model: this.currentModel,
+                    messages: message.content,
+                    timestamp: message.timestamp,
+                    threadId: this.currentThreadId,
+                    threadContext: this.currentThread.messages.slice(-10).map(m => ({
+                        type: m.type,
+                        content: m.content,
+                        model: m.model
+                    })),
+                    settings: this.settings
+                };
+
+                const response = await fetch(this.webhookUrl, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Accept': 'application/json',
+                    },
+                    body: JSON.stringify(payload),
+                    timeout: 30000
+                });
+
+                if (!response.ok) {
+                    const errorText = await response.text();
+                    throw new Error(`HTTP error! status: ${response.status}, message: ${errorText}`);
+                }
+
+                const contentType = response.headers.get('content-type');
+                let responseData;
+                
+                if (contentType && contentType.includes('application/json')) {
+                    responseData = await response.json();
+                } else {
+                    responseData = await response.text();
+                }
+
+                return responseData;
+            }
+
+            generateThreadTitle() {
+                if (!this.currentThread || this.currentThread.messages.length === 0) return 'Smart Building Analysis';
+                
+                const firstUserMessage = this.currentThread.messages.find(m => m.type === 'user');
+                if (firstUserMessage) {
+                    let title = firstUserMessage.content.substring(0, 50);
+                    if (firstUserMessage.content.length > 50) title += '...';
+                    
+                    // Smart title generation based on content
+                    const content = firstUserMessage.content.toLowerCase();
+                    if (content.includes('mep') || content.includes('hvac') || content.includes('electrical') || content.includes('plumbing')) {
+                        title = 'MEP System Analysis';
+                    } else if (content.includes('maintenance') || content.includes('schedule')) {
+                        title = 'Maintenance Planning';
+                    } else if (content.includes('energy') || content.includes('consumption') || content.includes('optimization')) {
+                        title = 'Energy Management';
+                    } else if (content.includes('asset') || content.includes('equipment') || content.includes('lifecycle')) {
+                        title = 'Asset Management';
+                    } else if (content.includes('emergency') || content.includes('crisis') || content.includes('response')) {
+                        title = 'Emergency Response';
+                    }
+                    
+                    this.currentThread.title = title;
+                    return title;
+                }
+                return 'Smart Building Analysis';
+            }
+
+            displayMessage(message) {
+                const messageElement = document.createElement('div');
+                messageElement.className = `${message.type}-message message-bubble rounded-lg max-w-full ${message.type === 'user' ? 'ml-auto' : ''}`;
+                
+                if (message.type === 'user') {
+                    messageElement.innerHTML = this.createUserMessageHTML(message);
+                } else {
+                    messageElement.innerHTML = this.createAIMessageHTML(message);
+                }
+
+                this.elements.messages.appendChild(messageElement);
+                this.scrollToBottom();
+
+                if (message.type === 'ai') {
+                    this.bindMessageActions(messageElement, message);
+                }
+            }
+
+            createUserMessageHTML(message) {
+                return `
+                    <div class="flex items-start space-x-3 justify-end">
+                        <div class="text-right flex-1 min-w-0">
+                            <div class="text-xs text-orange-200 mb-1 font-medium flex items-center justify-end">
+                                <span>You</span>
+                                <span class="ml-2 px-2 py-0.5 bg-orange-700 text-white text-xs rounded-full">${message.model}</span>
+                            </div>
+                            <div class="text-white leading-relaxed">${this.formatMessageContent(message.content)}</div>
+                            <div class="text-xs text-orange-200 opacity-60 mt-2">${this.formatTimestamp(message.timestamp)}</div>
+                        </div>
+                        <div class="w-8 h-8 bg-orange-700 rounded-full flex items-center justify-center flex-shrink-0">
+                            <i class="fas fa-user text-white text-sm"></i>
+                        </div>
+                    </div>
+                `;
+            }
+
+            createAIMessageHTML(message) {
+                const errorClass = message.isError ? 'border-red-500 bg-red-900 bg-opacity-20' : '';
+                
+                return `
+                    <div class="flex items-start space-x-3">
+                        <div class="w-8 h-8 bg-orange-600 rounded-full flex items-center justify-center flex-shrink-0">
+                            <i class="fas fa-building text-white text-sm"></i>
+                        </div>
+                        <div class="flex-1 min-w-0">
+                            <div class="text-xs text-orange-300 mb-1 font-medium flex items-center">
+                                <span>Critical Asset AI</span>
+                                <span class="ml-2 px-2 py-0.5 bg-orange-600 text-white text-xs rounded-full">${message.model}</span>
+                            </div>
+                            <div class="text-gray-100 leading-relaxed ${errorClass}">${this.formatMessageContent(message.content)}</div>
+                            <div class="text-xs text-gray-400 mt-2">${this.formatTimestamp(message.timestamp)}</div>
+                            <div class="message-actions flex items-center space-x-2 mt-2 opacity-0 transition-opacity">
+                                <button class="copy-btn text-gray-400 hover:text-orange-400 p-1 rounded" title="Copy message">
+                                    <i class="fas fa-copy text-xs"></i>
+                                </button>
+                                <button class="like-btn text-gray-400 hover:text-green-400 p-1 rounded" title="Good response">
+                                    <i class="fas fa-thumbs-up text-xs"></i>
+                                </button>
+                                <button class="dislike-btn text-gray-400 hover:text-red-400 p-1 rounded" title="Poor response">
+                                    <i class="fas fa-thumbs-down text-xs"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            }
+
+            formatMessageContent(content) {
+                if (!content) return '';
+                
+                // Handle code blocks
+                content = content.replace(/```(\w+)?\n([\s\S]*?)```/g, (match, language, code) => {
+                    return `<div class="bg-gray-900 border border-gray-700 rounded-lg p-3 my-2 overflow-x-auto"><pre><code class="text-green-400">${this.escapeHtml(code.trim())}</code></pre></div>`;
+                });
+
+                // Handle inline code
+                content = content.replace(/`([^`]+)`/g, '<code class="bg-gray-800 px-2 py-1 rounded text-orange-300 text-sm">$1</code>');
+                
+                // Handle line breaks
+                content = content.replace(/\n/g, '<br>');
+                
+                // Handle bold text
+                content = content.replace(/\*\*(.*?)\*\*/g, '<strong class="font-semibold">$1</strong>');
+                
+                // Handle italic text
+                content = content.replace(/\*(.*?)\*/g, '<em class="italic">$1</em>');
+                
+                // Handle links
+                content = content.replace(/(https?:\/\/[^\s]+)/g, '<a href="$1" target="_blank" class="text-orange-400 hover:text-orange-300 underline">$1</a>');
+
+                return content;
+            }
+
+            escapeHtml(text) {
+                const div = document.createElement('div');
+                div.textContent = text;
+                return div.innerHTML;
+            }
+
+            formatTimestamp(timestamp) {
+                const date = new Date(timestamp);
+                return date.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+            }
+
+            bindMessageActions(messageElement, message) {
+                const copyBtn = messageElement.querySelector('.copy-btn');
+                const likeBtn = messageElement.querySelector('.like-btn');
+                const dislikeBtn = messageElement.querySelector('.dislike-btn');
+
+                copyBtn?.addEventListener('click', () => this.copyMessage(message.content));
+                likeBtn?.addEventListener('click', () => this.rateMessage(message.id, 'like'));
+                dislikeBtn?.addEventListener('click', () => this.rateMessage(message.id, 'dislike'));
+            }
+
+            copyMessage(content) {
+                const textContent = content.replace(/<[^>]*>/g, '').replace(/&lt;/g, '<').replace(/&gt;/g, '>').replace(/&amp;/g, '&');
+                navigator.clipboard.writeText(textContent).then(() => {
+                    this.showNotification('Message copied to clipboard');
+                });
+            }
+
+            rateMessage(messageId, rating) {
+                const ratings = JSON.parse(localStorage.getItem('ca_ratings') || '{}');
+                ratings[messageId] = { rating, timestamp: new Date().toISOString() };
+                localStorage.setItem('ca_ratings', JSON.stringify(ratings));
+                
+                this.showNotification(`Feedback recorded: ${rating}`);
+            }
+
+            showTypingIndicator() {
+                this.elements.typingIndicator.classList.remove('hidden');
+                this.scrollToBottom();
+            }
+
+            hideTypingIndicator() {
+                this.elements.typingIndicator.classList.add('hidden');
+            }
+
+            scrollToBottom() {
+                setTimeout(() => {
+                    this.elements.messagesContainer.scrollTop = this.elements.messagesContainer.scrollHeight;
+                }, 100);
+            }
+
+            saveThreads() {
+                localStorage.setItem('ca_threads', JSON.stringify(this.threads));
+            }
+
+            showNotification(message) {
+                const notification = document.createElement('div');
+                notification.className = 'fixed top-4 right-4 bg-orange-600 text-white px-4 py-2 rounded-lg shadow-lg z-50 transition-opacity duration-300';
+                notification.textContent = message;
+                
+                document.body.appendChild(notification);
+                
+                setTimeout(() => {
+                    notification.style.opacity = '0';
+                    setTimeout(() => {
+                        if (document.body.contains(notification)) {
+                            document.body.removeChild(notification);
+                        }
+                    }, 300);
+                }, 3000);
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            new CriticalAssetAI();
+        });
+    </script>
+
+</body>
+</html>

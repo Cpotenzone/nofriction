@@ -1,0 +1,212 @@
+/* css/style.css - Main Page Styles */
+:root {
+    --primary-color-page: #ff5a5a; /* From your original root */
+    --dark-bg-page: #0a0a0a;       /* From your original root */
+    --dark-card-page: #151515;     /* From your original root */
+    --text-color-page: #f5f5f5;    /* From your original root */
+    --text-secondary-page: #a0a0a0;/* From your original root */
+}
+
+body { /* Effective body styling for the page */
+    font-family: 'Inter', sans-serif;
+    background-color: #0a1629; /* Grid background from your other body definition */
+    background-image: 
+        linear-gradient(rgba(25, 118, 210, 0.05) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(25, 118, 210, 0.05) 1px, transparent 1px);
+    background-size: 20px 20px;
+    color: #e2e8f0; /* From your grid background body definition */
+    line-height: 1.6;
+    min-height: 100vh; /* Ensure full height */
+}
+
+.document-card {
+    background: rgba(30, 58, 138, 0.3);
+    border-left: 3px solid #3b82f6;
+    transition: all 0.3s ease;
+}
+
+.document-card:hover {
+    background: rgba(30, 58, 138, 0.5);
+    transform: translateX(5px);
+}
+
+.section-divider {
+    height: 2px;
+    background: linear-gradient(90deg, rgba(59, 130, 246, 0.1), rgba(59, 130, 246, 0.7), rgba(59, 130, 246, 0.1));
+}
+
+.tech-badge { /* Page specific tech-badge */
+    background: rgba(37, 99, 235, 0.2);
+    border: 1px solid rgba(96, 165, 250, 0.3);
+    color: #90cdf4; /* Defaulting to a light blue, adjust if needed */
+    padding: 0.25rem 0.75rem;
+    border-radius: 999px;
+    font-size: 0.75rem;
+    font-weight: 500;
+}
+
+/* Page Navigation Styles */
+.nav-link {
+    position: relative;
+    color: var(--text-color-page); /* Using page variable */
+    text-decoration: none;
+    padding: 0.5rem 1rem;
+    transition: color 0.3s ease;
+    font-weight: 500;
+}
+.nav-link::after {
+    content: '';
+    position: absolute;
+    bottom: -5px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 0;
+    height: 2px;
+    background-color: transparent;
+    transition: width 0.3s ease, background-color 0.3s ease;
+}
+.nav-link:hover::after {
+    width: 20px;
+    background-color: #00cc66; /* Green color for hover */
+}
+.nav-link.active {
+    color: var(--primary-color-page); /* Using page variable */
+}
+.nav-link.active::after {
+    content: ''; /* Ensure content is there for ::after to show */
+    position: absolute;
+    bottom: -5px; /* Position underline correctly */
+    left: 50%;
+    transform: translateX(-50%);
+    width: 20px; /* Match hover width or make it dynamic */
+    height: 2px;
+    background-color: var(--primary-color-page); /* Using page variable */
+}
+
+/* Page Button Styles */
+.btn {
+    padding: 0.5rem 1.5rem;
+    border-radius: 999px;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+.btn-primary {
+    background-color: var(--primary-color-page); /* Using page variable */
+    color: white;
+}
+.btn-outline {
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    background-color: rgba(255, 255, 255, 0.05);
+    color: var(--text-color-page); /* Using page variable */
+}
+.btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+/* Page Code Snippet Styles */
+.code-snippet {
+    background: #1e1e1e;
+    border-radius: 8px;
+    padding: 1.5rem;
+    font-family: monospace;
+    font-size: 0.9rem;
+    color: #e0e0e0;
+    position: relative;
+    overflow: hidden;
+}
+.code-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    display: inline-block;
+    margin-right: 6px;
+}
+
+/* Page Section Title Styles */
+.section-title {
+    font-weight: 700;
+    margin-bottom: 2rem;
+    position: relative;
+    display: inline-block;
+    color: var(--text-color-page); /* Ensure section titles use page text color */
+}
+.section-title::after {
+    content: '';
+    position: absolute;
+    bottom: -8px;
+    left: 0;
+    width: 40px;
+    height: 3px;
+    background-color: var(--primary-color-page); /* Using page variable */
+}
+
+/* Page Project Card Styles */
+.project-card {
+    background-color: var(--dark-card-page); /* Using page variable */
+    border-radius: 12px;
+    overflow: hidden;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.project-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+}
+.gradient-text {
+    background: linear-gradient(to right, #ff5a5a, #ff8a5a);
+    -webkit-background-clip: text;
+    color: transparent;
+}
+
+/* Page Lab Grid and Animation Styles */
+.lab-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); grid-gap: 2rem; perspective: 1000px; }
+.futuristic-border { border: 1px solid rgba(255, 90, 90, 0.3); border-radius: 12px; background: linear-gradient(145deg, rgba(21, 21, 21, 0.8), rgba(25, 25, 25, 0.4)); box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2); backdrop-filter: blur(10px); }
+.pulse-circle { position: absolute; width: 200px; height: 200px; border-radius: 50%; background: radial-gradient(circle, rgba(255,90,90,0.1) 0%, rgba(255,90,90,0) 70%); animation: pulse 2s infinite; z-index: 0; }
+@keyframes pulse { 0% { transform: scale(0.8); opacity: 0.8; } 70% { transform: scale(1.2); opacity: 0; } 100% { transform: scale(0.8); opacity: 0; } }
+.rotating-circle { position: absolute; width: 400px; height: 400px; border-radius: 50%; border: 1px dashed rgba(255, 255, 255, 0.1); animation: rotate 60s linear infinite; }
+@keyframes rotate { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+.animated-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(120px, 1fr)); grid-gap: 1.5rem; }
+.grid-item { aspect-ratio: 1/1; background-color: rgba(255, 255, 255, 0.03); border-radius: 8px; display: flex; align-items: center; justify-content: center; transition: transform 0.3s ease, background-color 0.3s ease; position: relative; overflow: hidden; }
+.grid-item:hover { transform: translateY(-5px); background-color: rgba(255, 90, 90, 0.1); }
+.marquee { width: 100%; overflow: hidden; white-space: nowrap; position: relative; }
+.marquee-content { display: inline-block; animation: marquee-anim 20s linear infinite; } /* Renamed animation */
+@keyframes marquee-anim { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } } /* Renamed animation */
+
+/* Page Timeline Styles */
+.timeline { position: relative; padding: 2rem 0; }
+.timeline::before { content: ''; position: absolute; top: 0; left: 50%; height: 100%; width: 2px; background: rgba(255, 255, 255, 0.1); transform: translateX(-50%); }
+.timeline-item { margin-bottom: 4rem; position: relative; }
+.timeline-item:nth-child(odd) { padding-right: 50%; text-align: right; }
+.timeline-item:nth-child(even) { padding-left: 50%; }
+.timeline-dot { position: absolute; top: 0; left: 50%; transform: translateX(-50%); width: 16px; height: 16px; border-radius: 50%; background-color: var(--primary-color-page); z-index: 1; }
+
+/* Page Interactive Card Styles */
+.interactive-card { position: relative; transition: transform 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275); transform-style: preserve-3d; }
+.interactive-card:hover { transform: rotateY(10deg) rotateX(5deg); }
+.interactive-card::before { content: ''; position: absolute; top: -10px; left: -10px; right: -10px; bottom: -10px; border: 1px solid rgba(255, 90, 90, 0.3); border-radius: 16px; opacity: 0; transition: opacity 0.3s ease; z-index: -1; }
+.interactive-card:hover::before { opacity: 1; }
+.project-image-container { overflow: hidden; border-radius: 8px; position: relative; }
+.project-image-container img { transition: transform 0.5s ease; width: 100%; object-fit: cover; }
+.project-image-container:hover img { transform: scale(1.05); }
+.icon-hover { transition: transform 0.3s ease, color 0.3s ease; }
+.icon-hover:hover { transform: translateY(-5px); color: var(--primary-color-page); }
+
+/* Page Footer Styles */
+footer { background-color: var(--dark-card-page); border-top: 1px solid rgba(255, 255, 255, 0.05); }
+.footer-link { color: var(--text-secondary-page); transition: color 0.3s ease; }
+.footer-link:hover { color: var(--primary-color-page); }
+
+/* Page Typing Animation Styles */
+.typing { overflow: hidden; border-right: 2px solid var(--primary-color-page); white-space: nowrap; animation: page-typing-anim 3.5s steps(40, end), page-blink-caret-anim .75s step-end infinite; }
+@keyframes page-typing-anim { from { width: 0 } to { width: 100% } }
+@keyframes page-blink-caret-anim { from, to { border-color: transparent } 50% { border-color: var(--primary-color-page) } }
+
+/* Page Custom Scrollbar (already defined, ensuring it's here) */
+body::-webkit-scrollbar { width: 8px; height: 8px; }
+body::-webkit-scrollbar-track { background: rgba(255,255,255,0.05); border-radius: 10px; }
+body::-webkit-scrollbar-thumb { background: rgba(255,90,90,0.3); border-radius: 10px; }
+body::-webkit-scrollbar-thumb:hover { background: rgba(255,90,90,0.5); }
+body { scrollbar-width: thin; scrollbar-color: rgba(255,90,90,0.3) rgba(255,255,255,0.05); }

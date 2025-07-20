@@ -1,0 +1,1190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Premium Flip-Card Workout System</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #4361ee;
+            --secondary: #3f37c9;
+            --accent: #4895ef;
+            --light: #f8f9fa;
+            --dark: #212529;
+            --success: #4cc9f0;
+            --warning: #f72585;
+            --info: #4895ef;
+            --card-width: 300px;
+            --card-height: 380px;
+        }
+        
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background-color: #f0f2f5;
+            color: var(--dark);
+        }
+        
+        .header-gradient {
+            background: linear-gradient(135deg, #4361ee, #3a0ca3);
+        }
+        
+        /* Flip Card Styling */
+        .flip-card-container {
+            width: var(--card-width);
+            height: var(--card-height);
+            perspective: 1000px;
+            margin: 15px;
+        }
+        
+        .flip-card {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            transition: transform 0.8s;
+            transform-style: preserve-3d;
+            cursor: pointer;
+        }
+        
+        .flip-card.flipped {
+            transform: rotateY(180deg);
+        }
+        
+        .flip-card-front, .flip-card-back {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            -webkit-backface-visibility: hidden;
+            backface-visibility: hidden;
+            border-radius: 16px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+        
+        .flip-card-front {
+            background-color: white;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            overflow: hidden;
+        }
+        
+        .flip-card-back {
+            background-color: white;
+            transform: rotateY(180deg);
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            overflow-y: auto;
+        }
+        
+        .card-image-container {
+            height: 200px;
+            overflow: hidden;
+        }
+        
+        .card-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        /* Custom Tab Styling */
+        .tab-button {
+            border-bottom: 3px solid transparent;
+            transition: all 0.3s ease;
+        }
+        
+        .tab-button.active {
+            border-bottom: 3px solid var(--primary);
+            color: var(--primary);
+        }
+        
+        /* Timer Styling */
+        .timer-container {
+            background: white;
+            border-radius: 16px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+        
+        .timer-progress {
+            height: 6px;
+            background: var(--light);
+            border-radius: 3px;
+            overflow: hidden;
+        }
+        
+        .timer-bar {
+            height: 100%;
+            background: var(--primary);
+            transition: width 1s linear;
+        }
+        
+        /* Set Selection Styling */
+        .set-selector {
+            display: inline-block;
+            padding: 8px 16px;
+            margin: 0 5px;
+            border: 2px solid #ddd;
+            border-radius: 20px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .set-selector.active {
+            background-color: var(--primary);
+            color: white;
+            border-color: var(--primary);
+        }
+        
+        /* Exercise Cards Container */
+        .exercise-cards-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 20px;
+        }
+        
+        /* Responsive Adjustments */
+        @media (max-width: 640px) {
+            .flip-card-container {
+                width: 100%;
+                max-width: 300px;
+                height: 350px;
+                margin: 10px auto;
+            }
+            
+            .exercise-cards-container {
+                gap: 10px;
+            }
+        }
+        
+        /* Pulsing animation for active elements */
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+        
+        .pulse {
+            animation: pulse 2s infinite;
+        }
+        
+        /* Hide scrollbar for clean look */
+        ::-webkit-scrollbar {
+            width: 6px;
+        }
+        
+        ::-webkit-scrollbar-track {
+            background: #f1f1f1;
+        }
+        
+        ::-webkit-scrollbar-thumb {
+            background: #888;
+            border-radius: 3px;
+        }
+        
+        ::-webkit-scrollbar-thumb:hover {
+            background: #555;
+        }
+        
+        /* Variation selector styling */
+        .variation-selector {
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+            border-radius: 12px;
+        }
+        
+        .variation-selector:hover {
+            transform: translateY(-5px);
+        }
+        
+        .variation-selector.active {
+            border-color: var(--primary);
+            box-shadow: 0 4px 8px rgba(67, 97, 238, 0.3);
+        }
+        
+        /* Tooltip styling */
+        .tooltip {
+            position: relative;
+            display: inline-block;
+        }
+        
+        .tooltip .tooltip-text {
+            visibility: hidden;
+            width: 120px;
+            background-color: rgba(0, 0, 0, 0.8);
+            color: #fff;
+            text-align: center;
+            border-radius: 6px;
+            padding: 5px;
+            position: absolute;
+            z-index: 1;
+            bottom: 125%;
+            left: 50%;
+            transform: translateX(-50%);
+            opacity: 0;
+            transition: opacity 0.3s;
+            font-size: 0.75rem;
+        }
+        
+        .tooltip:hover .tooltip-text {
+            visibility: visible;
+            opacity: 1;
+        }
+    </style>
+</head>
+<body class="min-h-screen">
+    <!-- Header -->
+    <header class="header-gradient text-white py-6 px-4">
+        <div class="container mx-auto">
+            <h1 class="text-3xl font-bold text-center mb-2">Premium Flip-Card Workout System</h1>
+            <p class="text-center text-blue-100">Customizable workouts based on your training history</p>
+        </div>
+    </header>
+    
+    <!-- Main Content -->
+    <main class="container mx-auto px-4 py-8">
+        <!-- Timer Section -->
+        <section class="timer-container p-4 mb-8">
+            <h2 class="text-xl font-semibold text-center mb-4">Workout Timer</h2>
+            <div class="flex justify-center items-center mb-3">
+                <div class="text-4xl font-bold" id="timer-display">00:45</div>
+            </div>
+            <div class="timer-progress mb-3">
+                <div class="timer-bar" id="timer-progress-bar" style="width: 100%;"></div>
+            </div>
+            <div class="flex justify-between mb-4">
+                <div>
+                    <p class="text-sm font-medium">Phase: <span id="timer-phase" class="font-bold text-blue-600">WORK</span></p>
+                </div>
+                <div>
+                    <p class="text-sm font-medium">Total Time: <span id="total-time" class="font-bold">00:00</span></p>
+                </div>
+            </div>
+            
+            <!-- Custom Timer Settings -->
+            <div class="mb-4 grid grid-cols-3 gap-4">
+                <div>
+                    <label class="text-xs font-medium block mb-1">Work (sec)</label>
+                    <input type="number" id="work-time" class="w-full p-2 border rounded" value="45" min="5" max="120">
+                </div>
+                <div>
+                    <label class="text-xs font-medium block mb-1">Rest (sec)</label>
+                    <input type="number" id="rest-time" class="w-full p-2 border rounded" value="20" min="5" max="60">
+                </div>
+                <div>
+                    <label class="text-xs font-medium block mb-1">Interval (sec)</label>
+                    <input type="number" id="interval-time" class="w-full p-2 border rounded" value="60" min="10" max="120">
+                </div>
+            </div>
+            
+            <div class="flex justify-center space-x-4">
+                <button id="timer-start" class="bg-green-500 hover:bg-green-600 text-white px-6 py-2 rounded-full transition-colors font-medium">
+                    <i class="fas fa-play mr-2"></i>Start
+                </button>
+                <button id="timer-pause" class="bg-yellow-500 hover:bg-yellow-600 text-white px-6 py-2 rounded-full transition-colors font-medium" disabled>
+                    <i class="fas fa-pause mr-2"></i>Pause
+                </button>
+                <button id="timer-reset" class="bg-red-500 hover:bg-red-600 text-white px-6 py-2 rounded-full transition-colors font-medium">
+                    <i class="fas fa-redo-alt mr-2"></i>Reset
+                </button>
+            </div>
+        </section>
+        
+        <!-- Workout Customization -->
+        <section class="bg-white rounded-lg shadow-md p-6 mb-8">
+            <h2 class="text-2xl font-bold mb-4">Customize Your Workout</h2>
+            
+            <!-- Set Count Selection -->
+            <div class="mb-6">
+                <h3 class="text-lg font-semibold mb-3">How many sets do you want?</h3>
+                <div class="flex flex-wrap justify-center gap-3">
+                    <div class="set-selector text-center" data-sets="3">
+                        <span class="font-bold">3</span>
+                        <span class="block text-xs">Sets</span>
+                    </div>
+                    <div class="set-selector text-center active" data-sets="4">
+                        <span class="font-bold">4</span>
+                        <span class="block text-xs">Sets</span>
+                    </div>
+                    <div class="set-selector text-center" data-sets="5">
+                        <span class="font-bold">5</span>
+                        <span class="block text-xs">Sets</span>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Set Type Selection -->
+            <h3 class="text-lg font-semibold mb-3">Choose your equipment preference for each set:</h3>
+            <div class="space-y-6" id="set-variations-container">
+                <!-- Set variation selectors will be dynamically inserted here -->
+            </div>
+            
+            <div class="mt-6 text-center">
+                <button id="generate-workout" class="bg-blue-600 hover:bg-blue-700 text-white px-8 py-3 rounded-lg transition-colors font-bold text-lg">
+                    <i class="fas fa-dumbbell mr-2"></i>Generate Workout
+                </button>
+            </div>
+        </section>
+        
+        <!-- Workout Display -->
+        <div id="workout-display">
+            <!-- Warm-up Section -->
+            <section class="mb-8" id="warmup-section">
+                <div class="bg-blue-50 rounded-lg p-4">
+                    <h2 class="text-2xl font-bold mb-4 text-blue-800">
+                        <i class="fas fa-fire-alt mr-2"></i>Warm-up
+                    </h2>
+                    <div class="exercise-cards-container" id="warmup-exercises">
+                        <!-- Warm-up cards will be inserted here -->
+                    </div>
+                </div>
+            </section>
+            
+            <!-- Main Workout Sets -->
+            <div id="workout-sets-container">
+                <!-- Main workout sets will be inserted here -->
+            </div>
+            
+            <!-- Cool-down Section -->
+            <section class="mt-8" id="cooldown-section">
+                <div class="bg-blue-50 rounded-lg p-4">
+                    <h2 class="text-2xl font-bold mb-4 text-blue-800">
+                        <i class="fas fa-snowflake mr-2"></i>Cool-down
+                    </h2>
+                    <div class="exercise-cards-container" id="cooldown-exercises">
+                        <!-- Cool-down cards will be inserted here -->
+                    </div>
+                </div>
+            </section>
+        </div>
+    </main>
+    
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-white py-8 px-4">
+        <div class="container mx-auto text-center">
+            <p>&copy; 2025 Premium Fitness. Customized workout based on your exercise history.</p>
+            <p class="mt-2 text-gray-400 text-sm">Click on any exercise card to flip and see detailed instructions.</p>
+        </div>
+    </footer>
+    
+    <audio id="ding-sound" preload="auto">
+        <source src="https://assets.mixkit.co/active_storage/sfx/2566/2566-preview.mp3" type="audio/mpeg">
+    </audio>
+    
+    <script>
+        // Exercise data with images from our safe sources
+        const exerciseData = {
+            // Chest exercises
+            dumbbellBenchPress: {
+                name: "Dumbbell Bench Press",
+                image: "https://www.shape.com/thmb/z3acwtPA1GS8PHiM7k8o4lgCzSs=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/Dumbbell-Bench-Press-GettyImages-965946682-93706dc96ed745eca27c48aef4534fa6.jpg",
+                muscles: "Chest, Shoulders, Triceps",
+                equipment: "Dumbbells, Bench",
+                weight: "65-70 lbs",
+                instructions: "1. Lie flat on a bench holding dumbbells at chest level\n2. Push dumbbells up until arms are extended\n3. Lower weights with control to starting position\n4. Keep shoulder blades retracted and feet planted",
+                tips: "• Keep wrists straight\n• Don't lock out elbows at the top\n• Focus on chest contraction\n• Control the descent",
+                variations: "Incline DB Press, Decline DB Press, Alternating DB Press"
+            },
+            dumbbellFlys: {
+                name: "Dumbbell Flys",
+                image: "https://media.post.rvohealth.io/wp-content/uploads/2024/06/400x400_How_and_Why_To_Do_A_Dumbbell_Chest_Fly_Incline_Dumbbell_Fly.gif",
+                muscles: "Chest, Shoulders",
+                equipment: "Dumbbells, Bench",
+                weight: "45-50 lbs",
+                instructions: "1. Lie on bench holding dumbbells extended above chest\n2. Lower weights out to sides with slight elbow bend\n3. Maintain arc motion like hugging a barrel\n4. Bring weights back together at top",
+                tips: "• Keep slight bend in elbows throughout\n• Focus on stretching chest at bottom\n• Squeeze chest at top\n• Control the movement",
+                variations: "Incline Flys, Cable Flys, Machine Flys"
+            },
+            barbellBenchPress: {
+                name: "Barbell Bench Press",
+                image: "https://weighttraining.guide/wp-content/uploads/2016/05/Dumbbell-Bench-Press-resized.png",
+                muscles: "Chest, Shoulders, Triceps",
+                equipment: "Barbell, Bench",
+                weight: "135-185 lbs",
+                instructions: "1. Lie flat on bench with feet planted firmly\n2. Grip barbell slightly wider than shoulder-width\n3. Lower bar to mid-chest level\n4. Press bar back up to starting position",
+                tips: "• Tuck elbows at 45° angle\n• Drive through feet for stability\n• Keep glutes on bench\n• Maintain neutral wrist position",
+                variations: "Incline Press, Close-grip Press, Pause Reps"
+            },
+            cableCrossover: {
+                name: "Cable Crossover",
+                image: "https://www.shape.com/thmb/bY49P4LgE9EqVjcLuruCmwnDpoo=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/SHP_MTM_Chest-Press_3x2-ce168c47572a4c81b7e91e4ae3fae552.jpg",
+                muscles: "Chest, Shoulders",
+                equipment: "Cable Machine",
+                weight: "40-50 lbs each side",
+                instructions: "1. Stand between cable towers with handles\n2. Step forward with one foot for stability\n3. Pull handles down and across body\n4. Return to starting position with control",
+                tips: "• Maintain slight forward lean\n• Keep elbows slightly bent\n• Squeeze chest when hands meet\n• Control the negative portion",
+                variations: "High-to-low, Low-to-high, Single-arm"
+            },
+            pushUps: {
+                name: "Push-Ups",
+                image: "https://i.ytimg.com/vi/KjYak5vZO9s/maxresdefault.jpg",
+                muscles: "Chest, Shoulders, Triceps, Core",
+                equipment: "Bodyweight",
+                weight: "Bodyweight",
+                instructions: "1. Start in high plank position, hands shoulder-width\n2. Lower body maintaining straight line\n3. Descend until chest nearly touches floor\n4. Push back up to starting position",
+                tips: "• Keep core engaged throughout\n• Don't let hips sag\n• Fully extend arms at top\n• Elbows at 45° angle from body",
+                variations: "Incline, Decline, Diamond, Wide-grip"
+            },
+            
+            // Arm exercises
+            pushDowns: {
+                name: "Cable Push-Downs",
+                image: "https://i.ytimg.com/vi/R8zsVZoldvY/maxresdefault.jpg",
+                muscles: "Triceps",
+                equipment: "Cable Machine, Rope or Bar",
+                weight: "140-160 lbs",
+                instructions: "1. Stand facing cable machine with attachment\n2. Grip attachment with elbows at sides\n3. Extend arms downward, contracting triceps\n4. Return to starting position with control",
+                tips: "• Keep elbows close to body\n• Only move forearms\n• Squeeze triceps at bottom\n• Don't let elbows drift forward",
+                variations: "Rope, V-bar, Straight bar, Reverse grip"
+            },
+            lowCableCurls: {
+                name: "Low Cable Curls",
+                image: "https://i.ytimg.com/vi/rfRdD5PKrko/maxresdefault.jpg",
+                muscles: "Biceps, Forearms",
+                equipment: "Cable Machine, Curl Bar",
+                weight: "130-150 lbs",
+                instructions: "1. Stand facing cable machine with attachment\n2. Hold attachment with palms facing up\n3. Curl weight toward shoulders\n4. Lower with control to starting position",
+                tips: "• Keep elbows fixed at sides\n• Fully extend arms at bottom\n• Squeeze biceps at top\n• Avoid rocking or swinging",
+                variations: "Wide grip, Narrow grip, Alternating, Rope attachment"
+            },
+            closeGripBenchPress: {
+                name: "Close-Grip Bench Press",
+                image: "https://i.ytimg.com/vi/nEF0bv2FW94/mqdefault.jpg",
+                muscles: "Triceps, Chest, Shoulders",
+                equipment: "Barbell, Bench",
+                weight: "115-135 lbs",
+                instructions: "1. Lie on bench with narrow grip (hands shoulder-width)\n2. Lower bar to lower chest\n3. Press bar back up focusing on triceps\n4. Maintain vertical forearm position",
+                tips: "• Keep elbows close to body\n• Don't flare elbows outward\n• Focus on triceps contraction\n• Use controlled tempo",
+                variations: "Dumbbell close-grip press, Smith machine, EZ bar"
+            },
+            barbellCurls: {
+                name: "Barbell Curls",
+                image: "https://i.ytimg.com/vi/kwG2ipFRgfo/maxresdefault.jpg",
+                muscles: "Biceps, Forearms",
+                equipment: "Barbell",
+                weight: "65-85 lbs",
+                instructions: "1. Stand with feet shoulder-width apart\n2. Hold barbell with shoulder-width grip\n3. Curl weight toward shoulders\n4. Lower with control, fully extending arms",
+                tips: "• Keep upper arms stationary\n• Maintain upright posture\n• Squeeze biceps at top\n• Avoid excessive back motion",
+                variations: "EZ-bar curls, Wide-grip, Narrow-grip"
+            },
+            dumbbellCurls: {
+                name: "Dumbbell Curls",
+                image: "https://i.ytimg.com/vi/sAq1LAh_l0g/maxresdefault.jpg",
+                muscles: "Biceps, Forearms",
+                equipment: "Dumbbells",
+                weight: "25-35 lbs",
+                instructions: "1. Stand with dumbbells at sides, palms forward\n2. Curl weights toward shoulders\n3. Squeeze biceps at top position\n4. Lower with control to starting position",
+                tips: "• Keep shoulders back and down\n• Avoid excessive swinging\n• Fully extend arms at bottom\n• Control both up and down portions",
+                variations: "Alternating curls, Hammer curls, Incline curls"
+            },
+            
+            // Back exercises
+            straightArmLatPulldowns: {
+                name: "Straight-Arm Lat Pulldowns",
+                image: "https://i.ytimg.com/vi/gDtXrJWPdlY/maxresdefault.jpg",
+                muscles: "Lats, Shoulders, Triceps",
+                equipment: "Cable Machine",
+                weight: "130-140 lbs",
+                instructions: "1. Stand facing cable machine with high pulley\n2. Grasp attachment with straight arms\n3. Pull down to thighs keeping arms straight\n4. Return to starting position with control",
+                tips: "• Maintain slight forward lean\n• Keep arms straight but not locked\n• Focus on lat contraction\n• Control the weight throughout",
+                variations: "Single-arm, Rope attachment, Resistance band"
+            },
+            latPulldowns: {
+                name: "Wide-Grip Lat Pulldowns",
+                image: "https://i.ytimg.com/vi/ey9Fv3FGrRg/maxresdefault.jpg",
+                muscles: "Lats, Biceps, Rhomboids",
+                equipment: "Cable Machine, Lat Bar",
+                weight: "120-150 lbs",
+                instructions: "1. Sit at pulldown machine, grip bar wide\n2. Pull bar down to upper chest\n3. Lean back slightly during pull\n4. Return to start with control",
+                tips: "• Engage lats before pulling\n• Keep chest up throughout\n• Pull elbows down and back\n• Control the ascent",
+                variations: "Close-grip, V-bar, Behind-the-neck (advanced)"
+            },
+            bentOverRows: {
+                name: "Bent-Over Barbell Rows",
+                image: "https://i.ytimg.com/vi/kBWAon7ItDw/maxresdefault.jpg",
+                muscles: "Back, Lats, Biceps, Shoulders",
+                equipment: "Barbell",
+                weight: "95-135 lbs",
+                instructions: "1. Hinge at hips, back flat, knees bent\n2. Hold barbell with overhand grip\n3. Pull bar to lower chest/upper abdomen\n4. Lower with control to arms extended",
+                tips: "• Keep back flat (neutral spine)\n• Pull with elbows, not hands\n• Squeeze shoulder blades at top\n• Maintain hip hinge throughout",
+                variations: "Underhand grip, T-bar row, Pendlay row"
+            },
+            
+            // Shoulder exercises
+            lateralRaises: {
+                name: "Dumbbell Lateral Raises",
+                image: "https://womensfitness.co.uk/wp-content/uploads/sites/3/2022/07/shutterstock_1930135553-31.jpg",
+                muscles: "Shoulders, Upper Traps",
+                equipment: "Dumbbells",
+                weight: "25-30 lbs",
+                instructions: "1. Stand with dumbbells at sides\n2. Raise arms out to sides to shoulder height\n3. Maintain slight bend in elbows\n4. Lower with control to starting position",
+                tips: "• Lead with elbows, not hands\n• Keep wrists neutral\n• Slight forward tilt of dumbbells\n• Don't use momentum to swing weights",
+                variations: "Seated, Cable, Single-arm, Front raises"
+            },
+            shoulderPress: {
+                name: "Dumbbell Shoulder Press",
+                image: "https://i.ytimg.com/vi/qEwKCR5JCog/maxresdefault.jpg",
+                muscles: "Shoulders, Triceps, Upper Chest",
+                equipment: "Dumbbells, Bench",
+                weight: "40-55 lbs",
+                instructions: "1. Sit with back support, dumbbells at shoulder level\n2. Press weights overhead until arms extended\n3. Lower weights with control to shoulder level\n4. Repeat for desired repetitions",
+                tips: "• Keep core braced\n• Don't arch lower back\n• Align dumbbells with shoulders\n• Control both up and down portions",
+                variations: "Standing, Alternating, Arnold press, Z-press"
+            },
+            
+            // Core exercises
+            crunches: {
+                name: "Crunches",
+                image: "https://i.ytimg.com/vi/Xyd_fa5zoEU/maxresdefault.jpg",
+                muscles: "Abdominals",
+                equipment: "None",
+                weight: "Bodyweight",
+                instructions: "1. Lie on back, knees bent, feet flat\n2. Place hands behind head or across chest\n3. Lift shoulders and upper back off floor\n4. Lower with control to starting position",
+                tips: "• Focus on abdominal contraction\n• Don't pull on neck\n• Exhale during upward motion\n• Keep lower back pressed to floor",
+                variations: "Bicycle crunches, Reverse crunches, Weighted crunches"
+            },
+            plank: {
+                name: "Plank",
+                image: "https://i.ytimg.com/vi/pSHjTRCQxIw/maxresdefault.jpg",
+                muscles: "Core, Shoulders, Back",
+                equipment: "None",
+                weight: "Bodyweight",
+                instructions: "1. Start in forearm position, elbows under shoulders\n2. Extend legs back, balancing on toes\n3. Maintain straight line from head to heels\n4. Hold position for prescribed time",
+                tips: "• Engage core throughout\n• Don't let hips sag or pike\n• Breathe normally\n• Look at floor to maintain neutral neck",
+                variations: "High plank, Side plank, Plank with leg lift"
+            },
+            russianTwists: {
+                name: "Russian Twists",
+                image: "https://i.ytimg.com/vi/wkD8rjkodUI/maxresdefault.jpg",
+                muscles: "Obliques, Abdominals",
+                equipment: "Medicine Ball, Weight Plate (optional)",
+                weight: "Bodyweight or 10-20 lbs",
+                instructions: "1. Sit on floor, knees bent, feet elevated\n2. Lean back slightly, maintaining balance\n3. Twist torso side to side\n4. Touch hands or weight to floor on each side",
+                tips: "• Keep chest up throughout\n• Rotate from waist, not arms\n• Control the movement speed\n• Maintain elevated feet position",
+                variations: "Weighted, Medicine ball, Feet on floor (easier)"
+            },
+            legRaises: {
+                name: "Leg Raises",
+                image: "https://i.ytimg.com/vi/l4kQd9eWclE/maxresdefault.jpg",
+                muscles: "Lower Abdominals, Hip Flexors",
+                equipment: "None",
+                weight: "Bodyweight",
+                instructions: "1. Lie flat on back, legs extended\n2. Place hands under glutes or by sides\n3. Lift legs to 90° angle with floor\n4. Lower legs slowly without touching floor",
+                tips: "• Keep lower back pressed to floor\n• Don't swing or use momentum\n• Control the descent\n• Breathe out when raising legs",
+                variations: "Hanging leg raises, Bent knee raises, Alternating"
+            },
+            
+            // Warm-up exercises
+            warmupJumpingJacks: {
+                name: "Jumping Jacks",
+                image: "https://i.ytimg.com/vi/c4DAnQ6DtF8/maxresdefault.jpg",
+                muscles: "Full Body",
+                equipment: "None",
+                weight: "Bodyweight",
+                instructions: "1. Start with feet together, arms at sides\n2. Jump feet out while raising arms overhead\n3. Jump feet back together, lowering arms\n4. Repeat at moderate tempo for 1-2 minutes",
+                tips: "• Start slow and increase pace\n• Maintain rhythm and breathing\n• Land softly with bent knees\n• Keep core engaged",
+                variations: "Cross jacks, Low-impact (stepping), Star jumps"
+            },
+            warmupArmCircles: {
+                name: "Arm Circles",
+                image: "https://i.ytimg.com/vi/140RTNxywY8/maxresdefault.jpg",
+                muscles: "Shoulders, Upper Back",
+                equipment: "None",
+                weight: "Bodyweight",
+                instructions: "1. Stand with feet shoulder-width apart\n2. Extend arms out to sides\n3. Make small circles forward for 20-30 seconds\n4. Reverse direction for 20-30 seconds",
+                tips: "• Start with small circles, gradually increase size\n• Keep shoulders down, away from ears\n• Maintain arm position at shoulder height\n• Control the movement",
+                variations: "Forward/backward, Small/large circles, Single-arm"
+            },
+            warmupCatCow: {
+                name: "Cat-Cow Stretch",
+                image: "https://i.ytimg.com/vi/kqnua4rHVVA/maxresdefault.jpg",
+                muscles: "Spine, Core, Back",
+                equipment: "None",
+                weight: "Bodyweight",
+                instructions: "1. Start on hands and knees\n2. Arch back upward (cat)\n3. Hold briefly, then lower belly (cow)\n4. Alternate for 10-15 repetitions",
+                tips: "• Synchronize movement with breath\n• Move through full range of motion\n• Keep arms straight, hands under shoulders\n• Keep knees under hips",
+                variations: "Child's pose transition, Thread the needle, Spinal rotations"
+            },
+            
+            // Cool-down exercises
+            cooldownChildPose: {
+                name: "Child's Pose",
+                image: "https://i.ytimg.com/vi/eqVMAPM00DM/maxresdefault.jpg",
+                muscles: "Lower Back, Shoulders, Hips",
+                equipment: "None",
+                weight: "Bodyweight",
+                instructions: "1. Kneel on floor, sitting on heels\n2. Extend arms forward, lower chest to floor\n3. Rest forehead on mat\n4. Hold position for 30-60 seconds",
+                tips: "• Breathe deeply and relax into the stretch\n• Keep arms active, pressing palms down\n• Widen knees for deeper stretch\n• Focus on releasing tension",
+                variations: "Arms along sides, Thread the needle, One-arm extended"
+            },
+            cooldownDownwardDog: {
+                name: "Downward Dog",
+                image: "https://i.ytimg.com/vi/ruJn_YySvoA/maxresdefault.jpg",
+                muscles: "Hamstrings, Calves, Shoulders, Back",
+                equipment: "None",
+                weight: "Bodyweight",
+                instructions: "1. Start on hands and knees\n2. Lift hips up and back\n3. Press heels toward floor\n4. Create inverted V shape with body",
+                tips: "• Spread fingers wide for balance\n• Push floor away with hands\n• Relax neck, look toward knees\n• Pedal feet to deepen stretch",
+                variations: "Three-legged dog, Puppy pose, Dolphin pose"
+            },
+            cooldownCobra: {
+                name: "Cobra Stretch",
+                image: "https://i.ytimg.com/vi/JDcdhTuycOI/maxresdefault.jpg",
+                muscles: "Chest, Abdominals, Shoulders",
+                equipment: "None",
+                weight: "Bodyweight",
+                instructions: "1. Lie face down, hands under shoulders\n2. Press chest up, keeping hips on floor\n3. Open chest, pull shoulders back\n4. Hold for 15-30 seconds",
+                tips: "• Don't fully straighten arms\n• Keep slight bend in elbows\n• Focus on chest stretch, not height\n• Keep neck neutral, gaze slightly forward",
+                variations: "Baby cobra, Sphinx pose, Upward dog"
+            }
+        };
+        
+        // Set variation templates
+        const setVariations = {
+            chest: {
+                dumbbell: {
+                    name: "Dumbbell Chest Set",
+                    icon: "fa-dumbbell",
+                    exercises: ["dumbbellBenchPress", "dumbbellFlys", "pushUps", "crunches"]
+                },
+                barbell: {
+                    name: "Barbell Chest Set",
+                    icon: "fa-weight-hanging",
+                    exercises: ["barbellBenchPress", "closeGripBenchPress", "pushUps", "plank"]
+                },
+                cable: {
+                    name: "Cable Chest Set",
+                    icon: "fa-cable-car",
+                    exercises: ["cableCrossover", "lowCableCurls", "pushDowns", "russianTwists"]
+                },
+                bodyweight: {
+                    name: "Bodyweight Chest Set",
+                    icon: "fa-person",
+                    exercises: ["pushUps", "pushUps", "pushUps", "plank"]
+                }
+            },
+            arms: {
+                dumbbell: {
+                    name: "Dumbbell Arms Set",
+                    icon: "fa-dumbbell",
+                    exercises: ["dumbbellCurls", "closeGripBenchPress", "lateralRaises", "russianTwists"]
+                },
+                barbell: {
+                    name: "Barbell Arms Set",
+                    icon: "fa-weight-hanging",
+                    exercises: ["barbellCurls", "closeGripBenchPress", "barbellBenchPress", "legRaises"]
+                },
+                cable: {
+                    name: "Cable Arms Set",
+                    icon: "fa-cable-car",
+                    exercises: ["lowCableCurls", "pushDowns", "straightArmLatPulldowns", "crunches"]
+                },
+                bodyweight: {
+                    name: "Bodyweight Arms Set",
+                    icon: "fa-person",
+                    exercises: ["pushUps", "pushUps", "lateralRaises", "plank"]
+                }
+            },
+            back: {
+                dumbbell: {
+                    name: "Dumbbell Back Set",
+                    icon: "fa-dumbbell",
+                    exercises: ["lateralRaises", "shoulderPress", "dumbbellFlys", "russianTwists"]
+                },
+                barbell: {
+                    name: "Barbell Back Set",
+                    icon: "fa-weight-hanging",
+                    exercises: ["bentOverRows", "barbellBenchPress", "barbellCurls", "legRaises"]
+                },
+                cable: {
+                    name: "Cable Back Set",
+                    icon: "fa-cable-car",
+                    exercises: ["latPulldowns", "straightArmLatPulldowns", "lowCableCurls", "crunches"]
+                },
+                bodyweight: {
+                    name: "Bodyweight Back Set",
+                    icon: "fa-person",
+                    exercises: ["pushUps", "lateralRaises", "pushUps", "plank"]
+                }
+            },
+            shoulders: {
+                dumbbell: {
+                    name: "Dumbbell Shoulders Set",
+                    icon: "fa-dumbbell",
+                    exercises: ["lateralRaises", "shoulderPress", "dumbbellCurls", "russianTwists"]
+                },
+                barbell: {
+                    name: "Barbell Shoulders Set",
+                    icon: "fa-weight-hanging",
+                    exercises: ["barbellBenchPress", "bentOverRows", "barbellCurls", "legRaises"]
+                },
+                cable: {
+                    name: "Cable Shoulders Set",
+                    icon: "fa-cable-car",
+                    exercises: ["latPulldowns", "lowCableCurls", "pushDowns", "crunches"]
+                },
+                bodyweight: {
+                    name: "Bodyweight Shoulders Set",
+                    icon: "fa-person",
+                    exercises: ["pushUps", "lateralRaises", "pushUps", "plank"]
+                }
+            },
+        };
+        
+        // Warm-up and cool-down exercises
+        const warmupExercises = ["warmupJumpingJacks", "warmupArmCircles", "warmupCatCow"];
+        const cooldownExercises = ["cooldownChildPose", "cooldownDownwardDog", "cooldownCobra"];
+        
+        // Available set types
+        const setTypes = ["chest", "arms", "back", "shoulders"];
+        
+        // Document elements
+        const elements = {
+            timerDisplay: document.getElementById('timer-display'),
+            timerProgressBar: document.getElementById('timer-progress-bar'),
+            timerPhase: document.getElementById('timer-phase'),
+            totalTime: document.getElementById('total-time'),
+            startBtn: document.getElementById('timer-start'),
+            pauseBtn: document.getElementById('timer-pause'),
+            resetBtn: document.getElementById('timer-reset'),
+            workTime: document.getElementById('work-time'),
+            restTime: document.getElementById('rest-time'),
+            intervalTime: document.getElementById('interval-time'),
+            setSelectors: document.querySelectorAll('.set-selector'),
+            generateWorkoutBtn: document.getElementById('generate-workout'),
+            setVariationsContainer: document.getElementById('set-variations-container'),
+            warmupExercises: document.getElementById('warmup-exercises'),
+            cooldownExercises: document.getElementById('cooldown-exercises'),
+            workoutSetsContainer: document.getElementById('workout-sets-container'),
+            dingSound: document.getElementById('ding-sound')
+        };
+        
+        // Timer state
+        let timerState = {
+            workTime: 45,
+            restTime: 20,
+            intervalTime: 60,
+            currentPhase: 'work', // 'work', 'rest', 'interval'
+            timeRemaining: 45,
+            isRunning: false,
+            timer: null,
+            totalTimeElapsed: 0,
+            totalTimeTimer: null
+        };
+        
+        // Workout configuration
+        let workoutConfig = {
+            setCount: 4,
+            variations: []
+        };
+        
+        // Initialize the app
+        function init() {
+            setupEventListeners();
+            populateSetVariations();
+            populateWarmupCooldown();
+            updateTimerDisplay();
+        }
+        
+        // Set up event listeners
+        function setupEventListeners() {
+            // Timer controls
+            elements.startBtn.addEventListener('click', startTimer);
+            elements.pauseBtn.addEventListener('click', pauseTimer);
+            elements.resetBtn.addEventListener('click', resetTimer);
+            
+            // Timer settings
+            elements.workTime.addEventListener('change', updateTimerSettings);
+            elements.restTime.addEventListener('change', updateTimerSettings);
+            elements.intervalTime.addEventListener('change', updateTimerSettings);
+            
+            // Set count selection
+            elements.setSelectors.forEach(selector => {
+                selector.addEventListener('click', () => {
+                    elements.setSelectors.forEach(s => s.classList.remove('active'));
+                    selector.classList.add('active');
+                    workoutConfig.setCount = parseInt(selector.dataset.sets);
+                });
+            });
+            
+            // Generate workout
+            elements.generateWorkoutBtn.addEventListener('click', generateWorkout);
+        }
+        
+        // Populate set variation selectors
+        function populateSetVariations() {
+            const container = elements.setVariationsContainer;
+            container.innerHTML = '';
+            
+            // Create set selection boxes based on default set count
+            for (let i = 1; i <= workoutConfig.setCount; i++) {
+                // Create set container
+                const setBox = document.createElement('div');
+                setBox.className = 'bg-white rounded-lg shadow p-4 mb-4';
+                
+                // Set header
+                const setHeader = document.createElement('h4');
+                setHeader.className = 'text-lg font-semibold mb-3';
+                setHeader.textContent = `Set ${i}`;
+                setBox.appendChild(setHeader);
+                
+                // Variation options container
+                const optionsContainer = document.createElement('div');
+                optionsContainer.className = 'grid grid-cols-2 sm:grid-cols-4 gap-3';
+                optionsContainer.dataset.setIndex = i - 1;
+                
+                // Generate variation options
+                Object.keys(setVariations).forEach((setType, typeIndex) => {
+                    Object.keys(setVariations[setType]).forEach((variation, varIndex) => {
+                        if (typeIndex === (i - 1) % setTypes.length && varIndex === 0) {
+                            // Set default variation
+                            workoutConfig.variations[i - 1] = {
+                                type: setType,
+                                variation: variation
+                            };
+                        }
+                        
+                        // Only show variations for the current set type
+                        if (typeIndex === (i - 1) % setTypes.length) {
+                            const variationInfo = setVariations[setType][variation];
+                            
+                            // Create variation selector
+                            const selector = document.createElement('div');
+                            selector.className = `variation-selector p-3 bg-gray-50 rounded-lg text-center ${
+                                typeIndex === (i - 1) % setTypes.length && varIndex === 0 ? 'active' : ''
+                            }`;
+                            selector.dataset.setType = setType;
+                            selector.dataset.variation = variation;
+                            
+                            selector.innerHTML = `
+                                <div class="text-2xl mb-2">
+                                    <i class="fas ${variationInfo.icon}"></i>
+                                </div>
+                                <div class="font-medium text-sm">${variationInfo.name}</div>
+                            `;
+                            
+                            // Click event to select variation
+                            selector.addEventListener('click', () => {
+                                // Remove active class from siblings
+                                optionsContainer.querySelectorAll('.variation-selector').forEach(s => {
+                                    s.classList.remove('active');
+                                });
+                                
+                                // Add active class to selected
+                                selector.classList.add('active');
+                                
+                                // Update workout configuration
+                                workoutConfig.variations[parseInt(optionsContainer.dataset.setIndex)] = {
+                                    type: setType,
+                                    variation: variation
+                                };
+                            });
+                            
+                            optionsContainer.appendChild(selector);
+                        }
+                    });
+                });
+                
+                setBox.appendChild(optionsContainer);
+                container.appendChild(setBox);
+            }
+        }
+        
+        // Populate warm-up and cool-down exercises
+        function populateWarmupCooldown() {
+            // Warm-up exercises
+            elements.warmupExercises.innerHTML = '';
+            warmupExercises.forEach(exerciseKey => {
+                const exercise = exerciseData[exerciseKey];
+                elements.warmupExercises.appendChild(createFlipCard(exercise));
+            });
+            
+            // Cool-down exercises
+            elements.cooldownExercises.innerHTML = '';
+            cooldownExercises.forEach(exerciseKey => {
+                const exercise = exerciseData[exerciseKey];
+                elements.cooldownExercises.appendChild(createFlipCard(exercise));
+            });
+        }
+        
+        // Create flip card for an exercise
+        function createFlipCard(exercise) {
+            const container = document.createElement('div');
+            container.className = 'flip-card-container';
+            
+            const card = document.createElement('div');
+            card.className = 'flip-card';
+            
+            // Front of card
+            const front = document.createElement('div');
+            front.className = 'flip-card-front';
+            front.innerHTML = `
+                <div class="card-image-container">
+                    <img src="${exercise.image}" alt="${exercise.name}" class="card-image">
+                </div>
+                <div class="p-4">
+                    <h3 class="text-lg font-bold mb-2">${exercise.name}</h3>
+                    <div class="text-sm mb-2">
+                        <span class="font-medium text-blue-600">Target: </span>
+                        <span>${exercise.muscles}</span>
+                    </div>
+                    <div class="text-sm">
+                        <span class="font-medium text-blue-600">Weight: </span>
+                        <span>${exercise.weight}</span>
+                    </div>
+                    <div class="mt-3 text-xs text-gray-500 text-center">
+                        <i class="fas fa-sync-alt mr-1"></i> Tap to flip for instructions
+                    </div>
+                </div>
+            `;
+            
+            // Back of card
+            const back = document.createElement('div');
+            back.className = 'flip-card-back';
+            back.innerHTML = `
+                <h3 class="text-lg font-bold mb-3">${exercise.name}</h3>
+                <div class="mb-3">
+                    <h4 class="font-semibold text-blue-600 mb-1">Instructions:</h4>
+                    <p class="text-sm whitespace-pre-line">${exercise.instructions}</p>
+                </div>
+                <div class="mb-3">
+                    <h4 class="font-semibold text-blue-600 mb-1">Form Tips:</h4>
+                    <p class="text-sm whitespace-pre-line">${exercise.tips}</p>
+                </div>
+                <div>
+                    <h4 class="font-semibold text-blue-600 mb-1">Variations:</h4>
+                    <p class="text-sm">${exercise.variations}</p>
+                </div>
+                <div class="mt-auto pt-3 text-xs text-gray-500 text-center">
+                    <i class="fas fa-sync-alt mr-1"></i> Tap to flip back
+                </div>
+            `;
+            
+            // Add click event to flip the card
+            card.addEventListener('click', () => {
+                card.classList.toggle('flipped');
+            });
+            
+            card.appendChild(front);
+            card.appendChild(back);
+            container.appendChild(card);
+            
+            return container;
+        }
+        
+        // Generate workout based on selected configuration
+        function generateWorkout() {
+            const container = elements.workoutSetsContainer;
+            container.innerHTML = '';
+            
+            // Make sure variations are selected for all sets
+            while (workoutConfig.variations.length < workoutConfig.setCount) {
+                const setIndex = workoutConfig.variations.length;
+                const setType = setTypes[setIndex % setTypes.length];
+                workoutConfig.variations.push({
+                    type: setType,
+                    variation: Object.keys(setVariations[setType])[0]
+                });
+            }
+            
+            // Create each workout set
+            for (let i = 0; i < workoutConfig.setCount; i++) {
+                const setConfig = workoutConfig.variations[i];
+                const setVariationInfo = setVariations[setConfig.type][setConfig.variation];
+                
+                // Create set section
+                const setSection = document.createElement('section');
+                setSection.className = 'mb-8';
+                
+                // Set container
+                const setContainer = document.createElement('div');
+                setContainer.className = 'bg-gray-50 rounded-lg p-4';
+                
+                // Set header
+                const setHeader = document.createElement('div');
+                setHeader.className = 'flex justify-between items-center mb-4';
+                setHeader.innerHTML = `
+                    <h2 class="text-2xl font-bold text-gray-800">
+                        <i class="fas ${setVariationInfo.icon} mr-2 text-blue-600"></i>
+                        Set ${i + 1}: ${setVariationInfo.name}
+                    </h2>
+                    <div class="text-sm font-medium bg-blue-100 text-blue-800 px-3 py-1 rounded-full">
+                        3 × 10-12 reps
+                    </div>
+                `;
+                
+                setContainer.appendChild(setHeader);
+                
+                // Exercise cards container
+                const cardsContainer = document.createElement('div');
+                cardsContainer.className = 'exercise-cards-container';
+                
+                // Add exercise cards
+                setVariationInfo.exercises.forEach(exerciseKey => {
+                    const exercise = exerciseData[exerciseKey];
+                    cardsContainer.appendChild(createFlipCard(exercise));
+                });
+                
+                setContainer.appendChild(cardsContainer);
+                setSection.appendChild(setContainer);
+                container.appendChild(setSection);
+            }
+            
+            // Scroll to workout
+            document.getElementById('warmup-section').scrollIntoView({ 
+                behavior: 'smooth' 
+            });
+        }
+        
+        // Timer functions
+        function updateTimerSettings() {
+            timerState.workTime = parseInt(elements.workTime.value);
+            timerState.restTime = parseInt(elements.restTime.value);
+            timerState.intervalTime = parseInt(elements.intervalTime.value);
+            
+            // Reset timer with new settings
+            resetTimer();
+        }
+        
+        function startTimer() {
+            if (timerState.isRunning) return;
+            
+            elements.startBtn.disabled = true;
+            elements.pauseBtn.disabled = false;
+            timerState.isRunning = true;
+            
+            // Play ding sound when starting if sound is loaded
+            if (timerState.currentPhase === 'work') {
+                playDingSound();
+            }
+            
+            // Start the timer
+            timerState.timer = setInterval(timerTick, 1000);
+            
+            // Start total time tracking
+            timerState.totalTimeTimer = setInterval(() => {
+                timerState.totalTimeElapsed++;
+                updateTotalTimeDisplay();
+            }, 1000);
+        }
+        
+        function pauseTimer() {
+            if (!timerState.isRunning) return;
+            
+            elements.startBtn.disabled = false;
+            elements.pauseBtn.disabled = true;
+            timerState.isRunning = false;
+            
+            // Clear timers
+            clearInterval(timerState.timer);
+            clearInterval(timerState.totalTimeTimer);
+        }
+        
+        function resetTimer() {
+            // Clear timers
+            clearInterval(timerState.timer);
+            clearInterval(timerState.totalTimeTimer);
+            
+            // Reset state
+            timerState.currentPhase = 'work';
+            timerState.timeRemaining = timerState.workTime;
+            timerState.isRunning = false;
+            timerState.totalTimeElapsed = 0;
+            
+            // Reset UI
+            elements.startBtn.disabled = false;
+            elements.pauseBtn.disabled = true;
+            elements.timerProgressBar.style.width = '100%';
+            elements.timerProgressBar.style.backgroundColor = '#4361ee';
+            elements.timerPhase.textContent = 'WORK';
+            elements.timerPhase.style.color = '#4361ee';
+            
+            // Update displays
+            updateTimerDisplay();
+            updateTotalTimeDisplay();
+        }
+        
+        function timerTick() {
+            timerState.timeRemaining--;
+            
+            // If time is up for current phase
+            if (timerState.timeRemaining <= 0) {
+                switchPhase();
+            }
+            
+            updateTimerDisplay();
+        }
+        
+        function switchPhase() {
+            // Play ding sound for phase change
+            playDingSound();
+            
+            // Update phase
+            switch(timerState.currentPhase) {
+                case 'work':
+                    timerState.currentPhase = 'rest';
+                    timerState.timeRemaining = timerState.restTime;
+                    elements.timerPhase.textContent = 'REST';
+                    elements.timerPhase.style.color = '#4895ef';
+                    elements.timerProgressBar.style.backgroundColor = '#4895ef';
+                    break;
+                case 'rest':
+                    timerState.currentPhase = 'interval';
+                    timerState.timeRemaining = timerState.intervalTime;
+                    elements.timerPhase.textContent = 'INTERVAL';
+                    elements.timerPhase.style.color = '#f72585';
+                    elements.timerProgressBar.style.backgroundColor = '#f72585';
+                    break;
+                case 'interval':
+                    timerState.currentPhase = 'work';
+                    timerState.timeRemaining = timerState.workTime;
+                    elements.timerPhase.textContent = 'WORK';
+                    elements.timerPhase.style.color = '#4361ee';
+                    elements.timerProgressBar.style.backgroundColor = '#4361ee';
+                    break;
+            }
+            
+            updateTimerDisplay();
+        }
+        
+        function updateTimerDisplay() {
+            // Format time mm:ss
+            const minutes = Math.floor(timerState.timeRemaining / 60);
+            const seconds = timerState.timeRemaining % 60;
+            elements.timerDisplay.textContent = `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+            
+            // Update progress bar
+            let totalTime;
+            switch(timerState.currentPhase) {
+                case 'work': totalTime = timerState.workTime; break;
+                case 'rest': totalTime = timerState.restTime; break;
+                case 'interval': totalTime = timerState.intervalTime; break;
+            }
+            
+            const progressPercent = ((totalTime - timerState.timeRemaining) / totalTime) * 100;
+            elements.timerProgressBar.style.width = `${100 - progressPercent}%`;
+        }
+        
+        function updateTotalTimeDisplay() {
+            const minutes = Math.floor(timerState.totalTimeElapsed / 60);
+            const seconds = timerState.totalTimeElapsed % 60;
+            elements.totalTime.textContent = `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+        }
+        
+        function playDingSound() {
+            // Reset the audio to the beginning
+            elements.dingSound.currentTime = 0;
+            elements.dingSound.play()
+                .catch(error => console.log('Audio playback prevented: ', error));
+        }
+        
+        // Initialize the app
+        document.addEventListener('DOMContentLoaded', init);
+    </script>
+</body>
+</html>

@@ -1,0 +1,2000 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SYNTIN Platform - Functional Specification</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+        body { font-family: 'Inter', sans-serif; }
+        .gradient-bg { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); }
+        .feature-card { transition: all 0.3s ease; }
+        .feature-card:hover { transform: translateY(-5px); box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1); }
+        .code-block { background: #f8f9fa; border-left: 4px solid #667eea; }
+        .spec-section { page-break-inside: avoid; }
+        .architecture-diagram { height: 400px; }
+        .flow-diagram { height: 300px; }
+    </style>
+</head>
+<body class="bg-gray-50 text-gray-900">
+    <!-- Header -->
+    <header class="gradient-bg text-white py-16">
+        <div class="container mx-auto px-6">
+            <div class="text-center">
+                <h1 class="text-5xl font-bold mb-4">SYNTIN Platform</h1>
+                <p class="text-xl mb-6">Enterprise AI Platform for Conversational Business Intelligence</p>
+                <div class="bg-white bg-opacity-20 rounded-lg p-6 max-w-4xl mx-auto">
+                    <h2 class="text-2xl font-semibold mb-4">Functional Specification Document</h2>
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4 text-sm">
+                        <div><strong>Version:</strong> 1.0</div>
+                        <div><strong>Date:</strong> January 2024</div>
+                        <div><strong>Status:</strong> Draft</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Table of Contents -->
+    <section class="py-16 bg-white spec-section">
+        <div class="container mx-auto px-6">
+            <h2 class="text-3xl font-bold mb-8 text-center">Table of Contents</h2>
+            <div class="max-w-4xl mx-auto">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div class="space-y-2">
+                        <div class="flex justify-between border-b border-gray-200 pb-2">
+                            <span>1. Executive Summary</span>
+                            <span class="text-gray-500">Page 1</span>
+                        </div>
+                        <div class="flex justify-between border-b border-gray-200 pb-2">
+                            <span>2. Platform Architecture</span>
+                            <span class="text-gray-500">Page 2</span>
+                        </div>
+                        <div class="flex justify-between border-b border-gray-200 pb-2">
+                            <span>3. Core Components</span>
+                            <span class="text-gray-500">Page 3</span>
+                        </div>
+                        <div class="flex justify-between border-b border-gray-200 pb-2">
+                            <span>4. Data Narrative Framework</span>
+                            <span class="text-gray-500">Page 4</span>
+                        </div>
+                        <div class="flex justify-between border-b border-gray-200 pb-2">
+                            <span>5. NLP Interface Layer</span>
+                            <span class="text-gray-500">Page 5</span>
+                        </div>
+                    </div>
+                    <div class="space-y-2">
+                        <div class="flex justify-between border-b border-gray-200 pb-2">
+                            <span>6. Multi-Modal Communication</span>
+                            <span class="text-gray-500">Page 6</span>
+                        </div>
+                        <div class="flex justify-between border-b border-gray-200 pb-2">
+                            <span>7. Model Context Protocol</span>
+                            <span class="text-gray-500">Page 7</span>
+                        </div>
+                        <div class="flex justify-between border-b border-gray-200 pb-2">
+                            <span>8. Enterprise Integration</span>
+                            <span class="text-gray-500">Page 8</span>
+                        </div>
+                        <div class="flex justify-between border-b border-gray-200 pb-2">
+                            <span>9. Security & Compliance</span>
+                            <span class="text-gray-500">Page 9</span>
+                        </div>
+                        <div class="flex justify-between border-b border-gray-200 pb-2">
+                            <span>10. Implementation Guide</span>
+                            <span class="text-gray-500">Page 10</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 1. Executive Summary -->
+    <section class="py-16 bg-gray-50 spec-section">
+        <div class="container mx-auto px-6">
+            <h2 class="text-3xl font-bold mb-8">1. Executive Summary</h2>
+            <div class="max-w-6xl mx-auto">
+                <div class="bg-white rounded-lg shadow-lg p-8 mb-8">
+                    <h3 class="text-2xl font-semibold mb-6">Platform Overview</h3>
+                    <p class="text-lg leading-relaxed mb-6">
+                        SYNTIN is an enterprise AI platform that transforms how organizations interact with their data through 
+                        conversational business intelligence. By combining natural language processing, data narrative frameworks, 
+                        and agentic AI control, SYNTIN enables unprecedented access to enterprise insights through intuitive 
+                        chat interfaces.
+                    </p>
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8">
+                        <div>
+                            <h4 class="text-xl font-semibold mb-4 text-blue-600">Key Capabilities</h4>
+                            <ul class="space-y-2">
+                                <li class="flex items-center"><i class="fas fa-check text-green-500 mr-2"></i> Conversational Business Intelligence</li>
+                                <li class="flex items-center"><i class="fas fa-check text-green-500 mr-2"></i> Multi-Modal AI Communication</li>
+                                <li class="flex items-center"><i class="fas fa-check text-green-500 mr-2"></i> Enterprise Data Narratives</li>
+                                <li class="flex items-center"><i class="fas fa-check text-green-500 mr-2"></i> Agentic Control Architecture</li>
+                                <li class="flex items-center"><i class="fas fa-check text-green-500 mr-2"></i> Real-Time Analytics</li>
+                                <li class="flex items-center"><i class="fas fa-check text-green-500 mr-2"></i> Unreasonable Hospitality UX</li>
+                            </ul>
+                        </div>
+                        <div>
+                            <h4 class="text-xl font-semibold mb-4 text-blue-600">Business Value</h4>
+                            <ul class="space-y-2">
+                                <li class="flex items-center"><i class="fas fa-arrow-up text-green-500 mr-2"></i> 75% Faster Decision Making</li>
+                                <li class="flex items-center"><i class="fas fa-arrow-up text-green-500 mr-2"></i> 60% Reduction in Data Analysis Time</li>
+                                <li class="flex items-center"><i class="fas fa-arrow-up text-green-500 mr-2"></i> 90% Improvement in Data Accessibility</li>
+                                <li class="flex items-center"><i class="fas fa-arrow-up text-green-500 mr-2"></i> 40% Increase in Cross-Domain Insights</li>
+                                <li class="flex items-center"><i class="fas fa-arrow-up text-green-500 mr-2"></i> 85% User Adoption Rate</li>
+                                <li class="flex items-center"><i class="fas fa-arrow-up text-green-500 mr-2"></i> 300% ROI within 12 months</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="bg-blue-50 border-l-4 border-blue-500 p-6 rounded">
+                        <h4 class="text-xl font-semibold mb-3 text-blue-800">Vision Statement</h4>
+                        <p class="text-blue-700 leading-relaxed">
+                            "To democratize enterprise data access through conversational AI, enabling every business user to 
+                            become a data analyst and every executive to have instant access to actionable insights across 
+                            their entire organization."
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 2. Platform Architecture -->
+    <section class="py-16 bg-white spec-section">
+        <div class="container mx-auto px-6">
+            <h2 class="text-3xl font-bold mb-8">2. Platform Architecture</h2>
+            <div class="max-w-6xl mx-auto">
+                
+                <!-- Architecture Diagram -->
+                <div class="bg-gray-50 rounded-lg p-8 mb-8">
+                    <h3 class="text-2xl font-semibold mb-6">System Architecture Overview</h3>
+                    <div class="architecture-diagram mb-6">
+                        <canvas id="architectureChart"></canvas>
+                    </div>
+                </div>
+
+                <!-- Architecture Components -->
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+                    <div class="feature-card bg-white border border-gray-200 rounded-lg p-6">
+                        <div class="text-center mb-4">
+                            <i class="fas fa-comments text-4xl text-blue-500 mb-3"></i>
+                            <h4 class="text-xl font-semibold">NLP Interface Layer</h4>
+                        </div>
+                        <ul class="space-y-2 text-sm">
+                            <li>• Multi-threaded conversations</li>
+                            <li>• Model-agnostic chat interface</li>
+                            <li>• Real-time streaming responses</li>
+                            <li>• File upload & paste support</li>
+                            <li>• Mobile-responsive design</li>
+                        </ul>
+                    </div>
+
+                    <div class="feature-card bg-white border border-gray-200 rounded-lg p-6">
+                        <div class="text-center mb-4">
+                            <i class="fas fa-brain text-4xl text-purple-500 mb-3"></i>
+                            <h4 class="text-xl font-semibold">SYNTIN Core Engine</h4>
+                        </div>
+                        <ul class="space-y-2 text-sm">
+                            <li>• Data narrative processing</li>
+                            <li>• Cross-domain analytics</li>
+                            <li>• Predictive intelligence</li>
+                            <li>• Knowledge graph integration</li>
+                            <li>• Enterprise data ontology</li>
+                        </ul>
+                    </div>
+
+                    <div class="feature-card bg-white border border-gray-200 rounded-lg p-6">
+                        <div class="text-center mb-4">
+                            <i class="fas fa-network-wired text-4xl text-green-500 mb-3"></i>
+                            <h4 class="text-xl font-semibold">Integration Layer</h4>
+                        </div>
+                        <ul class="space-y-2 text-sm">
+                            <li>• Webhook endpoints</li>
+                            <li>• API gateway</li>
+                            <li>• Database connectors</li>
+                            <li>• Real-time data streams</li>
+                            <li>• External system APIs</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Technical Stack -->
+                <div class="bg-white rounded-lg shadow-lg p-8">
+                    <h3 class="text-2xl font-semibold mb-6">Technical Stack</h3>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                        <div>
+                            <h4 class="text-lg font-semibold mb-4 text-gray-700">Frontend Technologies</h4>
+                            <div class="space-y-3">
+                                <div class="flex items-center justify-between p-3 bg-gray-50 rounded">
+                                    <span>React/Vue.js Framework</span>
+                                    <span class="text-sm text-gray-500">UI Components</span>
+                                </div>
+                                <div class="flex items-center justify-between p-3 bg-gray-50 rounded">
+                                    <span>WebSocket Connections</span>
+                                    <span class="text-sm text-gray-500">Real-time Communication</span>
+                                </div>
+                                <div class="flex items-center justify-between p-3 bg-gray-50 rounded">
+                                    <span>Progressive Web App</span>
+                                    <span class="text-sm text-gray-500">Mobile Optimization</span>
+                                </div>
+                                <div class="flex items-center justify-between p-3 bg-gray-50 rounded">
+                                    <span>Chart.js/D3.js</span>
+                                    <span class="text-sm text-gray-500">Data Visualization</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div>
+                            <h4 class="text-lg font-semibold mb-4 text-gray-700">Backend Technologies</h4>
+                            <div class="space-y-3">
+                                <div class="flex items-center justify-between p-3 bg-gray-50 rounded">
+                                    <span>Python/Node.js</span>
+                                    <span class="text-sm text-gray-500">Core Services</span>
+                                </div>
+                                <div class="flex items-center justify-between p-3 bg-gray-50 rounded">
+                                    <span>LLM/SLM Pipeline</span>
+                                    <span class="text-sm text-gray-500">AI Processing</span>
+                                </div>
+                                <div class="flex items-center justify-between p-3 bg-gray-50 rounded">
+                                    <span>Vector Databases</span>
+                                    <span class="text-sm text-gray-500">Semantic Search</span>
+                                </div>
+                                <div class="flex items-center justify-between p-3 bg-gray-50 rounded">
+                                    <span>Time Series DBs</span>
+                                    <span class="text-sm text-gray-500">Analytics Storage</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 3. Core Components -->
+    <section class="py-16 bg-gray-50 spec-section">
+        <div class="container mx-auto px-6">
+            <h2 class="text-3xl font-bold mb-8">3. Core Components</h2>
+            <div class="max-w-6xl mx-auto">
+                
+                <!-- Component Overview -->
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
+                    <div class="text-center">
+                        <div class="bg-blue-100 rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-4">
+                            <i class="fas fa-database text-2xl text-blue-600"></i>
+                        </div>
+                        <h4 class="font-semibold mb-2">Data Layer</h4>
+                        <p class="text-sm text-gray-600">Enterprise data integration and management</p>
+                    </div>
+                    <div class="text-center">
+                        <div class="bg-green-100 rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-4">
+                            <i class="fas fa-cogs text-2xl text-green-600"></i>
+                        </div>
+                        <h4 class="font-semibold mb-2">Processing Engine</h4>
+                        <p class="text-sm text-gray-600">AI-powered analysis and insights</p>
+                    </div>
+                    <div class="text-center">
+                        <div class="bg-purple-100 rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-4">
+                            <i class="fas fa-comments text-2xl text-purple-600"></i>
+                        </div>
+                        <h4 class="font-semibold mb-2">Interface Layer</h4>
+                        <p class="text-sm text-gray-600">Conversational user interfaces</p>
+                    </div>
+                    <div class="text-center">
+                        <div class="bg-orange-100 rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-4">
+                            <i class="fas fa-shield-alt text-2xl text-orange-600"></i>
+                        </div>
+                        <h4 class="font-semibold mb-2">Security Layer</h4>
+                        <p class="text-sm text-gray-600">Enterprise-grade security and compliance</p>
+                    </div>
+                </div>
+
+                <!-- Detailed Components -->
+                <div class="space-y-8">
+                    <!-- Data Ingestion Engine -->
+                    <div class="bg-white rounded-lg shadow-lg p-8">
+                        <h3 class="text-2xl font-semibold mb-6 flex items-center">
+                            <i class="fas fa-upload text-blue-500 mr-3"></i>
+                            Data Ingestion Engine
+                        </h3>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <div>
+                                <h4 class="text-lg font-semibold mb-3">Capabilities</h4>
+                                <ul class="space-y-2">
+                                    <li class="flex items-center"><i class="fas fa-check text-green-500 mr-2"></i> Real-time data streaming</li>
+                                    <li class="flex items-center"><i class="fas fa-check text-green-500 mr-2"></i> Batch data processing</li>
+                                    <li class="flex items-center"><i class="fas fa-check text-green-500 mr-2"></i> Multi-format file support</li>
+                                    <li class="flex items-center"><i class="fas fa-check text-green-500 mr-2"></i> API-based integrations</li>
+                                    <li class="flex items-center"><i class="fas fa-check text-green-500 mr-2"></i> Data validation & cleansing</li>
+                                </ul>
+                            </div>
+                            <div>
+                                <h4 class="text-lg font-semibold mb-3">Supported Sources</h4>
+                                <ul class="space-y-2">
+                                    <li class="flex items-center"><i class="fas fa-database text-blue-500 mr-2"></i> SQL/NoSQL Databases</li>
+                                    <li class="flex items-center"><i class="fas fa-cloud text-blue-500 mr-2"></i> Cloud Storage (S3, Azure, GCP)</li>
+                                    <li class="flex items-center"><i class="fas fa-file-alt text-blue-500 mr-2"></i> Document Systems</li>
+                                    <li class="flex items-center"><i class="fas fa-chart-line text-blue-500 mr-2"></i> Analytics Platforms</li>
+                                    <li class="flex items-center"><i class="fas fa-network-wired text-blue-500 mr-2"></i> IoT Sensors</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Narrative Processing Engine -->
+                    <div class="bg-white rounded-lg shadow-lg p-8">
+                        <h3 class="text-2xl font-semibold mb-6 flex items-center">
+                            <i class="fas fa-book text-purple-500 mr-3"></i>
+                            Narrative Processing Engine
+                        </h3>
+                        <div class="mb-6">
+                            <p class="text-gray-700 leading-relaxed">
+                                The core of SYNTIN's intelligence, transforming raw data into meaningful business narratives 
+                                across five key dimensions: Strategy, Leadership, Culture, Value, and Brand.
+                            </p>
+                        </div>
+                        <div class="grid grid-cols-1 md:grid-cols-5 gap-4">
+                            <div class="text-center p-4 border rounded-lg">
+                                <i class="fas fa-chess text-2xl text-red-500 mb-2"></i>
+                                <h5 class="font-semibold">Strategy</h5>
+                                <p class="text-xs text-gray-600">Planning & Execution</p>
+                            </div>
+                            <div class="text-center p-4 border rounded-lg">
+                                <i class="fas fa-users text-2xl text-blue-500 mb-2"></i>
+                                <h5 class="font-semibold">Leadership</h5>
+                                <p class="text-xs text-gray-600">Organizational Structure</p>
+                            </div>
+                            <div class="text-center p-4 border rounded-lg">
+                                <i class="fas fa-heart text-2xl text-green-500 mb-2"></i>
+                                <h5 class="font-semibold">Culture</h5>
+                                <p class="text-xs text-gray-600">Employee Experience</p>
+                            </div>
+                            <div class="text-center p-4 border rounded-lg">
+                                <i class="fas fa-dollar-sign text-2xl text-yellow-500 mb-2"></i>
+                                <h5 class="font-semibold">Value</h5>
+                                <p class="text-xs text-gray-600">Business Outcomes</p>
+                            </div>
+                            <div class="text-center p-4 border rounded-lg">
+                                <i class="fas fa-star text-2xl text-purple-500 mb-2"></i>
+                                <h5 class="font-semibold">Brand</h5>
+                                <p class="text-xs text-gray-600">Market Perception</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- AI Orchestration Layer -->
+                    <div class="bg-white rounded-lg shadow-lg p-8">
+                        <h3 class="text-2xl font-semibold mb-6 flex items-center">
+                            <i class="fas fa-robot text-green-500 mr-3"></i>
+                            AI Orchestration Layer
+                        </h3>
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                            <div class="border rounded-lg p-4">
+                                <h4 class="text-lg font-semibold mb-3 text-center">LLM Pipeline</h4>
+                                <ul class="space-y-2 text-sm">
+                                    <li>• Query understanding</li>
+                                    <li>• Natural language generation</li>
+                                    <li>• Context preservation</li>
+                                    <li>• Multi-model support</li>
+                                </ul>
+                            </div>
+                            <div class="border rounded-lg p-4">
+                                <h4 class="text-lg font-semibold mb-3 text-center">SLM Pipeline</h4>
+                                <ul class="space-y-2 text-sm">
+                                    <li>• Structured data queries</li>
+                                    <li>• Computational analysis</li>
+                                    <li>• Data validation</li>
+                                    <li>• Performance optimization</li>
+                                </ul>
+                            </div>
+                            <div class="border rounded-lg p-4">
+                                <h4 class="text-lg font-semibold mb-3 text-center">Agent Controllers</h4>
+                                <ul class="space-y-2 text-sm">
+                                    <li>• Task orchestration</li>
+                                    <li>• Decision making</li>
+                                    <li>• Resource allocation</li>
+                                    <li>• Error handling</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 4. Data Narrative Framework -->
+    <section class="py-16 bg-white spec-section">
+        <div class="container mx-auto px-6">
+            <h2 class="text-3xl font-bold mb-8">4. Data Narrative Framework</h2>
+            <div class="max-w-6xl mx-auto">
+                
+                <!-- Framework Overview -->
+                <div class="bg-gradient-to-r from-blue-50 to-purple-50 rounded-lg p-8 mb-8">
+                    <h3 class="text-2xl font-semibold mb-6">Five-Dimensional Business Intelligence</h3>
+                    <p class="text-lg leading-relaxed mb-6">
+                        SYNTIN organizes all enterprise knowledge into five narrative categories, enabling cross-domain 
+                        analytics and comprehensive business intelligence that spans traditional data silos.
+                    </p>
+                    <div class="flow-diagram">
+                        <canvas id="narrativeFlowChart"></canvas>
+                    </div>
+                </div>
+
+                <!-- Detailed Narrative Descriptions -->
+                <div class="space-y-6">
+                    <!-- Strategy Narrative -->
+                    <div class="bg-white border-l-4 border-red-500 rounded-lg shadow-lg p-6">
+                        <div class="flex items-center mb-4">
+                            <i class="fas fa-chess text-3xl text-red-500 mr-4"></i>
+                            <div>
+                                <h3 class="text-2xl font-semibold">Strategy Narrative</h3>
+                                <p class="text-gray-600">Strategic planning and execution intelligence</p>
+                            </div>
+                        </div>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <div>
+                                <h4 class="text-lg font-semibold mb-3">Data Scope</h4>
+                                <ul class="space-y-2">
+                                    <li>• Corporate strategy documents</li>
+                                    <li>• OKR repositories and tracking</li>
+                                    <li>• Strategic initiative portfolios</li>
+                                    <li>• Market research and competitive intelligence</li>
+                                    <li>• M&A plans and analysis</li>
+                                    <li>• Board presentations and decisions</li>
+                                </ul>
+                            </div>
+                            <div>
+                                <h4 class="text-lg font-semibold mb-3">Key Metrics</h4>
+                                <ul class="space-y-2">
+                                    <li>• Goal attainment percentages</li>
+                                    <li>• Strategic project ROI</li>
+                                    <li>• Market share targets</li>
+                                    <li>• Competitive positioning scores</li>
+                                    <li>• Innovation pipeline metrics</li>
+                                    <li>• Strategic alignment indices</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="mt-6 p-4 bg-red-50 rounded">
+                            <h5 class="font-semibold text-red-800 mb-2">Ownership & Stakeholders</h5>
+                            <p class="text-red-700">Typically owned by C-suite leadership, Chief Strategy Officer, and senior executives responsible for strategic planning and execution.</p>
+                        </div>
+                    </div>
+
+                    <!-- Leadership Narrative -->
+                    <div class="bg-white border-l-4 border-blue-500 rounded-lg shadow-lg p-6">
+                        <div class="flex items-center mb-4">
+                            <i class="fas fa-users text-3xl text-blue-500 mr-4"></i>
+                            <div>
+                                <h3 class="text-2xl font-semibold">Leadership Narrative</h3>
+                                <p class="text-gray-600">Organizational structure and leadership effectiveness</p>
+                            </div>
+                        </div>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <div>
+                                <h4 class="text-lg font-semibold mb-3">Data Scope</h4>
+                                <ul class="space-y-2">
+                                    <li>• Organizational charts and structures</li>
+                                    <li>• Leadership performance evaluations</li>
+                                    <li>• Succession planning documents</li>
+                                    <li>• Management communication patterns</li>
+                                    <li>• Executive coaching and development</li>
+                                    <li>• Leadership competency assessments</li>
+                                </ul>
+                            </div>
+                            <div>
+                                <h4 class="text-lg font-semibold mb-3">Key Metrics</h4>
+                                <ul class="space-y-2">
+                                    <li>• Leadership diversity indices</li>
+                                    <li>• Manager engagement scores</li>
+                                    <li>• Leadership stability measures</li>
+                                    <li>• Team performance correlations</li>
+                                    <li>• Development program effectiveness</li>
+                                    <li>• 360-degree feedback scores</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="mt-6 p-4 bg-blue-50 rounded">
+                            <h5 class="font-semibold text-blue-800 mb-2">Ownership & Stakeholders</h5>
+                            <p class="text-blue-700">Owned by HR executives, C-suite leadership, and organizational development teams responsible for leadership effectiveness and succession planning.</p>
+                        </div>
+                    </div>
+
+                    <!-- Culture Narrative -->
+                    <div class="bg-white border-l-4 border-green-500 rounded-lg shadow-lg p-6">
+                        <div class="flex items-center mb-4">
+                            <i class="fas fa-heart text-3xl text-green-500 mr-4"></i>
+                            <div>
+                                <h3 class="text-2xl font-semibold">Culture Narrative</h3>
+                                <p class="text-gray-600">Employee experience and organizational culture</p>
+                            </div>
+                        </div>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <div>
+                                <h4 class="text-lg font-semibold mb-3">Data Scope</h4>
+                                <ul class="space-y-2">
+                                    <li>• Employee engagement surveys</li>
+                                    <li>• eNPS and pulse survey data</li>
+                                    <li>• Attrition and retention statistics</li>
+                                    <li>• Hiring and onboarding metrics</li>
+                                    <li>• DEI metrics and initiatives</li>
+                                    <li>• Workplace satisfaction indicators</li>
+                                </ul>
+                            </div>
+                            <div>
+                                <h4 class="text-lg font-semibold mb-3">Key Metrics</h4>
+                                <ul class="space-y-2">
+                                    <li>• Employee engagement scores</li>
+                                    <li>• Turnover rates by department</li>
+                                    <li>• Cultural alignment indices</li>
+                                    <li>• Innovation participation rates</li>
+                                    <li>• Diversity and inclusion metrics</li>
+                                    <li>• Work-life balance indicators</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="mt-6 p-4 bg-green-50 rounded">
+                            <h5 class="font-semibold text-green-800 mb-2">Ownership & Stakeholders</h5>
+                            <p class="text-green-700">Primarily owned by HR/People teams, sometimes COO or department heads, focusing on employee experience and organizational culture development.</p>
+                        </div>
+                    </div>
+
+                    <!-- Value Narrative -->
+                    <div class="bg-white border-l-4 border-yellow-500 rounded-lg shadow-lg p-6">
+                        <div class="flex items-center mb-4">
+                            <i class="fas fa-dollar-sign text-3xl text-yellow-500 mr-4"></i>
+                            <div>
+                                <h3 class="text-2xl font-semibold">Value Narrative</h3>
+                                <p class="text-gray-600">Business outcomes and value creation metrics</p>
+                            </div>
+                        </div>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <div>
+                                <h4 class="text-lg font-semibold mb-3">Data Scope</h4>
+                                <ul class="space-y-2">
+                                    <li>• Financial performance metrics</li>
+                                    <li>• Revenue and profit analysis</li>
+                                    <li>• Operational efficiency data</li>
+                                    <li>• Customer value metrics</li>
+                                    <li>• Cost optimization initiatives</li>
+                                    <li>• Productivity measurements</li>
+                                </ul>
+                            </div>
+                            <div>
+                                <h4 class="text-lg font-semibold mb-3">Key Metrics</h4>
+                                <ul class="space-y-2">
+                                    <li>• Revenue growth rates</li>
+                                    <li>• EBITDA and profit margins</li>
+                                    <li>• Cash flow indicators</li>
+                                    <li>• Customer lifetime value</li>
+                                    <li>• Operational efficiency ratios</li>
+                                    <li>• Return on investment (ROI)</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="mt-6 p-4 bg-yellow-50 rounded">
+                            <h5 class="font-semibold text-yellow-800 mb-2">Ownership & Stakeholders</h5>
+                            <p class="text-yellow-700">Generally owned by finance and operations leadership – typically the CFO for financial metrics and COO or business unit heads for operational metrics.</p>
+                        </div>
+                    </div>
+
+                    <!-- Brand Narrative -->
+                    <div class="bg-white border-l-4 border-purple-500 rounded-lg shadow-lg p-6">
+                        <div class="flex items-center mb-4">
+                            <i class="fas fa-star text-3xl text-purple-500 mr-4"></i>
+                            <div>
+                                <h3 class="text-2xl font-semibold">Brand Narrative</h3>
+                                <p class="text-gray-600">External perception and market-facing metrics</p>
+                            </div>
+                        </div>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <div>
+                                <h4 class="text-lg font-semibold mb-3">Data Scope</h4>
+                                <ul class="space-y-2">
+                                    <li>• Brand awareness and preference</li>
+                                    <li>• Customer satisfaction (NPS)</li>
+                                    <li>• Social media sentiment analysis</li>
+                                    <li>• Share of voice in media</li>
+                                    <li>• PR coverage and reputation</li>
+                                    <li>• Customer loyalty programs</li>
+                                </ul>
+                            </div>
+                            <div>
+                                <h4 class="text-lg font-semibold mb-3">Key Metrics</h4>
+                                <ul class="space-y-2">
+                                    <li>• Net Promoter Score (NPS)</li>
+                                    <li>• Brand awareness percentages</li>
+                                    <li>• Customer satisfaction scores</li>
+                                    <li>• Social sentiment analysis</li>
+                                    <li>• Market share indicators</li>
+                                    <li>• Customer advocacy rates</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="mt-6 p-4 bg-purple-50 rounded">
+                            <h5 class="font-semibold text-purple-800 mb-2">Ownership & Stakeholders</h5>
+                            <p class="text-purple-700">Typically owned by the CMO (Chief Marketing Officer) and marketing/brand management teams responsible for external perception and market positioning.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Cross-Narrative Integration -->
+                <div class="bg-gray-900 text-white rounded-lg p-8 mt-12">
+                    <h3 class="text-2xl font-semibold mb-6 text-center">Cross-Narrative Integration</h3>
+                    <p class="text-lg leading-relaxed mb-6 text-center text-gray-300">
+                        The real power of SYNTIN comes from connecting these narratives, enabling executives to ask rich questions 
+                        that span multiple domains and reveal hidden correlations.
+                    </p>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div class="bg-gray-800 rounded-lg p-6">
+                            <h4 class="text-xl font-semibold mb-4 text-blue-400">Example Cross-Domain Queries</h4>
+                            <ul class="space-y-3">
+                                <li class="flex items-start"><i class="fas fa-arrow-right text-blue-400 mr-2 mt-1"></i> "How is our leadership effectiveness (Leadership) influencing company culture and employee retention (Culture)?"</li>
+                                <li class="flex items-start"><i class="fas fa-arrow-right text-blue-400 mr-2 mt-1"></i> "Is our strategic investment in innovation (Strategy) reflected in improved financial outcomes (Value) and brand reputation (Brand)?"</li>
+                                <li class="flex items-start"><i class="fas fa-arrow-right text-blue-400 mr-2 mt-1"></i> "What's the correlation between our cultural initiatives (Culture) and customer satisfaction scores (Brand)?"</li>
+                            </ul>
+                        </div>
+                        <div class="bg-gray-800 rounded-lg p-6">
+                            <h4 class="text-xl font-semibold mb-4 text-green-400">Integration Benefits</h4>
+                            <ul class="space-y-3">
+                                <li class="flex items-start"><i class="fas fa-check text-green-400 mr-2 mt-1"></i> Holistic business understanding</li>
+                                <li class="flex items-start"><i class="fas fa-check text-green-400 mr-2 mt-1"></i> Hidden correlation discovery</li>
+                                <li class="flex items-start"><i class="fas fa-check text-green-400 mr-2 mt-1"></i> Strategic decision support</li>
+                                <li class="flex items-start"><i class="fas fa-check text-green-400 mr-2 mt-1"></i> Predictive insight generation</li>
+                                <li class="flex items-start"><i class="fas fa-check text-green-400 mr-2 mt-1"></i> Executive dashboard automation</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 5. NLP Interface Layer -->
+    <section class="py-16 bg-gray-50 spec-section">
+        <div class="container mx-auto px-6">
+            <h2 class="text-3xl font-bold mb-8">5. NLP Interface Layer</h2>
+            <div class="max-w-6xl mx-auto">
+                
+                <!-- Interface Overview -->
+                <div class="bg-white rounded-lg shadow-lg p-8 mb-8">
+                    <h3 class="text-2xl font-semibold mb-6">Conversational Business Intelligence</h3>
+                    <p class="text-lg leading-relaxed mb-6">
+                        SYNTIN's NLP interface transforms complex business data into intuitive conversations, enabling every user 
+                        to become a data analyst through natural language interactions.
+                    </p>
+                    
+                    <!-- Interface Features -->
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+                        <div class="feature-card border rounded-lg p-6 text-center">
+                            <i class="fas fa-comments text-4xl text-blue-500 mb-4"></i>
+                            <h4 class="text-xl font-semibold mb-3">Multi-Threading</h4>
+                            <p class="text-gray-600">Manage multiple conversation threads simultaneously for different topics or projects</p>
+                        </div>
+                        <div class="feature-card border rounded-lg p-6 text-center">
+                            <i class="fas fa-exchange-alt text-4xl text-green-500 mb-4"></i>
+                            <h4 class="text-xl font-semibold mb-3">Model Switching</h4>
+                            <p class="text-gray-600">Switch between different AI models mid-conversation based on task requirements</p>
+                        </div>
+                        <div class="feature-card border rounded-lg p-6 text-center">
+                            <i class="fas fa-mobile-alt text-4xl text-purple-500 mb-4"></i>
+                            <h4 class="text-xl font-semibold mb-3">Mobile First</h4>
+                            <p class="text-gray-600">Fully responsive design optimized for mobile professionals on the go</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Chat Interface Specifications -->
+                <div class="space-y-8">
+                    <!-- Core Chat Features -->
+                    <div class="bg-white rounded-lg shadow-lg p-8">
+                        <h3 class="text-2xl font-semibold mb-6 flex items-center">
+                            <i class="fas fa-keyboard text-blue-500 mr-3"></i>
+                            Core Chat Features
+                        </h3>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                            <div>
+                                <h4 class="text-lg font-semibold mb-4">Input Capabilities</h4>
+                                <div class="space-y-3">
+                                    <div class="flex items-center justify-between p-3 bg-gray-50 rounded">
+                                        <span>Text Input (Textarea)</span>
+                                        <i class="fas fa-check text-green-500"></i>
+                                    </div>
+                                    <div class="flex items-center justify-between p-3 bg-gray-50 rounded">
+                                        <span>File Upload (Multiple)</span>
+                                        <i class="fas fa-check text-green-500"></i>
+                                    </div>
+                                    <div class="flex items-center justify-between p-3 bg-gray-50 rounded">
+                                        <span>Drag & Drop</span>
+                                        <i class="fas fa-check text-green-500"></i>
+                                    </div>
+                                    <div class="flex items-center justify-between p-3 bg-gray-50 rounded">
+                                        <span>Paste Support</span>
+                                        <i class="fas fa-check text-green-500"></i>
+                                    </div>
+                                    <div class="flex items-center justify-between p-3 bg-gray-50 rounded">
+                                        <span>Voice Input</span>
+                                        <i class="fas fa-check text-green-500"></i>
+                                    </div>
+                                </div>
+                            </div>
+                            <div>
+                                <h4 class="text-lg font-semibold mb-4">Response Features</h4>
+                                <div class="space-y-3">
+                                    <div class="flex items-center justify-between p-3 bg-gray-50 rounded">
+                                        <span>Streaming Responses</span>
+                                        <i class="fas fa-check text-green-500"></i>
+                                    </div>
+                                    <div class="flex items-center justify-between p-3 bg-gray-50 rounded">
+                                        <span>Typing Indicators</span>
+                                        <i class="fas fa-check text-green-500"></i>
+                                    </div>
+                                    <div class="flex items-center justify-between p-3 bg-gray-50 rounded">
+                                        <span>Rich Formatting</span>
+                                        <i class="fas fa-check text-green-500"></i>
+                                    </div>
+                                    <div class="flex items-center justify-between p-3 bg-gray-50 rounded">
+                                        <span>Chart Generation</span>
+                                        <i class="fas fa-check text-green-500"></i>
+                                    </div>
+                                    <div class="flex items-center justify-between p-3 bg-gray-50 rounded">
+                                        <span>Export Options</span>
+                                        <i class="fas fa-check text-green-500"></i>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Thread Management -->
+                    <div class="bg-white rounded-lg shadow-lg p-8">
+                        <h3 class="text-2xl font-semibold mb-6 flex items-center">
+                            <i class="fas fa-layer-group text-purple-500 mr-3"></i>
+                            Thread Management System
+                        </h3>
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                            <div class="text-center">
+                                <div class="bg-purple-100 rounded-lg p-6 mb-4">
+                                    <i class="fas fa-plus text-3xl text-purple-600 mb-3"></i>
+                                    <h4 class="font-semibold">Create Threads</h4>
+                                </div>
+                                <ul class="text-sm space-y-1">
+                                    <li>• Auto-naming based on content</li>
+                                    <li>• Manual thread naming</li>
+                                    <li>• Context preservation</li>
+                                    <li>• Template-based creation</li>
+                                </ul>
+                            </div>
+                            <div class="text-center">
+                                <div class="bg-blue-100 rounded-lg p-6 mb-4">
+                                    <i class="fas fa-edit text-3xl text-blue-600 mb-3"></i>
+                                    <h4 class="font-semibold">Manage Threads</h4>
+                                </div>
+                                <ul class="text-sm space-y-1">
+                                    <li>• Rename and organize</li>
+                                    <li>• Archive old conversations</li>
+                                    <li>• Search within threads</li>
+                                    <li>• Share thread summaries</li>
+                                </ul>
+                            </div>
+                            <div class="text-center">
+                                <div class="bg-green-100 rounded-lg p-6 mb-4">
+                                    <i class="fas fa-exchange-alt text-3xl text-green-600 mb-3"></i>
+                                    <h4 class="font-semibold">Switch Context</h4>
+                                </div>
+                                <ul class="text-sm space-y-1">
+                                    <li>• Instant thread switching</li>
+                                    <li>• Context preservation</li>
+                                    <li>• Recent thread access</li>
+                                    <li>• Thread bookmarking</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Unreasonable Hospitality Features -->
+                    <div class="bg-gradient-to-r from-pink-50 to-purple-50 rounded-lg p-8">
+                        <h3 class="text-2xl font-semibold mb-6 flex items-center">
+                            <i class="fas fa-magic text-pink-500 mr-3"></i>
+                            Unreasonable Hospitality Features
+                        </h3>
+                        <p class="text-lg leading-relaxed mb-6">
+                            Going beyond standard AI assistance to create delightful, personalized experiences that anticipate user needs.
+                        </p>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                            <div>
+                                <h4 class="text-lg font-semibold mb-4 text-pink-600">Surprise & Delight</h4>
+                                <ul class="space-y-2">
+                                    <li class="flex items-center"><i class="fas fa-gift text-pink-500 mr-2"></i> Proactive insights and recommendations</li>
+                                    <li class="flex items-center"><i class="fas fa-lightbulb text-pink-500 mr-2"></i> Unexpected helpful suggestions</li>
+                                    <li class="flex items-center"><i class="fas fa-star text-pink-500 mr-2"></i> Achievement celebrations</li>
+                                    <li class="flex items-center"><i class="fas fa-heart text-pink-500 mr-2"></i> Personalized milestone recognition</li>
+                                </ul>
+                            </div>
+                            <div>
+                                <h4 class="text-lg font-semibold mb-4 text-purple-600">Anticipatory Service</h4>
+                                <ul class="space-y-2">
+                                    <li class="flex items-center"><i class="fas fa-clock text-purple-500 mr-2"></i> Daily briefings and summaries</li>
+                                    <li class="flex items-center"><i class="fas fa-bell text-purple-500 mr-2"></i> Intelligent alerts and notifications</li>
+                                    <li class="flex items-center"><i class="fas fa-user text-purple-500 mr-2"></i> Personalized dashboard creation</li>
+                                    <li class="flex items-center"><i class="fas fa-chart-line text-purple-500 mr-2"></i> Predictive analytics delivery</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 6. Multi-Modal Communication -->
+    <section class="py-16 bg-white spec-section">
+        <div class="container mx-auto px-6">
+            <h2 class="text-3xl font-bold mb-8">6. Multi-Modal Communication</h2>
+            <div class="max-w-6xl mx-auto">
+                
+                <!-- Communication Overview -->
+                <div class="bg-gradient-to-r from-indigo-50 to-blue-50 rounded-lg p-8 mb-8">
+                    <h3 class="text-2xl font-semibold mb-6">Comprehensive Input & Output Modalities</h3>
+                    <p class="text-lg leading-relaxed mb-6">
+                        SYNTIN supports multiple communication channels, enabling users to interact with data through 
+                        the most natural and efficient methods for their specific use cases and contexts.
+                    </p>
+                </div>
+
+                <!-- Input Modalities -->
+                <div class="space-y-8">
+                    <div class="bg-white rounded-lg shadow-lg p-8">
+                        <h3 class="text-2xl font-semibold mb-6 flex items-center">
+                            <i class="fas fa-arrow-down text-green-500 mr-3"></i>
+                            Input Modalities
+                        </h3>
+                        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                            <!-- Text Input -->
+                            <div class="border rounded-lg p-6 text-center">
+                                <i class="fas fa-keyboard text-4xl text-blue-500 mb-4"></i>
+                                <h4 class="text-lg font-semibold mb-3">Text Input</h4>
+                                <ul class="text-sm space-y-1">
+                                    <li>• Natural language queries</li>
+                                    <li>• Rich text formatting</li>
+                                    <li>• Markdown support</li>
+                                    <li>• Code snippet input</li>
+                                    <li>• Multi-language support</li>
+                                </ul>
+                            </div>
+                            
+                            <!-- Voice Input -->
+                            <div class="border rounded-lg p-6 text-center">
+                                <i class="fas fa-microphone text-4xl text-red-500 mb-4"></i>
+                                <h4 class="text-lg font-semibold mb-3">Voice Input</h4>
+                                <ul class="text-sm space-y-1">
+                                    <li>• Speech-to-text conversion</li>
+                                    <li>• Voice commands</li>
+                                    <li>• Multiple language support</li>
+                                    <li>• Noise cancellation</li>
+                                    <li>• Offline capability</li>
+                                </ul>
+                            </div>
+                            
+                            <!-- Document Upload -->
+                            <div class="border rounded-lg p-6 text-center">
+                                <i class="fas fa-file-upload text-4xl text-green-500 mb-4"></i>
+                                <h4 class="text-lg font-semibold mb-3">Document Upload</h4>
+                                <ul class="text-sm space-y-1">
+                                    <li>• PDF processing</li>
+                                    <li>• Excel/CSV analysis</li>
+                                    <li>• Word document parsing</li>
+                                    <li>• PowerPoint extraction</li>
+                                    <li>• Batch file processing</li>
+                                </ul>
+                            </div>
+                            
+                            <!-- Image Analysis -->
+                            <div class="border rounded-lg p-6 text-center">
+                                <i class="fas fa-image text-4xl text-purple-500 mb-4"></i>
+                                <h4 class="text-lg font-semibold mb-3">Image Analysis</h4>
+                                <ul class="text-sm space-y-1">
+                                    <li>• OCR text extraction</li>
+                                    <li>• Chart/graph reading</li>
+                                    <li>• Diagram interpretation</li>
+                                    <li>• Screenshot analysis</li>
+                                    <li>• Multi-image comparison</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Output Modalities -->
+                    <div class="bg-white rounded-lg shadow-lg p-8">
+                        <h3 class="text-2xl font-semibold mb-6 flex items-center">
+                            <i class="fas fa-arrow-up text-blue-500 mr-3"></i>
+                            Output Modalities
+                        </h3>
+                        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                            <!-- Text Responses -->
+                            <div class="border rounded-lg p-6 text-center">
+                                <i class="fas fa-align-left text-4xl text-blue-500 mb-4"></i>
+                                <h4 class="text-lg font-semibold mb-3">Text Responses</h4>
+                                <ul class="text-sm space-y-1">
+                                    <li>• Narrative explanations</li>
+                                    <li>• Structured summaries</li>
+                                    <li>• Executive briefings</li>
+                                    <li>• Technical documentation</li>
+                                    <li>• Action recommendations</li>
+                                </ul>
+                            </div>
+                            
+                            <!-- Data Visualizations -->
+                            <div class="border rounded-lg p-6 text-center">
+                                <i class="fas fa-chart-bar text-4xl text-green-500 mb-4"></i>
+                                <h4 class="text-lg font-semibold mb-3">Visualizations</h4>
+                                <ul class="text-sm space-y-1">
+                                    <li>• Interactive charts</li>
+                                    <li>• Dashboard generation</li>
+                                    <li>• Heat maps</li>
+                                    <li>• Network diagrams</li>
+                                    <li>• Timeline visualizations</li>
+                                </ul>
+                            </div>
+                            
+                            <!-- Documents -->
+                            <div class="border rounded-lg p-6 text-center">
+                                <i class="fas fa-file-export text-4xl text-purple-500 mb-4"></i>
+                                <h4 class="text-lg font-semibold mb-3">Document Export</h4>
+                                <ul class="text-sm space-y-1">
+                                    <li>• PDF reports</li>
+                                    <li>• Excel spreadsheets</li>
+                                    <li>• PowerPoint presentations</li>
+                                    <li>• Word documents</li>
+                                    <li>• JSON/CSV data</li>
+                                </ul>
+                            </div>
+                            
+                            <!-- Interactive Elements -->
+                            <div class="border rounded-lg p-6 text-center">
+                                <i class="fas fa-mouse-pointer text-4xl text-orange-500 mb-4"></i>
+                                <h4 class="text-lg font-semibold mb-3">Interactive</h4>
+                                <ul class="text-sm space-y-1">
+                                    <li>• Clickable insights</li>
+                                    <li>• Drill-down capabilities</li>
+                                    <li>• Interactive dashboards</li>
+                                    <li>• Real-time updates</li>
+                                    <li>• Collaborative features</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Webhook Integration -->
+                    <div class="bg-white rounded-lg shadow-lg p-8">
+                        <h3 class="text-2xl font-semibold mb-6 flex items-center">
+                            <i class="fas fa-plug text-yellow-500 mr-3"></i>
+                            Webhook Integration Specifications
+                        </h3>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                            <div>
+                                <h4 class="text-lg font-semibold mb-4">Request Format</h4>
+                                <div class="code-block p-4 rounded font-mono text-sm">
+<pre>Content-Type: multipart/form-data
+
+Fields:
+- text: String (optional)
+- fileCount: Number
+- file0, file1, etc.: File objects
+- messages: Stringified JSON array
+- threadId: String
+- model: String
+- timestamp: ISO 8601 string</pre>
+                                </div>
+                            </div>
+                            <div>
+                                <h4 class="text-lg font-semibold mb-4">Response Format</h4>
+                                <div class="code-block p-4 rounded font-mono text-sm">
+<pre>Content-Type: application/json
+
+{
+  "reply": "AI response text",
+  "modelUsed": "Model identifier",
+  "attachments": [...],
+  "metadata": {
+    "processingTime": "500ms",
+    "confidence": 0.95
+  }
+}</pre>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="mt-8 grid grid-cols-1 md:grid-cols-3 gap-6">
+                            <div class="text-center">
+                                <i class="fas fa-shield-alt text-3xl text-green-500 mb-3"></i>
+                                <h5 class="font-semibold">Security</h5>
+                                <p class="text-sm text-gray-600">HTTPS encryption, API key authentication, request signing</p>
+                            </div>
+                            <div class="text-center">
+                                <i class="fas fa-tachometer-alt text-3xl text-blue-500 mb-3"></i>
+                                <h5 class="font-semibold">Performance</h5>
+                                <p class="text-sm text-gray-600">Sub-second response times, concurrent request handling</p>
+                            </div>
+                            <div class="text-center">
+                                <i class="fas fa-sync-alt text-3xl text-purple-500 mb-3"></i>
+                                <h5 class="font-semibold">Reliability</h5>
+                                <p class="text-sm text-gray-600">Retry logic, failover mechanisms, status monitoring</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 7. Model Context Protocol (MCP) -->
+    <section class="py-16 bg-gray-50 spec-section">
+        <div class="container mx-auto px-6">
+            <h2 class="text-3xl font-bold mb-8">7. Model Context Protocol (MCP)</h2>
+            <div class="max-w-6xl mx-auto">
+                
+                <!-- MCP Overview -->
+                <div class="bg-gradient-to-r from-gray-800 to-gray-900 text-white rounded-lg p-8 mb-8">
+                    <h3 class="text-2xl font-semibold mb-6">Agentic AI Control Architecture</h3>
+                    <p class="text-lg leading-relaxed mb-6 text-gray-300">
+                        The Model Context Protocol enables SYNTIN to orchestrate multiple AI agents, each specialized for 
+                        specific tasks, while maintaining coherent context and decision-making across the entire system.
+                    </p>
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                        <div class="bg-gray-700 rounded-lg p-4 text-center">
+                            <i class="fas fa-robot text-3xl text-blue-400 mb-3"></i>
+                            <h4 class="font-semibold">Agent Orchestration</h4>
+                            <p class="text-sm text-gray-300">Coordinate multiple specialized AI agents</p>
+                        </div>
+                        <div class="bg-gray-700 rounded-lg p-4 text-center">
+                            <i class="fas fa-memory text-3xl text-green-400 mb-3"></i>
+                            <h4 class="font-semibold">Context Management</h4>
+                            <p class="text-sm text-gray-300">Maintain state across agent interactions</p>
+                        </div>
+                        <div class="bg-gray-700 rounded-lg p-4 text-center">
+                            <i class="fas fa-route text-3xl text-purple-400 mb-3"></i>
+                            <h4 class="font-semibold">Decision Routing</h4>
+                            <p class="text-sm text-gray-300">Intelligent task distribution and execution</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Agent Architecture -->
+                <div class="space-y-8">
+                    <!-- Agent Types -->
+                    <div class="bg-white rounded-lg shadow-lg p-8">
+                        <h3 class="text-2xl font-semibold mb-6 flex items-center">
+                            <i class="fas fa-users-cog text-blue-500 mr-3"></i>
+                            Specialized Agent Types
+                        </h3>
+                        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                            <!-- Data Analysis Agent -->
+                            <div class="border rounded-lg p-6">
+                                <div class="text-center mb-4">
+                                    <i class="fas fa-chart-line text-4xl text-blue-500 mb-3"></i>
+                                    <h4 class="text-lg font-semibold">Data Analysis Agent</h4>
+                                </div>
+                                <ul class="text-sm space-y-2">
+                                    <li>• Statistical analysis</li>
+                                    <li>• Trend identification</li>
+                                    <li>• Correlation analysis</li>
+                                    <li>• Anomaly detection</li>
+                                    <li>• Predictive modeling</li>
+                                </ul>
+                            </div>
+                            
+                            <!-- Narrative Generation Agent -->
+                            <div class="border rounded-lg p-6">
+                                <div class="text-center mb-4">
+                                    <i class="fas fa-pen-fancy text-4xl text-green-500 mb-3"></i>
+                                    <h4 class="text-lg font-semibold">Narrative Agent</h4>
+                                </div>
+                                <ul class="text-sm space-y-2">
+                                    <li>• Story generation</li>
+                                    <li>• Executive summaries</li>
+                                    <li>• Insight synthesis</li>
+                                    <li>• Report writing</li>
+                                    <li>• Presentation creation</li>
+                                </ul>
+                            </div>
+                            
+                            <!-- Visualization Agent -->
+                            <div class="border rounded-lg p-6">
+                                <div class="text-center mb-4">
+                                    <i class="fas fa-chart-pie text-4xl text-purple-500 mb-3"></i>
+                                    <h4 class="text-lg font-semibold">Visualization Agent</h4>
+                                </div>
+                                <ul class="text-sm space-y-2">
+                                    <li>• Chart generation</li>
+                                    <li>• Dashboard creation</li>
+                                    <li>• Interactive graphics</li>
+                                    <li>• Data mapping</li>
+                                    <li>• Visual storytelling</li>
+                                </ul>
+                            </div>
+                            
+                            <!-- Query Processing Agent -->
+                            <div class="border rounded-lg p-6">
+                                <div class="text-center mb-4">
+                                    <i class="fas fa-search text-4xl text-red-500 mb-3"></i>
+                                    <h4 class="text-lg font-semibold">Query Agent</h4>
+                                </div>
+                                <ul class="text-sm space-y-2">
+                                    <li>• Intent recognition</li>
+                                    <li>• Query optimization</li>
+                                    <li>• Data retrieval</li>
+                                    <li>• Context understanding</li>
+                                    <li>• Response routing</li>
+                                </ul>
+                            </div>
+                            
+                            <!-- Integration Agent -->
+                            <div class="border rounded-lg p-6">
+                                <div class="text-center mb-4">
+                                    <i class="fas fa-plug text-4xl text-yellow-500 mb-3"></i>
+                                    <h4 class="text-lg font-semibold">Integration Agent</h4>
+                                </div>
+                                <ul class="text-sm space-y-2">
+                                    <li>• API orchestration</li>
+                                    <li>• Data synchronization</li>
+                                    <li>• System coordination</li>
+                                    <li>• Error handling</li>
+                                    <li>• Performance monitoring</li>
+                                </ul>
+                            </div>
+                            
+                            <!-- Security Agent -->
+                            <div class="border rounded-lg p-6">
+                                <div class="text-center mb-4">
+                                    <i class="fas fa-shield-alt text-4xl text-orange-500 mb-3"></i>
+                                    <h4 class="text-lg font-semibold">Security Agent</h4>
+                                </div>
+                                <ul class="text-sm space-y-2">
+                                    <li>• Access control</li>
+                                    <li>• Data protection</li>
+                                    <li>• Audit logging</li>
+                                    <li>• Threat detection</li>
+                                    <li>• Compliance monitoring</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- MCP Workflow -->
+                    <div class="bg-white rounded-lg shadow-lg p-8">
+                        <h3 class="text-2xl font-semibold mb-6 flex items-center">
+                            <i class="fas fa-sitemap text-green-500 mr-3"></i>
+                            MCP Workflow & Decision Making
+                        </h3>
+                        <div class="space-y-6">
+                            <!-- Workflow Steps -->
+                            <div class="grid grid-cols-1 md:grid-cols-5 gap-4">
+                                <div class="text-center">
+                                    <div class="bg-blue-100 rounded-full w-12 h-12 flex items-center justify-center mx-auto mb-2">
+                                        <span class="font-bold text-blue-600">1</span>
+                                    </div>
+                                    <h5 class="font-semibold text-sm">Input Analysis</h5>
+                                    <p class="text-xs text-gray-600">Parse and understand user intent</p>
+                                </div>
+                                <div class="text-center">
+                                    <div class="bg-green-100 rounded-full w-12 h-12 flex items-center justify-center mx-auto mb-2">
+                                        <span class="font-bold text-green-600">2</span>
+                                    </div>
+                                    <h5 class="font-semibold text-sm">Agent Selection</h5>
+                                    <p class="text-xs text-gray-600">Route to appropriate specialists</p>
+                                </div>
+                                <div class="text-center">
+                                    <div class="bg-purple-100 rounded-full w-12 h-12 flex items-center justify-center mx-auto mb-2">
+                                        <span class="font-bold text-purple-600">3</span>
+                                    </div>
+                                    <h5 class="font-semibold text-sm">Parallel Processing</h5>
+                                    <p class="text-xs text-gray-600">Execute specialized tasks</p>
+                                </div>
+                                <div class="text-center">
+                                    <div class="bg-orange-100 rounded-full w-12 h-12 flex items-center justify-center mx-auto mb-2">
+                                        <span class="font-bold text-orange-600">4</span>
+                                    </div>
+                                    <h5 class="font-semibold text-sm">Result Synthesis</h5>
+                                    <p class="text-xs text-gray-600">Combine agent outputs</p>
+                                </div>
+                                <div class="text-center">
+                                    <div class="bg-red-100 rounded-full w-12 h-12 flex items-center justify-center mx-auto mb-2">
+                                        <span class="font-bold text-red-600">5</span>
+                                    </div>
+                                    <h5 class="font-semibold text-sm">Response Delivery</h5>
+                                    <p class="text-xs text-gray-600">Format and present results</p>
+                                </div>
+                            </div>
+
+                            <!-- Decision Matrix -->
+                            <div class="bg-gray-50 rounded-lg p-6">
+                                <h4 class="text-lg font-semibold mb-4">Agent Selection Decision Matrix</h4>
+                                <div class="overflow-x-auto">
+                                    <table class="w-full text-sm">
+                                        <thead>
+                                            <tr class="bg-gray-200">
+                                                <th class="p-3 text-left">Query Type</th>
+                                                <th class="p-3 text-left">Primary Agent</th>
+                                                <th class="p-3 text-left">Supporting Agents</th>
+                                                <th class="p-3 text-left">Expected Output</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr class="border-b">
+                                                <td class="p-3">"Show me Q3 performance"</td>
+                                                <td class="p-3">Data Analysis</td>
+                                                <td class="p-3">Narrative, Visualization</td>
+                                                <td class="p-3">Charts + Executive Summary</td>
+                                            </tr>
+                                            <tr class="border-b">
+                                                <td class="p-3">"How does culture affect retention?"</td>
+                                                <td class="p-3">Narrative</td>
+                                                <td class="p-3">Data Analysis, Query</td>
+                                                <td class="p-3">Correlation Analysis + Insights</td>
+                                            </tr>
+                                            <tr class="border-b">
+                                                <td class="p-3">"Create a dashboard for leadership"</td>
+                                                <td class="p-3">Visualization</td>
+                                                <td class="p-3">Data Analysis, Narrative</td>
+                                                <td class="p-3">Interactive Dashboard</td>
+                                            </tr>
+                                            <tr class="border-b">
+                                                <td class="p-3">"What's my team's access level?"</td>
+                                                <td class="p-3">Security</td>
+                                                <td class="p-3">Query, Integration</td>
+                                                <td class="p-3">Permission Summary</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Context Management -->
+                    <div class="bg-white rounded-lg shadow-lg p-8">
+                        <h3 class="text-2xl font-semibold mb-6 flex items-center">
+                            <i class="fas fa-memory text-purple-500 mr-3"></i>
+                            Context Management & Memory
+                        </h3>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                            <div>
+                                <h4 class="text-lg font-semibold mb-4">Context Types</h4>
+                                <div class="space-y-3">
+                                    <div class="border-l-4 border-blue-500 pl-4">
+                                        <h5 class="font-semibold">Session Context</h5>
+                                        <p class="text-sm text-gray-600">Current conversation state and recent interactions</p>
+                                    </div>
+                                    <div class="border-l-4 border-green-500 pl-4">
+                                        <h5 class="font-semibold">User Context</h5>
+                                        <p class="text-sm text-gray-600">User preferences, role, and historical behavior</p>
+                                    </div>
+                                    <div class="border-l-4 border-purple-500 pl-4">
+                                        <h5 class="font-semibold">Domain Context</h5>
+                                        <p class="text-sm text-gray-600">Business domain knowledge and data relationships</p>
+                                    </div>
+                                    <div class="border-l-4 border-orange-500 pl-4">
+                                        <h5 class="font-semibold">System Context</h5>
+                                        <p class="text-sm text-gray-600">Available resources and system capabilities</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div>
+                                <h4 class="text-lg font-semibold mb-4">Memory Management</h4>
+                                <div class="space-y-3">
+                                    <div class="flex items-center justify-between p-3 bg-gray-50 rounded">
+                                        <span>Short-term Memory</span>
+                                        <span class="text-sm text-gray-500">Session Duration</span>
+                                    </div>
+                                    <div class="flex items-center justify-between p-3 bg-gray-50 rounded">
+                                        <span>Long-term Memory</span>
+                                        <span class="text-sm text-gray-500">User Persistent</span>
+                                    </div>
+                                    <div class="flex items-center justify-between p-3 bg-gray-50 rounded">
+                                        <span>Knowledge Base</span>
+                                        <span class="text-sm text-gray-500">Domain Specific</span>
+                                    </div>
+                                    <div class="flex items-center justify-between p-3 bg-gray-50 rounded">
+                                        <span>Vector Memory</span>
+                                        <span class="text-sm text-gray-500">Semantic Search</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 8. Enterprise Integration -->
+    <section class="py-16 bg-white spec-section">
+        <div class="container mx-auto px-6">
+            <h2 class="text-3xl font-bold mb-8">8. Enterprise Integration</h2>
+            <div class="max-w-6xl mx-auto">
+                
+                <!-- Integration Overview -->
+                <div class="bg-gradient-to-r from-cyan-50 to-blue-50 rounded-lg p-8 mb-8">
+                    <h3 class="text-2xl font-semibold mb-6">Seamless Enterprise Connectivity</h3>
+                    <p class="text-lg leading-relaxed mb-6">
+                        SYNTIN integrates with existing enterprise systems through robust APIs, data connectors, 
+                        and real-time synchronization capabilities, ensuring zero disruption to current workflows.
+                    </p>
+                    <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                        <div class="text-center">
+                            <i class="fas fa-database text-3xl text-blue-500 mb-2"></i>
+                            <h5 class="font-semibold">Databases</h5>
+                        </div>
+                        <div class="text-center">
+                            <i class="fas fa-cloud text-3xl text-green-500 mb-2"></i>
+                            <h5 class="font-semibold">Cloud Services</h5>
+                        </div>
+                        <div class="text-center">
+                            <i class="fas fa-chart-bar text-3xl text-purple-500 mb-2"></i>
+                            <h5 class="font-semibold">BI Platforms</h5>
+                        </div>
+                        <div class="text-center">
+                            <i class="fas fa-cogs text-3xl text-orange-500 mb-2"></i>
+                            <h5 class="font-semibold">ERP Systems</h5>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Integration Capabilities -->
+                <div class="space-y-8">
+                    <!-- Data Source Integration -->
+                    <div class="bg-white rounded-lg shadow-lg p-8">
+                        <h3 class="text-2xl font-semibold mb-6 flex items-center">
+                            <i class="fas fa-plug text-blue-500 mr-3"></i>
+                            Data Source Integration
+                        </h3>
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                            <!-- Databases -->
+                            <div class="border rounded-lg p-6">
+                                <h4 class="text-lg font-semibold mb-4 flex items-center">
+                                    <i class="fas fa-database text-blue-500 mr-2"></i>
+                                    Databases
+                                </h4>
+                                <ul class="space-y-2 text-sm">
+                                    <li>• PostgreSQL, MySQL, SQL Server</li>
+                                    <li>• Oracle, DB2, SQLite</li>
+                                    <li>• MongoDB, Cassandra, Redis</li>
+                                    <li>• DynamoDB, Cosmos DB</li>
+                                    <li>• Snowflake, BigQuery</li>
+                                    <li>• Time-series databases</li>
+                                </ul>
+                            </div>
+                            
+                            <!-- Cloud Platforms -->
+                            <div class="border rounded-lg p-6">
+                                <h4 class="text-lg font-semibold mb-4 flex items-center">
+                                    <i class="fas fa-cloud text-green-500 mr-2"></i>
+                                    Cloud Platforms
+                                </h4>
+                                <ul class="space-y-2 text-sm">
+                                    <li>• AWS (S3, RDS, Redshift)</li>
+                                    <li>• Azure (Blob, SQL, Synapse)</li>
+                                    <li>• Google Cloud (Storage, BigQuery)</li>
+                                    <li>• Salesforce, HubSpot</li>
+                                    <li>• Office 365, Google Workspace</li>
+                                    <li>• Slack, Microsoft Teams</li>
+                                </ul>
+                            </div>
+                            
+                            <!-- Business Systems -->
+                            <div class="border rounded-lg p-6">
+                                <h4 class="text-lg font-semibold mb-4 flex items-center">
+                                    <i class="fas fa-briefcase text-purple-500 mr-2"></i>
+                                    Business Systems
+                                </h4>
+                                <ul class="space-y-2 text-sm">
+                                    <li>• SAP, Oracle ERP</li>
+                                    <li>• Workday, SuccessFactors</li>
+                                    <li>• Tableau, Power BI</li>
+                                    <li>• Jira, ServiceNow</li>
+                                    <li>• DocuSign, SharePoint</li>
+                                    <li>• Custom APIs and webhooks</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Real-time Data Streaming -->
+                    <div class="bg-white rounded-lg shadow-lg p-8">
+                        <h3 class="text-2xl font-semibold mb-6 flex items-center">
+                            <i class="fas fa-stream text-green-500 mr-3"></i>
+                            Real-time Data Streaming
+                        </h3>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                            <div>
+                                <h4 class="text-lg font-semibold mb-4">Streaming Technologies</h4>
+                                <div class="space-y-3">
+                                    <div class="flex items-center justify-between p-3 bg-gray-50 rounded">
+                                        <span>Apache Kafka</span>
+                                        <span class="text-sm text-gray-500">Message Streaming</span>
+                                    </div>
+                                    <div class="flex items-center justify-between p-3 bg-gray-50 rounded">
+                                        <span>Apache Pulsar</span>
+                                        <span class="text-sm text-gray-500">Pub/Sub Messaging</span>
+                                    </div>
+                                    <div class="flex items-center justify-between p-3 bg-gray-50 rounded">
+                                        <span>WebSocket Connections</span>
+                                        <span class="text-sm text-gray-500">Real-time Updates</span>
+                                    </div>
+                                    <div class="flex items-center justify-between p-3 bg-gray-50 rounded">
+                                        <span>Server-Sent Events</span>
+                                        <span class="text-sm text-gray-500">Live Notifications</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div>
+                                <h4 class="text-lg font-semibold mb-4">Data Processing</h4>
+                                <div class="space-y-3">
+                                    <div class="flex items-center justify-between p-3 bg-gray-50 rounded">
+                                        <span>Stream Processing</span>
+                                        <span class="text-sm text-gray-500">Real-time Analytics</span>
+                                    </div>
+                                    <div class="flex items-center justify-between p-3 bg-gray-50 rounded">
+                                        <span>Event Sourcing</span>
+                                        <span class="text-sm text-gray-500">Audit Trail</span>
+                                    </div>
+                                    <div class="flex items-center justify-between p-3 bg-gray-50 rounded">
+                                        <span>Change Data Capture</span>
+                                        <span class="text-sm text-gray-500">Database Sync</span>
+                                    </div>
+                                    <div class="flex items-center justify-between p-3 bg-gray-50 rounded">
+                                        <span>Complex Event Processing</span>
+                                        <span class="text-sm text-gray-500">Pattern Detection</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- API Architecture -->
+                    <div class="bg-white rounded-lg shadow-lg p-8">
+                        <h3 class="text-2xl font-semibold mb-6 flex items-center">
+                            <i class="fas fa-code text-purple-500 mr-3"></i>
+                            API Architecture & Standards
+                        </h3>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                            <div>
+                                <h4 class="text-lg font-semibold mb-4">API Types & Protocols</h4>
+                                <div class="space-y-4">
+                                    <div class="border-l-4 border-blue-500 pl-4">
+                                        <h5 class="font-semibold">REST APIs</h5>
+                                        <p class="text-sm text-gray-600">Standard HTTP-based integration for most systems</p>
+                                    </div>
+                                    <div class="border-l-4 border-green-500 pl-4">
+                                        <h5 class="font-semibold">GraphQL</h5>
+                                        <p class="text-sm text-gray-600">Flexible query language for complex data requirements</p>
+                                    </div>
+                                    <div class="border-l-4 border-purple-500 pl-4">
+                                        <h5 class="font-semibold">gRPC</h5>
+                                        <p class="text-sm text-gray-600">High-performance RPC for internal microservices</p>
+                                    </div>
+                                    <div class="border-l-4 border-orange-500 pl-4">
+                                        <h5 class="font-semibold">Webhooks</h5>
+                                        <p class="text-sm text-gray-600">Event-driven integrations and notifications</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div>
+                                <h4 class="text-lg font-semibold mb-4">Security & Standards</h4>
+                                <div class="space-y-4">
+                                    <div class="border-l-4 border-red-500 pl-4">
+                                        <h5 class="font-semibold">OAuth 2.0 / OIDC</h5>
+                                        <p class="text-sm text-gray-600">Standard authentication and authorization</p>
+                                    </div>
+                                    <div class="border-l-4 border-yellow-500 pl-4">
+                                        <h5 class="font-semibold">API Keys & JWT</h5>
+                                        <p class="text-sm text-gray-600">Secure token-based authentication</p>
+                                    </div>
+                                    <div class="border-l-4 border-teal-500 pl-4">
+                                        <h5 class="font-semibold">Rate Limiting</h5>
+                                        <p class="text-sm text-gray-600">Prevent abuse and ensure fair usage</p>
+                                    </div>
+                                    <div class="border-l-4 border-pink-500 pl-4">
+                                        <h5 class="font-semibold">OpenAPI Spec</h5>
+                                        <p class="text-sm text-gray-600">Standardized API documentation and validation</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Enterprise Deployment -->
+                    <div class="bg-white rounded-lg shadow-lg p-8">
+                        <h3 class="text-2xl font-semibold mb-6 flex items-center">
+                            <i class="fas fa-server text-orange-500 mr-3"></i>
+                            Enterprise Deployment Options
+                        </h3>
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                            <!-- Cloud Deployment -->
+                            <div class="border rounded-lg p-6 text-center">
+                                <i class="fas fa-cloud text-4xl text-blue-500 mb-4"></i>
+                                <h4 class="text-lg font-semibold mb-3">Cloud Native</h4>
+                                <ul class="text-sm space-y-2">
+                                    <li>• Multi-cloud support</li>
+                                    <li>• Auto-scaling capabilities</li>
+                                    <li>• Managed services integration</li>
+                                    <li>• Global deployment</li>
+                                    <li>• Pay-as-you-scale pricing</li>
+                                </ul>
+                            </div>
+                            
+                            <!-- Hybrid Deployment -->
+                            <div class="border rounded-lg p-6 text-center">
+                                <i class="fas fa-network-wired text-4xl text-green-500 mb-4"></i>
+                                <h4 class="text-lg font-semibold mb-3">Hybrid</h4>
+                                <ul class="text-sm space-y-2">
+                                    <li>• On-premise + cloud</li>
+                                    <li>• Data sovereignty compliance</li>
+                                    <li>• Gradual migration support</li>
+                                    <li>• Edge computing integration</li>
+                                    <li>• Disaster recovery</li>
+                                </ul>
+                            </div>
+                            
+                            <!-- On-Premise -->
+                            <div class="border rounded-lg p-6 text-center">
+                                <i class="fas fa-building text-4xl text-purple-500 mb-4"></i>
+                                <h4 class="text-lg font-semibold mb-3">On-Premise</h4>
+                                <ul class="text-sm space-y-2">
+                                    <li>• Complete data control</li>
+                                    <li>• Air-gapped environments</li>
+                                    <li>• Custom security policies</li>
+                                    <li>• Regulatory compliance</li>
+                                    <li>• Legacy system integration</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 9. Security & Compliance -->
+    <section class="py-16 bg-gray-50 spec-section">
+        <div class="container mx-auto px-6">
+            <h2 class="text-3xl font-bold mb-8">9. Security & Compliance</h2>
+            <div class="max-w-6xl mx-auto">
+                
+                <!-- Security Overview -->
+                <div class="bg-gradient-to-r from-red-50 to-orange-50 rounded-lg p-8 mb-8">
+                    <h3 class="text-2xl font-semibold mb-6">Enterprise-Grade Security Architecture</h3>
+                    <p class="text-lg leading-relaxed mb-6">
+                        SYNTIN implements multiple layers of security controls, from data encryption and access management 
+                        to compliance monitoring and threat detection, ensuring enterprise data remains protected at all times.
+                    </p>
+                    <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                        <div class="text-center">
+                            <i class="fas fa-shield-alt text-3xl text-red-500 mb-2"></i>
+                            <h5 class="font-semibold">Data Protection</h5>
+                        </div>
+                        <div class="text-center">
+                            <i class="fas fa-user-shield text-3xl text-blue-500 mb-2"></i>
+                            <h5 class="font-semibold">Identity & Access</h5>
+                        </div>
+                        <div class="text-center">
+                            <i class="fas fa-eye text-3xl text-green-500 mb-2"></i>
+                            <h5 class="font-semibold">Monitoring</h5>
+                        </div>
+                        <div class="text-center">
+                            <i class="fas fa-clipboard-check text-3xl text-purple-500 mb-2"></i>
+                            <h5 class="font-semibold">Compliance</h5>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Security Layers -->
+                <div class="space-y-8">
+                    <!-- Data Security -->
+                    <div class="bg-white rounded-lg shadow-lg p-8">
+                        <h3 class="text-2xl font-semibold mb-6 flex items-center">
+                            <i class="fas fa-lock text-red-500 mr-3"></i>
+                            Data Security Controls
+                        </h3>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                            <div>
+                                <h4 class="text-lg font-semibold mb-4">Encryption Standards</h4>
+                                <div class="space-y-3">
+                                    <div class="flex items-center justify-between p-3 bg-gray-50 rounded">
+                                        <span>Data at Rest</span>
+                                        <span class="text-sm text-gray-500">AES-256</span>
+                                    </div>
+                                    <div class="flex items-center justify-between p-3 bg-gray-50 rounded">
+                                        <span>Data in Transit</span>
+                                        <span class="text-sm text-gray-500">TLS 1.3</span>
+                                    </div>
+                                    <div class="flex items-center justify-between p-3 bg-gray-50 rounded">
+                                        <span>Data in Processing</span>
+                                        <span class="text-sm text-gray-500">Homomorphic Encryption</span>
+                                    </div>
+                                    <div class="flex items-center justify-between p-3 bg-gray-50 rounded">
+                                        <span>Key Management</span>
+                                        <span class="text-sm text-gray-500">HSM Integration</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div>
+                                <h4 class="text-lg font-semibold mb-4">Data Protection Features</h4>
+                                <div class="space-y-3">
+                                    <div class="flex items-center justify-between p-3 bg-gray-50 rounded">
+                                        <span>Data Masking</span>
+                                        <span class="text-sm text-gray-500">Dynamic & Static</span>
+                                    </div>
+                                    <div class="flex items-center justify-between p-3 bg-gray-50 rounded">
+                                        <span>Tokenization</span>
+                                        <span class="text-sm text-gray-500">Format-Preserving</span>
+                                    </div>
+                                    <div class="flex items-center justify-between p-3 bg-gray-50 rounded">
+                                        <span>Data Loss Prevention</span>
+                                        <span class="text-sm text-gray-500">Pattern Recognition</span>
+                                    </div>
+                                    <div class="flex items-center justify-between p-3 bg-gray-50 rounded">
+                                        <span>Backup & Recovery</span>
+                                        <span class="text-sm text-gray-500">Automated</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Identity & Access Management -->
+                    <div class="bg-white rounded-lg shadow-lg p-8">
+                        <h3 class="text-2xl font-semibold mb-6 flex items-center">
+                            <i class="fas fa-users-cog text-blue-500 mr-3"></i>
+                            Identity & Access Management
+                        </h3>
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                            <!-- Authentication -->
+                            <div class="border rounded-lg p-6">
+                                <h4 class="text-lg font-semibold mb-4 flex items-center">
+                                    <i class="fas fa-key text-blue-500 mr-2"></i>
+                                    Authentication
+                                </h4>
+                                <ul class="space-y-2 text-sm">
+                                    <li>• Multi-factor authentication (MFA)</li>
+                                    <li>• Single Sign-On (SSO)</li>
+                                    <li>• SAML 2.0 integration</li>
+                                    <li>• OAuth 2.0 / OpenID Connect</li>
+                                    <li>• Biometric authentication</li>
+                                    <li>• Passwordless options</li>
+                                </ul>
+                            </div>
+                            
+                            <!-- Authorization -->
+                            <div class="border rounded-lg p-6">
+                                <h4 class="text-lg font-semibold mb-4 flex items-center">
+                                    <i class="fas fa-user-check text-green-500 mr-2"></i>
+                                    Authorization
+                                </h4>
+                                <ul class="space-y-2 text-sm">
+                                    <li>• Role-based access control (RBAC)</li>
+                                    <li>• Attribute-based access (ABAC)</li>
+                                    <li>• Fine-grained permissions</li>
+                                    <li>• Dynamic access policies</li>
+                                    <li>• Resource-level controls</li>
+                                    <li>• Just-in-time access</li>
+                                </ul>
+                            </div>
+                            
+                            <!-- User Management -->
+                            <div class="border rounded-lg p-6">
+                                <h4 class="text-lg font-semibold mb-4 flex items-center">
+                                    <i class="fas fa-users text-purple-500 mr-2"></i>
+                                    User Management
+                                </h4>
+                                <ul class="space-y-2 text-sm">
+                                    <li>• Automated provisioning</li>
+                                    <li>• Lifecycle management</li>
+                                    <li>• Access reviews</li>
+                                    <li>• Privileged account management</li>
+                                    <li>• Directory integration</li>
+                                    <li>• Self-service capabilities</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Compliance Framework -->
+                    <div class="bg-white rounded-lg shadow-lg p-8">
+                        <h3 class="text-2xl font-semibold mb-6 flex items-center">
+                            <i class="fas fa-clipboard-check text-green-500 mr-3"></i>
+                            Compliance Framework
+                        </h3>
+                        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                            <!-- Regulatory Compliance -->
+                            <div class="text-center">
+                                <div class="bg-blue-100 rounded-lg p-6 mb-4">
+                                    <i class="fas fa-gavel text-3xl text-blue-600 mb-3"></i>
+                                    <h4 class="font-semibold">Regulatory</h4>
+                                </div>
+                                <ul class="text-sm space-y-1">
+                                    <li>• GDPR</li>
+                                    <li>• CCPA</li>
+                                    <li>• HIPAA</li>
+                                    <li>• PCI DSS</li>
+                                    <li>• SOX</li>
+                                </ul>
+                            </div>
+                            
+                            <!-- Industry Standards -->
+                            <div class="text-center">
+                                <div class="bg-green-100 rounded-lg p-6 mb-4">
+                                    <i class="fas fa-certificate text-3xl text-green-600 mb-3"></i>
+                                    <h4 class="font-semibold">Standards</h4>
+                                </div>
+                                <ul class="text-sm space-y-1">
+                                    <li>• ISO 27001</li>
+                                    <li>• SOC 2 Type II</li>
+                                    <li>• NIST Framework</li>
+                                    <li>• CSA CCM</li>
+                                    <li>• FedRAMP</li>
+                                </ul>
+                            </div>
+                            
+                            <!-- Security Frameworks -->
+                            <div class="text-center">
+                                <div class="bg-purple-100 rounded-lg p-6 mb-4">
+                                    <i class="fas fa-shield-alt text-3xl text-purple-600 mb-3"></i>
+                                    <h4 class="font-semibold">Security</h4>
+                                </div>
+                                <ul class="text-sm space-y-1">
+                                    <li>• Zero Trust</li>
+                                    <li>• OWASP Top 10</li>
+                                    <li>• SANS 20</li>
+                                    <li>• CIS Controls</li>
+                                    <li>• MITRE ATT&CK</li>
+                                </ul>
+                            </div>
+                            
+                            <!-- Privacy Controls -->
+                            <div class="text-center">
+                                <div class="bg-red-100 rounded-lg p-6 mb-4">
+                                    <i class="fas fa-user-secret text-3xl text-red-600 mb-3"></i>
+                                    <h4 class="font-semibold">Privacy</h4>
+                                </div>
+                                <ul class="text-sm space-y-1">
+                                    <li>• Data minimization</li>
+                                    <li>• Purpose limitation</li>
+                                    <li>• Consent management</li>
+                                    <li>• Right to be forgotten</li>
+                                    <li>• Privacy by design</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Monitoring & Incident Response -->
+                    <div class="bg-white rounded-lg shadow-lg p-8">
+                        <h3 class="text-2xl font-semibold mb-6 flex items-center">
+                            <i class="fas fa-eye text-purple-500 mr-3"></i>
+                            Security Monitoring & Incident Response
+                        </h3>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                            <div>
+                                <h4 class="text-lg font-semibold mb-4">Monitoring Capabilities</h4>
+                                <div class="space-y-4">
+                                    <div class="border-l-4 border-blue-500 pl-4">
+                                        <h5 class="font-semibold">Security Information and Event Management (SIEM)</h5>
+                                        <p class="text-sm text-gray-600">Real-time security event analysis and correlation</p>
+                                    </div>
+                                    <div class="border-l-4 border-green-500 pl-4">
+                                        <h5 class="font-semibold">User and Entity Behavior Analytics (UEBA)</h5>
+                                        <p class="text-sm text-gray-600">Anomaly detection and behavioral analysis</p>
+                                    </div>
+                                    <div class="border-l-4 border-purple-500 pl-4">
+                                        <h5 class="font-semibold">Threat Intelligence Integration</h5>
+                                        <p class="text-sm text-gray-600">External threat feed integration and analysis</p>
+                                    </div>
+                                    <div class="border-l-4 border-orange-500 pl-4">
+                                        <h5 class="font-semibold">Continuous Compliance Monitoring</h5>
+                                        <p class="text-sm text-gray-600">Automated compliance checking and reporting</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div>
+                                <h4 class="text-lg font-semibold mb-4">Incident Response</h4>
+                                <div class="space-y-4">
+                                    <div class="border-l-4 border-red-500 pl-4">
+                                        <h5 class="font-semibold">Automated Response</h5>
+                                        <p class="text-sm text-gray-600">Immediate threat containment and remediation</p>
+                                    </div>
+                                    <div class="border-l-4 border-yellow-500 pl-4">
+                                        <h5 class="font-semibold">Forensic Analysis</h5>
+                                        <p class="text-sm text-gray-600">Detailed investigation and evidence collection</p>
+                                    </div>
+                                    <div class="border-l-4 border-teal-500 pl-4">
+                                        <h5 class="font-semibold">Communication Workflows</h5>
+                                        <p class="text-sm text-gray-600">Stakeholder notification and escalation</p>
+                                    </div>
+                                    <div class="border-l-4 border-pink-500 pl-4">
+                                        <h5 class="font-semibold">Recovery Planning</h5>
+                                        <p class="text-sm text-gray-600">Business continuity and disaster recovery</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 10. Implementation Guide -->
+    <section class="py-16 bg-white spec-section">
+        <div class="container mx-auto px-6">
+            <h2 class="text-3xl font-bold mb-8">10. Implementation Guide</h2>
+            <div class="max-w-6xl mx-auto">
+                
+                <!-- Implementation Overview -->
+                <div class="bg-gradient-to-r from-emerald-50 to-teal-50 rounded-lg p-8 mb-8">
+                    <h3 class="text-2xl font-semibold mb-6">Phased Implementation Approach</h3>
+                    <p class="text-lg leading-relaxed mb-6">
+                        SYNTIN implementation follows a structured, phased approach that minimizes risk while maximizing 
+                        early value delivery. Each phase builds upon the previous one, ensuring sustainable growth and adoption.
+                    </p>
+                    <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
+                        <div class="text-center">
+                            <div class="bg-emerald-100 rounded-full w-12 h-12 flex items-center justify-center mx-auto mb-2">
+                                <span class="font-bold text-emerald-600">1</span>
+                            </div>
+                            <h5 class="font-semibold">Foundation</h5>
+                            <p class="text-sm text-gray-600">Core platform setup</p>
+                        </div>
+                        <div class="text-center">
+                            <div class="bg-teal-100 rounded-full w-12 h-12 flex items-center justify-center mx-auto mb-2">
+                                <span class="font-bold text-teal-600">2</span>
+                            </div>
+                            <h5 class="font-semibold">Integration</h5>
+                            <p class="text-sm text-gray-600">Data source connectivity</p>
+                        </div>
+                        <div class="text-center">
+                            <div class="bg-cyan-100 rounded-full w-12 h-12 flex items-center justify-center mx-auto mb-2">
+                                <span class="font-bold text-cyan-600">3</span>
+                            </div>
+                            <h5 class="font-semibold">Deployment</h5>
+                            <p class="text-sm text-gray-600">User onboarding</p>
+                        </div>
+                        <div class="text-center">
+                            <div class="bg-blue-100 rounded-full w-12 h-12 flex items-center justify-center mx-auto mb-2">
+                                <span class="font-bold text-blue-600">4</span>
+                            </div>
+                            <h5 class="font-semibold">Optimization</h5>
+                            <p class="text-sm text-gray-600">Continuous improvement</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Implementation Phases -->
+                <div class="space-y-8">
+                    <!-- Phase 1: Foundation -->
+                    <div class="bg-white rounded-lg shadow-lg p-8">
+                        <h3 class="text-2xl font-semibold mb-6 flex items-center">
+                            <i class="fas fa-foundation text-emerald-500 mr-3"></i>
+                            Phase 1: Foundation Setup (Weeks 1-4)
+                        </h3>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                            <div>
+                                <h4 class="text-lg font-semibold mb-4">Infrastructure Deployment</h4>
+                                <ul class="space-y-2">
+                                    <li class="flex items-center"><i class="fas fa-check text-green-500 mr-2"></i> Cloud environment setup</li>
+                                    <li class="flex items-center"><i class="fas fa-check text-green-500 mr-2"></i> Security controls implementation</li>
+                                    <li class="flex items-center"><i class="fas fa-check text-green-500 mr-2"></i> Network configuration</li>
+                                    <li class="flex items-center"><i class="fas fa-check text-green-500 mr-2"></i> Monitoring and logging setup</li>
+                                    <li class="flex items-center"><i class="fas fa-check text-green-500 mr-2"></i> Backup and disaster recovery</li>
+                                </ul>
+                            </div>
+                            <div>
+                                <h4 class="text-lg font-semibold mb-4">Core Platform Configuration</h4>
+                                <ul class="space-y-2">
+                                    <li class="flex items-center"><i class="fas fa-check text-green-500 mr-2"></i> SYNTIN core engine deployment</li>
+                                    <li class="flex items-center"><i class="fas fa-check text-green-500 mr-2"></i> Data narrative framework setup</li>
+                                    <li class="flex items-center"><i class="fas fa-check text-green-500 mr-2"></i> AI model configuration</li>
+                                    <li class="flex items-center"><i class="fas fa-check text-green-500 mr-2"></i> Initial security policies</li>
+                                    <li class="flex items-center"><i class="fas fa-check text-green-500 mr-2"></i> Basic user management</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="mt-6 p-4 bg-emerald-50 rounded">
+                            <h5 class="font-semibold text-emerald-800 mb-2">Key Deliverables</h5>
+                            <p class="text-emerald-700">Functional SYNTIN platform with basic security controls, ready for data integration and user access.</p>
+                        </div>
+                    </div>
+
+                    <!-- Phase 2: Data Integration -->
+                    <div class="bg-white rounded-lg shadow-lg p-8">
+                        <h3 class="text-2xl font-semibold mb-6 flex items-center">
+                            <i class="fas fa-plug text-teal-500 mr-3"></i>
+                            Phase 2: Data Integration (Weeks 5-10)
+                        </h3>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                            <div>
+                                <h4 class="text-lg font-semibold mb-4">Data Source Connectivity</h4>
+                                <ul class="space-y-2">
+                                    <li class="flex items-center"><i class="fas fa-check text-green-500 mr-2"></i> Priority data source identification</li>
+                                    <li class="flex items-center"><i class="fas fa-check text-green-500 mr-2"></i> API and database connections</li>
+                                    <li class="flex items-center"><i class="fas fa-check text-green-500 mr-2"></i> Data pipeline development</li>
+                                    <li class="flex items-center"><i class="fas fa-check text-green-500 mr-2"></i> Real-time streaming setup</li>
+                                    <li class="flex items-center"><i class="fas fa-check text-green-500 mr-2"></i> Data quality validation</li>
+                                </ul>
+                            </div>
+                            <div>
+                                <h4 class="text-lg font-semibold mb-4">Narrative Configuration</h4>
+                                <ul class="space-y-2">
+                                    <li class="flex items-center"><i class="fas fa-check text-green-500 mr-2"></i> Business context mapping</li>
+                                    <li class="flex items-center"><i class="fas fa-check text-green-500 mr-2"></i> Data ontology development</li>
+                                    <li class="flex items-center"><i class="fas fa-check text-green-500 mr-2"></i> Cross-narrative relationships</li>
+                                    <li class="flex items-center"><i class="fas fa-check text-green-500 mr-2"></i> Initial AI model training</li>
+                                    <li class="flex items-center"><i class="fas fa-check text-green-500 mr-2"></i> Testing and validation</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="mt-6 p-4 bg-teal-50 rounded">
+                            <h5 class="font-semibold text-teal-800 mb-2">Key Deliverables</h5>
+                            <p class="text-teal-700">Fully integrated data ecosystem with narrative-driven analytics capabilities and validated AI models.</p>
+                        </div>
+                    </div>
+
+                    <!-- Phase 3: User Deployment -->
+                    <div class="bg-white rounded-lg shadow-lg p-8">
+                        <h3 class="text-2xl font-semibold mb-6 flex items-center">
+                            <i class="fas fa-users text-cyan-500 mr-3"></i>
+                            Phase 3: User Deployment (Weeks 11-16)
+                        </h3>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                            <div>
+                                <h4 class="text-lg font-semibold mb-4">User Onboarding</h4>
+                                <ul class="space-y-2">
+                                    <li class="flex items-center"><i class="fas fa-check text-green-500 mr-2"></i> User interface customization</li>
+                                    <li class="flex items-center"><i class="fas fa-check text-green-500 mr-2"></i> Role-based access configuration</li>
+                                    <li class="flex items-center"><i class="fas fa-check text-green-500 mr-2"></i> Training program delivery</li>
+                                    <li class="flex items-center"><i class="fas fa-check text-green-500 mr-2"></i> Pilot user group deployment</li>
+                                    <li class="flex items-center"><i class="fas fa-check text-green-500 mr-2"></i> Feedback collection and iteration</li>
+                                </ul>
+                            </div>
+                            <div>
+                                <h4 class="text-lg font-semibold mb-4">Feature Enablement</h4>
+                                <ul class="space-y-2">
+                                    <li class="flex items-center"><i class="fas fa-check text-green-500 mr-2"></i> Conversational interface deployment</li>
+                                    <li class="flex items-center"><i class="fas fa-check text-green-500 mr-2"></i> Multi-modal communication setup</li>
+                                    <li class="flex items-center"><i class="fas fa-check text-green-500 mr-2"></i> Unreasonable hospitality features</li>
+                                    <li class="flex items-center"><i class="fas fa-check text-green-500 mr-2"></i> Mobile app deployment</li>
+                                    <li class="flex items-center"><i class="fas fa-check text-green-500 mr-2"></i> Integration with existing tools</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="mt-6 p-4 bg-cyan-50 rounded">
+                            <h5 class="font-semibold text-cyan-800 mb-2">Key Deliverables</h5>
+                            <p class="text-cyan-700">Fully functional user environment with trained users, active engagement, and validated use cases.</p>
+                        </div>
+                    </div>
+
+                    <!-- Phase 4: Optimization -->
+                    <div class="bg-white rounded-lg shadow-lg p-8">
+                        <h3 class="text-2xl font-semibold mb-6 flex items-center">
+                            <i class="fas fa-chart-line text-blue-500 mr-3"></i>
+                            Phase 4: Optimization (Weeks 17-24)
+                        </h3>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                            <div>
+                                <h4 class="text-lg font-semibold mb-4">Performance Optimization</h4>
+                                <ul class="space-y-2">
+                                    <li class="flex items-center"><i class="fas fa-check text-green-500 mr-2"></i> Usage pattern analysis</li>
+                                    <li class="flex items-center"><i class="fas fa-check text-green-500 mr-2"></i> AI model fine-tuning</li>
+                                    <li class="flex items-center"><i class="fas fa-check text-green-500 mr-2"></i> Query optimization</li>
+                                    <li class="flex items-center"><i class="fas fa-check text-green-500 mr-2"></i> Performance monitoring setup</li>
+                                    <li class="flex items-center"><i class="fas check text-green-500 mr-2"></i> Scalability improvements</li>
+                                </ul>
+                            </div>
+                            

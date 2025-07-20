@@ -1,0 +1,1203 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ultimate Freshwater Fishing Guide: CA-46W to Santa Cruz</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@300;400;600;700&family=Open+Sans:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        * {
+            scroll-behavior: smooth;
+        }
+        
+        body {
+            font-family: 'Open Sans', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+        
+        .hero-title {
+            font-family: 'Oswald', sans-serif;
+            background: linear-gradient(45deg, #ff6b6b, #4ecdc4, #45b7d1, #96ceb4);
+            background-size: 300% 300%;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: gradientShift 3s ease infinite;
+        }
+        
+        @keyframes gradientShift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+        
+        .fishing-card {
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        
+        .fishing-card:hover {
+            transform: translateY(-10px) scale(1.02);
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.3);
+        }
+        
+        .priority-badge {
+            animation: pulse 2s infinite;
+            background: linear-gradient(45deg, #ff6b6b, #ffa500);
+        }
+        
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+        
+        .route-line {
+            height: 8px;
+            background: linear-gradient(90deg, #4facfe 0%, #00f2fe 100%);
+            border-radius: 4px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .route-line::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.6), transparent);
+            animation: shimmer 3s infinite;
+        }
+        
+        @keyframes shimmer {
+            0% { left: -100%; }
+            100% { left: 100%; }
+        }
+        
+        .species-tag {
+            background: linear-gradient(45deg, #11998e, #38ef7d);
+            color: white;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            margin: 2px;
+            display: inline-block;
+            animation: fadeInUp 0.5s ease;
+        }
+        
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .gps-button {
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            transition: all 0.3s ease;
+        }
+        
+        .gps-button:hover {
+            background: linear-gradient(45deg, #764ba2, #667eea);
+            transform: scale(1.05);
+        }
+        
+        .section-header {
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.05));
+            backdrop-filter: blur(15px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        
+        .highlight-map {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 15px;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+        }
+        
+        .info-badge {
+            background: linear-gradient(45deg, #12c2e9, #c471ed, #f64f59);
+            background-size: 200% 200%;
+            animation: gradientMove 4s ease infinite;
+        }
+        
+        @keyframes gradientMove {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+        
+        .distance-indicator {
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .distance-indicator::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+            animation: sweep 2s infinite;
+        }
+        
+        @keyframes sweep {
+            0% { left: -100%; }
+            100% { left: 100%; }
+        }
+    </style>
+</head>
+<body class="bg-gradient-to-br from-blue-900 via-purple-900 to-indigo-900">
+    
+    <!-- Hero Section -->
+    <div class="relative py-20 px-4">
+        <div class="max-w-7xl mx-auto text-center">
+            <h1 class="hero-title text-6xl md:text-8xl font-bold mb-6">
+                ULTIMATE FISHING GUIDE
+            </h1>
+            <p class="text-white text-xl md:text-2xl mb-8 font-light">
+                CA-46W → US-101N → Santa Cruz | 40 Premium Freshwater Trout Spots
+            </p>
+            <div class="route-line max-w-4xl mx-auto mb-8"></div>
+            <div class="flex flex-wrap justify-center gap-4 text-white">
+                <div class="info-badge px-6 py-3 rounded-full">
+                    <i class="fas fa-fish mr-2"></i>40+ Fishing Spots
+                </div>
+                <div class="info-badge px-6 py-3 rounded-full">
+                    <i class="fas fa-map-marker-alt mr-2"></i>GPS Coordinates
+                </div>
+                <div class="info-badge px-6 py-3 rounded-full">
+                    <i class="fas fa-route mr-2"></i>Highway Access
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Route Overview Map -->
+    <div class="max-w-7xl mx-auto px-4 mb-16">
+        <div class="highlight-map p-8">
+            <h2 class="text-3xl font-bold text-gray-800 mb-6 text-center">
+                <i class="fas fa-map-marked-alt mr-3 text-blue-600"></i>
+                Route Overview: South to North
+            </h2>
+            <div class="bg-gradient-to-r from-blue-100 to-green-100 p-6 rounded-lg">
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6 text-center">
+                    <div class="section-header p-4 rounded-lg">
+                        <h3 class="font-bold text-lg mb-2 text-white">SECTION 1: CA-46W</h3>
+                        <p class="text-gray-200">Paso Robles to Coast</p>
+                        <p class="text-blue-300 font-bold">12 Spots</p>
+                    </div>
+                    <div class="section-header p-4 rounded-lg">
+                        <h3 class="font-bold text-lg mb-2 text-white">SECTION 2: US-101N</h3>
+                        <p class="text-gray-200">SLO to Monterey Bay</p>
+                        <p class="text-blue-300 font-bold">18 Spots</p>
+                    </div>
+                    <div class="section-header p-4 rounded-lg">
+                        <h3 class="font-bold text-lg mb-2 text-white">SECTION 3: Santa Cruz Mountains</h3>
+                        <p class="text-gray-200">Final Approach</p>
+                        <p class="text-blue-300 font-bold">10 Spots</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Section 1: CA-46 West Corridor -->
+    <div class="max-w-7xl mx-auto px-4 mb-16">
+        <div class="section-header p-6 rounded-lg mb-8">
+            <h2 class="text-4xl font-bold text-white mb-4">
+                <i class="fas fa-road mr-3 text-yellow-400"></i>
+                SECTION 1: CA-46 WEST CORRIDOR
+            </h2>
+            <p class="text-gray-200 text-lg">From Paso Robles to the Coast - Premium Lake and River Access</p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            
+            <!-- Spot 1: Paso Robles City Park Pond -->
+            <div class="fishing-card bg-white bg-opacity-10 p-6 rounded-lg">
+                <div class="flex justify-between items-start mb-4">
+                    <h3 class="text-xl font-bold text-white">Paso Robles City Park Pond</h3>
+                    <span class="text-yellow-400 text-sm">#1</span>
+                </div>
+                <div class="mb-4">
+                    <div class="species-tag">Rainbow Trout</div>
+                    <div class="species-tag">Bass</div>
+                    <div class="species-tag">Bluegill</div>
+                </div>
+                <div class="space-y-2 text-gray-200 mb-4">
+                    <p><i class="fas fa-route mr-2 text-blue-400"></i>3 min via Spring Street exit</p>
+                    <p><i class="fas fa-clock mr-2 text-green-400"></i>Best: Early morning</p>
+                    <p><i class="fas fa-parking mr-2 text-purple-400"></i>Free city park access</p>
+                </div>
+                <a href="https://maps.google.com/maps?q=35.6285,-120.6908" target="_blank" 
+                   class="gps-button block text-center py-3 px-6 rounded-lg text-white font-bold">
+                    <i class="fas fa-map-marker-alt mr-2"></i>GPS: 35.6285°N, -120.6908°W
+                </a>
+            </div>
+
+            <!-- Spot 2: Huer Huero Creek -->
+            <div class="fishing-card bg-white bg-opacity-10 p-6 rounded-lg">
+                <div class="flex justify-between items-start mb-4">
+                    <h3 class="text-xl font-bold text-white">Huer Huero Creek</h3>
+                    <span class="text-yellow-400 text-sm">#2</span>
+                </div>
+                <div class="mb-4">
+                    <div class="species-tag">Wild Trout</div>
+                    <div class="species-tag">Seasonal</div>
+                </div>
+                <div class="space-y-2 text-gray-200 mb-4">
+                    <p><i class="fas fa-route mr-2 text-blue-400"></i>8 min north of Paso Robles</p>
+                    <p><i class="fas fa-exclamation-triangle mr-2 text-orange-400"></i>Check private property</p>
+                    <p><i class="fas fa-water mr-2 text-blue-400"></i>Seasonal flows</p>
+                </div>
+                <a href="https://maps.google.com/maps?q=35.6543,-120.7234" target="_blank" 
+                   class="gps-button block text-center py-3 px-6 rounded-lg text-white font-bold">
+                    <i class="fas fa-map-marker-alt mr-2"></i>GPS: 35.6543°N, -120.7234°W
+                </a>
+            </div>
+
+            <!-- Spot 3: Lake Nacimiento - TOP PRIORITY -->
+            <div class="fishing-card bg-white bg-opacity-10 p-6 rounded-lg border-4 border-yellow-400">
+                <div class="flex justify-between items-start mb-4">
+                    <h3 class="text-xl font-bold text-white">Lake Nacimiento</h3>
+                    <div class="priority-badge px-3 py-1 rounded-full text-white font-bold text-sm">#3 ⭐ TOP</div>
+                </div>
+                <div class="mb-4">
+                    <div class="species-tag">Trophy Trout</div>
+                    <div class="species-tag">White Bass</div>
+                    <div class="species-tag">Striped Bass</div>
+                    <div class="species-tag">Catfish</div>
+                </div>
+                <div class="space-y-2 text-gray-200 mb-4">
+                    <p><i class="fas fa-route mr-2 text-blue-400"></i>25 min via Nacimiento Lake Dr</p>
+                    <p><i class="fas fa-ship mr-2 text-green-400"></i>Full marina & boat rentals</p>
+                    <p><i class="fas fa-ruler mr-2 text-purple-400"></i>165 miles of shoreline</p>
+                </div>
+                <a href="https://maps.google.com/maps?q=35.7567,-120.8975" target="_blank" 
+                   class="gps-button block text-center py-3 px-6 rounded-lg text-white font-bold">
+                    <i class="fas fa-map-marker-alt mr-2"></i>GPS: 35.7567°N, -120.8975°W
+                </a>
+            </div>
+
+            <!-- Spot 4: Estrella River -->
+            <div class="fishing-card bg-white bg-opacity-10 p-6 rounded-lg">
+                <div class="flex justify-between items-start mb-4">
+                    <h3 class="text-xl font-bold text-white">Estrella River</h3>
+                    <span class="text-yellow-400 text-sm">#4</span>
+                </div>
+                <div class="mb-4">
+                    <div class="species-tag">Wild Trout</div>
+                    <div class="species-tag">Seasonal</div>
+                </div>
+                <div class="space-y-2 text-gray-200 mb-4">
+                    <p><i class="fas fa-route mr-2 text-blue-400"></i>15 min via Estrella Plains Rd</p>
+                    <p><i class="fas fa-calendar mr-2 text-green-400"></i>Best: Winter/Spring</p>
+                    <p><i class="fas fa-hiking mr-2 text-purple-400"></i>Limited access</p>
+                </div>
+                <a href="https://maps.google.com/maps?q=35.7123,-120.8234" target="_blank" 
+                   class="gps-button block text-center py-3 px-6 rounded-lg text-white font-bold">
+                    <i class="fas fa-map-marker-alt mr-2"></i>GPS: 35.7123°N, -120.8234°W
+                </a>
+            </div>
+
+            <!-- Spot 5: Cholame Creek -->
+            <div class="fishing-card bg-white bg-opacity-10 p-6 rounded-lg">
+                <div class="flex justify-between items-start mb-4">
+                    <h3 class="text-xl font-bold text-white">Cholame Creek</h3>
+                    <span class="text-yellow-400 text-sm">#5</span>
+                </div>
+                <div class="mb-4">
+                    <div class="species-tag">Wild Trout</div>
+                    <div class="species-tag">Steelhead</div>
+                </div>
+                <div class="space-y-2 text-gray-200 mb-4">
+                    <p><i class="fas fa-route mr-2 text-blue-400"></i>30 min via Cholame Valley Rd</p>
+                    <p><i class="fas fa-mountain mr-2 text-green-400"></i>Remote access</p>
+                    <p><i class="fas fa-calendar mr-2 text-purple-400"></i>Seasonal flows</p>
+                </div>
+                <a href="https://maps.google.com/maps?q=35.7845,-120.3012" target="_blank" 
+                   class="gps-button block text-center py-3 px-6 rounded-lg text-white font-bold">
+                    <i class="fas fa-map-marker-alt mr-2"></i>GPS: 35.7845°N, -120.3012°W
+                </a>
+            </div>
+
+            <!-- Spot 6: Vineyard Creek -->
+            <div class="fishing-card bg-white bg-opacity-10 p-6 rounded-lg">
+                <div class="flex justify-between items-start mb-4">
+                    <h3 class="text-xl font-bold text-white">Vineyard Creek</h3>
+                    <span class="text-yellow-400 text-sm">#6</span>
+                </div>
+                <div class="mb-4">
+                    <div class="species-tag">Small Trout</div>
+                    <div class="species-tag">Seasonal</div>
+                </div>
+                <div class="space-y-2 text-gray-200 mb-4">
+                    <p><i class="fas fa-route mr-2 text-blue-400"></i>12 min via Vineyard Dr</p>
+                    <p><i class="fas fa-wine-bottle mr-2 text-green-400"></i>Wine country access</p>
+                    <p><i class="fas fa-leaf mr-2 text-purple-400"></i>Intermittent water</p>
+                </div>
+                <a href="https://maps.google.com/maps?q=35.6789,-120.7456" target="_blank" 
+                   class="gps-button block text-center py-3 px-6 rounded-lg text-white font-bold">
+                    <i class="fas fa-map-marker-alt mr-2"></i>GPS: 35.6789°N, -120.7456°W
+                </a>
+            </div>
+
+            <!-- Spot 7: Cayucos Creek -->
+            <div class="fishing-card bg-white bg-opacity-10 p-6 rounded-lg">
+                <div class="flex justify-between items-start mb-4">
+                    <h3 class="text-xl font-bold text-white">Cayucos Creek</h3>
+                    <span class="text-yellow-400 text-sm">#7</span>
+                </div>
+                <div class="mb-4">
+                    <div class="species-tag">Steelhead</div>
+                    <div class="species-tag">Seasonal</div>
+                </div>
+                <div class="space-y-2 text-gray-200 mb-4">
+                    <p><i class="fas fa-route mr-2 text-blue-400"></i>35 min to Hwy 1, then N</p>
+                    <p><i class="fas fa-waves mr-2 text-green-400"></i>Near ocean outlet</p>
+                    <p><i class="fas fa-calendar mr-2 text-purple-400"></i>Winter access</p>
+                </div>
+                <a href="https://maps.google.com/maps?q=35.4456,-120.8923" target="_blank" 
+                   class="gps-button block text-center py-3 px-6 rounded-lg text-white font-bold">
+                    <i class="fas fa-map-marker-alt mr-2"></i>GPS: 35.4456°N, -120.8923°W
+                </a>
+            </div>
+
+            <!-- Spot 8: San Simeon Creek -->
+            <div class="fishing-card bg-white bg-opacity-10 p-6 rounded-lg">
+                <div class="flex justify-between items-start mb-4">
+                    <h3 class="text-xl font-bold text-white">San Simeon Creek</h3>
+                    <span class="text-yellow-400 text-sm">#8</span>
+                </div>
+                <div class="mb-4">
+                    <div class="species-tag">Steelhead</div>
+                    <div class="species-tag">Rainbow Trout</div>
+                </div>
+                <div class="space-y-2 text-gray-200 mb-4">
+                    <p><i class="fas fa-route mr-2 text-blue-400"></i>40 min to Hearst Castle area</p>
+                    <p><i class="fas fa-calendar mr-2 text-green-400"></i>Fall steelhead runs</p>
+                    <p><i class="fas fa-exclamation-triangle mr-2 text-orange-400"></i>Closed most of year</p>
+                </div>
+                <a href="https://maps.google.com/maps?q=35.6423,-121.1901" target="_blank" 
+                   class="gps-button block text-center py-3 px-6 rounded-lg text-white font-bold">
+                    <i class="fas fa-map-marker-alt mr-2"></i>GPS: 35.6423°N, -121.1901°W
+                </a>
+            </div>
+
+            <!-- Spot 9: Little Cayucos Creek -->
+            <div class="fishing-card bg-white bg-opacity-10 p-6 rounded-lg">
+                <div class="flex justify-between items-start mb-4">
+                    <h3 class="text-xl font-bold text-white">Little Cayucos Creek</h3>
+                    <span class="text-yellow-400 text-sm">#9</span>
+                </div>
+                <div class="mb-4">
+                    <div class="species-tag">Wild Trout</div>
+                    <div class="species-tag">Small Stream</div>
+                </div>
+                <div class="space-y-2 text-gray-200 mb-4">
+                    <p><i class="fas fa-route mr-2 text-blue-400"></i>38 min to coast</p>
+                    <p><i class="fas fa-tint mr-2 text-green-400"></i>Small creek fishing</p>
+                    <p><i class="fas fa-hiking mr-2 text-purple-400"></i>Limited access</p>
+                </div>
+                <a href="https://maps.google.com/maps?q=35.4223,-120.8756" target="_blank" 
+                   class="gps-button block text-center py-3 px-6 rounded-lg text-white font-bold">
+                    <i class="fas fa-map-marker-alt mr-2"></i>GPS: 35.4223°N, -120.8756°W
+                </a>
+            </div>
+
+            <!-- Spot 10: Old Creek -->
+            <div class="fishing-card bg-white bg-opacity-10 p-6 rounded-lg">
+                <div class="flex justify-between items-start mb-4">
+                    <h3 class="text-xl font-bold text-white">Old Creek</h3>
+                    <span class="text-yellow-400 text-sm">#10</span>
+                </div>
+                <div class="mb-4">
+                    <div class="species-tag">Wild Trout</div>
+                    <div class="species-tag">Seasonal</div>
+                </div>
+                <div class="space-y-2 text-gray-200 mb-4">
+                    <p><i class="fas fa-route mr-2 text-blue-400"></i>45 min to coast access</p>
+                    <p><i class="fas fa-leaf mr-2 text-green-400"></i>Seasonal flows</p>
+                    <p><i class="fas fa-hiking mr-2 text-purple-400"></i>Backcountry access</p>
+                </div>
+                <a href="https://maps.google.com/maps?q=35.3892,-120.8634" target="_blank" 
+                   class="gps-button block text-center py-3 px-6 rounded-lg text-white font-bold">
+                    <i class="fas fa-map-marker-alt mr-2"></i>GPS: 35.3892°N, -120.8634°W
+                </a>
+            </div>
+
+            <!-- Spot 11: Toro Creek -->
+            <div class="fishing-card bg-white bg-opacity-10 p-6 rounded-lg">
+                <div class="flex justify-between items-start mb-4">
+                    <h3 class="text-xl font-bold text-white">Toro Creek</h3>
+                    <span class="text-yellow-400 text-sm">#11</span>
+                </div>
+                <div class="mb-4">
+                    <div class="species-tag">Wild Trout</div>
+                    <div class="species-tag">Steelhead</div>
+                </div>
+                <div class="space-y-2 text-gray-200 mb-4">
+                    <p><i class="fas fa-route mr-2 text-blue-400"></i>25 min via Toro Creek Rd</p>
+                    <p><i class="fas fa-mountain mr-2 text-green-400"></i>Mountain access</p>
+                    <p><i class="fas fa-calendar mr-2 text-purple-400"></i>Best: Winter/Spring</p>
+                </div>
+                <a href="https://maps.google.com/maps?q=35.5234,-120.7890" target="_blank" 
+                   class="gps-button block text-center py-3 px-6 rounded-lg text-white font-bold">
+                    <i class="fas fa-map-marker-alt mr-2"></i>GPS: 35.5234°N, -120.7890°W
+                </a>
+            </div>
+
+            <!-- Spot 12: Cambria Creek -->
+            <div class="fishing-card bg-white bg-opacity-10 p-6 rounded-lg">
+                <div class="flex justify-between items-start mb-4">
+                    <h3 class="text-xl font-bold text-white">Cambria Creek</h3>
+                    <span class="text-yellow-400 text-sm">#12</span>
+                </div>
+                <div class="mb-4">
+                    <div class="species-tag">Steelhead</div>
+                    <div class="species-tag">Rainbow Trout</div>
+                </div>
+                <div class="space-y-2 text-gray-200 mb-4">
+                    <p><i class="fas fa-route mr-2 text-blue-400"></i>50 min to Cambria via Hwy 1</p>
+                    <p><i class="fas fa-waves mr-2 text-green-400"></i>Coastal access</p>
+                    <p><i class="fas fa-calendar mr-2 text-purple-400"></i>Winter steelhead</p>
+                </div>
+                <a href="https://maps.google.com/maps?q=35.5645,-121.0923" target="_blank" 
+                   class="gps-button block text-center py-3 px-6 rounded-lg text-white font-bold">
+                    <i class="fas fa-map-marker-alt mr-2"></i>GPS: 35.5645°N, -121.0923°W
+                </a>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- Section 2: US-101 North Corridor -->
+    <div class="max-w-7xl mx-auto px-4 mb-16">
+        <div class="section-header p-6 rounded-lg mb-8">
+            <h2 class="text-4xl font-bold text-white mb-4">
+                <i class="fas fa-highway mr-3 text-green-400"></i>
+                SECTION 2: US-101 NORTH CORRIDOR
+            </h2>
+            <p class="text-gray-200 text-lg">San Luis Obispo to Monterey Bay - The Heart of Central Coast Fishing</p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+
+            <!-- Spot 13: Santa Margarita Lake - TOP PRIORITY -->
+            <div class="fishing-card bg-white bg-opacity-10 p-6 rounded-lg border-4 border-yellow-400">
+                <div class="flex justify-between items-start mb-4">
+                    <h3 class="text-xl font-bold text-white">Santa Margarita Lake</h3>
+                    <div class="priority-badge px-3 py-1 rounded-full text-white font-bold text-sm">#13 ⭐ TOP</div>
+                </div>
+                <div class="mb-4">
+                    <div class="species-tag">Rainbow Trout</div>
+                    <div class="species-tag">Brown Trout</div>
+                    <div class="species-tag">Bass</div>
+                    <div class="species-tag">Bluegill</div>
+                </div>
+                <div class="space-y-2 text-gray-200 mb-4">
+                    <p><i class="fas fa-route mr-2 text-blue-400"></i>12 min via CA-58 east</p>
+                    <p><i class="fas fa-ship mr-2 text-green-400"></i>County park, boat launch</p>
+                    <p><i class="fas fa-fishing-rod mr-2 text-purple-400"></i>Excellent shore fishing</p>
+                </div>
+                <a href="https://maps.google.com/maps?q=35.3567,-120.6178" target="_blank" 
+                   class="gps-button block text-center py-3 px-6 rounded-lg text-white font-bold">
+                    <i class="fas fa-map-marker-alt mr-2"></i>GPS: 35.3567°N, -120.6178°W
+                </a>
+            </div>
+
+            <!-- Spot 14: Salinas River - Santa Margarita Section -->
+            <div class="fishing-card bg-white bg-opacity-10 p-6 rounded-lg">
+                <div class="flex justify-between items-start mb-4">
+                    <h3 class="text-xl font-bold text-white">Salinas River - Santa Margarita</h3>
+                    <span class="text-yellow-400 text-sm">#14</span>
+                </div>
+                <div class="mb-4">
+                    <div class="species-tag">Wild Trout</div>
+                    <div class="species-tag">Seasonal</div>
+                </div>
+                <div class="space-y-2 text-gray-200 mb-4">
+                    <p><i class="fas fa-route mr-2 text-blue-400"></i>8 min via Santa Margarita exit</p>
+                    <p><i class="fas fa-hiking mr-2 text-green-400"></i>Public easements</p>
+                    <p><i class="fas fa-water mr-2 text-purple-400"></i>Wade fishing</p>
+                </div>
+                <a href="https://maps.google.com/maps?q=35.3845,-120.6123" target="_blank" 
+                   class="gps-button block text-center py-3 px-6 rounded-lg text-white font-bold">
+                    <i class="fas fa-map-marker-alt mr-2"></i>GPS: 35.3845°N, -120.6123°W
+                </a>
+            </div>
+
+            <!-- Spot 15: Atascadero Lake -->
+            <div class="fishing-card bg-white bg-opacity-10 p-6 rounded-lg">
+                <div class="flex justify-between items-start mb-4">
+                    <h3 class="text-xl font-bold text-white">Atascadero Lake</h3>
+                    <span class="text-yellow-400 text-sm">#15</span>
+                </div>
+                <div class="mb-4">
+                    <div class="species-tag">Rainbow Trout</div>
+                    <div class="species-tag">Bass</div>
+                    <div class="species-tag">Bluegill</div>
+                </div>
+                <div class="space-y-2 text-gray-200 mb-4">
+                    <p><i class="fas fa-route mr-2 text-blue-400"></i>5 min via Traffic Way exit</p>
+                    <p><i class="fas fa-park mr-2 text-green-400"></i>City park, easy access</p>
+                    <p><i class="fas fa-family mr-2 text-purple-400"></i>Family-friendly</p>
+                </div>
+                <a href="https://maps.google.com/maps?q=35.4567,-120.6789" target="_blank" 
+                   class="gps-button block text-center py-3 px-6 rounded-lg text-white font-bold">
+                    <i class="fas fa-map-marker-alt mr-2"></i>GPS: 35.4567°N, -120.6789°W
+                </a>
+            </div>
+
+            <!-- Spot 16: Morro Creek -->
+            <div class="fishing-card bg-white bg-opacity-10 p-6 rounded-lg">
+                <div class="flex justify-between items-start mb-4">
+                    <h3 class="text-xl font-bold text-white">Morro Creek</h3>
+                    <span class="text-yellow-400 text-sm">#16</span>
+                </div>
+                <div class="mb-4">
+                    <div class="species-tag">Steelhead</div>
+                    <div class="species-tag">Small Trout</div>
+                </div>
+                <div class="space-y-2 text-gray-200 mb-4">
+                    <p><i class="fas fa-route mr-2 text-blue-400"></i>10 min via Main St, Morro Bay</p>
+                    <p><i class="fas fa-bridge mr-2 text-green-400"></i>Multiple bridge crossings</p>
+                    <p><i class="fas fa-calendar mr-2 text-purple-400"></i>Seasonal steelhead</p>
+                </div>
+                <a href="https://maps.google.com/maps?q=35.3678,-120.8234" target="_blank" 
+                   class="gps-button block text-center py-3 px-6 rounded-lg text-white font-bold">
+                    <i class="fas fa-map-marker-alt mr-2"></i>GPS: 35.3678°N, -120.8234°W
+                </a>
+            </div>
+
+            <!-- Spot 17: Chorro Creek -->
+            <div class="fishing-card bg-white bg-opacity-10 p-6 rounded-lg">
+                <div class="flex justify-between items-start mb-4">
+                    <h3 class="text-xl font-bold text-white">Chorro Creek</h3>
+                    <span class="text-yellow-400 text-sm">#17</span>
+                </div>
+                <div class="mb-4">
+                    <div class="species-tag">Wild Trout</div>
+                    <div class="species-tag">Seasonal</div>
+                </div>
+                <div class="space-y-2 text-gray-200 mb-4">
+                    <p><i class="fas fa-route mr-2 text-blue-400"></i>8 min via Los Osos Valley Rd</p>
+                    <p><i class="fas fa-park mr-2 text-green-400"></i>Chorro Regional Park</p>
+                    <p><i class="fas fa-water mr-2 text-purple-400"></i>Seasonal flows</p>
+                </div>
+                <a href="https://maps.google.com/maps?q=35.3234,-120.8567" target="_blank" 
+                   class="gps-button block text-center py-3 px-6 rounded-lg text-white font-bold">
+                    <i class="fas fa-map-marker-alt mr-2"></i>GPS: 35.3234°N, -120.8567°W
+                </a>
+            </div>
+
+            <!-- Spot 18: San Luis Creek -->
+            <div class="fishing-card bg-white bg-opacity-10 p-6 rounded-lg">
+                <div class="flex justify-between items-start mb-4">
+                    <h3 class="text-xl font-bold text-white">San Luis Creek</h3>
+                    <span class="text-yellow-400 text-sm">#18</span>
+                </div>
+                <div class="mb-4">
+                    <div class="species-tag">Small Wild Trout</div>
+                    <div class="species-tag">Creek Fishing</div>
+                </div>
+                <div class="space-y-2 text-gray-200 mb-4">
+                    <p><i class="fas fa-route mr-2 text-blue-400"></i>6 min via Broad St, SLO</p>
+                    <p><i class="fas fa-trail mr-2 text-green-400"></i>City creek trail access</p>
+                    <p><i class="fas fa-tint mr-2 text-purple-400"></i>Small creek fishing</p>
+                </div>
+                <a href="https://maps.google.com/maps?q=35.2789,-120.6567" target="_blank" 
+                   class="gps-button block text-center py-3 px-6 rounded-lg text-white font-bold">
+                    <i class="fas fa-map-marker-alt mr-2"></i>GPS: 35.2789°N, -120.6567°W
+                </a>
+            </div>
+
+            <!-- Spot 19: Lopez Lake - TOP PRIORITY -->
+            <div class="fishing-card bg-white bg-opacity-10 p-6 rounded-lg border-4 border-yellow-400">
+                <div class="flex justify-between items-start mb-4">
+                    <h3 class="text-xl font-bold text-white">Lopez Lake</h3>
+                    <div class="priority-badge px-3 py-1 rounded-full text-white font-bold text-sm">#19 ⭐ TOP</div>
+                </div>
+                <div class="mb-4">
+                    <div class="species-tag">Rainbow Trout</div>
+                    <div class="species-tag">Brown Trout</div>
+                    <div class="species-tag">Bass</div>
+                    <div class="species-tag">Catfish</div>
+                </div>
+                <div class="space-y-2 text-gray-200 mb-4">
+                    <p><i class="fas fa-route mr-2 text-blue-400"></i>15 min via CA-227 to Lopez Lake Rd</p>
+                    <p><i class="fas fa-cog mr-2 text-green-400"></i>Full facilities, boat launch</p>
+                    <p><i class="fas fa-star mr-2 text-purple-400"></i>Excellent shore fishing</p>
+                </div>
+                <a href="https://maps.google.com/maps?q=35.1678,-120.5234" target="_blank" 
+                   class="gps-button block text-center py-3 px-6 rounded-lg text-white font-bold">
+                    <i class="fas fa-map-marker-alt mr-2"></i>GPS: 35.1678°N, -120.5234°W
+                </a>
+            </div>
+
+            <!-- Spot 20: Arroyo Grande Creek -->
+            <div class="fishing-card bg-white bg-opacity-10 p-6 rounded-lg">
+                <div class="flex justify-between items-start mb-4">
+                    <h3 class="text-xl font-bold text-white">Arroyo Grande Creek</h3>
+                    <span class="text-yellow-400 text-sm">#20</span>
+                </div>
+                <div class="mb-4">
+                    <div class="species-tag">Steelhead</div>
+                    <div class="species-tag">Small Trout</div>
+                </div>
+                <div class="space-y-2 text-gray-200 mb-4">
+                    <p><i class="fas fa-route mr-2 text-blue-400"></i>8 min via Grand Avenue</p>
+                    <p><i class="fas fa-park mr-2 text-green-400"></i>City park access points</p>
+                    <p><i class="fas fa-calendar mr-2 text-purple-400"></i>Seasonal steelhead</p>
+                </div>
+                <a href="https://maps.google.com/maps?q=35.1234,-120.5678" target="_blank" 
+                   class="gps-button block text-center py-3 px-6 rounded-lg text-white font-bold">
+                    <i class="fas fa-map-marker-alt mr-2"></i>GPS: 35.1234°N, -120.5678°W
+                </a>
+            </div>
+
+            <!-- Spot 21: Santa Maria River -->
+            <div class="fishing-card bg-white bg-opacity-10 p-6 rounded-lg">
+                <div class="flex justify-between items-start mb-4">
+                    <h3 class="text-xl font-bold text-white">Santa Maria River</h3>
+                    <span class="text-yellow-400 text-sm">#21</span>
+                </div>
+                <div class="mb-4">
+                    <div class="species-tag">Limited</div>
+                    <div class="species-tag">Seasonal</div>
+                </div>
+                <div class="space-y-2 text-gray-200 mb-4">
+                    <p><i class="fas fa-route mr-2 text-blue-400"></i>6 min via Main St, Santa Maria</p>
+                    <p><i class="fas fa-bridge mr-2 text-green-400"></i>Bridge crossings</p>
+                    <p><i class="fas fa-exclamation-triangle mr-2 text-orange-400"></i>Limited water</p>
+                </div>
+                <a href="https://maps.google.com/maps?q=34.9567,-120.4321" target="_blank" 
+                   class="gps-button block text-center py-3 px-6 rounded-lg text-white font-bold">
+                    <i class="fas fa-map-marker-alt mr-2"></i>GPS: 34.9567°N, -120.4321°W
+                </a>
+            </div>
+
+            <!-- Spot 22: Sisquoc River -->
+            <div class="fishing-card bg-white bg-opacity-10 p-6 rounded-lg">
+                <div class="flex justify-between items-start mb-4">
+                    <h3 class="text-xl font-bold text-white">Sisquoc River</h3>
+                    <span class="text-yellow-400 text-sm">#22</span>
+                </div>
+                <div class="mb-4">
+                    <div class="species-tag">Wild Trout</div>
+                    <div class="species-tag">Upper Reaches</div>
+                </div>
+                <div class="space-y-2 text-gray-200 mb-4">
+                    <p><i class="fas fa-route mr-2 text-blue-400"></i>20 min via Foxen Canyon Rd</p>
+                    <p><i class="fas fa-truck mr-2 text-green-400"></i>4WD access</p>
+                    <p><i class="fas fa-certificate mr-2 text-purple-400"></i>Backcountry permits</p>
+                </div>
+                <a href="https://maps.google.com/maps?q=34.8765,-120.2234" target="_blank" 
+                   class="gps-button block text-center py-3 px-6 rounded-lg text-white font-bold">
+                    <i class="fas fa-map-marker-alt mr-2"></i>GPS: 34.8765°N, -120.2234°W
+                </a>
+            </div>
+
+            <!-- Spot 23: Salinas River - King City Section -->
+            <div class="fishing-card bg-white bg-opacity-10 p-6 rounded-lg">
+                <div class="flex justify-between items-start mb-4">
+                    <h3 class="text-xl font-bold text-white">Salinas River - King City</h3>
+                    <span class="text-yellow-400 text-sm">#23</span>
+                </div>
+                <div class="mb-4">
+                    <div class="species-tag">Brown Trout</div>
+                    <div class="species-tag">Carp</div>
+                </div>
+                <div class="space-y-2 text-gray-200 mb-4">
+                    <p><i class="fas fa-route mr-2 text-blue-400"></i>3 min via First Street exit</p>
+                    <p><i class="fas fa-park mr-2 text-green-400"></i>Public river access</p>
+                    <p><i class="fas fa-water mr-2 text-purple-400"></i>Seasonal flows</p>
+                </div>
+                <a href="https://maps.google.com/maps?q=36.2134,-121.1267" target="_blank" 
+                   class="gps-button block text-center py-3 px-6 rounded-lg text-white font-bold">
+                    <i class="fas fa-map-marker-alt mr-2"></i>GPS: 36.2134°N, -121.1267°W
+                </a>
+            </div>
+
+            <!-- Spot 24: Arroyo Seco River - TOP PRIORITY -->
+            <div class="fishing-card bg-white bg-opacity-10 p-6 rounded-lg border-4 border-yellow-400">
+                <div class="flex justify-between items-start mb-4">
+                    <h3 class="text-xl font-bold text-white">Arroyo Seco River</h3>
+                    <div class="priority-badge px-3 py-1 rounded-full text-white font-bold text-sm">#24 ⭐ TOP</div>
+                </div>
+                <div class="mb-4">
+                    <div class="species-tag">Wild Rainbow Trout</div>
+                    <div class="species-tag">Wild Brown Trout</div>
+                    <div class="species-tag">Steelhead</div>
+                </div>
+                <div class="space-y-2 text-gray-200 mb-4">
+                    <p><i class="fas fa-route mr-2 text-blue-400"></i>18 min via Arroyo Seco Rd</p>
+                    <p><i class="fas fa-tree mr-2 text-green-400"></i>Multiple forest access</p>
+                    <p><i class="fas fa-star mr-2 text-purple-400"></i>Excellent fishing</p>
+                </div>
+                <a href="https://maps.google.com/maps?q=36.2789,-121.3456" target="_blank" 
+                   class="gps-button block text-center py-3 px-6 rounded-lg text-white font-bold">
+                    <i class="fas fa-map-marker-alt mr-2"></i>GPS: 36.2789°N, -121.3456°W
+                </a>
+            </div>
+
+            <!-- Spot 25: Salinas River - Greenfield -->
+            <div class="fishing-card bg-white bg-opacity-10 p-6 rounded-lg">
+                <div class="flex justify-between items-start mb-4">
+                    <h3 class="text-xl font-bold text-white">Salinas River - Greenfield</h3>
+                    <span class="text-yellow-400 text-sm">#25</span>
+                </div>
+                <div class="mb-4">
+                    <div class="species-tag">Brown Trout</div>
+                    <div class="species-tag">Carp</div>
+                    <div class="species-tag">Suckers</div>
+                </div>
+                <div class="space-y-2 text-gray-200 mb-4">
+                    <p><i class="fas fa-route mr-2 text-blue-400"></i>2 min via Elm Avenue</p>
+                    <p><i class="fas fa-park mr-2 text-green-400"></i>City park access</p>
+                    <p><i class="fas fa-parking mr-2 text-purple-400"></i>Easy parking</p>
+                </div>
+                <a href="https://maps.google.com/maps?q=36.3234,-121.2456" target="_blank" 
+                   class="gps-button block text-center py-3 px-6 rounded-lg text-white font-bold">
+                    <i class="fas fa-map-marker-alt mr-2"></i>GPS: 36.3234°N, -121.2456°W
+                </a>
+            </div>
+
+            <!-- Spot 26: San Antonio River -->
+            <div class="fishing-card bg-white bg-opacity-10 p-6 rounded-lg">
+                <div class="flex justify-between items-start mb-4">
+                    <h3 class="text-xl font-bold text-white">San Antonio River</h3>
+                    <span class="text-yellow-400 text-sm">#26</span>
+                </div>
+                <div class="mb-4">
+                    <div class="species-tag">Wild Trout</div>
+                    <div class="species-tag">Upper Reaches</div>
+                </div>
+                <div class="space-y-2 text-gray-200 mb-4">
+                    <p><i class="fas fa-route mr-2 text-blue-400"></i>25 min via Jolon Road</p>
+                    <p><i class="fas fa-road mr-2 text-green-400"></i>Lake San Antonio access</p>
+                    <p><i class="fas fa-mountain mr-2 text-purple-400"></i>Upper reaches best</p>
+                </div>
+                <a href="https://maps.google.com/maps?q=36.0567,-120.8234" target="_blank" 
+                   class="gps-button block text-center py-3 px-6 rounded-lg text-white font-bold">
+                    <i class="fas fa-map-marker-alt mr-2"></i>GPS: 36.0567°N, -120.8234°W
+                </a>
+            </div>
+
+            <!-- Spot 27: Salinas River - Salinas -->
+            <div class="fishing-card bg-white bg-opacity-10 p-6 rounded-lg">
+                <div class="flex justify-between items-start mb-4">
+                    <h3 class="text-xl font-bold text-white">Salinas River - Salinas</h3>
+                    <span class="text-yellow-400 text-sm">#27</span>
+                </div>
+                <div class="mb-4">
+                    <div class="species-tag">Carp</div>
+                    <div class="species-tag">Limited Urban</div>
+                </div>
+                <div class="space-y-2 text-gray-200 mb-4">
+                    <p><i class="fas fa-route mr-2 text-blue-400"></i>5 min via Main Street</p>
+                    <p><i class="fas fa-park mr-2 text-green-400"></i>Multiple city parks</p>
+                    <p><i class="fas fa-city mr-2 text-purple-400"></i>Urban fishing</p>
+                </div>
+                <a href="https://maps.google.com/maps?q=36.6567,-121.6234" target="_blank" 
+                   class="gps-button block text-center py-3 px-6 rounded-lg text-white font-bold">
+                    <i class="fas fa-map-marker-alt mr-2"></i>GPS: 36.6567°N, -121.6234°W
+                </a>
+            </div>
+
+            <!-- Spot 28: Pajaro River -->
+            <div class="fishing-card bg-white bg-opacity-10 p-6 rounded-lg">
+                <div class="flex justify-between items-start mb-4">
+                    <h3 class="text-xl font-bold text-white">Pajaro River</h3>
+                    <span class="text-yellow-400 text-sm">#28</span>
+                </div>
+                <div class="mb-4">
+                    <div class="species-tag">Steelhead</div>
+                    <div class="species-tag">Seasonal</div>
+                </div>
+                <div class="space-y-2 text-gray-200 mb-4">
+                    <p><i class="fas fa-route mr-2 text-blue-400"></i>8 min via Riverside Drive</p>
+                    <p><i class="fas fa-park mr-2 text-green-400"></i>Pajaro River State Park</p>
+                    <p><i class="fas fa-calendar mr-2 text-purple-400"></i>Seasonal steelhead</p>
+                </div>
+                <a href="https://maps.google.com/maps?q=36.9234,-121.7567" target="_blank" 
+                   class="gps-button block text-center py-3 px-6 rounded-lg text-white font-bold">
+                    <i class="fas fa-map-marker-alt mr-2"></i>GPS: 36.9234°N, -121.7567°W
+                </a>
+            </div>
+
+            <!-- Spot 29: Big Sur River -->
+            <div class="fishing-card bg-white bg-opacity-10 p-6 rounded-lg">
+                <div class="flex justify-between items-start mb-4">
+                    <h3 class="text-xl font-bold text-white">Big Sur River</h3>
+                    <span class="text-yellow-400 text-sm">#29</span>
+                </div>
+                <div class="mb-4">
+                    <div class="species-tag">Steelhead Trout</div>
+                    <div class="species-tag">Rainbow Trout</div>
+                </div>
+                <div class="space-y-2 text-gray-200 mb-4">
+                    <p><i class="fas fa-route mr-2 text-blue-400"></i>45 min via Highway 1 south</p>
+                    <p><i class="fas fa-calendar mr-2 text-green-400"></i>Dec 1 - Mar 1 season</p>
+                    <p><i class="fas fa-recycle mr-2 text-purple-400"></i>Catch & release only</p>
+                </div>
+                <a href="https://maps.google.com/maps?q=36.2456,-121.7890" target="_blank" 
+                   class="gps-button block text-center py-3 px-6 rounded-lg text-white font-bold">
+                    <i class="fas fa-map-marker-alt mr-2"></i>GPS: 36.2456°N, -121.7890°W
+                </a>
+            </div>
+
+            <!-- Spot 30: Carmel River -->
+            <div class="fishing-card bg-white bg-opacity-10 p-6 rounded-lg">
+                <div class="flex justify-between items-start mb-4">
+                    <h3 class="text-xl font-bold text-white">Carmel River</h3>
+                    <span class="text-yellow-400 text-sm">#30</span>
+                </div>
+                <div class="mb-4">
+                    <div class="species-tag">Steelhead</div>
+                    <div class="species-tag">Rainbow Trout</div>
+                    <div class="species-tag">Brown Trout</div>
+                </div>
+                <div class="space-y-2 text-gray-200 mb-4">
+                    <p><i class="fas fa-route mr-2 text-blue-400"></i>30 min via Highway 68 to Carmel</p>
+                    <p><i class="fas fa-calendar mr-2 text-green-400"></i>Dec 1 - Mar 7 season</p>
+                    <p><i class="fas fa-recycle mr-2 text-purple-400"></i>Catch & release, artificials</p>
+                </div>
+                <a href="https://maps.google.com/maps?q=36.5234,-121.9345" target="_blank" 
+                   class="gps-button block text-center py-3 px-6 rounded-lg text-white font-bold">
+                    <i class="fas fa-map-marker-alt mr-2"></i>GPS: 36.5234°N, -121.9345°W
+                </a>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- Section 3: Santa Cruz Mountains -->
+    <div class="max-w-7xl mx-auto px-4 mb-16">
+        <div class="section-header p-6 rounded-lg mb-8">
+            <h2 class="text-4xl font-bold text-white mb-4">
+                <i class="fas fa-mountain mr-3 text-red-400"></i>
+                SECTION 3: SANTA CRUZ MOUNTAINS - FINAL APPROACH
+            </h2>
+            <p class="text-gray-200 text-lg">The Crown Jewels - Premium Mountain Trout Fishing Destinations</p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+
+            <!-- Spot 31: Pescadero Creek -->
+            <div class="fishing-card bg-white bg-opacity-10 p-6 rounded-lg">
+                <div class="flex justify-between items-start mb-4">
+                    <h3 class="text-xl font-bold text-white">Pescadero Creek</h3>
+                    <span class="text-yellow-400 text-sm">#31</span>
+                </div>
+                <div class="mb-4">
+                    <div class="species-tag">Steelhead</div>
+                    <div class="species-tag">Wild Trout</div>
+                </div>
+                <div class="space-y-2 text-gray-200 mb-4">
+                    <p><i class="fas fa-route mr-2 text-blue-400"></i>25 min via Highway 1 to Pescadero</p>
+                    <p><i class="fas fa-calendar mr-2 text-green-400"></i>Dec 1 - Mar 7 season</p>
+                    <p><i class="fas fa-certificate mr-2 text-purple-400"></i>Wild & Heritage candidate</p>
+                </div>
+                <a href="https://maps.google.com/maps?q=37.2567,-122.3845" target="_blank" 
+                   class="gps-button block text-center py-3 px-6 rounded-lg text-white font-bold">
+                    <i class="fas fa-map-marker-alt mr-2"></i>GPS: 37.2567°N, -122.3845°W
+                </a>
+            </div>
+
+            <!-- Spot 32: Gazos Creek -->
+            <div class="fishing-card bg-white bg-opacity-10 p-6 rounded-lg">
+                <div class="flex justify-between items-start mb-4">
+                    <h3 class="text-xl font-bold text-white">Gazos Creek</h3>
+                    <span class="text-yellow-400 text-sm">#32</span>
+                </div>
+                <div class="mb-4">
+                    <div class="species-tag">Steelhead Trout</div>
+                    <div class="species-tag">Coho Salmon</div>
+                </div>
+                <div class="space-y-2 text-gray-200 mb-4">
+                    <p><i class="fas fa-route mr-2 text-blue-400"></i>30 min to Año Nuevo area</p>
+                    <p><i class="fas fa-calendar mr-2 text-green-400"></i>Nov - Jan migration</p>
+                    <p><i class="fas fa-star mr-2 text-purple-400"></i>Important coastal stream</p>
+                </div>
+                <a href="https://maps.google.com/maps?q=37.1234,-122.3456" target="_blank" 
+                   class="gps-button block text-center py-3 px-6 rounded-lg text-white font-bold">
+                    <i class="fas fa-map-marker-alt mr-2"></i>GPS: 37.1234°N, -122.3456°W
+                </a>
+            </div>
+
+            <!-- Spot 33: Waddell Creek -->
+            <div class="fishing-card bg-white bg-opacity-10 p-6 rounded-lg">
+                <div class="flex justify-between items-start mb-4">
+                    <h3 class="text-xl font-bold text-white">Waddell Creek</h3>
+                    <span class="text-yellow-400 text-sm">#33</span>
+                </div>
+                <div class="mb-4">
+                    <div class="species-tag">Steelhead</div>
+                    <div class="species-tag">Coho Salmon</div>
+                </div>
+                <div class="space-y-2 text-gray-200 mb-4">
+                    <p><i class="fas fa-route mr-2 text-blue-400"></i>35 min via Highway 1 to Big Basin</p>
+                    <p><i class="fas fa-tree mr-2 text-green-400"></i>Big Basin Redwoods access</p>
+                    <p><i class="fas fa-calendar mr-2 text-purple-400"></i>Dec 1 - Mar 7 season</p>
+                </div>
+                <a href="https://maps.google.com/maps?q=37.1890,-122.2678" target="_blank" 
+                   class="gps-button block text-center py-3 px-6 rounded-lg text-white font-bold">
+                    <i class="fas fa-map-marker-alt mr-2"></i>GPS: 37.1890°N, -122.2678°W
+                </a>
+            </div>
+
+            <!-- Spot 34: Scott Creek -->
+            <div class="fishing-card bg-white bg-opacity-10 p-6 rounded-lg">
+                <div class="flex justify-between items-start mb-4">
+                    <h3 class="text-xl font-bold text-white">Scott Creek</h3>
+                    <span class="text-yellow-400 text-sm">#34</span>
+                </div>
+                <div class="mb-4">
+                    <div class="species-tag">Coho Salmon</div>
+                    <div class="species-tag">Steelhead</div>
+                </div>
+                <div class="space-y-2 text-gray-200 mb-4">
+                    <p><i class="fas fa-route mr-2 text-blue-400"></i>40 min via Highway 1 north</p>
+                    <p><i class="fas fa-star mr-2 text-green-400"></i>Only 3-brood Coho south of SF</p>
+                    <p><i class="fas fa-calendar mr-2 text-purple-400"></i>Dec 1 - Mar 7 season</p>
+                </div>
+                <a href="https://maps.google.com/maps?q=37.0456,-122.2234" target="_blank" 
+                   class="gps-button block text-center py-3 px-6 rounded-lg text-white font-bold">
+                    <i class="fas fa-map-marker-alt mr-2"></i>GPS: 37.0456°N, -122.2234°W
+                </a>
+            </div>
+
+            <!-- Spot 35: San Lorenzo River - TOP PRIORITY -->
+            <div class="fishing-card bg-white bg-opacity-10 p-6 rounded-lg border-4 border-yellow-400">
+                <div class="flex justify-between items-start mb-4">
+                    <h3 class="text-xl font-bold text-white">San Lorenzo River</h3>
+                    <div class="priority-badge px-3 py-1 rounded-full text-white font-bold text-sm">#35 ⭐ TOP</div>
+                </div>
+                <div class="mb-4">
+                    <div class="species-tag">Steelhead</div>
+                    <div class="species-tag">Wild Trout</div>
+                </div>
+                <div class="space-y-2 text-gray-200 mb-4">
+                    <p><i class="fas fa-route mr-2 text-blue-400"></i>25 min via CA-17 to Felton</p>
+                    <p><i class="fas fa-park mr-2 text-green-400"></i>Henry Cowell State Park</p>
+                    <p><i class="fas fa-recycle mr-2 text-purple-400"></i>Catch & release only</p>
+                </div>
+                <a href="https://maps.google.com/maps?q=37.0567,-122.0789" target="_blank" 
+                   class="gps-button block text-center py-3 px-6 rounded-lg text-white font-bold">
+                    <i class="fas fa-map-marker-alt mr-2"></i>GPS: 37.0567°N, -122.0789°W
+                </a>
+            </div>
+
+            <!-- Spot 36: Soquel Creek -->
+            <div class="fishing-card bg-white bg-opacity-10 p-6 rounded-lg">
+                <div class="flex justify-between items-start mb-4">
+                    <h3 class="text-xl font-bold text-white">Soquel Creek</h3>
+                    <span class="text-yellow-400 text-sm">#36</span>
+                </div>
+                <div class="mb-4">
+                    <div class="species-tag">Steelhead</div>
+                    <div class="species-tag">Rainbow Trout</div>
+                    <div class="species-tag">Striped Bass</div>
+                </div>
+                <div class="space-y-2 text-gray-200 mb-4">
+                    <p><i class="fas fa-route mr-2 text-blue-400"></i>22 min via Soquel Drive</p>
+                    <p><i class="fas fa-park mr-2 text-green-400"></i>Multiple county parks</p>
+                    <p><i class="fas fa-water mr-2 text-purple-400"></i>Seasonal trout</p>
+                </div>
+                <a href="https://maps.google.com/maps?q=37.0234,-121.9567" target="_blank" 
+                   class="gps-button block text-center py-3 px-6 rounded-lg text-white font-bold">
+                    <i class="fas fa-map-marker-alt mr-2"></i>GPS: 37.0234°N, -121.9567°W
+                </a>
+            </div>
+
+            <!-- Spot 37: Aptos Creek -->
+            <div class="fishing-card bg-white bg-opacity-10 p-6 rounded-lg">
+                <div class="flex justify-between items-start mb-4">
+                    <h3 class="text-xl font-bold text-white">Aptos Creek</h3>
+                    <span class="text-yellow-400 text-sm">#37</span>
+                </div>
+                <div class="mb-4">
+                    <div class="species-tag">Steelhead</div>
+                    <div class="species-tag">Coho Salmon</div>
+                </div>
+                <div class="space-y-2 text-gray-200 mb-4">
+                    <p><i class="fas fa-route mr-2 text-blue-400"></i>20 min via Aptos Creek Rd</p>
+                    <p><i class="fas fa-tree mr-2 text-green-400"></i>Forest of Nisene Marks</p>
+                    <p><i class="fas fa-calendar mr-2 text-purple-400"></i>Wed, Sat, Sun only</p>
+                </div>
+                <a href="https://maps.google.com/maps?q=36.9789,-121.8234" target="_blank" 
+                   class="gps-button block text-center py-3 px-6 rounded-lg text-white font-bold">
+                    <i class="fas fa-map-marker-alt mr-2"></i>GPS: 36.9789°N, -121.8234°W
+                </a>
+            </div>
+
+            <!-- Spot 38: Branciforte Creek -->
+            <div class="fishing-card bg-white bg-opacity-10 p-6 rounded-lg">
+                <div class="flex justify-between items-start mb-4">
+                    <h3 class="text-xl font-bold text-white">Branciforte Creek</h3>
+                    <span class="text-yellow-400 text-sm">#38</span>
+                </div>
+                <div class="mb-4">
+                    <div class="species-tag">Coho Salmon</div>
+                    <div class="species-tag">Steelhead Trout</div>
+                </div>
+                <div class="space-y-2 text-gray-200 mb-4">
+                    <p><i class="fas fa-route mr-2 text-blue-400"></i>18 min via Branciforte Dr</p>
+                    <p><i class="fas fa-cog mr-2 text-green-400"></i>Fish monitoring equipment</p>
+                    <p><i class="fas fa-recycle mr-2 text-purple-400"></i>Restoration area</p>
+                </div>
+                <a href="https://maps.google.com/maps?q=37.0123,-122.0345" target="_blank" 
+                   class="gps-button block text-center py-3 px-6 rounded-lg text-white font-bold">
+                    <i class="fas fa-map-marker-alt mr-2"></i>GPS: 37.0123°N, -122.0345°W
+                </a>
+            </div>
+
+            <!-- Spot 39: Los Gatos Creek -->
+            <div class="fishing-card bg-white bg-opacity-10 p-6 rounded-lg">
+                <div class="flex justify-between items-start mb-4">
+                    <h3 class="text-xl font-bold text-white">Los Gatos Creek</h3>
+                    <span class="text-yellow-400 text-sm">#39</span>
+                </div>
+                <div class="mb-4">
+                    <div class="species-tag">Wild Trout</div>
+                    <div class="species-tag">Upper Reaches</div>
+                </div>
+                <div class="space-y-2 text-gray-200 mb-4">
+                    <p><i class="fas fa-route mr-2 text-blue-400"></i>20 min via CA-17 north</p>
+                    <p><i class="fas fa-lake mr-2 text-green-400"></i>Lexington Reservoir area</p>
+                    <p><i class="fas fa-mountain mr-2 text-purple-400"></i>Upper reaches best</p>
+                </div>
+                <a href="https://maps.google.com/maps?q=37.2234,-121.9567" target="_blank" 
+                   class="gps-button block text-center py-3 px-6 rounded-lg text-white font-bold">
+                    <i class="fas fa-map-marker-alt mr-2"></i>GPS: 37.2234°N, -121.9567°W
+                </a>
+            </div>
+
+            <!-- Spot 40: Loch Lomond Recreation Area - CROWN JEWEL -->
+            <div class="fishing-card bg-white bg-opacity-10 p-6 rounded-lg border-8 border-gradient-to-r from-yellow-400 via-red-500 to-pink-500">
+                <div class="flex justify-between items-start mb-4">
+                    <h3 class="text-xl font-bold text-white">Loch Lomond Recreation Area</h3>
+                    <div class="priority-badge px-3 py-1 rounded-full text-white font-bold text-sm">#40 👑 CROWN JEWEL</div>
+                </div>
+                <div class="mb-4">
+                    <div class="species-tag">Trophy Rainbow Trout</div>
+                    <div class="species-tag">Bass</div>
+                    <div class="species-tag">Bluegill</div>
+                </div>
+                <div class="space-y-2 text-gray-200 mb-4">
+                    <p><i class="fas fa-route mr-2 text-blue-400"></i>30 min via CA-9 to Felton</p>
+                    <p><i class="fas fa-depth-chart mr-2 text-green-400"></i>150-foot deep reservoir</p>
+                    <p><i class="fas fa-crown mr-2 text-yellow-400"></i>Santa Cruz's legendary secret!</p>
+                </div>
+                <a href="https://maps.google.com/maps?q=37.0789,-122.0456" target="_blank" 
+                   class="gps-button block text-center py-3 px-6 rounded-lg text-white font-bold bg-gradient-to-r from-yellow-500 to-red-500">
+                    <i class="fas fa-map-marker-alt mr-2"></i>GPS: 37.0789°N, -122.0456°W
+                </a>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- Quick Reference Summary -->
+    <div class="max-w-7xl mx-auto px-4 mb-16">
+        <div class="highlight-map p-8">
+            <h2 class="text-3xl font-bold text-gray-800 mb-6 text-center">
+                <i class="fas fa-star mr-3 text-yellow-500"></i>
+                TOP PRIORITY STOPS - MUST FISH!
+            </h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                <div class="bg-gradient-to-br from-yellow-400 to-orange-500 p-4 rounded-lg text-white text-center">
+                    <h3 class="font-bold text-lg">Lake Nacimiento</h3>
+                    <p class="text-sm">#3 - Trophy Trout Paradise</p>
+                    <p class="text-xs">165 miles shoreline</p>
+                </div>
+                <div class="bg-gradient-to-br from-green-400 to-blue-500 p-4 rounded-lg text-white text-center">
+                    <h3 class="font-bold text-lg">Lopez Lake</h3>
+                    <p class="text-sm">#19 - Rainbow & Brown Trout</p>
+                    <p class="text-xs">Full facilities</p>
+                </div>
+                <div class="bg-gradient-to-br from-purple-400 to-pink-500 p-4 rounded-lg text-white text-center">
+                    <h3 class="font-bold text-lg">Arroyo Seco River</h3>
+                    <p class="text-sm">#24 - Wild Trout Haven</p>
+                    <p class="text-xs">Multiple forest access</p>
+                </div>
+                <div class="bg-gradient-to-br from-red-400 to-yellow-500 p-4 rounded-lg text-white text-center">
+                    <h3 class="font-bold text-lg">Loch Lomond</h3>
+                    <p class="text-sm">#40 - Crown Jewel!</p>
+                    <p class="text-xs">Santa Cruz legend</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <div class="bg-black bg-opacity-30 text-white text-center py-8">
+        <p class="text-lg font-bold mb-2">🎣 TIGHT LINES & SAFE TRAVELS! 🎣</p>
+        <p class="text-sm">Remember: Valid California fishing license required | Check current regulations | Practice catch & release for wild fish</p>
+        <div class="mt-4 flex justify-center space-x-4 text-sm">
+            <span><i class="fas fa-clock mr-1"></i>Best Times: Early morning & evening</span>
+            <span><i class="fas fa-thermometer-half mr-1"></i>Best Seasons: Fall through Spring</span>
+        </div>
+    </div>
+
+    <script>
+        // Add smooth scrolling animation
+        document.addEventListener('DOMContentLoaded', function() {
+            // Animate cards on scroll
+            const cards = document.querySelectorAll('.fishing-card');
+            
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.opacity = '1';
+                        entry.target.style.transform = 'translateY(0)';
+                    }
+                });
+            });
+
+            cards.forEach(card => {
+                card.style.opacity = '0';
+                card.style.transform = 'translateY(50px)';
+                card.style.transition = 'all 0.6s ease';
+                observer.observe(card);
+            });
+
+            // Add click tracking for GPS links
+            document.querySelectorAll('.gps-button').forEach(button => {
+                button.addEventListener('click', function() {
+                    this.style.transform = 'scale(0.95)';
+                    setTimeout(() => {
+                        this.style.transform = 'scale(1.05)';
+                    }, 100);
+                });
+            });
+        });
+    </script>
+
+<script defer src="https://static.cloudflareinsights.com/beacon.min.js/vcd15cbe7772f49c399c6a5babf22c1241717689176015" integrity="sha512-ZpsOmlRQV6y907TI0dKBHq9Md29nnaEIPlkf84rnaERnq6zvWvPUqr2ft8M1aS28oN72PdrCzSjY4U6VaAw1EQ==" data-cf-beacon='{"rayId":"9576a76288e67d86","serverTiming":{"name":{"cfExtPri":true,"cfEdge":true,"cfOrigin":true,"cfL4":true,"cfSpeedBrain":true,"cfCacheStatus":true}},"version":"2025.6.2","token":"4edd5f8ec12a48cfa682ab8261b80a79"}' crossorigin="anonymous"></script>
+</body>
+</html>
+    <script id="html_badge_script1">
+        window.__genspark_remove_badge_link = "https://www.genspark.ai/api/html_badge/" +
+            "remove_badge?token=To%2FBnjzloZ3UfQdcSaYfDphqOqOJ8od5R3la3OoCo81kUP8yGmkWiqSIweCfcrc0D%2FaCzb9ktj8GAalEEPoDkQLCUTv%2Fl26OFWirxH70rtO28B86ZlEzkkeX8TgjjfiM12WlA6gqd3WBUvAVAWqy%2BYkY7RzVw8ScJQO89pLq6YtPEqdWgVn8%2FB6SCHR2BlyhlU5Z9Sy%2FgbelR4t%2Fz6nHwdhy%2FH24VvvUCBVFiMZTLJoLZZVMiBNUwYlerRAhVbA0Qv3kR50l0%2Bm3y5JVYcUvwEraap8bEZp8k%2BAslvyy7Tf%2FBsZPJywQR391et3Z9rgIZMXDVPJnXLE61QFGRZsfFGAfFiVXq9yETrWWNJMb9XGoTYKmiKpeJcs122d5PvbF9Pvhk9Pn3cSOOmyBpcXtep6m%2FFymy6RjDWPTL0XZmQtXsU0z6U3to7Cv5FbbMUMlS%2FoxaXqaK5q3W2BYPe5b1iha%2FXquhiwROeK0ckhYdEUr4YINQQSwEq73uBckg7zf91DzweoGMfLx7D3XWE3xSWjUVSgIBpmmU18xai39J48%3D";
+        window.__genspark_locale = "en-US";
+        window.__genspark_token = "To/BnjzloZ3UfQdcSaYfDphqOqOJ8od5R3la3OoCo81kUP8yGmkWiqSIweCfcrc0D/aCzb9ktj8GAalEEPoDkQLCUTv/l26OFWirxH70rtO28B86ZlEzkkeX8TgjjfiM12WlA6gqd3WBUvAVAWqy+YkY7RzVw8ScJQO89pLq6YtPEqdWgVn8/B6SCHR2BlyhlU5Z9Sy/gbelR4t/z6nHwdhy/H24VvvUCBVFiMZTLJoLZZVMiBNUwYlerRAhVbA0Qv3kR50l0+m3y5JVYcUvwEraap8bEZp8k+Aslvyy7Tf/BsZPJywQR391et3Z9rgIZMXDVPJnXLE61QFGRZsfFGAfFiVXq9yETrWWNJMb9XGoTYKmiKpeJcs122d5PvbF9Pvhk9Pn3cSOOmyBpcXtep6m/Fymy6RjDWPTL0XZmQtXsU0z6U3to7Cv5FbbMUMlS/oxaXqaK5q3W2BYPe5b1iha/XquhiwROeK0ckhYdEUr4YINQQSwEq73uBckg7zf91DzweoGMfLx7D3XWE3xSWjUVSgIBpmmU18xai39J48=";
+    </script>
+    
+    <script id="html_notice_dialog_script" src="https://www.genspark.ai/notice_dialog.js"></script>
+    

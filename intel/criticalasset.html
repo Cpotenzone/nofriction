@@ -1,0 +1,1562 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>InsureMEP - Insuring Smarter Buildings with Smarter Data</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css">
+    <style>
+        :root {
+            --blue: #069dd8;
+            --red: #c1202f;
+            --green: #019147;
+        }
+        
+        body {
+            font-family: 'Montserrat', sans-serif;
+            color: #333;
+            overflow-x: hidden;
+        }
+        
+        .btn-primary {
+            background-color: var(--blue);
+            color: white;
+            transition: all 0.3s;
+        }
+        
+        .btn-primary:hover {
+            background-color: #0589be;
+            transform: translateY(-2px);
+            box-shadow: 0 10px 15px rgba(6, 157, 216, 0.2);
+        }
+        
+        .btn-secondary {
+            background-color: var(--red);
+            color: white;
+            transition: all 0.3s;
+        }
+        
+        .btn-secondary:hover {
+            background-color: #a91c29;
+            transform: translateY(-2px);
+            box-shadow: 0 10px 15px rgba(193, 32, 47, 0.2);
+        }
+        
+        .btn-tertiary {
+            background-color: var(--green);
+            color: white;
+            transition: all 0.3s;
+        }
+        
+        .btn-tertiary:hover {
+            background-color: #01803e;
+            transform: translateY(-2px);
+            box-shadow: 0 10px 15px rgba(1, 145, 71, 0.2);
+        }
+        
+        .text-blue {
+            color: var(--blue);
+        }
+        
+        .text-red {
+            color: var(--red);
+        }
+        
+        .text-green {
+            color: var(--green);
+        }
+        
+        .bg-blue {
+            background-color: var(--blue);
+        }
+        
+        .bg-red {
+            background-color: var(--red);
+        }
+        
+        .bg-green {
+            background-color: var(--green);
+        }
+        
+        .border-blue {
+            border-color: var(--blue);
+        }
+        
+        .border-red {
+            border-color: var(--red);
+        }
+        
+        .border-green {
+            border-color: var(--green);
+        }
+        
+        .section {
+            padding: 5rem 0;
+        }
+        
+        .feature-card {
+            border-radius: 8px;
+            overflow: hidden;
+            transition: all 0.5s ease;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transform-origin: center;
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-15px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+        }
+        
+        .nav-link {
+            position: relative;
+            font-weight: 600;
+        }
+        
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: 0;
+            left: 50%;
+            background-color: var(--blue);
+            transition: all 0.3s ease;
+            transform: translateX(-50%);
+        }
+        
+        .nav-link:hover::after {
+            width: 100%;
+        }
+        
+        .hero-wave {
+            position: absolute;
+            bottom: -1px;
+            left: 0;
+            width: 100%;
+        }
+        
+        .animate-float {
+            animation: float 6s ease-in-out infinite;
+        }
+        
+        @keyframes float {
+            0% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-20px) rotate(1deg); }
+            100% { transform: translateY(0px) rotate(0deg); }
+        }
+        
+        .testimonial-card {
+            transition: all 0.5s;
+            transform-style: preserve-3d;
+            perspective: 1000px;
+        }
+        
+        .testimonial-card:hover {
+            transform: rotateY(5deg) scale(1.03);
+            box-shadow: -10px 10px 20px rgba(0, 0, 0, 0.1);
+        }
+        
+        .step-card {
+            position: relative;
+            transition: all 0.5s ease;
+            overflow: hidden;
+        }
+        
+        .step-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 30px rgba(0, 0, 0, 0.15);
+        }
+        
+        .step-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 4px;
+            height: 0;
+            background-color: var(--blue);
+            transition: all 0.8s ease;
+        }
+        
+        .step-card:hover::before {
+            height: 100%;
+        }
+        
+        .step-number {
+            font-size: 4rem;
+            font-weight: 800;
+            opacity: 0.1;
+            position: absolute;
+            top: -20px;
+            right: 10px;
+            transition: all 0.5s;
+        }
+        
+        .step-card:hover .step-number {
+            opacity: 0.2;
+            transform: scale(1.2);
+        }
+        
+        .contact-input {
+            border: 2px solid #e5e7eb;
+            transition: all 0.3s;
+        }
+        
+        .contact-input:focus {
+            border-color: var(--blue);
+            box-shadow: 0 0 0 3px rgba(6, 157, 216, 0.25);
+            outline: none;
+        }
+        
+        .service-icon {
+            font-size: 2rem;
+            width: 80px;
+            height: 80px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            margin: 0 auto 1.5rem;
+            transition: all 0.6s ease;
+            color: white;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+        
+        .service-card:hover .service-icon {
+            transform: rotateY(360deg);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+        }
+        
+        .scroll-top {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background-color: var(--blue);
+            color: white;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            opacity: 0;
+            transition: all 0.3s;
+            z-index: 999;
+            box-shadow: 0 5px 15px rgba(6, 157, 216, 0.3);
+        }
+
+        .scroll-top.active {
+            opacity: 1;
+        }
+        
+        .scroll-top:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(6, 157, 216, 0.5);
+        }
+        
+        /* Background elements */
+        .bg-shape {
+            position: absolute;
+            opacity: 0.05;
+            z-index: 0;
+        }
+        
+        .bg-shape-1 {
+            top: 5%;
+            left: 5%;
+            width: 300px;
+            height: 300px;
+            border-radius: 50%;
+            background: var(--blue);
+            animation: float-slow 15s ease-in-out infinite;
+        }
+        
+        .bg-shape-2 {
+            bottom: 10%;
+            right: 5%;
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            background: var(--red);
+            animation: float-slow 12s ease-in-out infinite;
+        }
+        
+        .bg-shape-3 {
+            top: 50%;
+            left: 50%;
+            width: 400px;
+            height: 400px;
+            border-radius: 50%;
+            background: var(--green);
+            opacity: 0.03;
+            animation: float-slow 20s ease-in-out infinite;
+        }
+        
+        @keyframes float-slow {
+            0% { transform: translate(0, 0) rotate(0deg); }
+            50% { transform: translate(30px, -30px) rotate(8deg); }
+            100% { transform: translate(0, 0) rotate(0deg); }
+        }
+        
+        /* Hover effect for feature panels */
+        .feature-panel {
+            transition: all 0.5s ease;
+            overflow: hidden;
+        }
+        
+        .feature-panel:hover {
+            transform: translateY(-5px) scale(1.02);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+        }
+        
+        .feature-panel::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to bottom right, rgba(6, 157, 216, 0.1), rgba(1, 145, 71, 0.1));
+            opacity: 0;
+            transition: all 0.5s ease;
+            z-index: -1;
+        }
+        
+        .feature-panel:hover::before {
+            opacity: 1;
+        }
+        
+        /* Content reveal animations */
+        .content-reveal {
+            overflow: hidden;
+            position: relative;
+        }
+        
+        .content-reveal::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: var(--blue);
+            transform: translateX(-100%);
+            transition: transform 0.5s ease;
+            z-index: 1;
+        }
+        
+        .content-reveal.active::after {
+            transform: translateX(100%);
+        }
+        
+        .content-reveal-content {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.5s ease 0.3s;
+        }
+        
+        .content-reveal.active .content-reveal-content {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        /* Gradient text */
+        .gradient-text {
+            background: linear-gradient(to right, var(--blue), var(--green));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            position: relative;
+            display: inline-block;
+        }
+        
+        .gradient-text::before {
+            content: attr(data-text);
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 0;
+            height: 100%;
+            color: var(--red);
+            overflow: hidden;
+            white-space: nowrap;
+            transition: width 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+        }
+        
+        .gradient-text:hover::before {
+            width: 100%;
+        }
+        
+        /* Icon pulse animation */
+        .icon-pulse {
+            animation: icon-pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+        }
+        
+        @keyframes icon-pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+        }
+        
+        /* Card flip effect */
+        .card-flip {
+            perspective: 1000px;
+            background-color: transparent;
+            width: 100%;
+            height: 400px;
+        }
+        
+        .card-flip-inner {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            transition: transform 0.8s;
+            transform-style: preserve-3d;
+        }
+        
+        .card-flip:hover .card-flip-inner {
+            transform: rotateY(180deg);
+        }
+        
+        .card-flip-front, .card-flip-back {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            -webkit-backface-visibility: hidden;
+            backface-visibility: hidden;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+        
+        .card-flip-back {
+            transform: rotateY(180deg);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 2rem;
+            background: linear-gradient(135deg, var(--blue), #0475a3);
+            color: white;
+        }
+        
+        /* Glow effect for buttons */
+        .btn-glow {
+            position: relative;
+            z-index: 1;
+            overflow: hidden;
+        }
+        
+        .btn-glow::after {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.8) 0%, rgba(255,255,255,0) 70%);
+            opacity: 0;
+            transform: scale(0.5);
+            transition: transform 0.5s ease-out, opacity 0.5s ease-out;
+            z-index: -1;
+        }
+        
+        .btn-glow:hover::after {
+            opacity: 0.3;
+            transform: scale(1);
+        }
+        
+        /* Text highlight effect */
+        .highlight-text {
+            position: relative;
+            display: inline-block;
+        }
+        
+        .highlight-text::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 30%;
+            background-color: rgba(6, 157, 216, 0.2);
+            z-index: -1;
+            transform: skewX(-12deg) scaleX(0);
+            transform-origin: bottom left;
+            transition: transform 0.3s ease;
+        }
+        
+        .highlight-text:hover::after {
+            transform: skewX(-12deg) scaleX(1);
+        }
+        
+        /* Carousel styles */
+        .carousel {
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .carousel-inner {
+            display: flex;
+            transition: transform 0.5s ease;
+        }
+        
+        .carousel-item {
+            min-width: 100%;
+            display: flex;
+            justify-content: center;
+            padding: 0 1rem;
+        }
+        
+        .carousel-control {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 40px;
+            height: 40px;
+            background-color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            z-index: 10;
+            transition: all 0.3s ease;
+        }
+        
+        .carousel-control:hover {
+            background-color: var(--blue);
+            color: white;
+        }
+        
+        .carousel-control-prev {
+            left: 10px;
+        }
+        
+        .carousel-control-next {
+            right: 10px;
+        }
+        
+        .carousel-indicators {
+            display: flex;
+            justify-content: center;
+            margin-top: 20px;
+        }
+        
+        .carousel-indicator {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background-color: #ccc;
+            margin: 0 5px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .carousel-indicator.active {
+            background-color: var(--blue);
+            transform: scale(1.3);
+        }
+        
+        /* Animated counter */
+        .counter-wrapper {
+            position: relative;
+        }
+        
+        .counter-value {
+            font-size: 3rem;
+            font-weight: 800;
+            color: var(--blue);
+            line-height: 1;
+        }
+        
+        .counter-label {
+            font-size: 1rem;
+            color: #666;
+            margin-top: 0.5rem;
+        }
+        
+        /* Trophy icon style */
+        .trophy-icon {
+            position: relative;
+            display: inline-block;
+            margin-bottom: 1.5rem;
+        }
+        
+        .trophy-icon i {
+            font-size: 3rem;
+            color: #f0b823;
+            animation: trophy-glow 2s ease-in-out infinite;
+        }
+        
+        @keyframes trophy-glow {
+            0%, 100% { text-shadow: 0 0 5px rgba(240, 184, 35, 0.5); }
+            50% { text-shadow: 0 0 20px rgba(240, 184, 35, 0.8); }
+        }
+        
+        /* Nav item animation */
+        .nav-item {
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .nav-item::before {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background-color: var(--blue);
+            transform: scaleX(0);
+            transition: transform 0.3s ease;
+            transform-origin: right;
+        }
+        
+        .nav-item:hover::before {
+            transform: scaleX(1);
+            transform-origin: left;
+        }
+        
+        /* For PDF export optimization */
+         {
+            body {
+                width: 100%;
+                margin: 0;
+                padding: 0;
+            }
+            .container {
+                width: 100%;
+                max-width: 100%;
+            }
+            .hidden-print {
+                display: none !important;
+            }
+        }
+        
+        /* Video container */
+        .video-container {
+            position: relative;
+            width: 100%;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+        }
+        
+        /* Vertical timeline */
+        .vertical-timeline {
+            position: relative;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .vertical-timeline::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 4px;
+            height: 100%;
+            background-color: var(--blue);
+        }
+        
+        .vertical-timeline-item {
+            position: relative;
+            margin: 2rem 0;
+        }
+        
+        .vertical-timeline-item:nth-child(odd) {
+            padding-right: calc(50% + 30px);
+        }
+        
+        .vertical-timeline-item:nth-child(even) {
+            padding-left: calc(50% + 30px);
+        }
+        
+        .vertical-timeline-dot {
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            background-color: white;
+            border: 4px solid var(--blue);
+            z-index: 1;
+        }
+        
+        /* Image overlay hover effect */
+        .image-overlay {
+            position: relative;
+            overflow: hidden;
+            border-radius: 8px;
+        }
+        
+        .image-overlay img {
+            transition: transform 0.5s ease;
+        }
+        
+        .image-overlay:hover img {
+            transform: scale(1.05);
+        }
+        
+        .image-overlay::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to bottom, rgba(0,0,0,0) 50%, rgba(0,0,0,0.7) 100%);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        
+        .image-overlay:hover::after {
+            opacity: 1;
+        }
+        
+        .image-overlay-content {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            padding: 2rem;
+            color: white;
+            transform: translateY(50px);
+            opacity: 0;
+            transition: all 0.3s ease;
+            z-index: 2;
+        }
+        
+        .image-overlay:hover .image-overlay-content {
+            transform: translateY(0);
+            opacity: 1;
+        }
+
+        .ca-logo-bg {
+            background-color: #666666;
+            padding: 10px;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+    <!-- Background shapes -->
+    <div class="bg-shape bg-shape-1"></div>
+    <div class="bg-shape bg-shape-2"></div>
+    <div class="bg-shape bg-shape-3"></div>
+
+    <!-- Navigation -->
+    <nav class="fixed top-0 w-full bg-white shadow-md z-50 hidden-print">
+        <div class="container mx-auto px-6 py-3 flex justify-between items-center">
+            <div class="flex items-center">
+                <div class="text-2xl font-extrabold">
+                    <span class="text-blue">Insure</span><span class="text-red">M</span><span class="text-green">E</span><span class="text-blue">P</span>
+                </div>
+            </div>
+            <div class="hidden md:flex space-x-8">
+                <a href="#how-it-works" class="nav-link py-2">How It Works</a>
+                <a href="#who-we-serve" class="nav-link py-2">Who We Serve</a>
+                <a href="#why-different" class="nav-link py-2">Why We're Different</a>
+                <a href="#contact" class="nav-link py-2">Get a Quote</a>
+                <a href="#" class="nav-link py-2">Broker Login</a>
+            </div>
+            <div class="md:hidden">
+                <button id="mobile-menu-button" class="outline-none">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                    </svg>
+                </button>
+            </div>
+        </div>
+        <div id="mobile-menu" class="hidden md:hidden bg-white shadow-md absolute w-full">
+            <div class="container mx-auto px-6 py-3 flex flex-col space-y-4">
+                <a href="#how-it-works" class="nav-link py-2">How It Works</a>
+                <a href="#who-we-serve" class="nav-link py-2">Who We Serve</a>
+                <a href="#why-different" class="nav-link py-2">Why We're Different</a>
+                <a href="#contact" class="nav-link py-2">Get a Quote</a>
+                <a href="#" class="nav-link py-2">Broker Login</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="pt-32 pb-20 bg-gradient-to-br from-blue-50 to-white relative">
+        <div class="container mx-auto px-6 flex flex-col md:flex-row items-center">
+            <div class="md:w-1/2 mb-10 md:mb-0" data-aos="fade-right" data-aos-duration="1000">
+                <h1 class="text-4xl md:text-5xl font-extrabold mb-6">
+                    <span class="text-blue gradient-text" data-text="Insuring Smarter Buildings">Insuring Smarter Buildings</span><br>
+                    <span>with Smarter Data</span>
+                </h1>
+                <p class="text-lg mb-8 text-gray-700">
+                    InsureMEP is the first MGA powered by real-time Mechanical, Electrical & Plumbing (MEP) infrastructure insights—giving underwriters better data and clients better rates.
+                </p>
+                <div class="flex flex-col md:flex-row space-y-4 md:space-y-0 md:space-x-4">
+                    <a href="#contact" class="btn-primary px-8 py-3 rounded-md font-bold text-center btn-glow">
+                        Get a Quote
+                    </a>
+                    <a href="#about" class="btn-secondary px-8 py-3 rounded-md font-bold text-center btn-glow">
+                        Partner With Us
+                    </a>
+                </div>
+            </div>
+            <div class="md:w-1/2 flex justify-center animate-float" data-aos="fade-left" data-aos-duration="1000">
+                <div class="image-overlay rounded-lg shadow-2xl">
+                    <img src="https://lirp.cdn-website.com/f0def7f0/dms3rep/multi/opt/CriticalAsset_Current_ElectricalPanel-1920w.png" alt="Building Infrastructure" class="max-w-full rounded-lg">
+                    <div class="image-overlay-content">
+                        <h3 class="text-xl font-bold mb-2">Smart Electrical Panels</h3>
+                        <p>Real-time monitoring for proactive risk management</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <svg class="hero-wave" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 100">
+            <path fill="#ffffff" fill-opacity="1" d="M0,64L60,58.7C120,53,240,43,360,42.7C480,43,600,53,720,58.7C840,64,960,64,1080,56C1200,48,1320,32,1380,24L1440,16L1440,320L1380,320C1320,320,1200,320,1080,320C960,320,840,320,720,320C600,320,480,320,360,320C240,320,120,320,60,320L0,320Z"></path>
+        </svg>
+    </section>
+
+    <!-- CriticalAsset Integration Banner -->
+    <section class="bg-white py-10">
+        <div class="container mx-auto px-6">
+            <div class="flex flex-col md:flex-row items-center justify-center space-y-4 md:space-y-0 md:space-x-8" data-aos="fade-up">
+                <div class="text-center md:text-left">
+                    <p class="text-gray-600 font-medium">Powered by</p>
+                </div>
+                <div class="ca-logo-bg">
+                    <img src="https://lirp.cdn-website.com/f0def7f0/dms3rep/multi/opt/CriticalAssetLogo_black-448w.png" alt="CriticalAsset Logo" class="h-12">
+                </div>
+                <div class="h-12 w-px bg-gray-300 hidden md:block"></div>
+                <div class="text-center md:text-left">
+                    <p class="text-gray-600">Transforming facilities into efficient, organized, paperless, smart buildings.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- How It Works Section -->
+    <section id="how-it-works" class="section bg-white py-20">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-16" data-aos="fade-up">
+                <h2 class="text-3xl md:text-4xl font-bold mb-4">From Circuit to Coverage—Here's How We Do It</h2>
+                <div class="w-24 h-1 bg-blue mx-auto"></div>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="step-card bg-white p-8 rounded-lg shadow-lg relative" data-aos="fade-up" data-aos-delay="100">
+                    <span class="step-number">1</span>
+                    <div class="service-icon bg-blue mb-6 mx-auto">
+                        <i class="fas fa-map-marked-alt"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-4 text-center">Scan & Map</h3>
+                    <p class="text-gray-600">Use CriticalAsset to digitally map and document all MEP systems throughout your building. Creates a complete digital inventory of your infrastructure.</p>
+                    <div class="absolute bottom-0 left-0 w-full h-1 bg-gradient-to-r from-blue-100 to-blue-500 transform scale-x-0 origin-left transition-transform duration-500 group-hover:scale-x-100"></div>
+                </div>
+                <div class="step-card bg-white p-8 rounded-lg shadow-lg relative" data-aos="fade-up" data-aos-delay="200">
+                    <span class="step-number">2</span>
+                    <div class="service-icon bg-red mb-6 mx-auto">
+                        <i class="fas fa-chart-line"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-4 text-center">Analyze & Score</h3>
+                    <p class="text-gray-600">We evaluate infrastructure age, maintenance records, and sensor health to create a comprehensive risk score that helps determine insurance terms.</p>
+                    <div class="absolute bottom-0 left-0 w-full h-1 bg-gradient-to-r from-red-100 to-red-500 transform scale-x-0 origin-left transition-transform duration-500 group-hover:scale-x-100"></div>
+                </div>
+                <div class="step-card bg-white p-8 rounded-lg shadow-lg relative" data-aos="fade-up" data-aos-delay="300">
+                    <span class="step-number">3</span>
+                    <div class="service-icon bg-green mb-6 mx-auto">
+                        <i class="fas fa-shield-alt"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-4 text-center">Underwrite & Insure</h3>
+                    <p class="text-gray-600">Properties with better infrastructure get better pricing, faster decisions, and lower deductibles. We reward building owners who invest in quality MEP systems.</p>
+                    <div class="absolute bottom-0 left-0 w-full h-1 bg-gradient-to-r from-green-100 to-green-500 transform scale-x-0 origin-left transition-transform duration-500 group-hover:scale-x-100"></div>
+                </div>
+            </div>
+            <div class="text-center mt-16" data-aos="fade-up" data-aos-delay="400">
+                <a href="#contact" class="btn-primary px-8 py-3 rounded-md font-bold inline-block btn-glow">See Full Workflow</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Stats Section -->
+    <section class="py-16 bg-gray-50">
+        <div class="container mx-auto px-6">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8 text-center">
+                <div class="counter-wrapper" data-aos="fade-up" data-aos-delay="100">
+                    <div class="counter-value" data-count="40">0</div>
+                    <div class="counter-label">Less Claims</div>
+                </div>
+                <div class="counter-wrapper" data-aos="fade-up" data-aos-delay="200">
+                    <div class="counter-value" data-count="25">0</div>
+                    <div class="counter-label">Premium Savings</div>
+                </div>
+                <div class="counter-wrapper" data-aos="fade-up" data-aos-delay="300">
+                    <div class="counter-value" data-count="90">0</div>
+                    <div class="counter-label">Issue Detection</div>
+                </div>
+                <div class="counter-wrapper" data-aos="fade-up" data-aos-delay="400">
+                    <div class="counter-value" data-count="100">0</div>
+                    <div class="counter-label">Customer Satisfaction</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Who We Serve Section -->
+    <section id="who-we-serve" class="section bg-white py-20">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-16" data-aos="fade-up">
+                <h2 class="text-3xl md:text-4xl font-bold mb-4">Designed for Owners, Built for Brokers</h2>
+                <div class="w-24 h-1 bg-blue mx-auto"></div>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="feature-card bg-white p-8 rounded-lg shadow-lg" data-aos="fade-up" data-aos-delay="100">
+                    <div class="h-16 flex items-center justify-center mb-6">
+                        <div class="w-20 h-20 rounded-full bg-blue-100 flex items-center justify-center">
+                            <i class="fas fa-building text-4xl text-blue"></i>
+                        </div>
+                    </div>
+                    <h3 class="text-xl font-bold mb-6 text-center">Property Owners & Facility Managers</h3>
+                    <ul class="space-y-4 text-gray-600">
+                        <li class="flex items-start">
+                            <i class="fas fa-check-circle text-green mt-1 mr-3"></i>
+                            <span>Unlock lower premiums for healthy infrastructure</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check-circle text-green mt-1 mr-3"></i>
+                            <span>Get risk feedback before you even apply</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check-circle text-green mt-1 mr-3"></i>
+                            <span>Improve infrastructure for better insurance terms</span>
+                        </li>
+                    </ul>
+                    <div class="mt-8 text-center">
+                        <a href="#contact" class="text-blue font-bold inline-flex items-center group">
+                            Learn More
+                            <i class="fas fa-arrow-right ml-2 transform group-hover:translate-x-2 transition-transform"></i>
+                        </a>
+                    </div>
+                </div>
+                <div class="feature-card bg-white p-8 rounded-lg shadow-lg" data-aos="fade-up" data-aos-delay="200">
+                    <div class="h-16 flex items-center justify-center mb-6">
+                        <div class="w-20 h-20 rounded-full bg-red-100 flex items-center justify-center">
+                            <i class="fas fa-handshake text-4xl text-red"></i>
+                        </div>
+                    </div>
+                    <h3 class="text-xl font-bold mb-6 text-center">Insurance Brokers</h3>
+                    <ul class="space-y-4 text-gray-600">
+                        <li class="flex items-start">
+                            <i class="fas fa-check-circle text-green mt-1 mr-3"></i>
+                            <span>Quote faster with fewer back-and-forths</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check-circle text-green mt-1 mr-3"></i>
+                            <span>Use our tech as your competitive edge</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check-circle text-green mt-1 mr-3"></i>
+                            <span>Offer clients innovative solutions that reduce premiums</span>
+                        </li>
+                    </ul>
+                    <div class="mt-8 text-center">
+                        <a href="#contact" class="text-red font-bold inline-flex items-center group">
+                            Learn More
+                            <i class="fas fa-arrow-right ml-2 transform group-hover:translate-x-2 transition-transform"></i>
+                        </a>
+                    </div>
+                </div>
+                <div class="feature-card bg-white p-8 rounded-lg shadow-lg" data-aos="fade-up" data-aos-delay="300">
+                    <div class="h-16 flex items-center justify-center mb-6">
+                        <div class="w-20 h-20 rounded-full bg-green-100 flex items-center justify-center">
+                            <i class="fas fa-chart-pie text-4xl text-green"></i>
+                        </div>
+                    </div>
+                    <h3 class="text-xl font-bold mb-6 text-center">REITs & Institutional Investors</h3>
+                    <ul class="space-y-4 text-gray-600">
+                        <li class="flex items-start">
+                            <i class="fas fa-check-circle text-green mt-1 mr-3"></i>
+                            <span>Portfolio-wide infrastructure benchmarking</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check-circle text-green mt-1 mr-3"></i>
+                            <span>Predictive risk analysis & loss mitigation</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check-circle text-green mt-1 mr-3"></i>
+                            <span>Optimize capital expenditures across properties</span>
+                        </li>
+                    </ul>
+                    <div class="mt-8 text-center">
+                        <a href="#contact" class="text-green font-bold inline-flex items-center group">
+                            Learn More
+                            <i class="fas fa-arrow-right ml-2 transform group-hover:translate-x-2 transition-transform"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="text-center mt-16" data-aos="fade-up">
+                <a href="#contact" class="btn-primary px-8 py-3 rounded-md font-bold inline-block btn-glow">Start a Conversation</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Why We're Different Section -->
+    <section id="why-different" class="section bg-gray-50 py-20">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-16" data-aos="fade-up">
+                <h2 class="text-3xl md:text-4xl font-bold mb-4">An MGA That Doesn't Rely on Guesswork</h2>
+                <div class="w-24 h-1 bg-blue mx-auto"></div>
+                <p class="text-lg text-gray-600 mt-4">We leverage real-time infrastructure data for more accurate risk assessment and pricing.</p>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center mb-20">
+                <div data-aos="fade-right" data-aos-duration="1000">
+                    <div class="image-overlay rounded-lg">
+                        <img src="https://lirp.cdn-website.com/f0def7f0/dms3rep/multi/opt/CriticalAsset_Current_SmartStorage-1920w.png" alt="Real-Time Data" class="rounded-lg shadow-xl">
+                        <div class="image-overlay-content">
+                            <h3 class="text-xl font-bold mb-2">Smart Document Storage</h3>
+                            <p>All your facility documents in one secure location</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="space-y-8" data-aos="fade-left" data-aos-duration="1000">
+                    <div class="bg-white p-6 rounded-lg border-l-4 border-blue transform transition hover:scale-105 shadow-md">
+                        <h3 class="text-xl font-bold mb-3 flex items-center">
+                            <div class="w-12 h-12 rounded-full bg-blue-100 flex items-center justify-center mr-4">
+                                <i class="fas fa-bolt text-blue"></i>
+                            </div>
+                            Real-Time Data
+                        </h3>
+                        <p class="text-gray-600">Live monitoring of HVAC, electrical panels & plumbing systems keeps our underwriting current. Sensor alerts provide early warning of potential issues.</p>
+                    </div>
+                    <div class="bg-white p-6 rounded-lg border-l-4 border-red transform transition hover:scale-105 shadow-md">
+                        <h3 class="text-xl font-bold mb-3 flex items-center">
+                            <div class="w-12 h-12 rounded-full bg-red-100 flex items-center justify-center mr-4">
+                                <i class="fas fa-drafting-compass text-red"></i>
+                            </div>
+                            Verified Blueprints
+                        </h3>
+                        <p class="text-gray-600">We use mapped plans and digital models of your infrastructure, not vague building ages or incomplete maintenance records.</p>
+                    </div>
+                    <div class="bg-white p-6 rounded-lg border-l-4 border-green transform transition hover:scale-105 shadow-md">
+                        <h3 class="text-xl font-bold mb-3 flex items-center">
+                            <div class="w-12 h-12 rounded-full bg-green-100 flex items-center justify-center mr-4">
+                                <i class="fas fa-tachometer-alt text-green"></i>
+                            </div>
+                            Preventive Pricing
+                        </h3>
+                        <p class="text-gray-600">Get discounted rates for proactive maintenance and infrastructure modernization. We reward buildings that are managed properly.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+                <div class="space-y-8 order-2 md:order-1" data-aos="fade-right" data-aos-duration="1000">
+                    <div class="bg-white p-6 rounded-lg border-l-4 border-blue transform transition hover:scale-105 shadow-md">
+                        <h3 class="text-xl font-bold mb-3 flex items-center">
+                            <div class="w-12 h-12 rounded-full bg-blue-100 flex items-center justify-center mr-4">
+                                <i class="fas fa-search text-blue"></i>
+                            </div>
+                            Instant Inspections
+                        </h3>
+                        <p class="text-gray-600">CriticalAsset virtual assessments allow us to evaluate your infrastructure remotely, speeding up the underwriting process.</p>
+                    </div>
+                    <div class="bg-white p-6 rounded-lg border-l-4 border-red transform transition hover:scale-105 shadow-md">
+                        <h3 class="text-xl font-bold mb-3 flex items-center">
+                            <div class="w-12 h-12 rounded-full bg-red-100 flex items-center justify-center mr-4">
+                                <i class="fas fa-shield-alt text-red"></i>
+                            </div>
+                            Risk Mitigation Tools
+                        </h3>
+                        <p class="text-gray-600">Beyond coverage, we provide tools to help identify and mitigate potential risks before they cause claims.</p>
+                    </div>
+                    <div class="bg-white p-6 rounded-lg border-l-4 border-green transform transition hover:scale-105 shadow-md">
+                        <h3 class="text-xl font-bold mb-3 flex items-center">
+                            <div class="w-12 h-12 rounded-full bg-green-100 flex items-center justify-center mr-4">
+                                <i class="fas fa-history text-green"></i>
+                            </div>
+                            Continuous Monitoring
+                        </h3>
+                        <p class="text-gray-600">We don't just insure and forget. Our system continuously monitors building health for ongoing risk assessment.</p>
+                    </div>
+                </div>
+                <div class="order-1 md:order-2" data-aos="fade-left" data-aos-duration="1000">
+                    <div class="image-overlay rounded-lg">
+                        <img src="https://lirp.cdn-website.com/f0def7f0/dms3rep/multi/opt/CA_Current_Team-1920w.png" alt="Team Collaboration" class="rounded-lg shadow-xl">
+                        <div class="image-overlay-content">
+                            <h3 class="text-xl font-bold mb-2">Team Collaboration</h3>
+                            <p>Connect your entire team and contractors to your infrastructure data</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="text-center mt-16" data-aos="fade-up">
+                <a href="#contact" class="btn-primary px-8 py-3 rounded-md font-bold inline-block btn-glow">Learn About Our Advantage</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Technology Integration Section -->
+    <section class="py-20 bg-white">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-16" data-aos="fade-up">
+                <h2 class="text-3xl md:text-4xl font-bold mb-4">Powered by Advanced Technology</h2>
+                <div class="w-24 h-1 bg-blue mx-auto"></div>
+                <p class="text-lg text-gray-600 mt-4">Our integration with CriticalAsset provides unmatched visibility into your building systems</p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="card-flip" data-aos="flip-left" data-aos-delay="100">
+                    <div class="card-flip-inner">
+                        <div class="card-flip-front bg-white p-8 rounded-lg shadow-lg flex flex-col items-center justify-center">
+                            <div class="w-20 h-20 rounded-full bg-blue-100 flex items-center justify-center mb-6">
+                                <i class="fas fa-bolt text-4xl text-blue"></i>
+                            </div>
+                            <h3 class="text-xl font-bold mb-4">Smart Electrical Panels</h3>
+                            <p class="text-gray-600 text-center">Real-time monitoring of electrical systems for early detection of potential issues</p>
+                            <div class="mt-4 text-blue text-sm">(Flip for more info)</div>
+                        </div>
+                        <div class="card-flip-back">
+                            <h3 class="text-xl font-bold mb-4">Smart Electrical Panels</h3>
+                            <p class="mb-4">Comprehensive mapping of your building's electrical infrastructure including:</p>
+                            <ul class="space-y-2 text-sm">
+                                <li>• Circuit tracking and documentation</li>
+                                <li>• Load monitoring and alerts</li>
+                                <li>• Maintenance scheduling</li>
+                                <li>• Risk assessment scoring</li>
+                                <li>• Integration with building systems</li>
+                            </ul>
+                            <a href="#contact" class="mt-6 bg-white text-blue px-6 py-2 rounded-md font-bold inline-block">Learn More</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card-flip" data-aos="flip-left" data-aos-delay="200">
+                    <div class="card-flip-inner">
+                        <div class="card-flip-front bg-white p-8 rounded-lg shadow-lg flex flex-col items-center justify-center">
+                            <div class="w-20 h-20 rounded-full bg-red-100 flex items-center justify-center mb-6">
+                                <i class="fas fa-water text-4xl text-red"></i>
+                            </div>
+                            <h3 class="text-xl font-bold mb-4">Plumbing Monitoring</h3>
+                            <p class="text-gray-600 text-center">Water leak detection and pressure monitoring to prevent costly water damage</p>
+                            <div class="mt-4 text-red text-sm">(Flip for more info)</div>
+                        </div>
+                        <div class="card-flip-back" style="background: linear-gradient(135deg, var(--red), #950e20);">
+                            <h3 class="text-xl font-bold mb-4">Plumbing Monitoring</h3>
+                            <p class="mb-4">Comprehensive water system monitoring including:</p>
+                            <ul class="space-y-2 text-sm">
+                                <li>• Early leak detection</li>
+                                <li>• Water pressure monitoring</li>
+                                <li>• Supply line documentation</li>
+                                <li>• Preventative maintenance alerts</li>
+                                <li>• Historical usage data analysis</li>
+                            </ul>
+                            <a href="#contact" class="mt-6 bg-white text-red px-6 py-2 rounded-md font-bold inline-block">Learn More</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card-flip" data-aos="flip-left" data-aos-delay="300">
+                    <div class="card-flip-inner">
+                        <div class="card-flip-front bg-white p-8 rounded-lg shadow-lg flex flex-col items-center justify-center">
+                            <div class="w-20 h-20 rounded-full bg-green-100 flex items-center justify-center mb-6">
+                                <i class="fas fa-temperature-high text-4xl text-green"></i>
+                            </div>
+                            <h3 class="text-xl font-bold mb-4">HVAC Intelligence</h3>
+                            <p class="text-gray-600 text-center">Performance monitoring and predictive maintenance for your heating and cooling systems</p>
+                            <div class="mt-4 text-green text-sm">(Flip for more info)</div>
+                        </div>
+                        <div class="card-flip-back" style="background: linear-gradient(135deg, var(--green), #017438);">
+                            <h3 class="text-xl font-bold mb-4">HVAC Intelligence</h3>
+                            <p class="mb-4">Complete HVAC system monitoring including:</p>
+                            <ul class="space-y-2 text-sm">
+                                <li>• Performance efficiency tracking</li>
+                                <li>• Temperature monitoring</li>
+                                <li>• Predictive maintenance</li>
+                                <li>• System age and health assessment</li>
+                                <li>• Energy usage optimization</li>
+                            </ul>
+                            <a href="#contact" class="mt-6 bg-white text-green px-6 py-2 rounded-md font-bold inline-block">Learn More</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Awards Section -->
+    <section class="py-16 bg-white">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-16" data-aos="fade-up">
+                <div class="trophy-icon">
+                    <i class="fas fa-trophy"></i>
+                </div>
+                <h2 class="text-3xl md:text-4xl font-bold mb-4">Award-Winning Technology</h2>
+                <div class="w-24 h-1 bg-blue mx-auto"></div>
+                <p class="text-lg text-gray-600 mt-4 max-w-3xl mx-auto">Our innovative approach to insurance has been recognized throughout the industry</p>
+            </div>
+            
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
+                <div class="p-6" data-aos="zoom-in" data-aos-delay="100">
+                    <div class="w-20 h-20 rounded-full bg-blue-100 flex items-center justify-center mb-4 mx-auto">
+                        <i class="fas fa-medal text-3xl text-blue"></i>
+                    </div>
+                    <h3 class="font-bold">InsureTech Innovation Award</h3>
+                    <p class="text-sm text-gray-600 mt-2">2023</p>
+                </div>
+                <div class="p-6" data-aos="zoom-in" data-aos-delay="200">
+                    <div class="w-20 h-20 rounded-full bg-red-100 flex items-center justify-center mb-4 mx-auto">
+                        <i class="fas fa-award text-3xl text-red"></i>
+                    </div>
+                    <h3 class="font-bold">Property Tech Disruptor</h3>
+                    <p class="text-sm text-gray-600 mt-2">2022</p>
+                </div>
+                <div class="p-6" data-aos="zoom-in" data-aos-delay="300">
+                    <div class="w-20 h-20 rounded-full bg-green-100 flex items-center justify-center mb-4 mx-auto">
+                        <i class="fas fa-star text-3xl text-green"></i>
+                    </div>
+                    <h3 class="font-bold">Smart Building Excellence</h3>
+                    <p class="text-sm text-gray-600 mt-2">2023</p>
+                </div>
+                <div class="p-6" data-aos="zoom-in" data-aos-delay="400">
+                    <div class="w-20 h-20 rounded-full bg-blue-100 flex items-center justify-center mb-4 mx-auto">
+                        <i class="fas fa-thumbs-up text-3xl text-blue"></i>
+                    </div>
+                    <h3 class="font-bold">Risk Management Innovation</h3>
+                    <p class="text-sm text-gray-600 mt-2">2022</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section with CriticalAsset Integration -->
+    <section class="py-20 bg-gradient-to-br from-blue-800 to-blue-900 text-white">
+        <div class="container mx-auto px-6">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+                <div data-aos="fade-right" data-aos-duration="1000">
+                    <h2 class="text-3xl md:text-4xl font-bold mb-6">Powered by CriticalAsset Technology</h2>
+                    <p class="text-lg mb-8">Our integration with CriticalAsset's building infrastructure platform provides unprecedented visibility into your MEP systems, creating better risk assessment and insurance pricing.</p>
+                    <div class="flex flex-col md:flex-row space-y-4 md:space-y-0 md:space-x-4">
+                        <a href="https://www.criticalasset.com" target="_blank" class="bg-white text-blue-800 px-8 py-3 rounded-md font-bold text-center btn-glow">
+                            Learn About CriticalAsset
+                        </a>
+                        <a href="#contact" class="border-2 border-white px-8 py-3 rounded-md font-bold text-center hover:bg-white hover:text-blue-800 transition btn-glow">
+                            Get Coverage Quote
+                        </a>
+                    </div>
+                </div>
+                <div class="flex justify-center" data-aos="fade-left" data-aos-duration="1000">
+                    <div class="ca-logo-bg transform hover:scale-105 transition duration-500 rounded-lg shadow-2xl">
+                        <img src="https://lirp.cdn-website.com/f0def7f0/dms3rep/multi/opt/CriticalAssetLogo_black-448w.png" alt="CriticalAsset Logo" class="max-w-full h-auto p-6">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact/Quote Section -->
+    <section id="contact" class="section bg-white py-20">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-16" data-aos="fade-up">
+                <h2 class="text-3xl md:text-4xl font-bold mb-4">Let's See If You Qualify for Smarter Rates</h2>
+                <div class="w-24 h-1 bg-blue mx-auto"></div>
+                <p class="text-lg text-gray-600 mt-4">Submit your property info or connect your CriticalAsset account to get pre-underwritten in 24 hours.</p>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-12">
+                <div class="bg-white p-8 rounded-lg shadow-xl border border-gray-100" data-aos="fade-right" data-aos-duration="1000">
+                    <h3 class="text-2xl font-bold mb-6">Get a Quote</h3>
+                    <form class="space-y-6" method="POST" action="https://criticalasset.app.n8n.cloud/webhook/get-quote">
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <div>
+                                <label for="firstName" class="block text-gray-700 font-medium mb-2">First Name</label>
+                                <input type="text" id="firstName" name="firstName" class="contact-input w-full px-4 py-3 rounded-md" placeholder="Your first name">
+                            </div>
+                            <div>
+                                <label for="lastName" class="block text-gray-700 font-medium mb-2">Last Name</label>
+                                <input type="text" id="lastName" name="lastName" class="contact-input w-full px-4 py-3 rounded-md" placeholder="Your last name">
+                            </div>
+                        </div>
+                        <div>
+                            <label for="email" class="block text-gray-700 font-medium mb-2">Email Address</label>
+                            <input type="email" id="email" name="email" class="contact-input w-full px-4 py-3 rounded-md" placeholder="your@email.com">
+                        </div>
+                        <div>
+                            <label for="phone" class="block text-gray-700 font-medium mb-2">Phone Number</label>
+                            <input type="tel" id="phone" name="phone" class="contact-input w-full px-4 py-3 rounded-md" placeholder="(555) 123-4567">
+                        </div>
+                        <div>
+                            <label for="propertyType" class="block text-gray-700 font-medium mb-2">Property Type</label>
+                            <select id="propertyType" name="propertyType" class="contact-input w-full px-4 py-3 rounded-md bg-white">
+                                <option value="" selected disabled>Select property type</option>
+                                <option value="multifamily">Multifamily</option>
+                                <option value="office">Office Building</option>
+                                <option value="retail">Retail</option>
+                                <option value="healthcare">Healthcare Facility</option>
+                                <option value="education">Educational Institution</option>
+                                <option value="other">Other Commercial</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label for="message" class="block text-gray-700 font-medium mb-2">Tell Us About Your Property</label>
+                            <textarea id="message" name="message" rows="4" class="contact-input w-full px-4 py-3 rounded-md" placeholder="Square footage, age, recent upgrades, etc."></textarea>
+                        </div>
+                        <div>
+                            <button type="submit" class="btn-primary w-full py-3 rounded-md font-bold btn-glow">Submit for Quote</button>
+                        </div>
+                    </form>
+                </div>
+                <div class="flex flex-col justify-between" data-aos="fade-left" data-aos-duration="1000">
+                    <div class="bg-white p-8 rounded-lg shadow-xl border border-gray-100 mb-8">
+                        <h3 class="text-2xl font-bold mb-6">Already using CriticalAsset?</h3>
+                        <p class="text-gray-600 mb-6">Connect your CriticalAsset account for an expedited underwriting process and potential additional discounts.</p>
+                        <button class="btn-secondary w-full py-3 rounded-md font-bold flex items-center justify-center btn-glow">
+                            <div class="ca-logo-bg mr-2 p-1 rounded">
+                                <img src="https://lirp.cdn-website.com/f0def7f0/dms3rep/multi/opt/CriticalAssetLogo_black-448w.png" alt="CriticalAsset" class="h-6">
+                            </div>
+                            Log In with CriticalAsset
+                        </button>
+                    </div>
+                    <div class="bg-white p-8 rounded-lg shadow-xl border border-gray-100">
+                        <h3 class="text-2xl font-bold mb-6">For Brokers</h3>
+                        <p class="text-gray-600 mb-6">Insurance brokers can register for our portal to submit multiple properties and access our broker-specific tools.</p>
+                        <a href="#" class="btn-tertiary w-full py-3 rounded-md font-bold block text-center btn-glow">
+                            Broker Registration
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-white py-12">
+        <div class="container mx-auto px-6">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
+                <div>
+                    <div class="text-2xl font-extrabold mb-4">
+                        <span class="text-blue">Insure</span><span class="text-red">M</span><span class="text-green">E</span><span class="text-blue">P</span>
+                    </div>
+                    <p class="text-gray-400">InsureMEP is an MGA specializing in infrastructure-driven commercial property insurance.</p>
+                </div>
+                <div>
+                    <h4 class="text-lg font-bold mb-4">Quick Links</h4>
+                    <ul class="space-y-2">
+                        <li><a href="#how-it-works" class="text-gray-400 hover:text-white transition">How It Works</a></li>
+                        <li><a href="#who-we-serve" class="text-gray-400 hover:text-white transition">Who We Serve</a></li>
+                        <li><a href="#why-different" class="text-gray-400 hover:text-white transition">Why We're Different</a></li>
+                        <li><a href="#contact" class="text-gray-400 hover:text-white transition">Get a Quote</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="text-lg font-bold mb-4">Resources</h4>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="text-gray-400 hover:text-white transition">About Us</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition">Privacy Policy</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition">Carrier Partners</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition">Broker Resources</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="text-lg font-bold mb-4">Contact</h4>
+                    <ul class="space-y-3">
+                        <li class="flex items-start">
+                            <i class="fas fa-map-marker-alt mt-1 mr-3 text-blue"></i>
+                            <span class="text-gray-400">Long Beach, CA</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-phone mt-1 mr-3 text-blue"></i>
+                            <span class="text-gray-400">(718) 839-0115</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-envelope mt-1 mr-3 text-blue"></i>
+                            <span class="text-gray-400"><a href="info@criticalasset.com" class="__cf_email__" data-cfemail="93fafdf5fcd3f0e1fae7faf0f2fff2e0e0f6e7bdf0fcfe">info @ criticalasset.com</a></span>
+                        </li>
+                    </ul>
+                    <div class="flex space-x-4 mt-4">
+                        <a href="https://www.facebook.com/criticalasset" target="_blank" class="text-gray-400 hover:text-white transition">
+                            <i class="fab fa-facebook-f fa-lg"></i>
+                        </a>
+                        <a href="https://www.instagram.com/critical.asset/" target="_blank" class="text-gray-400 hover:text-white transition">
+                            <i class="fab fa-instagram fa-lg"></i>
+                        </a>
+                        <a href="https://www.linkedin.com/company/criticalasset/" target="_blank" class="text-gray-400 hover:text-white transition">
+                            <i class="fab fa-linkedin fa-lg"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="pt-8 border-t border-gray-700 flex flex-col md:flex-row justify-between items-center">
+                <div class="text-gray-400 mb-4 md:mb-0">
+                    © 2025 InsureMEP. All rights reserved.
+                </div>
+                <div class="flex items-center">
+                    <span class="text-gray-400 mr-2">Powered by</span>
+                    <a href="https://www.criticalasset.com" target="_blank" class="hover:opacity-80 transition">
+                        <div class="ca-logo-bg p-1 rounded">
+                            <img src="https://lirp.cdn-website.com/f0def7f0/dms3rep/multi/opt/CriticalAssetLogo_black-448w.png" alt="CriticalAsset" class="h-6">
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scroll to Top Button -->
+    <div id="scroll-top" class="scroll-top hidden-print">
+        <i class="fas fa-chevron-up"></i>
+    </div>
+
+    <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
+    <script>
+        // Initialize AOS
+        AOS.init({
+            duration: 800,
+            easing: 'ease-in-out',
+            once: true
+        });
+        
+        // Mobile menu toggle
+        const mobileMenuButton = document.getElementById('mobile-menu-button');
+        const mobileMenu = document.getElementById('mobile-menu');
+
+        mobileMenuButton.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                if (this.getAttribute('href') !== '#') {
+                    const target = document.querySelector(this.getAttribute('href'));
+                    if (target) {
+                        window.scrollTo({
+                            top: target.offsetTop - 80,
+                            behavior: 'smooth'
+                        });
+                    }
+                    // Close mobile menu if open
+                    mobileMenu.classList.add('hidden');
+                }
+            });
+        });
+
+        // Scroll to top button
+        const scrollTopButton = document.getElementById('scroll-top');
+        
+        window.addEventListener('scroll', () => {
+            if (window.pageYOffset > 300) {
+                scrollTopButton.classList.add('active');
+                scrollTopButton.classList.remove('opacity-0');
+            } else {
+                scrollTopButton.classList.remove('active');
+                scrollTopButton.classList.add('opacity-0');
+            }
+        });
+        
+        scrollTopButton.addEventListener('click', () => {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+        
+        // Carousel functionality
+        const carousel = document.querySelector('.carousel');
+        const carouselInner = document.querySelector('.carousel-inner');
+        const carouselItems = document.querySelectorAll('.carousel-item');
+        const prevBtn = document.querySelector('.carousel-control-prev');
+        const nextBtn = document.querySelector('.carousel-control-next');
+        const indicators = document.querySelectorAll('.carousel-indicator');
+        
+        let currentIndex = 0;
+        const itemWidth = 100; // 100% of container
+        
+        function updateCarousel() {
+            carouselInner.style.transform = `translateX(-${currentIndex * itemWidth}%)`;
+            
+            indicators.forEach((indicator, index) => {
+                if (index === currentIndex) {
+                    indicator.classList.add('active');
+                } else {
+                    indicator.classList.remove('active');
+                }
+            });
+        }
+        
+        if (prevBtn && nextBtn) {
+            nextBtn.addEventListener('click', () => {
+                currentIndex = (currentIndex + 1) % carouselItems.length;
+                updateCarousel();
+            });
+            
+            prevBtn.addEventListener('click', () => {
+                currentIndex = (currentIndex - 1 + carouselItems.length) % carouselItems.length;
+                updateCarousel();
+            });
+        }
+        
+        if (indicators.length > 0) {
+            indicators.forEach((indicator, index) => {
+                indicator.addEventListener('click', () => {
+                    currentIndex = index;
+                    updateCarousel();
+                });
+            });
+            
+            // Auto advance carousel every 5 seconds
+            setInterval(() => {
+                currentIndex = (currentIndex + 1) % carouselItems.length;
+                updateCarousel();
+            }, 5000);
+        }
+        
+        // Counter animation
+        const counters = document.querySelectorAll('.counter-value');
+        
+        const startCounters = () => {
+            counters.forEach(counter => {
+                const target = parseInt(counter.getAttribute('data-count'));
+                const count = +counter.innerText;
+                const increment = target / 40; // Speed of counting
+                
+                if (count < target) {
+                    counter.innerText = Math.ceil(count + increment);
+                    setTimeout(() => startCounters(), 40);
+                } else {
+                    counter.innerText = target;
+                    if (target > 0) {
+                        counter.innerText += '%';
+                    }
+                }
+            });
+        };
+        
+        // Start counters when they come into view
+        const counterObserver = new IntersectionObserver(
+            (entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        startCounters();
+                        counterObserver.unobserve(entry.target);
+                    }
+                });
+            },
+            { threshold: 0.5 }
+        );
+        
+        if (counters.length > 0) {
+            counterObserver.observe(document.querySelector('.counter-wrapper'));
+        }
+    </script>
+</body>
+</html>
+    <script id="html_badge_script1">
+        window.__genspark_remove_badge_link = "https://www.genspark.ai/api/html_badge/" +
+            "remove_badge?token=To%2FBnjzloZ3UfQdcSaYfDk4yTUE2zL1Xb8buNpVNCvhs%2B39V0ROhwETJJXR3XahTp%2Br3roQnG4P3reFJvSb5XGAyz%2B9HHoBZG99k5xSwZ%2Br1h6v0b3Kw6yDbA2KGogAFiCkg0O4PF5sCz4ktljliTE0T7KeVWzH0rY42d1ZqQ4sQIhZwh6H2pAjkq0la2vf7Ntp2npaXlE8f7GOxuvZu4T7atqKogxvsb29rHlsl8WsyqyFwhoNbtRswXv7jCff%2FyRYVTpfLkdtukiak2edBA%2BS%2Bqx86DXvpOLfUkpAPcxrFNFWyzqg%2Bt7AOC0NLyAOyB5SH6yuzhSjSn5O016bYwCga46nQ1NjWoUBdh5P39iVJX0psr1b8oCD6YfUFTf%2F1L1%2BOIY6vZXX18f4IPogMbZjrkGPpQuPOOwOsiMQIqY3Qd6FETIlG0xEJqVqYQZhfo4SG6cbmHknj4tcIrE6RNVmXXNArNQgt6f19J66hhK9pmwZgdOCmMcwdSTIibfM8NHF1m2xXVFUDxZRos9RlLXglazKf1FxagC5erDhmocA%3D";
+        window.__genspark_locale = "en-US";
+        window.__genspark_token = "To/BnjzloZ3UfQdcSaYfDk4yTUE2zL1Xb8buNpVNCvhs+39V0ROhwETJJXR3XahTp+r3roQnG4P3reFJvSb5XGAyz+9HHoBZG99k5xSwZ+r1h6v0b3Kw6yDbA2KGogAFiCkg0O4PF5sCz4ktljliTE0T7KeVWzH0rY42d1ZqQ4sQIhZwh6H2pAjkq0la2vf7Ntp2npaXlE8f7GOxuvZu4T7atqKogxvsb29rHlsl8WsyqyFwhoNbtRswXv7jCff/yRYVTpfLkdtukiak2edBA+S+qx86DXvpOLfUkpAPcxrFNFWyzqg+t7AOC0NLyAOyB5SH6yuzhSjSn5O016bYwCga46nQ1NjWoUBdh5P39iVJX0psr1b8oCD6YfUFTf/1L1+OIY6vZXX18f4IPogMbZjrkGPpQuPOOwOsiMQIqY3Qd6FETIlG0xEJqVqYQZhfo4SG6cbmHknj4tcIrE6RNVmXXNArNQgt6f19J66hhK9pmwZgdOCmMcwdSTIibfM8NHF1m2xXVFUDxZRos9RlLXglazKf1FxagC5erDhmocA=";
+    </script>
+    

@@ -1,0 +1,946 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+<script type="text/javascript" src="https://app.secureprivacy.ai/script/6832a781a32b1bf9b5b2a7ab.js"></script>
+
+<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-T3MZ43V4');</script>
+<!-- End Google Tag Manager -->
+
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-8M3X5312PN"></script>
+
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-8M3X5312PN');
+</script>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact | NoFriction</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/alpinejs@3.12.0/dist/cdn.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #ff5a5a;
+            --dark-bg: #0a0a0a;
+            --dark-card: #151515;
+            --text-color: #f5f5f5;
+            --text-secondary: #a0a0a0;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--dark-bg);
+            color: var(--text-color);
+            line-height: 1.6;
+        }
+
+        .nav-link {
+            position: relative;
+            color: var(--text-color);
+            text-decoration: none;
+            padding: 0.5rem 1rem;
+            transition: color 0.3s ease;
+        }
+
+        .nav-link.active {
+            color: var(--primary-color);
+        }
+
+        .nav-link.active::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 20px;
+            height: 2px;
+            background-color: var(--primary-color);
+        }
+
+        .btn {
+            padding: 0.5rem 1.5rem;
+            border-radius: 999px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .btn-primary {
+            background-color: var(--primary-color);
+            color: white;
+        }
+
+        .btn-outline {
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            background-color: rgba(255, 255, 255, 0.05);
+            color: var(--text-color);
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .code-snippet {
+            background: #1e1e1e;
+            border-radius: 8px;
+            padding: 1.5rem;
+            font-family: monospace;
+            font-size: 0.9rem;
+            color: #e0e0e0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .code-dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            display: inline-block;
+            margin-right: 6px;
+        }
+
+        .section-title {
+            font-weight: 700;
+            margin-bottom: 2rem;
+            position: relative;
+            display: inline-block;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -8px;
+            left: 0;
+            width: 40px;
+            height: 3px;
+            background-color: var(--primary-color);
+        }
+
+        .project-card {
+            background-color: var(--dark-card);
+            border-radius: 12px;
+            overflow: hidden;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .project-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+        }
+
+        .gradient-text {
+            background: linear-gradient(to right, #ff5a5a, #ff8a5a);
+            -webkit-background-clip: text;
+            color: transparent;
+        }
+
+        .lab-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            grid-gap: 2rem;
+            perspective: 1000px;
+        }
+
+        .tech-badge {
+            background-color: rgba(255,90,90,0.1);
+            color: var(--primary-color);
+            padding: 0.25rem 0.75rem;
+            border-radius: 999px;
+            font-size: 0.75rem;
+            font-weight: 500;
+        }
+
+        .futuristic-border {
+            border: 1px solid rgba(255, 90, 90, 0.3);
+            border-radius: 12px;
+            background: linear-gradient(145deg, rgba(21, 21, 21, 0.8), rgba(25, 25, 25, 0.4));
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+            backdrop-filter: blur(10px);
+        }
+
+        .pulse-circle {
+            position: absolute;
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(255,90,90,0.1) 0%, rgba(255,90,90,0) 70%);
+            animation: pulse 2s infinite;
+            z-index: 0;
+        }
+
+        @keyframes pulse {
+            0% {
+                transform: scale(0.8);
+                opacity: 0.8;
+            }
+            70% {
+                transform: scale(1.2);
+                opacity: 0;
+            }
+            100% {
+                transform: scale(0.8);
+                opacity: 0;
+            }
+        }
+
+        .rotating-circle {
+            position: absolute;
+            width: 400px;
+            height: 400px;
+            border-radius: 50%;
+            border: 1px dashed rgba(255, 255, 255, 0.1);
+            animation: rotate 60s linear infinite;
+        }
+
+        @keyframes rotate {
+            from {
+                transform: rotate(0deg);
+            }
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+        .animated-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+            grid-gap: 1.5rem;
+        }
+
+        .grid-item {
+            aspect-ratio: 1/1;
+            background-color: rgba(255, 255, 255, 0.03);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: transform 0.3s ease, background-color 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .grid-item:hover {
+            transform: translateY(-5px);
+            background-color: rgba(255, 90, 90, 0.1);
+        }
+
+        .marquee {
+            width: 100%;
+            overflow: hidden;
+            white-space: nowrap;
+            position: relative;
+        }
+
+        .marquee-content {
+            display: inline-block;
+            animation: marquee 20s linear infinite;
+        }
+
+        @keyframes marquee {
+            0% {
+                transform: translateX(0);
+            }
+            100% {
+                transform: translateX(-50%);
+            }
+        }
+
+        /* Custom scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: rgba(255,255,255,0.05);
+            border-radius: 10px;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: rgba(255,90,90,0.3);
+            border-radius: 10px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: rgba(255,90,90,0.5);
+        }
+
+        /* Timeline */
+        .timeline {
+            position: relative;
+            padding: 2rem 0;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 50%;
+            height: 100%;
+            width: 2px;
+            background: rgba(255, 255, 255, 0.1);
+            transform: translateX(-50%);
+        }
+
+        .timeline-item {
+            margin-bottom: 4rem;
+            position: relative;
+        }
+
+        .timeline-item:nth-child(odd) {
+            padding-right: 50%;
+            text-align: right;
+        }
+
+        .timeline-item:nth-child(even) {
+            padding-left: 50%;
+        }
+
+        .timeline-dot {
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 16px;
+            height: 16px;
+            border-radius: 50%;
+            background-color: var(--primary-color);
+            z-index: 1;
+        }
+
+        /* Interactive project cards */
+        .interactive-card {
+            position: relative;
+            transition: transform 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            transform-style: preserve-3d;
+        }
+
+        .interactive-card:hover {
+            transform: rotateY(10deg) rotateX(5deg);
+        }
+
+        .interactive-card::before {
+            content: '';
+            position: absolute;
+            top: -10px;
+            left: -10px;
+            right: -10px;
+            bottom: -10px;
+            border: 1px solid rgba(255, 90, 90, 0.3);
+            border-radius: 16px;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            z-index: -1;
+        }
+
+        .interactive-card:hover::before {
+            opacity: 1;
+        }
+
+        .project-image-container {
+            overflow: hidden;
+            border-radius: 8px;
+            position: relative;
+        }
+
+        .project-image-container img {
+            transition: transform 0.5s ease;
+            width: 100%;
+            object-fit: cover;
+        }
+
+        .project-image-container:hover img {
+            transform: scale(1.05);
+        }
+
+        /* Hover effect for icons */
+        .icon-hover {
+            transition: transform 0.3s ease, color 0.3s ease;
+        }
+
+        .icon-hover:hover {
+            transform: translateY(-5px);
+            color: var(--primary-color);
+        }
+
+        /* Footer styling */
+        footer {
+            background-color: var(--dark-card);
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .footer-link {
+            color: var(--text-secondary);
+            transition: color 0.3s ease;
+        }
+
+        .footer-link:hover {
+            color: var(--primary-color);
+        }
+
+        /* Typing Animation */
+        .typing {
+            overflow: hidden;
+            border-right: 2px solid var(--primary-color);
+            white-space: nowrap;
+            animation: typing 3.5s steps(40, end), blink-caret .75s step-end infinite;
+        }
+
+        @keyframes typing {
+            from { width: 0 }
+            to { width: 100% }
+        }
+
+        @keyframes blink-caret {
+            from, to { border-color: transparent }
+            50% { border-color: var(--primary-color) }
+        }
+        
+        /* Form Styling */
+        .form-input {
+            background-color: rgba(30, 30, 30, 0.8);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            color: var(--text-color);
+            border-radius: 8px;
+            padding: 12px 16px;
+            width: 100%;
+            transition: all 0.3s ease;
+        }
+        
+        .form-input:focus {
+            outline: none;
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 2px rgba(255, 90, 90, 0.2);
+        }
+        
+        .form-label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+        }
+        
+        .form-group {
+            margin-bottom: 24px;
+            position: relative;
+        }
+        
+        .form-group .form-icon {
+            position: absolute;
+            top: 47px;
+            left: 16px;
+            color: var(--text-secondary);
+        }
+        
+        .form-input-with-icon {
+            padding-left: 42px;
+        }
+        
+        .form-select {
+            appearance: none;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%23ff5a5a' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right 16px center;
+            background-size: 16px;
+            padding-right: 42px;
+        }
+        
+        .input-animation {
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .input-animation::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0%;
+            height: 2px;
+            background: linear-gradient(to right, #ff5a5a, #ff8a5a);
+            transition: width 0.3s ease;
+        }
+        
+        .form-input:focus + .input-animation::after {
+            width: 100%;
+        }
+        
+        /* Animation for form elements */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .animate-fadeInUp {
+            animation: fadeInUp 0.6s ease forwards;
+            opacity: 0;
+        }
+        
+        .delay-100 { animation-delay: 0.1s; }
+        .delay-200 { animation-delay: 0.2s; }
+        .delay-300 { animation-delay: 0.3s; }
+        .delay-400 { animation-delay: 0.4s; }
+        .delay-500 { animation-delay: 0.5s; }
+        .delay-600 { animation-delay: 0.6s; }
+
+        /* Checkbox styling */
+        .custom-checkbox {
+            display: flex;
+            align-items: flex-start;
+            position: relative;
+            padding-left: 35px;
+            margin-bottom: 15px;
+            cursor: pointer;
+        }
+
+        .custom-checkbox input {
+            position: absolute;
+            opacity: 0;
+            cursor: pointer;
+            height: 0;
+            width: 0;
+        }
+
+        .checkmark {
+            position: absolute;
+            top: 2px;
+            left: 0;
+            height: 22px;
+            width: 22px;
+            background-color: rgba(30, 30, 30, 0.8);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 4px;
+            transition: all 0.2s ease;
+        }
+
+        .custom-checkbox:hover input ~ .checkmark {
+            border-color: var(--primary-color);
+        }
+
+        .custom-checkbox input:checked ~ .checkmark {
+            background-color: var(--primary-color);
+            border-color: var(--primary-color);
+        }
+
+        .checkmark:after {
+            content: "";
+            position: absolute;
+            display: none;
+            left: 7px;
+            top: 3px;
+            width: 6px;
+            height: 12px;
+            border: solid white;
+            border-width: 0 2px 2px 0;
+            transform: rotate(45deg);
+        }
+
+        .custom-checkbox input:checked ~ .checkmark:after {
+            display: block;
+        }
+
+        .link-style {
+            color: var(--primary-color);
+            text-decoration: none;
+            position: relative;
+            transition: all 0.2s ease;
+        }
+
+        .link-style:after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 1px;
+            bottom: 0;
+            left: 0;
+            background-color: var(--primary-color);
+            transition: width 0.3s ease;
+        }
+
+        .link-style:hover:after {
+            width: 100%;
+        }
+        
+        /* Fixed navigation for desktop */
+        @media (min-width: 768px) {
+            .desktop-nav {
+                display: flex;
+            }
+            .mobile-menu-button {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body class="min-h-screen">
+    <!-- Navigation -->
+    <header class="py-4 px-6 md:px-12 w-full">
+        <div class="max-w-6xl mx-auto">
+            <nav class="flex items-center justify-between">
+                <a href="#" class="flex items-center">
+                    <img src="/images/nofrictionlogo10.png" alt="NoFriction Logo" class="h-10">
+                </a>
+                
+                <div class="hidden md:flex items-center space-x-6">
+                    <a href="/about.html" class="nav-link">About</a>
+                    <a href="/cv.html" class="nav-link">Customers & CV</a>
+                    <a href="/lab.html" class="nav-link">Secret Lab</a>
+                    <a href="#" class="nav-link active">Contact</a>
+                </div>
+                
+                <!-- Mobile menu button - ONLY visible on mobile -->
+                <button class="md:hidden btn btn-outline">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="relative pt-12 pb-24 px-6 md:px-12 overflow-hidden">
+        <div class="rotating-circle" style="top: -200px; left: -200px;"></div>
+        <div class="rotating-circle" style="bottom: -200px; right: -200px;"></div>
+        
+        <div class="max-w-6xl mx-auto relative z-10">
+            <div class="flex flex-col items-center">
+                <div class="w-full max-w-3xl">
+                    <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight mb-4 text-center">Let's <span class="gradient-text">Connect</span></h1>
+                    <p class="text-xl mb-8 opacity-80 text-center">Ready to transform your IP and technology into powerful revenue streams? Tell us about your vision.</p>
+                    
+                    <div class="code-snippet mb-8">
+                        <div class="flex mb-4">
+                            <span class="code-dot" style="background: #ff5f56;"></span>
+                            <span class="code-dot" style="background: #ffbd2e;"></span>
+                            <span class="code-dot" style="background: #27c93f;"></span>
+                        </div>
+                        <div class="typing text-sm" style="max-width: 100%; white-space: pre;">
+                            <span class="text-blue-400">async</span> <span class="text-purple-400">function</span> <span class="text-yellow-400">connectWithNoFriction</span>() {
+  <span class="text-green-400">// Let's turn your vision into reality</span>
+  <span class="text-blue-400">const</span> <span class="text-purple-400">response</span> = <span class="text-blue-400">await</span> NoFriction.contact({
+    <span class="text-yellow-400">vision</span>: <span class="text-green-400">'YourProject'</span>,
+    <span class="text-yellow-400">approach</span>: <span class="text-green-400">'HighTouch-DigitalFirst'</span>,
+    <span class="text-yellow-400">result</span>: <span class="text-green-400">'Transformation'</span>
+  });
+  
+  <span class="text-blue-400">return</span> response.success;
+}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Contact Form Section -->
+    <section class="py-16 px-6 md:px-12">
+        <div class="max-w-4xl mx-auto">
+            <div class="text-center mb-16">
+                <h2 class="section-title text-3xl md:text-4xl">Get In Touch</h2>
+                <p class="text-lg mt-6 text-gray-300">We're excited to learn about your project and explore how we can help transform your vision into reality.</p>
+            </div>
+            
+            <div class="futuristic-border p-8 md:p-12">
+                <form id="contactForm" class="space-y-8" action="https://caseyp.app.n8n.cloud/webhook/get-quote" method="POST">
+                    <div class="grid md:grid-cols-2 gap-8">
+                        <div class="form-group animate-fadeInUp delay-100">
+                            <label for="name" class="form-label">Your Name</label>
+                            <div class="relative">
+                                <i class="fas fa-user form-icon"></i>
+                                <input type="text" id="name" name="name" class="form-input form-input-with-icon" placeholder="John Smith" required>
+                                <div class="input-animation"></div>
+                            </div>
+                        </div>
+                        
+                        <div class="form-group animate-fadeInUp delay-200">
+                            <label for="email" class="form-label">Email Address</label>
+                            <div class="relative">
+                                <i class="fas fa-envelope form-icon"></i>
+                                <input type="email" id="email" name="email" class="form-input form-input-with-icon" placeholder="john@example.com" required>
+                                <div class="input-animation"></div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="grid md:grid-cols-2 gap-8">
+                        <div class="form-group animate-fadeInUp delay-300">
+                            <label for="company" class="form-label">Company</label>
+                            <div class="relative">
+                                <i class="fas fa-building form-icon"></i>
+                                <input type="text" id="company" name="company" class="form-input form-input-with-icon" placeholder="Your Company">
+                                <div class="input-animation"></div>
+                            </div>
+                        </div>
+                        
+                        <div class="form-group animate-fadeInUp delay-400">
+                            <label for="budget" class="form-label">Budget Range</label>
+                            <div class="relative">
+                                <i class="fas fa-dollar-sign form-icon"></i>
+                                <select id="budget" name="budget" class="form-input form-select form-input-with-icon" required>
+                                    <option value="" disabled selected>Select budget range</option>
+                                    <option value="Under $10k">Under $10k</option>
+                                    <option value="$10k - $25k">$10k - $25k</option>
+                                    <option value="$25k - $50k">$25k - $50k</option>
+                                    <option value="$50k - $100k">$50k - $100k</option>
+                                    <option value="$100k+">$100k+</option>
+                                </select>
+                                <div class="input-animation"></div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group animate-fadeInUp delay-500">
+                        <label for="project" class="form-label">Project Details</label>
+                        <div class="relative">
+                            <i class="fas fa-project-diagram form-icon"></i>
+                            <input type="text" id="project" name="project" class="form-input form-input-with-icon" placeholder="Brief project description" required>
+                            <div class="input-animation"></div>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group animate-fadeInUp delay-600">
+                        <label for="message" class="form-label">Your Message</label>
+                        <textarea id="message" name="message" rows="6" class="form-input" placeholder="Tell us more about your project, goals, and how we can help..." required></textarea>
+                        <div class="input-animation"></div>
+                    </div>
+                    
+                    <div class="form-group animate-fadeInUp delay-600">
+                        <label class="custom-checkbox">
+                            <input type="checkbox" name="consent" required>
+                            <span class="checkmark"></span>
+                            <span class="text-sm text-gray-300">
+                                I consent to NoFriction collecting and storing my personal information according to the <a href="privacy.html" class="link-style">Privacy Policy</a>. I understand that I can request access to my data or its deletion at any time. By submitting this form, I agree to the <a href="tos.html" class="link-style">Terms of Service</a>.
+                            </span>
+                        </label>
+                    </div>
+                    
+                    <div class="flex justify-between items-center animate-fadeInUp delay-600">
+                        <div class="text-sm text-gray-400">
+                            <i class="fas fa-lock mr-2"></i> Your information is secure and will never be shared.
+                        </div>
+                        <button type="submit" class="btn btn-primary px-8 py-4">
+                            <i class="fas fa-paper-plane mr-2"></i> Send Message
+                        </button>
+                    </div>
+                </form>
+                
+                <!-- Success message (hidden by default) -->
+                <div id="formSuccess" class="hidden bg-green-900 bg-opacity-20 border border-green-500 text-green-300 p-6 rounded-lg mt-8 animate-fadeInUp">
+                    <div class="flex items-center">
+                        <i class="fas fa-check-circle text-green-400 text-3xl mr-4"></i>
+                        <div>
+                            <h3 class="text-xl font-bold">Message Sent Successfully!</h3>
+                            <p>Thank you for reaching out. We'll get back to you shortly.</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Error message (hidden by default) -->
+                <div id="formError" class="hidden bg-red-900 bg-opacity-20 border border-red-500 text-red-300 p-6 rounded-lg mt-8 animate-fadeInUp">
+                    <div class="flex items-center">
+                        <i class="fas fa-exclamation-circle text-red-400 text-3xl mr-4"></i>
+                        <div>
+                            <h3 class="text-xl font-bold">Something went wrong</h3>
+                            <p>Please try again or contact us directly at <a href="/cdn-cgi/l/email-protection#24474b4a50454750644a4b42564d47504d4b4a0a4d4b" class="link-style"><span class="__cf_email__" data-cfemail="492a26273d282a3d0927262f3b202a3d202627672026">[email&#160;protected]</span></a></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Alternative Contact Methods -->
+    <section class="py-16 px-6 md:px-12 bg-gradient-to-b from-transparent to-gray-900">
+        <div class="max-w-4xl mx-auto">
+            <div class="grid md:grid-cols-3 gap-8 text-center">
+                <div class="futuristic-border p-8 hover:border-primary-500 transition-all duration-300">
+                    <div class="text-4xl text-primary-500 mb-4">
+                        <i class="fas fa-envelope-open"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-2">Email Us</h3>
+                    <p class="text-gray-400 mb-4">Send us an email directly</p>
+                    <a href="/cdn-cgi/l/email-protection#771418190316140337191811051e14031e1819591e18" class="text-primary-500 hover:underline"><span class="__cf_email__" data-cfemail="aac9c5c4decbc9deeac4c5ccd8c3c9dec3c5c484c3c5">[email&#160;protected]</span></a>
+                </div>
+                
+                <div class="futuristic-border p-8 hover:border-primary-500 transition-all duration-300">
+                    <div class="text-4xl text-primary-500 mb-4">
+                        <i class="fas fa-map-marker-alt"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-2">Our Location</h3>
+                    <p class="text-gray-400 mb-4">Available for meetings globally</p>
+                    <p class="text-gray-300">Europe • USA • UAE</p>
+                </div>
+                
+                <div class="futuristic-border p-8 hover:border-primary-500 transition-all duration-300">
+                    <div class="text-4xl text-primary-500 mb-4">
+                        <i class="fas fa-calendar-check"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-2">Schedule a Call</h3>
+                    <p class="text-gray-400 mb-4">Book a consultation</p>
+                    <a href="#" class="text-primary-500 hover:underline">View Availability</a>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- California Privacy Notice -->
+    <section class="py-12 px-6 md:px-12">
+        <div class="max-w-4xl mx-auto">
+            <div class="futuristic-border p-8">
+                <h3 class="text-xl font-bold mb-4">California Residents Privacy Notice</h3>
+                <p class="text-sm text-gray-300 mb-4">Under the California Consumer Privacy Act (CCPA), California residents have specific rights regarding their personal information:</p>
+                <ul class="text-sm text-gray-300 list-disc pl-5 space-y-2 mb-4">
+                    <li>The right to know what personal information we collect about you and how we use and disclose it</li>
+                    <li>The right to delete personal information collected from you (with certain exceptions)</li>
+                    <li>The right to opt-out of the sale of your personal information</li>
+                    <li>The right to non-discrimination for exercising your privacy rights</li>
+                </ul>
+                <p class="text-sm text-gray-300">To exercise these rights or for more information, please review our <a href="privacy.html" class="link-style">Privacy Policy</a> or contact us at <a href="/cdn-cgi/l/email-protection#6111130817000218210f0e0713080215080e0f4f080e" class="link-style"><span class="__cf_email__" data-cfemail="0474766d7265677d446a6b62766d67706d6b6a2a6d6b">[email&#160;protected]</span></a>.</p>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Footer -->
+    <footer class="py-12 px-6 md:px-12 mt-12">
+        <div class="max-w-6xl mx-auto">
+            <div class="flex flex-col md:flex-row justify-between items-center mb-12">
+                <div class="mb-8 md:mb-0">
+                    <img src="https://page.genspark.site/v1/base64_upload/3ced5bb1a137097e11aacf33af0bde73" alt="NoFriction Logo" class="h-8 mb-4">
+                    <p class="text-sm text-gray-500 max-w-sm">NoFriction transforms IP and technology assets into powerful revenue streams with our boutique consulting approach.</p>
+                </div>
+                
+                <div class="flex flex-wrap justify-center md:justify-end gap-8">
+                    <div>
+                        <h4 class="font-semibold mb-3">Company</h4>
+                        <ul class="space-y-2">
+                            <li><a href="#" class="footer-link text-sm">About</a></li>
+                            <li><a href="#" class="footer-link text-sm">Projects</a></li>
+                            <li><a href="#" class="footer-link text-sm">Customers & CV</a></li>
+                            <li><a href="#" class="footer-link text-sm">Secret Lab</a></li>
+                        </ul>
+                    </div>
+                    
+                    <div>
+                        <h4 class="font-semibold mb-3">Resources</h4>
+                        <ul class="space-y-2">
+                            <li><a href="#" class="footer-link text-sm">Blog</a></li>
+                            <li><a href="#" class="footer-link text-sm">Case Studies</a></li>
+                            <li><a href="#" class="footer-link text-sm">White Papers</a></li>
+                        </ul>
+                    </div>
+                    
+                    <div>
+                        <h4 class="font-semibold mb-3">Legal</h4>
+                        <ul class="space-y-2">
+                            <li><a href="privacy.html" class="footer-link text-sm">Privacy Policy</a></li>
+                            <li><a href="tos.html" class="footer-link text-sm">Terms of Service</a></li>
+                            <li><a href="#" class="footer-link text-sm">Cookie Policy</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="border-t border-gray-800 pt-8 flex flex-col md:flex-row justify-between items-center">
+                <div class="text-sm text-gray-600 mb-4 md:mb-0">© 2025 NoFriction. All rights reserved.</div>
+                
+                <div class="flex space-x-6">
+                    <a href="#" class="footer-link text-sm"><i class="fab fa-linkedin"></i></a>
+                    <a href="#" class="footer-link text-sm"><i class="fab fa-twitter"></i></a>
+                    <a href="#" class="footer-link text-sm"><i class="fab fa-github"></i></a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+        // Form submission handling
+        document.getElementById('contactForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const formData = new FormData(this);
+            const data = {};
+            formData.forEach((value, key) => data[key] = value);
+            
+            fetch('https://caseyp.app.n8n.cloud/webhook/newlead', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    formData: {
+                        name: data.name,
+                        email: data.email,
+                        company: data.company || "",
+                        budget: data.budget,
+                        project: data.project,
+                        message: data.message,
+                        consentGiven: data.consent === "on",
+                        contactPreference: data.contactPreference || "email",
+                        referralSource: data.referralSource || "website"
+                    },
+                    metadata: {
+                        submittedAt: new Date().toISOString(),
+                        userAgent: navigator.userAgent,
+                        pageOrigin: window.location.href
+                    }
+                })
+            })
+            .then(response => {
+                if (response.ok) {
+                    document.getElementById('contactForm').reset();
+                    document.getElementById('formSuccess').classList.remove('hidden');
+                    setTimeout(() => {
+                        document.getElementById('formSuccess').classList.add('hidden');
+                    }, 5000);
+                } else {
+                    throw new Error('Network response was not ok');
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                document.getElementById('formError').classList.remove('hidden');
+                setTimeout(() => {
+                    document.getElementById('formError').classList.add('hidden');
+                }, 5000);
+            });
+        });
+        
+        // Animated form field focus effects
+        document.querySelectorAll('.form-input').forEach(input => {
+            input.addEventListener('focus', function() {
+                this.parentElement.classList.add('input-focused');
+            });
+            
+            input.addEventListener('blur', function() {
+                this.parentElement.classList.remove('input-focused');
+            });
+        });
+    </script>
+</body>
+</html>
+    <script id="html_badge_script1">
+        window.__genspark_remove_badge_link = "https://www.genspark.ai/api/html_badge/" +
+            "remove_badge?token=To%2FBnjzloZ3UfQdcSaYfDvibfLAVA5i6mVSo6n5JGKAsJtZsDfdEPMfEMFGC8IV6abiu8UDkf4nNNvOyLHKypuBAjglzr0LtiKNufL%2BEGWl%2BwmLF%2BytAZnHUuypH%2FuFh7nIeWKCGY2Bgwc5Vn9wf0j7rGiKqvdYgDIwH%2BbceYYD1LZUhZcOoqAG5X%2FbJUGapg0F9eXBX9mpLUCDkzw9T96ELEHBnX0hiGPbHl7tpNy%2B9V2L8K1ao%2BxNmOLSx4he%2B5Cq6yNh3DIotU9kh7TLtK61gAoqR6FT9VANt9E8HapR8URcutW1o5Cf9BN8zwkHSeY3HPDubwbyPHCD26ODAz6sKpjgMqvB8e8JeBqnZp2m6VyQWjlRsj6mVScfCbYIouh9RDiy56jaBzr8ZtK2wJcOgh0n4qYQQ9ntipVCawb5rE3Jgz0s2YZooHW%2BA9cArtnYDhCziuMFiiW2Wq4ffw1JJMbh1cQjquQsC32V2bejtE5XNett77sgVD4WGYlI8B1OaebR4hzDMvd1lFUl5dpicYaIKw0u%2BK2Sj40gB%2Fjk%3D";
+        window.__genspark_locale = "en-US";
+        window.__genspark_token = "To/BnjzloZ3UfQdcSaYfDvibfLAVA5i6mVSo6n5JGKAsJtZsDfdEPMfEMFGC8IV6abiu8UDkf4nNNvOyLHKypuBAjglzr0LtiKNufL+EGWl+wmLF+ytAZnHUuypH/uFh7nIeWKCGY2Bgwc5Vn9wf0j7rGiKqvdYgDIwH+bceYYD1LZUhZcOoqAG5X/bJUGapg0F9eXBX9mpLUCDkzw9T96ELEHBnX0hiGPbHl7tpNy+9V2L8K1ao+xNmOLSx4he+5Cq6yNh3DIotU9kh7TLtK61gAoqR6FT9VANt9E8HapR8URcutW1o5Cf9BN8zwkHSeY3HPDubwbyPHCD26ODAz6sKpjgMqvB8e8JeBqnZp2m6VyQWjlRsj6mVScfCbYIouh9RDiy56jaBzr8ZtK2wJcOgh0n4qYQQ9ntipVCawb5rE3Jgz0s2YZooHW+A9cArtnYDhCziuMFiiW2Wq4ffw1JJMbh1cQjquQsC32V2bejtE5XNett77sgVD4WGYlI8B1OaebR4hzDMvd1lFUl5dpicYaIKw0u+K2Sj40gB/jk=";
+    </script>
+    

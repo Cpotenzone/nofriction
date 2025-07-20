@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-8M3X5312PN"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-8M3X5312PN');
+</script>
+<!-- Hotjar Tracking Code for https://www.nofriction.io -->
+<script>
+    (function(h,o,t,j,a,r){
+        h.hj=h.hj||function(){(h.hj.q=h.hj.q||[]).push(arguments)};
+        h._hjSettings={hjid:6414675,hjsv:6};
+        a=o.getElementsByTagName('head')[0];
+        r=o.createElement('script');r.async=1;
+        r.src=t+h._hjSettings.hjid+j+h._hjSettings.hjsv;
+        a.appendChild(r);
+    })(window,document,'https://static.hotjar.com/c/hotjar-','.js?sv=');
+</script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Journey | NoFriction</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.0.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background-color: #0a0a0a;
+            color: #e5e5e5;
+        }
+        .timeline-container {
+            position: relative;
+        }
+        .timeline-container::before {
+            content: '';
+            position: absolute;
+            width: 2px;
+            background-color: #444;
+            top: 0;
+            bottom: 0;
+            left: 50%;
+            margin-left: -1px;
+        }
+        .timeline-item {
+            position: relative;
+            margin-bottom: 4rem;
+        }
+        .timeline-dot {
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            background-color: #666;
+            border-radius: 50%;
+            left: 50%;
+            margin-left: -10px;
+            top: 25px;
+            z-index: 10;
+        }
+        .timeline-content {
+            position: relative;
+            width: 45%;
+            padding: 20px;
+            background-color: #1a1a1a;
+            border-radius: 6px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+        }
+        .timeline-item:nth-child(odd) .timeline-content {
+            margin-left: auto;
+        }
+        .timeline-date {
+            color: #9ca3af;
+            font-weight: 600;
+        }
+        .pull-quote {
+            font-size: 1.5rem;
+            line-height: 2rem;
+            font-weight: 300;
+            border-left: 4px solid #4f46e5;
+            padding-left: 1.5rem;
+            margin: 2rem 0;
+            font-style: italic;
+        }
+        .gradient-bg {
+            background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+        }
+        .btn-primary {
+            background: linear-gradient(135deg, #4f46e5 0%, #6366f1 100%);
+            transition: all 0.3s ease;
+        }
+        .btn-primary:hover {
+            background: linear-gradient(135deg, #4338ca 0%, #4f46e5 100%);
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(79, 70, 229, 0.3);
+        }
+        .nav-link {
+            position: relative;
+        }
+        .nav-link::after {
+            content: "";
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -4px;
+            left: 0;
+            background-color: #4f46e5;
+            transition: all 0.3s ease;
+        }
+        .nav-link:hover::after {
+            width: 100%;
+        }
+        .social-icon {
+            transition: all 0.3s ease;
+        }
+        .social-icon:hover {
+            transform: translateY(-3px);
+            color: #4f46e5;
+        }
+        @media (max-width: 768px) {
+            .timeline-container::before {
+                left: 31px;
+            }
+            .timeline-dot {
+                left: 31px;
+            }
+            .timeline-content {
+                width: calc(100% - 80px);
+                float: right;
+            }
+            .timeline-item:nth-child(odd) .timeline-content {
+                margin-left: 80px;
+            }
+            .timeline-item:nth-child(even) .timeline-content {
+                margin-left: 80px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="bg-black px-6 py-4 shadow-lg">
+        <div class="max-w-7xl mx-auto flex items-center justify-between">
+            <div class="flex items-center space-x-4">
+                <a href="index.html" class="flex items-center">
+                    <img src="https://page.genspark.site/v1/base64_upload/3ced5bb1a137097e11aacf33af0bde73" alt="NoFriction Logo" class="h-10">
+                    <span class="ml-3 text-xl font-bold text-white">NoFriction</span>
+                </a>
+            </div>
+            <div class="hidden md:flex items-center space-x-8">
+                <a href="about.html" class="nav-link text-gray-300 hover:text-white transition-colors">About</a>
+                <a href="projects.html" class="nav-link text-gray-300 hover:text-white transition-colors">Projects</a>
+                <a href="customers.html" class="nav-link text-gray-300 hover:text-white transition-colors">Customers & CV</a>
+                <a href="secretlab.html" class="nav-link text-gray-300 hover:text-white transition-colors">Secret Lab</a>
+                <a href="#contact" class="btn-primary px-6 py-2 rounded-full text-white font-medium shadow-lg">Contact</a>
+            </div>
+            <div class="md:hidden">
+                <button class="text-white focus:outline-none">
+                    <i class="fas fa-bars text-2xl"></i>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="relative py-20 bg-gradient-to-r from-gray-900 to-black">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="text-center mb-16">
+                <h1 class="text-4xl md:text-6xl font-bold text-white mb-4">From BASIC to Billions</h1>
+                <p class="text-xl md:text-2xl text-gray-300 max-w-3xl mx-auto">The journey of a tech pioneer transforming intellectual property monetization</p>
+            </div>
+        </div>
+        <div class="absolute bottom-0 left-0 right-0 h-16 bg-gradient-to-t from-black to-transparent"></div>
+    </section>
+
+    <!-- Introduction -->
+    <section class="py-16 bg-black">
+        <div class="max-w-5xl mx-auto px-6">
+            <div class="bg-gradient-to-br from-gray-900 to-gray-800 p-8 rounded-xl shadow-2xl">
+                <p class="text-lg md:text-xl leading-relaxed mb-8">
+                    Born in 1977 near New York City, my tech journey began at age 9, coding in BASIC on an Epson 8088. By '94, I was applying to college by stapling my AOL website to a signed paper and submitting them as my college applications.
+                </p>
+                <p class="text-lg md:text-xl leading-relaxed">
+                    After a brief period at NYU and despite skipping two years, I chose to dive directly into the DotCom market, the first of two technology revolutions that I'd participate in. And the second one is just starting.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Timeline Section -->
+    <section class="py-16 bg-black">
+        <div class="max-w-6xl mx-auto px-6">
+            <h2 class="text-3xl md:text-4xl font-bold mb-16 text-center text-white">My Professional Journey</h2>
+            
+            <div class="timeline-container">
+                <!-- Timeline Item 1 -->
+                <div class="timeline-item">
+                    <div class="timeline-dot bg-indigo-600"></div>
+                    <div class="timeline-content">
+                        <h3 class="text-2xl font-bold mb-2 text-white">Early Days: The Coding Genesis</h3>
+                        <span class="timeline-date block mb-4">1986-1994</span>
+                        <p class="mb-4">My journey into the tech world began at the age of 9, writing BASIC code on an Epson 8088. I learned by copying from a book and experimenting with variables. It was a time of exploration and discovery, laying the foundation for my future career.</p>
+                        <div class="pull-quote">
+                            "The future belongs to those who learn to code—I discovered this truth at age 9, typing line by line from a book into my Epson 8088."
+                        </div>
+                        <p class="mb-4">In 1994, my college application process was innovative, sending a link to my AOL website with application details, a signed note, and a check. This was a forward-thinking approach, leveraging technology to stand out from the crowd.</p>
+                    </div>
+                </div>
+
+                <!-- Timeline Item 2 -->
+                <div class="timeline-item">
+                    <div class="timeline-dot bg-indigo-600"></div>
+                    <div class="timeline-content">
+                        <h3 class="text-2xl font-bold mb-2 text-white">DotCom Revolution & MTV</h3>
+                        <span class="timeline-date block mb-4">1995-2000</span>
+                        <p class="mb-4">After a brief period at NYU, I left college to fully immerse myself in the dotCom boom. By 20 I was making significant strides, first working at Chase Bank and then at MTV, setting the stage for my ascent in the tech industry.</p>
+                        <p class="mb-4">Hired at 21 and promoted at 22, I became the youngest Tech. Director at MTV, a role that allowed me to take on significant responsibilities and drive digital media innovation.</p>
+                        <div class="pull-quote">
+                            "At MTV, we didn't just adopt technology—we pioneered it, streaming what were then the biggest live events in internet history."
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Timeline Item 3 -->
+                <div class="timeline-item">
+                    <div class="timeline-dot bg-indigo-600"></div>
+                    <div class="timeline-content">
+                        <h3 class="text-2xl font-bold mb-2 text-white">Innovation & Patents</h3>
+                        <span class="timeline-date block mb-4">2000-2007</span>
+                        <p class="mb-4">Secured my first patent at 21 for digital content distribution, a cornerstone for modern streaming technologies. This early work laid foundations for how digital media would be consumed in the decades to follow.</p>
+                        <p class="mb-4">By 30, I had obtained a patent for code security and anti-hacking, showcasing a commitment to protecting digital assets in an increasingly vulnerable online landscape.</p>
+                        <p>Throughout this period, I pivoted across various hands-on tech roles, from fintech to e-commerce and product development, demonstrating adaptability and an insatiable appetite for new challenges.</p>
+                    </div>
+                </div>
+
+                <!-- Timeline Item 4 -->
+                <div class="timeline-item">
+                    <div class="timeline-dot bg-indigo-600"></div>
+                    <div class="timeline-content">
+                        <h3 class="text-2xl font-bold mb-2 text-white">Trial by Fire: Executive Leadership</h3>
+                        <span class="timeline-date block mb-4">2008-2015</span>
+                        <p class="mb-4">Managed a quarter-billion-dollar a year in transactions and a company under siege by the FTC due to forces targeting the company's business model. This challenging period tested both technical knowledge and leadership capabilities.</p>
+                        <div class="pull-quote">
+                            "Leadership isn't proven during easy times—it's forged in fire. Managing billions in transactions under regulatory scrutiny revealed what true business resilience means."
+                        </div>
+                        <p class="mb-4">After years of strategic maneuvering, our legal teams successfully secured the company and its businesses against the assault and enabled continued operations.</p>
+                        <p>This trial by fire demonstrated my unwavering commitment to safeguarding stakeholder interests and exemplified my resilience in the face of formidable regulatory challenges.</p>
+                    </div>
+                </div>
+
+                <!-- Timeline Item 5 -->
+                <div class="timeline-item">
+                    <div class="timeline-dot bg-indigo-600"></div>
+                    <div class="timeline-content">
+                        <h3 class="text-2xl font-bold mb-2 text-white">Global Leadership & Family</h3>
+                        <span class="timeline-date block mb-4">2012-2020</span>
+                        <p class="mb-4">Married in 2012 and blessed with a wonderful daughter, my personal life evolved alongside my professional growth. Family has been the cornerstone of my success, providing support through all challenges.</p>
+                        <p class="mb-4">Developed extensive experience building and leading teams across Europe, the GCC, and the US, gaining valuable insights into global business operations and cross-cultural leadership.</p>
+                        <p>My passion for endurance sports and outdoor activities—fly fishing, hiking, camping, cycling, triathlons, and obstacle races—kept me grounded and energized through the demanding pace of global leadership.</p>
+                    </div>
+                </div>
+
+                <!-- Timeline Item 6 -->
+                <div class="timeline-item">
+                    <div class="timeline-dot bg-indigo-600"></div>
+                    <div class="timeline-content">
+                        <h3 class="text-2xl font-bold mb-2 text-white">NoFriction: IP Monetization Pioneer</h3>
+                        <span class="timeline-date block mb-4">2021-Present</span>
+                        <p class="mb-4">Leveraging decades of experience in technology innovation, leadership, and strategic thinking, I founded NoFriction with a clear mission: revolutionize how companies monetize their intellectual property in the digital age.</p>
+                        <div class="pull-quote">
+                            "The second technological revolution of my career is underway—transforming how we value and monetize intellectual property through AI-driven, frictionless strategies."
+                        </div>
+                        <p class="mb-4">Developed NoFriction's proprietary 'High-Touch, Digital-First' methodology to eliminate the complexities traditionally associated with commercializing innovation.</p>
+                        <p>Currently leading the development of an AI-enhanced CRM suite specifically designed for IP monetization, combining human expertise with artificial intelligence to create unprecedented value for clients.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Community Impact Section -->
+    <section class="py-16 bg-black">
+        <div class="max-w-5xl mx-auto px-6">
+            <div class="bg-gradient-to-br from-indigo-900 to-indigo-800 p-8 rounded-xl shadow-2xl">
+                <h2 class="text-3xl font-bold mb-6 text-white">Continued Community Support</h2>
+                <p class="text-lg mb-6">
+                    Over the years I've supported a variety of public service organizations from <a href="https://www.wohi.org/" class="text-indigo-300 underline hover:text-white transition-colors">UN non-profits</a> to local community charities and operations.
+                </p>
+                <p class="text-lg">
+                    My commitment to community extends beyond business, embracing the belief that true success includes making a positive impact on society.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Quote Section -->
+    <section class="py-16 bg-black">
+        <div class="max-w-4xl mx-auto px-6 text-center">
+            <div class="mb-8">
+                <i class="fas fa-quote-left text-5xl text-indigo-500 opacity-50"></i>
+            </div>
+            <blockquote class="text-2xl md:text-3xl font-light italic mb-8">
+                "Much like a film editor, I recut technology and remix the storyline. By pushing the boundaries of product marketing and IP monetization, I turn amazing inventions into incredible successes."
+            </blockquote>
+            <div class="flex justify-center">
+                <div class="h-0.5 w-24 bg-indigo-600"></div>
+            </div>
+            <p class="mt-6 text-xl font-medium">Casey Potenzone</p>
+            <p class="text-gray-400">Founder, NoFriction</p>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="py-16 bg-gradient-to-r from-indigo-900 to-black">
+        <div class="max-w-5xl mx-auto px-6 text-center">
+            <h2 class="text-3xl md:text-4xl font-bold mb-6 text-white">Ready to Transform Your IP Strategy?</h2>
+            <p class="text-xl mb-10 text-gray-300 max-w-3xl mx-auto">
+                From AI orchestration to digital-first strategies, modern IP monetization is more than just licensing patents. Let's craft the narrative of your technology in a way that resonates and drives engagement.
+            </p>
+            <a href="#contact" class="btn-primary inline-block px-10 py-4 rounded-full text-white text-lg font-medium shadow-lg">
+                Start Your Journey
+            </a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-black text-white pt-16 pb-8" id="contact">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 mb-12">
+                <!-- Company Info -->
+                <div>
+                    <div class="flex items-center mb-6">
+                        <img src="https://page.genspark.site/v1/base64_upload/3ced5bb1a137097e11aacf33af0bde73" alt="NoFriction Logo" class="h-8">
+                        <span class="ml-3 text-xl font-bold">NoFriction</span>
+                    </div>
+                    <p class="text-gray-400 mb-4">
+                        Transforming IP monetization and sales strategies through our High-Touch, Digital-First approach.
+                    </p>
+                    <div class="flex space-x-4">
+                        <a href="#" class="social-icon text-gray-400 hover:text-white"><i class="fab fa-linkedin"></i></a>
+                        <a href="#" class="social-icon text-gray-400 hover:text-white"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="social-icon text-gray-400 hover:text-white"><i class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+                
+                <!-- Quick Links -->
+                <div>
+                    <h3 class="text-lg font-semibold mb-6 border-b border-gray-800 pb-2">Quick Links</h3>
+                    <ul class="space-y-3">
+                        <li><a href="about.html" class="text-gray-400 hover:text-white transition-colors">About Us</a></li>
+                        <li><a href="projects.html" class="text-gray-400 hover:text-white transition-colors">Projects</a></li>
+                        <li><a href="customers.html" class="text-gray-400 hover:text-white transition-colors">Customers & CV</a></li>
+                        <li><a href="secretlab.html" class="text-gray-400 hover:text-white transition-colors">Secret Lab</a></li>
+                    </ul>
+                </div>
+                
+                <!-- Legal -->
+                <div>
+                    <h3 class="text-lg font-semibold mb-6 border-b border-gray-800 pb-2">Legal</h3>
+                    <ul class="space-y-3">
+                        <li><a href="privacy.html" class="text-gray-400 hover:text-white transition-colors">Privacy Policy</a></li>
+                        <li><a href="terms.html" class="text-gray-400 hover:text-white transition-colors">Terms of Service</a></li>
+                        <li><a href="cookies.html" class="text-gray-400 hover:text-white transition-colors">Cookie Policy</a></li>
+                        <li><a href="disclaimer.html" class="text-gray-400 hover:text-white transition-colors">Disclaimer</a></li>
+                    </ul>
+                </div>
+                
+                <!-- Contact -->
+                <div>
+                    <h3 class="text-lg font-semibold mb-6 border-b border-gray-800 pb-2">Contact</h3>
+                    <ul class="space-y-3">
+                        <li class="flex items-start">
+                            <i class="fas fa-map-marker-alt mt-1 mr-3 text-indigo-500"></i>
+                            <span class="text-gray-400">New York City, NY</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-envelope mt-1 mr-3 text-indigo-500"></i>
+                            <span class="text-gray-400">info@nofriction.io</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-phone mt-1 mr-3 text-indigo-500"></i>
+                            <span class="text-gray-400">+1 (555) 123-4567</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="border-t border-gray-800 pt-8 mt-8 text-center text-sm text-gray-500">
+                <p>© 2025 Casey S. Potenzone, All Rights Reserved. NoFriction is a registered trademark.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                const targetElement = document.querySelector(targetId);
+                
+                if (targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+        
+        // Highlight timeline items on scroll
+        window.addEventListener('scroll', function() {
+            const timelineItems = document.querySelectorAll('.timeline-item');
+            
+            timelineItems.forEach(item => {
+                const itemTop = item.getBoundingClientRect().top;
+                const itemHeight = item.offsetHeight;
+                const windowHeight = window.innerHeight;
+                
+                if (itemTop < windowHeight - itemHeight / 3) {
+                    item.classList.add('opacity-100');
+                    item.classList.remove('opacity-50');
+                } else {
+                    item.classList.add('opacity-50');
+                    item.classList.remove('opacity-100');
+                }
+            });
+        });
+    </script>
+</body>
+</html>

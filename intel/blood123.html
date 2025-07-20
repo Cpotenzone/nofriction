@@ -1,0 +1,836 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Comprehensive Bloodwork Analysis Report</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f8fafc; /* Light gray background */
+            color: #334155; /* Dark slate gray text */
+        }
+        .animate-fade-in {
+            animation: fadeIn 0.8s ease-out forwards;
+            opacity: 0;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .color-optimal { background-color: #dcfce7; color: #16a34a; } /* Green-50, Green-700 */
+        .color-borderline { background-color: #fffbeb; color: #f59e0b; } /* Yellow-50, Yellow-600 */
+        .color-high-risk { background-color: #fee2e2; color: #ef4444; } /* Red-50, Red-600 */
+        .color-low-risk { background-color: #e0f2fe; color: #0284c7; } /* Blue-50, Blue-700 */
+
+        .tooltip {
+            position: relative;
+            display: inline-block;
+            cursor: help;
+        }
+        .tooltip .tooltiptext {
+            visibility: hidden;
+            width: 300px;
+            background-color: #1e293b; /* Slate-800 */
+            color: #f8fafc; /* Light gray */
+            text-align: left;
+            border-radius: 6px;
+            padding: 10px;
+            position: absolute;
+            z-index: 10;
+            bottom: 125%; /* Position above the element */
+            left: 50%;
+            margin-left: -150px; /* Center the tooltip */
+            opacity: 0;
+            transition: opacity 0.3s;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+            font-size: 0.875rem;
+        }
+        .tooltip .tooltiptext::after {
+            content: "";
+            position: absolute;
+            top: 100%;
+            left: 50%;
+            margin-left: -5px;
+            border-width: 5px;
+            border-style: solid;
+            border-color: #1e293b transparent transparent transparent;
+        }
+        .tooltip:hover .tooltiptext {
+            visibility: visible;
+            opacity: 1;
+        }
+        /* Style for simple bar chart representation */
+        .bar-chart-container {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 4px;
+            padding: 8px;
+            border-radius: 8px;
+            background-color: #f1f5f9; /* Slate-100 */
+        }
+        .bar-item {
+            display: flex;
+            align-items: center;
+            width: 100%;
+            gap: 8px;
+        }
+        .bar-label {
+            font-size: 0.75rem;
+            color: #64748b; /* Slate-500 */
+            width: 80px; /* Fixed width for dates */
+            flex-shrink: 0;
+        }
+        .bar {
+            height: 16px;
+            border-radius: 4px;
+            transition: width 0.5s ease-out;
+            background-color: #60a5fa; /* Blue-400 */
+            position: relative;
+        }
+        .bar-value {
+            font-size: 0.75rem;
+            color: #1e293b; /* Slate-800 */
+            margin-left: 8px;
+        }
+        .bar.color-high-risk { background-color: #ef4444; }
+        .bar.color-low-risk { background-color: #0284c7; }
+        .bar.color-borderline { background-color: #f59e0b; }
+
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .flex-sidebar {
+                flex-direction: column;
+            }
+            .sidebar {
+                width: 100%;
+                padding-bottom: 1rem;
+                border-bottom: 1px solid #e2e8f0;
+            }
+            .main-content {
+                width: 100%;
+                padding-top: 1rem;
+            }
+        }
+    </style>
+</head>
+<body class="p-4 md:p-8">
+    <div class="min-h-screen flex flex-col md:flex-row bg-gray-50 rounded-lg shadow-xl overflow-hidden">
+        <aside class="sidebar w-full md:w-64 bg-slate-800 text-white p-6 md:p-8 flex-shrink-0 rounded-l-lg">
+            <h1 class="text-2xl font-bold mb-8 text-blue-300">Health Report AI</h1>
+            <nav>
+                <ul class="space-y-4">
+                    <li><a href="#summary" class="block py-2 px-4 rounded-md hover:bg-slate-700 transition-colors duration-200">Executive Summary</a></li>
+                    <li><a href="#endocrine" class="block py-2 px-4 rounded-md hover:bg-slate-700 transition-colors duration-200">Endocrine Health</a></li>
+                    <li><a href="#metabolic" class="block py-2 px-4 rounded-md hover:bg-slate-700 transition-colors duration-200">Metabolic & Kidney</a></li>
+                    <li><a href="#liver" class="block py-2 px-4 rounded-md hover:bg-slate-700 transition-colors duration-200">Liver Function</a></li>
+                    <li><a href="#blood-count" class="block py-2 px-4 rounded-md hover:bg-slate-700 transition-colors duration-200">Complete Blood Count</a></li>
+                    <li><a href="#lipid" class="block py-2 px-4 rounded-md hover:bg-slate-700 transition-colors duration-200">Lipid Profile</a></li>
+                    <li><a href="#diabetes" class="block py-2 px-4 rounded-md hover:bg-slate-700 transition-colors duration-200">Diabetes Markers</a></li>
+                </ul>
+            </nav>
+        </aside>
+
+        <main class="main-content flex-grow p-6 md:p-10 bg-white rounded-r-lg">
+            <section id="summary" class="mb-12 animate-fade-in" style="animation-delay: 0.1s;">
+                <h2 class="text-4xl font-extrabold text-slate-800 mb-6 border-b-2 border-blue-200 pb-2">Executive Summary</h2>
+                <div class="bg-blue-50 border-l-4 border-blue-400 text-blue-800 p-4 rounded-md mb-6">
+                    <p class="font-medium">This report provides a comprehensive analysis of your bloodwork data from October 2023 to May 2025. It highlights key trends, potential health implications, and offers insights based on clinical guidelines. Please consult with your healthcare provider for personalized medical advice.</p>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
+                    <div class="bg-white p-6 rounded-lg shadow-md border border-gray-200 animate-fade-in" style="animation-delay: 0.2s;">
+                        <h3 class="text-xl font-semibold text-slate-700 mb-3">🧪 Key Concerning Trends</h3>
+                        <ul class="list-disc list-inside text-slate-600 space-y-2">
+                            <li><span class="font-medium text-red-600">Testosterone:</span> Significant increase to high levels (938.28 ng/dL in May 2025) from previously normal ranges.</li>
+                            <li><span class="font-medium text-red-600">Creatinine:</span> Elevated to 1.35 mg/dL in May 2025, indicating potential kidney strain.</li>
+                            <li><span class="font-medium text-red-600">BUN:</span> Consistently high (29 mg/dL in May 2024, 26 mg/dL in May 2025), suggesting hydration or kidney function concerns.</li>
+                            <li><span class="font-medium text-red-600">Hemoglobin & Hematocrit:</span> Persistently high values across multiple measurements, indicating potential polycythemia or dehydration.</li>
+                            <li><span class="font-medium text-red-600">MCV & MCH:</span> Elevated MCV and MCH in May 2025, suggesting macrocytic anemia or other red blood cell abnormalities.</li>
+                            <li><span class="font-medium text-red-600">Monocytes:</span> Consistently at the higher end or slightly above normal, warranting further investigation.</li>
+                            <li><span class="font-medium text-red-600">LDL Cholesterol:</span> Increased to high levels (110 mg/dL in May 2025) from normal.</li>
+                            <li><span class="font-medium text-red-600">Estradiol:</span> Elevated (59.40 pg/mL in May 2025) for an adult male, which could be related to high testosterone or other factors.</li>
+                        </ul>
+                    </div>
+                    <div class="bg-white p-6 rounded-lg shadow-md border border-gray-200 animate-fade-in" style="animation-delay: 0.3s;">
+                        <h3 class="text-xl font-semibold text-slate-700 mb-3">🔄 Patterns Over Time</h3>
+                        <ul class="list-disc list-inside text-slate-600 space-y-2">
+                            <li><span class="font-medium">Thyroid Function:</span> TSH was low in May 2024 (0.154 ulU/mL) but normalized by November 2024 and May 2025, likely due to medication adjustment (Synthroid). Free T4 was high in May 2024, aligning with low TSH.</li>
+                            <li><span class="font-medium">Testosterone:</span> Shows a notable upward trend from normal levels in 2023/2024 to high levels in May 2025.</li>
+                            <li><span class="font-medium">Lipid Profile:</span> While total cholesterol and triglycerides remain good, LDL has shown an increasing trend, moving into the high-risk category. The LDL/HDL risk ratio remains within range but has increased.</li>
+                            <li><span class="font-medium">Red Blood Cell Indices:</span> Hemoglobin, Hematocrit, MCV, and MCH show a pattern of being elevated at various points, particularly in the latest measurement.</li>
+                        </ul>
+                    </div>
+                    <div class="bg-white p-6 rounded-lg shadow-md border border-gray-200 animate-fade-in" style="animation-delay: 0.4s;">
+                        <h3 class="text-xl font-semibold text-slate-700 mb-3">💡 Implications for Health</h3>
+                        <ul class="list-disc list-inside text-slate-600 space-y-2">
+                            <li><span class="font-medium text-red-600">High Testosterone & Estradiol:</span> May indicate exogenous testosterone use or other hormonal imbalances, which can have cardiovascular, prostate, and liver implications.</li>
+                            <li><span class="font-medium text-red-600">Kidney Strain:</span> Elevated creatinine and BUN suggest that kidney function should be closely monitored.</li>
+                            <li><span class="font-medium text-red-600">Cardiovascular Risk:</span> Rising LDL cholesterol increases the risk of atherosclerosis and heart disease. The increasing LDL/HDL ratio, though still "normal" by the provided broad range, warrants attention.</li>
+                            <li><span class="font-medium text-red-600">Blood Viscosity:</span> Persistently high hemoglobin and hematocrit could lead to increased blood viscosity, raising the risk of blood clots, stroke, and heart attack.</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="bg-yellow-50 border-l-4 border-yellow-400 text-yellow-800 p-4 rounded-md animate-fade-in" style="animation-delay: 0.5s;">
+                    <h3 class="text-xl font-semibold text-slate-700 mb-3">🧭 Recommended Next Steps & Tests</h3>
+                    <ul class="list-disc list-inside text-slate-700 space-y-2">
+                        <li>**Consult a Physician:** Discuss the high testosterone, estradiol, creatinine, BUN, and consistently high red blood cell parameters.</li>
+                        <li>**Further Investigation for High Testosterone/Estradiol:** If not on exogenous testosterone, further endocrine evaluation is recommended to determine the cause.</li>
+                        <li>**Kidney Function Monitoring:** Regular monitoring of kidney markers (creatinine, BUN, eGFR) is advisable.</li>
+                        <li>**Cardiovascular Risk Assessment:** Discuss strategies to manage LDL cholesterol, including diet, exercise, and potentially medication.</li>
+                        <li>**Hydration Status:** Ensure adequate hydration, especially given the high BUN and red blood cell parameters.</li>
+                        <li>**Repeat Bloodwork:** Recheck all flagged abnormal values in 3-6 months, or as advised by your doctor, to monitor trends and the effectiveness of any interventions.</li>
+                    </ul>
+                </div>
+            </section>
+
+            <section id="endocrine" class="mb-12 animate-fade-in" style="animation-delay: 0.6s;">
+                <h2 class="text-3xl font-bold text-slate-800 mb-6 border-b-2 border-blue-200 pb-2">Endocrine Health</h2>
+                <div class="bg-white p-6 rounded-lg shadow-md border border-gray-200 mb-6">
+                    <h3 class="text-xl font-semibold text-slate-700 mb-4">Summary Table</h3>
+                    <div class="overflow-x-auto">
+                        <table class="min-w-full divide-y divide-gray-200">
+                            <thead class="bg-gray-50">
+                                <tr>
+                                    <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Test</th>
+                                    <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">10/2023</th>
+                                    <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">05/2024</th>
+                                    <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">11/2024</th>
+                                    <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">05/2025</th>
+                                    <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Range</th>
+                                </tr>
+                            </thead>
+                            <tbody class="bg-white divide-y divide-gray-200">
+                                <tr>
+                                    <td class="px-6 py-4 whitespace-nowrap font-medium text-slate-700">Testosterone (NG/dL)</td>
+                                    <td class="px-6 py-4 whitespace-nowrap color-optimal">727</td>
+                                    <td class="px-6 py-4 whitespace-nowrap color-optimal">609</td>
+                                    <td class="px-6 py-4 whitespace-nowrap color-optimal">602</td>
+                                    <td class="px-6 py-4 whitespace-nowrap color-high-risk">938.28</td>
+                                    <td class="px-6 py-4 whitespace-nowrap">300-890 (to 813.86)</td>
+                                </tr>
+                                <tr>
+                                    <td class="px-6 py-4 whitespace-nowrap font-medium text-slate-700">PSA, Total (NG/mL)</td>
+                                    <td class="px-6 py-4 whitespace-nowrap color-optimal">0.42</td>
+                                    <td class="px-6 py-4 whitespace-nowrap color-optimal">0.34</td>
+                                    <td class="px-6 py-4 whitespace-nowrap color-optimal">0.39</td>
+                                    <td class="px-6 py-4 whitespace-nowrap color-optimal">0.42</td>
+                                    <td class="px-6 py-4 whitespace-nowrap">&lt;=4.00</td>
+                                </tr>
+                                <tr>
+                                    <td class="px-6 py-4 whitespace-nowrap font-medium text-slate-700">Free T3 (pg/mL)</td>
+                                    <td class="px-6 py-4 whitespace-nowrap color-optimal">2.4</td>
+                                    <td class="px-6 py-4 whitespace-nowrap">N/A</td>
+                                    <td class="px-6 py-4 whitespace-nowrap color-optimal">2.3</td>
+                                    <td class="px-6 py-4 whitespace-nowrap">N/A</td>
+                                    <td class="px-6 py-4 whitespace-nowrap">2.2-4.2</td>
+                                </tr>
+                                <tr>
+                                    <td class="px-6 py-4 whitespace-nowrap font-medium text-slate-700">TSH (ulU/mL)</td>
+                                    <td class="px-6 py-4 whitespace-nowrap color-optimal">2.510</td>
+                                    <td class="px-6 py-4 whitespace-nowrap color-low-risk">0.154</td>
+                                    <td class="px-6 py-4 whitespace-nowrap color-optimal">3.610</td>
+                                    <td class="px-6 py-4 whitespace-nowrap color-optimal">1.47</td>
+                                    <td class="px-6 py-4 whitespace-nowrap">0.400-4.100</td>
+                                </tr>
+                                <tr>
+                                    <td class="px-6 py-4 whitespace-nowrap font-medium text-slate-700">Free T4 (NG/dL)</td>
+                                    <td class="px-6 py-4 whitespace-nowrap">N/A</td>
+                                    <td class="px-6 py-4 whitespace-nowrap color-high-risk">1.95</td>
+                                    <td class="px-6 py-4 whitespace-nowrap">N/A</td>
+                                    <td class="px-6 py-4 whitespace-nowrap">N/A</td>
+                                    <td class="px-6 py-4 whitespace-nowrap">0.80-1.90</td>
+                                </tr>
+                                <tr>
+                                    <td class="px-6 py-4 whitespace-nowrap font-medium text-slate-700">Estradiol (pg/mL)</td>
+                                    <td class="px-6 py-4 whitespace-nowrap">N/A</td>
+                                    <td class="px-6 py-4 whitespace-nowrap">N/A</td>
+                                    <td class="px-6 py-4 whitespace-nowrap color-optimal">29.5</td>
+                                    <td class="px-6 py-4 whitespace-nowrap color-high-risk">59.40</td>
+                                    <td class="px-6 py-4 whitespace-nowrap">7.6-42.6 (Adult male)</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div class="bg-white p-6 rounded-lg shadow-md border border-gray-200 animate-fade-in" style="animation-delay: 0.7s;">
+                        <h3 class="text-xl font-semibold text-slate-700 mb-3 tooltip">Testosterone
+                            <span class="tooltiptext">
+                                <strong>Clinical Meaning:</strong> A primary male sex hormone, crucial for muscle mass, bone density, and sexual function.
+                                <br><strong>Normal Range:</strong> 300-890 NG/dL (varies by age).
+                                <br><strong>Implications (High):</strong> May indicate exogenous testosterone use, adrenal tumors, or testicular tumors. Can lead to increased red blood cell count, acne, hair loss, and potentially cardiovascular issues.
+                                <br>Source: Mayo Clinic
+                            </span>
+                        </h3>
+                        <div class="bar-chart-container">
+                            <div class="bar-item">
+                                <span class="bar-label">10/2023:</span>
+                                <div class="bar w-11/12 color-optimal" style="width: calc(727 / 1000 * 100%);"></div>
+                                <span class="bar-value">727 NG/dL</span>
+                            </div>
+                            <div class="bar-item">
+                                <span class="bar-label">05/2024:</span>
+                                <div class="bar w-10/12 color-optimal" style="width: calc(609 / 1000 * 100%);"></div>
+                                <span class="bar-value">609 NG/dL</span>
+                            </div>
+                            <div class="bar-item">
+                                <span class="bar-label">11/2024:</span>
+                                <div class="bar w-10/12 color-optimal" style="width: calc(602 / 1000 * 100%);"></div>
+                                <span class="bar-value">602 NG/dL</span>
+                            </div>
+                            <div class="bar-item">
+                                <span class="bar-label">05/2025:</span>
+                                <div class="bar w-full color-high-risk" style="width: calc(938.28 / 1000 * 100%);"></div>
+                                <span class="bar-value">938.28 NG/dL</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="bg-white p-6 rounded-lg shadow-md border border-gray-200 animate-fade-in" style="animation-delay: 0.8s;">
+                        <h3 class="text-xl font-semibold text-slate-700 mb-3 tooltip">TSH
+                            <span class="tooltiptext">
+                                <strong>Clinical Meaning:</strong> Thyroid-stimulating hormone, produced by the pituitary gland, regulates thyroid hormone production.
+                                <br><strong>Normal Range:</strong> 0.400-4.100 ulU/mL.
+                                <br><strong>Implications (Low):</strong> May indicate hyperthyroidism or overtreatment with thyroid medication (e.g., Synthroid).
+                                <br>Source: MedlinePlus
+                            </span>
+                        </h3>
+                        <div class="bar-chart-container">
+                            <div class="bar-item">
+                                <span class="bar-label">10/2023:</span>
+                                <div class="bar w-6/12 color-optimal" style="width: calc(2.510 / 5 * 100%);"></div>
+                                <span class="bar-value">2.510 ulU/mL</span>
+                            </div>
+                            <div class="bar-item">
+                                <span class="bar-label">05/2024:</span>
+                                <div class="bar w-1/12 color-low-risk" style="width: calc(0.154 / 5 * 100%);"></div>
+                                <span class="bar-value">0.154 ulU/mL</span>
+                            </div>
+                            <div class="bar-item">
+                                <span class="bar-label">11/2024:</span>
+                                <div class="bar w-7/12 color-optimal" style="width: calc(3.610 / 5 * 100%);"></div>
+                                <span class="bar-value">3.610 ulU/mL</span>
+                            </div>
+                            <div class="bar-item">
+                                <span class="bar-label">05/2025:</span>
+                                <div class="bar w-3/12 color-optimal" style="width: calc(1.47 / 5 * 100%);"></div>
+                                <span class="bar-value">1.47 ulU/mL</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="bg-white p-6 rounded-lg shadow-md border border-gray-200 animate-fade-in" style="animation-delay: 0.9s;">
+                        <h3 class="text-xl font-semibold text-slate-700 mb-3 tooltip">Estradiol
+                            <span class="tooltiptext">
+                                <strong>Clinical Meaning:</strong> A form of estrogen, present in both males and females. In males, it's involved in bone health, libido, and sperm production.
+                                <br><strong>Normal Range (Adult Male):</strong> 7.6 to 42.6 pg/mL.
+                                <br><strong>Implications (High):</strong> In males, high estradiol can lead to gynecomastia, fluid retention, and may be associated with high testosterone levels or certain medical conditions.
+                                <br>Source: Mayo Clinic
+                            </span>
+                        </h3>
+                        <div class="bar-chart-container">
+                            <div class="bar-item">
+                                <span class="bar-label">11/2024:</span>
+                                <div class="bar w-6/12 color-optimal" style="width: calc(29.5 / 70 * 100%);"></div>
+                                <span class="bar-value">29.5 pg/mL</span>
+                            </div>
+                            <div class="bar-item">
+                                <span class="bar-label">05/2025:</span>
+                                <div class="bar w-11/12 color-high-risk" style="width: calc(59.40 / 70 * 100%);"></div>
+                                <span class="bar-value">59.40 pg/mL</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="metabolic" class="mb-12 animate-fade-in" style="animation-delay: 1.0s;">
+                <h2 class="text-3xl font-bold text-slate-800 mb-6 border-b-2 border-blue-200 pb-2">Metabolic & Kidney Health</h2>
+                <div class="bg-white p-6 rounded-lg shadow-md border border-gray-200 mb-6">
+                    <h3 class="text-xl font-semibold text-slate-700 mb-4">Summary Table</h3>
+                    <div class="overflow-x-auto">
+                        <table class="min-w-full divide-y divide-gray-200">
+                            <thead class="bg-gray-50">
+                                <tr>
+                                    <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Test</th>
+                                    <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">05/2024</th>
+                                    <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">05/2025</th>
+                                    <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Range</th>
+                                </tr>
+                            </thead>
+                            <tbody class="bg-white divide-y divide-gray-200">
+                                <tr>
+                                    <td class="px-6 py-4 whitespace-nowrap font-medium text-slate-700">Creatinine (mg/dL)</td>
+                                    <td class="px-6 py-4 whitespace-nowrap color-optimal">1.26</td>
+                                    <td class="px-6 py-4 whitespace-nowrap color-high-risk">1.35</td>
+                                    <td class="px-6 py-4 whitespace-nowrap">0.76-1.27</td>
+                                </tr>
+                                <tr>
+                                    <td class="px-6 py-4 whitespace-nowrap font-medium text-slate-700">Glucose (mg/dL)</td>
+                                    <td class="px-6 py-4 whitespace-nowrap color-optimal">83</td>
+                                    <td class="px-6 py-4 whitespace-nowrap color-optimal">92</td>
+                                    <td class="px-6 py-4 whitespace-nowrap">70-99</td>
+                                </tr>
+                                <tr>
+                                    <td class="px-6 py-4 whitespace-nowrap font-medium text-slate-700">BUN (mg/dL)</td>
+                                    <td class="px-6 py-4 whitespace-nowrap color-high-risk">29</td>
+                                    <td class="px-6 py-4 whitespace-nowrap color-optimal">26</td>
+                                    <td class="px-6 py-4 whitespace-nowrap">8-27</td>
+                                </tr>
+                                <tr>
+                                    <td class="px-6 py-4 whitespace-nowrap font-medium text-slate-700">eGFR (mL/min/1.73)</td>
+                                    <td class="px-6 py-4 whitespace-nowrap color-optimal">66</td>
+                                    <td class="px-6 py-4 whitespace-nowrap color-optimal">60</td>
+                                    <td class="px-6 py-4 whitespace-nowrap">&gt;59</td>
+                                </tr>
+                                <tr>
+                                    <td class="px-6 py-4 whitespace-nowrap font-medium text-slate-700">Carbon Dioxide (mEq/L)</td>
+                                    <td class="px-6 py-4 whitespace-nowrap color-optimal">26</td>
+                                    <td class="px-6 py-4 whitespace-nowrap color-high-risk">30</td>
+                                    <td class="px-6 py-4 whitespace-nowrap">20-29</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div class="bg-white p-6 rounded-lg shadow-md border border-gray-200 animate-fade-in" style="animation-delay: 1.1s;">
+                        <h3 class="text-xl font-semibold text-slate-700 mb-3 tooltip">Creatinine
+                            <span class="tooltiptext">
+                                <strong>Clinical Meaning:</strong> A waste product from muscle metabolism, filtered by the kidneys. High levels can indicate impaired kidney function.
+                                <br><strong>Normal Range:</strong> 0.76-1.27 mg/dL.
+                                <br><strong>Implications (High):</strong> Suggests that kidneys may not be filtering waste products effectively. Can be influenced by muscle mass, diet, and hydration.
+                                <br>Source: MedlinePlus
+                            </span>
+                        </h3>
+                        <div class="bar-chart-container">
+                            <div class="bar-item">
+                                <span class="bar-label">05/2024:</span>
+                                <div class="bar w-7/12 color-optimal" style="width: calc(1.26 / 2 * 100%);"></div>
+                                <span class="bar-value">1.26 mg/dL</span>
+                            </div>
+                            <div class="bar-item">
+                                <span class="bar-label">05/2025:</span>
+                                <div class="bar w-8/12 color-high-risk" style="width: calc(1.35 / 2 * 100%);"></div>
+                                <span class="bar-value">1.35 mg/dL</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="bg-white p-6 rounded-lg shadow-md border border-gray-200 animate-fade-in" style="animation-delay: 1.2s;">
+                        <h3 class="text-xl font-semibold text-slate-700 mb-3 tooltip">BUN (Blood Urea Nitrogen)
+                            <span class="tooltiptext">
+                                <strong>Clinical Meaning:</strong> Urea nitrogen is a waste product formed when protein is broken down. It is filtered by the kidneys.
+                                <br><strong>Normal Range:</strong> 8-27 mg/dL.
+                                <br><strong>Implications (High):</strong> Can indicate kidney disease, dehydration, high protein diet, or certain medications.
+                                <br>Source: MedlinePlus
+                            </span>
+                        </h3>
+                        <div class="bar-chart-container">
+                            <div class="bar-item">
+                                <span class="bar-label">05/2024:</span>
+                                <div class="bar w-8/12 color-high-risk" style="width: calc(29 / 40 * 100%);"></div>
+                                <span class="bar-value">29 mg/dL</span>
+                            </div>
+                            <div class="bar-item">
+                                <span class="bar-label">05/2025:</span>
+                                <div class="bar w-7/12 color-optimal" style="width: calc(26 / 40 * 100%);"></div>
+                                <span class="bar-value">26 mg/dL</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="liver" class="mb-12 animate-fade-in" style="animation-delay: 1.3s;">
+                <h2 class="text-3xl font-bold text-slate-800 mb-6 border-b-2 border-blue-200 pb-2">Liver Function</h2>
+                <div class="bg-white p-6 rounded-lg shadow-md border border-gray-200 mb-6">
+                    <h3 class="text-xl font-semibold text-slate-700 mb-4">Summary Table</h3>
+                    <div class="overflow-x-auto">
+                        <table class="min-w-full divide-y divide-gray-200">
+                            <thead class="bg-gray-50">
+                                <tr>
+                                    <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Test</th>
+                                    <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">05/2024</th>
+                                    <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">05/2025</th>
+                                    <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Range</th>
+                                </tr>
+                            </thead>
+                            <tbody class="bg-white divide-y divide-gray-200">
+                                <tr>
+                                    <td class="px-6 py-4 whitespace-nowrap font-medium text-slate-700">ALT (U/L)</td>
+                                    <td class="px-6 py-4 whitespace-nowrap color-optimal">16</td>
+                                    <td class="px-6 py-4 whitespace-nowrap color-optimal">26</td>
+                                    <td class="px-6 py-4 whitespace-nowrap">0-44</td>
+                                </tr>
+                                <tr>
+                                    <td class="px-6 py-4 whitespace-nowrap font-medium text-slate-700">Bilirubin, Total (mg/dL)</td>
+                                    <td class="px-6 py-4 whitespace-nowrap color-high-risk">1.3</td>
+                                    <td class="px-6 py-4 whitespace-nowrap color-optimal">1.2</td>
+                                    <td class="px-6 py-4 whitespace-nowrap">0.0-1.2</td>
+                                </tr>
+                                <tr>
+                                    <td class="px-6 py-4 whitespace-nowrap font-medium text-slate-700">AST (U/L)</td>
+                                    <td class="px-6 py-4 whitespace-nowrap color-optimal">22</td>
+                                    <td class="px-6 py-4 whitespace-nowrap color-optimal">28</td>
+                                    <td class="px-6 py-4 whitespace-nowrap">0-40</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div class="bg-white p-6 rounded-lg shadow-md border border-gray-200 animate-fade-in" style="animation-delay: 1.4s;">
+                        <h3 class="text-xl font-semibold text-slate-700 mb-3 tooltip">Bilirubin, Total
+                            <span class="tooltiptext">
+                                <strong>Clinical Meaning:</strong> A yellowish pigment made during the normal breakdown of red blood cells. The liver processes bilirubin.
+                                <br><strong>Normal Range:</strong> 0.0-1.2 mg/dL.
+                                <br><strong>Implications (High):</strong> Can indicate liver disease, bile duct obstruction, or increased red blood cell destruction.
+                                <br>Source: MedlinePlus
+                            </span>
+                        </h3>
+                        <div class="bar-chart-container">
+                            <div class="bar-item">
+                                <span class="bar-label">05/2024:</span>
+                                <div class="bar w-11/12 color-high-risk" style="width: calc(1.3 / 1.5 * 100%);"></div>
+                                <span class="bar-value">1.3 mg/dL</span>
+                            </div>
+                            <div class="bar-item">
+                                <span class="bar-label">05/2025:</span>
+                                <div class="bar w-10/12 color-optimal" style="width: calc(1.2 / 1.5 * 100%);"></div>
+                                <span class="bar-value">1.2 mg/dL</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="blood-count" class="mb-12 animate-fade-in" style="animation-delay: 1.5s;">
+                <h2 class="text-3xl font-bold text-slate-800 mb-6 border-b-2 border-blue-200 pb-2">Complete Blood Count (CBC)</h2>
+                <div class="bg-white p-6 rounded-lg shadow-md border border-gray-200 mb-6">
+                    <h3 class="text-xl font-semibold text-slate-700 mb-4">Summary Table</h3>
+                    <div class="overflow-x-auto">
+                        <table class="min-w-full divide-y divide-gray-200">
+                            <thead class="bg-gray-50">
+                                <tr>
+                                    <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Test</th>
+                                    <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">10/2023</th>
+                                    <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">05/2024</th>
+                                    <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">11/2024</th>
+                                    <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">05/2025</th>
+                                    <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Range</th>
+                                </tr>
+                            </thead>
+                            <tbody class="bg-white divide-y divide-gray-200">
+                                <tr>
+                                    <td class="px-6 py-4 whitespace-nowrap font-medium text-slate-700">Hemoglobin (g/dL)</td>
+                                    <td class="px-6 py-4 whitespace-nowrap color-high-risk">17.8</td>
+                                    <td class="px-6 py-4 whitespace-nowrap color-optimal">16.9</td>
+                                    <td class="px-6 py-4 whitespace-nowrap color-high-risk">17.2</td>
+                                    <td class="px-6 py-4 whitespace-nowrap color-high-risk">18.0</td>
+                                    <td class="px-6 py-4 whitespace-nowrap">12.6-17.7</td>
+                                </tr>
+                                <tr>
+                                    <td class="px-6 py-4 whitespace-nowrap font-medium text-slate-700">Hematocrit (%)</td>
+                                    <td class="px-6 py-4 whitespace-nowrap color-high-risk">51.8</td>
+                                    <td class="px-6 py-4 whitespace-nowrap color-optimal">50.5</td>
+                                    <td class="px-6 py-4 whitespace-nowrap color-high-risk">52.8</td>
+                                    <td class="px-6 py-4 whitespace-nowrap color-high-risk">52.9</td>
+                                    <td class="px-6 py-4 whitespace-nowrap">37.5-51.0</td>
+                                </tr>
+                                <tr>
+                                    <td class="px-6 py-4 whitespace-nowrap font-medium text-slate-700">MCV (fL)</td>
+                                    <td class="px-6 py-4 whitespace-nowrap color-optimal">96.8</td>
+                                    <td class="px-6 py-4 whitespace-nowrap color-optimal">96.7</td>
+                                    <td class="px-6 py-4 whitespace-nowrap color-high-risk">101.3</td>
+                                    <td class="px-6 py-4 whitespace-nowrap color-high-risk">99</td>
+                                    <td class="px-6 py-4 whitespace-nowrap">79-97</td>
+                                </tr>
+                                <tr>
+                                    <td class="px-6 py-4 whitespace-nowrap font-medium text-slate-700">MCH (pg)</td>
+                                    <td class="px-6 py-4 whitespace-nowrap color-high-risk">33.3</td>
+                                    <td class="px-6 py-4 whitespace-nowrap color-optimal">32.4</td>
+                                    <td class="px-6 py-4 whitespace-nowrap color-optimal">33.0</td>
+                                    <td class="px-6 py-4 whitespace-nowrap color-high-risk">33.5</td>
+                                    <td class="px-6 py-4 whitespace-nowrap">26.6-33.0</td>
+                                </tr>
+                                <tr>
+                                    <td class="px-6 py-4 whitespace-nowrap font-medium text-slate-700">Monocytes% (%)</td>
+                                    <td class="px-6 py-4 whitespace-nowrap color-high-risk">9.5</td>
+                                    <td class="px-6 py-4 whitespace-nowrap color-high-risk">11.7</td>
+                                    <td class="px-6 py-4 whitespace-nowrap color-high-risk">11.5</td>
+                                    <td class="px-6 py-4 whitespace-nowrap color-high-risk">10.1</td>
+                                    <td class="px-6 py-4 whitespace-nowrap">2-10 (typical)</td>
+                                </tr>
+                                <tr>
+                                    <td class="px-6 py-4 whitespace-nowrap font-medium text-slate-700">Basophils% (%)</td>
+                                    <td class="px-6 py-4 whitespace-nowrap color-high-risk">1.1</td>
+                                    <td class="px-6 py-4 whitespace-nowrap color-high-risk">1.4</td>
+                                    <td class="px-6 py-4 whitespace-nowrap color-high-risk">1.2</td>
+                                    <td class="px-6 py-4 whitespace-nowrap color-optimal">0.9</td>
+                                    <td class="px-6 py-4 whitespace-nowrap">0-1 (typical)</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div class="bg-white p-6 rounded-lg shadow-md border border-gray-200 animate-fade-in" style="animation-delay: 1.6s;">
+                        <h3 class="text-xl font-semibold text-slate-700 mb-3 tooltip">Hemoglobin
+                            <span class="tooltiptext">
+                                <strong>Clinical Meaning:</strong> The protein in red blood cells that carries oxygen.
+                                <br><strong>Normal Range:</strong> 12.6-17.7 g/dL.
+                                <br><strong>Implications (High):</strong> Can indicate dehydration, polycythemia vera, or chronic lung disease. High levels can increase blood viscosity and risk of clots.
+                                <br>Source: MedlinePlus
+                            </span>
+                        </h3>
+                        <div class="bar-chart-container">
+                            <div class="bar-item">
+                                <span class="bar-label">10/2023:</span>
+                                <div class="bar w-11/12 color-high-risk" style="width: calc(17.8 / 20 * 100%);"></div>
+                                <span class="bar-value">17.8 g/dL</span>
+                            </div>
+                            <div class="bar-item">
+                                <span class="bar-label">05/2024:</span>
+                                <div class="bar w-10/12 color-optimal" style="width: calc(16.9 / 20 * 100%);"></div>
+                                <span class="bar-value">16.9 g/dL</span>
+                            </div>
+                            <div class="bar-item">
+                                <span class="bar-label">11/2024:</span>
+                                <div class="bar w-11/12 color-high-risk" style="width: calc(17.2 / 20 * 100%);"></div>
+                                <span class="bar-value">17.2 g/dL</span>
+                            </div>
+                            <div class="bar-item">
+                                <span class="bar-label">05/2025:</span>
+                                <div class="bar w-full color-high-risk" style="width: calc(18.0 / 20 * 100%);"></div>
+                                <span class="bar-value">18.0 g/dL</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="bg-white p-6 rounded-lg shadow-md border border-gray-200 animate-fade-in" style="animation-delay: 1.7s;">
+                        <h3 class="text-xl font-semibold text-slate-700 mb-3 tooltip">Hematocrit
+                            <span class="tooltiptext">
+                                <strong>Clinical Meaning:</strong> The percentage of red blood cells in your blood.
+                                <br><strong>Normal Range:</strong> 37.5-51.0 %.
+                                <br><strong>Implications (High):</strong> Similar to high hemoglobin, can indicate dehydration, polycythemia, or other conditions affecting red blood cell production. Increases risk of blood clots.
+                                <br>Source: MedlinePlus
+                            </span>
+                        </h3>
+                        <div class="bar-chart-container">
+                            <div class="bar-item">
+                                <span class="bar-label">10/2023:</span>
+                                <div class="bar w-11/12 color-high-risk" style="width: calc(51.8 / 60 * 100%);"></div>
+                                <span class="bar-value">51.8 %</span>
+                            </div>
+                            <div class="bar-item">
+                                <span class="bar-label">05/2024:</span>
+                                <div class="bar w-10/12 color-optimal" style="width: calc(50.5 / 60 * 100%);"></div>
+                                <span class="bar-value">50.5 %</span>
+                            </div>
+                            <div class="bar-item">
+                                <span class="bar-label">11/2024:</span>
+                                <div class="bar w-full color-high-risk" style="width: calc(52.8 / 60 * 100%);"></div>
+                                <span class="bar-value">52.8 %</span>
+                            </div>
+                            <div class="bar-item">
+                                <span class="bar-label">05/2025:</span>
+                                <div class="bar w-full color-high-risk" style="width: calc(52.9 / 60 * 100%);"></div>
+                                <span class="bar-value">52.9 %</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="lipid" class="mb-12 animate-fade-in" style="animation-delay: 1.8s;">
+                <h2 class="text-3xl font-bold text-slate-800 mb-6 border-b-2 border-blue-200 pb-2">Lipid Profile</h2>
+                <div class="bg-white p-6 rounded-lg shadow-md border border-gray-200 mb-6">
+                    <h3 class="text-xl font-semibold text-slate-700 mb-4">Summary Table</h3>
+                    <div class="overflow-x-auto">
+                        <table class="min-w-full divide-y divide-gray-200">
+                            <thead class="bg-gray-50">
+                                <tr>
+                                    <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Test</th>
+                                    <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">10/2023</th>
+                                    <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">05/2024</th>
+                                    <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">05/2025</th>
+                                    <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Range</th>
+                                </tr>
+                            </thead>
+                            <tbody class="bg-white divide-y divide-gray-200">
+                                <tr>
+                                    <td class="px-6 py-4 whitespace-nowrap font-medium text-slate-700">HDL Cholesterol (mg/dL)</td>
+                                    <td class="px-6 py-4 whitespace-nowrap color-optimal">46</td>
+                                    <td class="px-6 py-4 whitespace-nowrap color-optimal">41</td>
+                                    <td class="px-6 py-4 whitespace-nowrap color-optimal">40</td>
+                                    <td class="px-6 py-4 whitespace-nowrap">&gt;39 (40-60)</td>
+                                </tr>
+                                <tr>
+                                    <td class="px-6 py-4 whitespace-nowrap font-medium text-slate-700">Total Cholesterol (mg/dL)</td>
+                                    <td class="px-6 py-4 whitespace-nowrap color-optimal">154</td>
+                                    <td class="px-6 py-4 whitespace-nowrap color-optimal">156</td>
+                                    <td class="px-6 py-4 whitespace-nowrap color-optimal">167</td>
+                                    <td class="px-6 py-4 whitespace-nowrap">&lt;200</td>
+                                </tr>
+                                <tr>
+                                    <td class="px-6 py-4 whitespace-nowrap font-medium text-slate-700">Triglycerides (mg/dL)</td>
+                                    <td class="px-6 py-4 whitespace-nowrap color-optimal">73</td>
+                                    <td class="px-6 py-4 whitespace-nowrap color-optimal">62</td>
+                                    <td class="px-6 py-4 whitespace-nowrap color-optimal">83</td>
+                                    <td class="px-6 py-4 whitespace-nowrap">&lt;150</td>
+                                </tr>
+                                <tr>
+                                    <td class="px-6 py-4 whitespace-nowrap font-medium text-slate-700">Calc LDL Chol (mg/dL)</td>
+                                    <td class="px-6 py-4 whitespace-nowrap color-optimal">92</td>
+                                    <td class="px-6 py-4 whitespace-nowrap color-optimal">101</td>
+                                    <td class="px-6 py-4 whitespace-nowrap color-high-risk">110</td>
+                                    <td class="px-6 py-4 whitespace-nowrap">&lt;130 (0-99)</td>
+                                </tr>
+                                <tr>
+                                    <td class="px-6 py-4 whitespace-nowrap font-medium text-slate-700">LDL/HDL Risk Ratio</td>
+                                    <td class="px-6 py-4 whitespace-nowrap color-optimal">2.00</td>
+                                    <td class="px-6 py-4 whitespace-nowrap color-optimal">2.46</td>
+                                    <td class="px-6 py-4 whitespace-nowrap color-borderline">4.2</td>
+                                    <td class="px-6 py-4 whitespace-nowrap">&lt;3.55 (0.0-5.0)</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div class="bg-white p-6 rounded-lg shadow-md border border-gray-200 animate-fade-in" style="animation-delay: 1.9s;">
+                        <h3 class="text-xl font-semibold text-slate-700 mb-3 tooltip">LDL Cholesterol
+                            <span class="tooltiptext">
+                                <strong>Clinical Meaning:</strong> "Bad" cholesterol. High levels contribute to fatty buildups in arteries (atherosclerosis), increasing risk of heart attack and stroke.
+                                <br><strong>Normal Range:</strong> &lt;130 mg/dL (optimal &lt;100 mg/dL). The provided range of 0-99 mg/dL is optimal.
+                                <br><strong>Implications (High):</strong> Increased risk of cardiovascular disease.
+                                <br>Source: CDC, Mayo Clinic
+                            </span>
+                        </h3>
+                        <div class="bar-chart-container">
+                            <div class="bar-item">
+                                <span class="bar-label">10/2023:</span>
+                                <div class="bar w-8/12 color-optimal" style="width: calc(92 / 150 * 100%);"></div>
+                                <span class="bar-value">92 mg/dL</span>
+                            </div>
+                            <div class="bar-item">
+                                <span class="bar-label">05/2024:</span>
+                                <div class="bar w-9/12 color-optimal" style="width: calc(101 / 150 * 100%);"></div>
+                                <span class="bar-value">101 mg/dL</span>
+                            </div>
+                            <div class="bar-item">
+                                <span class="bar-label">05/2025:</span>
+                                <div class="bar w-10/12 color-high-risk" style="width: calc(110 / 150 * 100%);"></div>
+                                <span class="bar-value">110 mg/dL</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="bg-white p-6 rounded-lg shadow-md border border-gray-200 animate-fade-in" style="animation-delay: 2.0s;">
+                        <h3 class="text-xl font-semibold text-slate-700 mb-3 tooltip">LDL/HDL Risk Ratio
+                            <span class="tooltiptext">
+                                <strong>Clinical Meaning:</strong> The ratio of "bad" cholesterol to "good" cholesterol. A lower ratio is generally better for heart health.
+                                <br><strong>Normal Range:</strong> &lt;3.55 (optimal &lt;2.5). The provided range of 0.0-5.0 is very broad.
+                                <br><strong>Implications (High):</strong> A higher ratio indicates an increased risk of cardiovascular disease.
+                                <br>Source: American Heart Association
+                            </span>
+                        </h3>
+                        <div class="bar-chart-container">
+                            <div class="bar-item">
+                                <span class="bar-label">10/2023:</span>
+                                <div class="bar w-4/12 color-optimal" style="width: calc(2.00 / 5 * 100%);"></div>
+                                <span class="bar-value">2.00 ratio</span>
+                            </div>
+                            <div class="bar-item">
+                                <span class="bar-label">05/2024:</span>
+                                <div class="bar w-5/12 color-optimal" style="width: calc(2.46 / 5 * 100%);"></div>
+                                <span class="bar-value">2.46 ratio</span>
+                            </div>
+                            <div class="bar-item">
+                                <span class="bar-label">05/2025:</span>
+                                <div class="bar w-8/12 color-borderline" style="width: calc(4.2 / 5 * 100%);"></div>
+                                <span class="bar-value">4.2 ratio</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="diabetes" class="mb-12 animate-fade-in" style="animation-delay: 2.1s;">
+                <h2 class="text-3xl font-bold text-slate-800 mb-6 border-b-2 border-blue-200 pb-2">Diabetes Markers</h2>
+                <div class="bg-white p-6 rounded-lg shadow-md border border-gray-200 mb-6">
+                    <h3 class="text-xl font-semibold text-slate-700 mb-4">Summary Table</h3>
+                    <div class="overflow-x-auto">
+                        <table class="min-w-full divide-y divide-gray-200">
+                            <thead class="bg-gray-50">
+                                <tr>
+                                    <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Test</th>
+                                    <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">05/2024</th>
+                                    <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">05/2025</th>
+                                    <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Range</th>
+                                </tr>
+                            </thead>
+                            <tbody class="bg-white divide-y divide-gray-200">
+                                <tr>
+                                    <td class="px-6 py-4 whitespace-nowrap font-medium text-slate-700">Hemoglobin A1C (%)</td>
+                                    <td class="px-6 py-4 whitespace-nowrap color-optimal">5.1</td>
+                                    <td class="px-6 py-4 whitespace-nowrap color-optimal">5.2</td>
+                                    <td class="px-6 py-4 whitespace-nowrap">&lt;5.7</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div class="bg-white p-6 rounded-lg shadow-md border border-gray-200 animate-fade-in" style="animation-delay: 2.2s;">
+                        <h3 class="text-xl font-semibold text-slate-700 mb-3 tooltip">Hemoglobin A1C
+                            <span class="tooltiptext">
+                                <strong>Clinical Meaning:</strong> Measures your average blood sugar levels over the past 2-3 months.
+                                <br><strong>Normal Range:</strong> &lt;5.7%. Prediabetes: 5.7-6.4%. Diabetes: &gt;6.4%.
+                                <br><strong>Implications:</strong> Values in the normal range indicate good long-term blood sugar control.
+                                <br>Source: American Diabetes Association
+                            </span>
+                        </h3>
+                        <div class="bar-chart-container">
+                            <div class="bar-item">
+                                <span class="bar-label">05/2024:</span>
+                                <div class="bar w-9/12 color-optimal" style="width: calc(5.1 / 7 * 100%);"></div>
+                                <span class="bar-value">5.1 %</span>
+                            </div>
+                            <div class="bar-item">
+                                <span class="bar-label">05/2025:</span>
+                                <div class="bar w-9/12 color-optimal" style="width: calc(5.2 / 7 * 100%);"></div>
+                                <span class="bar-value">5.2 %</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <script>
+        // Smooth scrolling for sidebar navigation
+        document.querySelectorAll('nav a').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+
+        // Simple animation trigger for sections on load
+        document.addEventListener('DOMContentLoaded', () => {
+            const sections = document.querySelectorAll('section');
+            sections.forEach((section, index) => {
+                section.style.animationDelay = `${index * 0.1}s`;
+                section.classList.add('animate-fade-in');
+            });
+        });
+    </script>
+</body>
+</html>

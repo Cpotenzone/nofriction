@@ -1,0 +1,1385 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-8M3X5312PN"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-8M3X5312PN');
+</script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SYNTIN.AI | Contextual Intelligence Through Geo-Coded Trade Areas</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Michroma&family=Open+Sans:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/alpinejs@3.12.0/dist/cdn.min.js" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" rel="stylesheet">
+    <style>
+        :root {
+            --syntin-orange: #EB6B23;
+            --syntin-dark-orange: #B44200;
+            --syntin-black: #050505;
+            --syntin-white: #FCFCFC;
+        }
+        
+        body {
+            font-family: 'Open Sans', sans-serif;
+            background-color: var(--syntin-white);
+            color: var(--syntin-black);
+            scroll-behavior: smooth;
+        }
+        
+        h1, h2, h3, h4, .michroma {
+            font-family: 'Michroma', sans-serif;
+        }
+        
+        .hero-gradient {
+            background: linear-gradient(135deg, var(--syntin-orange) 0%, var(--syntin-dark-orange) 100%);
+        }
+        
+        .syntin-orange {
+            color: var(--syntin-orange);
+        }
+        
+        .bg-syntin-orange {
+            background-color: var(--syntin-orange);
+        }
+        
+        .syntin-dark-orange {
+            color: var(--syntin-dark-orange);
+        }
+        
+        .bg-syntin-dark-orange {
+            background-color: var(--syntin-dark-orange);
+        }
+        
+        .syntin-black {
+            color: var(--syntin-black);
+        }
+        
+        .bg-syntin-black {
+            background-color: var(--syntin-black);
+        }
+        
+        .syntin-white {
+            color: var(--syntin-white);
+        }
+        
+        .bg-syntin-white {
+            background-color: var(--syntin-white);
+        }
+        
+        .section {
+            min-height: 100vh;
+            padding: 4rem 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .card-flip {
+            perspective: 1000px;
+            height: 300px;
+        }
+
+        .card-flip-inner {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            transition: transform 0.8s;
+            transform-style: preserve-3d;
+            cursor: pointer;
+        }
+
+        .card-flipped .card-flip-inner {
+            transform: rotateY(180deg);
+        }
+
+        .card-front, .card-back {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            -webkit-backface-visibility: hidden;
+            backface-visibility: hidden;
+            border-radius: 0.5rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 1.5rem;
+        }
+
+        .card-front {
+            background-color: rgba(255, 255, 255, 0.9);
+            border: 2px solid var(--syntin-orange);
+        }
+
+        .card-back {
+            background-color: rgba(5, 5, 5, 0.95);
+            color: var(--syntin-white);
+            transform: rotateY(180deg);
+            border: 2px solid var(--syntin-dark-orange);
+        }
+
+        .innovative-approach-gradient {
+            background: linear-gradient(90deg, #EB6B23 0%, #B44200 100%);
+        }
+
+        .dimension-dot {
+            position: absolute;
+            width: 3px;
+            height: 3px;
+            background-color: var(--syntin-orange);
+            border-radius: 50%;
+            opacity: 0.7;
+            animation: pulse 3s infinite;
+        }
+
+        @keyframes pulse {
+            0% {
+                transform: scale(1);
+                opacity: 0.7;
+            }
+            50% {
+                transform: scale(1.5);
+                opacity: 0.4;
+            }
+            100% {
+                transform: scale(1);
+                opacity: 0.7;
+            }
+        }
+
+        .nav-link {
+            position: relative;
+            padding: 0.5rem 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 0;
+            height: 2px;
+            background-color: var(--syntin-orange);
+            transition: width 0.3s ease;
+        }
+
+        .nav-link:hover::after {
+            width: 80%;
+        }
+
+        .nav-link.active::after {
+            width: 80%;
+        }
+
+        .pattern-container {
+            position: relative;
+            width: 100%;
+            height: 300px;
+            overflow: hidden;
+            background-color: rgba(5, 5, 5, 0.8);
+            border-radius: 1rem;
+        }
+
+        .blackhole {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: radial-gradient(circle, var(--syntin-dark-orange) 0%, transparent 70%);
+            transform: translate(-50%, -50%);
+            box-shadow: 0 0 30px var(--syntin-orange);
+        }
+
+        .comparison-table th {
+            background-color: var(--syntin-orange);
+            color: white;
+            font-family: 'Michroma', sans-serif;
+        }
+
+        .comparison-table tr:nth-child(odd) {
+            background-color: rgba(235, 107, 35, 0.1);
+        }
+
+        .innovative-step {
+            position: relative;
+            padding: 1.5rem;
+            border-radius: 0.5rem;
+            transition: transform 0.3s ease;
+        }
+
+        .innovative-step:hover {
+            transform: translateY(-5px);
+        }
+
+        .step-connector {
+            position: absolute;
+            top: 50%;
+            right: -20px;
+            transform: translateY(-50%);
+            font-size: 1.5rem;
+            color: var(--syntin-orange);
+            z-index: 10;
+        }
+
+        #model-container {
+            position: relative;
+            width: 100%;
+            height: 500px;
+            background-color: rgba(5, 5, 5, 0.03);
+            border-radius: 1rem;
+            overflow: hidden;
+        }
+
+        .geo-coded-container {
+            position: relative;
+            width: 100%;
+            max-width: 800px;
+            margin: 0 auto;
+            background-color: rgba(255, 255, 255, 0.95);
+            border-radius: 1rem;
+            padding: 2rem;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .sdp-framework {
+            position: relative;
+            background-color: #1A365D;
+            border-radius: 1rem;
+            color: white;
+            padding: 2rem;
+        }
+
+        .scroll-indicator {
+            position: absolute;
+            bottom: 2rem;
+            left: 50%;
+            transform: translateX(-50%);
+            animation: bounce 2s infinite;
+        }
+
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% {
+                transform: translateY(0) translateX(-50%);
+            }
+            40% {
+                transform: translateY(-20px) translateX(-50%);
+            }
+            60% {
+                transform: translateY(-10px) translateX(-50%);
+            }
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .section {
+                padding: 3rem 1rem;
+            }
+            
+            .card-flip {
+                height: 250px;
+            }
+        }
+    </style>
+</head>
+<body x-data="{ activeSection: 'hero', isMenuOpen: false }">
+    <!-- Navigation -->
+    <nav class="fixed top-0 left-0 w-full z-50 bg-white bg-opacity-90 shadow-md backdrop-blur-sm">
+        <div class="container mx-auto px-4">
+            <div class="flex justify-between items-center py-4">
+                <div class="flex items-center">
+                    <span class="michroma text-xl font-bold syntin-orange">SYNTIN</span>
+                    <span class="ml-2 text-sm syntin-black">AI for Here and Now</span>
+                </div>
+                <div class="hidden md:flex space-x-2">
+                    <a href="#hero" @click="activeSection = 'hero'" :class="activeSection === 'hero' ? 'active' : ''" class="nav-link">Home</a>
+                    <a href="#innovation" @click="activeSection = 'innovation'" :class="activeSection === 'innovation' ? 'active' : ''" class="nav-link">Innovation</a>
+                    <a href="#distillation" @click="activeSection = 'distillation'" :class="activeSection === 'distillation' ? 'active' : ''" class="nav-link">Model Distillation</a>
+                    <a href="#dimensional" @click="activeSection = 'dimensional'" :class="activeSection === 'dimensional' ? 'active' : ''" class="nav-link">780D Analysis</a>
+                    <a href="#geocoded" @click="activeSection = 'geocoded'" :class="activeSection === 'geocoded' ? 'active' : ''" class="nav-link">Geo-Coded Trade Areas</a>
+                    <a href="#applications" @click="activeSection = 'applications'" :class="activeSection === 'applications' ? 'active' : ''" class="nav-link">Applications</a>
+                </div>
+                <div class="md:hidden">
+                    <button @click="isMenuOpen = !isMenuOpen" class="p-2 text-syntin-black">
+                        <i class="fas fa-bars text-xl"></i>
+                    </button>
+                </div>
+            </div>
+            
+            <!-- Mobile Menu -->
+            <div x-show="isMenuOpen" x-transition class="md:hidden py-4 space-y-3">
+                <a href="#hero" @click="activeSection = 'hero'; isMenuOpen = false" class="block py-2 px-4 hover:bg-gray-100">Home</a>
+                <a href="#innovation" @click="activeSection = 'innovation'; isMenuOpen = false" class="block py-2 px-4 hover:bg-gray-100">Innovation</a>
+                <a href="#distillation" @click="activeSection = 'distillation'; isMenuOpen = false" class="block py-2 px-4 hover:bg-gray-100">Model Distillation</a>
+                <a href="#dimensional" @click="activeSection = 'dimensional'; isMenuOpen = false" class="block py-2 px-4 hover:bg-gray-100">780D Analysis</a>
+                <a href="#geocoded" @click="activeSection = 'geocoded'; isMenuOpen = false" class="block py-2 px-4 hover:bg-gray-100">Geo-Coded Trade Areas</a>
+                <a href="#applications" @click="activeSection = 'applications'; isMenuOpen = false" class="block py-2 px-4 hover:bg-gray-100">Applications</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="hero" class="section flex items-center justify-center hero-gradient text-white pt-24">
+        <div class="container mx-auto px-4">
+            <div class="flex flex-col md:flex-row items-center">
+                <div class="md:w-1/2" data-aos="fade-right">
+                    <h1 class="text-4xl md:text-6xl font-bold mb-6">AI for Here and Now</h1>
+                    <p class="text-xl mb-8">SYNTIN empowers organizations to enter the AI arms race without requiring millions in infrastructure investment. Our revolutionary model distillation technology transforms complex, resource-intensive AI systems into compact, efficient agents that deliver powerful insights at the precise moment they hold the greatest value.</p>
+                    <div class="flex flex-wrap gap-4">
+                        <div class="bg-white bg-opacity-20 backdrop-blur-sm p-4 rounded-lg">
+                            <h3 class="font-bold text-lg mb-2">Smart Models as Superpowers</h3>
+                            <p>SYNTIN turns compact, distilled models into enterprise-grade intelligence, matching or exceeding traditional massive AI systems at a fraction of the cost.</p>
+                        </div>
+                        <div class="bg-white bg-opacity-20 backdrop-blur-sm p-4 rounded-lg">
+                            <h3 class="font-bold text-lg mb-2">Reasonable Scaling Costs</h3>
+                            <p>Deploy powerful AI capabilities across your organization with 80-90% lower operational costs and standard hardware instead of specialized GPU clusters.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="md:w-1/2 p-10" data-aos="fade-left">
+                    <div class="relative">
+                        <div class="dimension-sphere relative w-full aspect-square max-w-md mx-auto">
+                            <!-- Dynamic dots representing 780 dimensions -->
+                            <div id="dimension-dots" class="absolute inset-0"></div>
+                            <!-- Central sphere representing the model -->
+                            <div class="absolute inset-0 flex items-center justify-center">
+                                <div class="w-28 h-28 rounded-full bg-white bg-opacity-30 flex items-center justify-center">
+                                    <div class="w-20 h-20 rounded-full bg-white text-syntin-dark-orange flex items-center justify-center text-lg font-bold">
+                                        SYNTIN
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="scroll-indicator text-center">
+                <p class="mb-2 text-sm">Scroll to discover</p>
+                <i class="fas fa-chevron-down"></i>
+            </div>
+        </div>
+    </section>
+
+    <!-- Innovative Approach Section -->
+    <section id="innovation" class="section bg-white pt-24">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl md:text-4xl font-bold mb-12 text-center syntin-orange" data-aos="fade-up">Innovative Approach</h2>
+            
+            <div class="mb-16 max-w-4xl mx-auto" data-aos="fade-up">
+                <p class="text-lg mb-8 text-center">SYNTIN operates on a revolutionary framework that combines multiple cutting-edge technologies to deliver contextual intelligence precisely when and where it's needed.</p>
+            </div>
+            
+            <div class="innovative-approach-gradient rounded-xl text-white p-6 md:p-12 mb-16 max-w-5xl mx-auto" data-aos="fade-up">
+                <div class="grid grid-cols-1 md:grid-cols-5 gap-4">
+                    <div class="innovative-step bg-white bg-opacity-10 backdrop-filter backdrop-blur-sm">
+                        <h3 class="font-bold mb-3">High-Speed Learning</h3>
+                        <p class="text-sm">Continuously refines understanding of market dynamics</p>
+                        <div class="step-connector hidden md:block">+</div>
+                    </div>
+                    
+                    <div class="innovative-step bg-white bg-opacity-10 backdrop-filter backdrop-blur-sm">
+                        <h3 class="font-bold mb-3">Action Insights</h3>
+                        <p class="text-sm">In Market & Network Grouping</p>
+                        <div class="step-connector hidden md:block">+</div>
+                    </div>
+                    
+                    <div class="innovative-step bg-white bg-opacity-10 backdrop-filter backdrop-blur-sm">
+                        <h3 class="font-bold mb-3">Large-to-Small Models</h3>
+                        <p class="text-sm">Integrates broad market understanding into efficient Small Language Models by eliminating what has no value</p>
+                        <div class="step-connector hidden md:block">+</div>
+                    </div>
+                    
+                    <div class="innovative-step bg-white bg-opacity-10 backdrop-filter backdrop-blur-sm">
+                        <h3 class="font-bold mb-3">Dynamic Derivative Key Generation</h3>
+                        <p class="text-sm">Proprietary "fingerprint" of combined attributes that enables secure data linking</p>
+                        <div class="step-connector hidden md:block">+</div>
+                    </div>
+                    
+                    <div class="innovative-step bg-white bg-opacity-10 backdrop-filter backdrop-blur-sm">
+                        <h3 class="font-bold mb-3">Positive & Negative Impact Analysis</h3>
+                        <p class="text-sm">Identify and accentuate the positive and eliminate the negative – both are required for maximum ROI</p>
+                    </div>
+                </div>
+                
+                <div class="mt-12 grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <div class="bg-white bg-opacity-10 backdrop-filter backdrop-blur-sm p-6 rounded-lg">
+                        <h4 class="font-bold mb-4">Recognize opportunity and risk across supply, demand and promote</h4>
+                        <p>Our framework systematically identifies hidden patterns in data that represent either opportunities for growth or risks to be mitigated. This balanced approach ensures comprehensive decision intelligence.</p>
+                    </div>
+                    
+                    <div class="bg-white bg-opacity-10 backdrop-filter backdrop-blur-sm p-6 rounded-lg">
+                        <h4 class="font-bold mb-4">Proprietary "fingerprint" of combined attributes</h4>
+                        <p>SYNTIN's Orbiting Data Keys technology enables data from disparate sources to be joined and leveraged securely, creating a comprehensive view while maintaining privacy and security.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Model Distillation Section -->
+    <section id="distillation" class="section bg-gray-50 pt-24">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl md:text-4xl font-bold mb-12 text-center syntin-orange" data-aos="fade-up">Knowledge Distillation: The Core Technology</h2>
+            
+            <div class="mb-16 max-w-4xl mx-auto" data-aos="fade-up">
+                <p class="text-lg mb-8 text-center">SYNTIN's model distillation approach enables the transfer of intelligence from large, complex "teacher" models to smaller, efficient "student" models without sacrificing critical capabilities. This transforms how organizations can deploy AI at scale.</p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-12 mb-16" data-aos="fade-up">
+                <div class="flex flex-col items-center">
+                    <div class="mb-6 w-48 h-48 bg-syntin-black rounded-full flex items-center justify-center">
+                        <span class="text-white text-2xl font-bold">Teacher Model</span>
+                    </div>
+                    <h3 class="text-xl font-bold mb-4">Large, Complex AI</h3>
+                    <ul class="space-y-2">
+                        <li><i class="fas fa-check text-syntin-orange mr-2"></i> Vast parameter count (billions)</li>
+                        <li><i class="fas fa-check text-syntin-orange mr-2"></i> Trained on diverse datasets</li>
+                        <li><i class="fas fa-check text-syntin-orange mr-2"></i> High resource requirements</li>
+                        <li><i class="fas fa-check text-syntin-orange mr-2"></i> Broad capabilities</li>
+                    </ul>
+                </div>
+                
+                <div class="flex flex-col items-center">
+                    <div class="mb-6 w-24 h-24 bg-syntin-orange rounded-full flex items-center justify-center">
+                        <span class="text-white text-lg font-bold">Student Model</span>
+                    </div>
+                    <h3 class="text-xl font-bold mb-4">Compact, Efficient AI</h3>
+                    <ul class="space-y-2">
+                        <li><i class="fas fa-check text-syntin-orange mr-2"></i> Reduced parameter count</li>
+                        <li><i class="fas fa-check text-syntin-orange mr-2"></i> Focused on specific domains</li>
+                        <li><i class="fas fa-check text-syntin-orange mr-2"></i> Low resource requirements</li>
+                        <li><i class="fas fa-check text-syntin-orange mr-2"></i> Targeted capabilities</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-16">
+                <div class="bg-white p-6 rounded-lg shadow-md" data-aos="fade-up" data-aos-delay="100">
+                    <div class="text-4xl text-syntin-orange mb-4"><i class="fas fa-graduation-cap"></i></div>
+                    <h3 class="text-xl font-bold mb-3">Teacher Training</h3>
+                    <p>Develop comprehensive model with full data repository</p>
+                </div>
+                
+                <div class="bg-white p-6 rounded-lg shadow-md" data-aos="fade-up" data-aos-delay="200">
+                    <div class="text-4xl text-syntin-orange mb-4"><i class="fas fa-exchange-alt"></i></div>
+                    <h3 class="text-xl font-bold mb-3">Knowledge Transfer</h3>
+                    <p>Extract patterns through soft targets, intermediate representations</p>
+                </div>
+                
+                <div class="bg-white p-6 rounded-lg shadow-md" data-aos="fade-up" data-aos-delay="300">
+                    <div class="text-4xl text-syntin-orange mb-4"><i class="fas fa-brain"></i></div>
+                    <h3 class="text-xl font-bold mb-3">Student Training</h3>
+                    <p>Teach compact model to mimic teacher's intelligence</p>
+                </div>
+                
+                <div class="bg-white p-6 rounded-lg shadow-md" data-aos="fade-up" data-aos-delay="400">
+                    <div class="text-4xl text-syntin-orange mb-4"><i class="fas fa-sliders-h"></i></div>
+                    <h3 class="text-xl font-bold mb-3">Optimization</h3>
+                    <p>Fine-tune for deployment efficiency and accuracy</p>
+                </div>
+            </div>
+            
+            <div class="mb-16">
+                <h3 class="text-2xl font-bold mb-8 text-center" data-aos="fade-up">Distillation Benefits</h3>
+                
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8" data-aos="fade-up">
+                    <div class="bg-white p-6 rounded-lg shadow-md text-center">
+                        <div class="text-3xl font-bold mb-2 syntin-orange">90%</div>
+                        <h4 class="text-lg font-bold mb-2">Size Reduction</h4>
+                        <p class="text-sm">Dramatically smaller models that retain 95% of capabilities</p>
+                    </div>
+                    
+                    <div class="bg-white p-6 rounded-lg shadow-md text-center">
+                        <div class="text-3xl font-bold mb-2 syntin-orange">&lt;100ms</div>
+                        <h4 class="text-lg font-bold mb-2">Response Time</h4>
+                        <p class="text-sm">Achieve millisecond-level inference for real-time applications</p>
+                    </div>
+                    
+                    <div class="bg-white p-6 rounded-lg shadow-md text-center">
+                        <div class="text-3xl font-bold mb-2 syntin-orange">80-90%</div>
+                        <h4 class="text-lg font-bold mb-2">Lower Cost</h4>
+                        <p class="text-sm">Operate without expensive specialized hardware</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="overflow-x-auto mb-16" data-aos="fade-up">
+                <table class="comparison-table min-w-full bg-white rounded-lg overflow-hidden shadow-lg">
+                    <thead>
+                        <tr>
+                            <th class="py-4 px-6 text-left">Feature</th>
+                            <th class="py-4 px-6 text-left">SYNTIN Distilled Model</th>
+                            <th class="py-4 px-6 text-left">Traditional Large Model</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="py-4 px-6 font-semibold">Model Size</td>
+                            <td class="py-4 px-6">Tens to hundreds of MB</td>
+                            <td class="py-4 px-6">Tens to hundreds of GB</td>
+                        </tr>
+                        <tr>
+                            <td class="py-4 px-6 font-semibold">Inference Speed</td>
+                            <td class="py-4 px-6">&lt;100ms response time</td>
+                            <td class="py-4 px-6">Seconds to minutes</td>
+                        </tr>
+                        <tr>
+                            <td class="py-4 px-6 font-semibold">Hardware Requirements</td>
+                            <td class="py-4 px-6">Standard CPU/limited GPU</td>
+                            <td class="py-4 px-6">High-end GPU clusters</td>
+                        </tr>
+                        <tr>
+                            <td class="py-4 px-6 font-semibold">Operating Costs</td>
+                            <td class="py-4 px-6">80-90% lower</td>
+                            <td class="py-4 px-6">$500K-$1M+ annually</td>
+                        </tr>
+                        <tr>
+                            <td class="py-4 px-6 font-semibold">Deployment Options</td>
+                            <td class="py-4 px-6">Edge, mobile, cloud, on-prem</td>
+                            <td class="py-4 px-6">Primarily cloud-based</td>
+                        </tr>
+                        <tr>
+                            <td class="py-4 px-6 font-semibold">Scaling Economics</td>
+                            <td class="py-4 px-6">Linear, predictable</td>
+                            <td class="py-4 px-6">Exponential growth</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </section>
+
+    <!-- 780-Dimensional Pattern Discovery Section -->
+    <section id="dimensional" class="section bg-gray-900 text-white pt-24">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl md:text-4xl font-bold mb-12 text-center syntin-orange" data-aos="fade-up">780-Dimensional Pattern Discovery</h2>
+            
+            <div class="mb-16 max-w-4xl mx-auto" data-aos="fade-up">
+                <p class="text-lg mb-8 text-center">At the heart of SYNTIN's technology is its ability to map data relationships into a sophisticated 780-dimensional space, identifying "blackhole" patterns that represent significant opportunities or insights that would remain invisible to traditional analytics.</p>
+            </div>
+            
+            <div class="pattern-container mb-16 mx-auto" data-aos="fade-up">
+                <div class="blackhole"></div>
+                <!-- Dimensional dots would be added via JavaScript -->
+                <div id="pattern-dots"></div>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-5 gap-6 mb-16">
+                <div class="bg-white bg-opacity-10 backdrop-blur-sm p-6 rounded-lg" data-aos="fade-up" data-aos-delay="100">
+                    <h3 class="text-xl font-bold mb-4 syntin-orange">Dimensions 1-120</h3>
+                    <p class="text-sm">Entity attributes and characteristics</p>
+                </div>
+                
+                <div class="bg-white bg-opacity-10 backdrop-blur-sm p-6 rounded-lg" data-aos="fade-up" data-aos-delay="200">
+                    <h3 class="text-xl font-bold mb-4 syntin-orange">Dimensions 121-340</h3>
+                    <p class="text-sm">Behavioral and transactional features</p>
+                </div>
+                
+                <div class="bg-white bg-opacity-10 backdrop-blur-sm p-6 rounded-lg" data-aos="fade-up" data-aos-delay="300">
+                    <h3 class="text-xl font-bold mb-4 syntin-orange">Dimensions 341-520</h3>
+                    <p class="text-sm">Temporal and sequential patterns</p>
+                </div>
+                
+                <div class="bg-white bg-opacity-10 backdrop-blur-sm p-6 rounded-lg" data-aos="fade-up" data-aos-delay="400">
+                    <h3 class="text-xl font-bold mb-4 syntin-orange">Dimensions 521-650</h3>
+                    <p class="text-sm">Relational and network attributes</p>
+                </div>
+                
+                <div class="bg-white bg-opacity-10 backdrop-blur-sm p-6 rounded-lg" data-aos="fade-up" data-aos-delay="500">
+                    <h3 class="text-xl font-bold mb-4 syntin-orange">Dimensions 651-780</h3>
+                    <p class="text-sm">Contextual and environmental factors</p>
+                </div>
+            </div>
+            
+            <div class="mb-16">
+                <h3 class="text-2xl font-bold mb-8 text-center" data-aos="fade-up">Pattern Classification System</h3>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-8" data-aos="fade-up">
+                    <div class="bg-white bg-opacity-10 backdrop-blur-sm p-6 rounded-lg text-center">
+                        <div class="text-3xl mb-4 syntin-orange"><i class="fas fa-exclamation-triangle"></i></div>
+                        <h4 class="text-lg font-bold mb-2">Anomaly Patterns</h4>
+                        <p class="text-sm">Unusual data relationships requiring investigation</p>
+                    </div>
+                    
+                    <div class="bg-white bg-opacity-10 backdrop-blur-sm p-6 rounded-lg text-center">
+                        <div class="text-3xl mb-4 syntin-orange"><i class="fas fa-lightbulb"></i></div>
+                        <h4 class="text-lg font-bold mb-2">Opportunity Patterns</h4>
+                        <p class="text-sm">Potential for optimization or value creation</p>
+                    </div>
+                    
+                    <div class="bg-white bg-opacity-10 backdrop-blur-sm p-6 rounded-lg text-center">
+                        <div class="text-3xl mb-4 syntin-orange"><i class="fas fa-seedling"></i></div>
+                        <h4 class="text-lg font-bold mb-2">Emergent Patterns</h4>
+                        <p class="text-sm">Newly forming relationships with increasing significance</p>
+                    </div>
+                    
+                    <div class="bg-white bg-opacity-10 backdrop-blur-sm p-6 rounded-lg text-center">
+                        <div class="text-3xl mb-4 syntin-orange"><i class="fas fa-project-diagram"></i></div>
+                        <h4 class="text-lg font-bold mb-2">Causal Patterns</h4>
+                        <p class="text-sm">Cause-effect relationships that can be leveraged</p>
+                    </div>
+                    
+                    <div class="bg-white bg-opacity-10 backdrop-blur-sm p-6 rounded-lg text-center">
+                        <div class="text-3xl mb-4 syntin-orange"><i class="fas fa-shield-alt"></i></div>
+                        <h4 class="text-lg font-bold mb-2">Risk Patterns</h4>
+                        <p class="text-sm">Potential issues requiring preventive action</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Geo-Coded Trade Area Section -->
+    <section id="geocoded" class="section bg-white pt-24">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl md:text-4xl font-bold mb-12 text-center syntin-orange" data-aos="fade-up">Geo-Coded Trade Area Framework</h2>
+            
+            <div class="mb-16 max-w-4xl mx-auto" data-aos="fade-up">
+                <p class="text-lg mb-8 text-center">SYNTIN connects real-world locations to AI intelligence through our Geo-Coded Trade Area system, bringing context to data and meaning to decisions.</p>
+            </div>
+            
+            <div class="geo-coded-container mb-16" data-aos="fade-up">
+                <div class="sdp-framework mb-12">
+                    <div class="grid grid-cols-1 gap-4">
+                        <div class="text-center mb-6">
+                            <div class="inline-block p-4 rounded-lg bg-white bg-opacity-10">
+                                <h3 class="text-xl font-bold mb-2">Learning</h3>
+                                <div class="flex justify-center">
+                                    <i class="fas fa-arrow-down text-2xl"></i>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="grid grid-cols-2 gap-4">
+                            <div>
+                                <h3 class="text-xl font-bold mb-4">LLM Models</h3>
+                                <div class="mb-4 p-3 bg-white bg-opacity-20 rounded-lg">
+                                    <h4 class="font-bold">Demand</h4>
+                                </div>
+                                <div class="grid grid-cols-3 gap-2 mb-4">
+                                    <div class="p-2 bg-white bg-opacity-20 rounded-lg text-center">
+                                        <i class="fas fa-chart-line"></i>
+                                        <div class="text-xs mt-1">Strategy</div>
+                                    </div>
+                                    <div class="p-2 bg-white bg-opacity-20 rounded-lg text-center">
+                                        <i class="fas fa-users"></i>
+                                        <div class="text-xs mt-1">Leadership</div>
+                                    </div>
+                                    <div class="p-2 bg-white bg-opacity-20 rounded-lg text-center">
+                                        <i class="fas fa-heart"></i>
+                                        <div class="text-xs mt-1">Culture</div>
+                                    </div>
+                                </div>
+                                <div class="mb-4 p-3 bg-white bg-opacity-20 rounded-lg">
+                                    <h4 class="font-bold">Supply</h4>
+                                </div>
+                                <div class="text-center text-lg mt-6 mb-2">Market</div>
+                                <div class="text-center text-lg mt-6">Time Series Data</div>
+                            </div>
+                            
+                            <div>
+                                <h3 class="text-xl font-bold mb-4">SLM Models</h3>
+                                <div class="mb-4 p-3 bg-white bg-opacity-20 rounded-lg">
+                                    <h4 class="font-bold">Promotion</h4>
+                                </div>
+                                <div class="grid grid-cols-3 gap-2 mb-4">
+                                    <div class="p-2 bg-white bg-opacity-20 rounded-lg text-center">
+                                        <i class="fas fa-dollar-sign"></i>
+                                        <div class="text-xs mt-1">Value</div>
+                                    </div>
+                                    <div class="p-2 bg-white bg-opacity-20 rounded-lg text-center">
+                                        <i class="fas fa-bullhorn"></i>
+                                        <div class="text-xs mt-1">Brand</div>
+                                    </div>
+                                    <div class="p-2 bg-white bg-opacity-20 rounded-lg text-center">
+                                        <i class="fas fa-comments"></i>
+                                        <div class="text-xs mt-1">Marketing</div>
+                                    </div>
+                                </div>
+                                <div class="mb-4 p-3 bg-white bg-opacity-20 rounded-lg">
+                                    <h4 class="font-bold">Conversation</h4>
+                                </div>
+                                <div class="text-center text-lg mt-6 mb-2">Customer</div>
+                                <div class="text-center text-lg mt-6">Performance Insight</div>
+                            </div>
+                        </div>
+                        
+                        <div class="text-center mt-6">
+                            <div class="inline-block p-4 rounded-lg bg-white bg-opacity-10">
+                                <h3 class="text-xl font-bold mb-2">People UX</h3>
+                                <div class="flex justify-center">
+                                    <i class="fas fa-arrow-up text-2xl"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12">
+                    <div data-aos="fade-up" data-aos-delay="100">
+                        <div class="text-center mb-4">
+                            <i class="fas fa-globe text-4xl syntin-orange"></i>
+                        </div>
+                        <h4 class="text-lg font-bold mb-3 text-center">Orbiting Data Keys</h4>
+                        <p class="text-sm text-gray-600 text-center">Our proprietary technology enables secure, privacy-preserving data linking across systems without exposing personal information.</p>
+                    </div>
+                    
+                    <div data-aos="fade-up" data-aos-delay="200">
+                        <div class="text-center mb-4">
+                            <i class="fas fa-map-marker-alt text-4xl syntin-orange"></i>
+                        </div>
+                        <h4 class="text-lg font-bold mb-3 text-center">Geo-Coded Trade Area</h4>
+                        <p class="text-sm text-gray-600 text-center">The physical location context that anchors data intelligence to real-world places, creating meaningful "here and now" moments.</p>
+                    </div>
+                    
+                    <div data-aos="fade-up" data-aos-delay="300">
+                        <div class="text-center mb-4">
+                            <i class="fas fa-chart-network text-4xl syntin-orange"></i>
+                        </div>
+                        <h4 class="text-lg font-bold mb-3 text-center">Dynamic Groupings</h4>
+                        <p class="text-sm text-gray-600 text-center">Algorithmic clustering of data points and entities based on behavioral patterns and relationships.</p>
+                    </div>
+                </div>
+                
+                <div class="text-center" data-aos="fade-up">
+                    <div class="inline-block p-6 bg-gray-100 rounded-lg">
+                        <h3 class="text-xl font-bold mb-4">The Spatial Intelligence Advantage</h3>
+                        <p>By mapping AI intelligence to physical locations through our Geo-Coded Trade Areas, SYNTIN enables organizations to deliver the right insights, to the right people, in the right places, at exactly the right moment. This spatial dimension of intelligence creates unprecedented opportunity for contextually relevant decision support.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Supply, Demand & Promotion Framework -->
+    <section id="sdp" class="section bg-gray-50 pt-24">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl md:text-4xl font-bold mb-12 text-center syntin-orange" data-aos="fade-up">Supply, Demand & Promotion Framework</h2>
+            
+            <div class="mb-16 max-w-4xl mx-auto" data-aos="fade-up">
+                <p class="text-lg mb-8 text-center">SYNTIN operates on the principles of supply, demand, and promotion, where promotion represents the ability to manipulate the scales of supply and demand to create optimal outcomes and value.</p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-12 mb-16">
+                <div class="bg-white p-8 rounded-lg shadow-md" data-aos="fade-up" data-aos-delay="100">
+                    <div class="text-4xl text-syntin-orange mb-4"><i class="fas fa-box-open"></i></div>
+                    <h3 class="text-xl font-bold mb-4">Supply</h3>
+                    <p class="mb-6">The availability of data, computational resources, and AI capabilities that organizations can access.</p>
+                    <ul class="space-y-2">
+                        <li><i class="fas fa-circle text-xs text-syntin-orange mr-2"></i> Raw data assets</li>
+                        <li><i class="fas fa-circle text-xs text-syntin-orange mr-2"></i> Computing infrastructure</li>
+                        <li><i class="fas fa-circle text-xs text-syntin-orange mr-2"></i> AI model capabilities</li>
+                        <li><i class="fas fa-circle text-xs text-syntin-orange mr-2"></i> Data science expertise</li>
+                    </ul>
+                </div>
+                
+                <div class="bg-white p-8 rounded-lg shadow-md" data-aos="fade-up" data-aos-delay="200">
+                    <div class="text-4xl text-syntin-orange mb-4"><i class="fas fa-chart-line"></i></div>
+                    <h3 class="text-xl font-bold mb-4">Demand</h3>
+                    <p class="mb-6">The business need for insights, predictions, optimizations, and automated decision-making.</p>
+                    <ul class="space-y-2">
+                        <li><i class="fas fa-circle text-xs text-syntin-orange mr-2"></i> Business intelligence needs</li>
+                        <li><i class="fas fa-circle text-xs text-syntin-orange mr-2"></i> Operational optimization requirements</li>
+                        <li><i class="fas fa-circle text-xs text-syntin-orange mr-2"></i> Customer experience expectations</li>
+                        <li><i class="fas fa-circle text-xs text-syntin-orange mr-2"></i> Competitive market pressures</li>
+                    </ul>
+                </div>
+                
+                <div class="bg-white p-8 rounded-lg shadow-md" data-aos="fade-up" data-aos-delay="300">
+                    <div class="text-4xl text-syntin-orange mb-4"><i class="fas fa-bullhorn"></i></div>
+                    <h3 class="text-xl font-bold mb-4">Promotion</h3>
+                    <p class="mb-6">SYNTIN's ability to manipulate the balance by making advanced AI accessible and actionable.</p>
+                    <ul class="space-y-2">
+                        <li><i class="fas fa-circle text-xs text-syntin-orange mr-2"></i> Model distillation technology</li>
+                        <li><i class="fas fa-circle text-xs text-syntin-orange mr-2"></i> Agent orchestration system</li>
+                        <li><i class="fas fa-circle text-xs text-syntin-orange mr-2"></i> Intelligent resource allocation</li>
+                        <li><i class="fas fa-circle text-xs text-syntin-orange mr-2"></i> Value-driven pattern discovery</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="bg-white p-8 rounded-lg shadow-md max-w-4xl mx-auto mb-16" data-aos="fade-up">
+                <h3 class="text-xl font-bold mb-6">The Promotion Effect</h3>
+                <p class="mb-6">By distilling large models into compact, efficient ones and orchestrating them through MCP, SYNTIN effectively "promotes" AI capabilities, making them available to organizations that previously couldn't access them due to computational or expertise constraints. This fundamentally changes the economics of AI deployment:</p>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <div class="bg-gray-100 p-6 rounded-lg">
+                        <h4 class="font-bold mb-4">Traditional Approach</h4>
+                        <ul class="space-y-2">
+                            <li><i class="fas fa-times-circle text-red-500 mr-2"></i> $1-5M+ in specialized AI infrastructure</li>
+                            <li><i class="fas fa-times-circle text-red-500 mr-2"></i> $500K-$1M+ annual operational costs</li>
+                            <li><i class="fas fa-times-circle text-red-500 mr-2"></i> Specialized ML team required</li>
+                            <li><i class="fas fa-times-circle text-red-500 mr-2"></i> Complex scaling challenges</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="bg-syntin-orange bg-opacity-10 p-6 rounded-lg">
+                        <h4 class="font-bold mb-4">SYNTIN MCP Approach</h4>
+                        <ul class="space-y-2">
+                            <li><i class="fas fa-check-circle text-syntin-orange mr-2"></i> Run on standard hardware</li>
+                            <li><i class="fas fa-check-circle text-syntin-orange mr-2"></i> 80-90% lower operational costs</li>
+                            <li><i class="fas fa-check-circle text-syntin-orange mr-2"></i> Minimal specialized expertise needed</li>
+                            <li><i class="fas fa-check-circle text-syntin-orange mr-2"></i> Linear, predictable scaling</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contextual Business Intelligence Section -->
+    <section id="contextual" class="section bg-white pt-24">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl md:text-4xl font-bold mb-12 text-center syntin-orange" data-aos="fade-up">Contextual Business Intelligence Framework</h2>
+            
+            <div class="mb-16 max-w-4xl mx-auto" data-aos="fade-up">
+                <p class="text-lg mb-8 text-center">SYNTIN operates on a powerful framework that integrates various business data sources to create meaningful "here and now" moments through contextual intelligence. By leveraging our Supply-Demand-Promotion model, we transform diverse data inputs into actionable insights.</p>
+            </div>
+            
+            <div class="bg-blue-900 rounded-lg p-8 max-w-4xl mx-auto mb-12" data-aos="fade-up">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-white mb-8">
+                    <div>
+                        <h3 class="text-xl font-bold mb-4">LLM Models</h3>
+                        <div class="bg-white text-blue-900 p-3 rounded-lg text-center font-bold mb-4">Demand</div>
+                        <div class="text-lg mb-2">Market</div>
+                        <div class="flex justify-around mb-8">
+                            <div class="p-2">
+                                <div class="h-12 w-12 rounded-full bg-white flex items-center justify-center mb-2">
+                                    <i class="fas fa-chart-pie text-blue-900"></i>
+                                </div>
+                                <div class="text-xs text-center">Strategy</div>
+                            </div>
+                            <div class="p-2">
+                                <div class="h-12 w-12 rounded-full bg-white flex items-center justify-center mb-2">
+                                    <i class="fas fa-users text-blue-900"></i>
+                                </div>
+                                <div class="text-xs text-center">Leadership</div>
+                            </div>
+                            <div class="p-2">
+                                <div class="h-12 w-12 rounded-full bg-white flex items-center justify-center mb-2">
+                                    <i class="fas fa-heart text-blue-900"></i>
+                                </div>
+                                <div class="text-xs text-center">Culture</div>
+                            </div>
+                        </div>
+                        <div class="bg-white text-blue-900 p-3 rounded-lg text-center font-bold">Supply</div>
+                        <div class="text-center mt-8">Time Series Data</div>
+                    </div>
+                    
+                    <div>
+                        <h3 class="text-xl font-bold mb-4">SLM Models</h3>
+                        <div class="bg-white text-blue-900 p-3 rounded-lg text-center font-bold mb-4">Promotion</div>
+                        <div class="text-lg mb-2">Customer</div>
+                        <div class="flex justify-around mb-8">
+                            <div class="p-2">
+                                <div class="h-12 w-12 rounded-full bg-white flex items-center justify-center mb-2">
+                                    <i class="fas fa-clock text-blue-900"></i>
+                                </div>
+                                <div class="text-xs text-center">Value</div>
+                            </div>
+                            <div class="p-2">
+                                <div class="h-12 w-12 rounded-full bg-white flex items-center justify-center mb-2">
+                                    <i class="fas fa-bullhorn text-blue-900"></i>
+                                </div>
+                                <div class="text-xs text-center">Brand</div>
+                            </div>
+                            <div class="p-2">
+                                <div class="h-12 w-12 rounded-full bg-white flex items-center justify-center mb-2">
+                                    <i class="fas fa-comments text-blue-900"></i>
+                                </div>
+                                <div class="text-xs text-center">Marketing</div>
+                            </div>
+                        </div>
+                        <div class="bg-white text-blue-900 p-3 rounded-lg text-center font-bold">Conversation</div>
+                        <div class="text-center mt-8">Performance Insight</div>
+                    </div>
+                </div>
+                
+                <div class="text-white mt-12 p-6 bg-blue-800 rounded-lg" data-aos="fade-up">
+                    <h3 class="text-xl font-bold mb-4">Creating Meaningful "Here and Now" Moments</h3>
+                    <p>SYNTIN collects various types of business data to establish context and deliver actionable intelligence precisely when it matters most. Our framework transforms insights from large models into targeted small language models that address specific business needs.</p>
+                </div>
+            </div>
+            
+            <div class="mb-16" data-aos="fade-up">
+                <h3 class="text-2xl font-bold mb-8 text-center">Business Data Sources for Contextual Intelligence</h3>
+                <p class="text-center mb-8">SYNTIN ingests and analyzes diverse data types to establish behavioral context, enabling precise, relevant, and timely decision support.</p>
+                
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                    <div class="bg-white p-6 rounded-lg shadow-md" data-aos="fade-up" data-aos-delay="100">
+                        <div class="flex items-center mb-4">
+                            <div class="bg-blue-100 p-3 rounded-lg mr-4">
+                                <i class="fas fa-file-alt text-blue-600"></i>
+                            </div>
+                            <h4 class="text-lg font-bold">Strategic Planning Data</h4>
+                        </div>
+                        <p class="text-sm text-gray-600 mb-4">We collect and analyze strategic plans to support the planning/demand process, identifying patterns, objectives, and conflicts to create meaningful decision context.</p>
+                    </div>
+                    
+                    <div class="bg-white p-6 rounded-lg shadow-md" data-aos="fade-up" data-aos-delay="200">
+                        <div class="flex items-center mb-4">
+                            <div class="bg-blue-100 p-3 rounded-lg mr-4">
+                                <i class="fas fa-chart-bar text-blue-600"></i>
+                            </div>
+                            <h4 class="text-lg font-bold">Leadership KPIs & P&Ls</h4>
+                        </div>
+                        <p class="text-sm text-gray-600 mb-4">We analyze key performance indicators from leadership teams and profit & loss statements, comparing against public company data to deliver relevant insights on operational performance.</p>
+                    </div>
+                    
+                    <div class="bg-white p-6 rounded-lg shadow-md" data-aos="fade-up" data-aos-delay="300">
+                        <div class="flex items-center mb-4">
+                            <div class="bg-blue-100 p-3 rounded-lg mr-4">
+                                <i class="fas fa-users text-blue-600"></i>
+                            </div>
+                            <h4 class="text-lg font-bold">Cultural Signals</h4>
+                        </div>
+                        <p class="text-sm text-gray-600 mb-4">By analyzing cultural indicators within organizations, we identify patterns of communication, organizational patterns, and team dynamics that influence decision-making and innovation potential.</p>
+                    </div>
+                </div>
+                
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mt-8">
+                    <div class="bg-white p-6 rounded-lg shadow-md" data-aos="fade-up" data-aos-delay="100">
+                        <div class="flex items-center mb-4">
+                            <div class="bg-blue-100 p-3 rounded-lg mr-4">
+                                <i class="fas fa-database text-blue-600"></i>
+                            </div>
+                            <h4 class="text-lg font-bold">ERP System Data</h4>
+                        </div>
+                        <p class="text-sm text-gray-600 mb-4">We integrate with enterprise resource planning systems to extract operations data, sales, transaction patterns, and resource allocation information that reveals critical business constraints.</p>
+                    </div>
+                    
+                    <div class="bg-white p-6 rounded-lg shadow-md" data-aos="fade-up" data-aos-delay="200">
+                        <div class="flex items-center mb-4">
+                            <div class="bg-blue-100 p-3 rounded-lg mr-4">
+                                <i class="fas fa-comments text-blue-600"></i>
+                            </div>
+                            <h4 class="text-lg font-bold">Customer Interactions</h4>
+                        </div>
+                        <p class="text-sm text-gray-600 mb-4">We analyze customer communications, feedback, and support tickets to understand sentiment, preferences, and needs, enabling more responsive and personalized interactions.</p>
+                    </div>
+                    
+                    <div class="bg-white p-6 rounded-lg shadow-md" data-aos="fade-up" data-aos-delay="300">
+                        <div class="flex items-center mb-4">
+                            <div class="bg-blue-100 p-3 rounded-lg mr-4">
+                                <i class="fas fa-bullhorn text-blue-600"></i>
+                            </div>
+                            <h4 class="text-lg font-bold">Brand & Market Signals</h4>
+                        </div>
+                        <p class="text-sm text-gray-600 mb-4">We gather and process brand perception data, market positioning, and competitive intelligence to inform promotional strategies and align messaging with market demands.</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="bg-gray-50 p-8 rounded-lg max-w-4xl mx-auto mb-16" data-aos="fade-up">
+                <h3 class="text-2xl font-bold mb-8 text-center">The Behavioral Context Advantage</h3>
+                <p class="mb-8">By integrating diverse data sources through our Supply-Demand-Promotion framework, SYNTIN creates a comprehensive behavioral context that enables truly intelligent "here and now" moments. This contextual understanding allows our distilled models to deliver precisely the right insights at exactly the right time, transforming how organizations make decisions and serve customers.</p>
+                
+                <h4 class="text-xl font-bold mb-4">Key Benefits:</h4>
+                <ul class="space-y-4">
+                    <li class="flex items-start">
+                        <i class="fas fa-check-circle text-syntin-orange mt-1 mr-3"></i>
+                        <div>
+                            <span class="font-bold">Enhanced Relevance:</span> Insights take into account the full business and behavioral context
+                        </div>
+                    </li>
+                    <li class="flex items-start">
+                        <i class="fas fa-check-circle text-syntin-orange mt-1 mr-3"></i>
+                        <div>
+                            <span class="font-bold">Perfect Timing:</span> Intelligence delivered at the moment of maximum impact
+                        </div>
+                    </li>
+                    <li class="flex items-start">
+                        <i class="fas fa-check-circle text-syntin-orange mt-1 mr-3"></i>
+                        <div>
+                            <span class="font-bold">Comprehensive View:</span> Integration of strategy, leadership, culture, and operations factors
+                        </div>
+                    </li>
+                    <li class="flex items-start">
+                        <i class="fas fa-check-circle text-syntin-orange mt-1 mr-3"></i>
+                        <div>
+                            <span class="font-bold">Strategic Alignment:</span> Ensures insights support organizational goals and objectives
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- Applications Section -->
+    <section id="applications" class="section bg-gray-100 pt-24">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl md:text-4xl font-bold mb-12 text-center syntin-orange" data-aos="fade-up">Real-World Applications</h2>
+            
+            <div class="mb-16 max-w-4xl mx-auto" data-aos="fade-up">
+                <p class="text-lg mb-8 text-center">SYNTIN's technology is powering transformative AI applications across industries, delivering "AI for the Here and Now" through efficient, intelligent agent orchestration.</p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-16">
+                <div class="bg-white rounded-lg overflow-hidden shadow-lg" data-aos="fade-up" data-aos-delay="100">
+                    <div class="bg-syntin-orange h-3"></div>
+                    <div class="p-6">
+                        <div class="flex justify-between items-center mb-4">
+                            <h3 class="text-xl font-bold">Retail Intelligence</h3>
+                            <i class="fas fa-shopping-cart text-2xl text-syntin-orange"></i>
+                        </div>
+                        <p class="text-gray-600 mb-6">Comprehensive retail analytics, including inventory optimization, dynamic pricing, customer segmentation, and personalized marketing.</p>
+                        <div class="bg-syntin-orange bg-opacity-10 p-4 rounded-lg">
+                            <div class="font-bold mb-1">Impact:</div>
+                            <div class="flex justify-between">
+                                <span>15-30% increase in sales</span>
+                                <span>20-40% reduction in overstock</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="bg-white rounded-lg overflow-hidden shadow-lg" data-aos="fade-up" data-aos-delay="200">
+                    <div class="bg-syntin-orange h-3"></div>
+                    <div class="p-6">
+                        <div class="flex justify-between items-center mb-4">
+                            <h3 class="text-xl font-bold">Predictive Maintenance</h3>
+                            <i class="fas fa-tools text-2xl text-syntin-orange"></i>
+                        </div>
+                        <p class="text-gray-600 mb-6">Specialized agents identify potential equipment failures before they occur, dramatically reducing downtime and maintenance costs.</p>
+                        <div class="bg-syntin-orange bg-opacity-10 p-4 rounded-lg">
+                            <div class="font-bold mb-1">Impact:</div>
+                            <div class="flex justify-between">
+                                <span>30-50% reduction in downtime</span>
+                                <span>20-35% lower maintenance costs</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="bg-white rounded-lg overflow-hidden shadow-lg" data-aos="fade-up" data-aos-delay="300">
+                    <div class="bg-syntin-orange h-3"></div>
+                    <div class="p-6">
+                        <div class="flex justify-between items-center mb-4">
+                            <h3 class="text-xl font-bold">"Unreasonable Hospitality"</h3>
+                            <i class="fas fa-concierge-bell text-2xl text-syntin-orange"></i>
+                        </div>
+                        <p class="text-gray-600 mb-6">AI-powered personalization that anticipates needs and delivers exceptional customer experiences through high-touch service at scale.</p>
+                        <div class="bg-syntin-orange bg-opacity-10 p-4 rounded-lg">
+                            <div class="font-bold mb-1">Impact:</div>
+                            <div class="flex justify-between">
+                                <span>40-60% higher satisfaction</span>
+                                <span>25-45% improved retention</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="bg-white rounded-lg overflow-hidden shadow-lg" data-aos="fade-up" data-aos-delay="400">
+                    <div class="bg-syntin-orange h-3"></div>
+                    <div class="p-6">
+                        <div class="flex justify-between items-center mb-4">
+                            <h3 class="text-xl font-bold">Infrastructure Intelligence</h3>
+                            <i class="fas fa-building text-2xl text-syntin-orange"></i>
+                        </div>
+                        <p class="text-gray-600 mb-6">Geo-temporal agents monitor building systems and infrastructure, predicting failures and optimizing energy usage through pattern analysis.</p>
+                        <div class="bg-syntin-orange bg-opacity-10 p-4 rounded-lg">
+                            <div class="font-bold mb-1">Impact:</div>
+                            <div class="flex justify-between">
+                                <span>15-30% energy savings</span>
+                                <span>40-60% faster issue resolution</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="bg-white rounded-lg overflow-hidden shadow-lg" data-aos="fade-up" data-aos-delay="500">
+                    <div class="bg-syntin-orange h-3"></div>
+                    <div class="p-6">
+                        <div class="flex justify-between items-center mb-4">
+                            <h3 class="text-xl font-bold">ERP Intelligence</h3>
+                            <i class="fas fa-database text-2xl text-syntin-orange"></i>
+                        </div>
+                        <p class="text-gray-600 mb-6">Distilled models that transform complex enterprise systems into powerful AI agents for sales, operations, and customer service.</p>
+                        <div class="bg-syntin-orange bg-opacity-10 p-4 rounded-lg">
+                            <div class="font-bold mb-1">Impact:</div>
+                            <div class="flex justify-between">
+                                <span>25-40% operational efficiency gain</span>
+                                <span>15-30% cost reduction</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="bg-white rounded-lg overflow-hidden shadow-lg" data-aos="fade-up" data-aos-delay="600">
+                    <div class="bg-syntin-orange h-3"></div>
+                    <div class="p-6">
+                        <div class="flex justify-between items-center mb-4">
+                            <h3 class="text-xl font-bold">Security & Risk Analytics</h3>
+                            <i class="fas fa-shield-alt text-2xl text-syntin-orange"></i>
+                        </div>
+                        <p class="text-gray-600 mb-6">Pattern detection agents that identify anomalies, potential threats, and risk factors across physical and digital environments.</p>
+                        <div class="bg-syntin-orange bg-opacity-10 p-4 rounded-lg">
+                            <div class="font-bold mb-1">Impact:</div>
+                            <div class="flex justify-between">
+                                <span>30-50% faster threat detection</span>
+                                <span>20-40% improved prevention</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="mb-16 bg-white p-8 rounded-lg shadow-md max-w-4xl mx-auto" data-aos="fade-up">
+                <h3 class="text-2xl font-bold mb-6">Transforming MEP Infrastructure Management</h3>
+                <p class="mb-6">One powerful application of SYNTIN's technology is in the management and monitoring of Mechanical, Electrical, and Plumbing (MEP) infrastructure in commercial buildings. By creating a comprehensive "walled garden" of MEP knowledge, organizations can achieve:</p>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div class="flex items-start">
+                        <div class="bg-syntin-orange p-2 rounded-full mr-4">
+                            <i class="fas fa-tools text-white"></i>
+                        </div>
+                        <div>
+                            <h4 class="font-bold mb-2">Predictive Maintenance</h4>
+                            <p class="text-sm text-gray-600">Identifies potential failures before they occur</p>
+                        </div>
+                    </div>
+                    
+                    <div class="flex items-start">
+                        <div class="bg-syntin-orange p-2 rounded-full mr-4">
+                            <i class="fas fa-bolt text-white"></i>
+                        </div>
+                        <div>
+                            <h4 class="font-bold mb-2">Optimized Energy Usage</h4>
+                            <p class="text-sm text-gray-600">Pattern analysis and anomaly detection</p>
+                        </div>
+                    </div>
+                    
+                    <div class="flex items-start">
+                        <div class="bg-syntin-orange p-2 rounded-full mr-4">
+                            <i class="fas fa-shield-alt text-white"></i>
+                        </div>
+                        <div>
+                            <h4 class="font-bold mb-2">Enhanced Safety</h4>
+                            <p class="text-sm text-gray-600">Improved regulatory compliance</p>
+                        </div>
+                    </div>
+                    
+                    <div class="flex items-start">
+                        <div class="bg-syntin-orange p-2 rounded-full mr-4">
+                            <i class="fas fa-chart-line text-white"></i>
+                        </div>
+                        <div>
+                            <h4 class="font-bold mb-2">Reduced Operational Costs</h4>
+                            <p class="text-sm text-gray-600">Extended equipment lifespan</p>
+                        </div>
+                    </div>
+                    
+                    <div class="flex items-start">
+                        <div class="bg-syntin-orange p-2 rounded-full mr-4">
+                            <i class="fas fa-database text-white"></i>
+                        </div>
+                        <div>
+                            <h4 class="font-bold mb-2">Data-Driven Insurance</h4>
+                            <p class="text-sm text-gray-600">Improved risk management</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Call to Action Section -->
+    <section class="section hero-gradient text-white">
+        <div class="container mx-auto px-4">
+            <div class="max-w-4xl mx-auto text-center" data-aos="fade-up">
+                <h2 class="text-3xl md:text-5xl font-bold mb-8">Entering the AI Arms Race Affordably</h2>
+                <p class="text-xl mb-12">SYNTIN's technology democratizes access to advanced AI capabilities, allowing organizations of all sizes to deploy sophisticated intelligence at scale without massive infrastructure investments.</p>
+                
+                <div class="bg-white bg-opacity-10 backdrop-blur-sm p-8 rounded-lg mb-12">
+                    <h3 class="text-2xl font-bold mb-4">Smart Models as Superpowers</h3>
+                    <p class="text-lg">SYNTIN transforms AI from an expensive luxury to an accessible superpower, enabling organizations to compete and thrive in an increasingly AI-driven world.</p>
+                </div>
+                
+                <div class="text-3xl md:text-4xl font-bold michroma">
+                    AI for the Here and Now
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-syntin-black text-white py-12">
+        <div class="container mx-auto px-4">
+            <div class="flex flex-col md:flex-row justify-between items-center">
+                <div class="mb-8 md:mb-0">
+                    <div class="flex items-center">
+                        <span class="michroma text-xl font-bold syntin-orange">SYNTIN</span>
+                        <span class="ml-2 text-sm">AI for Here and Now</span>
+                    </div>
+                </div>
+                
+                <div class="flex space-x-8">
+                    <div>
+                        <h4 class="font-bold mb-4">Solutions</h4>
+                        <ul class="space-y-2">
+                            <li><a href="#" class="hover:text-syntin-orange">Model Distillation</a></li>
+                            <li><a href="#" class="hover:text-syntin-orange">Geo-Coded Trade Areas</a></li>
+                            <li><a href="#" class="hover:text-syntin-orange">Contextual Intelligence</a></li>
+                            <li><a href="#" class="hover:text-syntin-orange">Integration</a></li>
+                        </ul>
+                    </div>
+                    
+                    <div>
+                        <h4 class="font-bold mb-4">Industries</h4>
+                        <ul class="space-y-2">
+                            <li><a href="#" class="hover:text-syntin-orange">Retail</a></li>
+                            <li><a href="#" class="hover:text-syntin-orange">Manufacturing</a></li>
+                            <li><a href="#" class="hover:text-syntin-orange">Healthcare</a></li>
+                            <li><a href="#" class="hover:text-syntin-orange">Finance</a></li>
+                        </ul>
+                    </div>
+                    
+                    <div>
+                        <h4 class="font-bold mb-4">Company</h4>
+                        <ul class="space-y-2">
+                            <li><a href="#" class="hover:text-syntin-orange">About Us</a></li>
+                            <li><a href="#" class="hover:text-syntin-orange">Contact</a></li>
+                            <li><a href="#" class="hover:text-syntin-orange">Careers</a></li>
+                            <li><a href="#" class="hover:text-syntin-orange">Blog</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="mt-12 pt-8 border-t border-gray-700 text-center text-sm">
+                <p>&copy; 2025 SYNTIN. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Initialize AOS
+        document.addEventListener('DOMContentLoaded', function() {
+            AOS.init({
+                duration: 800,
+                easing: 'ease-in-out',
+                once: true
+            });
+            
+            // Create dimension dots for hero section
+            createDimensionDots('dimension-dots', 100);
+            
+            // Create pattern dots for pattern container
+            createPatternDots('pattern-dots', 200);
+            
+            // Monitor scroll for active section
+            monitorScroll();
+        });
+        
+        function createDimensionDots(containerId, count) {
+            const container = document.getElementById(containerId);
+            if (!container) return;
+            
+            const containerWidth = container.offsetWidth;
+            const containerHeight = container.offsetHeight;
+            
+            for (let i = 0; i < count; i++) {
+                const dot = document.createElement('div');
+                dot.classList.add('dimension-dot');
+                
+                // Random position
+                const x = Math.random() * containerWidth;
+                const y = Math.random() * containerHeight;
+                
+                dot.style.left = `${x}px`;
+                dot.style.top = `${y}px`;
+                
+                // Random size
+                const size = Math.random() * 2 + 1;
+                dot.style.width = `${size}px`;
+                dot.style.height = `${size}px`;
+                
+                // Random animation delay
+                dot.style.animationDelay = `${Math.random() * 3}s`;
+                
+                container.appendChild(dot);
+            }
+        }
+        
+        function createPatternDots(containerId, count) {
+            const container = document.getElementById(containerId);
+            if (!container) return;
+            
+            const parentContainer = container.parentElement;
+            const containerWidth = parentContainer.offsetWidth;
+            const containerHeight = parentContainer.offsetHeight;
+            
+            for (let i = 0; i < count; i++) {
+                const dot = document.createElement('div');
+                dot.classList.add('dimension-dot');
+                
+                // Random position
+                const x = Math.random() * containerWidth;
+                const y = Math.random() * containerHeight;
+                
+                dot.style.left = `${x}px`;
+                dot.style.top = `${y}px`;
+                
+                // Random size
+                const size = Math.random() * 2 + 1;
+                dot.style.width = `${size}px`;
+                dot.style.height = `${size}px`;
+                
+                // Random color based on distance from center
+                const centerX = containerWidth / 2;
+                const centerY = containerHeight / 2;
+                const dx = x - centerX;
+                const dy = y - centerY;
+                const distance = Math.sqrt(dx * dx + dy * dy);
+                const maxDistance = Math.sqrt(centerX * centerX + centerY * centerY);
+                const normalizedDistance = distance / maxDistance;
+                
+                // Random color (more orange closer to center, more blue further away)
+                const hue = normalizedDistance * 200 + 20; // 20 (orange) to 220 (blue)
+                dot.style.backgroundColor = `hsl(${hue}, 80%, 50%)`;
+                
+                // Random animation delay
+                dot.style.animationDelay = `${Math.random() * 3}s`;
+                
+                parentContainer.appendChild(dot);
+            }
+        }
+        
+        function monitorScroll() {
+            const sections = document.querySelectorAll('.section');
+            const navLinks = document.querySelectorAll('.nav-link');
+            
+            window.addEventListener('scroll', function() {
+                let current = '';
+                
+                sections.forEach(section => {
+                    const sectionTop = section.offsetTop;
+                    const sectionHeight = section.clientHeight;
+                    if (scrollY >= sectionTop - 300) {
+                        current = section.getAttribute('id');
+                    }
+                });
+                
+                navLinks.forEach(link => {
+                    link.classList.remove('active');
+                    if (link.getAttribute('href').substring(1) === current) {
+                        link.classList.add('active');
+                    }
+                });
+            });
+        }
+    </script>
+</body>
+</html>

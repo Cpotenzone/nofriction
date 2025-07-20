@@ -1,0 +1,538 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Digital Bodyguard Law Enforcement Data Policy</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.0.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Barlow:wght@400;500;600;700;800&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+          /* Primary Colors */
+          --primary-orange: #FF5A00;
+          --deep-navy: #051F3C;
+          --silver-white: #F8F9FA;
+          --charcoal: #2D3748;
+          
+          /* Secondary Colors */
+          --light-orange: #FF8A50;
+          --dark-orange: #E64A00;
+          --light-navy: #173D6E;
+          --mid-navy: #0B2D4A;
+          --light-gray: #E2E8F0;
+          --mid-gray: #A0AEC0;
+          
+          /* Tertiary/Accent Colors */
+          --teal: #2C7A7B;
+          --light-teal: #4FD1C5;
+          --success-green: #38A169;
+          --alert-red: #E53E3E;
+          --info-blue: #3182CE;
+          --warning-yellow: #ECC94B;
+        }
+        
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            color: var(--charcoal);
+            background-color: var(--silver-white);
+            line-height: 1.6;
+        }
+        
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Barlow', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            color: var(--deep-navy);
+            font-weight: 600;
+            margin-top: 1.5em;
+            margin-bottom: 0.75em;
+        }
+        
+        h1 {
+            font-size: 2.25rem;
+            font-weight: 800;
+            margin-top: 0;
+            margin-bottom: 1.5rem;
+            color: var(--deep-navy);
+            border-bottom: 4px solid var(--primary-orange);
+            padding-bottom: 0.5rem;
+            display: inline-block;
+        }
+        
+        h2 {
+            font-size: 1.75rem;
+            color: var(--deep-navy);
+            padding-bottom: 0.25rem;
+            border-bottom: 2px solid var(--light-gray);
+        }
+        
+        h3 {
+            font-size: 1.5rem;
+            color: var(--deep-navy);
+        }
+        
+        h4 {
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: var(--light-navy);
+        }
+        
+        p, li {
+            margin-bottom: 1rem;
+        }
+        
+        .policy-container {
+            max-width: 900px;
+            margin: 2rem auto;
+            padding: 2rem;
+            background: white;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            border-radius: 0.5rem;
+        }
+        
+        .section {
+            margin-bottom: 2rem;
+        }
+        
+        .header {
+            margin-bottom: 3rem;
+            text-align: center;
+        }
+        
+        .highlight-box {
+            background-color: rgba(255, 90, 0, 0.05);
+            border-left: 4px solid var(--primary-orange);
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+            border-radius: 0.25rem;
+        }
+        
+        .warning-box {
+            background-color: rgba(229, 62, 62, 0.05);
+            border-left: 4px solid var(--alert-red);
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+            border-radius: 0.25rem;
+        }
+        
+        .info-box {
+            background-color: rgba(49, 130, 206, 0.05);
+            border-left: 4px solid var(--info-blue);
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+            border-radius: 0.25rem;
+        }
+        
+        .footer {
+            margin-top: 3rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid var(--light-gray);
+            font-size: 0.875rem;
+            color: var(--mid-gray);
+        }
+        
+        ul, ol {
+            margin-left: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        ul li, ol li {
+            margin-bottom: 0.5rem;
+        }
+        
+        ul {
+            list-style-type: disc;
+        }
+        
+        ol {
+            list-style-type: decimal;
+        }
+        
+        .icon {
+            color: var(--primary-orange);
+            margin-right: 0.5rem;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1.5rem 0;
+        }
+        
+        th, td {
+            padding: 0.75rem;
+            border: 1px solid var(--light-gray);
+        }
+        
+        th {
+            background-color: var(--silver-white);
+            font-weight: 600;
+        }
+        
+        tr:nth-child(even) {
+            background-color: var(--silver-white);
+        }
+        
+        .toc {
+            background-color: var(--silver-white);
+            padding: 1.5rem;
+            border-radius: 0.5rem;
+            margin-bottom: 2rem;
+        }
+        
+        .toc-title {
+            font-size: 1.25rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            color: var(--deep-navy);
+        }
+        
+        .toc ul {
+            list-style-type: none;
+            margin-left: 0;
+        }
+        
+        .toc ul li {
+            margin-bottom: 0.5rem;
+        }
+        
+        .toc ul li a {
+            color: var(--light-navy);
+            text-decoration: none;
+        }
+        
+        .toc ul li a:hover {
+            color: var(--primary-orange);
+            text-decoration: underline;
+        }
+        
+        .date-block {
+            margin-bottom: 1.5rem;
+            color: var(--mid-gray);
+            font-size: 0.875rem;
+        }
+    </style>
+</head>
+<body class="bg-gray-50">
+    <div class="policy-container">
+        <div class="header">
+            <h1>Digital Bodyguard Law Enforcement Data Policy</h1>
+            <div class="date-block">
+                <p>Effective Date: <span id="effective-date">January 1, 2024</span></p>
+                <p>Last Updated: <span id="last-updated">January 1, 2024</span></p>
+            </div>
+        </div>
+        
+        <div class="toc">
+            <div class="toc-title">Table of Contents</div>
+            <ul>
+                <li><a href="#introduction">1. Introduction</a></li>
+                <li><a href="#scope-purpose">2. Scope and Purpose</a></li>
+                <li><a href="#legal-framework">3. Legal Framework and Compliance</a></li>
+                <li><a href="#data-request-procedures">4. Data Request Procedures</a></li>
+                <li><a href="#childrens-data">5. Heightened Protections for Children's Data</a></li>
+                <li><a href="#user-notification">6. User Notification Process</a></li>
+                <li><a href="#legal-advocacy">7. EFF and Legal Advocacy Involvement</a></li>
+                <li><a href="#transparency">8. Transparency Reporting</a></li>
+                <li><a href="#response-timelines">9. Response Timelines and Processes</a></li>
+                <li><a href="#employee-training">10. Employee Training Requirements</a></li>
+                <li><a href="#record-keeping">11. Record Keeping Requirements</a></li>
+                <li><a href="#policy-updates">12. Policy Updates</a></li>
+                <li><a href="#contact-information">13. Contact Information</a></li>
+            </ul>
+        </div>
+        
+        <div id="introduction" class="section">
+            <h2>1. Introduction</h2>
+            <p>At Digital Bodyguard, we are committed to protecting our users' privacy and data security. This Law Enforcement Data Policy outlines our approach to handling legal requests for user data from law enforcement agencies, government entities, and other third parties. Our primary goal is to safeguard user privacy while complying with applicable laws.</p>
+            
+            <div class="highlight-box">
+                <h4><i class="fas fa-shield-alt icon"></i>Our Commitment to You</h4>
+                <p>We will exhaust all legal options to protect your data. We believe that your personal information belongs to you, and we will only disclose it when legally required to do so after carefully scrutinizing each request.</p>
+            </div>
+        </div>
+        
+        <div id="scope-purpose" class="section">
+            <h2>2. Scope and Purpose</h2>
+            <p>This policy applies to all requests for user data received from law enforcement agencies, government entities, courts, or other third parties. It covers:</p>
+            <ul>
+                <li>Subpoenas</li>
+                <li>Court orders</li>
+                <li>Search warrants</li>
+                <li>National security letters and orders</li>
+                <li>Civil investigative demands</li>
+                <li>Other legal demands for user information</li>
+            </ul>
+            <p>The purpose of this policy is to establish clear protocols for handling such requests while prioritizing user privacy and data security to the maximum extent permitted by law.</p>
+        </div>
+        
+        <div id="legal-framework" class="section">
+            <h2>3. Legal Framework and Compliance</h2>
+            <p>Our response to law enforcement data requests is governed by:</p>
+            <ul>
+                <li>The Fourth Amendment to the U.S. Constitution</li>
+                <li>Electronic Communications Privacy Act (ECPA)</li>
+                <li>Stored Communications Act (SCA)</li>
+                <li>California Consumer Privacy Act (CCPA)</li>
+                <li>California Privacy Rights Act (CPRA)</li>
+                <li>Children's Online Privacy Protection Act (COPPA)</li>
+                <li>Other applicable federal, state, and local laws</li>
+            </ul>
+            
+            <p>We evaluate each request against this legal framework to ensure it is valid, properly authorized, and legally enforceable. We comply with valid legal obligations but will challenge requests that we believe are overbroad, vague, or otherwise legally deficient.</p>
+        </div>
+        
+        <div id="data-request-procedures" class="section">
+            <h2>4. Data Request Procedures</h2>
+            <h3>4.1 Requirements for Valid Requests</h3>
+            <p>All requests for user data must:</p>
+            <ul>
+                <li>Be issued by a competent legal authority with jurisdiction</li>
+                <li>Be properly executed and served according to applicable laws</li>
+                <li>Clearly identify the specific information sought</li>
+                <li>Provide the legal basis for the request</li>
+                <li>Be narrowly tailored to request only information necessary for the stated purpose</li>
+                <li>Be submitted in writing to: admin@agent-wallace.com or via certified mail to our registered agent</li>
+            </ul>
+            
+            <h3>4.2 Our Review Process</h3>
+            <p>Upon receiving a request, we will:</p>
+            <ol>
+                <li>Verify the authenticity of the request and requesting agency</li>
+                <li>Assess whether the request meets all legal requirements</li>
+                <li>Determine if the scope of the request is reasonable and permitted under applicable law</li>
+                <li>Evaluate whether we possess the requested information</li>
+                <li>Assess whether disclosure of the requested information would violate our commitments to our users</li>
+                <li>Consult with legal counsel as needed</li>
+                <li>Prepare an appropriate response based on our assessment</li>
+            </ol>
+            
+            <div class="info-box">
+                <h4><i class="fas fa-exclamation-triangle icon"></i>Important Notice</h4>
+                <p>Digital Bodyguard will carefully scrutinize every request for user data. We will reject or seek to narrow requests that are overly broad, vague, or that we believe lack proper legal authority.</p>
+            </div>
+        </div>
+        
+        <div id="childrens-data" class="section">
+            <h2>5. Heightened Protections for Children's Data</h2>
+            <p>We apply especially stringent standards when reviewing requests for children's data. Our approach includes:</p>
+            
+            <div class="warning-box">
+                <h4><i class="fas fa-child icon"></i>Enhanced Protection for Children</h4>
+                <p>We employ the highest level of scrutiny and protection for data related to children under 13 years of age. Law enforcement will need to demonstrate exceptional legal justification to access children's data stored in our system.</p>
+            </div>
+            
+            <h3>5.1 Special Requirements for Children's Data Requests</h3>
+            <p>For requests involving children's data, we require:</p>
+            <ul>
+                <li>Court orders or warrants specifically authorized by a judge (subpoenas alone are insufficient)</li>
+                <li>Clear demonstration of compelling need and lack of alternatives</li>
+                <li>Narrowly tailored scope limited only to the specific information necessary</li>
+                <li>Explicit documentation of compliance with COPPA and other applicable child privacy laws</li>
+                <li>Evidence that the best interests of the child have been considered</li>
+            </ul>
+            
+            <h3>5.2 Legal Advocacy for Children's Data</h3>
+            <p>For any request involving children's data:</p>
+            <ul>
+                <li>We will immediately engage specialized legal counsel</li>
+                <li>We will contact the Electronic Frontier Foundation (EFF) for assistance</li>
+                <li>We may file motions to quash or modify requests that do not meet our heightened standards</li>
+                <li>We will seek protective orders to limit the use and disclosure of any provided data</li>
+                <li>We will notify parents/guardians when legally permitted to do so</li>
+            </ul>
+        </div>
+        
+        <div id="user-notification" class="section">
+            <h2>6. User Notification Process</h2>
+            <p>It is our policy to notify users about requests for their data unless we are legally prohibited from doing so. Our notification process includes:</p>
+            <ul>
+                <li>Promptly notifying users when we receive a legal request for their information</li>
+                <li>Providing users with a copy of the request when legally permitted</li>
+                <li>Giving users time (typically 7 days) to seek legal counsel and challenge the request before we respond, when circumstances allow</li>
+                <li>If notification is prohibited by a gag order or similar restriction:</li>
+                <ul>
+                    <li>We will assess the validity of the restriction</li>
+                    <li>We will challenge overly broad or indefinite non-disclosure requirements</li>
+                    <li>We will notify the user as soon as the restriction expires</li>
+                </ul>
+            </ul>
+            
+            <p>For requests involving children's data, we will notify the parent or legal guardian on record unless specifically prohibited by court order.</p>
+        </div>
+        
+        <div id="legal-advocacy" class="section">
+            <h2>7. EFF and Legal Advocacy Involvement</h2>
+            <p>Digital Bodyguard is committed to involving specialized legal advocates to protect user data, particularly in complex or concerning cases.</p>
+            
+            <h3>7.1 Partnership with the Electronic Frontier Foundation</h3>
+            <p>We have established a relationship with the Electronic Frontier Foundation (EFF) and will consult with them in the following circumstances:</p>
+            <ul>
+                <li>Any request for children's data</li>
+                <li>Requests that appear overbroad or legally questionable</li>
+                <li>Cases involving novel legal issues or setting potential precedents</li>
+                <li>National security requests that may implicate constitutional rights</li>
+                <li>Any request where users' fundamental privacy rights are at stake</li>
+            </ul>
+            
+            <div class="highlight-box">
+                <h4><i class="fas fa-balance-scale icon"></i>Our Commitment to Legal Advocacy</h4>
+                <p>When faced with legally questionable data requests, especially those involving children's data, we will promptly contact the Electronic Frontier Foundation (EFF) for assistance. We will exhaust all legal remedies and appeals before complying with requests we believe are overbroad, improper, or potentially harmful to our users.</p>
+            </div>
+            
+            <h3>7.2 Legal Resistance Process</h3>
+            <p>When we identify a problematic request, our legal advocacy process includes:</p>
+            <ol>
+                <li>Immediate consultation with specialized privacy counsel</li>
+                <li>Outreach to the EFF or similar advocacy organizations</li>
+                <li>Filing motions to quash or narrow overly broad requests</li>
+                <li>Challenging gag orders or non-disclosure requirements</li>
+                <li>Seeking judicial review of questionable administrative requests</li>
+                <li>Pursuing appeals when necessary to establish important legal precedents</li>
+                <li>Documenting our concerns and the basis for our challenges</li>
+            </ol>
+        </div>
+        
+        <div id="transparency" class="section">
+            <h2>8. Transparency Reporting</h2>
+            <p>We are committed to transparency about government and law enforcement requests for user data. Our transparency efforts include:</p>
+            <ul>
+                <li>Publishing semi-annual transparency reports detailing:</li>
+                <ul>
+                    <li>The number of requests received, by type and requesting agency</li>
+                    <li>The number of requests we complied with, partially or fully</li>
+                    <li>The number of requests we challenged or rejected</li>
+                    <li>The number of user accounts affected</li>
+                    <li>The number of times we notified users about requests</li>
+                </ul>
+                <li>Providing categorized data on requests related to children's information (without revealing identifying details)</li>
+                <li>Documenting our efforts to narrow requests or protect user data</li>
+                <li>Highlighting significant legal challenges we've mounted to protect user privacy</li>
+            </ul>
+            
+            <p>Our transparency reports will comply with all legal restrictions while providing the maximum information permitted by law.</p>
+        </div>
+        
+        <div id="response-timelines" class="section">
+            <h2>9. Response Timelines and Processes</h2>
+            <p>We have established clear timelines and processes for responding to law enforcement data requests:</p>
+            
+            <h3>9.1 Initial Review (1-2 Business Days)</h3>
+            <ul>
+                <li>Verify authenticity and legal validity of the request</li>
+                <li>Determine if we possess the requested information</li>
+                <li>Assess whether immediate user notification is permitted</li>
+                <li>Identify any potential legal deficiencies in the request</li>
+            </ul>
+            
+            <h3>9.2 Legal Assessment (3-5 Business Days)</h3>
+            <ul>
+                <li>Conduct thorough legal analysis of the request</li>
+                <li>Consult with external counsel as needed</li>
+                <li>Contact the EFF if the request involves children's data or raises significant concerns</li>
+                <li>Determine our response strategy</li>
+            </ul>
+            
+            <h3>9.3 User Notification (When Permitted)</h3>
+            <ul>
+                <li>Notify affected users about the request</li>
+                <li>Provide users with time to seek legal counsel (typically 7 days)</li>
+                <li>Consider any user objections or legal challenges</li>
+            </ul>
+            
+            <h3>9.4 Response Preparation (5-10 Business Days)</h3>
+            <ul>
+                <li>Prepare required documentation for compliance or objection</li>
+                <li>Ensure proper data handling protections</li>
+                <li>Draft necessary legal filings if challenging the request</li>
+            </ul>
+            
+            <h3>9.5 Final Response</h3>
+            <ul>
+                <li>Provide the narrowest set of data legally required (if complying)</li>
+                <li>Submit formal objections (if challenging)</li>
+                <li>Document all actions taken for internal records</li>
+            </ul>
+            
+            <p>These timelines may be expedited in emergency situations involving imminent threat to life or safety, but all legal protections will still be applied.</p>
+        </div>
+        
+        <div id="employee-training" class="section">
+            <h2>10. Employee Training Requirements</h2>
+            <p>All employees who may be involved in handling law enforcement data requests receive specialized training:</p>
+            <ul>
+                <li>Initial comprehensive training covering:</li>
+                <ul>
+                    <li>Legal framework for data requests</li>
+                    <li>Types of legal process and their requirements</li>
+                    <li>Our internal response procedures</li>
+                    <li>Special protections for children's data</li>
+                    <li>User notification protocols</li>
+                </ul>
+                <li>Quarterly refresher training on policy updates and legal developments</li>
+                <li>Annual certification on proper handling of sensitive data requests</li>
+                <li>Specialized training for team members handling children's data</li>
+                <li>Regular drills simulating various types of requests to ensure readiness</li>
+            </ul>
+            
+            <p>Only authorized personnel who have completed this training are permitted to process law enforcement data requests.</p>
+        </div>
+        
+        <div id="record-keeping" class="section">
+            <h2>11. Record Keeping Requirements</h2>
+            <p>We maintain comprehensive records of all law enforcement and government requests for user data, including:</p>
+            <ul>
+                <li>Complete copies of all requests received</li>
+                <li>Documentation of our verification and authentication efforts</li>
+                <li>Records of all communications with requesting agencies</li>
+                <li>Copies of any challenges or objections we filed</li>
+                <li>Documentation of user notifications or reasons for delayed notification</li>
+                <li>Detailed logs of what information was provided, if any</li>
+                <li>Records of consultations with external legal counsel or the EFF</li>
+                <li>Post-response analysis documenting lessons learned</li>
+            </ul>
+            
+            <p>These records are securely maintained for a minimum of 5 years and are used to inform our transparency reporting and policy improvements.</p>
+        </div>
+        
+        <div id="policy-updates" class="section">
+            <h2>12. Policy Updates</h2>
+            <p>This Law Enforcement Data Policy will be reviewed and updated regularly to reflect changes in:</p>
+            <ul>
+                <li>Applicable laws and regulations</li>
+                <li>Court decisions affecting user data privacy</li>
+                <li>Our internal processes and capabilities</li>
+                <li>Industry best practices for data protection</li>
+            </ul>
+            
+            <p>We will notify users of significant changes to this policy through:</p>
+            <ul>
+                <li>Prominent notices on our website</li>
+                <li>Direct communications to registered users</li>
+                <li>Updates in our transparency reports</li>
+            </ul>
+        </div>
+        
+        <div id="contact-information" class="section">
+            <h2>13. Contact Information</h2>
+            <p>For questions about this policy or to report a law enforcement request:</p>
+            <ul>
+                <li><strong>Email:</strong> admin@agent-wallace.com</li>
+                <li><strong>Legal Department:</strong> [Phone number for urgent matters]</li>
+                <li><strong>Mailing Address:</strong> [Physical address for service of process]</li>
+            </ul>
+            
+            <p>Law enforcement agencies should direct all requests to admin@agent-wallace.com or to our registered agent for service of process.</p>
+            
+            <div class="highlight-box">
+                <h4><i class="fas fa-lock icon"></i>Our Pledge to Users</h4>
+                <p>Digital Bodyguard is committed to fighting for your privacy rights. We will pursue all available legal avenues to protect your data, particularly for our most vulnerable users. We believe that strong data protection is essential to maintaining trust, and we will continue to advocate for privacy rights in the face of increasing data requests.</p>
+            </div>
+        </div>
+        
+        <div class="footer">
+            <p>© 2024 Digital Bodyguard. All rights reserved.</p>
+            <p>This policy is effective as of January 1, 2024 and was last updated on January 1, 2024.</p>
+        </div>
+    </div>
+</body>
+</html>

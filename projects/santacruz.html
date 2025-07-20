@@ -1,0 +1,1249 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🎣🎠🍷 Complete Road Trip Guide: CA-46W to SF Bay</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Poppins', sans-serif; }
+        .flip-card { perspective: 1000px; height: 300px; }
+        .flip-card-inner { position: relative; width: 100%; height: 100%; text-align: center; transition: transform 0.6s; transform-style: preserve-3d; }
+        .flip-card:hover .flip-card-inner { transform: rotateY(180deg); }
+        .flip-card-front, .flip-card-back { position: absolute; width: 100%; height: 100%; -webkit-backface-visibility: hidden; backface-visibility: hidden; border-radius: 15px; }
+        .flip-card-back { transform: rotateY(180deg); }
+        .gradient-bg { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); }
+        .fishing-gradient { background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%); }
+        .kids-gradient { background: linear-gradient(135deg, #fa709a 0%, #fee140 100%); }
+        .adult-gradient { background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%); }
+        .location-card { transition: all 0.3s ease; border-left: 4px solid #3b82f6; }
+        .location-card:hover { transform: translateX(5px); box-shadow: 0 10px 25px rgba(0,0,0,0.1); }
+        .priority-badge { animation: pulse 2s infinite; }
+        @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.7; } }
+        .section-divider { background: linear-gradient(90deg, transparent, #3b82f6, transparent); height: 2px; margin: 2rem 0; }
+    </style>
+</head>
+<body class="bg-gray-50">
+    <!-- Header -->
+    <div class="gradient-bg text-white py-8">
+        <div class="container mx-auto px-4">
+            <h1 class="text-4xl font-bold text-center mb-4">🚗 Ultimate Road Trip Guide</h1>
+            <p class="text-xl text-center mb-6">CA-46W to San Francisco Bay • 150+ Amazing Stops</p>
+            <div class="flex justify-center space-x-4">
+                <button onclick="scrollToSection('fishing')" class="bg-blue-500 hover:bg-blue-600 px-6 py-2 rounded-full transition">🎣 Fishing</button>
+                <button onclick="scrollToSection('kids')" class="bg-pink-500 hover:bg-pink-600 px-6 py-2 rounded-full transition">🎠 Kids</button>
+                <button onclick="scrollToSection('adults')" class="bg-purple-500 hover:bg-purple-600 px-6 py-2 rounded-full transition">🍷 Adults</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Route Overview -->
+    <div class="container mx-auto px-4 py-8">
+        <div class="bg-white rounded-lg shadow-lg p-6 mb-8">
+            <h2 class="text-2xl font-bold mb-4"><i class="fas fa-route text-blue-600"></i> Your Complete Route</h2>
+            <div class="grid md:grid-cols-4 gap-4">
+                <div class="text-center p-4 bg-blue-50 rounded-lg">
+                    <i class="fas fa-road text-2xl text-blue-600 mb-2"></i>
+                    <h3 class="font-bold">CA-46W Start</h3>
+                    <p class="text-sm">Paso Robles Area</p>
+                </div>
+                <div class="text-center p-4 bg-green-50 rounded-lg">
+                    <i class="fas fa-mountain text-2xl text-green-600 mb-2"></i>
+                    <h3 class="font-bold">Central Coast</h3>
+                    <p class="text-sm">SLO to Monterey</p>
+                </div>
+                <div class="text-center p-4 bg-purple-50 rounded-lg">
+                    <i class="fas fa-water text-2xl text-purple-600 mb-2"></i>
+                    <h3 class="font-bold">Santa Cruz</h3>
+                    <p class="text-sm">Beach & Mountains</p>
+                </div>
+                <div class="text-center p-4 bg-orange-50 rounded-lg">
+                    <i class="fas fa-city text-2xl text-orange-600 mb-2"></i>
+                    <h3 class="font-bold">SF Bay Area</h3>
+                    <p class="text-sm">90 Miles Extended</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Flip Card Navigation -->
+    <div class="container mx-auto px-4 py-8">
+        <div class="grid md:grid-cols-3 gap-8 mb-12">
+            <!-- Fishing Card -->
+            <div class="flip-card">
+                <div class="flip-card-inner">
+                    <div class="flip-card-front fishing-gradient flex flex-col justify-center items-center text-white">
+                        <i class="fas fa-fish text-6xl mb-4"></i>
+                        <h3 class="text-2xl font-bold">Summer Fishing</h3>
+                        <p class="text-center">40+ Hot Spots</p>
+                        <p class="text-sm">July 2024 Conditions</p>
+                    </div>
+                    <div class="flip-card-back bg-blue-600 text-white p-6 flex flex-col justify-center">
+                        <h4 class="text-xl font-bold mb-4">Current Hot Spots</h4>
+                        <ul class="text-sm space-y-2">
+                            <li>🔥 Lake Nacimiento - 77°F</li>
+                            <li>🔥 Lopez Lake - 74°F</li>
+                            <li>🔥 Monterey Bay Rockfish</li>
+                            <li>⚠️ Stream Closures Noted</li>
+                        </ul>
+                        <button onclick="scrollToSection('fishing')" class="mt-4 bg-white text-blue-600 px-4 py-2 rounded">Explore →</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Kids Card -->
+            <div class="flip-card">
+                <div class="flip-card-inner">
+                    <div class="flip-card-front kids-gradient flex flex-col justify-center items-center text-white">
+                        <i class="fas fa-child text-6xl mb-4"></i>
+                        <h3 class="text-2xl font-bold">Kid Adventures</h3>
+                        <p class="text-center">50+ Amazing Stops</p>
+                        <p class="text-sm">Perfect for 6-Year-Olds</p>
+                    </div>
+                    <div class="flip-card-back bg-pink-600 text-white p-6 flex flex-col justify-center">
+                        <h4 class="text-xl font-bold mb-4">Crown Jewels</h4>
+                        <ul class="text-sm space-y-2">
+                            <li>🎢 Santa Cruz Boardwalk</li>
+                            <li>🐋 Monterey Aquarium</li>
+                            <li>🚂 Roaring Camp Train</li>
+                            <li>🦭 Elephant Seals</li>
+                        </ul>
+                        <button onclick="scrollToSection('kids')" class="mt-4 bg-white text-pink-600 px-4 py-2 rounded">Explore →</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Adults Card -->
+            <div class="flip-card">
+                <div class="flip-card-inner">
+                    <div class="flip-card-front adult-gradient flex flex-col justify-center items-center text-gray-800">
+                        <i class="fas fa-wine-glass text-6xl mb-4"></i>
+                        <h3 class="text-2xl font-bold">Adult Experiences</h3>
+                        <p class="text-center">60+ Premium Stops</p>
+                        <p class="text-sm">Wine, Dining, Luxury</p>
+                    </div>
+                    <div class="flip-card-back bg-purple-600 text-white p-6 flex flex-col justify-center">
+                        <h4 class="text-xl font-bold mb-4">Premium Experiences</h4>
+                        <ul class="text-sm space-y-2">
+                            <li>🍷 Paso Robles Wineries</li>
+                            <li>🍽️ Big Sur Luxury Resorts</li>
+                            <li>⛳ Pebble Beach Golf</li>
+                            <li>🌃 SF Rooftop Bars</li>
+                        </ul>
+                        <button onclick="scrollToSection('adults')" class="mt-4 bg-white text-purple-600 px-4 py-2 rounded">Explore →</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- FISHING SECTION -->
+    <div id="fishing" class="container mx-auto px-4 py-8">
+        <div class="bg-white rounded-lg shadow-lg p-8">
+            <h2 class="text-3xl font-bold mb-6 text-blue-600"><i class="fas fa-fish"></i> Summer Fishing Guide - July 2024</h2>
+            
+            <!-- Current Conditions Alert -->
+            <div class="bg-blue-50 border-l-4 border-blue-400 p-4 mb-6">
+                <div class="flex">
+                    <div class="flex-shrink-0">
+                        <i class="fas fa-thermometer-half text-blue-400"></i>
+                    </div>
+                    <div class="ml-3">
+                        <p class="text-sm text-blue-700">
+                            <strong>Current Summer Conditions:</strong> Warm water species active, most streams closed for steelhead protection. Focus on lakes and ocean fishing.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Section 1: CA-46W Corridor -->
+            <div class="mb-8">
+                <h3 class="text-2xl font-bold mb-4 text-green-600">Section 1: CA-46W Corridor</h3>
+                
+                <div class="grid lg:grid-cols-2 gap-6">
+                    <!-- Lake Nacimiento -->
+                    <div class="location-card bg-white p-6 rounded-lg shadow-md">
+                        <div class="flex justify-between items-start mb-3">
+                            <h4 class="text-xl font-bold text-blue-700">Lake Nacimiento</h4>
+                            <span class="priority-badge bg-red-500 text-white px-2 py-1 rounded text-sm">⭐ TOP PRIORITY</span>
+                        </div>
+                        <p class="text-gray-600 mb-2"><i class="fas fa-map-marker-alt"></i> <a href="https://maps.google.com/maps?q=35.7567,-120.8975" class="text-blue-500">35.7567°N, -120.8975°W</a></p>
+                        <p class="text-gray-600 mb-2"><i class="fas fa-car"></i> 25 minutes via Nacimiento Lake Drive from CA-46</p>
+                        <p class="text-gray-600 mb-2"><i class="fas fa-thermometer-half"></i> Current Temp: 77°F (IDEAL!)</p>
+                        <p class="text-gray-700 mb-2"><strong>Hot Species:</strong> Trophy white bass schools, largemouth bass, striped bass</p>
+                        <p class="text-gray-700 mb-2"><strong>Summer Technique:</strong> Early morning topwater, deep structure 25-35ft</p>
+                        <p class="text-gray-700"><strong>Access:</strong> Full marina, boat rentals, 165 miles of pristine shoreline</p>
+                    </div>
+
+                    <!-- Paso Robles City Park Pond -->
+                    <div class="location-card bg-white p-6 rounded-lg shadow-md">
+                        <h4 class="text-xl font-bold text-blue-700">Paso Robles City Park Pond</h4>
+                        <p class="text-gray-600 mb-2"><i class="fas fa-map-marker-alt"></i> <a href="https://maps.google.com/maps?q=35.6285,-120.6908" class="text-blue-500">35.6285°N, -120.6908°W</a></p>
+                        <p class="text-gray-600 mb-2"><i class="fas fa-car"></i> 3 minutes via Spring Street from CA-46</p>
+                        <p class="text-gray-700 mb-2"><strong>Species:</strong> Stocked trout, bass, bluegill</p>
+                        <p class="text-gray-700 mb-2"><strong>Summer Focus:</strong> Early morning bass, evening catfish</p>
+                        <p class="text-gray-700"><strong>Access:</strong> City park, free access, easy parking</p>
+                    </div>
+
+                    <!-- Estrella River -->
+                    <div class="location-card bg-white p-6 rounded-lg shadow-md">
+                        <h4 class="text-xl font-bold text-blue-700">Estrella River</h4>
+                        <p class="text-gray-600 mb-2"><i class="fas fa-map-marker-alt"></i> <a href="https://maps.google.com/maps?q=35.6543,-120.7234" class="text-blue-500">35.6543°N, -120.7234°W</a></p>
+                        <p class="text-gray-600 mb-2"><i class="fas fa-car"></i> 8 minutes north of Paso Robles</p>
+                        <p class="text-gray-700 mb-2"><strong>Summer Status:</strong> Low flow, limited access</p>
+                        <p class="text-gray-700 mb-2"><strong>Species:</strong> Small wild trout (when flowing)</p>
+                        <p class="text-gray-700"><strong>Access:</strong> Check private property, seasonal flows</p>
+                    </div>
+
+                    <!-- Whale Rock Reservoir -->
+                    <div class="location-card bg-white p-6 rounded-lg shadow-md">
+                        <h4 class="text-xl font-bold text-blue-700">Whale Rock Reservoir</h4>
+                        <p class="text-gray-600 mb-2"><i class="fas fa-map-marker-alt"></i> <a href="https://maps.google.com/maps?q=35.5234,-120.7567" class="text-blue-500">35.5234°N, -120.7567°W</a></p>
+                        <p class="text-gray-600 mb-2"><i class="fas fa-car"></i> 15 minutes southwest of Paso Robles</p>
+                        <p class="text-gray-700 mb-2"><strong>Species:</strong> Largemouth bass, bluegill</p>
+                        <p class="text-gray-700 mb-2"><strong>Summer Pattern:</strong> Deep water fishing, structure focus</p>
+                        <p class="text-gray-700"><strong>Access:</strong> Limited public access, check regulations</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="section-divider"></div>
+
+            <!-- Section 2: US-101N Summer Hotspots -->
+            <div class="mb-8">
+                <h3 class="text-2xl font-bold mb-4 text-green-600">Section 2: US-101N Summer Hotspots</h3>
+                
+                <div class="grid lg:grid-cols-2 gap-6">
+                    <!-- Santa Margarita Lake -->
+                    <div class="location-card bg-white p-6 rounded-lg shadow-md">
+                        <div class="flex justify-between items-start mb-3">
+                            <h4 class="text-xl font-bold text-blue-700">Santa Margarita Lake</h4>
+                            <span class="priority-badge bg-red-500 text-white px-2 py-1 rounded text-sm">⭐ TOP PRIORITY</span>
+                        </div>
+                        <p class="text-gray-600 mb-2"><i class="fas fa-map-marker-alt"></i> <a href="https://maps.google.com/maps?q=35.3567,-120.6178" class="text-blue-500">35.3567°N, -120.6178°W</a></p>
+                        <p class="text-gray-600 mb-2"><i class="fas fa-car"></i> 12 minutes via CA-58 east from US-101</p>
+                        <p class="text-gray-700 mb-2"><strong>Species:</strong> Rainbow & brown trout, bass, bluegill</p>
+                        <p class="text-gray-700 mb-2"><strong>Summer Strategy:</strong> Early morning trout, evening bass</p>
+                        <p class="text-gray-700"><strong>Access:</strong> County park, boat launch, excellent shore fishing</p>
+                    </div>
+
+                    <!-- Lopez Lake -->
+                    <div class="location-card bg-white p-6 rounded-lg shadow-md">
+                        <div class="flex justify-between items-start mb-3">
+                            <h4 class="text-xl font-bold text-blue-700">Lopez Lake</h4>
+                            <span class="priority-badge bg-red-500 text-white px-2 py-1 rounded text-sm">⭐ TOP PRIORITY</span>
+                        </div>
+                        <p class="text-gray-600 mb-2"><i class="fas fa-map-marker-alt"></i> <a href="https://maps.google.com/maps?q=35.1678,-120.5234" class="text-blue-500">35.1678°N, -120.5234°W</a></p>
+                        <p class="text-gray-600 mb-2"><i class="fas fa-car"></i> 15 minutes via CA-227 to Lopez Lake Road</p>
+                        <p class="text-gray-600 mb-2"><i class="fas fa-thermometer-half"></i> Current Temp: 74°F</p>
+                        <p class="text-gray-700 mb-2"><strong>Species:</strong> Rainbow trout, brown trout, bass, catfish</p>
+                        <p class="text-gray-700 mb-2"><strong>Summer Pattern:</strong> Thermocline fishing 20-30ft</p>
+                        <p class="text-gray-700"><strong>Access:</strong> Full facilities, boat launch, camping available</p>
+                    </div>
+
+                    <!-- Atascadero Lake -->
+                    <div class="location-card bg-white p-6 rounded-lg shadow-md">
+                        <h4 class="text-xl font-bold text-blue-700">Atascadero Lake</h4>
+                        <p class="text-gray-600 mb-2"><i class="fas fa-map-marker-alt"></i> <a href="https://maps.google.com/maps?q=35.4567,-120.6789" class="text-blue-500">35.4567°N, -120.6789°W</a></p>
+                        <p class="text-gray-600 mb-2"><i class="fas fa-car"></i> 5 minutes via Traffic Way exit from US-101</p>
+                        <p class="text-gray-700 mb-2"><strong>Species:</strong> Rainbow trout, bass, bluegill</p>
+                        <p class="text-gray-700 mb-2"><strong>Summer Focus:</strong> Urban fishing, family-friendly</p>
+                        <p class="text-gray-700"><strong>Access:</strong> City park, easy access, playground nearby</p>
+                    </div>
+
+                    <!-- Morro Bay -->
+                    <div class="location-card bg-white p-6 rounded-lg shadow-md">
+                        <div class="flex justify-between items-start mb-3">
+                            <h4 class="text-xl font-bold text-blue-700">Morro Bay</h4>
+                            <span class="priority-badge bg-yellow-500 text-white px-2 py-1 rounded text-sm">EXCELLENT</span>
+                        </div>
+                        <p class="text-gray-600 mb-2"><i class="fas fa-map-marker-alt"></i> <a href="https://maps.google.com/maps?q=35.3678,-120.8234" class="text-blue-500">35.3678°N, -120.8234°W</a></p>
+                        <p class="text-gray-600 mb-2"><i class="fas fa-car"></i> 10 minutes via Main Street from US-101</p>
+                        <p class="text-gray-700 mb-2"><strong>Species:</strong> Summer rockfish, surf perch, sea otters viewing</p>
+                        <p class="text-gray-700 mb-2"><strong>Summer Peak:</strong> July-September prime time</p>
+                        <p class="text-gray-700"><strong>Access:</strong> Multiple piers, kayak rentals, charter boats</p>
+                    </div>
+
+                    <!-- Arroyo Seco River -->
+                    <div class="location-card bg-white p-6 rounded-lg shadow-md">
+                        <div class="flex justify-between items-start mb-3">
+                            <h4 class="text-xl font-bold text-blue-700">Arroyo Seco River</h4>
+                            <span class="priority-badge bg-red-500 text-white px-2 py-1 rounded text-sm">⭐ TOP PRIORITY</span>
+                        </div>
+                        <p class="text-gray-600 mb-2"><i class="fas fa-map-marker-alt"></i> <a href="https://maps.google.com/maps?q=36.2789,-121.3456" class="text-blue-500">36.2789°N, -121.3456°W</a></p>
+                        <p class="text-gray-600 mb-2"><i class="fas fa-car"></i> 18 minutes via Arroyo Seco Road from US-101</p>
+                        <p class="text-gray-700 mb-2"><strong>Species:</strong> Wild rainbow & brown trout, steelhead (seasonal)</p>
+                        <p class="text-gray-700 mb-2"><strong>Summer Status:</strong> Check flow conditions, upper reaches best</p>
+                        <p class="text-gray-700"><strong>Access:</strong> Multiple forest service access points</p>
+                    </div>
+
+                    <!-- Salinas River Sections -->
+                    <div class="location-card bg-white p-6 rounded-lg shadow-md">
+                        <h4 class="text-xl font-bold text-blue-700">Salinas River - Multiple Sections</h4>
+                        <p class="text-gray-600 mb-2"><i class="fas fa-map-marker-alt"></i> King City: <a href="https://maps.google.com/maps?q=36.2134,-121.1267" class="text-blue-500">36.2134°N, -121.1267°W</a></p>
+                        <p class="text-gray-600 mb-2"><i class="fas fa-car"></i> Multiple US-101 exits (King City, Greenfield, Salinas)</p>
+                        <p class="text-gray-700 mb-2"><strong>Summer Status:</strong> Low flow restrictions active</p>
+                        <p class="text-gray-700 mb-2"><strong>Species:</strong> Brown trout, carp, limited access</p>
+                        <p class="text-gray-700"><strong>Access:</strong> City park areas, check flow conditions</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="section-divider"></div>
+
+            <!-- Section 3: Monterey Bay Ocean -->
+            <div class="mb-8">
+                <h3 class="text-2xl font-bold mb-4 text-green-600">Section 3: Monterey Bay Ocean Fishing</h3>
+                
+                <div class="grid lg:grid-cols-2 gap-6">
+                    <!-- Monterey Bay Rockfish -->
+                    <div class="location-card bg-white p-6 rounded-lg shadow-md">
+                        <div class="flex justify-between items-start mb-3">
+                            <h4 class="text-xl font-bold text-blue-700">Monterey Bay Rockfish</h4>
+                            <span class="priority-badge bg-red-500 text-white px-2 py-1 rounded text-sm">⭐ PEAK SEASON</span>
+                        </div>
+                        <p class="text-gray-600 mb-2"><i class="fas fa-map-marker-alt"></i> <a href="https://maps.google.com/maps?q=36.6567,-121.8234" class="text-blue-500">36.6567°N, -121.8234°W</a></p>
+                        <p class="text-gray-600 mb-2"><i class="fas fa-car"></i> Fisherman's Wharf, Monterey</p>
+                        <p class="text-gray-700 mb-2"><strong>Current Season:</strong> Inshore rockfish <120ft depth (July-Sept)</p>
+                        <p class="text-gray-700 mb-2"><strong>Hot Species:</strong> Rockfish, lingcod, cabezon</p>
+                        <p class="text-gray-700"><strong>Charters:</strong> Multiple operators, half/full day trips</p>
+                    </div>
+
+                    <!-- Santa Cruz Harbor -->
+                    <div class="location-card bg-white p-6 rounded-lg shadow-md">
+                        <h4 class="text-xl font-bold text-blue-700">Santa Cruz Harbor</h4>
+                        <p class="text-gray-600 mb-2"><i class="fas fa-map-marker-alt"></i> <a href="https://maps.google.com/maps?q=36.9567,-122.0234" class="text-blue-500">36.9567°N, -122.0234°W</a></p>
+                        <p class="text-gray-600 mb-2"><i class="fas fa-car"></i> Harbor access from CA-1</p>
+                        <p class="text-gray-700 mb-2"><strong>Status:</strong> Salmon season closed early 2024</p>
+                        <p class="text-gray-700 mb-2"><strong>Alternative:</strong> Rockfish charters available</p>
+                        <p class="text-gray-700"><strong>Access:</strong> Public pier, charter operators</p>
+                    </div>
+
+                    <!-- Capitola Wharf -->
+                    <div class="location-card bg-white p-6 rounded-lg shadow-md">
+                        <h4 class="text-xl font-bold text-blue-700">Capitola Wharf</h4>
+                        <p class="text-gray-600 mb-2"><i class="fas fa-map-marker-alt"></i> <a href="https://maps.google.com/maps?q=36.9745,-121.9567" class="text-blue-500">36.9745°N, -121.9567°W</a></p>
+                        <p class="text-gray-600 mb-2"><i class="fas fa-car"></i> Easy walk from Capitola Village</p>
+                        <p class="text-gray-700 mb-2"><strong>Summer Focus:</strong> Surf perch, rockfish</p>
+                        <p class="text-gray-700 mb-2"><strong>Family Friendly:</strong> No license required on pier</p>
+                        <p class="text-gray-700"><strong>Access:</strong> Free pier fishing, bait shop nearby</p>
+                    </div>
+
+                    <!-- Seacliff Pier -->
+                    <div class="location-card bg-white p-6 rounded-lg shadow-md">
+                        <h4 class="text-xl font-bold text-blue-700">Seacliff State Beach Pier</h4>
+                        <p class="text-gray-600 mb-2"><i class="fas fa-map-marker-alt"></i> <a href="https://maps.google.com/maps?q=36.9678,-121.9123" class="text-blue-500">36.9678°N, -121.9123°W</a></p>
+                        <p class="text-gray-600 mb-2"><i class="fas fa-car"></i> State Beach Road from CA-1</p>
+                        <p class="text-gray-700 mb-2"><strong>Unique Feature:</strong> Pier extends to concrete ship</p>
+                        <p class="text-gray-700 mb-2"><strong>Species:</strong> Surf perch, rockfish, seasonal runs</p>
+                        <p class="text-gray-700"><strong>Access:</strong> State park day use fee, facilities available</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="section-divider"></div>
+
+            <!-- Section 4: Extended Range (90 Miles North) -->
+            <div class="mb-8">
+                <h3 class="text-2xl font-bold mb-4 text-green-600">Section 4: Extended Range - Silicon Valley to SF Bay</h3>
+                
+                <div class="grid lg:grid-cols-2 gap-6">
+                    <!-- San Francisco Bay Stripers -->
+                    <div class="location-card bg-white p-6 rounded-lg shadow-md">
+                        <div class="flex justify-between items-start mb-3">
+                            <h4 class="text-xl font-bold text-blue-700">San Francisco Bay Striped Bass</h4>
+                            <span class="priority-badge bg-yellow-500 text-white px-2 py-1 rounded text-sm">SUMMER HOT</span>
+                        </div>
+                        <p class="text-gray-600 mb-2"><i class="fas fa-map-marker-alt"></i> <a href="https://maps.google.com/maps?q=37.7749,-122.4194" class="text-blue-500">37.7749°N, -122.4194°W</a></p>
+                        <p class="text-gray-600 mb-2"><i class="fas fa-car"></i> Multiple bay access points</p>
+                        <p class="text-gray-700 mb-2"><strong>Summer Pattern:</strong> Excellent striper fishing July-September</p>
+                        <p class="text-gray-700 mb-2"><strong>Hot Spots:</strong> Berkeley flats, Alameda, Crissy Field</p>
+                        <p class="text-gray-700"><strong>Access:</strong> Shore fishing, charter boats available</p>
+                    </div>
+
+                    <!-- Uvas Reservoir -->
+                    <div class="location-card bg-white p-6 rounded-lg shadow-md">
+                        <h4 class="text-xl font-bold text-blue-700">Uvas Reservoir</h4>
+                        <p class="text-gray-600 mb-2"><i class="fas fa-map-marker-alt"></i> <a href="https://maps.google.com/maps?q=37.0456,-121.6789" class="text-blue-500">37.0456°N, -121.6789°W</a></p>
+                        <p class="text-gray-600 mb-2"><i class="fas fa-car"></i> 15 minutes via Uvas Road from US-101</p>
+                        <p class="text-gray-700 mb-2"><strong>Species:</strong> Bass, catfish, occasional trout</p>
+                        <p class="text-gray-700 mb-2"><strong>Summer Strategy:</strong> Early morning, evening fishing</p>
+                        <p class="text-gray-700"><strong>Access:</strong> County park, good facilities</p>
+                    </div>
+
+                    <!-- Los Gatos Creek -->
+                    <div class="location-card bg-white p-6 rounded-lg shadow-md">
+                        <h4 class="text-xl font-bold text-blue-700">Los Gatos Creek</h4>
+                        <p class="text-gray-600 mb-2"><i class="fas fa-map-marker-alt"></i> <a href="https://maps.google.com/maps?q=37.2234,-121.9567" class="text-blue-500">37.2234°N, -121.9567°W</a></p>
+                        <p class="text-gray-600 mb-2"><i class="fas fa-car"></i> 20 minutes via CA-17 north from Santa Cruz</p>
+                        <p class="text-gray-700 mb-2"><strong>Species:</strong> Wild trout in upper reaches</p>
+                        <p class="text-gray-700 mb-2"><strong>Summer Status:</strong> Check flows, Lexington Reservoir area</p>
+                        <p class="text-gray-700"><strong>Access:</strong> Trail system, limited summer fishing</p>
+                    </div>
+
+                    <!-- Loch Lomond Recreation Area -->
+                    <div class="location-card bg-white p-6 rounded-lg shadow-md">
+                        <div class="flex justify-between items-start mb-3">
+                            <h4 class="text-xl font-bold text-blue-700">Loch Lomond Recreation Area</h4>
+                            <span class="priority-badge bg-red-500 text-white px-2 py-1 rounded text-sm">⭐ CROWN JEWEL</span>
+                        </div>
+                        <p class="text-gray-600 mb-2"><i class="fas fa-map-marker-alt"></i> <a href="https://maps.google.com/maps?q=37.0789,-122.0456" class="text-blue-500">37.0789°N, -122.0456°W</a></p>
+                        <p class="text-gray-600 mb-2"><i class="fas fa-car"></i> 30 minutes via CA-9 to Felton from Santa Cruz</p>
+                        <p class="text-gray-700 mb-2"><strong>Species:</strong> Trophy rainbow trout, bass, bluegill</p>
+                        <p class="text-gray-700 mb-2"><strong>Special Note:</strong> Fish stocking temporarily suspended - check status</p>
+                        <p class="text-gray-700"><strong>Access:</strong> 150-foot deep reservoir, boat rentals when open</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Summer Fishing Tips -->
+            <div class="bg-yellow-50 border-l-4 border-yellow-400 p-6 mt-8">
+                <h4 class="text-lg font-bold mb-3 text-yellow-800"><i class="fas fa-lightbulb"></i> Summer Fishing Pro Tips</h4>
+                <div class="grid md:grid-cols-2 gap-4 text-yellow-700">
+                    <div>
+                        <p class="mb-2"><strong>Best Times:</strong> Dawn (5:30-8:30am) and dusk (6:30-8:30pm)</p>
+                        <p class="mb-2"><strong>Avoid:</strong> 11am-4pm (too hot, fish inactive)</p>
+                        <p class="mb-2"><strong>Deep Water:</strong> Target thermocline 25-35ft in lakes</p>
+                    </div>
+                    <div>
+                        <p class="mb-2"><strong>Summer Gear:</strong> Topwater early, deep jigs midday</p>
+                        <p class="mb-2"><strong>Water Temp:</strong> Monitor for 70-75°F sweet spots</p>
+                        <p class="mb-2"><strong>Stream Status:</strong> Most closed until winter rains</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- KIDS SECTION -->
+    <div id="kids" class="container mx-auto px-4 py-8">
+        <div class="bg-white rounded-lg shadow-lg p-8">
+            <h2 class="text-3xl font-bold mb-6 text-pink-600"><i class="fas fa-child"></i> Epic Kid Adventures - 50+ Amazing Stops</h2>
+            
+            <!-- Age Recommendation -->
+            <div class="bg-pink-50 border-l-4 border-pink-400 p-4 mb-6">
+                <div class="flex">
+                    <div class="flex-shrink-0">
+                        <i class="fas fa-birthday-cake text-pink-400"></i>
+                    </div>
+                    <div class="ml-3">
+                        <p class="text-sm text-pink-700">
+                            <strong>Perfect for 6-Year-Olds:</strong> All locations rated for excitement level, safety, and age-appropriate fun!
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Section 1: CA-46W Corridor Kids -->
+            <div class="mb-8">
+                <h3 class="text-2xl font-bold mb-4 text-green-600">Section 1: CA-46W Corridor Kid Adventures</h3>
+                
+                <div class="grid lg:grid-cols-2 gap-6">
+                    <!-- Paso Robles Children's Museum -->
+                    <div class="location-card bg-white p-6 rounded-lg shadow-md">
+                        <div class="flex justify-between items-start mb-3">
+                            <h4 class="text-xl font-bold text-pink-700">Paso Robles Children's Museum</h4>
+                            <span class="priority-badge bg-yellow-500 text-white px-2 py-1 rounded text-sm">⭐⭐⭐⭐</span>
+                        </div>
+                        <p class="text-gray-600 mb-2"><i class="fas fa-map-marker-alt"></i> <a href="https://maps.google.com/maps?q=35.6267,-120.6901" class="text-blue-500">35.6267°N, -120.6901°W</a></p>
+                        <p class="text-gray-600 mb-2"><i class="fas fa-car"></i> 2 minutes from CA-46 via Spring Street</p>
+                        <p class="text-gray-700 mb-2"><strong>Perfect For:</strong> Ages 2-7, interactive exhibits</p>
+                        <p class="text-gray-700 mb-2"><strong>Highlights:</strong> Real fire truck to climb, art projects, dress-up</p>
+                        <p class="text-gray-700"><strong>Time Needed:</strong> 1-2 hours, indoor fun</p>
+                    </div>
+
+                    <!-- Conservation Ambassadors - Zoo to You -->
+                    <div class="location-card bg-white p-6 rounded-lg shadow-md">
+                        <div class="flex justify-between items-start mb-3">
+                            <h4 class="text-xl font-bold text-pink-700">Zoo to You (Conservation Ambassadors)</h4>
+                            <span class="priority-badge bg-red-500 text-white px-2 py-1 rounded text-sm">⭐⭐⭐⭐⭐</span>
+                        </div>
+                        <p class="text-gray-600 mb-2"><i class="fas fa-map-marker-alt"></i> <a href="https://maps.google.com/maps?q=35.6543,-120.7123" class="text-blue-500">35.6543°N, -120.7123°W</a></p>
+                        <p class="text-gray-600 mb-2"><i class="fas fa-car"></i> 15 minutes from Paso Robles</p>
+                        <p class="text-gray-700 mb-2"><strong>Amazing Experience:</strong> Mobile zoo with exotic animals</p>
+                        <p class="text-gray-700 mb-2"><strong>Animals:</strong> Tigers, primates, reptiles, birds</p>
+                        <p class="text-gray-700"><strong>Note:</strong> Call ahead for tours, educational programs</p>
+                    </div>
+
+                    <!-- Ravine Waterpark -->
+                    <div class="location-card bg-white p-6 rounded-lg shadow-md">
+                        <h4 class="text-xl font-bold text-pink-700">Ravine Waterpark</h4>
+                        <p class="text-gray-600 mb-2"><i class="fas fa-map-marker-alt"></i> <a href="https://maps.google.com/maps?q=35.6234,-120.6789" class="text-blue-500">35.6234°N, -120.6789°W</a></p>
+                        <p class="text-gray-600 mb-2"><i class="fas fa-car"></i> 5 minutes from downtown Paso Robles</p>
+                        <p class="text-gray-700 mb-2"><strong>Summer Fun:</strong> Water slides, pools, splash areas</p>
+                        <p class="text-gray-700 mb-2"><strong>Perfect Weather:</strong> Great for hot summer days</p>
+                        <p class="text-gray-700"><strong>Facilities:</strong> Snack bar, shade areas, changing rooms</p>
+                    </div>
+
+                    <!-- Sensorio -->
+                    <div class="location-card bg-white p-6 rounded-lg shadow-md">
+                        <div class="flex justify-between items-start mb-3">
+                            <h4 class="text-xl font-bold text-pink-700">Sensorio Light Fields</h4>
+                            <span class="priority-badge bg-purple-500 text-white px-2 py-1 rounded text-sm">MAGICAL</span>
+                        </div>
+                        <p class="text-gray-600 mb-2"><i class="fas fa-map-marker-alt"></i> <a href="https://maps.google.com/maps?q=35.6123,-120.7456" class="text-blue-500">35.6123°N, -120.7456°W</a></p>
+                        <p class="text-gray-600 mb-2"><i class="fas fa-car"></i> 10 minutes west of Paso Robles</p>
+                        <p class="text-gray-700 mb-2"><strong>Magical Experience:</strong> 15-acre field of LED light towers</p>
+                        <p class="text-gray-700 mb-2"><strong>Best Time:</strong> Evening visits (sunset onwards)</p>
+                        <p class="text-gray-700"><strong>Kid Appeal:</strong> Like walking through a fairy tale!</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="section-divider"></div>
+
+            <!-- Section 2: Central Coast Kids -->
+            <div class="mb-8">
+                <h3 class="text-2xl font-bold mb-4 text-green-600">Section 2: Central Coast Kid Adventures</h3>
+                
+                <div class="grid lg:grid-cols-2 gap-6">
+                    <!-- Hearst Castle -->
+                    <div class="location-card bg-white p-6 rounded-lg shadow-md">
+                        <div class="flex justify-between items-start mb-3">
+                            <h4 class="text-xl font-bold text-pink-700">Hearst Castle</h4>
+                            <span class="priority-badge bg-red-500 text-white px-2 py-1 rounded text-sm">⭐⭐⭐⭐⭐</span>
+                        </div>
+                        <p class="text-gray-600 mb-2"><i class="fas fa-map-marker-alt"></i> <a href="https://maps.google.com/maps?q=35.6856,-121.1681" class="text-blue-500">35.6856°N, -121.1681°W</a></p>
+                        <p class="text-gray-600 mb-2"><i class="fas fa-car"></i> Highway 1, San Simeon</p>
+                        <p class="text-gray-700 mb-2"><strong>Real Castle:</strong> Pools, gardens, zebras on grounds!</p>
+                        <p class="text-gray-700 mb-2"><strong>Kid-Friendly Tours:</strong> Grand Rooms Tour best for families</p>
+                        <p class="text-gray-700"><strong>Pricing:</strong> Children 5-12 discounted, under 5 free</p>
+                    </div>
+
+                    <!-- Elephant Seals -->
+                    <div class="location-card bg-white p-6 rounded-lg shadow-md">
+                        <div class="flex justify-between items-start mb-3">
+                            <h4 class="text-xl font-bold text-pink-700">Elephant Seals Viewing</h4>
+                            <span class="priority-badge bg-red-500 text-white px-2 py-1 rounded text-sm">⭐⭐⭐⭐⭐</span>
+                        </div>
+                        <p class="text-gray-600 mb-2"><i class="fas fa-map-marker-alt"></i> <a href="https://maps.google.com/maps?q=35.6934,-121.1992" class="text-blue-500">35.6934°N, -121.1992°W</a></p>
+                        <p class="text-gray-600 mb-2"><i class="fas fa-car"></i> 4.5 miles north of Hearst Castle on Hwy 1</p>
+                        <p class="text-gray-700 mb-2"><strong>AMAZING!</strong> Giant seals right on the beach - FREE!</p>
+                        <p class="text-gray-700 mb-2"><strong>Kid Zone:</strong> Educational activities and programs</p>
+                        <p class="text-gray-700"><strong>Best Times:</strong> Year-round, babies in spring</p>
+                    </div>
+
+                    <!-- Pismo Beach Dunes ATV -->
+                    <div class="location-card bg-white p-6 rounded-lg shadow-md">
+                        <div class="flex justify-between items-start mb-3">
+                            <h4 class="text-xl font-bold text-pink-700">Pismo Beach ATV Dunes</h4>
+                            <span class="priority-badge bg-red-500 text-white px-2 py-1 rounded text-sm">⭐⭐⭐⭐⭐</span>
+                        </div>
+                        <p class="text-gray-600 mb-2"><i class="fas fa-map-marker-alt"></i> <a href="https://maps.google.com/maps?q=35.1367,-120.6145" class="text-blue-500">35.1367°N, -120.6145°W</a></p>
+                        <p class="text-gray-600 mb-2"><i class="fas fa-car"></i> Oceano Dunes entrance</p>
+                        <p class="text-gray-700 mb-2"><strong>Thrilling:</strong> Kids can drive ATVs on sand dunes!</p>
+                        <p class="text-gray-700 mb-2"><strong>Age Requirement:</strong> 48" tall (usually 8+ years)</p>
+                        <p class="text-gray-700"><strong>Rentals:</strong> Steve's ATV, BJ's ATV, multiple operators</p>
+                    </div>
+
+                    <!-- Morro Bay Rock & Otters -->
+                    <div class="location-card bg-white p-6 rounded-lg shadow-md">
+                        <h4 class="text-xl font-bold text-pink-700">Morro Bay Rock & Sea Otters</h4>
+                        <p class="text-gray-600 mb-2"><i class="fas fa-map-marker-alt"></i> <a href="https://maps.google.com/maps?q=35.3658,-120.8638" class="text-blue-500">35.3658°N, -120.8638°W</a></p>
+                        <p class="text-gray-600 mb-2"><i class="fas fa-car"></i> Embarcadero, Morro Bay</p>
+                        <p class="text-gray-700 mb-2"><strong>Giant Rock:</strong> 576-foot volcanic rock formation</p>
+                        <p class="text-gray-700 mb-2"><strong>Sea Otters:</strong> Watch them float and play in harbor</p>
+                        <p class="text-gray-700"><strong>Activities:</strong> Kayaking, harbor walk, aquarium</p>
+                    </div>
+
+                    <!-- Casa de Fruta -->
+                    <div class="location-card bg-white p-6 rounded-lg shadow-md">
+                        <div class="flex justify-between items-start mb-3">
+                            <h4 class="text-xl font-bold text-pink-700">Casa de Fruta</h4>
+                            <span class="priority-badge bg-yellow-500 text-white px-2 py-1 rounded text-sm">⭐⭐⭐⭐</span>
+                        </div>
+                        <p class="text-gray-600 mb-2"><i class="fas fa-map-marker-alt"></i> <a href="https://maps.google.com/maps?q=36.7123,-121.1456" class="text-blue-500">36.7123°N, -121.1456°W</a></p>
+                        <p class="text-gray-600 mb-2"><i class="fas fa-car"></i> Off US-101 near Hollister</p>
+                        <p class="text-gray-700 mb-2"><strong>Fun Combo:</strong> Train ride, carousel, playground</p>
+                        <p class="text-gray-700 mb-2"><strong>Special:</strong> Peacocks roaming around, mining sluice</p>
+                        <p class="text-gray-700"><strong>Treats:</strong> Fresh fruit, candy shop, restaurant</p>
+                    </div>
+
+                    <!-- Pinnacles National Park Caves -->
+                    <div class="location-card bg-white p-6 rounded-lg shadow-md">
+                        <h4 class="text-xl font-bold text-pink-700">Pinnacles National Park Caves</h4>
+                        <p class="text-gray-600 mb-2"><i class="fas fa-map-marker-alt"></i> <a href="https://maps.google.com/maps?q=36.4906,-121.1825" class="text-blue-500">36.4906°N, -121.1825°W</a></p>
+                        <p class="text-gray-600 mb-2"><i class="fas fa-car"></i> 30 minutes east from US-101</p>
+                        <p class="text-gray-700 mb-2"><strong>Adventure:</strong> Real caves to explore with flashlights!</p>
+                        <p class="text-gray-700 mb-2"><strong>Easy Hike:</strong> Bear Gulch Cave Trail (2.4 miles)</p>
+                        <p class="text-gray-700"><strong>Bonus:</strong> California Condors sometimes visible!</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="section-divider"></div>
+
+            <!-- Section 3: Monterey Bay Kids -->
+            <div class="mb-8">
+                <h3 class="text-2xl font-bold mb-4 text-green-600">Section 3: Monterey Bay Kid Paradise</h3>
+                
+                <div class="grid lg:grid-cols-2 gap-6">
+                    <!-- Monterey Bay Aquarium -->
+                    <div class="location-card bg-white p-6 rounded-lg shadow-md">
+                        <div class="flex justify-between items-start mb-3">
+                            <h4 class="text-xl font-bold text-pink-700">Monterey Bay Aquarium</h4>
+                            <span class="priority-badge bg-red-500 text-white px-2 py-1 rounded text-sm">⭐⭐⭐⭐⭐</span>
+                        </div>
+                        <p class="text-gray-600 mb-2"><i class="fas fa-map-marker-alt"></i> <a href="https://maps.google.com/maps?q=36.6183,-121.9015" class="text-blue-500">36.6183°N, -121.9015°W</a></p>
+                        <p class="text-gray-600 mb-2"><i class="fas fa-car"></i> Cannery Row, Monterey</p>
+                        <p class="text-gray-700 mb-2"><strong>World Class:</strong> Sea otters, jellyfish, touch tanks</p>
+                        <p class="text-gray-700 mb-2"><strong>Kid Programs:</strong> Family Adventures tour (ages under 8)</p>
+                        <p class="text-gray-700"><strong>Time Needed:</strong> Full day, advance tickets recommended</p>
+                    </div>
+
+                    <!-- Whale Watching -->
+                    <div class="location-card bg-white p-6 rounded-lg shadow-md">
+                        <h4 class="text-xl font-bold text-pink-700">Monterey Bay Whale Watching</h4>
+                        <p class="text-gray-600 mb-2"><i class="fas fa-map-marker-alt"></i> <a href="https://maps.google.com/maps?q=36.6067,-121.8945" class="text-blue-500">36.6067°N, -121.8945°W</a></p>
+                        <p class="text-gray-600 mb-2"><i class="fas fa-car"></i> Fisherman's Wharf, Monterey</p>
+                        <p class="text-gray-700 mb-2"><strong>Amazing:</strong> Real whales, dolphins, sea otters</p>
+                        <p class="text-gray-700 mb-2"><strong>Kid Friendly:</strong> 3-hour tours, motion sickness meds recommended</p>
+                        <p class="text-gray-700"><strong>Operators:</strong> Multiple companies, kids 12+ pricing</p>
+                    </div>
+
+                    <!-- Castroville Artichoke Festival -->
+                    <div class="location-card bg-white p-6 rounded-lg shadow-md">
+                        <h4 class="text-xl font-bold text-pink-700">Castroville (Artichoke Capital)</h4>
+                        <p class="text-gray-600 mb-2"><i class="fas fa-map-marker-alt"></i> <a href="https://maps.google.com/maps?q=36.7645,-121.7567" class="text-blue-500">36.7645°N, -121.7567°W</a></p>
+                        <p class="text-gray-600 mb-2"><i class="fas fa-car"></i> US-101 exit at Castroville</p>
+                        <p class="text-gray-700 mb-2"><strong>Festival Season:</strong> May-June, kids zone with bounce houses</p>
+                        <p class="text-gray-700 mb-2"><strong>Year Round:</strong> Giant artichoke statue, fruit stands</p>
+                        <p class="text-gray-700"><strong>Food Fun:</strong> Try artichoke ice cream!</p>
+                    </div>
+
+                    <!-- Gilroy Gardens -->
+                    <div class="location-card bg-white p-6 rounded-lg shadow-md">
+                        <div class="flex justify-between items-start mb-3">
+                            <h4 class="text-xl font-bold text-pink-700">Gilroy Gardens Family Theme Park</h4>
+                            <span class="priority-badge bg-red-500 text-white px-2 py-1 rounded text-sm">⭐⭐⭐⭐⭐</span>
+                        </div>
+                        <p class="text-gray-600 mb-2"><i class="fas fa-map-marker-alt"></i> <a href="https://maps.google.com/maps?q=37.0116,-121.6294" class="text-blue-500">37.0116°N, -121.6294°W</a></p>
+                        <p class="text-gray-600 mb-2"><i class="fas fa-car"></i> Hecker Pass Highway, west of US-101</p>
+                        <p class="text-gray-700 mb-2"><strong>Unique:</strong> Garlic-themed rides! Twirling garlic bulb ride</p>
+                        <p class="text-gray-700 mb-2"><strong>Perfect Size:</strong> Not overwhelming, 40+ rides</p>
+                        <p class="text-gray-700"><strong>Special:</strong> Circus Trees - amazing tree sculptures!</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="section-divider"></div>
+
+            <!-- Section 4: Santa Cruz Kids Paradise -->
+            <div class="mb-8">
+                <h3 class="text-2xl font-bold mb-4 text-green-600">Section 4: Santa Cruz - Ultimate Kid Destination</h3>
+                
+                <div class="grid lg:grid-cols-2 gap-6">
+                    <!-- Santa Cruz Beach Boardwalk -->
+                    <div class="location-card bg-white p-6 rounded-lg shadow-md">
+                        <div class="flex justify-between items-start mb-3">
+                            <h4 class="text-xl font-bold text-pink-700">Santa Cruz Beach Boardwalk</h4>
+                            <span class="priority-badge bg-red-500 text-white px-2 py-1 rounded text-sm">⭐⭐⭐⭐⭐</span>
+                        </div>
+                        <p class="text-gray-600 mb-2"><i class="fas fa-map-marker-alt"></i> <a href="https://maps.google.com/maps?q=36.9645,-122.0178" class="text-blue-500">36.9645°N, -122.0178°W</a></p>
+                        <p class="text-gray-600 mb-2"><i class="fas fa-car"></i> Beach Street, Santa Cruz</p>
+                        <p class="text-gray-700 mb-2"><strong>Classic!</strong> Giant Dipper roller coaster, Looff Carousel</p>
+                        <p class="text-gray-700 mb-2"><strong>Kiddie Area:</strong> Bulgy the Whale, Beach Swing, Sea Dragons</p>
+                        <p class="text-gray-700"><strong>Perfect:</strong> Beach + amusement park in one location!</p>
+                    </div>
+
+                    <!-- Mystery Spot -->
+                    <div class="location-card bg-white p-6 rounded-lg shadow-md">
+                        <div class="flex justify-between items-start mb-3">
+                            <h4 class="text-xl font-bold text-pink-700">Mystery Spot</h4>
+                            <span class="priority-badge bg-red-500 text-white px-2 py-1 rounded text-sm">⭐⭐⭐⭐⭐</span>
+                        </div>
+                        <p class="text-gray-600 mb-2"><i class="fas fa-map-marker-alt"></i> <a href="https://maps.google.com/maps?q=37.0234,-122.0567" class="text-blue-500">37.0234°N, -122.0567°W</a></p>
+                        <p class="text-gray-600 mb-2"><i class="fas fa-car"></i> Mystery Spot Road, Santa Cruz</p>
+                        <p class="text-gray-700 mb-2"><strong>Mind-Blowing:</strong> Gravity-defying house experience!</p>
+                        <p class="text-gray-700 mb-2"><strong>Kid Appeal:</strong> Water flows uphill, people lean at angles</p>
+                        <p class="text-gray-700"><strong>Duration:</strong> 45-minute tour, truly mysterious!</p>
+                    </div>
+
+                    <!-- Roaring Camp Railroad -->
+                    <div class="location-card bg-white p-6 rounded-lg shadow-md">
+                        <div class="flex justify-between items-start mb-3">
+                            <h4 class="text-xl font-bold text-pink-700">Roaring Camp Steam Train</h4>
+                            <span class="priority-badge bg-red-500 text-white px-2 py-1 rounded text-sm">⭐⭐⭐⭐⭐</span>
+                        </div>
+                        <p class="text-gray-600 mb-2"><i class="fas fa-map-marker-alt"></i> <a href="https://maps.google.com/maps?q=37.0423,-122.0789" class="text-blue-500">37.0423°N, -122.0789°W</a></p>
+                        <p class="text-gray-600 mb-2"><i class="fas fa-car"></i> Roaring Camp Road, Felton</p>
+                        <p class="text-gray-700 mb-2"><strong>Real Steam Engine:</strong> Through redwood forests!</p>
+                        <p class="text-gray-700 mb-2"><strong>Two Options:</strong> Forest train or Beach train to Boardwalk</p>
+                        <p class="text-gray-700"><strong>Activities:</strong> Gold panning, candle making, Old West fun</p>
+                    </div>
+
+                    <!-- Natural Bridges State Beach -->
+                    <div class="location-card bg-white p-6 rounded-lg shadow-md">
+                        <h4 class="text-xl font-bold text-pink-700">Natural Bridges & Tide Pools</h4>
+                        <p class="text-gray-600 mb-2"><i class="fas fa-map-marker-alt"></i> <a href="https://maps.google.com/maps?q=36.9567,-122.0645" class="text-blue-500">36.9567°N, -122.0645°W</a></p>
+                        <p class="text-gray-600 mb-2"><i class="fas fa-car"></i> Natural Bridges Drive, Santa Cruz</p>
+                        <p class="text-gray-700 mb-2"><strong>Nature Wonder:</strong> Rock arch, tide pools, butterflies</p>
+                        <p class="text-gray-700 mb-2"><strong>Tide Pools:</strong> Sea stars, hermit crabs, anemones</p>
+                        <p class="text-gray-700"><strong>Monarchs:</strong> Butterfly sanctuary (October-February)</p>
+                    </div>
+
+                    <!-- Capitola Colorful Houses -->
+                    <div class="location-card bg-white p-6 rounded-lg shadow-md">
+                        <h4 class="text-xl font-bold text-pink-700">Capitola Colorful Village</h4>
+                        <p class="text-gray-600 mb-2"><i class="fas fa-map-marker-alt"></i> <a href="https://maps.google.com/maps?q=36.9756,-121.9567" class="text-blue-500">36.9756°N, -121.9567°W</a></p>
+                        <p class="text-gray-600 mb-2"><i class="fas fa-car"></i> Capitola Avenue to beach</p>
+                        <p class="text-gray-700 mb-2"><strong>Instagram Perfect:</strong> Rainbow-colored beach houses</p>
+                        <p class="text-gray-700 mb-2"><strong>Beach Fun:</strong> Safe swimming, wharf fishing</p>
+                        <p class="text-gray-700"><strong>Activities:</strong> Sand castle building, ice cream shops</p>
+                    </div>
+
+                    <!-- Seacliff Concrete Ship -->
+                    <div class="location-card bg-white p-6 rounded-lg shadow-md">
+                        <h4 class="text-xl font-bold text-pink-700">Seacliff Concrete Ship</h4>
+                        <p class="text-gray-600 mb-2"><i class="fas fa-map-marker-alt"></i> <a href="https://maps.google.com/maps?q=36.9678,-121.9123" class="text-blue-500">36.9678°N, -121.9123°W</a></p>
+                        <p class="text-gray-600 mb-2"><i class="fas fa-car"></i> State Beach Road from CA-1</p>
+                        <p class="text-gray-700 mb-2"><strong>Unique:</strong> Walk on pier to real concrete ship!</p>
+                        <p class="text-gray-700 mb-2"><strong>History:</strong> 100-year-old WWI ship, now fishing pier</p>
+                        <p class="text-gray-700"><strong>Fun:</strong> Fishing, beach play, ship exploration</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="section-divider"></div>
+
+            <!-- Section 5: Extended North (Silicon Valley & SF) -->
+            <div class="mb-8">
+                <h3 class="text-2xl font-bold mb-4 text-green-600">Section 5: Extended North - Silicon Valley to SF</h3>
+                
+                <div class="grid lg:grid-cols-2 gap-6">
+                    <!-- Children's Discovery Museum San Jose -->
+                    <div class="location-card bg-white p-6 rounded-lg shadow-md">
+                        <h4 class="text-xl font-bold text-pink-700">Children's Discovery Museum San Jose</h4>
+                        <p class="text-gray-600 mb-2"><i class="fas fa-map-marker-alt"></i> <a href="https://maps.google.com/maps?q=37.3323,-121.8905" class="text-blue-500">37.3323°N, -121.8905°W</a></p>
+                        <p class="text-gray-600 mb-2"><i class="fas fa-car"></i> Downtown San Jose, near US-101</p>
+                        <p class="text-gray-700 mb-2"><strong>Interactive:</strong> Hands-on exhibits, water play area</p>
+                        <p class="text-gray-700 mb-2"><strong>STEM Focus:</strong> Science experiments, building activities</p>
+                        <p class="text-gray-700"><strong>Perfect Size:</strong> Not overwhelming, 2-3 hours ideal</p>
+                    </div>
+
+                    <!-- California's Great America -->
+                    <div class="location-card bg-white p-6 rounded-lg shadow-md">
+                        <h4 class="text-xl font-bold text-pink-700">California's Great America</h4>
+                        <p class="text-gray-600 mb-2"><i class="fas fa-map-marker-alt"></i> <a href="https://maps.google.com/maps?q=37.3975,-121.9745" class="text-blue-500">37.3975°N, -121.9745°W</a></p>
+                        <p class="text-gray-600 mb-2"><i class="fas fa-car"></i> Great America Parkway, Santa Clara</p>
+                        <p class="text-gray-700 mb-2"><strong>Big Theme Park:</strong> Roller coasters, kid area</p>
+                        <p class="text-gray-700 mb-2"><strong>Planet Snoopy:</strong> Perfect section for 6-year-olds</p>
+                        <p class="text-gray-700"><strong>Summer:</strong> Water park included, full day needed</p>
+                    </div>
+
+                    <!-- Winchester Mystery House -->
+                    <div class="location-card bg-white p-6 rounded-lg shadow-md">
+                        <h4 class="text-xl font-bold text-pink-700">Winchester Mystery House</h4>
+                        <p class="text-gray-600 mb-2"><i class="fas fa-map-marker-alt"></i> <a href="https://maps.google.com/maps?q=37.3185,-121.9511" class="text-blue-500">37.3185°N, -121.9511°W</a></p>
+                        <p class="text-gray-600 mb-2"><i class="fas fa-car"></i> Winchester Boulevard, San Jose</p>
+                        <p class="text-gray-700 mb-2"><strong>Mysterious:</strong> Staircases to nowhere, secret passages</p>
+                        <p class="text-gray-700 mb-2"><strong>Kid Tours:</strong> Less scary daytime tours available</p>
+                        <p class="text-gray-700"><strong>Gardens:</strong> Beautiful gardens to explore too</p>
+                    </div>
+
+                    <!-- Half Moon Bay Pumpkin Patch -->
+                    <div class="location-card bg-white p-6 rounded-lg shadow-md">
+                        <h4 class="text-xl font-bold text-pink-700">Half Moon Bay (Seasonal)</h4>
+                        <p class="text-gray-600 mb-2"><i class="fas fa-map-marker-alt"></i> <a href="https://maps.google.com/maps?q=37.4636,-122.4286" class="text-blue-500">37.4636°N, -122.4286°W</a></p>
+                        <p class="text-gray-600 mb-2"><i class="fas fa-car"></i> CA-92 west to coast</p>
+                        <p class="text-gray-700 mb-2"><strong>Fall:</strong> Giant pumpkin patches, festivals</p>
+                        <p class="text-gray-700 mb-2"><strong>Year Round:</strong> Beautiful coastal town, beaches</p>
+                        <p class="text-gray-700"><strong>Activities:</strong> Tide pools, coastal trails, farm visits</p>
+                    </div>
+
+                    <!-- Crissy Field & Golden Gate -->
+                    <div class="location-card bg-white p-6 rounded-lg shadow-md">
+                        <h4 class="text-xl font-bold text-pink-700">Crissy Field & Golden Gate Bridge</h4>
+                        <p class="text-gray-600 mb-2"><i class="fas fa-map-marker-alt"></i> <a href="https://maps.google.com/maps?q=37.8024,-122.4662" class="text-blue-500">37.8024°N, -122.4662°W</a></p>
+                        <p class="text-gray-600 mb-2"><i class="fas fa-car"></i> Marina District, San Francisco</p>
+                        <p class="text-gray-700 mb-2"><strong>Iconic Views:</strong> Best Golden Gate Bridge viewing</p>
+                        <p class="text-gray-700 mb-2"><strong>Wide Open:</strong> Perfect for running around, flying kites</p>
+                        <p class="text-gray-700"><strong>Facilities:</strong> Visitor center, restrooms, snacks</p>
+                    </div>
+
+                    <!-- Exploratorium -->
+                    <div class="location-card bg-white p-6 rounded-lg shadow-md">
+                        <h4 class="text-xl font-bold text-pink-700">Exploratorium</h4>
+                        <p class="text-gray-600 mb-2"><i class="fas fa-map-marker-alt"></i> <a href="https://maps.google.com/maps?q=37.8016,-122.3973" class="text-blue-500">37.8016°N, -122.3973°W</a></p>
+                        <p class="text-gray-600 mb-2"><i class="fas fa-car"></i> Pier 15, San Francisco</p>
+                        <p class="text-gray-700 mb-2"><strong>Science Fun:</strong> Hands-on experiments, interactive exhibits</p>
+                        <p class="text-gray-700 mb-2"><strong>Perfect Age:</strong> Great for curious 6-year-olds</p>
+                        <p class="text-gray-700"><strong>Location:</strong> Right on SF Bay with great views</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Kid Travel Tips -->
+            <div class="bg-green-50 border-l-4 border-green-400 p-6 mt-8">
+                <h4 class="text-lg font-bold mb-3 text-green-800"><i class="fas fa-child"></i> Pro Tips for Traveling with Kids</h4>
+                <div class="grid md:grid-cols-2 gap-4 text-green-700">
+                    <div>
+                        <p class="mb-2"><strong>Timing:</strong> Plan active stops before quiet car time</p>
+                        <p class="mb-2"><strong>Snacks:</strong> Stock up at fruit stands along the way</p>
+                        <p class="mb-2"><strong>Rest Stops:</strong> Parks with playgrounds at each location</p>
+                    </div>
+                    <div>
+                        <p class="mb-2"><strong>Weather:</strong> Coastal areas can be cool, bring layers</p>
+                        <p class="mb-2"><strong>Tickets:</strong> Buy online for popular attractions</p>
+                        <p class="mb-2"><strong>Backup Plans:</strong> Indoor options for foggy days</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ADULTS SECTION -->
+    <div id="adults" class="container mx-auto px-4 py-8">
+        <div class="bg-white rounded-lg shadow-lg p-8">
+            <h2 class="text-3xl font-bold mb-6 text-purple-600"><i class="fas fa-wine-glass"></i> Premium Adult Experiences - 60+ Sophisticated Stops</h2>
+            
+            <!-- Adult Focus -->
+            <div class="bg-purple-50 border-l-4 border-purple-400 p-4 mb-6">
+                <div class="flex">
+                    <div class="flex-shrink-0">
+                        <i class="fas fa-cocktail text-purple-400"></i>
+                    </div>
+                    <div class="ml-3">
+                        <p class="text-sm text-purple-700">
+                            <strong>Sophisticated Experiences:</strong> Wine tasting, luxury dining, premium golf, spa retreats, and cultural attractions designed for discerning adults.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Section 1: Paso Robles Wine Country -->
+            <div class="mb-8">
+                <h3 class="text-2xl font-bold mb-4 text-green-600">Section 1: Paso Robles Wine Country</h3>
+                
+                <div class="grid lg:grid-cols-2 gap-6">
+                    <!-- DAOU Vineyards -->
+                    <div class="location-card bg-white p-6 rounded-lg shadow-md">
+                        <div class="flex justify-between items-start mb-3">
+                            <h4 class="text-xl font-bold text-purple-700">DAOU Vineyards</h4>
+                            <span class="priority-badge bg-red-500 text-white px-2 py-1 rounded text-sm">LUXURY</span>
+                        </div>
+                        <p class="text-gray-600 mb-2"><i class="fas fa-map-marker-alt"></i> <a href="https://maps.google.com/maps?q=35.6234,-120.7123" class="text-blue-500">35.6234°N, -120.7123°W</a></p>
+                        <p class="text-gray-600 mb-2"><i class="fas fa-car"></i> 15 minutes from CA-46 via Adelaida Road</p>
+                        <p class="text-gray-700 mb-2"><strong>Elevation:</strong> 2,200 feet with spectacular views</p>
+                        <p class="text-gray-700 mb-2"><strong>Specialties:</strong> Premium Cabernet Sauvignon, Rhône varietals</p>
+                        <p class="text-gray-700"><strong>Experience:</strong> Mountaintop tasting, reserve experiences available</p>
+                    </div>
+
+                    <!-- JUSTIN Vineyards -->
+                    <div class="location-card bg-white p-6 rounded-lg shadow-md">
+                        <h4 class="text-xl font-bold text-purple-700">JUSTIN Vineyards & Winery</h4>
+                        <p class="text-gray-600 mb-2"><i class="fas fa-map-marker-alt"></i> <a href="https://maps.google.com/maps?q=35.6456,-120.7456" class="text-blue-500">35.6456°N, -120.7456°W</a></p>
+                        <p class="text-gray-600 mb-2"><i class="fas fa-car"></i> 20 minutes west via Adelaida Road</p>
+                        <p class="text-gray-700 mb-2"><strong>Famous For:</strong> Isosceles blend, luxury accommodations</p>
+                        <p class="text-gray-700 mb-2"><strong>Dining:</strong> Deborah's Room fine dining restaurant</p>
+                        <p class="text-gray-700"><strong>Stay Option:</strong> JUST Inn luxury suites on property</p>
+                    </div>
+
+                    <!-- Epoch Estate Wines -->
+                    <div class="location-card bg-white p-6 rounded-lg shadow-md">
+                        <h4 class="text-xl font-bold text-purple-700">Epoch Estate Wines</h4>
+                        <p class="text-gray-600 mb-2"><i class="fas fa-map-marker-alt"></i> <a href="https://maps.google.com/maps?q=35.6123,-120.7234" class="text-blue-500">35.6123°N, -120.7234°W</a></p>
+                        <p class="text-gray-600 mb-2"><i class="fas fa-car"></i> Adelaida District, Paso Robles</p>
+                        <p class="text-gray-700 mb-2"><strong>Setting:</strong> Gorgeous hilltop views, intimate tastings</p>
+                        <p class="text-gray-700 mb-2"><strong>Wines:</strong> Rhône and Bordeaux varietals</p>
+                        <p class="text-gray-700"><strong>Experience:</strong> Appointment recommended, personalized service</p>
+                    </div>
+
+                    <!-- Calcareous Vineyard -->
+                    <div class="location-card bg-white p-6 rounded-lg shadow-md">
+                        <h4 class="text-xl font-bold text-purple-700">Calcareous Vineyard</h4>
+                        <p class="text-gray-600 mb-2"><i class="fas fa-map-marker-alt"></i> <a href="https://maps.google.com/maps?q=35.5987,-120.7345" class="text-blue-500">35.5987°N, -120.7345°W</a></p>
+                        <p class="text-gray-600 mb-2"><i class="fas fa-car"></i> Peachy Canyon Road</p>
+                        <p class="text-gray-700 mb-2"><strong>Specialty:</strong> Limestone-influenced wines</p>
+                        <p class="text-gray-700 mb-2"><strong>Setting:</strong> Beautiful estate grounds</p>
+                        <p class="text-gray-700"><strong>Wines:</strong> Pinot Noir, Chardonnay, Rhône blends</p>
+                    </div>
+
+                    <!-- Allegretto Vineyard Resort -->
+                    <div class="location-card bg-white p-6 rounded-lg shadow-md">
+                        <div class="flex justify-between items-start mb-3">
+                            <h4 class="text-xl font-bold text-purple-700">Allegretto Vineyard Resort</h4>
+                            <span class="priority-badge bg-gold-500 text-white px-2 py-1 rounded text-sm">RESORT</span>
+                        </div>
+                        <p class="text-gray-600 mb-2"><i class="fas fa-map-marker-alt"></i> <a href="https://maps.google.com/maps?q=35.6289,-120.6734" class="text-blue-500">35.6289°N, -120.6734°W</a></p>
+                        <p class="text-gray-600 mb-2"><i class="fas fa-car"></i> Paso Robles Street</p>
+                        <p class="text-gray-700 mb-2"><strong>Luxury Stay:</strong> Vineyard resort with spa</p>
+                        <p class="text-gray-700 mb-2"><strong>Dining:</strong> Cello Ristorante & Bar</p>
+                        <p class="text-gray-700"><strong>Amenities:</strong> Pool, spa services, wine tasting</p>
+                    </div>
+
+                    <!-- Eberle Winery -->
+                    <div class="location-card bg-white p-6 rounded-lg shadow-md">
+                        <h4 class="text-xl font-bold text-purple-700">Eberle Winery</h4>
+                        <p class="text-gray-600 mb-2"><i class="fas fa-map-marker-alt"></i> <a href="https://maps.google.com/maps?q=35.6456,-120.6789" class="text-blue-500">35.6456°N, -120.6789°W</a></p>
+                        <p class="text-gray-600 mb-2"><i class="fas fa-car"></i> Highway 46 East</p>
+                        <p class="text-gray-700 mb-2"><strong>Historic:</strong> One of Paso's pioneering wineries</p>
+                        <p class="text-gray-700 mb-2"><strong>Famous:</strong> Cave tours and Cabernet Sauvignon</p>
+                        <p class="text-gray-700"><strong>Experience:</strong> Underground cave tasting experiences</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="section-divider"></div>
+
+            <!-- Section 2: Central Coast Premium -->
+            <div class="mb-8">
+                <h3 class="text-2xl font-bold mb-4 text-green-600">Section 2: Central Coast Premium Experiences</h3>
+                
+                <div class="grid lg:grid-cols-2 gap-6">
+                    <!-- SLO Brewing Company -->
+                    <div class="location-card bg-white p-6 rounded-lg shadow-md">
+                        <h4 class="text-xl font-bold text-purple-700">SLO Brewing Co</h4>
+                        <p class="text-gray-600 mb-2"><i class="fas fa-map-marker-alt"></i> <a href="https://maps.google.com/maps?q=35.2828,-120.6596" class="text-blue-500">35.2828°N, -120.6596°W</a></p>
+                        <p class="text-gray-600 mb-2"><i class="fas fa-car"></i> Downtown San Luis Obispo</p>
+                        <p class="text-gray-700 mb-2"><strong>Craft Beer:</strong> Local brewery with restaurant</p>
+                        <p class="text-gray-700 mb-2"><strong>Setting:</strong> Historic downtown location</p>
+                        <p class="text-gray-700"><strong>Experience:</strong> Beer flights, food pairings</p>
+                    </div>
+
+                    <!-- Central Coast Brewing -->
+                    <div class="location-card bg-white p-6 rounded-lg shadow-md">
+                        <h4 class="text-xl font-bold text-purple-700">Central Coast Brewing</h4>
+                        <p class="text-gray-600 mb-2"><i class="fas fa-map-marker-alt"></i> <a href="https://maps.google.com/maps?q=35.2845,-120.6634" class="text-blue-500">35.2845°N, -120.6634°W</a></p>
+                        <p class="text-gray-600 mb-2"><i class="fas fa-car"></i> Higuera Street, SLO</p>
+                        <p class="text-gray-700 mb-2"><strong>Local Favorite:</strong> Award-winning craft beers</p>
+                        <p class="text-gray-700 mb-2"><strong>Food:</strong> Artisan pizza, craft beer pairings</p>
+                        <p class="text-gray-700"><strong>Atmosphere:</strong> Industrial chic tasting room</p>
+                    </div>
+
+                    <!-- Hearst Castle Wine Experience -->
+                    <div class="location-card bg-white p-6 rounded-lg shadow-md">
+                        <h4 class="text-xl font-bold text-purple-700">Hearst Ranch Winery</h4>
+                        <p class="text-gray-600 mb-2"><i class="fas fa-map-marker-alt"></i> <a href="https://maps.google.com/maps?q=35.6856,-121.1681" class="text-blue-500">35.6856°N, -121.1681°W</a></p>
+                        <p class="text-gray-600 mb-2"><i class="fas fa-car"></i> San Simeon, near Hearst Castle</p>
+                        <p class="text-gray-700 mb-2"><strong>Historic:</strong> Wines from Hearst family estate</p>
+                        <p class="text-gray-700 mb-2"><strong>Setting:</strong> Coastal vineyard with ocean views</p>
+                        <p class="text-gray-700"><strong>Combine:</strong> Castle tour + wine tasting experience</p>
+                    </div>
+
+                    <!-- Morro Bay Fine Dining -->
+                    <div class="location-card bg-white p-6 rounded-lg shadow-md">
+                        <h4 class="text-xl font-bold text-purple-700">Morro Bay Waterfront Dining</h4>
+                        <p class="text-gray-600 mb-2"><i class="fas fa-map-marker-alt"></i> <a href="https://maps.google.com/maps?q=35.3658,-120.8638" class="text-blue-500">35.3658°N, -120.8638°W</a></p>
+                        <p class="text-gray-600 mb-2"><i class="fas fa-car"></i> Embarcadero, Morro Bay</p>
+                        <p class="text-gray-700 mb-2"><strong>Seafood:</strong> Fresh local catch, ocean views</p>
+                        <p class="text-gray-700 mb-2"><strong>Restaurants:</strong> Windows on the Water, Dorn's</p>
+                        <p class="text-gray-700"><strong>Setting:</strong> Iconic Morro Rock backdrop</p>
+                    </div>
+
+                    <!-- Pismo Beach Luxury -->
+                    <div class="location-card bg-white p-6 rounded-lg shadow-md">
+                        <h4 class="text-xl font-bold text-purple-700">Pismo Beach Resort Experiences</h4>
+                        <p class="text-gray-600 mb-2"><i class="fas fa-map-marker-alt"></i> <a href="https://maps.google.com/maps?q=35.1367,-120.6411" class="text-blue-500">35.1367°N, -120.6411°W</a></p>
+                        <p class="text-gray-600 mb-2"><i class="fas fa-car"></i> Shell Beach Road</p>
+                        <p class="text-gray-700 mb-2"><strong>Luxury Stay:</strong> Dolphin Bay Resort & Spa</p>
+                        <p class="text-gray-700 mb-2"><strong>Activities:</strong> Spa treatments, coastal hiking</p>
+                        <p class="text-gray-700"><strong>Dining:</strong> Lido Restaurant, ocean-to-table cuisine</p>
+                    </div>
+
+                    <!-- Edna Valley Wineries -->
+                    <div class="location-card bg-white p-6 rounded-lg shadow-md">
+                        <h4 class="text-xl font-bold text-purple-700">Edna Valley Wine Trail</h4>
+                        <p class="text-gray-600 mb-2"><i class="fas fa-map-marker-alt"></i> <a href="https://maps.google.com/maps?q=35.2123,-120.5456" class="text-blue-500">35.2123°N, -120.5456°W</a></p>
+                        <p class="text-gray-600 mb-2"><i class="fas fa-car"></i> South of San Luis Obispo</p>
+                        <p class="text-gray-700 mb-2"><strong>Cool Climate:</strong> Chardonnay and Pinot Noir specialists</p>
+                        <p class="text-gray-700 mb-2"><strong>Wineries:</strong> Tolosa, Chamisal, Baileyana</p>
+                        <p class="text-gray-700"><strong>Setting:</strong> Rolling hills, coastal influence</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="section-divider"></div>
+
+            <!-- Section 3: Monterey Peninsula Luxury -->
+            <div class="mb-8">
+                <h3 class="text-2xl font-bold mb-4 text-green-600">Section 3: Monterey Peninsula Luxury</h3>
+                
+                <div class="grid lg:grid-cols-2 gap-6">
+                    <!-- Pebble Beach Golf Links -->
+                    <div class="location-card bg-white p-6 rounded-lg shadow-md">
+                        <div class="flex justify-between items-start mb-3">
+                            <h4 class="text-xl font-bold text-purple-700">Pebble Beach Golf Links</h4>
+                            <span class="priority-badge bg-gold-500 text-white px-2 py-1 rounded text-sm">WORLD CLASS</span>
+                        </div>
+                        <p class="text-gray-600 mb-2"><i class="fas fa-map-marker-alt"></i> <a href="https://maps.google.com/maps?q=36.5672,-121.9467" class="text-blue-500">36.5672°N, -121.9467°W</a></p>
+                        <p class="text-gray-600 mb-2"><i class="fas fa-car"></i> 17-Mile Drive, Pebble Beach</p>
+                        <p class="text-gray-700 mb-2"><strong>Legendary:</strong> Host of US Opens, iconic 18th hole</p>
+                        <p class="text-gray-700 mb-2"><strong>Experience:</strong> Once-in-a-lifetime golf round</p>
+                        <p class="text-gray-700"><strong>Alternatives:</strong> Spyglass Hill, Spanish Bay nearby</p>
+                    </div>
+
+                    <!-- Carmel Valley Wine Country -->
+                    <div class="location-card bg-white p-6 rounded-lg shadow-md">
+                        <div class="flex justify-between items-start mb-3">
+                            <h4 class="text-xl font-bold text-purple-700">Carmel Valley Wine Country</h4>
+                            <span class="priority-badge bg-red-500 text-white px-2 py-1 rounded text-sm">LUXURY</span>
+                        </div>
+                        <p class="text-gray-600 mb-2"><i class="fas fa-map-marker-alt"></i> <a href="https://maps.google.com/maps?q=36.4845,-121.7334" class="text-blue-500">36.4845°N, -121.7334°W</a></p>
+                        <p class="text-gray-600 mb-2"><i class="fas fa-car"></i> Carmel Valley Road</p>
+                        <p class="text-gray-700 mb-2"><strong>Premium:</strong> Holman Ranch, Bernardus, Galante</p>
+                        <p class="text-gray-700 mb-2"><strong>Setting:</strong> Sunny valley, luxury estates</p>
+                        <p class="text-gray-700"><strong>Experience:</strong> Private tastings, vineyard tours</p>
+                    </div>
+
+                    <!-- Big Sur Luxury Resorts -->
+                    <div class="location-card bg-white p-6 rounded-lg shadow-md">
+                        <div class="flex justify-between items-start mb-3">
+                            <h4 class="text-xl font-bold text-purple-700">Big Sur Luxury Resorts</h4>
+                            <span class="priority-badge bg-red-500 text-white px-2 py-1 rounded text-sm">⭐⭐⭐⭐⭐</span>
+                        </div>
+                        <p class="text-gray-600 mb-2"><i class="fas fa-map-marker-alt"></i> <a href="https://maps.google.com/maps?q=36.2705,-121.8077" class="text-blue-500">36.2705°N, -121.8077°W</a></p>
+                        <p class="text-gray-600 mb-2"><i class="fas fa-car"></i> Highway 1, Big Sur</p>
+                        <p class="text-gray-700 mb-2"><strong>Ultra-Luxury:</strong> Post Ranch Inn, Ventana Big Sur</p>
+                        <p class="text-gray-700 mb-2"><strong>Spa Experiences:</strong> Alila Spa, forest therapy</p>
+                        <p class="text-gray-700"><strong>Dining:</strong> Auberge du Soleil, Sierra Mar</p>
+                    </div>
+
+                    <!-- Monterey Peninsula Wine -->
+                    <div class="location-card bg-white p-6 rounded-lg shadow-md">
+                        <h4 class="text-xl font-bold text-purple-700">Monterey Wine Trail</h4>
+                        <p class="text-gray-600 mb-2"><i class="fas fa-map-marker-alt"></i> <a href="https://maps.google.com/maps?q=36.5234,-121.3456" class="text-blue-500">36.5234°N, -121.3456°W</a></p>
+                        <p class="text-gray-600 mb-2"><i class="fas fa-car"></i> River Road wine trail</p>
+                        <p class="text-gray-700 mb-2"><strong>Cool Climate:</strong> Pinot Noir, Chardonnay specialists</p>
+                        <p class="text-gray-700 mb-2"><strong>Wineries:</strong> Hahn, Scheid, Mer Soleil</p>
+                        <p class="text-gray-700"><strong>Setting:</strong> Salinas Valley vineyard views</p>
+                    </div>
+
+                    <!-- Cannery Row Fine Dining -->
+                    <div class="location-card bg-white p-6 rounded-lg shadow-md">
+                        <h4 class="text-xl font-bold text-purple-700">Cannery Row Dining</h4>
+                        <p class="text-gray-600 mb-2"><i class="fas fa-map-marker-alt"></i> <a href="https://maps.google.com/maps?q=36.6183,-121.9015" class="text-blue-500">36.6183°N, -121.9015°W</a></p>
+                        <p class="text-gray-600 mb-2"><i class="fas fa-car"></i> Cannery Row, Monterey</p>
+                        <p class="text-gray-700 mb-2"><strong>Historic:</strong> Steinbeck's famous waterfront</p>
+                        <p class="text-gray-700 mb-2"><strong>Dining:</strong> Passion Fish, The Sardine Factory</p>
+                        <p class="text-gray-700"><strong>Experience:</strong> Ocean views, fresh seafood</p>
+                    </div>
+
+                    <!-- Carmel-by-the-Sea -->
+                    <div class="location-card bg-white p-6 rounded-lg shadow-md">
+                        <h4 class="text-xl font-bold text-purple-700">Carmel-by-the-Sea</h4>
+                        <p class="text-gray-600 mb-2"><i class="fas fa-map-marker-alt"></i> <a href="https://maps.google.com/maps?q=36.5552,-121.9233" class="text-blue-500">36.5552°N, -121.9233°W</a></p>
+                        <p class="text-gray-600 mb-2"><i class="fas fa-car"></i> Ocean Avenue, Carmel</p>
+                        <p class="text-gray-700 mb-2"><strong>Fairy Tale Village:</strong> Storybook cottages, art galleries</p>
+                        <p class="text-gray-700 mb-2"><strong>Shopping:</strong> Luxury boutiques, local artists</p>
+                        <p class="text-gray-700"><strong>Beach:</strong> White sand Carmel Beach</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="section-divider"></div>
+
+            <!-- Section 4: Santa Cruz Mountains Wine -->
+            <div class="mb-8">
+                <h3 class="text-2xl font-bold mb-4 text-green-600">Section 4: Santa Cruz Mountains Wine Country</h3>
+                
+                <div class="grid lg:grid-cols-2 gap-6">
+                    <!-- Ridge Vineyards -->
+                    <div class="location-card bg-white p-6 rounded-lg shadow-md">
+                        <div class="flex justify-between items-start mb-3">
+                            <h4 class="text-xl font-bold text-purple-700">Ridge Vineyards</h4>
+                            <span class="priority-badge bg-red-500 text-white px-2 py-1 rounded text-sm">LEGENDARY</span>
+                        </div>
+                        <p class="text-gray-600 mb-2"><i class="fas fa-map-marker-alt"></i> <a href="https://maps.google.com/maps?q=37.3234,-122.1456" class="text-blue-500">37.3234°N, -122.1456°W</a></p>
+                        <p class="text-gray-600 mb-2"><i class="fas fa-car"></i> Monte Bello Road, Cupertino</p>
+                        <p class="text-gray-700 mb-2"><strong>Famous:</strong> Monte Bello Cabernet, historic winery</p>
+                        <p class="text-gray-700 mb-2"><strong>Views:</strong> Spectacular bay and valley vistas</p>
+                        <p class="text-gray-700"><strong>Experience:</strong> Estate tastings by appointment</p>
+                    </div>
+
+                    <!-- Byington Vineyard -->
+                    <div class="location-card bg-white p-6 rounded-lg shadow-md">
+                        <h4 class="text-xl font-bold text-purple-700">Byington Vineyard & Winery</h4>
+                        <p class="text-gray-600 mb-2"><i class="fas fa-map-marker-alt"></i> <a href="https://maps.google.com/maps?q=37.1234,-121.9789" class="text-blue-500">37.1234°N, -121.9789°W</a></p>
+                        <p class="text-gray-600 mb-2"><i class="fas fa-car"></i> Bear Creek Road, Los Gatos</p>
+                        <p class="text-gray-700 mb-2"><strong>Castle Setting:</strong> Italian-style mansion and gardens</p>
+                        <p class="text-gray-700 mb-2"><strong>Views:</strong> Panoramic valley views</p>
+                        <p class="text-gray-700"><strong>Events:</strong> Weddings, special occasions venue</p>
+                    </div>
+
+                    <!-- Saratoga Wine Country -->
+                    <div class="location-card bg-white p-6 rounded-lg shadow-md">
+                        <h4 class="text-xl font-bold text-purple-700">Saratoga Wine Trail</h4>
+                        <p class="text-gray-600 mb-2"><i class="fas fa-map-marker-alt"></i> <a href="https://maps.google.com/maps?q=37.2567,-122.0234" class="text-blue-500">37.2567°N, -122.0234°W</a></p>
+                        <p class="text-gray-600 mb-2"><i class="fas fa-car"></i> Saratoga foothills</p>
+                        <p class="text-gray-700 mb-2"><strong>Wineries:</strong> Mountain Winery, Garrod Farms</p>
+                        <p class="text-gray-700 mb-2"><strong>Silicon Valley:</strong> Tech country wine escape</p>
+                        <p class="text-gray-700"><strong>Activities:</strong> Horseback riding, concerts</p>
+                    </div>
+
+                    <!-- Los Gatos Wine & Dining -->
+                    <div class="location-card bg-white p-6 rounded-lg shadow-md">
+                        <h4 class="text-xl font-bold text-purple-700">Los Gatos Wine Scene</h4>
+                        <p class="text-gray-600 mb-2"><i class="fas fa-map-marker-alt"></i> <a href="https://maps.google.com/maps?q=37.2358,-121.9623" class="text-blue-500">37.2358°N, -121.9623°W</a></p>
+                        <p class="text-gray-600 mb-2"><i class="fas fa-car"></i> Downtown Los Gatos</p>
+                        <p class="text-gray-700 mb-2"><strong>Tasting Rooms:</strong> Downtown wine walk</p>
+                        <p class="text-gray-700 mb-2"><strong>Fine Dining:</strong> Manresa, sophisticated cuisine</p>
+                        <p class="text-gray-700"><strong>Atmosphere:</strong> Upscale small town charm</p>
+                    </div>
+
+                    <!-- Santa Cruz Craft Brewing -->
+                    <div class="location-card bg-white p-6 rounded-lg shadow-md">
+                        <h4 class="text-xl font-bold text-purple-700">Santa Cruz Craft Beer Scene</h4>
+                        <p class="text-gray-600 mb-2"><i class="fas fa-map-marker-alt"></i> <a href="https://maps.google.com/maps?q=36.9741,-122.0308" class="text-blue-500">36.9741°N, -122.0308°W</a></p>
+                        <p class="text-gray-600 mb-2"><i class="fas fa-car"></i> Downtown Santa Cruz</p>
+                        <p class="text-gray-700 mb-2"><strong>Breweries:</strong> Santa Cruz Ale Works, Humble Sea</p>
+                        <p class="text-gray-700 mb-2"><strong>Scene:</strong> Craft beer capital of Central Coast</p>
+                        <p class="text-gray-700"><strong>Food Pairing:</strong> Farm-to-table restaurants</p>
+                    </div>
+
+                    <!-- Bonny Doon Vineyard -->
+                    <div class="location-card bg-white p-6 rounded-lg shadow-md">
+                        <h4 class="text-xl font-bold text-purple-700">Bonny Doon Vineyard</h4>
+                        <p class="text-gray-600 mb-2"><i class="fas fa-map-marker-alt"></i> <a href="https://maps.google.com/maps?q=37.0456,-122.1123" class="text-blue-500">37.0456°N, -122.1123°W</a></p>
+                        <p class="text-gray-600 mb-2"><i class="fas fa-car"></i> Bonny Doon Road</p>
+                        <p class="text-gray-700 mb-2"><strong>Innovative:</strong> Rhône varieties, biodynamic farming</p>
+                        <p class="text-gray-700 mb-2"><strong>Personality:</strong> Randall Grahm's creative wines</p>
+                        <p class="text-gray-700"><strong>Experience:</strong> Quirky, educational tastings</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="section-divider"></div>
+
+            <!-- Section 5: Extended North - Premium Bay Area -->
+            <div class="mb-8">
+                <h3 class="text-2xl font-bold mb-4 text-green-600">Section 5: Extended North - Premium Bay Area Experiences</h3>
+                
+                <div class="grid lg:grid-cols-2 gap-6">
+                    <!-- Half Moon Bay Luxury -->
+                    <div class="location-card bg-white p-6 rounded-lg shadow-md">
+                        <h4 class="text-xl font-bold text-purple-700">Half Moon Bay Luxury Dining</h4>
+                        <p class="text-gray-600 mb-2"><i class="fas fa-map-marker-alt"></i> <a href="https://maps.google.com/maps?q=37.4636,-122.4286" class="text-blue-500">37.4636°N, -122.4286°W</a></p>
+                        <p class="text-gray-600 mb-2"><i class="fas fa-car"></i> CA-92 west to coast</p>
+                        <p class="text-gray-700 mb-2"><strong>Romantic:</strong> Miramar Beach Restaurant, ocean views</p>
+                        <p class="text-gray-700 mb-2"><strong>Fine Dining:</strong> Navio at Ritz-Carlton</p>
+                        <p class="text-gray-700"><strong>Setting:</strong> Dramatic coastline, farm-to-table cuisine</p>
+                    </div>
+
+                    <!-- Livermore Valley Wine -->
+                    <div class="location-card bg-white p-6 rounded-lg shadow-md">
+                        <div class="flex justify-between items-start mb-3">
+                            <h4 class="text-xl font-bold text-purple-700">Livermore Valley Wine Country</h4>
+                            <span class="priority-badge bg-yellow-500 text-white px-2 py-1 rounded text-sm">HISTORIC</span>
+                        </div>
+                        <p class="text-gray-600 mb-2"><i class="fas fa-map-marker-alt"></i> <a href="https://maps.google.com/maps?q=37.6819,-121.7680" class="text-blue-500">37.6819°N, -121.7680°W</a></p>
+                        <p class="text-gray-600 mb-2"><i class="fas fa-car"></i> Livermore, east of Bay Area</p>
+                        <p class="text-gray-700 mb-2"><strong>Historic:</strong> California's oldest wine region</p>
+                        <p class="text-gray-700 mb-2"><strong>Wineries:</strong> Wente, Concannon, Las Positas</p>
+                        <p class="text-gray-700"><strong>Experience:</strong> Golf course wineries, easy access</p>
+                    </div>
+
+                    <!-- San Francisco Premium -->
+                    <div class="location-card bg-white p-6 rounded-lg shadow-md">
+                        <div class="flex justify-between items-start mb-3">
+                            <h4 class="text-xl font-bold text-purple-700">San Francisco Rooftop Bars</h4>
+                            <span class="priority-badge bg-red-500 text-white px-2 py-1 rounded text-sm">WORLD CLASS</span>
+                        </div>
+                        <p class="text-gray-600 mb-2"><i class="fas fa-map-marker-alt"></i> <a href="https://maps.google.com/maps?q=37.7749,-122.4194" class="text-blue-500">37.7749°N, -122.4194°W</a></p>
+                        <p class="text-gray-600 mb-2"><i class="fas fa-car"></i> Downtown San Francisco</p>
+                        <p class="text-gray-700 mb-2"><strong>Premium:</strong> Charmaine's, Top of the Mark</p>
+                        <p class="text-gray-700 mb-2"><strong>Views:</strong> 360-degree city and bay vistas</p>
+                        <p class="text-gray-700"><strong>Experience:</strong> Signature cocktails, fine dining</p>
+                    </div>
+
+                    <!-- Napa Day Trip -->
+                    <div class="location-card bg-white p-6 rounded-lg shadow-md">
+                        <h4 class="text-xl font-bold text-purple-700">Napa Valley Day Trip</h4>
+                        <p class="text-gray-600 mb-2"><i class="fas fa-map-marker-alt"></i> <a href="https://maps.google.com/maps?q=38.2975,-122.2869" class="text-blue-500">38.2975°N, -122.2869°W</a></p>
+                        <p class="text-gray-600 mb-2"><i class="fas fa-car"></i> 2 hours north via US-101</p>
+                        <p class="text-gray-700 mb-2"><strong>World Renowned:</strong> Premium Cabernet, luxury tastings</p>
+                        <p class="text-gray-700 mb-2"><strong>High-End:</strong> Opus One, Screaming Eagle, Caymus</p>
+                        <p class="text-gray-700"><strong>Experience:</strong> Wine train, helicopter tours</p>
+                    </div>
+
+                    <!-- Sonoma County -->
+                    <div class="location-card bg-white p-6 rounded-lg shadow-md">
+                        <h4 class="text-xl font-bold text-purple-700">Sonoma County Wine</h4>
+                        <p class="text-gray-600 mb-2"><i class="fas fa-map-marker-alt"></i> <a href="https://maps.google.com/maps?q=38.2906,-122.4580" class="text-blue-500">38.2906°N, -122.4580°W</a></p>
+                        <p class="text-gray-600 mb-2"><i class="fas fa-car"></i> 2.5 hours north via US-101</p>
+                        <p class="text-gray-700 mb-2"><strong>Diverse:</strong> Russian River, Alexander Valley</p>
+                        <p class="text-gray-700 mb-2"><strong>Specialties:</strong> Pinot Noir, Chardonnay, Zinfandel</p>
+                        <p class="text-gray-700"><strong>Atmosphere:</strong> More relaxed than Napa</p>
+                    </div>
+
+                    <!-- Anderson Valley -->
+                    <div class="location-card bg-white p-6 rounded-lg shadow-md">
+                        <h4 class="text-xl font-bold text-purple-700">Anderson Valley (Mendocino)</h4>
+                        <p class="text-gray-600 mb-2"><i class="fas fa-map-marker-alt"></i> <a href="https://maps.google.com/maps?q=39.1234,-123.3456" class="text-blue-500">39.1234°N, -123.3456°W</a></p>
+                        <p class="text-gray-600 mb-2"><i class="fas fa-car"></i> 3 hours north via US-101 to CA-128</p>
+                        <p class="text-gray-700 mb-2"><strong>Hidden Gem:</strong> Pristine Pinot Noir region</p>
+                        <p class="text-gray-700 mb-2"><strong>Wineries:</strong> Roederer Estate, Navarro, Husch</p>
+                        <p class="text-gray-700"><strong>Setting:</strong> Scenic mountain valley, fewer crowds</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Adult Experience Tips -->
+            <div class="bg-indigo-50 border-l-4 border-indigo-400 p-6 mt-8">
+                <h4 class="text-lg font-bold mb-3 text-indigo-800"><i class="fas fa-wine-glass"></i> Premium Experience Tips</h4>
+                <div class="grid md:grid-cols-2 gap-4 text-indigo-700">
+                    <div>
+                        <p class="mb-2"><strong>Reservations:</strong> Book luxury restaurants and premium tastings ahead</p>
+                        <p class="mb-2"><strong>Transportation:</strong> Consider wine tour services for safety</p>
+                        <p class="mb-2"><strong>Timing:</strong> Weekdays less crowded at tasting rooms</p>
+                    </div>
+                    <div>
+                        <p class="mb-2"><strong>Dress Code:</strong> Business casual for fine dining establishments</p>
+                        <p class="mb-2"><strong>Seasons:</strong> Harvest time (Sept-Oct) most exciting</p>
+                        <p class="mb-2"><strong>Budget:</strong> Premium experiences worth the splurge</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <div class="gradient-bg text-white py-8 mt-12">
+        <div class="container mx-auto px-4 text-center">
+            <h3 class="text-2xl font-bold mb-4">🚗 Your Epic Road Trip Awaits!</h3>
+            <p class="text-lg mb-4">150+ Amazing Destinations • 3 Specialized Guides • CA-46W to San Francisco Bay</p>
+            <div class="flex justify-center space-x-4 text-sm">
+                <span><i class="fas fa-fish"></i> 40+ Fishing Spots</span>
+                <span><i class="fas fa-child"></i> 50+ Kid Adventures</span>
+                <span><i class="fas fa-wine-glass"></i> 60+ Adult Experiences</span>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function scrollToSection(sectionId) {
+            document.getElementById(sectionId).scrollIntoView({
+                behavior: 'smooth'
+            });
+        }
+
+        // Add loading animations
+        document.addEventListener('DOMContentLoaded', function() {
+            // Animate location cards on scroll
+            const observerOptions = {
+                threshold: 0.1,
+                rootMargin: '0px 0px -50px 0px'
+            };
+
+            const observer = new IntersectionObserver(function(entries) {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.opacity = '1';
+                        entry.target.style.transform = 'translateY(0)';
+                    }
+                });
+            }, observerOptions);
+
+            // Observe all location cards
+            document.querySelectorAll('.location-card').forEach(card => {
+                card.style.opacity = '0';
+                card.style.transform = 'translateY(20px)';
+                card.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+                observer.observe(card);
+            });
+        });
+    </script>
+</body>
+</html>

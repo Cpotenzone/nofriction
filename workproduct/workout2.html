@@ -1,0 +1,3265 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ultimate Workout Timer</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&family=Montserrat:wght@600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #111827;
+            --secondary: #1f2937;
+            --accent: #3b82f6;
+            --accent-hover: #2563eb;
+            --text: #e5e7eb;
+            --text-muted: #9ca3af;
+            --success: #10b981;
+            --danger: #ef4444;
+            --warning: #f59e0b;
+            --info: #06b6d4;
+        }
+
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: var(--primary);
+            color: var(--text);
+            min-height: 100vh;
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+        }
+
+        .app-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem 1rem;
+        }
+
+        .workout-header {
+            background: linear-gradient(135deg, #374151 0%, #111827 100%);
+            border-radius: 0.75rem;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+            border: 1px solid #374151;
+        }
+
+        .section {
+            background-color: var(--secondary);
+            border-radius: 0.75rem;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            border: 1px solid #374151;
+        }
+
+        .timer-display {
+            font-size: 5rem;
+            font-weight: 700;
+            text-align: center;
+            background: linear-gradient(90deg, var(--accent), var(--info));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-fill-color: transparent;
+            margin: 0.5rem 0;
+        }
+
+        .progress-bar {
+            height: 0.75rem;
+            background-color: #374151;
+            border-radius: 9999px;
+            overflow: hidden;
+            margin: 1rem 0;
+        }
+
+        .progress-bar-fill {
+            height: 100%;
+            background: linear-gradient(90deg, var(--accent), var(--info));
+            border-radius: 9999px;
+            transition: width 0.5s ease;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0.625rem 1.25rem;
+            font-weight: 500;
+            border-radius: 0.5rem;
+            transition: all 0.2s ease;
+            cursor: pointer;
+            box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
+            text-transform: uppercase;
+            letter-spacing: 0.025em;
+            border: none;
+        }
+
+        .btn-primary {
+            background-color: var(--accent);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background-color: var(--accent-hover);
+        }
+
+        .btn-success {
+            background-color: var(--success);
+            color: white;
+        }
+
+        .btn-success:hover {
+            background-color: #0da271;
+        }
+
+        .btn-danger {
+            background-color: var(--danger);
+            color: white;
+        }
+
+        .btn-danger:hover {
+            background-color: #dc2626;
+        }
+
+        .btn-warning {
+            background-color: var(--warning);
+            color: white;
+        }
+
+        .btn-warning:hover {
+            background-color: #d97706;
+        }
+
+        .btn-info {
+            background-color: var(--info);
+            color: white;
+        }
+
+        .btn-info:hover {
+            background-color: #0891b2;
+        }
+
+        .btn-icon {
+            margin-right: 0.5rem;
+        }
+
+        .input-group {
+            margin-bottom: 1rem;
+        }
+
+        .input-label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+            color: var(--text);
+        }
+
+        .input-field {
+            width: 100%;
+            padding: 0.75rem;
+            background-color: #374151;
+            color: var(--text);
+            border: 1px solid #4b5563;
+            border-radius: 0.5rem;
+            outline: none;
+            transition: border-color 0.2s ease;
+        }
+
+        .input-field:focus {
+            border-color: var(--accent);
+        }
+
+        .select-field {
+            appearance: none;
+            background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%236b7280' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='M6 8l4 4 4-4'/%3e%3c/svg%3e");
+            background-position: right 0.5rem center;
+            background-repeat: no-repeat;
+            background-size: 1.5em 1.5em;
+            padding-right: 2.5rem;
+        }
+
+        .exercise-container {
+            border: 1px solid #4b5563;
+            border-radius: 0.5rem;
+            padding: 1rem;
+            margin-bottom: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .exercise-active {
+            border-color: var(--accent);
+            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.3);
+        }
+
+        .exercise-visual {
+            height: 150px;
+            background-color: #374151;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 0.5rem;
+            margin-bottom: 1rem;
+            border: 1px dashed #4b5563;
+        }
+
+        .exercise-meta {
+            margin-bottom: 0.75rem;
+            padding-bottom: 0.75rem;
+            border-bottom: 1px solid #4b5563;
+        }
+
+        .exercise-meta-item {
+            display: inline-block;
+            padding: 0.25rem 0.75rem;
+            background-color: #374151;
+            border-radius: 9999px;
+            font-size: 0.875rem;
+            margin-right: 0.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .instruction-list {
+            padding-left: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .instruction-list li {
+            margin-bottom: 0.5rem;
+        }
+
+        .tips-list {
+            list-style-type: none;
+            padding-left: 0;
+        }
+
+        .tips-list li {
+            display: flex;
+            align-items: start;
+            margin-bottom: 0.5rem;
+        }
+
+        .tips-list li i {
+            margin-right: 0.5rem;
+            margin-top: 0.25rem;
+            color: var(--accent);
+        }
+
+        .tips-list.mistakes li i {
+            color: var(--danger);
+        }
+
+        .timer-controls {
+            display: flex;
+            justify-content: center;
+            gap: 0.75rem;
+            margin-top: 1.5rem;
+            flex-wrap: wrap;
+        }
+
+        .timer-nav-controls {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 1rem;
+        }
+
+        .custom-range {
+            -webkit-appearance: none;
+            width: 100%;
+            height: 8px;
+            border-radius: 5px;
+            background: #374151;
+            outline: none;
+            opacity: 0.7;
+            transition: opacity 0.2s;
+        }
+
+        .custom-range:hover {
+            opacity: 1;
+        }
+
+        .custom-range::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: var(--accent);
+            cursor: pointer;
+        }
+
+        .custom-range::-moz-range-thumb {
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: var(--accent);
+            cursor: pointer;
+            border: none;
+        }
+
+        .collapse-trigger {
+            cursor: pointer;
+            padding: 0.75rem;
+            background-color: #374151;
+            border-radius: 0.5rem;
+            margin-bottom: 0.5rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .collapse-content {
+            padding: 1rem;
+            background-color: #1f2937;
+            border-radius: 0 0 0.5rem 0.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .duration-display {
+            font-size: 1.125rem;
+            font-weight: 600;
+            color: var(--accent);
+        }
+
+        .context-exercises {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            margin: 1.5rem 0;
+        }
+
+        .context-exercise {
+            flex: 1;
+            min-width: 200px;
+            padding: 0.75rem;
+            background-color: #374151;
+            border-radius: 0.5rem;
+            margin: 0 0.5rem 0.5rem 0;
+        }
+
+        .context-exercise-title {
+            font-weight: 500;
+            color: var(--text-muted);
+            margin-bottom: 0.5rem;
+            font-size: 0.875rem;
+        }
+
+        .context-exercise-name {
+            font-weight: 600;
+            font-size: 1.125rem;
+        }
+
+        .context-current {
+            border-left: 4px solid var(--accent);
+        }
+
+        @media (min-width: 768px) {
+            .grid-2 {
+                display: grid;
+                grid-template-columns: 1fr 1fr;
+                gap: 1.5rem;
+            }
+
+            .grid-3 {
+                display: grid;
+                grid-template-columns: 1fr 1fr 1fr;
+                gap: 1rem;
+            }
+        }
+
+        @media (max-width: 767px) {
+            .timer-display {
+                font-size: 3.5rem;
+            }
+            
+            .context-exercises {
+                flex-direction: column;
+            }
+            
+            .context-exercise {
+                margin-right: 0;
+            }
+            
+            .timer-controls {
+                flex-direction: column;
+            }
+            
+            .timer-controls .btn {
+                width: 100%;
+                margin-bottom: 0.5rem;
+            }
+        }
+
+        /* Animation for the active exercise */
+        @keyframes pulse {
+            0% {
+                box-shadow: 0 0 0 0px rgba(59, 130, 246, 0.7);
+            }
+            100% {
+                box-shadow: 0 0 0 10px rgba(59, 130, 246, 0);
+            }
+        }
+
+        .pulse {
+            animation: pulse 2s infinite;
+        }
+
+        /* Skip extended rest button styling */
+        .skip-rest-btn {
+            display: none; /* Hidden by default */
+            background-color: var(--warning);
+            color: white;
+            font-weight: 600;
+            padding: 0.75rem 1.5rem;
+            border-radius: 0.5rem;
+            margin: 1rem auto;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            text-align: center;
+        }
+
+        .skip-rest-btn:hover {
+            background-color: #d97706;
+        }
+
+        /* Settings toggle */
+        .settings-toggle {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background-color: var(--accent);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            z-index: 10;
+            transition: all 0.2s ease;
+        }
+
+        .settings-toggle:hover {
+            background-color: var(--accent-hover);
+            transform: scale(1.05);
+        }
+
+        .settings-panel {
+            position: fixed;
+            bottom: 80px;
+            right: 20px;
+            width: 320px;
+            background-color: var(--secondary);
+            border-radius: 0.75rem;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+            padding: 1.5rem;
+            z-index: 20;
+            transform: translateY(100%);
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .settings-panel.show {
+            transform: translateY(0);
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .range-value {
+            font-weight: 600;
+            color: var(--accent);
+        }
+
+        /* Custom checkbox styling */
+        .checkbox-container {
+            display: block;
+            position: relative;
+            padding-left: 35px;
+            margin-bottom: 12px;
+            cursor: pointer;
+            font-size: 16px;
+            user-select: none;
+        }
+
+        .checkbox-container input {
+            position: absolute;
+            opacity: 0;
+            cursor: pointer;
+            height: 0;
+            width: 0;
+        }
+
+        .checkmark {
+            position: absolute;
+            top: 0;
+            left: 0;
+            height: 25px;
+            width: 25px;
+            background-color: #374151;
+            border-radius: 5px;
+        }
+
+        .checkbox-container:hover input ~ .checkmark {
+            background-color: #4b5563;
+        }
+
+        .checkbox-container input:checked ~ .checkmark {
+            background-color: var(--accent);
+        }
+
+        .checkmark:after {
+            content: "";
+            position: absolute;
+            display: none;
+        }
+
+        .checkbox-container input:checked ~ .checkmark:after {
+            display: block;
+        }
+
+        .checkbox-container .checkmark:after {
+            left: 9px;
+            top: 5px;
+            width: 7px;
+            height: 12px;
+            border: solid white;
+            border-width: 0 3px 3px 0;
+            transform: rotate(45deg);
+        }
+    </style>
+</head>
+<body>
+    <div class="app-container">
+        <div class="workout-header">
+            <h1 class="text-3xl md:text-4xl font-bold text-center mb-2">Ultimate Workout Timer</h1>
+            <p class="text-center text-gray-400">Customize your workout, track your progress, and achieve your fitness goals</p>
+        </div>
+
+        <div class="section">
+            <div class="flex flex-col md:flex-row justify-between items-start gap-4">
+                <div class="input-group w-full md:w-3/5">
+                    <label class="input-label" for="workout-select">Select Workout Plan:</label>
+                    <select id="workout-select" class="input-field select-field">
+                        <option value="trx-db-garage-blitz">TRX & Dumbbell Garage Blitz (45s Intervals)</option>
+                        <option value="full-arms-blast">Full Arms Blast (DB & TRX - 45s Intervals)</option>
+                        <option value="full-legs-power">Full Legs Power (DB & Bodyweight - 45s Intervals)</option>
+                        <option value="full-body-burn">Full Body Burn (DB, TRX & Bodyweight - 45s Intervals)</option>
+                        <option value="upper-body-sculpt">Upper Body Sculpt (DB & TRX - 45s Intervals)</option>
+                        <option value="lower-body-grind">Lower Body Grind (DB & Bodyweight - 45s Intervals)</option>
+                    </select>
+                </div>
+
+                <div class="grid-3 w-full md:w-2/5 gap-2">
+                    <div class="input-group">
+                        <label class="input-label" for="work-time">Work (sec):</label>
+                        <input id="work-time" type="number" min="10" max="120" value="45" class="input-field">
+                    </div>
+                    <div class="input-group">
+                        <label class="input-label" for="rest-time">Rest (sec):</label>
+                        <input id="rest-time" type="number" min="10" max="120" value="45" class="input-field">
+                    </div>
+                    <div class="input-group">
+                        <label class="input-label" for="extended-rest-time">Extended Rest (sec):</label>
+                        <input id="extended-rest-time" type="number" min="30" max="300" value="180" class="input-field">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="grid-2">
+            <div class="section">
+                <div id="timer-state" class="text-center text-lg font-medium mb-2 text-accent">Ready to Start</div>
+                <div class="timer-display" id="timer-display">00:45</div>
+                <div class="progress-bar">
+                    <div class="progress-bar-fill" id="progress-bar-fill" style="width: 0%;"></div>
+                </div>
+
+                <div class="context-exercises">
+                    <div class="context-exercise" id="prev-exercise">
+                        <div class="context-exercise-title">
+                            <i class="fas fa-check-circle text-success"></i> Previously Completed
+                        </div>
+                        <div class="context-exercise-name">---</div>
+                    </div>
+                    <div class="context-exercise context-current" id="current-exercise">
+                        <div class="context-exercise-title">
+                            <i class="fas fa-play-circle text-accent"></i> Currently Doing
+                        </div>
+                        <div class="context-exercise-name">Select a workout to begin</div>
+                    </div>
+                    <div class="context-exercise" id="next-exercise">
+                        <div class="context-exercise-title">
+                            <i class="fas fa-arrow-circle-right text-warning"></i> Coming Up Next
+                        </div>
+                        <div class="context-exercise-name">---</div>
+                    </div>
+                </div>
+
+                <div id="skip-rest-btn" class="skip-rest-btn">
+                    Skip Extended Rest <i class="fas fa-forward"></i>
+                </div>
+
+                <div class="timer-controls">
+                    <button id="start-btn" class="btn btn-success">
+                        <i class="fas fa-play btn-icon"></i> Start
+                    </button>
+                    <button id="pause-btn" class="btn btn-warning" disabled>
+                        <i class="fas fa-pause btn-icon"></i> Pause
+                    </button>
+                    <button id="reset-btn" class="btn btn-danger" disabled>
+                        <i class="fas fa-redo btn-icon"></i> Reset
+                    </button>
+                </div>
+
+                <div class="timer-nav-controls">
+                    <button id="prev-btn" class="btn btn-info">
+                        <i class="fas fa-step-backward btn-icon"></i> Previous
+                    </button>
+                    <button id="next-btn" class="btn btn-info">
+                        <i class="fas fa-step-forward btn-icon"></i> Next
+                    </button>
+                </div>
+
+                <div class="mt-4 text-center">
+                    <div class="text-sm text-gray-400 mb-2">Total Workout Progress</div>
+                    <div class="progress-bar">
+                        <div class="progress-bar-fill" id="total-progress-bar-fill" style="width: 0%;"></div>
+                    </div>
+                    <div class="text-xs text-gray-500 mt-1">
+                        <span id="workout-progress-text">0%</span> complete
+                    </div>
+                </div>
+            </div>
+
+            <div class="section">
+                <h2 class="text-xl font-semibold mb-4">Exercise Information</h2>
+                <div id="exercise-details">
+                    <div class="exercise-container">
+                        <h3 class="text-lg font-medium mb-3">Select a workout to begin</h3>
+                        <div class="exercise-visual">
+                            <span class="text-center text-gray-500">
+                                <i class="fas fa-image fa-2x mb-2"></i><br>
+                                Exercise visual placeholder
+                            </span>
+                        </div>
+                        <div class="text-center text-gray-400">
+                            Choose a workout plan from the dropdown menu above to get started
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="settings-toggle" id="settings-toggle">
+        <i class="fas fa-cog fa-lg"></i>
+    </div>
+    <div class="settings-panel" id="settings-panel">
+        <h3 class="text-lg font-semibold mb-3">Additional Settings</h3>
+        
+        <div class="input-group">
+            <label class="checkbox-container">
+                Enable Voice Announcements
+                <input type="checkbox" id="voice-enabled" checked>
+                <span class="checkmark"></span>
+            </label>
+        </div>
+        
+        <div class="input-group">
+            <label class="input-label">Voice Volume: <span class="range-value" id="volume-value">80%</span></label>
+            <input type="range" min="0" max="100" value="80" class="custom-range" id="voice-volume">
+        </div>
+        
+        <div class="input-group">
+            <label class="checkbox-container">
+                Sound Effects
+                <input type="checkbox" id="sound-effects-enabled" checked>
+                <span class="checkmark"></span>
+            </label>
+        </div>
+        
+        <div class="input-group">
+            <label class="checkbox-container">
+                Show Countdown in Title/Tab
+                <input type="checkbox" id="title-countdown" checked>
+                <span class="checkmark"></span>
+            </label>
+        </div>
+        
+        <div class="input-group">
+            <label class="checkbox-container">
+                Auto-start Next Exercise
+                <input type="checkbox" id="auto-advance" checked>
+                <span class="checkmark"></span>
+            </label>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // ----- DOM ELEMENTS -----
+            const workoutSelect = document.getElementById('workout-select');
+            const workTimeInput = document.getElementById('work-time');
+            const restTimeInput = document.getElementById('rest-time');
+            const extendedRestTimeInput = document.getElementById('extended-rest-time');
+            const timerDisplay = document.getElementById('timer-display');
+            const timerStateDisplay = document.getElementById('timer-state');
+            const progressBarFill = document.getElementById('progress-bar-fill');
+            const totalProgressBarFill = document.getElementById('total-progress-bar-fill');
+            const workoutProgressText = document.getElementById('workout-progress-text');
+            const prevExerciseDisplay = document.getElementById('prev-exercise').querySelector('.context-exercise-name');
+            const currentExerciseDisplay = document.getElementById('current-exercise').querySelector('.context-exercise-name');
+            const nextExerciseDisplay = document.getElementById('next-exercise').querySelector('.context-exercise-name');
+            const exerciseDetailsContainer = document.getElementById('exercise-details');
+            const startBtn = document.getElementById('start-btn');
+            const pauseBtn = document.getElementById('pause-btn');
+            const resetBtn = document.getElementById('reset-btn');
+            const prevBtn = document.getElementById('prev-btn');
+            const nextBtn = document.getElementById('next-btn');
+            const skipRestBtn = document.getElementById('skip-rest-btn');
+            const settingsToggle = document.getElementById('settings-toggle');
+            const settingsPanel = document.getElementById('settings-panel');
+            const voiceEnabledCheckbox = document.getElementById('voice-enabled');
+            const voiceVolumeSlider = document.getElementById('voice-volume');
+            const volumeValueDisplay = document.getElementById('volume-value');
+            const soundEffectsCheckbox = document.getElementById('sound-effects-enabled');
+            const titleCountdownCheckbox = document.getElementById('title-countdown');
+            const autoAdvanceCheckbox = document.getElementById('auto-advance');
+
+            // ----- TIMER STATE -----
+            let workoutTimers = [];
+            let currentWorkout = null;
+            let currentExerciseIndex = 0;
+            let timerInterval = null;
+            let timeRemaining = 0;
+            let totalWorkoutDuration = 0;
+            let elapsedTime = 0;
+            let timerState = 'ready'; // ready, running, paused
+            let originalTitle = document.title;
+
+            // ----- SETTINGS STATE -----
+            let settings = {
+                voiceEnabled: true,
+                voiceVolume: 0.8,
+                soundEffectsEnabled: true,
+                titleCountdown: true,
+                autoAdvance: true
+            };
+
+            // ----- WORKOUT DATA -----
+            const workoutPlans = {
+                'trx-db-garage-blitz': {
+                    name: 'TRX & Dumbbell Garage Blitz',
+                    exercises: [
+                        // Warm-up
+                        {
+                            name: "Dynamic Stretching & Joint Mobility",
+                            type: "info",
+                            duration: 0,
+                            visualPlaceholder: "Visual for Dynamic Stretching",
+                            targetMuscles: "Full Body",
+                            equipment: "None",
+                            instructions: [
+                                "Move through a series of dynamic stretches",
+                                "Focus on mobilizing all major joints",
+                                "Start slowly and increase range of motion gradually"
+                            ],
+                            formTips: [
+                                "Keep movements controlled and fluid",
+                                "Breathe deeply throughout the warm-up"
+                            ],
+                            commonMistakes: [
+                                "Rushing through the warm-up",
+                                "Using static stretches instead of dynamic movements"
+                            ]
+                        },
+                        {
+                            name: "Arm Circles",
+                            type: "exercise",
+                            duration: 45,
+                            visualPlaceholder: "Visual for Arm Circles",
+                            targetMuscles: "Shoulders, Upper Back",
+                            equipment: "None",
+                            instructions: [
+                                "Stand with feet shoulder-width apart",
+                                "Extend arms straight out to sides at shoulder height",
+                                "Make small circles forward for 20-30 seconds",
+                                "Reverse direction for remaining time"
+                            ],
+                            formTips: [
+                                "Keep shoulders relaxed and down",
+                                "Maintain good posture throughout"
+                            ],
+                            commonMistakes: [
+                                "Hunching shoulders toward ears",
+                                "Making circles too large initially"
+                            ]
+                        },
+                        {
+                            name: "Rest",
+                            type: "rest",
+                            duration: 45
+                        },
+                        {
+                            name: "Bodyweight Squats",
+                            type: "exercise",
+                            duration: 45,
+                            visualPlaceholder: "Visual for Bodyweight Squats",
+                            targetMuscles: "Quadriceps, Glutes, Hamstrings",
+                            equipment: "None",
+                            instructions: [
+                                "Stand with feet shoulder-width apart",
+                                "Lower your body by pushing hips back and bending knees",
+                                "Aim to reach parallel thigh position",
+                                "Push through heels to return to standing"
+                            ],
+                            formTips: [
+                                "Keep chest up and back straight",
+                                "Ensure knees track in line with toes"
+                            ],
+                            commonMistakes: [
+                                "Knees collapsing inward",
+                                "Heels lifting off the ground"
+                            ]
+                        },
+                        {
+                            name: "Rest",
+                            type: "rest",
+                            duration: 45
+                        },
+                        {
+                            name: "Mountain Climbers",
+                            type: "exercise",
+                            duration: 45,
+                            visualPlaceholder: "Visual for Mountain Climbers",
+                            targetMuscles: "Core, Shoulders, Hip Flexors",
+                            equipment: "None",
+                            instructions: [
+                                "Start in a plank position with arms straight",
+                                "Alternate bringing knees toward chest in a running motion",
+                                "Keep hips stable and core engaged",
+                                "Maintain a brisk pace"
+                            ],
+                            formTips: [
+                                "Keep shoulders over wrists",
+                                "Maintain a neutral spine position"
+                            ],
+                            commonMistakes: [
+                                "Raising hips too high",
+                                "Moving too slowly or bouncing"
+                            ]
+                        },
+                        {
+                            name: "Extended Rest",
+                            type: "extended_rest",
+                            duration: 180
+                        },
+                        
+                        // First superset
+                        {
+                            name: "TRX Rows",
+                            type: "exercise",
+                            duration: 45,
+                            visualPlaceholder: "Visual for TRX Rows",
+                            targetMuscles: "Upper Back, Biceps, Rear Deltoids",
+                            equipment: "TRX Suspension Trainer",
+                            instructions: [
+                                "Grip TRX handles with palms facing each other",
+                                "Walk feet forward until body is at an angle",
+                                "Pull body up by bending elbows and squeezing shoulder blades",
+                                "Lower with control to starting position"
+                            ],
+                            formTips: [
+                                "Keep body straight from head to heels",
+                                "Pull shoulders down and back at top of movement"
+                            ],
+                            commonMistakes: [
+                                "Letting body sag in the middle",
+                                "Not fully extending arms between reps"
+                            ]
+                        },
+                        {
+                            name: "Rest",
+                            type: "rest",
+                            duration: 45
+                        },
+                        {
+                            name: "Dumbbell Chest Press",
+                            type: "exercise",
+                            duration: 45,
+                            visualPlaceholder: "Visual for Dumbbell Chest Press",
+                            targetMuscles: "Chest, Shoulders, Triceps",
+                            equipment: "Dumbbells, Bench",
+                            instructions: [
+                                "Lie on bench with feet flat on floor",
+                                "Hold dumbbells with palms facing forward",
+                                "Lower dumbbells to chest level with controlled motion",
+                                "Press upward until arms are extended"
+                            ],
+                            formTips: [
+                                "Keep wrists straight and elbows at 45-degree angle",
+                                "Maintain contact between shoulder blades and bench"
+                            ],
+                            commonMistakes: [
+                                "Arching lower back",
+                                "Bouncing weights off chest"
+                            ]
+                        },
+                        {
+                            name: "Rest",
+                            type: "rest",
+                            duration: 45
+                        },
+                        {
+                            name: "TRX Rows",
+                            type: "exercise",
+                            duration: 45,
+                            visualPlaceholder: "Visual for TRX Rows",
+                            targetMuscles: "Upper Back, Biceps, Rear Deltoids",
+                            equipment: "TRX Suspension Trainer",
+                            instructions: [
+                                "Grip TRX handles with palms facing each other",
+                                "Walk feet forward until body is at an angle",
+                                "Pull body up by bending elbows and squeezing shoulder blades",
+                                "Lower with control to starting position"
+                            ],
+                            formTips: [
+                                "Keep body straight from head to heels",
+                                "Pull shoulders down and back at top of movement"
+                            ],
+                            commonMistakes: [
+                                "Letting body sag in the middle",
+                                "Not fully extending arms between reps"
+                            ]
+                        },
+                        {
+                            name: "Rest",
+                            type: "rest",
+                            duration: 45
+                        },
+                        {
+                            name: "Dumbbell Chest Press",
+                            type: "exercise",
+                            duration: 45,
+                            visualPlaceholder: "Visual for Dumbbell Chest Press",
+                            targetMuscles: "Chest, Shoulders, Triceps",
+                            equipment: "Dumbbells, Bench",
+                            instructions: [
+                                "Lie on bench with feet flat on floor",
+                                "Hold dumbbells with palms facing forward",
+                                "Lower dumbbells to chest level with controlled motion",
+                                "Press upward until arms are extended"
+                            ],
+                            formTips: [
+                                "Keep wrists straight and elbows at 45-degree angle",
+                                "Maintain contact between shoulder blades and bench"
+                            ],
+                            commonMistakes: [
+                                "Arching lower back",
+                                "Bouncing weights off chest"
+                            ]
+                        },
+                        {
+                            name: "Extended Rest",
+                            type: "extended_rest",
+                            duration: 180
+                        },
+                        
+                        // Second superset
+                        {
+                            name: "TRX Squat",
+                            type: "exercise",
+                            duration: 45,
+                            visualPlaceholder: "Visual for TRX Squat",
+                            targetMuscles: "Quadriceps, Glutes, Hamstrings, Core",
+                            equipment: "TRX Suspension Trainer",
+                            instructions: [
+                                "Stand facing the anchor point holding TRX handles",
+                                "Place feet shoulder-width apart",
+                                "Lower into squat position while keeping arms extended",
+                                "Push through heels to return to standing"
+                            ],
+                            formTips: [
+                                "Keep weight in heels and mid-foot",
+                                "Use TRX for balance, not to pull yourself up"
+                            ],
+                            commonMistakes: [
+                                "Leaning back and using arms too much",
+                                "Not squatting deep enough"
+                            ]
+                        },
+                        {
+                            name: "Rest",
+                            type: "rest",
+                            duration: 45
+                        },
+                        {
+                            name: "Dumbbell Lunges",
+                            type: "exercise",
+                            duration: 45,
+                            visualPlaceholder: "Visual for Dumbbell Lunges",
+                            targetMuscles: "Quadriceps, Glutes, Hamstrings",
+                            equipment: "Dumbbells",
+                            instructions: [
+                                "Hold dumbbells at sides with palms facing in",
+                                "Take a step forward and lower back knee toward floor",
+                                "Push through front heel to return to standing",
+                                "Alternate legs with each rep"
+                            ],
+                            formTips: [
+                                "Keep torso upright and core engaged",
+                                "Front knee should track over ankle, not past toes"
+                            ],
+                            commonMistakes: [
+                                "Stepping too short or too long",
+                                "Front knee caving inward"
+                            ]
+                        },
+                        {
+                            name: "Rest",
+                            type: "rest",
+                            duration: 45
+                        },
+                        {
+                            name: "TRX Squat",
+                            type: "exercise",
+                            duration: 45,
+                            visualPlaceholder: "Visual for TRX Squat",
+                            targetMuscles: "Quadriceps, Glutes, Hamstrings, Core",
+                            equipment: "TRX Suspension Trainer",
+                            instructions: [
+                                "Stand facing the anchor point holding TRX handles",
+                                "Place feet shoulder-width apart",
+                                "Lower into squat position while keeping arms extended",
+                                "Push through heels to return to standing"
+                            ],
+                            formTips: [
+                                "Keep weight in heels and mid-foot",
+                                "Use TRX for balance, not to pull yourself up"
+                            ],
+                            commonMistakes: [
+                                "Leaning back and using arms too much",
+                                "Not squatting deep enough"
+                            ]
+                        },
+                        {
+                            name: "Rest",
+                            type: "rest",
+                            duration: 45
+                        },
+                        {
+                            name: "Dumbbell Lunges",
+                            type: "exercise",
+                            duration: 45,
+                            visualPlaceholder: "Visual for Dumbbell Lunges",
+                            targetMuscles: "Quadriceps, Glutes, Hamstrings",
+                            equipment: "Dumbbells",
+                            instructions: [
+                                "Hold dumbbells at sides with palms facing in",
+                                "Take a step forward and lower back knee toward floor",
+                                "Push through front heel to return to standing",
+                                "Alternate legs with each rep"
+                            ],
+                            formTips: [
+                                "Keep torso upright and core engaged",
+                                "Front knee should track over ankle, not past toes"
+                            ],
+                            commonMistakes: [
+                                "Stepping too short or too long",
+                                "Front knee caving inward"
+                            ]
+                        },
+                        {
+                            name: "Extended Rest",
+                            type: "extended_rest",
+                            duration: 180
+                        },
+                        
+                        // Core finisher
+                        {
+                            name: "TRX Plank",
+                            type: "exercise",
+                            duration: 45,
+                            visualPlaceholder: "Visual for TRX Plank",
+                            targetMuscles: "Core, Shoulders",
+                            equipment: "TRX Suspension Trainer",
+                            instructions: [
+                                "Place feet in TRX foot cradles",
+                                "Position yourself in a plank position with hands on floor",
+                                "Maintain straight body alignment from head to heels",
+                                "Hold position for the duration"
+                            ],
+                            formTips: [
+                                "Engage core throughout the exercise",
+                                "Keep shoulders over wrists and neck neutral"
+                            ],
+                            commonMistakes: [
+                                "Dropping hips too low",
+                                "Lifting hips too high (pike position)"
+                            ]
+                        },
+                        {
+                            name: "Rest",
+                            type: "rest",
+                            duration: 45
+                        },
+                        {
+                            name: "Dumbbell Russian Twists",
+                            type: "exercise",
+                            duration: 45,
+                            visualPlaceholder: "Visual for Dumbbell Russian Twists",
+                            targetMuscles: "Obliques, Abdominals",
+                            equipment: "Dumbbell",
+                            instructions: [
+                                "Sit on floor with knees bent and feet elevated",
+                                "Hold dumbbell with both hands at chest level",
+                                "Lean back slightly to engage core",
+                                "Twist torso to touch dumbbell to floor beside hip, alternate sides"
+                            ],
+                            formTips: [
+                                "Keep chest up and back straight",
+                                "Twist from obliques, not arms"
+                            ],
+                            commonMistakes: [
+                                "Rounding lower back",
+                                "Moving arms only, not rotating torso"
+                            ]
+                        },
+                        {
+                            name: "Rest",
+                            type: "rest",
+                            duration: 45
+                        },
+                        {
+                            name: "TRX Plank",
+                            type: "exercise",
+                            duration: 45,
+                            visualPlaceholder: "Visual for TRX Plank",
+                            targetMuscles: "Core, Shoulders",
+                            equipment: "TRX Suspension Trainer",
+                            instructions: [
+                                "Place feet in TRX foot cradles",
+                                "Position yourself in a plank position with hands on floor",
+                                "Maintain straight body alignment from head to heels",
+                                "Hold position for the duration"
+                            ],
+                            formTips: [
+                                "Engage core throughout the exercise",
+                                "Keep shoulders over wrists and neck neutral"
+                            ],
+                            commonMistakes: [
+                                "Dropping hips too low",
+                                "Lifting hips too high (pike position)"
+                            ]
+                        },
+                        {
+                            name: "Rest",
+                            type: "rest",
+                            duration: 45
+                        },
+                        {
+                            name: "Dumbbell Russian Twists",
+                            type: "exercise",
+                            duration: 45,
+                            visualPlaceholder: "Visual for Dumbbell Russian Twists",
+                            targetMuscles: "Obliques, Abdominals",
+                            equipment: "Dumbbell",
+                            instructions: [
+                                "Sit on floor with knees bent and feet elevated",
+                                "Hold dumbbell with both hands at chest level",
+                                "Lean back slightly to engage core",
+                                "Twist torso to touch dumbbell to floor beside hip, alternate sides"
+                            ],
+                            formTips: [
+                                "Keep chest up and back straight",
+                                "Twist from obliques, not arms"
+                            ],
+                            commonMistakes: [
+                                "Rounding lower back",
+                                "Moving arms only, not rotating torso"
+                            ]
+                        },
+                        {
+                            name: "Extended Rest",
+                            type: "extended_rest",
+                            duration: 180
+                        },
+                        
+                        // Cool down
+                        {
+                            name: "Gentle Stretching",
+                            type: "exercise",
+                            duration: 45,
+                            visualPlaceholder: "Visual for Gentle Stretching",
+                            targetMuscles: "Full Body",
+                            equipment: "None",
+                            instructions: [
+                                "Perform gentle static stretches for major muscle groups",
+                                "Hold each stretch for 15-30 seconds",
+                                "Focus on areas that feel tight or were heavily worked"
+                            ],
+                            formTips: [
+                                "Breathe deeply and relax into stretches",
+                                "Never stretch to the point of pain"
+                            ],
+                            commonMistakes: [
+                                "Bouncing during static stretches",
+                                "Holding breath during stretches"
+                            ]
+                        },
+                    ]
+                },
+                'full-arms-blast': {
+                    name: 'Full Arms Blast (DB & TRX)',
+                    exercises: [
+                        // Warm-up
+                        {
+                            name: "Dynamic Arm & Shoulder Mobility",
+                            type: "info",
+                            duration: 0,
+                            visualPlaceholder: "Visual for Dynamic Arm & Shoulder Mobility",
+                            targetMuscles: "Shoulders, Arms",
+                            equipment: "None",
+                            instructions: [
+                                "Perform arm circles forward and backward",
+                                "Do shoulder rolls and scapular retractions",
+                                "Include wrist and elbow mobilization movements"
+                            ],
+                            formTips: [
+                                "Start with smaller movements and increase range",
+                                "Keep movements fluid and continuous"
+                            ],
+                            commonMistakes: [
+                                "Moving too quickly through mobility exercises",
+                                "Skipping smaller joint mobilization"
+                            ]
+                        },
+                        {
+                            name: "Arm Circles",
+                            type: "exercise",
+                            duration: 45,
+                            visualPlaceholder: "Visual for Arm Circles",
+                            targetMuscles: "Shoulders, Upper Back",
+                            equipment: "None",
+                            instructions: [
+                                "Stand with feet shoulder-width apart",
+                                "Extend arms straight out to sides at shoulder height",
+                                "Make small circles forward for 20-30 seconds",
+                                "Reverse direction for remaining time"
+                            ],
+                            formTips: [
+                                "Keep shoulders relaxed and down",
+                                "Maintain good posture throughout"
+                            ],
+                            commonMistakes: [
+                                "Hunching shoulders toward ears",
+                                "Making circles too large initially"
+                            ]
+                        },
+                        {
+                            name: "Rest",
+                            type: "rest",
+                            duration: 45
+                        },
+                        {
+                            name: "Push-Up Shoulder Taps",
+                            type: "exercise",
+                            duration: 45,
+                            visualPlaceholder: "Visual for Push-Up Shoulder Taps",
+                            targetMuscles: "Chest, Shoulders, Core",
+                            equipment: "None",
+                            instructions: [
+                                "Start in push-up position with hands under shoulders",
+                                "Keeping hips stable, lift one hand to tap opposite shoulder",
+                                "Return hand to floor and repeat with other hand",
+                                "Continue alternating sides"
+                            ],
+                            formTips: [
+                                "Keep core engaged to minimize hip rotation",
+                                "Maintain a straight line from head to heels"
+                            ],
+                            commonMistakes: [
+                                "Letting hips sway side to side",
+                                "Sagging in the middle"
+                            ]
+                        },
+                        {
+                            name: "Rest",
+                            type: "rest",
+                            duration: 45
+                        },
+                        {
+                            name: "Bodyweight Tricep Dips",
+                            type: "exercise",
+                            duration: 45,
+                            visualPlaceholder: "Visual for Bodyweight Tricep Dips",
+                            targetMuscles: "Triceps, Shoulders",
+                            equipment: "Bench or Chair",
+                            instructions: [
+                                "Sit on edge of bench/chair with hands beside hips",
+                                "Slide hips forward off the bench with legs extended",
+                                "Lower body by bending elbows to about 90 degrees",
+                                "Push back up to starting position"
+                            ],
+                            formTips: [
+                                "Keep elbows pointed backward, not outward",
+                                "Keep shoulders down and chest up"
+                            ],
+                            commonMistakes: [
+                                "Shrugging shoulders toward ears",
+                                "Not lowering enough for full activation"
+                            ]
+                        },
+                        {
+                            name: "Extended Rest",
+                            type: "extended_rest",
+                            duration: 180
+                        },
+
+                        // Biceps superset
+                        {
+                            name: "Dumbbell Bicep Curls",
+                            type: "exercise",
+                            duration: 45,
+                            visualPlaceholder: "Visual for Dumbbell Bicep Curls",
+                            targetMuscles: "Biceps",
+                            equipment: "Dumbbells",
+                            instructions: [
+                                "Stand with feet hip-width apart holding dumbbells",
+                                "Keep elbows close to sides and palms facing forward",
+                                "Curl weights toward shoulders while keeping upper arms still",
+                                "Lower with control to starting position"
+                            ],
+                            formTips: [
+                                "Keep wrists straight throughout movement",
+                                "Avoid swinging or using momentum"
+                            ],
+                            commonMistakes: [
+                                "Moving elbows forward or away from body",
+                                "Not fully extending arms at bottom"
+                            ]
+                        },
+                        {
+                            name: "Rest",
+                            type: "rest",
+                            duration: 45
+                        },
+                        {
+                            name: "Hammer Curls",
+                            type: "exercise",
+                            duration: 45,
+                            visualPlaceholder: "Visual for Hammer Curls",
+                            targetMuscles: "Biceps, Brachialis, Forearms",
+                            equipment: "Dumbbells",
+                            instructions: [
+                                "Stand with feet hip-width apart holding dumbbells",
+                                "Position dumbbells at sides with palms facing in (neutral grip)",
+                                "Curl weights toward shoulders while keeping palms facing in",
+                                "Lower with control to starting position"
+                            ],
+                            formTips: [
+                                "Keep upper arms stationary throughout",
+                                "Fully engage biceps at the top of the movement"
+                            ],
+                            commonMistakes: [
+                                "Using shoulder to initiate movement",
+                                "Letting elbows drift forward"
+                            ]
+                        },
+                        {
+                            name: "Rest",
+                            type: "rest",
+                            duration: 45
+                        },
+                        {
+                            name: "TRX Bicep Curls",
+                            type: "exercise",
+                            duration: 45,
+                            visualPlaceholder: "Visual for TRX Bicep Curls",
+                            targetMuscles: "Biceps, Core",
+                            equipment: "TRX Suspension Trainer",
+                            instructions: [
+                                "Stand facing anchor point holding TRX handles",
+                                "Step back until there's tension in the straps, arms extended",
+                                "Keeping body straight, bend elbows and pull face toward hands",
+                                "Extend arms to lower body back to starting position"
+                            ],
+                            formTips: [
+                                "Keep core engaged and body in straight line",
+                                "Keep elbows elevated throughout movement"
+                            ],
+                            commonMistakes: [
+                                "Letting body sag during movement",
+                                "Using shoulders instead of biceps"
+                            ]
+                        },
+                        {
+                            name: "Rest",
+                            type: "rest",
+                            duration: 45
+                        },
+                        {
+                            name: "Dumbbell Concentration Curls",
+                            type: "exercise",
+                            duration: 45,
+                            visualPlaceholder: "Visual for Dumbbell Concentration Curls",
+                            targetMuscles: "Biceps (peak)",
+                            equipment: "Single Dumbbell",
+                            instructions: [
+                                "Sit on bench with legs spread, holding dumbbell in one hand",
+                                "Brace elbow against inner thigh near knee",
+                                "Curl weight toward shoulder while keeping upper arm still",
+                                "Lower with control, then switch arms halfway through"
+                            ],
+                            formTips: [
+                                "Focus on squeezing bicep at top of movement",
+                                "Keep upper body stable throughout"
+                            ],
+                            commonMistakes: [
+                                "Moving upper arm away from thigh",
+                                "Using momentum to swing weight up"
+                            ]
+                        },
+                        {
+                            name: "Extended Rest",
+                            type: "extended_rest",
+                            duration: 180
+                        },
+
+                        // Triceps superset
+                        {
+                            name: "Dumbbell Overhead Tricep Extension",
+                            type: "exercise",
+                            duration: 45,
+                            visualPlaceholder: "Visual for Dumbbell Overhead Tricep Extension",
+                            targetMuscles: "Triceps",
+                            equipment: "Single Dumbbell",
+                            instructions: [
+                                "Stand or sit with feet shoulder-width apart",
+                                "Hold dumbbell with both hands above head, arms extended",
+                                "Keeping upper arms stationary, bend elbows to lower weight behind head",
+                                "Extend arms to raise weight back to starting position"
+                            ],
+                            formTips: [
+                                "Keep upper arms close to head",
+                                "Maintain straight back and engaged core"
+                            ],
+                            commonMistakes: [
+                                "Flaring elbows outward",
+                                "Moving upper arms during the exercise"
+                            ]
+                        },
+                        {
+                            name: "Rest",
+                            type: "rest",
+                            duration: 45
+                        },
+                        {
+                            name: "Dumbbell Tricep Kickbacks",
+                            type: "exercise",
+                            duration: 45,
+                            visualPlaceholder: "Visual for Dumbbell Tricep Kickbacks",
+                            targetMuscles: "Triceps",
+                            equipment: "Dumbbells",
+                            instructions: [
+                                "Hinge forward at hips with slight knee bend",
+                                "Hold dumbbells with palms facing each other",
+                                "Keep upper arms parallel to floor and close to torso",
+                                "Extend arms backward, straightening at elbow, then return"
+                            ],
+                            formTips: [
+                                "Keep wrists straight throughout",
+                                "Focus on full extension of the arm"
+                            ],
+                            commonMistakes: [
+                                "Moving upper arms during extension",
+                                "Not extending arms fully"
+                            ]
+                        },
+                        {
+                            name: "Rest",
+                            type: "rest",
+                            duration: 45
+                        },
+                        {
+                            name: "TRX Tricep Extensions",
+                            type: "exercise",
+                            duration: 45,
+                            visualPlaceholder: "Visual for TRX Tricep Extensions",
+                            targetMuscles: "Triceps, Core",
+                            equipment: "TRX Suspension Trainer",
+                            instructions: [
+                                "Face away from anchor point, holding TRX handles",
+                                "Lean forward with arms extended overhead",
+                                "Bend elbows to lower forehead toward hands",
+                                "Extend arms to push body back to starting position"
+                            ],
+                            formTips: [
+                                "Keep elbows close to ears",
+                                "Maintain straight body alignment"
+                            ],
+                            commonMistakes: [
+                                "Letting elbows flare out wide",
+                                "Bending at waist during movement"
+                            ]
+                        },
+                        {
+                            name: "Rest",
+                            type: "rest",
+                            duration: 45
+                        },
+                        {
+                            name: "Diamond Push-Ups",
+                            type: "exercise",
+                            duration: 45,
+                            visualPlaceholder: "Visual for Diamond Push-Ups",
+                            targetMuscles: "Triceps, Chest, Shoulders",
+                            equipment: "None",
+                            instructions: [
+                                "Start in push-up position with hands close together under chest",
+                                "Form a diamond shape with thumbs and index fingers touching",
+                                "Lower chest toward hands while keeping elbows close to body",
+                                "Push back up to starting position"
+                            ],
+                            formTips: [
+                                "Keep elbows tucked in close to torso",
+                                "Maintain straight body alignment from head to heels"
+                            ],
+                            commonMistakes: [
+                                "Flaring elbows outward",
+                                "Sagging hips or raising buttocks"
+                            ]
+                        },
+                        {
+                            name: "Extended Rest",
+                            type: "extended_rest",
+                            duration: 180
+                        },
+
+                        // Forearm finishers
+                        {
+                            name: "Dumbbell Wrist Curls",
+                            type: "exercise",
+                            duration: 45,
+                            visualPlaceholder: "Visual for Dumbbell Wrist Curls",
+                            targetMuscles: "Forearm Flexors",
+                            equipment: "Dumbbells",
+                            instructions: [
+                                "Sit on bench with forearms resting on thighs, palms up",
+                                "Hold dumbbells with hands extending beyond knees",
+                                "Lower weights by bending wrists downward",
+                                "Curl weights up by bending wrists upward"
+                            ],
+                            formTips: [
+                                "Keep forearms stationary throughout",
+                                "Focus on movement coming only from wrists"
+                            ],
+                            commonMistakes: [
+                                "Using too heavy weight",
+                                "Moving forearms during exercise"
+                            ]
+                        },
+                        {
+                            name: "Rest",
+                            type: "rest",
+                            duration: 45
+                        },
+                        {
+                            name: "Dumbbell Reverse Wrist Curls",
+                            type: "exercise",
+                            duration: 45,
+                            visualPlaceholder: "Visual for Dumbbell Reverse Wrist Curls",
+                            targetMuscles: "Forearm Extensors",
+                            equipment: "Dumbbells",
+                            instructions: [
+                                "Sit on bench with forearms resting on thighs, palms down",
+                                "Hold dumbbells with hands extending beyond knees",
+                                "Lower weights by bending wrists downward",
+                                "Raise weights by extending wrists upward"
+                            ],
+                            formTips: [
+                                "Use lighter weight than for wrist curls",
+                                "Move through full range of motion"
+                            ],
+                            commonMistakes: [
+                                "Using momentum instead of wrist strength",
+                                "Rushing through repetitions"
+                            ]
+                        },
+                        {
+                            name: "Rest",
+                            type: "rest",
+                            duration: 45
+                        },
+                        {
+                            name: "Farmer's Walk",
+                            type: "exercise",
+                            duration: 45,
+                            visualPlaceholder: "Visual for Farmer's Walk",
+                            targetMuscles: "Forearms, Grip, Shoulders, Core",
+                            equipment: "Heavy Dumbbells",
+                            instructions: [
+                                "Stand holding heavy dumbbells at sides, palms facing in",
+                                "Walk forward with short, controlled steps",
+                                "Maintain upright posture and engaged core",
+                                "Continue walking for the duration"
+                            ],
+                            formTips: [
+                                "Keep shoulders back and down",
+                                "Walk heel-to-toe with controlled steps"
+                            ],
+                            commonMistakes: [
+                                "Hunching shoulders",
+                                "Leaning to one side"
+                            ]
+                        },
+                        {
+                            name: "Extended Rest",
+                            type: "extended_rest",
+                            duration: 180
+                        },
+
+                        // Cool down
+                        {
+                            name: "Upper Body Stretching",
+                            type: "exercise",
+                            duration: 45,
+                            visualPlaceholder: "Visual for Upper Body Stretching",
+                            targetMuscles: "Arms, Shoulders, Chest, Back",
+                            equipment: "None",
+                            instructions: [
+                                "Perform tricep stretches by reaching arm overhead and behind back",
+                                "Do bicep stretches by extending arm forward with palm up",
+                                "Stretch chest by clasping hands behind back and opening chest",
+                                "Stretch shoulders with cross-body arm pulls"
+                            ],
+                            formTips: [
+                                "Hold each stretch for 15-30 seconds",
+                                "Breathe deeply during stretches"
+                            ],
+                            commonMistakes: [
+                                "Rushing through stretches",
+                                "Stretching to the point of pain"
+                            ]
+                        },
+                    ]
+                },
+                'full-legs-power': {
+                    name: 'Full Legs Power (DB & Bodyweight)',
+                    exercises: [
+                        // Warm-up
+                        {
+                            name: "Dynamic Leg Mobility",
+                            type: "info",
+                            duration: 0,
+                            visualPlaceholder: "Visual for Dynamic Leg Mobility",
+                            targetMuscles: "Lower Body",
+                            equipment: "None",
+                            instructions: [
+                                "Perform leg swings forward and side to side",
+                                "Do ankle rotations and hip circles",
+                                "Include light calf raises and knee bends"
+                            ],
+                            formTips: [
+                                "Start with smaller movements and increase range gradually",
+                                "Hold onto something for balance if needed"
+                            ],
+                            commonMistakes: [
+                                "Rushing through mobility exercises",
+                                "Skipping mobility before intense leg work"
+                            ]
+                        },
+                        {
+                            name: "Bodyweight Squats",
+                            type: "exercise",
+                            duration: 45,
+                            visualPlaceholder: "Visual for Bodyweight Squats",
+                            targetMuscles: "Quadriceps, Glutes, Hamstrings",
+                            equipment: "None",
+                            instructions: [
+                                "Stand with feet shoulder-width apart",
+                                "Lower your body by pushing hips back and bending knees",
+                                "Aim to reach parallel thigh position",
+                                "Push through heels to return to standing"
+                            ],
+                            formTips: [
+                                "Keep chest up and back straight",
+                                "Ensure knees track in line with toes"
+                            ],
+                            commonMistakes: [
+                                "Knees collapsing inward",
+                                "Heels lifting off the ground"
+                            ]
+                        },
+                        {
+                            name: "Rest",
+                            type: "rest",
+                            duration: 45
+                        },
+                        {
+                            name: "Walking Lunges",
+                            type: "exercise",
+                            duration: 45,
+                            visualPlaceholder: "Visual for Walking Lunges",
+                            targetMuscles: "Quadriceps, Glutes, Hamstrings",
+                            equipment: "None",
+                            instructions: [
+                                "Stand with feet hip-width apart",
+                                "Step forward with one leg and lower into a lunge position",
+                                "Push through front heel to rise up",
+                                "Step the back leg forward directly into the next lunge"
+                            ],
+                            formTips: [
+                                "Keep torso upright and core engaged",
+                                "Front knee should track over ankle, not past toes"
+                            ],
+                            commonMistakes: [
+                                "Taking steps that are too short or too long",
+                                "Letting front knee cave inward"
+                            ]
+                        },
+                        {
+                            name: "Rest",
+                            type: "rest",
+                            duration: 45
+                        },
+                        {
+                            name: "Calf Raises",
+                            type: "exercise",
+                            duration: 45,
+                            visualPlaceholder: "Visual for Calf Raises",
+                            targetMuscles: "Calves",
+                            equipment: "None",
+                            instructions: [
+                                "Stand with feet hip-width apart",
+                                "Raise heels off the ground, standing on balls of feet",
+                                "Hold briefly at top position",
+                                "Lower heels with control back to floor"
+                            ],
+                            formTips: [
+                                "Use a wall or chair for balance if needed",
+                                "Push through the balls of feet evenly"
+                            ],
+                            commonMistakes: [
+                                "Rising onto toes too quickly",
+                                "Not getting full range of motion"
+                            ]
+                        },
+                        {
+                            name: "Extended Rest",
+                            type: "extended_rest",
+                            duration: 180
+                        },
+
+                        // Quad-focused superset
+                        {
+                            name: "Goblet Squats",
+                            type: "exercise",
+                            duration: 45,
+                            visualPlaceholder: "Visual for Goblet Squats",
+                            targetMuscles: "Quadriceps, Glutes, Core",
+                            equipment: "Single Dumbbell or Kettlebell",
+                            instructions: [
+                                "Hold dumbbell vertically close to chest with both hands",
+                                "Stand with feet shoulder-width apart, toes slightly turned out",
+                                "Lower into squat by pushing hips back and bending knees",
+                                "Push through heels to return to standing"
+                            ],
+                            formTips: [
+                                "Keep chest up and elbows tracking between knees",
+                                "Maintain neutral spine position"
+                            ],
+                            commonMistakes: [
+                                "Leaning too far forward",
+                                "Rounding lower back at bottom of squat"
+                            ]
+                        },
+                        {
+                            name: "Rest",
+                            type: "rest",
+                            duration: 45
+                        },
+                        {
+                            name: "Dumbbell Forward Lunges",
+                            type: "exercise",
+                            duration: 45,
+                            visualPlaceholder: "Visual for Dumbbell Forward Lunges",
+                            targetMuscles: "Quadriceps, Glutes, Hamstrings",
+                            equipment: "Dumbbells",
+                            instructions: [
+                                "Hold dumbbells at sides with palms facing in",
+                                "Step forward with one leg and lower into a lunge position",
+                                "Push through front heel to return to starting position",
+                                "Alternate legs with each repetition"
+                            ],
+                            formTips: [
+                                "Keep torso upright throughout movement",
+                                "Step far enough forward that front knee remains over ankle"
+                            ],
+                            commonMistakes: [
+                                "Front knee extending past toes",
+                                "Back knee not lowering enough"
+                            ]
+                        },
+                        {
+                            name: "Rest",
+                            type: "rest",
+                            duration: 45
+                        },
+                        {
+                            name: "Goblet Squats",
+                            type: "exercise",
+                            duration: 45,
+                            visualPlaceholder: "Visual for Goblet Squats",
+                            targetMuscles: "Quadriceps, Glutes, Core",
+                            equipment: "Single Dumbbell or Kettlebell",
+                            instructions: [
+                                "Hold dumbbell vertically close to chest with both hands",
+                                "Stand with feet shoulder-width apart, toes slightly turned out",
+                                "Lower into squat by pushing hips back and bending knees",
+                                "Push through heels to return to standing"
+                            ],
+                            formTips: [
+                                "Keep chest up and elbows tracking between knees",
+                                "Maintain neutral spine position"
+                            ],
+                            commonMistakes: [
+                                "Leaning too far forward",
+                                "Rounding lower back at bottom of squat"
+                            ]
+                        },
+                        {
+                            name: "Rest",
+                            type: "rest",
+                            duration: 45
+                        },
+                        {
+                            name: "Dumbbell Forward Lunges",
+                            type: "exercise",
+                            duration: 45,
+                            visualPlaceholder: "Visual for Dumbbell Forward Lunges",
+                            targetMuscles: "Quadriceps, Glutes, Hamstrings",
+                            equipment: "Dumbbells",
+                            instructions: [
+                                "Hold dumbbells at sides with palms facing in",
+                                "Step forward with one leg and lower into a lunge position",
+                                "Push through front heel to return to starting position",
+                                "Alternate legs with each repetition"
+                            ],
+                            formTips: [
+                                "Keep torso upright throughout movement",
+                                "Step far enough forward that front knee remains over ankle"
+                            ],
+                            commonMistakes: [
+                                "Front knee extending past toes",
+                                "Back knee not lowering enough"
+                            ]
+                        },
+                        {
+                            name: "Extended Rest",
+                            type: "extended_rest",
+                            duration: 180
+                        },
+
+                        // Hamstring & glute superset
+                        {
+                            name: "Romanian Deadlifts",
+                            type: "exercise",
+                            duration: 45,
+                            visualPlaceholder: "Visual for Romanian Deadlifts",
+                            targetMuscles: "Hamstrings, Glutes, Lower Back",
+                            equipment: "Dumbbells",
+                            instructions: [
+                                "Hold dumbbells in front of thighs with palms facing thighs",
+                                "Stand with feet hip-width apart, soft bend in knees",
+                                "Hinge at hips pushing buttocks back while lowering dumbbells",
+                                "Keep back flat and dumbbells close to legs",
+                                "Lower until you feel stretch in hamstrings, then return to standing"
+                            ],
+                            formTips: [
+                                "Maintain natural curve in lower back",
+                                "Initiate movement from hips, not waist"
+                            ],
+                            commonMistakes: [
+                                "Rounding the back during the movement",
+                                "Bending knees too much (turning into a squat)"
+                            ]
+                        },
+                        {
+                            name: "Rest",
+                            type: "rest",
+                            duration: 45
+                        },
+                        {
+                            name: "Dumbbell Sumo Squats",
+                            type: "exercise",
+                            duration: 45,
+                            visualPlaceholder: "Visual for Dumbbell Sumo Squats",
+                            targetMuscles: "Inner Thighs, Glutes, Hamstrings",
+                            equipment: "Single Dumbbell",
+                            instructions: [
+                                "Stand with feet wider than shoulder width, toes pointed out",
+                                "Hold dumbbell vertically between legs with both hands",
+                                "Lower into squat by pushing hips back and bending knees",
+                                "Push through heels to return to standing"
+                            ],
+                            formTips: [
+                                "Keep chest up and back straight",
+                                "Push knees outward in line with toes"
+                            ],
+                            commonMistakes: [
+                                "Knees caving inward",
+                                "Not squatting low enough"
+                            ]
+                        },
+                        {
+                            name: "Rest",
+                            type: "rest",
+                            duration: 45
+                        },
+                        {
+                            name: "Romanian Deadlifts",
+                            type: "exercise",
+                            duration: 45,
+                            visualPlaceholder: "Visual for Romanian Deadlifts",
+                            targetMuscles: "Hamstrings, Glutes, Lower Back",
+                            equipment: "Dumbbells",
+                            instructions: [
+                                "Hold dumbbells in front of thighs with palms facing thighs",
+                                "Stand with feet hip-width apart, soft bend in knees",
+                                "Hinge at hips pushing buttocks back while lowering dumbbells",
+                                "Keep back flat and dumbbells close to legs",
+                                "Lower until you feel stretch in hamstrings, then return to standing"
+                            ],
+                            formTips: [
+                                "Maintain natural curve in lower back",
+                                "Initiate movement from hips, not waist"
+                            ],
+                            commonMistakes: [
+                                "Rounding the back during the movement",
+                                "Bending knees too much (turning into a squat)"
+                            ]
+                        },
+                        {
+                            name: "Rest",
+                            type: "rest",
+                            duration: 45
+                        },
+                        {
+                            name: "Dumbbell Sumo Squats",
+                            type: "exercise",
+                            duration: 45,
+                            visualPlaceholder: "Visual for Dumbbell Sumo Squats",
+                            targetMuscles: "Inner Thighs, Glutes, Hamstrings",
+                            equipment: "Single Dumbbell",
+                            instructions: [
+                                "Stand with feet wider than shoulder width, toes pointed out",
+                                "Hold dumbbell vertically between legs with both hands",
+                                "Lower into squat by pushing hips back and bending knees",
+                                "Push through heels to return to standing"
+                            ],
+                            formTips: [
+                                "Keep chest up and back straight",
+                                "Push knees outward in line with toes"
+                            ],
+                            commonMistakes: [
+                                "Knees caving inward",
+                                "Not squatting low enough"
+                            ]
+                        },
+                        {
+                            name: "Extended Rest",
+                            type: "extended_rest",
+                            duration: 180
+                        },
+
+                        // Calf & accessory superset
+                        {
+                            name: "Dumbbell Calf Raises",
+                            type: "exercise",
+                            duration: 45,
+                            visualPlaceholder: "Visual for Dumbbell Calf Raises",
+                            targetMuscles: "Calves",
+                            equipment: "Dumbbells",
+                            instructions: [
+                                "Hold dumbbells at sides with feet hip-width apart",
+                                "Raise heels off the ground, standing on balls of feet",
+                                "Hold briefly at top position",
+                                "Lower heels with control back to floor"
+                            ],
+                            formTips: [
+                                "Stand near a wall or sturdy object for balance if needed",
+                                "Fully extend ankles at top of movement"
+                            ],
+                            commonMistakes: [
+                                "Using momentum to bounce through reps",
+                                "Not going through full range of motion"
+                            ]
+                        },
+                        {
+                            name: "Rest",
+                            type: "rest",
+                            duration: 45
+                        },
+                        {
+                            name: "Bodyweight Lateral Lunges",
+                            type: "exercise",
+                            duration: 45,
+                            visualPlaceholder: "Visual for Bodyweight Lateral Lunges",
+                            targetMuscles: "Adductors, Glutes, Quadriceps",
+                            equipment: "None",
+                            instructions: [
+                                "Stand with feet together",
+                                "Step one leg out to the side and bend that knee",
+                                "Keep other leg straight as you lower into a side lunge",
+                                "Push off bent leg to return to starting position",
+                                "Alternate sides"
+                            ],
+                            formTips: [
+                                "Keep chest up and back flat",
+                                "Ensure bent knee tracks over foot"
+                            ],
+                            commonMistakes: [
+                                "Leaning forward too much",
+                                "Not stepping wide enough"
+                            ]
+                        },
+                        {
+                            name: "Rest",
+                            type: "rest",
+                            duration: 45
+                        },
+                        {
+                            name: "Dumbbell Calf Raises",
+                            type: "exercise",
+                            duration: 45,
+                            visualPlaceholder: "Visual for Dumbbell Calf Raises",
+                            targetMuscles: "Calves",
+                            equipment: "Dumbbells",
+                            instructions: [
+                                "Hold dumbbells at sides with feet hip-width apart",
+                                "Raise heels off the ground, standing on balls of feet",
+                                "Hold briefly at top position",
+                                "Lower heels with control back to floor"
+                            ],
+                            formTips: [
+                                "Stand near a wall or sturdy object for balance if needed",
+                                "Fully extend ankles at top of movement"
+                            ],
+                            commonMistakes: [
+                                "Using momentum to bounce through reps",
+                                "Not going through full range of motion"
+                            ]
+                        },
+                        {
+                            name: "Rest",
+                            type: "rest",
+                            duration: 45
+                        },
+                        {
+                            name: "Bodyweight Lateral Lunges",
+                            type: "exercise",
+                            duration: 45,
+                            visualPlaceholder: "Visual for Bodyweight Lateral Lunges",
+                            targetMuscles: "Adductors, Glutes, Quadriceps",
+                            equipment: "None",
+                            instructions: [
+                                "Stand with feet together",
+                                "Step one leg out to the side and bend that knee",
+                                "Keep other leg straight as you lower into a side lunge",
+                                "Push off bent leg to return to starting position",
+                                "Alternate sides"
+                            ],
+                            formTips: [
+                                "Keep chest up and back flat",
+                                "Ensure bent knee tracks over foot"
+                            ],
+                            commonMistakes: [
+                                "Leaning forward too much",
+                                "Not stepping wide enough"
+                            ]
+                        },
+                        {
+                            name: "Extended Rest",
+                            type: "extended_rest",
+                            duration: 180
+                        },
+
+                        // Leg finishers
+                        {
+                            name: "Jump Squats",
+                            type: "exercise",
+                            duration: 45,
+                            visualPlaceholder: "Visual for Jump Squats",
+                            targetMuscles: "Quadriceps, Glutes, Calves",
+                            equipment: "None",
+                            instructions: [
+                                "Stand with feet shoulder-width apart",
+                                "Lower into squat position",
+                                "Explosively jump upward, extending through hips, knees, and ankles",
+                                "Land softly by bending knees, immediately lowering into next squat"
+                            ],
+                            formTips: [
+                                "Use arms to assist momentum swinging up during jump",
+                                "Land with soft knees to absorb impact"
+                            ],
+                            commonMistakes: [
+                                "Landing with straight legs",
+                                "Letting knees cave inward during landing"
+                            ]
+                        },
+                        {
+                            name: "Rest",
+                            type: "rest",
+                            duration: 45
+                        },
+                        {
+                            name: "Pulse Lunges",
+                            type: "exercise",
+                            duration: 45,
+                            visualPlaceholder: "Visual for Pulse Lunges",
+                            targetMuscles: "Quadriceps, Glutes",
+                            equipment: "None",
+                            instructions: [
+                                "Step into a lunge position with one leg forward",
+                                "Instead of returning to standing, pulse up and down a few inches",
+                                "Stay in lunge position for half the time",
+                                "Switch legs halfway through"
+                            ],
+                            formTips: [
+                                "Keep front knee over ankle, not past toes",
+                                "Maintain upright torso throughout"
+                            ],
+                            commonMistakes: [
+                                "Pulse range too small",
+                                "Leaning too far forward"
+                            ]
+                        },
+                        {
+                            name: "Rest",
+                            type: "rest",
+                            duration: 45
+                        },
+                        {
+                            name: "Wall Sit",
+                            type: "exercise",
+                            duration: 45,
+                            visualPlaceholder: "Visual for Wall Sit",
+                            targetMuscles: "Quadriceps, Glutes",
+                            equipment: "Wall",
+                            instructions: [
+                                "Stand with back against wall, feet shoulder-width apart",
+                                "Slide down wall until thighs are parallel to ground",
+                                "Keep knees at 90-degree angles directly above ankles",
+                                "Hold position for the duration"
+                            ],
+                            formTips: [
+                                "Keep entire back flat against wall",
+                                "Distribute weight evenly through both feet"
+                            ],
+                            commonMistakes: [
+                                "Knees extending past toes",
+                                "Sliding butt too far down or not enough"
+                            ]
+                        },
+                        {
+                            name: "Extended Rest",
+                            type: "extended_rest",
+                            duration: 180
+                        },
+
+                        // Cool down
+                        {
+                            name: "Lower Body Stretching",
+                            type: "exercise",
+                            duration: 45,
+                            visualPlaceholder: "Visual for Lower Body Stretching",
+                            targetMuscles: "Legs, Hips, Lower Back",
+                            equipment: "None",
+                            instructions: [
+                                "Perform hamstring stretches by reaching for toes",
+                                "Do quadricep stretches by pulling foot toward buttocks",
+                                "Stretch calves by pressing heel into floor and leaning forward",
+                                "Include hip flexor and glute stretches"
+                            ],
+                            formTips: [
+                                "Hold each stretch for 15-30 seconds",
+                                "Breathe deeply and relax into each stretch"
+                            ],
+                            commonMistakes: [
+                                "Bouncing during stretches",
+                                "Rushing through the cool down"
+                            ]
+                        },
+                    ]
+                },
+                'full-body-burn': {
+                    name: 'Full Body Burn (DB, TRX & Bodyweight)',
+                    exercises: [
+                        // Warm-up
+                        {
+                            name: "Full Body Dynamic Warm-up",
+                            type: "info",
+                            duration: 0,
+                            visualPlaceholder: "Visual for Full Body Dynamic Warm-up",
+                            targetMuscles: "Full Body",
+                            equipment: "None",
+                            instructions: [
+                                "Perform jumping jacks for 30 seconds",
+                                "Do arm circles forward and backward",
+                                "Include hip rotations and leg swings",
+                                "Finish with bodyweight squats and push-up position planks"
+                            ],
+                            formTips: [
+                                "Start slow and gradually increase intensity",
+                                "Focus on controlled form over speed"
+                            ],
+                            commonMistakes: [
+                                "Skipping the warm-up entirely",
+                                "Not warming up all major muscle groups"
+                            ]
+                        },
+                        {
+                            name: "Jumping Jacks",
+                            type: "exercise",
+                            duration: 45,
+                            visualPlaceholder: "Visual for Jumping Jacks",
+                            targetMuscles: "Full Body, Cardiovascular",
+                            equipment: "None",
+                            instructions: [
+                                "Stand with feet together and arms at sides",
+                                "Jump feet out to sides while raising arms overhead",
+                                "Jump feet back together while lowering arms",
+                                "Maintain a steady rhythm"
+                            ],
+                            formTips: [
+                                "Land softly on balls of feet",
+                                "Keep movements controlled and rhythmic"
+                            ],
+                            commonMistakes: [
+                                "Landing heavily on feet",
+                                "Arms not fully extending overhead"
+                            ]
+                        },
+                        {
+                            name: "Rest",
+                            type: "rest",
+                            duration: 45
+                        },
+                        {
+                            name: "Bodyweight Squats",
+                            type: "exercise",
+                            duration: 45,
+                            visualPlaceholder: "Visual for Bodyweight Squats",
+                            targetMuscles: "Quadriceps, Glutes, Hamstrings",
+                            equipment: "None",
+                            instructions: [
+                                "Stand with feet shoulder-width apart",
+                                "Lower your body by pushing hips back and bending knees",
+                                "Aim to reach parallel thigh position",
+                                "Push through heels to return to standing"
+                            ],
+                            formTips: [
+                                "Keep chest up and back straight",
+                                "Ensure knees track in line with toes"
+                            ],
+                            commonMistakes: [
+                                "Knees collapsing inward",
+                                "Heels lifting off ground"
+                            ]
+                        },
+                        {
+                            name: "Rest",
+                            type: "rest",
+                            duration: 45
+                        },
+                        {
+                            name: "Push-Up Position Planks",
+                            type: "exercise",
+                            duration: 45,
+                            visualPlaceholder: "Visual for Push-Up Position Planks",
+                            targetMuscles: "Core, Shoulders, Back",
+                            equipment: "None",
+                            instructions: [
+                                "Start in push-up position with arms straight",
+                                "Form straight line from head to heels",
+                                "Engage core and squeeze glutes",
+                                "Hold position for the duration"
+                            ],
+                            formTips: [
+                                "Keep shoulders over wrists",
+                                "Don't let hips sag or pike up"
+                            ],
+                            commonMistakes: [
+                                "Dropping head or looking up",
+                                "Forgetting to breathe"
+                            ]
+                        },
+                        {
+                            name: "Extended Rest",
+                            type: "extended_rest",
+                            duration: 180
+                        },
+
+                        // Upper body superset
+                        {
+                            name: "Push-Ups",
+                            type: "exercise",
+                            duration: 45,
+                            visualPlaceholder: "Visual for Push-Ups",
+                            targetMuscles: "Chest, Shoulders, Triceps",
+                            equipment: "None",
+                            instructions: [
+                                "Start in plank position with hands slightly wider than shoulders",
+                                "Lower body by bending elbows, keeping body in straight line",
+                                "Lower until chest nearly touches floor",
+                                "Push back up to starting position"
+                            ],
+                            formTips: [
+                                "Keep core engaged throughout movement",
+                                "Elbows should form 45-degree angle with body"
+                            ],
+                            commonMistakes: [
+                                "Sagging or piking at hips",
+                                "Not lowering deep enough"
+                            ]
+                        },
+                        {
+                            name: "Rest",
+                            type: "rest",
+                            duration: 45
+                        },
+                        {
+                            name: "TRX Rows",
+                            type: "exercise",
+                            duration: 45,
+                            visualPlaceholder: "Visual for TRX Rows",
+                            targetMuscles: "Upper Back, Biceps, Rear Deltoids",
+                            equipment: "TRX Suspension Trainer",
+                            instructions: [
+                                "Grip TRX handles with palms facing each other",
+                                "Walk feet forward until body is at an angle",
+                                "Pull body up by bending elbows and squeezing shoulder blades",
+                                "Lower with control to starting position"
+                            ],
+                            formTips: [
+                                "Keep body straight from head to heels",
+                                "Pull shoulders down and back at top of movement"
+                            ],
+                            commonMistakes: [
+                                "Letting body sag in the middle",
+                                "Not fully extending arms between reps"
+                            ]
+                        },
+                        {
+                            name: "Rest",
+                            type: "rest",
+                            duration: 45
+                        },
+                        {
+                            name: "Dumbbell Shoulder Press",
+                            type: "exercise",
+                            duration: 45,
+                            visualPlaceholder: "Visual for Dumbbell Shoulder Press",
+                            targetMuscles: "Shoulders, Triceps",
+                            equipment: "Dumbbells",
+                            instructions: [
+                                "Sit or stand with dumbbells at shoulder height",
+                                "Palms facing forward or slightly inward",
+                                "Press weights upward until arms are extended",
+                                "Lower with control back to shoulders"
+                            ],
+                            formTips: [
+                                "Keep core engaged and maintain straight back",
+                                "Don't arch lower back when pressing up"
+                            ],
+                            commonMistakes: [
+                                "Using momentum to lift weights",
+                                "Bringing dumbbells too far forward or back"
+                            ]
+                        },
+                        {
+                            name: "Extended Rest",
+                            type: "extended_rest",
+                            duration: 180
+                        },
+
+                        // Lower body superset
+                        {
+                            name: "Goblet Squats",
+                            type: "exercise",
+                            duration: 45,
+                            visualPlaceholder: "Visual for Goblet Squats",
+                            targetMuscles: "Quadriceps, Glutes, Core",
+                            equipment: "Single Dumbbell or Kettlebell",
+                            instructions: [
+                                "Hold dumbbell vertically close to chest with both hands",
+                                "Stand with feet shoulder-width apart, toes slightly turned out",
+                                "Lower into squat by pushing hips back and bending knees",
+                                "Push through heels to return to standing"
+                            ],
+                            formTips: [
+                                "Keep chest up and elbows tracking between knees",
+                                "Maintain neutral spine position"
+                            ],
+                            commonMistakes: [
+                                "Leaning too far forward",
+                                "Rounding lower back at bottom of squat"
+                            ]
+                        },
+                        {
+                            name: "Rest",
+                            type: "rest",
+                            duration: 45
+                        },
+                        {
+                            name: "Romanian Deadlifts",
+                            type: "exercise",
+                            duration: 45,
+                            visualPlaceholder: "Visual for Romanian Deadlifts",
+                            targetMuscles: "Hamstrings, Glutes, Lower Back",
+                            equipment: "Dumbbells",
+                            instructions: [
+                                "Hold dumbbells in front of thighs with palms facing thighs",
+                                "Stand with feet hip-width apart, soft bend in knees",
+                                "Hinge at hips pushing buttocks back while lowering dumbbells",
+                                "Keep back flat and dumbbells close to legs",
+                                "Lower until you feel stretch in hamstrings, then return to standing"
+                            ],
+                            formTips: [
+                                "Maintain natural curve in lower back",
+                                "Initiate movement from hips, not waist"
+                            ],
+                            commonMistakes: [
+                                "Rounding the back during the movement",
+                                "Bending knees too much (turning into a squat)"
+                            ]
+                        },
+                        {
+                            name: "Rest",
+                            type: "rest",
+                            duration: 45
+                        },
+                        {
+                            name: "Dumbbell Reverse Lunges",
+                            type: "exercise",
+                            duration: 45,
+                            visualPlaceholder: "Visual for Dumbbell Reverse Lunges",
+                            targetMuscles: "Quadriceps, Glutes, Hamstrings, Balance",
+                            equipment: "Dumbbells",
+                            instructions: [
+                                "Stand with dumbbells at sides",
+                                "Step backward with one leg into lunge position",
+                                "Lower until both knees are at 90-degree angles",
+                                "Push through front heel to return to standing",
+                                "Alternate legs with each rep"
+                            ],
+                            formTips: [
+                                "Keep front knee over ankle, not past toes",
+                                "Maintain upright posture throughout"
+                            ],
+                            commonMistakes: [
+                                "Stepping back too short or too far",
+                                "Dropping back knee too hard"
+                            ]
+                        },
+                        {
+                            name: "Extended Rest",
+                            type: "extended_rest",
+                            duration: 180
+                        },
+
+                        // Core superset
+                        {
+                            name: "TRX Mountain Climbers",
+                            type: "exercise",
+                            duration: 45,
+                            visualPlaceholder: "Visual for TRX Mountain Climbers",
+                            targetMuscles: "Core, Hip Flexors, Shoulders",
+                            equipment: "TRX Suspension Trainer",
+                            instructions: [
+                                "Place feet in TRX foot cradles in push-up position",
+                                "Alternately bring knees toward chest",
+                                "Keep hips stable throughout movement",
+                                "Maintain a controlled pace"
+                            ],
+                            formTips: [
+                                "Keep core tight and back flat",
+                                "Control the movement with abdominals"
+                            ],
+                            commonMistakes: [
+                                "Letting hips rise too high",
+                                "Moving too fast with poor form"
+                            ]
+                        },
+                        {
+                            name: "Rest",
+                            type: "rest",
+                            duration: 45
+                        },
+                        {
+                            name: "Dumbbell Russian Twists",
+                            type: "exercise",
+                            duration: 45,
+                            visualPlaceholder: "Visual for Dumbbell Russian Twists",
+                            targetMuscles: "Obliques, Abdominals",
+                            equipment: "Single Dumbbell",
+                            instructions: [
+                                "Sit on floor with knees bent and feet elevated",
+                                "Hold dumbbell with both hands at chest level",
+                                "Lean back slightly to engage core",
+                                "Twist torso to touch dumbbell to floor beside hip, alternate sides"
+                            ],
+                            formTips: [
+                                "Keep chest up and back straight",
+                                "Twist from obliques, not arms"
+                            ],
+                            commonMistakes: [
+                                "Rounding lower back",
+                                "Moving arms only, not rotating torso"
+                            ]
+                        },
+                        {
+                            name: "Rest",
+                            type: "rest",
+                            duration: 45
+                        },
+                        {
+                            name: "Plank Shoulder Taps",
+                            type: "exercise",
+                            duration: 45,
+                            visualPlaceholder: "Visual for Plank Shoulder Taps",
+                            targetMuscles: "Core, Shoulders, Stabilizers",
+                            equipment: "None",
+                            instructions: [
+                                "Start in push-up position with hands under shoulders",
+                                "Keeping hips stable, lift one hand to tap opposite shoulder",
+                                "Return hand to floor and repeat with other hand",
+                                "Continue alternating sides"
+                            ],
+                            formTips: [
+                                "Keep core engaged to minimize hip rotation",
+                                "Maintain a straight line from head to heels"
+                            ],
+                            commonMistakes: [
+                                "Letting hips sway side to side",
+                                "Sagging in the middle"
+                            ]
+                        },
+                        {
+                            name: "Extended Rest",
+                            type: "extended_rest",
+                            duration: 180
+                        },
+
+                        // Full body finisher
+                        {
+                            name: "Burpees",
+                            type: "exercise",
+                            duration: 45,
+                            visualPlaceholder: "Visual for Burpees",
+                            targetMuscles: "Full Body, Cardiovascular",
+                            equipment: "None",
+                            instructions: [
+                                "Start standing, then squat down placing hands on floor",
+                                "Jump feet back into plank position",
+                                "Perform one push-up (optional)",
+                                "Jump feet forward to hands",
+                                "Explosively jump up with arms overhead"
+                            ],
+                            formTips: [
+                                "Keep core engaged throughout movement",
+                                "Land softly when jumping back to squat"
+                            ],
+                            commonMistakes: [
+                                "Sagging hips in plank position",
+                                "Not fully extending during jump"
+                            ]
+                        },
+                        {
+                            name: "Rest",
+                            type: "rest",
+                            duration: 45
+                        },
+                        {
+                            name: "TRX Squat Jumps",
+                            type: "exercise",
+                            duration: 45,
+                            visualPlaceholder: "Visual for TRX Squat Jumps",
+                            targetMuscles: "Quadriceps, Glutes, Hamstrings, Calves",
+                            equipment: "TRX Suspension Trainer",
+                            instructions: [
+                                "Hold TRX handles at chest level",
+                                "Lower into squat position",
+                                "Explosively jump up, using TRX for balance",
+                                "Land softly and immediately lower into next squat"
+                            ],
+                            formTips: [
+                                "Use TRX for balance, not to pull yourself up",
+                                "Land with soft knees to absorb impact"
+                            ],
+                            commonMistakes: [
+                                "Pulling too hard on TRX straps",
+                                "Landing with straight legs"
+                            ]
+                        },
+                        {
+                            name: "Rest",
+                            type: "rest",
+                            duration: 45
+                        },
+                        {
+                            name: "Dumbbell Thrusters",
+                            type: "exercise",
+                            duration: 45,
+                            visualPlaceholder: "Visual for Dumbbell Thrusters",
+                            targetMuscles: "Quadriceps, Glutes, Shoulders, Triceps",
+                            equipment: "Dumbbells",
+                            instructions: [
+                                "Hold dumbbells at shoulder height",
+                                "Lower into squat position",
+                                "As you stand, press dumbbells overhead",
+                                "Lower dumbbells back to shoulders as you squat again"
+                            ],
+                            formTips: [
+                                "Keep weight in heels during squat",
+                                "Use leg drive to help press weights overhead"
+                            ],
+                            commonMistakes: [
+                                "Arching back during overhead press",
+                                "Not squatting to proper depth"
+                            ]
+                        },
+                        {
+                            name: "Extended Rest",
+                            type: "extended_rest",
+                            duration: 180
+                        },
+
+                        // Cool down
+                        {
+                            name: "Full Body Stretching",
+                            type: "exercise",
+                            duration: 45,
+                            visualPlaceholder: "Visual for Full Body Stretching",
+                            targetMuscles: "Full Body",
+                            equipment: "None",
+                            instructions: [
+                                "Perform gentle static stretches for major muscle groups",
+                                "Hold each stretch for 15-30 seconds",
+                                "Include upper and lower body stretches",
+                                "Focus on deep breathing and relaxation"
+                            ],
+                            formTips: [
+                                "Don't bounce during static stretches",
+                                "Stretch to the point of tension, not pain"
+                            ],
+                            commonMistakes: [
+                                "Rushing through cool down stretches",
+                                "Holding breath during stretches"
+                            ]
+                        },
+                    ]
+                },
+                'upper-body-sculpt': {
+                    name: 'Upper Body Sculpt (DB & TRX)',
+                    exercises: [
+                        // Warm-up
+                        {
+                            name: "Upper Body Mobility",
+                            type: "info",
+                            duration: 0,
+                            visualPlaceholder: "Visual for Upper Body Mobility",
+                            targetMuscles: "Shoulders, Upper Back, Chest",
+                            equipment: "None",
+                            instructions: [
+                                "Perform arm circles forward and backward",
+                                "Do scapular retractions and protraction movements",
+                                "Include shoulder rolls and neck rotations",
+                                "End with wall angels or band pull-aparts if available"
+                            ],
+                            formTips: [
+                                "Focus on smooth, controlled movements",
+                                "Gradually increase range of motion"
+                            ],
+                            commonMistakes: [
+                                "Skimping on warm-up before upper body work",
+                                "Moving too quickly through mobility exercises"
+                            ]
+                        },
+                        {
+                            name: "Arm Circles",
+                            type: "exercise",
+                            duration: 45,
+                            visualPlaceholder: "Visual for Arm Circles",
+                            targetMuscles: "Shoulders, Upper Back",
+                            equipment: "None",
+                            instructions: [
+                                "Stand with feet shoulder-width apart",
+                                "Extend arms straight out to sides at shoulder height",
+                                "Make small circles forward for 20-30 seconds",
+                                "Reverse direction for remaining time"
+                            ],
+                            formTips: [
+                                "Keep shoulders relaxed and down",
+                                "Maintain good posture throughout"
+                            ],
+                            commonMistakes: [
+                                "Hunching shoulders toward ears",
+                                "Making circles too large initially"
+                            ]
+                        },
+                        {
+                            name: "Rest",
+                            type: "rest",
+                            duration: 45
+                        },
+                        {
+                            name: "Scapular Push-Ups",
+                            type: "exercise",
+                            duration: 45,
+                            visualPlaceholder: "Visual for Scapular Push-Ups",
+                            targetMuscles: "Serratus Anterior, Scapular Stabilizers",
+                            equipment: "None",
+                            instructions: [
+                                "Start in push-up position with arms straight",
+                                "Without bending elbows, pinch shoulder blades together",
+                                "Then push shoulder blades apart, rounding upper back slightly",
+                                "Continue this protraction/retraction movement"
+                            ],
+                            formTips: [
+                                "Keep core engaged and body in straight line",
+                                "Focus on shoulder blade movement, not arm movement"
+                            ],
+                            commonMistakes: [
+                                "Bending elbows (turning into regular push-ups)",
+                                "Allowing hips to sag"
+                            ]
+                        },
+                        {
+                            name: "Rest",
+                            type: "rest",
+                            duration: 45
+                        },
+                        {
+                            name: "Band Pull-Aparts or Wall Angels",
+                            type: "exercise",
+                            duration: 45,
+                            visualPlaceholder: "Visual for Band Pull-Aparts/Wall Angels",
+                            targetMuscles: "Upper Back, Rear Deltoids, Rotator Cuff",
+                            equipment: "Resistance Band or Wall",
+                            instructions: [
+                                "For band pull-aparts: Hold band in front with arms extended",
+                                "Pull band apart by squeezing shoulder blades together",
+                                "For wall angels: Stand with back against wall",
+                                "Raise arms in 'goal post' position and slide up and down wall"
+                            ],
+                            formTips: [
+                                "Keep shoulders down away from ears",
+                                "Focus on controlled movement"
+                            ],
+                            commonMistakes: [
+                                "Using momentum instead of muscle control",
+                                "Not maintaining contact with wall during wall angels"
+                            ]
+                        },
+                        {
+                            name: "Extended Rest",
+                            type: "extended_rest",
+                            duration: 180
+                        },
+
+                        // Chest superset
+                        {
+                            name: "Dumbbell Chest Press",
+                            type: "exercise",
+                            duration: 45,
+                            visualPlaceholder: "Visual for Dumbbell Chest Press",
+                            targetMuscles: "Chest, Shoulders, Triceps",
+                            equipment: "Dumbbells, Bench",
+                            instructions: [
+                                "Lie on bench with feet flat on floor",
+                                "Hold dumbbells with palms facing forward",
+                                "Lower dumbbells to chest level with controlled motion",
+                                "Press upward until arms are extended"
+                            ],
+                            formTips: [
+                                "Keep wrists straight and elbows at 45-degree angle",
+                                "Maintain contact between shoulder blades and bench"
+                            ],
+                            commonMistakes: [
+                                "Arching lower back",
+                                "Bouncing weights off chest"
+                            ]
+                        },
+                        {
+                            name: "Rest",
+                            type: "rest",
+                            duration: 45
+                        },
+                        {
+                            name: "TRX Push-Ups",
+                            type: "exercise",
+                            duration: 45,
+                            visualPlaceholder: "Visual for TRX Push-Ups",
+                            targetMuscles: "Chest, Shoulders, Triceps, Core",
+                            equipment: "TRX Suspension Trainer",
+                            instructions: [
+                                "Hold TRX handles and position feet back until body is at angle",
+                                "Lower chest between handles by bending elbows",
+                                "Keep elbows close to sides at 45-degree angle",
+                                "Push back up to straight arm position"
+                            ],
+                            formTips: [
+                                "Maintain straight line from head to heels",
+                                "Engage core throughout movement"
+                            ],
+                            commonMistakes: [
+                                "Letting hips sag or pike",
+                                "Flaring elbows too wide"
+                            ]
+                        },
+                        {
+                            name: "Rest",
+                            type: "rest",
+                            duration: 45
+                        },
+                        {
+                            name: "Dumbbell Chest Press",
+                            type: "exercise",
+                            duration: 45,
+                            visualPlaceholder: "Visual for Dumbbell Chest Press",
+                            targetMuscles: "Chest, Shoulders, Triceps",
+                            equipment: "Dumbbells, Bench",
+                            instructions: [
+                                "Lie on bench with feet flat on floor",
+                                "Hold dumbbells with palms facing forward",
+                                "Lower dumbbells to chest level with controlled motion",
+                                "Press upward until arms are extended"
+                            ],
+                            formTips: [
+                                "Keep wrists straight and elbows at 45-degree angle",
+                                "Maintain contact between shoulder blades and bench"
+                            ],
+                            commonMistakes: [
+                                "Arching lower back",
+                                "Bouncing weights off chest"
+                            ]
+                        },
+                        {
+                            name: "Rest",
+                            type: "rest",
+                            duration: 45
+                        },
+                        {
+                            name: "TRX Push-Ups",
+                            type: "exercise",
+                            duration: 45,
+                            visualPlaceholder: "Visual for TRX Push-Ups",
+                            targetMuscles: "Chest, Shoulders, Triceps, Core",
+                            equipment: "TRX Suspension Trainer",
+                            instructions: [
+                                "Hold TRX handles and position feet back until body is at angle",
+                                "Lower chest between handles by bending elbows",
+                                "Keep elbows close to sides at 45-degree angle",
+                                "Push back up to straight arm position"
+                            ],
+                            formTips: [
+                                "Maintain straight line from head to heels",
+                                "Engage core throughout movement"
+                            ],
+                            commonMistakes: [
+                                "Letting hips sag or pike",
+                                "Flaring elbows too wide"
+                            ]
+                        },
+                        {
+                            name: "Extended Rest",
+                            type: "extended_rest",
+                            duration: 180
+                        },
+
+                        // Back superset
+                        {
+                            name: "TRX Rows",
+                            type: "exercise",
+                            duration: 45,
+                            visualPlaceholder: "Visual for TRX Rows",
+                            targetMuscles: "Upper Back, Biceps, Rear Deltoids",
+                            equipment: "TRX Suspension Trainer",
+                            instructions: [
+                                "Grip TRX handles with palms facing each other",
+                                "Walk feet forward until body is at an angle",
+                                "Pull body up by bending elbows and squeezing shoulder blades",
+                                "Lower with control to starting position"
+                            ],
+                            formTips: [
+                                "Keep body straight from head to heels",
+                                "Pull shoulders down and back at top of movement"
+                            ],
+                            commonMistakes: [
+                                "Letting body sag in the middle",
+                                "Not fully extending arms between reps"
+                            ]
+                        },
+                        {
+                            name: "Rest",
+                            type: "rest",
+                            duration: 45
+                        },
+                        {
+                            name: "Dumbbell Bent Over Rows",
+                            type: "exercise",
+                            duration: 45,
+                            visualPlaceholder: "Visual for Dumbbell Bent Over Rows",
+                            targetMuscles: "Upper Back, Lats, Rear Deltoids",
+                            equipment: "Dumbbells",
+                            instructions: [
+                                "Hinge at hips with soft knees, back flat",
+                                "Hold dumbbells hanging at arms' length",
+                                "Pull dumbbells up alongside body by bending elbows",
+                                "Squeeze shoulder blades at top of movement",
+                                "Lower with control"
+                            ],
+                            formTips: [
+                                "Keep back flat and core engaged",
+                                "Pull elbows close to sides, not flared out"
+                            ],
+                            commonMistakes: [
+                                "Rounding back during movement",
+                                "Using momentum to swing weights up"
+                            ]
+                        },
+                        {
+                            name: "Rest",
+                            type: "rest",
+                            duration: 45
+                        },
+                        {
+                            name: "TRX Rows",
+                            type: "exercise",
+                            duration: 45,
+                            visualPlaceholder: "Visual for TRX Rows",
+                            targetMuscles: "Upper Back, Biceps, Rear Deltoids",
+                            equipment: "TRX Suspension Trainer",
+                            instructions: [
+                                "Grip TRX handles with palms facing each other",
+                                "Walk feet forward until body is at an angle",
+                                "Pull body up by bending elbows and squeezing shoulder blades",
+                                "Lower with control to starting position"
+                            ],
+                            formTips: [
+                                "Keep body straight from head to heels",
+                                "Pull shoulders down and back at top of movement"
+                            ],
+                            commonMistakes: [
+                                "Letting body sag in the middle",
+                                "Not fully extending arms between reps"
+                            ]
+                        },
+                        {
+                            name: "Rest",
+                            type: "rest",
+                            duration: 45
+                        },
+                        {
+                            name: "Dumbbell Bent Over Rows",
+                            type: "exercise",
+                            duration: 45,
+                            visualPlaceholder: "Visual for Dumbbell Bent Over Rows",
+                            targetMuscles: "Upper Back, Lats, Rear Deltoids",
+                            equipment: "Dumbbells",
+                            instructions: [
+                                "Hinge at hips with soft knees, back flat",
+                                "Hold dumbbells hanging at arms' length",
+                                "Pull dumbbells up alongside body by bending elbows",
+                                "Squeeze shoulder blades at top of movement",
+                                "Lower with control"
+                            ],
+                            formTips: [
+                                "Keep back flat and core engaged",
+                                "Pull elbows close to sides, not flared out"
+                            ],
+                            commonMistakes: [
+                                "Rounding back during movement",
+                                "Using momentum to swing weights up"
+                            ]
+                        },
+                        {
+                            name: "Extended Rest",
+                            type: "extended_rest",
+                            duration: 180
+                        },
+
+                        // Shoulder superset
+                        {
+                            name: "Dumbbell Shoulder Press",
+                            type: "exercise",
+                            duration: 45,
+                            visualPlaceholder: "Visual for Dumbbell Shoulder Press",
+                            targetMuscles: "Shoulders, Triceps",
+                            equipment: "Dumbbells",
+                            instructions: [
+                                "Sit or stand with dumbbells at shoulder height",
+                                "Palms facing forward or slightly inward",
+                                "Press weights upward until arms are extended",
+                                "Lower with control back to shoulders"
+                            ],
+                            formTips: [
+                                "Keep core engaged and maintain straight back",
+                                "Don't arch lower back when pressing up"
+                            ],
+                            commonMistakes: [
+                                "Using momentum to lift weights",
+                                "Bringing dumbbells too far forward or back"
+                            ]
+                        },
+                        {
+                            name: "Rest",
+                            type: "rest",
+                            duration: 45
+                        },
+                        {
+                            name: "TRX Y-Flies",
+                            type: "exercise",
+                            duration: 45,
+                            visualPlaceholder: "Visual for TRX Y-Flies",
+                            targetMuscles: "Rear Deltoids, Upper Traps, Rhomboids",
+                            equipment: "TRX Suspension Trainer",
+                            instructions: [
+                                "Hold TRX handles and lean back with arms extended forward",
+                                "Raise arms up and out to form a Y shape overhead",
+                                "Squeeze shoulder blades together at top of movement",
+                                "Return to starting position with control"
+                            ],
+                            formTips: [
+                                "Keep body straight from head to heels",
+                                "Focus on using shoulder muscles, not momentum"
+                            ],
+                            commonMistakes: [
+                                "Sagging body position",
+                                "Shrugging shoulders toward ears"
+                            ]
+                        },
+                        {
+                            name: "Rest",
+                            type: "rest",
+                            duration: 45
+                        },
+                        {
+                            name: "Dumbbell Lateral Raises",
+                            type: "exercise",
+                            duration: 45,
+                            visualPlaceholder: "Visual for Dumbbell Lateral Raises",
+                            targetMuscles: "Lateral Deltoids",
+                            equipment: "Dumbbells",
+                            instructions: [
+                                "Stand with dumbbells at sides, palms facing in",
+                                "Raise arms out to sides up to shoulder height",
+                                "Keep slight bend in elbows throughout",
+                                "Lower with control to starting position"
+                            ],
+                            formTips: [
+                                "Lead with elbows, not hands",
+                                "Avoid shrugging shoulders during lift"
+                            ],
+                            commonMistakes: [
+                                "Using too heavy weight and swinging",
+                                "Raising arms too high (above shoulder level)"
+                            ]
+                        },
+                        {
+                            name: "Extended Rest",
+                            type: "extended_rest",
+                            duration: 180
+                        },
+
+                        // Arms tri-set
+                        {
+                            name: "Dumbbell Bicep Curls",
+                            type: "exercise",
+                            duration: 45,
+                            visualPlaceholder: "Visual for Dumbbell Bicep Curls",
+                            targetMuscles: "Biceps",
+                            equipment: "Dumbbells",
+                            instructions: [
+                                "Stand with feet hip-width apart holding dumbbells",
+                                "Keep elbows close to sides and palms facing forward",
+                                "Curl weights toward shoulders while keeping upper arms still",
+                                "Lower with control to starting position"
+                            ],
+                            formTips: [
+                                "Keep wrists straight throughout movement",
+                                "Avoid swinging or using momentum"
+                            ],
+                            commonMistakes: [
+                                "Moving elbows forward or away from body",
+                                "Not fully extending arms at bottom"
+                            ]
+                        },
+                        {
+                            name: "Rest",
+                            type: "rest",
+                            duration: 45
+                        },
+                        {
+                            name: "Dumbbell Tricep Kickbacks",
+                            type: "exercise",
+                            duration: 45,
+                            visualPlaceholder: "Visual for Dumbbell Tricep Kickbacks",
+                            targetMuscles: "Triceps",
+                            equipment: "Dumbbells",
+                            instructions: [
+                                "Hinge forward at hips with slight knee bend",
+                                "Hold dumbbells with palms facing each other",
+                                "Keep upper arms parallel to floor and close to torso",
+                                "Extend arms backward, straightening at elbow, then return"
+                            ],
+                            formTips: [
+                                "Keep wrists straight throughout",
+                                "Focus on full extension of the arm"
+                            ],
+                            commonMistakes: [
+                                "Moving upper arms during extension",
+                                "Not extending arms fully"
+                            ]
+                        },
+                        {
+                            name: "Rest",
+                            type: "rest",
+                            duration: 45
+                        },
+                        {
+                            name: "TRX Bicep Curls",
+                            type: "exercise",
+                            duration: 45,
+                            visualPlaceholder: "Visual for TRX Bicep Curls",
+                            targetMuscles: "Biceps, Core",
+                            equipment: "TRX Suspension Trainer",
+                            instructions: [
+                                "Stand facing anchor point holding TRX handles",
+                                "Step back until there's tension in the straps, arms extended",
+                                "Keeping body straight, bend elbows and pull face toward hands",
+                                "Extend arms to lower body back to starting position"
+                            ],
+                            formTips: [
+                                "Keep core engaged and body in straight line",
+                                "Keep elbows elevated throughout movement"
+                            ],
+                            commonMistakes: [
+                                "Letting body sag during movement",
+                                "Using shoulders instead of biceps"
+                            ]
+                        },
+                        {
+                            name: "Extended Rest",
+                            type: "extended_rest",
+                            duration: 180
+                        },
+
+                        // Core finisher (upper body focus)
+                        {
+                            name: "TRX Plank",
+                            type: "exercise",
+                            duration: 45,
+                            visualPlaceholder: "Visual for TRX Plank",
+                            targetMuscles: "Core, Shoulders",
+                            equipment: "TRX Suspension Trainer",
+                            instructions: [
+                                "Place feet in TRX foot cradles",
+                                "Position yourself in a plank position with hands on floor",
+                                "Maintain straight body alignment from head to heels",
+                                "Hold position for the duration"
+                            ],
+                            formTips: [
+                                "Engage core throughout the exercise",
+                                "Keep shoulders over wrists and neck neutral"
+                            ],
+                            commonMistakes: [
+                                "Dropping hips too low",
+                                "Lifting hips too high (pike position)"
+                            ]
+                        },
+                        {
+                            name: "Rest",
+                            type: "rest",
+                            duration: 45
+                        },
+                        {
+                            name: "Dumbbell Plank Rows",
+                            type: "exercise",
+                            duration: 45,
+                            visualPlaceholder: "Visual for Dumbbell Plank Rows",
+                            targetMuscles: "Core, Upper Back, Shoulders",
+                            equipment: "Single Dumbbell",
+                            instructions: [
+                                "Start in plank position with feet wider than hip-width",
+                                "Hold dumbbell in one hand",
+                                "Keeping hips level, row dumbbell up by bending elbow",
+                                "Lower dumbbell to ground and switch sides halfway through"
+                            ],
+                            formTips: [
+                                "Keep hips square and avoid rotation",
+                                "Maintain core engagement throughout"
+                            ],
+                            commonMistakes: [
+                                "Rotating hips excessively",
+                                "Dropping hip on lifting side"
+                            ]
+                        },
+                        {
+                            name: "Rest",
+                            type: "rest",
+                            duration: 45
+                        },
+                        {
+                            name: "Push-Up to Side Plank",
+                            type: "exercise",
+                            duration: 45,
+                            visualPlaceholder: "Visual for Push-Up to Side Plank",
+                            targetMuscles: "Chest, Core, Shoulders, Obliques",
+                            equipment: "None",
+                            instructions: [
+                                "Start in push-up position",
+                                "Perform one push-up",
+                                "After pushing up, rotate body to side plank position",
+                                "Extend top arm toward ceiling",
+                                "Return to push-up position and repeat on other side"
+                            ],
+                            formTips: [
+                                "Keep hips elevated during side plank",
+                                "Maintain straight body alignment throughout"
+                            ],
+                            commonMistakes: [
+                                "Rushing the transitions",
+                                "Dropping hips in side plank"
+                            ]
+                        },
+                        {
+                            name: "Extended Rest",
+                            type: "extended_rest",
+                            duration: 180
+                        },
+
+                        // Cool down
+                        {
+                            name: "Upper Body Stretching",
+                            type: "exercise",
+                            duration: 45,
+                            visualPlaceholder: "Visual for Upper Body Stretching",
+                            targetMuscles: "Chest, Back, Shoulders, Arms",
+                            equipment: "None",
+                            instructions: [
+                                "Perform chest stretches by clasping hands behind back",
+                                "Do tricep stretches by reaching arm overhead and behind back",
+                                "Include doorway stretches for chest and shoulders",
+                                "Add wrist and forearm stretches"
+                            ],
+                            formTips:

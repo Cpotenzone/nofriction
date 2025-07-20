@@ -1,0 +1,1471 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SYNTIN AI Functional Specification - Complete System Design</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        .chart-container { height: 400px; }
+        .nav-link:hover { color: #3B82F6; }
+        .section-padding { padding: 2rem 0; }
+        body { font-family: 'Inter', sans-serif; }
+        .gradient-bg { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); }
+        .card-shadow { box-shadow: 0 10px 25px rgba(0,0,0,0.1); }
+        .architecture-box { border: 2px dashed #E5E7EB; border-radius: 8px; padding: 1rem; margin: 0.5rem; }
+    </style>
+</head>
+<body class="bg-gray-50">
+    <!-- Header -->
+    <header class="gradient-bg text-white py-6 sticky top-0 z-50">
+        <div class="container mx-auto px-6">
+            <div class="flex items-center justify-between">
+                <div class="flex items-center">
+                    <i class="fas fa-brain text-3xl mr-3"></i>
+                    <h1 class="text-2xl font-bold">SYNTIN AI Functional Specification</h1>
+                </div>
+                <nav class="hidden md:flex space-x-6">
+                    <a href="#executive-summary" class="nav-link transition-colors">Executive Summary</a>
+                    <a href="#architecture" class="nav-link transition-colors">Architecture</a>
+                    <a href="#implementation" class="nav-link transition-colors">Implementation</a>
+                    <a href="#apis" class="nav-link transition-colors">APIs</a>
+                    <a href="#cost-analysis" class="nav-link transition-colors">Cost Analysis</a>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <!-- Executive Summary -->
+    <section id="executive-summary" class="section-padding bg-white">
+        <div class="container mx-auto px-6">
+            <h2 class="text-4xl font-bold text-gray-800 mb-8 text-center">Executive Summary</h2>
+            
+            <div class="grid md:grid-cols-2 gap-8 mb-12">
+                <div class="card-shadow bg-white p-6 rounded-lg">
+                    <h3 class="text-xl font-semibold mb-4 flex items-center">
+                        <i class="fas fa-bullseye text-blue-500 mr-2"></i>
+                        Project Overview
+                    </h3>
+                    <p class="text-gray-600 leading-relaxed">
+                        The SYNTIN AI-powered Programmatic Ad Buy and Amazon Affiliate Integration system represents a revolutionary approach to e-commerce marketing. By leveraging artificial intelligence to power programmatic advertising decisions, this system automatically identifies high-margin products, optimizes ad placements, and drives traffic to Amazon affiliate links without holding inventory.
+                    </p>
+                </div>
+                
+                <div class="card-shadow bg-white p-6 rounded-lg">
+                    <h3 class="text-xl font-semibold mb-4 flex items-center">
+                        <i class="fas fa-rocket text-green-500 mr-2"></i>
+                        Key Innovation
+                    </h3>
+                    <p class="text-gray-600 leading-relaxed">
+                        This disruptive model combines AI-driven decision making with real-time market data analysis, including tariff information, consumer sentiment, and economic indicators, to maximize ROI while minimizing operational overhead through a completely inventory-free dropshipping approach.
+                    </p>
+                </div>
+            </div>
+
+            <div class="bg-blue-50 p-6 rounded-lg mb-8">
+                <h3 class="text-xl font-semibold mb-4">Business Value Proposition</h3>
+                <div class="grid md:grid-cols-4 gap-4">
+                    <div class="text-center">
+                        <i class="fas fa-dollar-sign text-3xl text-green-500 mb-2"></i>
+                        <h4 class="font-semibold">Zero Inventory</h4>
+                        <p class="text-sm text-gray-600">No upfront costs or storage requirements</p>
+                    </div>
+                    <div class="text-center">
+                        <i class="fas fa-tachometer-alt text-3xl text-blue-500 mb-2"></i>
+                        <h4 class="font-semibold">Real-time Optimization</h4>
+                        <p class="text-sm text-gray-600">Instant response to market conditions</p>
+                    </div>
+                    <div class="text-center">
+                        <i class="fas fa-chart-line text-3xl text-purple-500 mb-2"></i>
+                        <h4 class="font-semibold">AI-Driven Decisions</h4>
+                        <p class="text-sm text-gray-600">Data-backed product and bid selection</p>
+                    </div>
+                    <div class="text-center">
+                        <i class="fas fa-expand-arrows-alt text-3xl text-red-500 mb-2"></i>
+                        <h4 class="font-semibold">Infinite Scalability</h4>
+                        <p class="text-sm text-gray-600">Expandable to any marketplace or vertical</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="grid md:grid-cols-3 gap-6">
+                <div class="bg-white p-6 rounded-lg card-shadow">
+                    <h4 class="font-semibold text-lg mb-3">Implementation Timeline</h4>
+                    <ul class="space-y-2">
+                        <li class="flex items-center"><i class="fas fa-check text-green-500 mr-2"></i>Weeks 1-2: Foundation Setup</li>
+                        <li class="flex items-center"><i class="fas fa-check text-green-500 mr-2"></i>Weeks 3-4: Core Integration</li>
+                        <li class="flex items-center"><i class="fas fa-check text-green-500 mr-2"></i>Weeks 5-6: Testing & Optimization</li>
+                        <li class="flex items-center"><i class="fas fa-check text-green-500 mr-2"></i>Weeks 7-8: Production Deployment</li>
+                    </ul>
+                </div>
+                
+                <div class="bg-white p-6 rounded-lg card-shadow">
+                    <h4 class="font-semibold text-lg mb-3">Budget Requirements</h4>
+                    <ul class="space-y-2">
+                        <li class="flex justify-between"><span>Development Phase:</span><span class="text-green-600 font-semibold">$0</span></li>
+                        <li class="flex justify-between"><span>Initial Testing:</span><span class="text-blue-600 font-semibold">$50-100</span></li>
+                        <li class="flex justify-between"><span>Production Scale:</span><span class="text-purple-600 font-semibold">Variable</span></li>
+                        <li class="border-t pt-2 flex justify-between font-semibold"><span>Total POC Cost:</span><span class="text-green-600">≤ $100</span></li>
+                    </ul>
+                </div>
+                
+                <div class="bg-white p-6 rounded-lg card-shadow">
+                    <h4 class="font-semibold text-lg mb-3">Success Metrics</h4>
+                    <ul class="space-y-2">
+                        <li class="flex items-center"><i class="fas fa-percentage text-blue-500 mr-2"></i>ROI > 300%</li>
+                        <li class="flex items-center"><i class="fas fa-clock text-green-500 mr-2"></i>Response Time < 5min</li>
+                        <li class="flex items-center"><i class="fas fa-chart-bar text-purple-500 mr-2"></i>Conversion Rate > 2%</li>
+                        <li class="flex items-center"><i class="fas fa-coins text-yellow-500 mr-2"></i>Cost per Click < $0.50</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- System Architecture -->
+    <section id="architecture" class="section-padding bg-gray-100">
+        <div class="container mx-auto px-6">
+            <h2 class="text-4xl font-bold text-gray-800 mb-8 text-center">System Architecture</h2>
+            
+            <div class="bg-white p-8 rounded-lg card-shadow mb-8">
+                <h3 class="text-2xl font-semibold mb-6">SYNTIN AI Core Engine</h3>
+                <div class="grid md:grid-cols-3 gap-6">
+                    <div class="architecture-box bg-blue-50">
+                        <h4 class="font-semibold text-lg mb-3 flex items-center">
+                            <i class="fas fa-database text-blue-500 mr-2"></i>
+                            Data Layer
+                        </h4>
+                        <ul class="text-sm space-y-1">
+                            <li>• Market data ingestion</li>
+                            <li>• Product performance metrics</li>
+                            <li>• Real-time event streams</li>
+                            <li>• Multi-source data handling</li>
+                        </ul>
+                    </div>
+                    <div class="architecture-box bg-green-50">
+                        <h4 class="font-semibold text-lg mb-3 flex items-center">
+                            <i class="fas fa-brain text-green-500 mr-2"></i>
+                            Model Layer
+                        </h4>
+                        <ul class="text-sm space-y-1">
+                            <li>• Predictive analytics models</li>
+                            <li>• Consumer behavior patterns</li>
+                            <li>• Price optimization algorithms</li>
+                            <li>• Performance forecasting</li>
+                        </ul>
+                    </div>
+                    <div class="architecture-box bg-purple-50">
+                        <h4 class="font-semibold text-lg mb-3 flex items-center">
+                            <i class="fas fa-cogs text-purple-500 mr-2"></i>
+                            Decision Layer
+                        </h4>
+                        <ul class="text-sm space-y-1">
+                            <li>• Bid optimization algorithms</li>
+                            <li>• Campaign optimization</li>
+                            <li>• Anomaly detection</li>
+                            <li>• Actionable recommendations</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="grid md:grid-cols-2 gap-8 mb-8">
+                <div class="bg-white p-6 rounded-lg card-shadow">
+                    <h3 class="text-xl font-semibold mb-4">Data Sources Integration</h3>
+                    <div class="space-y-3">
+                        <div class="flex items-center justify-between p-3 bg-gray-50 rounded">
+                            <span class="flex items-center"><i class="fab fa-amazon text-orange-500 mr-2"></i>Amazon Product API</span>
+                            <span class="text-sm text-gray-600">Free</span>
+                        </div>
+                        <div class="flex items-center justify-between p-3 bg-gray-50 rounded">
+                            <span class="flex items-center"><i class="fas fa-chart-line text-blue-500 mr-2"></i>FRED Economic Data</span>
+                            <span class="text-sm text-gray-600">Free</span>
+                        </div>
+                        <div class="flex items-center justify-between p-3 bg-gray-50 rounded">
+                            <span class="flex items-center"><i class="fas fa-globe text-green-500 mr-2"></i>Census Trade Data</span>
+                            <span class="text-sm text-gray-600">Free</span>
+                        </div>
+                        <div class="flex items-center justify-between p-3 bg-gray-50 rounded">
+                            <span class="flex items-center"><i class="fab fa-reddit text-red-500 mr-2"></i>Social Sentiment</span>
+                            <span class="text-sm text-gray-600">Free</span>
+                        </div>
+                        <div class="flex items-center justify-between p-3 bg-gray-50 rounded">
+                            <span class="flex items-center"><i class="fas fa-cloud text-purple-500 mr-2"></i>Weather Data</span>
+                            <span class="text-sm text-gray-600">Free Tier</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-white p-6 rounded-lg card-shadow">
+                    <h3 class="text-xl font-semibold mb-4">Infrastructure Components</h3>
+                    <div class="space-y-3">
+                        <div class="flex items-center justify-between p-3 bg-gray-50 rounded">
+                            <span class="flex items-center"><i class="fab fa-google text-blue-500 mr-2"></i>Firebase Firestore</span>
+                            <span class="text-sm text-gray-600">1GB Free</span>
+                        </div>
+                        <div class="flex items-center justify-between p-3 bg-gray-50 rounded">
+                            <span class="flex items-center"><i class="fas fa-server text-green-500 mr-2"></i>Cloud Functions</span>
+                            <span class="text-sm text-gray-600">2M/month</span>
+                        </div>
+                        <div class="flex items-center justify-between p-3 bg-gray-50 rounded">
+                            <span class="flex items-center"><i class="fas fa-database text-yellow-500 mr-2"></i>BigQuery</span>
+                            <span class="text-sm text-gray-600">1TB/month</span>
+                        </div>
+                        <div class="flex items-center justify-between p-3 bg-gray-50 rounded">
+                            <span class="flex items-center"><i class="fas fa-cloud-upload-alt text-purple-500 mr-2"></i>Cloud Storage</span>
+                            <span class="text-sm text-gray-600">5GB Free</span>
+                        </div>
+                        <div class="flex items-center justify-between p-3 bg-gray-50 rounded">
+                            <span class="flex items-center"><i class="fas fa-globe text-blue-500 mr-2"></i>Firebase Hosting</span>
+                            <span class="text-sm text-gray-600">10GB Free</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="bg-white p-8 rounded-lg card-shadow">
+                <h3 class="text-2xl font-semibold mb-6">Data Flow Architecture</h3>
+                <div class="grid grid-cols-1 md:grid-cols-5 gap-4 text-center">
+                    <div class="architecture-box bg-blue-50">
+                        <i class="fas fa-cloud-download-alt text-3xl text-blue-500 mb-2"></i>
+                        <h4 class="font-semibold">Data Collection</h4>
+                        <p class="text-xs text-gray-600">Market data, sentiment, economic indicators</p>
+                    </div>
+                    <div class="flex items-center justify-center">
+                        <i class="fas fa-arrow-right text-2xl text-gray-400"></i>
+                    </div>
+                    <div class="architecture-box bg-green-50">
+                        <i class="fas fa-brain text-3xl text-green-500 mb-2"></i>
+                        <h4 class="font-semibold">SYNTIN Analysis</h4>
+                        <p class="text-xs text-gray-600">Product selection, bid optimization</p>
+                    </div>
+                    <div class="flex items-center justify-center">
+                        <i class="fas fa-arrow-right text-2xl text-gray-400"></i>
+                    </div>
+                    <div class="architecture-box bg-purple-50">
+                        <i class="fas fa-bullhorn text-3xl text-purple-500 mb-2"></i>
+                        <h4 class="font-semibold">Ad Execution</h4>
+                        <p class="text-xs text-gray-600">Campaign deployment, performance tracking</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Technical Requirements -->
+    <section id="technical-requirements" class="section-padding bg-white">
+        <div class="container mx-auto px-6">
+            <h2 class="text-4xl font-bold text-gray-800 mb-8 text-center">Technical Requirements</h2>
+            
+            <div class="grid md:grid-cols-2 gap-8 mb-8">
+                <div class="card-shadow bg-white p-6 rounded-lg">
+                    <h3 class="text-xl font-semibold mb-4 flex items-center">
+                        <i class="fas fa-tools text-blue-500 mr-2"></i>
+                        Development Stack
+                    </h3>
+                    <div class="space-y-3">
+                        <div class="flex justify-between items-center">
+                            <span>Frontend:</span>
+                            <span class="bg-blue-100 text-blue-800 px-2 py-1 rounded text-sm">HTML/CSS/JavaScript</span>
+                        </div>
+                        <div class="flex justify-between items-center">
+                            <span>Backend:</span>
+                            <span class="bg-green-100 text-green-800 px-2 py-1 rounded text-sm">Node.js/Firebase Functions</span>
+                        </div>
+                        <div class="flex justify-between items-center">
+                            <span>Database:</span>
+                            <span class="bg-purple-100 text-purple-800 px-2 py-1 rounded text-sm">Firestore/BigQuery</span>
+                        </div>
+                        <div class="flex justify-between items-center">
+                            <span>APIs:</span>
+                            <span class="bg-yellow-100 text-yellow-800 px-2 py-1 rounded text-sm">RESTful/GraphQL</span>
+                        </div>
+                        <div class="flex justify-between items-center">
+                            <span>Analytics:</span>
+                            <span class="bg-red-100 text-red-800 px-2 py-1 rounded text-sm">Firebase Analytics</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card-shadow bg-white p-6 rounded-lg">
+                    <h3 class="text-xl font-semibold mb-4 flex items-center">
+                        <i class="fas fa-shield-alt text-green-500 mr-2"></i>
+                        Security & Compliance
+                    </h3>
+                    <div class="space-y-2">
+                        <div class="flex items-center">
+                            <i class="fas fa-check text-green-500 mr-2"></i>
+                            <span>OAuth 2.0 Authentication</span>
+                        </div>
+                        <div class="flex items-center">
+                            <i class="fas fa-check text-green-500 mr-2"></i>
+                            <span>API Key Management</span>
+                        </div>
+                        <div class="flex items-center">
+                            <i class="fas fa-check text-green-500 mr-2"></i>
+                            <span>Data Encryption at Rest</span>
+                        </div>
+                        <div class="flex items-center">
+                            <i class="fas fa-check text-green-500 mr-2"></i>
+                            <span>HTTPS/TLS in Transit</span>
+                        </div>
+                        <div class="flex items-center">
+                            <i class="fas fa-check text-green-500 mr-2"></i>
+                            <span>GDPR Compliance</span>
+                        </div>
+                        <div class="flex items-center">
+                            <i class="fas fa-check text-green-500 mr-2"></i>
+                            <span>Rate Limiting</span>
+                        </div>
+                        <div class="flex items-center">
+                            <i class="fas fa-check text-green-500 mr-2"></i>
+                            <span>Input Validation</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="bg-gray-50 p-6 rounded-lg mb-8">
+                <h3 class="text-xl font-semibold mb-4">Performance Requirements</h3>
+                <div class="grid md:grid-cols-4 gap-4">
+                    <div class="text-center p-4 bg-white rounded-lg">
+                        <i class="fas fa-tachometer-alt text-2xl text-blue-500 mb-2"></i>
+                        <h4 class="font-semibold">Response Time</h4>
+                        <p class="text-sm text-gray-600">&lt; 2 seconds for API calls</p>
+                    </div>
+                    <div class="text-center p-4 bg-white rounded-lg">
+                        <i class="fas fa-users text-2xl text-green-500 mb-2"></i>
+                        <h4 class="font-semibold">Concurrent Users</h4>
+                        <p class="text-sm text-gray-600">100+ simultaneous users</p>
+                    </div>
+                    <div class="text-center p-4 bg-white rounded-lg">
+                        <i class="fas fa-server text-2xl text-purple-500 mb-2"></i>
+                        <h4 class="font-semibold">Uptime</h4>
+                        <p class="text-sm text-gray-600">99.9% availability</p>
+                    </div>
+                    <div class="text-center p-4 bg-white rounded-lg">
+                        <i class="fas fa-sync-alt text-2xl text-red-500 mb-2"></i>
+                        <h4 class="font-semibold">Data Refresh</h4>
+                        <p class="text-sm text-gray-600">Real-time to hourly</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="grid md:grid-cols-2 gap-8">
+                <div class="card-shadow bg-white p-6 rounded-lg">
+                    <h3 class="text-xl font-semibold mb-4">Integration Requirements</h3>
+                    <div class="space-y-3">
+                        <div class="p-3 border-l-4 border-blue-500 bg-blue-50">
+                            <h4 class="font-semibold">Amazon Product Advertising API</h4>
+                            <p class="text-sm text-gray-600">Product data, pricing, affiliate links</p>
+                        </div>
+                        <div class="p-3 border-l-4 border-green-500 bg-green-50">
+                            <h4 class="font-semibold">Google Ads API</h4>
+                            <p class="text-sm text-gray-600">Campaign management, bid optimization</p>
+                        </div>
+                        <div class="p-3 border-l-4 border-purple-500 bg-purple-50">
+                            <h4 class="font-semibold">Economic Data APIs</h4>
+                            <p class="text-sm text-gray-600">FRED, Census Bureau, Trade data</p>
+                        </div>
+                        <div class="p-3 border-l-4 border-yellow-500 bg-yellow-50">
+                            <h4 class="font-semibold">Social Media APIs</h4>
+                            <p class="text-sm text-gray-600">Reddit, Twitter sentiment analysis</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card-shadow bg-white p-6 rounded-lg">
+                    <h3 class="text-xl font-semibold mb-4">Scalability Considerations</h3>
+                    <div class="space-y-3">
+                        <div class="flex items-start">
+                            <i class="fas fa-expand-arrows-alt text-blue-500 mr-3 mt-1"></i>
+                            <div>
+                                <h4 class="font-semibold">Horizontal Scaling</h4>
+                                <p class="text-sm text-gray-600">Serverless functions auto-scale based on demand</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start">
+                            <i class="fas fa-database text-green-500 mr-3 mt-1"></i>
+                            <div>
+                                <h4 class="font-semibold">Database Partitioning</h4>
+                                <p class="text-sm text-gray-600">Data sharding by product category or region</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start">
+                            <i class="fas fa-memory text-purple-500 mr-3 mt-1"></i>
+                            <div>
+                                <h4 class="font-semibold">Caching Strategy</h4>
+                                <p class="text-sm text-gray-600">Multi-layer caching for frequently accessed data</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start">
+                            <i class="fas fa-clock text-red-500 mr-3 mt-1"></i>
+                            <div>
+                                <h4 class="font-semibold">Rate Limiting</h4>
+                                <p class="text-sm text-gray-600">Intelligent throttling to respect API limits</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Implementation Phases -->
+    <section id="implementation" class="section-padding bg-gray-100">
+        <div class="container mx-auto px-6">
+            <h2 class="text-4xl font-bold text-gray-800 mb-8 text-center">Implementation Phases</h2>
+            
+            <div class="space-y-8">
+                <!-- Phase 1 -->
+                <div class="bg-white p-6 rounded-lg card-shadow">
+                    <div class="flex items-center mb-4">
+                        <div class="bg-blue-500 text-white rounded-full w-8 h-8 flex items-center justify-center mr-3">1</div>
+                        <h3 class="text-xl font-semibold">Phase 1: Foundation Setup (Weeks 1-2)</h3>
+                        <span class="ml-auto bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-sm">Foundation</span>
+                    </div>
+                    <div class="grid md:grid-cols-3 gap-6">
+                        <div>
+                            <h4 class="font-semibold mb-2 flex items-center">
+                                <i class="fas fa-cloud text-blue-500 mr-2"></i>
+                                Infrastructure Setup
+                            </h4>
+                            <ul class="text-sm space-y-1 text-gray-600">
+                                <li>• Google Cloud Platform project creation</li>
+                                <li>• Firebase project initialization</li>
+                                <li>• BigQuery dataset configuration</li>
+                                <li>• Service account setup</li>
+                                <li>• Security and IAM configuration</li>
+                            </ul>
+                        </div>
+                        <div>
+                            <h4 class="font-semibold mb-2 flex items-center">
+                                <i class="fas fa-plug text-green-500 mr-2"></i>
+                                API Integrations
+                            </h4>
+                            <ul class="text-sm space-y-1 text-gray-600">
+                                <li>• Amazon Associates account setup</li>
+                                <li>• Product Advertising API access</li>
+                                <li>• FRED API registration</li>
+                                <li>• Census Bureau API setup</li>
+                                <li>• Reddit API client configuration</li>
+                            </ul>
+                        </div>
+                        <div>
+                            <h4 class="font-semibold mb-2 flex items-center">
+                                <i class="fas fa-check-circle text-purple-500 mr-2"></i>
+                                Validation & Testing
+                            </h4>
+                            <ul class="text-sm space-y-1 text-gray-600">
+                                <li>• API connection testing</li>
+                                <li>• Data pipeline verification</li>
+                                <li>• Security configuration audit</li>
+                                <li>• Performance baseline establishment</li>
+                                <li>• Documentation creation</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Phase 2 -->
+                <div class="bg-white p-6 rounded-lg card-shadow">
+                    <div class="flex items-center mb-4">
+                        <div class="bg-green-500 text-white rounded-full w-8 h-8 flex items-center justify-center mr-3">2</div>
+                        <h3 class="text-xl font-semibold">Phase 2: Core Integration (Weeks 3-4)</h3>
+                        <span class="ml-auto bg-green-100 text-green-800 px-3 py-1 rounded-full text-sm">Core Development</span>
+                    </div>
+                    <div class="grid md:grid-cols-3 gap-6">
+                        <div>
+                            <h4 class="font-semibold mb-2 flex items-center">
+                                <i class="fas fa-cogs text-blue-500 mr-2"></i>
+                                Data Pipeline
+                            </h4>
+                            <ul class="text-sm space-y-1 text-gray-600">
+                                <li>• Cloud Functions for data collection</li>
+                                <li>• Scheduled data refresh jobs</li>
+                                <li>• Data transformation pipelines</li>
+                                <li>• Real-time event processing</li>
+                                <li>• Error handling and retry logic</li>
+                            </ul>
+                        </div>
+                        <div>
+                            <h4 class="font-semibold mb-2 flex items-center">
+                                <i class="fas fa-brain text-green-500 mr-2"></i>
+                                SYNTIN Integration
+                            </h4>
+                            <ul class="text-sm space-y-1 text-gray-600">
+                                <li>• Product selection algorithms</li>
+                                <li>• Margin calculation engine</li>
+                                <li>• Sentiment analysis integration</li>
+                                <li>• Tariff impact assessment</li>
+                                <li>• Decision API endpoints</li>
+                            </ul>
+                        </div>
+                        <div>
+                            <h4 class="font-semibold mb-2 flex items-center">
+                                <i class="fas fa-link text-purple-500 mr-2"></i>
+                                Affiliate Management
+                            </h4>
+                            <ul class="text-sm space-y-1 text-gray-600">
+                                <li>• Affiliate link generation</li>
+                                <li>• Click tracking system</li>
+                                <li>• Conversion attribution</li>
+                                <li>• Commission calculation</li>
+                                <li>• Performance analytics</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Phase 3 -->
+                <div class="bg-white p-6 rounded-lg card-shadow">
+                    <div class="flex items-center mb-4">
+                        <div class="bg-purple-500 text-white rounded-full w-8 h-8 flex items-center justify-center mr-3">3</div>
+                        <h3 class="text-xl font-semibold">Phase 3: Optimization & Testing (Weeks 5-6)</h3>
+                        <span class="ml-auto bg-purple-100 text-purple-800 px-3 py-1 rounded-full text-sm">Testing</span>
+                    </div>
+                    <div class="grid md:grid-cols-3 gap-6">
+                        <div>
+                            <h4 class="font-semibold mb-2 flex items-center">
+                                <i class="fas fa-bullhorn text-blue-500 mr-2"></i>
+                                Ad Platform Integration
+                            </h4>
+                            <ul class="text-sm space-y-1 text-gray-600">
+                                <li>• Google Ads API integration</li>
+                                <li>• Campaign creation automation</li>
+                                <li>• Bid adjustment algorithms</li>
+                                <li>• Performance monitoring</li>
+                                <li>• Budget management</li>
+                            </ul>
+                        </div>
+                        <div>
+                            <h4 class="font-semibold mb-2 flex items-center">
+                                <i class="fas fa-chart-bar text-green-500 mr-2"></i>
+                                Analytics Dashboard
+                            </h4>
+                            <ul class="text-sm space-y-1 text-gray-600">
+                                <li>• Real-time performance metrics</li>
+                                <li>• ROI tracking and reporting</li>
+                                <li>• Product performance analysis</li>
+                                <li>• Campaign effectiveness metrics</li>
+                                <li>• Custom alert system</li>
+                            </ul>
+                        </div>
+                        <div>
+                            <h4 class="font-semibold mb-2 flex items-center">
+                                <i class="fas fa-vial text-purple-500 mr-2"></i>
+                                Testing & Validation
+                            </h4>
+                            <ul class="text-sm space-y-1 text-gray-600">
+                                <li>• Unit and integration testing</li>
+                                <li>• Performance testing</li>
+                                <li>• A/B testing framework</li>
+                                <li>• Load testing</li>
+                                <li>• User acceptance testing</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Phase 4 -->
+                <div class="bg-white p-6 rounded-lg card-shadow">
+                    <div class="flex items-center mb-4">
+                        <div class="bg-red-500 text-white rounded-full w-8 h-8 flex items-center justify-center mr-3">4</div>
+                        <h3 class="text-xl font-semibold">Phase 4: Full Deployment (Weeks 7-8)</h3>
+                        <span class="ml-auto bg-red-100 text-red-800 px-3 py-1 rounded-full text-sm">Production</span>
+                    </div>
+                    <div class="grid md:grid-cols-3 gap-6">
+                        <div>
+                            <h4 class="font-semibold mb-2 flex items-center">
+                                <i class="fas fa-rocket text-blue-500 mr-2"></i>
+                                Production Deployment
+                            </h4>
+                            <ul class="text-sm space-y-1 text-gray-600">
+                                <li>• CI/CD pipeline setup</li>
+                                <li>• Production environment configuration</li>
+                                <li>• Blue-green deployment</li>
+                                <li>• Rollback procedures</li>
+                                <li>• Health monitoring</li>
+                            </ul>
+                        </div>
+                        <div>
+                            <h4 class="font-semibold mb-2 flex items-center">
+                                <i class="fas fa-eye text-green-500 mr-2"></i>
+                                Monitoring & Alerting
+                            </h4>
+                            <ul class="text-sm space-y-1 text-gray-600">
+                                <li>• System health dashboards</li>
+                                <li>• Performance monitoring</li>
+                                <li>• Error tracking and alerting</li>
+                                <li>• Cost monitoring</li>
+                                <li>• Uptime monitoring</li>
+                            </ul>
+                        </div>
+                        <div>
+                            <h4 class="font-semibold mb-2 flex items-center">
+                                <i class="fas fa-graduation-cap text-purple-500 mr-2"></i>
+                                Documentation & Training
+                            </h4>
+                            <ul class="text-sm space-y-1 text-gray-600">
+                                <li>• Technical documentation</li>
+                                <li>• User manuals</li>
+                                <li>• API documentation</li>
+                                <li>• Troubleshooting guides</li>
+                                <li>• Knowledge transfer</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Timeline Visualization -->
+            <div class="mt-8 bg-white p-6 rounded-lg card-shadow">
+                <h3 class="text-xl font-semibold mb-4">Implementation Timeline</h3>
+                <div class="chart-container">
+                    <canvas id="timelineChart"></canvas>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- API Specifications -->
+    <section id="apis" class="section-padding bg-white">
+        <div class="container mx-auto px-6">
+            <h2 class="text-4xl font-bold text-gray-800 mb-8 text-center">API Specifications</h2>
+            
+            <div class="grid md:grid-cols-2 gap-8 mb-8">
+                <div class="card-shadow bg-white p-6 rounded-lg">
+                    <h3 class="text-xl font-semibold mb-4 flex items-center">
+                        <i class="fas fa-exchange-alt text-blue-500 mr-2"></i>
+                        SYNTIN Core APIs
+                    </h3>
+                    <div class="space-y-4">
+                        <div class="border-l-4 border-blue-500 pl-4">
+                            <div class="flex justify-between items-center">
+                                <span class="font-mono text-sm">GET /api/products/top</span>
+                                <span class="bg-green-100 text-green-800 px-2 py-1 rounded text-xs">GET</span>
+                            </div>
+                            <p class="text-sm text-gray-600 mt-1">Retrieve top-performing products by category and score</p>
+                        </div>
+                        <div class="border-l-4 border-green-500 pl-4">
+                            <div class="flex justify-between items-center">
+                                <span class="font-mono text-sm">POST /api/campaigns/create</span>
+                                <span class="bg-blue-100 text-blue-800 px-2 py-1 rounded text-xs">POST</span>
+                            </div>
+                            <p class="text-sm text-gray-600 mt-1">Create new advertising campaign for selected products</p>
+                        </div>
+                        <div class="border-l-4 border-purple-500 pl-4">
+                            <div class="flex justify-between items-center">
+                                <span class="font-mono text-sm">PUT /api/campaigns/{id}/bid</span>
+                                <span class="bg-yellow-100 text-yellow-800 px-2 py-1 rounded text-xs">PUT</span>
+                            </div>
+                            <p class="text-sm text-gray-600 mt-1">Update campaign bid amounts based on performance</p>
+                        </div>
+                        <div class="border-l-4 border-red-500 pl-4">
+                            <div class="flex justify-between items-center">
+                                <span class="font-mono text-sm">GET /api/analytics/performance</span>
+                                <span class="bg-green-100 text-green-800 px-2 py-1 rounded text-xs">GET</span>
+                            </div>
+                            <p class="text-sm text-gray-600 mt-1">Retrieve comprehensive performance analytics</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card-shadow bg-white p-6 rounded-lg">
+                    <h3 class="text-xl font-semibold mb-4 flex items-center">
+                        <i class="fas fa-link text-green-500 mr-2"></i>
+                        Affiliate Link APIs
+                    </h3>
+                    <div class="space-y-4">
+                        <div class="border-l-4 border-blue-500 pl-4">
+                            <div class="flex justify-between items-center">
+                                <span class="font-mono text-sm">POST /api/links/generate</span>
+                                <span class="bg-blue-100 text-blue-800 px-2 py-1 rounded text-xs">POST</span>
+                            </div>
+                            <p class="text-sm text-gray-600 mt-1">Generate tracked affiliate links for products</p>
+                        </div>
+                        <div class="border-l-4 border-green-500 pl-4">
+                            <div class="flex justify-between items-center">
+                                <span class="font-mono text-sm">GET /api/links/track/{id}</span>
+                                <span class="bg-green-100 text-green-800 px-2 py-1 rounded text-xs">GET</span>
+                            </div>
+                            <p class="text-sm text-gray-600 mt-1">Track click events and redirect to Amazon</p>
+                        </div>
+                        <div class="border-l-4 border-purple-500 pl-4">
+                            <div class="flex justify-between items-center">
+                                <span class="font-mono text-sm">GET /api/links/stats</span>
+                                <span class="bg-green-100 text-green-800 px-2 py-1 rounded text-xs">GET</span>
+                            </div>
+                            <p class="text-sm text-gray-600 mt-1">Retrieve click and conversion statistics</p>
+                        </div>
+                        <div class="border-l-4 border-red-500 pl-4">
+                            <div class="flex justify-between items-center">
+                                <span class="font-mono text-sm">POST /api/links/batch</span>
+                                <span class="bg-blue-100 text-blue-800 px-2 py-1 rounded text-xs">POST</span>
+                            </div>
+                            <p class="text-sm text-gray-600 mt-1">Generate multiple affiliate links in batch</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="bg-gray-50 p-6 rounded-lg mb-8">
+                <h3 class="text-xl font-semibold mb-4">API Request/Response Examples</h3>
+                <div class="grid md:grid-cols-2 gap-6">
+                    <div>
+                        <h4 class="font-semibold mb-2">Product Selection Request</h4>
+                        <div class="bg-gray-800 text-green-400 p-4 rounded font-mono text-sm overflow-x-auto">
+<pre>{
+  "category": "Electronics",
+  "minScore": 0.7,
+  "limit": 10,
+  "filters": {
+    "priceRange": [10, 100],
+    "rating": 4.0
+  }
+}</pre>
+                        </div>
+                    </div>
+                    <div>
+                        <h4 class="font-semibold mb-2">Product Selection Response</h4>
+                        <div class="bg-gray-800 text-green-400 p-4 rounded font-mono text-sm overflow-x-auto">
+<pre>{
+  "success": true,
+  "products": [{
+    "asin": "B08N5WRWNW",
+    "title": "Echo Dot (4th Gen)",
+    "price": 49.99,
+    "score": 0.85,
+    "margin": 2.00,
+    "affiliateLink": "https://..."
+  }],
+  "count": 10
+}</pre>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="grid md:grid-cols-3 gap-6">
+                <div class="card-shadow bg-white p-6 rounded-lg">
+                    <h3 class="text-lg font-semibold mb-3">Authentication</h3>
+                    <div class="space-y-2 text-sm">
+                        <div class="flex items-center">
+                            <i class="fas fa-key text-blue-500 mr-2"></i>
+                            <span>API Key Header</span>
+                        </div>
+                        <div class="flex items-center">
+                            <i class="fas fa-lock text-green-500 mr-2"></i>
+                            <span>OAuth 2.0 Bearer Token</span>
+                        </div>
+                        <div class="flex items-center">
+                            <i class="fas fa-shield-alt text-purple-500 mr-2"></i>
+                            <span>Request Signing</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card-shadow bg-white p-6 rounded-lg">
+                    <h3 class="text-lg font-semibold mb-3">Rate Limiting</h3>
+                    <div class="space-y-2 text-sm">
+                        <div class="flex justify-between">
+                            <span>Standard APIs:</span>
+                            <span class="font-semibold">1000/hour</span>
+                        </div>
+                        <div class="flex justify-between">
+                            <span>Analytics APIs:</span>
+                            <span class="font-semibold">100/hour</span>
+                        </div>
+                        <div class="flex justify-between">
+                            <span>Bulk Operations:</span>
+                            <span class="font-semibold">10/hour</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card-shadow bg-white p-6 rounded-lg">
+                    <h3 class="text-lg font-semibold mb-3">Error Handling</h3>
+                    <div class="space-y-2 text-sm">
+                        <div class="flex items-center">
+                            <span class="w-12 h-6 bg-green-500 text-white text-xs flex items-center justify-center rounded mr-2">200</span>
+                            <span>Success</span>
+                        </div>
+                        <div class="flex items-center">
+                            <span class="w-12 h-6 bg-yellow-500 text-white text-xs flex items-center justify-center rounded mr-2">400</span>
+                            <span>Bad Request</span>
+                        </div>
+                        <div class="flex items-center">
+                            <span class="w-12 h-6 bg-red-500 text-white text-xs flex items-center justify-center rounded mr-2">401</span>
+                            <span>Unauthorized</span>
+                        </div>
+                        <div class="flex items-center">
+                            <span class="w-12 h-6 bg-red-500 text-white text-xs flex items-center justify-center rounded mr-2">429</span>
+                            <span>Rate Limited</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Cost Analysis -->
+    <section id="cost-analysis" class="section-padding bg-gray-100">
+        <div class="container mx-auto px-6">
+            <h2 class="text-4xl font-bold text-gray-800 mb-8 text-center">Cost Analysis</h2>
+            
+            <div class="grid md:grid-cols-2 gap-8 mb-8">
+                <div class="card-shadow bg-white p-6 rounded-lg">
+                    <h3 class="text-xl font-semibold mb-4 flex items-center">
+                        <i class="fas fa-calculator text-blue-500 mr-2"></i>
+                        Development Phase Costs
+                    </h3>
+                    <div class="space-y-3">
+                        <div class="flex justify-between items-center p-3 bg-green-50 rounded">
+                            <span>Google Cloud Platform (Free Tier)</span>
+                            <span class="font-semibold text-green-600">$0.00</span>
+                        </div>
+                        <div class="flex justify-between items-center p-3 bg-green-50 rounded">
+                            <span>Firebase Services (Free Tier)</span>
+                            <span class="font-semibold text-green-600">$0.00</span>
+                        </div>
+                        <div class="flex justify-between items-center p-3 bg-green-50 rounded">
+                            <span>Amazon Associates Program</span>
+                            <span class="font-semibold text-green-600">$0.00</span>
+                        </div>
+                        <div class="flex justify-between items-center p-3 bg-green-50 rounded">
+                            <span>Economic Data APIs (FRED, Census)</span>
+                            <span class="font-semibold text-green-600">$0.00</span>
+                        </div>
+                        <div class="flex justify-between items-center p-3 bg-yellow-50 rounded">
+                            <span>Domain Registration (Optional)</span>
+                            <span class="font-semibold text-yellow-600">$12.00</span>
+                        </div>
+                        <div class="border-t pt-3 flex justify-between items-center font-bold">
+                            <span>Total Development Cost:</span>
+                            <span class="text-green-600">≤ $12.00</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card-shadow bg-white p-6 rounded-lg">
+                    <h3 class="text-xl font-semibold mb-4 flex items-center">
+                        <i class="fas fa-chart-line text-green-500 mr-2"></i>
+                        Operational Costs (Monthly)
+                    </h3>
+                    <div class="space-y-3">
+                        <div class="flex justify-between items-center p-3 bg-blue-50 rounded">
+                            <span>Google Cloud Functions</span>
+                            <span class="font-semibold text-blue-600">$0-20</span>
+                        </div>
+                        <div class="flex justify-between items-center p-3 bg-blue-50 rounded">
+                            <span>Firebase Firestore</span>
+                            <span class="font-semibold text-blue-600">$0-15</span>
+                        </div>
+                        <div class="flex justify-between items-center p-3 bg-blue-50 rounded">
+                            <span>BigQuery Processing</span>
+                            <span class="font-semibold text-blue-600">$0-10</span>
+                        </div>
+                        <div class="flex justify-between items-center p-3 bg-yellow-50 rounded">
+                            <span>Google Ads Testing Budget</span>
+                            <span class="font-semibold text-yellow-600">$50-200</span>
+                        </div>
+                        <div class="flex justify-between items-center p-3 bg-purple-50 rounded">
+                            <span>Enhanced APIs (Optional)</span>
+                            <span class="font-semibold text-purple-600">$0-50</span>
+                        </div>
+                        <div class="border-t pt-3 flex justify-between items-center font-bold">
+                            <span>Total Monthly Cost:</span>
+                            <span class="text-blue-600">$50-295</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="bg-white p-6 rounded-lg card-shadow mb-8">
+                <h3 class="text-xl font-semibold mb-4">Cost Scaling Analysis</h3>
+                <div class="chart-container">
+                    <canvas id="costChart"></canvas>
+                </div>
+            </div>
+
+            <div class="grid md:grid-cols-3 gap-6 mb-8">
+                <div class="bg-green-50 p-6 rounded-lg text-center">
+                    <i class="fas fa-seedling text-3xl text-green-500 mb-3"></i>
+                    <h4 class="font-semibold text-lg mb-2">Startup Phase</h4>
+                    <p class="text-2xl font-bold text-green-600 mb-2">$0-100/mo</p>
+                    <p class="text-sm text-gray-600">Free tiers cover most needs, minimal ad spend for testing</p>
+                </div>
+                <div class="bg-blue-50 p-6 rounded-lg text-center">
+                    <i class="fas fa-chart-line text-3xl text-blue-500 mb-3"></i>
+                    <h4 class="font-semibold text-lg mb-2">Growth Phase</h4>
+                    <p class="text-2xl font-bold text-blue-600 mb-2">$200-1000/mo</p>
+                    <p class="text-sm text-gray-600">Increased ad spend, some services exceed free tiers</p>
+                </div>
+                <div class="bg-purple-50 p-6 rounded-lg text-center">
+                    <i class="fas fa-rocket text-3xl text-purple-500 mb-3"></i>
+                    <h4 class="font-semibold text-lg mb-2">Scale Phase</h4>
+                    <p class="text-2xl font-bold text-purple-600 mb-2">$1000+/mo</p>
+                    <p class="text-sm text-gray-600">Significant ad budget, enterprise-level infrastructure</p>
+                </div>
+            </div>
+
+            <div class="bg-yellow-50 p-6 rounded-lg">
+                <h3 class="text-lg font-semibold mb-3 flex items-center">
+                    <i class="fas fa-lightbulb text-yellow-500 mr-2"></i>
+                    Cost Optimization Strategies
+                </h3>
+                <div class="grid md:grid-cols-2 gap-6">
+                    <div>
+                        <h4 class="font-semibold mb-2">Infrastructure Optimization</h4>
+                        <ul class="text-sm space-y-1">
+                            <li>• Use caching to reduce API calls</li>
+                            <li>• Implement request batching</li>
+                            <li>• Optimize database queries</li>
+                            <li>• Monitor and set usage alerts</li>
+                            <li>• Regular cost audits</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h4 class="font-semibold mb-2">Advertising Optimization</h4>
+                        <ul class="text-sm space-y-1">
+                            <li>• Start with small test budgets</li>
+                            <li>• Focus on high-margin products</li>
+                            <li>• Implement automatic bid adjustments</li>
+                            <li>• Use negative keywords to reduce waste</li>
+                            <li>• Regular performance reviews</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Risk Mitigation -->
+    <section id="risk-mitigation" class="section-padding bg-white">
+        <div class="container mx-auto px-6">
+            <h2 class="text-4xl font-bold text-gray-800 mb-8 text-center">Risk Mitigation</h2>
+            
+            <div class="grid md:grid-cols-2 gap-8 mb-8">
+                <div class="card-shadow bg-white p-6 rounded-lg">
+                    <h3 class="text-xl font-semibold mb-4 flex items-center">
+                        <i class="fas fa-exclamation-triangle text-red-500 mr-2"></i>
+                        Technical Risks
+                    </h3>
+                    <div class="space-y-4">
+                        <div class="border-l-4 border-red-500 pl-4">
+                            <h4 class="font-semibold text-red-700">API Rate Limiting</h4>
+                            <p class="text-sm text-gray-600 mb-2">Risk: Exceeding free tier limits or API rate restrictions</p>
+                            <p class="text-sm text-green-700"><strong>Mitigation:</strong> Implement intelligent queuing, request batching, and exponential backoff strategies</p>
+                        </div>
+                        <div class="border-l-4 border-orange-500 pl-4">
+                            <h4 class="font-semibold text-orange-700">Data Security</h4>
+                            <p class="text-sm text-gray-600 mb-2">Risk: Unauthorized access to sensitive business data</p>
+                            <p class="text-sm text-green-700"><strong>Mitigation:</strong> OAuth 2.0, API key rotation, encryption at rest and in transit</p>
+                        </div>
+                        <div class="border-l-4 border-yellow-500 pl-4">
+                            <h4 class="font-semibold text-yellow-700">System Downtime</h4>
+                            <p class="text-sm text-gray-600 mb-2">Risk: Service interruptions affecting campaign performance</p>
+                            <p class="text-sm text-green-700"><strong>Mitigation:</strong> Redundant systems, health monitoring, automatic failover mechanisms</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card-shadow bg-white p-6 rounded-lg">
+                    <h3 class="text-xl font-semibold mb-4 flex items-center">
+                        <i class="fas fa-business-time text-blue-500 mr-2"></i>
+                        Business Risks
+                    </h3>
+                    <div class="space-y-4">
+                        <div class="border-l-4 border-blue-500 pl-4">
+                            <h4 class="font-semibold text-blue-700">Amazon Policy Changes</h4>
+                            <p class="text-sm text-gray-600 mb-2">Risk: Changes to Amazon Associates terms or commission rates</p>
+                            <p class="text-sm text-green-700"><strong>Mitigation:</strong> Diversify to multiple affiliate programs, monitor policy updates</p>
+                        </div>
+                        <div class="border-l-4 border-green-500 pl-4">
+                            <h4 class="font-semibold text-green-700">Ad Cost Volatility</h4>
+                            <p class="text-sm text-gray-600 mb-2">Risk: Sudden increases in advertising costs affecting profitability</p>
+                            <p class="text-sm text-green-700"><strong>Mitigation:</strong> Implement spending caps, ROI thresholds, automatic pause triggers</p>
+                        </div>
+                        <div class="border-l-4 border-purple-500 pl-4">
+                            <h4 class="font-semibold text-purple-700">Product Quality Issues</h4>
+                            <p class="text-sm text-gray-600 mb-2">Risk: Promoting products with poor reviews or quality issues</p>
+                            <p class="text-sm text-green-700"><strong>Mitigation:</strong> Continuous monitoring of customer feedback, automated product filtering</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="bg-gray-50 p-6 rounded-lg mb-8">
+                <h3 class="text-xl font-semibold mb-4">Risk Assessment Matrix</h3>
+                <div class="overflow-x-auto">
+                    <table class="w-full text-sm">
+                        <thead class="bg-gray-100">
+                            <tr>
+                                <th class="text-left p-3">Risk Category</th>
+                                <th class="text-center p-3">Probability</th>
+                                <th class="text-center p-3">Impact</th>
+                                <th class="text-center p-3">Risk Level</th>
+                                <th class="text-left p-3">Mitigation Status</th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-gray-200">
+                            <tr>
+                                <td class="p-3 font-medium">API Rate Limiting</td>
+                                <td class="text-center p-3"><span class="bg-yellow-100 text-yellow-800 px-2 py-1 rounded-full text-xs">Medium</span></td>
+                                <td class="text-center p-3"><span class="bg-orange-100 text-orange-800 px-2 py-1 rounded-full text-xs">High</span></td>
+                                <td class="text-center p-3"><span class="bg-yellow-100 text-yellow-800 px-2 py-1 rounded-full text-xs">Medium</span></td>
+                                <td class="p-3"><span class="bg-green-100 text-green-800 px-2 py-1 rounded-full text-xs">Implemented</span></td>
+                            </tr>
+                            <tr>
+                                <td class="p-3 font-medium">Amazon Policy Changes</td>
+                                <td class="text-center p-3"><span class="bg-green-100 text-green-800 px-2 py-1 rounded-full text-xs">Low</span></td>
+                                <td class="text-center p-3"><span class="bg-red-100 text-red-800 px-2 py-1 rounded-full text-xs">Very High</span></td>
+                                <td class="text-center p-3"><span class="bg-yellow-100 text-yellow-800 px-2 py-1 rounded-full text-xs">Medium</span></td>
+                                <td class="p-3"><span class="bg-yellow-100 text-yellow-800 px-2 py-1 rounded-full text-xs">In Progress</span></td>
+                            </tr>
+                            <tr>
+                                <td class="p-3 font-medium">Data Security Breach</td>
+                                <td class="text-center p-3"><span class="bg-green-100 text-green-800 px-2 py-1 rounded-full text-xs">Low</span></td>
+                                <td class="text-center p-3"><span class="bg-red-100 text-red-800 px-2 py-1 rounded-full text-xs">Very High</span></td>
+                                <td class="text-center p-3"><span class="bg-yellow-100 text-yellow-800 px-2 py-1 rounded-full text-xs">Medium</span></td>
+                                <td class="p-3"><span class="bg-green-100 text-green-800 px-2 py-1 rounded-full text-xs">Implemented</span></td>
+                            </tr>
+                            <tr>
+                                <td class="p-3 font-medium">Ad Cost Escalation</td>
+                                <td class="text-center p-3"><span class="bg-orange-100 text-orange-800 px-2 py-1 rounded-full text-xs">High</span></td>
+                                <td class="text-center p-3"><span class="bg-yellow-100 text-yellow-800 px-2 py-1 rounded-full text-xs">Medium</span></td>
+                                <td class="text-center p-3"><span class="bg-orange-100 text-orange-800 px-2 py-1 rounded-full text-xs">High</span></td>
+                                <td class="p-3"><span class="bg-green-100 text-green-800 px-2 py-1 rounded-full text-xs">Implemented</span></td>
+                            </tr>
+                            <tr>
+                                <td class="p-3 font-medium">System Downtime</td>
+                                <td class="text-center p-3"><span class="bg-yellow-100 text-yellow-800 px-2 py-1 rounded-full text-xs">Medium</span></td>
+                                <td class="text-center p-3"><span class="bg-orange-100 text-orange-800 px-2 py-1 rounded-full text-xs">High</span></td>
+                                <td class="text-center p-3"><span class="bg-yellow-100 text-yellow-800 px-2 py-1 rounded-full text-xs">Medium</span></td>
+                                <td class="p-3"><span class="bg-green-100 text-green-800 px-2 py-1 rounded-full text-xs">Implemented</span></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div class="grid md:grid-cols-3 gap-6">
+                <div class="bg-blue-50 p-6 rounded-lg">
+                    <h4 class="font-semibold text-lg mb-3 flex items-center">
+                        <i class="fas fa-shield-alt text-blue-500 mr-2"></i>
+                        Preventive Measures
+                    </h4>
+                    <ul class="text-sm space-y-2">
+                        <li>• Comprehensive monitoring and alerting</li>
+                        <li>• Regular security audits</li>
+                        <li>• Automated backup procedures</li>
+                        <li>• Performance baseline establishment</li>
+                        <li>• Incident response procedures</li>
+                    </ul>
+                </div>
+
+                <div class="bg-green-50 p-6 rounded-lg">
+                    <h4 class="font-semibold text-lg mb-3 flex items-center">
+                        <i class="fas fa-life-ring text-green-500 mr-2"></i>
+                        Recovery Procedures
+                    </h4>
+                    <ul class="text-sm space-y-2">
+                        <li>• Automated failover mechanisms</li>
+                        <li>• Data backup and restore procedures</li>
+                        <li>• Emergency contact protocols</li>
+                        <li>• Business continuity planning</li>
+                        <li>• Post-incident analysis</li>
+                    </ul>
+                </div>
+
+                <div class="bg-purple-50 p-6 rounded-lg">
+                    <h4 class="font-semibold text-lg mb-3 flex items-center">
+                        <i class="fas fa-chart-line text-purple-500 mr-2"></i>
+                        Continuous Improvement
+                    </h4>
+                    <ul class="text-sm space-y-2">
+                        <li>• Regular risk assessments</li>
+                        <li>• Technology stack updates</li>
+                        <li>• Process optimization</li>
+                        <li>• Team training and development</li>
+                        <li>• Stakeholder feedback integration</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Expansion Plans -->
+    <section id="expansion-plans" class="section-padding bg-gray-100">
+        <div class="container mx-auto px-6">
+            <h2 class="text-4xl font-bold text-gray-800 mb-8 text-center">Expansion Plans</h2>
+            
+            <div class="bg-white p-8 rounded-lg card-shadow mb-8">
+                <h3 class="text-2xl font-semibold mb-6">Future Marketplace Integration</h3>
+                <div class="grid md:grid-cols-4 gap-6">
+                    <div class="text-center p-4 border-2 border-dashed border-gray-300 rounded-lg hover:border-blue-500 transition-colors">
+                        <i class="fas fa-store text-3xl text-blue-500 mb-3"></i>
+                        <h4 class="font-semibold mb-2">Walmart Marketplace</h4>
+                        <p class="text-sm text-gray-600">Expand to Walmart's growing e-commerce platform</p>
+                        <span class="bg-blue-100 text-blue-800 px-2 py-1 rounded-full text-xs mt-2 inline-block">Q2 2024</span>
+                    </div>
+                    <div class="text-center p-4 border-2 border-dashed border-gray-300 rounded-lg hover:border-green-500 transition-colors">
+                        <i class="fab fa-ebay text-3xl text-green-500 mb-3"></i>
+                        <h4 class="font-semibold mb-2">eBay Integration</h4>
+                        <p class="text-sm text-gray-600">Leverage eBay's auction and fixed-price listings</p>
+                        <span class="bg-green-100 text-green-800 px-2 py-1 rounded-full text-xs mt-2 inline-block">Q3 2024</span>
+                    </div>
+                    <div class="text-center p-4 border-2 border-dashed border-gray-300 rounded-lg hover:border-purple-500 transition-colors">
+                        <i class="fab fa-shopify text-3xl text-purple-500 mb-3"></i>
+                        <h4 class="font-semibold mb-2">Shopify Stores</h4>
+                        <p class="text-sm text-gray-600">Direct integration with Shopify merchant stores</p>
+                        <span class="bg-purple-100 text-purple-800 px-2 py-1 rounded-full text-xs mt-2 inline-block">Q4 2024</span>
+                    </div>
+                    <div class="text-center p-4 border-2 border-dashed border-gray-300 rounded-lg hover:border-red-500 transition-colors">
+                        <i class="fas fa-globe text-3xl text-red-500 mb-3"></i>
+                        <h4 class="font-semibold mb-2">International Markets</h4>
+                        <p class="text-sm text-gray-600">Alibaba, Rakuten, and other global platforms</p>
+                        <span class="bg-red-100 text-red-800 px-2 py-1 rounded-full text-xs mt-2 inline-block">2025</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="grid md:grid-cols-2 gap-8 mb-8">
+                <div class="card-shadow bg-white p-6 rounded-lg">
+                    <h3 class="text-xl font-semibold mb-4 flex items-center">
+                        <i class="fas fa-rocket text-blue-500 mr-2"></i>
+                        Enhanced AI Capabilities
+                    </h3>
+                    <div class="space-y-3">
+                        <div class="p-3 bg-blue-50 rounded">
+                            <h4 class="font-semibold">Dynamic Pricing Optimization</h4>
+                            <p class="text-sm text-gray-600">Real-time price adjustments based on market conditions</p>
+                        </div>
+                        <div class="p-3 bg-green-50 rounded">
+                            <h4 class="font-semibold">Custom Storefront Creation</h4>
+                            <p class="text-sm text-gray-600">AI-generated product pages with optimized content</p>
+                        </div>
+                        <div class="p-3 bg-purple-50 rounded">
+                            <h4 class="font-semibold">Advanced Targeting</h4>
+                            <p class="text-sm text-gray-600">ML-powered audience segmentation and personalization</p>
+                        </div>
+                        <div class="p-3 bg-yellow-50 rounded">
+                            <h4 class="font-semibold">Predictive Analytics</h4>
+                            <p class="text-sm text-gray-600">Seasonal demand forecasting and trend prediction</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card-shadow bg-white p-6 rounded-lg">
+                    <h3 class="text-xl font-semibold mb-4 flex items-center">
+                        <i class="fas fa-chart-bar text-green-500 mr-2"></i>
+                        Advanced Analytics Features
+                    </h3>
+                    <div class="space-y-3">
+                        <div class="p-3 bg-blue-50 rounded">
+                            <h4 class="font-semibold">Multi-Attribution Modeling</h4>
+                            <p class="text-sm text-gray-600">Comprehensive customer journey analysis</p>
+                        </div>
+                        <div class="p-3 bg-green-50 rounded">
+                            <h4 class="font-semibold">Competitive Intelligence</h4>
+                            <p class="text-sm text-gray-600">Monitor competitor pricing and strategies</p>
+                        </div>
+                        <div class="p-3 bg-purple-50 rounded">
+                            <h4 class="font-semibold">ROI Optimization</h4>
+                            <p class="text-sm text-gray-600">Advanced return on investment calculation and optimization</p>
+                        </div>
+                        <div class="p-3 bg-yellow-50 rounded">
+                            <h4 class="font-semibold">Custom Reporting</h4>
+                            <p class="text-sm text-gray-600">Stakeholder-specific dashboards and reports</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="bg-white p-6 rounded-lg card-shadow mb-8">
+                <h3 class="text-xl font-semibold mb-4">Expansion Roadmap</h3>
+                <div class="chart-container">
+                    <canvas id="expansionChart"></canvas>
+                </div>
+            </div>
+
+            <div class="grid md:grid-cols-3 gap-6">
+                <div class="bg-gradient-to-br from-blue-50 to-blue-100 p-6 rounded-lg">
+                    <h4 class="font-semibold text-lg mb-3 flex items-center">
+                        <i class="fas fa-cog text-blue-500 mr-2"></i>
+                        Technical Scalability
+                    </h4>
+                    <ul class="text-sm space-y-2">
+                        <li>• Microservices architecture migration</li>
+                        <li>• Container orchestration with Kubernetes</li>
+                        <li>• Multi-region deployment</li>
+                        <li>• Advanced caching strategies</li>
+                        <li>• Database sharding and optimization</li>
+                    </ul>
+                </div>
+
+                <div class="bg-gradient-to-br from-green-50 to-green-100 p-6 rounded-lg">
+                    <h4 class="font-semibold text-lg mb-3 flex items-center">
+                        <i class="fas fa-users text-green-500 mr-2"></i>
+                        Team Expansion
+                    </h4>
+                    <ul class="text-sm space-y-2">
+                        <li>• AI/ML engineers for SYNTIN enhancement</li>
+                        <li>• DevOps engineers for infrastructure</li>
+                        <li>• Digital marketing specialists</li>
+                        <li>• Data analysts and scientists</li>
+                        <li>• Customer success managers</li>
+                    </ul>
+                </div>
+
+                <div class="bg-gradient-to-br from-purple-50 to-purple-100 p-6 rounded-lg">
+                    <h4 class="font-semibold text-lg mb-3 flex items-center">
+                        <i class="fas fa-globe text-purple-500 mr-2"></i>
+                        Market Expansion
+                    </h4>
+                    <ul class="text-sm space-y-2">
+                        <li>• Geographic expansion to Europe</li>
+                        <li>• Asia-Pacific market entry</li>
+                        <li>• Vertical-specific solutions</li>
+                        <li>• B2B marketplace integration</li>
+                        <li>• White-label solution offerings</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Conclusion -->
+    <section class="section-padding bg-white">
+        <div class="container mx-auto px-6">
+            <h2 class="text-4xl font-bold text-gray-800 mb-8 text-center">Conclusion</h2>
+            
+            <div class="max-w-4xl mx-auto text-center mb-8">
+                <p class="text-lg text-gray-600 leading-relaxed">
+                    The SYNTIN AI-powered Programmatic Ad Buy and Amazon Affiliate Integration system represents a transformative approach to e-commerce marketing. By leveraging artificial intelligence, real-time data analysis, and programmatic advertising, this solution delivers unprecedented efficiency and profitability in the affiliate marketing space.
+                </p>
+            </div>
+
+            <div class="grid md:grid-cols-3 gap-6 mb-8">
+                <div class="text-center p-6">
+                    <i class="fas fa-trophy text-4xl text-yellow-500 mb-4"></i>
+                    <h3 class="text-xl font-semibold mb-2">Competitive Advantage</h3>
+                    <p class="text-gray-600">AI-driven decision making provides speed and precision unmatched by traditional approaches</p>
+                </div>
+                <div class="text-center p-6">
+                    <i class="fas fa-dollar-sign text-4xl text-green-500 mb-4"></i>
+                    <h3 class="text-xl font-semibold mb-2">Cost Efficiency</h3>
+                    <p class="text-gray-600">Zero inventory costs and intelligent resource utilization maximize profit margins</p>
+                </div>
+                <div class="text-center p-6">
+                    <i class="fas fa-expand-arrows-alt text-4xl text-blue-500 mb-4"></i>
+                    <h3 class="text-xl font-semibold mb-2">Scalability</h3>
+                    <p class="text-gray-600">Cloud-native architecture enables rapid scaling across markets and platforms</p>
+                </div>
+            </div>
+
+            <div class="bg-gradient-to-r from-blue-50 to-purple-50 p-8 rounded-lg text-center">
+                <h3 class="text-2xl font-semibold mb-4">Ready to Transform Your E-commerce Strategy?</h3>
+                <p class="text-gray-600 mb-6">
+                    This comprehensive functional specification provides the roadmap for implementing a cutting-edge, AI-powered affiliate marketing system that can be built and deployed with minimal upfront investment while delivering enterprise-level capabilities.
+                </p>
+                <div class="flex justify-center space-x-4">
+                    <div class="bg-white p-4 rounded-lg shadow">
+                        <p class="text-sm text-gray-600">Total Implementation Cost</p>
+                        <p class="text-2xl font-bold text-green-600">≤ $100</p>
+                    </div>
+                    <div class="bg-white p-4 rounded-lg shadow">
+                        <p class="text-sm text-gray-600">Time to Market</p>
+                        <p class="text-2xl font-bold text-blue-600">8 Weeks</p>
+                    </div>
+                    <div class="bg-white p-4 rounded-lg shadow">
+                        <p class="text-sm text-gray-600">Expected ROI</p>
+                        <p class="text-2xl font-bold text-purple-600">300%+</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="gradient-bg text-white py-6">
+        <div class="container mx-auto px-6 text-center">
+            <p>&copy; 2024 SYNTIN AI Functional Specification. All rights reserved.</p>
+            <p class="text-sm mt-2 opacity-75">This document contains proprietary and confidential information.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Timeline Chart
+        const timelineCtx = document.getElementById('timelineChart').getContext('2d');
+        new Chart(timelineCtx, {
+            type: 'bar',
+            data: {
+                labels: ['Week 1-2', 'Week 3-4', 'Week 5-6', 'Week 7-8'],
+                datasets: [{
+                    label: 'Foundation Setup',
+                    data: [100, 20, 10, 5],
+                    backgroundColor: '#3B82F6',
+                    stack: 'stack1'
+                }, {
+                    label: 'Core Integration',
+                    data: [0, 100, 30, 10],
+                    backgroundColor: '#10B981',
+                    stack: 'stack1'
+                }, {
+                    label: 'Testing & Optimization',
+                    data: [0, 0, 100, 40],
+                    backgroundColor: '#8B5CF6',
+                    stack: 'stack1'
+                }, {
+                    label: 'Deployment',
+                    data: [0, 0, 0, 100],
+                    backgroundColor: '#EF4444',
+                    stack: 'stack1'
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    title: {
+                        display: true,
+                        text: 'Implementation Timeline by Phase'
+                    },
+                    legend: {
+                        position: 'bottom'
+                    }
+                },
+                scales: {
+                    x: {
+                        stacked: true
+                    },
+                    y: {
+                        stacked: true,
+                        title: {
+                            display: true,
+                            text: 'Effort Allocation (%)'
+                        }
+                    }
+                }
+            }
+        });
+
+        // Cost Chart
+        const costCtx = document.getElementById('costChart').getContext('2d');
+        new Chart(costCtx, {
+            type: 'line',
+            data: {
+                labels: ['Month 1', 'Month 3', 'Month 6', 'Month 12', 'Month 18', 'Month 24'],
+                datasets: [{
+                    label: 'Infrastructure Costs',
+                    data: [0, 25, 75, 200, 400, 600],
+                    borderColor: '#3B82F6',
+                    backgroundColor: 'rgba(59, 130, 246, 0.1)',
+                    fill: true
+                }, {
+                    label: 'Advertising Spend',
+                    data: [50, 200, 500, 1500, 3000, 5000],
+                    borderColor: '#10B981',
+                    backgroundColor: 'rgba(16, 185, 129, 0.1)',
+                    fill: true
+                }, {
+                    label: 'Revenue',
+                    data: [100, 800, 2000, 6000, 12000, 20000],
+                    borderColor: '#F59E0B',
+                    backgroundColor: 'rgba(245, 158, 11, 0.1)',
+                    fill: true
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    title: {
+                        display: true,
+                        text: 'Cost vs Revenue Projection'
+                    },
+                    legend: {
+                        position: 'bottom'
+                    }
+                },
+                scales: {
+                    y: {
+                        title: {
+                            display: true,
+                            text: 'Amount ($)'
+                        }
+                    }
+                }
+            }
+        });
+
+        // Expansion Chart
+        const expansionCtx = document.getElementById('expansionChart').getContext('2d');
+        new Chart(expansionCtx, {
+            type: 'radar',
+            data: {
+                labels: ['Amazon', 'Walmart', 'eBay', 'Shopify', 'International', 'B2B'],
+                datasets: [{
+                    label: 'Current Coverage',
+                    data: [100, 0, 0, 0, 0, 0],
+                    borderColor: '#3B82F6',
+                    backgroundColor: 'rgba(59, 130, 246, 0.2)',
+                    pointBackgroundColor: '#3B82F6'
+                }, {
+                    label: '12-Month Target',
+                    data: [100, 80, 60, 70, 30, 40],
+                    borderColor: '#10B981',
+                    backgroundColor: 'rgba(16, 185, 129, 0.2)',
+                    pointBackgroundColor: '#10B981'
+                }, {
+                    label: '24-Month Vision',
+                    data: [100, 100, 90, 95, 80, 85],
+                    borderColor: '#F59E0B',
+                    backgroundColor: 'rgba(245, 158, 11, 0.2)',
+                    pointBackgroundColor: '#F59E0B'
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    title: {
+                        display: true,
+                        text: 'Marketplace Expansion Strategy'
+                    },
+                    legend: {
+                        position: 'bottom'
+                    }
+                },
+                scales: {
+                    r: {
+                        beginAtZero: true,
+                        max: 100,
+                        title: {
+                            display: true,
+                            text: 'Coverage (%)'
+                        }
+                    }
+                }
+            }
+        });
+
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>

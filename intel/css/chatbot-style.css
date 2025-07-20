@@ -1,0 +1,176 @@
+/* css/chatbot-style.css - Chatbot "Apple-like" Styles */
+:root {
+  /* Chatbot Specific Palette - Apple-Inspired Dark Theme */
+  --chatbot-system-background-dark: #1c1c1e; 
+  --chatbot-system-secondary-background-dark: #2c2c2e; 
+  --chatbot-system-tertiary-background-dark: #3a3a3c; 
+  --chatbot-system-label-dark: rgba(235, 235, 245, 0.85); 
+  --chatbot-system-secondary-label-dark: rgba(235, 235, 245, 0.6);
+  --chatbot-system-tertiary-label-dark: rgba(235, 235, 245, 0.3);
+  --chatbot-system-blue-dark: #0a84ff; 
+  --chatbot-system-gray-dark: #8e8e93;
+  --chatbot-system-green-dark: #30d158; 
+  --chatbot-system-separator-dark: rgba(84, 84, 88, 0.65); 
+  --chatbot-system-fill-dark: rgba(120, 120, 128, 0.36); 
+
+  --chatbot-app-bg: var(--chatbot-system-background-dark);
+  --chatbot-sidebar-bg: var(--chatbot-system-secondary-background-dark);
+  --chatbot-chat-controls-bg: var(--chatbot-system-secondary-background-dark);
+  --chatbot-chat-header-bg: var(--chatbot-system-tertiary-background-dark); 
+  
+  --chatbot-text-primary: var(--chatbot-system-label-dark);
+  --chatbot-text-secondary: var(--chatbot-system-secondary-label-dark);
+  --chatbot-text-placeholder: var(--chatbot-system-tertiary-label-dark);
+
+  --chatbot-accent-color-primary: var(--chatbot-system-blue-dark); 
+  --chatbot-accent-color-user: var(--chatbot-system-green-dark); 
+
+  --chatbot-border-subtle: var(--chatbot-system-separator-dark);
+  --chatbot-input-field-bg: var(--chatbot-system-fill-dark);
+
+  --chatbot-font-family-main: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  --chatbot-border-radius-standard: 10px; 
+  --chatbot-border-radius-buttons: 8px;
+  --chatbot-border-radius-messages: 18px;
+
+  --chatbot-shadow-subtle: 0 1px 3px rgba(0, 0, 0, 0.1), 0 1px 2px rgba(0, 0, 0, 0.06);
+  --chatbot-shadow-medium: 0 4px 6px rgba(0, 0, 0, 0.1), 0 2px 4px rgba(0, 0, 0, 0.06);
+  --chatbot-shadow-strong-for-modal: 0 15px 35px rgba(0,0,0,0.2), 0 5px 15px rgba(0,0,0,0.15);
+}
+
+#app-wrapper, #app-wrapper *, #chat-toggle#chat-toggle { 
+    font-family: var(--chatbot-font-family-main) !important;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    box-sizing: border-box; /* Ensure padding and border are included in element's total width and height */
+}
+#app-wrapper *:before, #app-wrapper *:after {
+    box-sizing: border-box;
+}
+
+#app-wrapper { 
+  position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%);
+  width: 850px; min-width: 600px; height: 75vh; min-height: 400px;
+  display: none; flex-direction: row;
+  background: rgba(44, 44, 46, 0.85); 
+  backdrop-filter: blur(20px) saturate(180%);
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
+  border: 1px solid rgba(255, 255, 255, 0.1); 
+  border-radius: var(--chatbot-border-radius-standard);
+  box-shadow: var(--chatbot-shadow-strong-for-modal);
+  overflow: hidden; z-index: 2000; 
+  color: var(--chatbot-text-primary);
+}
+
+#chat-toggle#chat-toggle { 
+  position: fixed; bottom: 25px; right: 25px; width: 60px; height: 60px;
+  background: var(--chatbot-accent-color-primary); color: #fff;
+  border: none; border-radius: 50%; font-size: 28px; cursor: pointer;
+  box-shadow: var(--chatbot-shadow-medium); z-index: 2001; 
+  display: flex; align-items: center; justify-content: center;
+  transition: transform 0.2s ease-out;
+}
+#chat-toggle#chat-toggle:hover { transform: scale(1.05); }
+
+#app-wrapper #resize-handle-tl { 
+  position: absolute; top: 0; left: 0; width: 18px; height: 18px;
+  cursor: nwse-resize; z-index: 10;
+}
+
+#app-wrapper #sidebar {
+  width: 280px; min-width: 240px; background: transparent;
+  border-right: 1px solid var(--chatbot-border-subtle); padding: 20px;
+  display: flex; flex-direction: column; color: var(--chatbot-text-primary);
+  flex-shrink: 0; overflow-y: auto;
+}
+#app-wrapper #sidebar-header { padding-bottom: 15px; margin-bottom: 10px; }
+#app-wrapper #new-chat-btn {
+  background: var(--chatbot-accent-color-primary); color: white; border: none;
+  padding: 12px 15px; border-radius: var(--chatbot-border-radius-buttons);
+  cursor: pointer; width: 100%; font-weight: 500; font-size: 0.95em;
+  text-align: center; transition: background-color 0.2s, transform 0.1s;
+}
+#app-wrapper #new-chat-btn:hover { background: #0070e0; }
+#app-wrapper #new-chat-btn:active { transform: scale(0.98); }
+
+#app-wrapper #thread-list { list-style: none; padding: 0; margin: 0; overflow-y: auto; flex-grow: 1; }
+#app-wrapper #thread-list li {
+  position: relative; padding: 12px 10px; padding-right: 35px; cursor: default; /* Changed cursor, click is on sub-element */
+  border-radius: var(--chatbot-border-radius-buttons);
+  margin-bottom: 6px; transition: background-color 0.15s ease-in-out;
+}
+#app-wrapper #thread-list li > div:first-child { /* Target the thread info container for hover and click */
+    cursor: pointer;
+    display: block;
+    padding: 2px 0; /* Small padding to make it feel like a button */
+}
+
+#app-wrapper #thread-list li:hover { background: rgba(255, 255, 255, 0.08); }
+#app-wrapper #thread-list li.active-thread { background: var(--chatbot-accent-color-primary); color: white; }
+#app-wrapper #thread-list li.active-thread .thread-details { color: rgba(255,255,255,0.7); }
+#app-wrapper .thread-title {
+  font-weight: 500; font-size: 0.9em; white-space: nowrap; overflow: hidden;
+  text-overflow: ellipsis; display: block; margin-bottom: 4px;
+}
+#app-wrapper .thread-details { font-size: 0.75em; color: var(--chatbot-text-secondary); }
+#app-wrapper .delete-thread-btn { 
+    position: absolute; top: 50%; right: 8px; transform: translateY(-50%); 
+    background: transparent; border: none; color: var(--chatbot-text-secondary); 
+    font-size: 1.1em; padding: 5px; border-radius: 50%; cursor: pointer; 
+    opacity: 0; /* Hidden by default, shown on li:hover */
+    transition: opacity 0.2s ease, background-color 0.2s ease, color 0.2s ease; 
+    line-height: 1; 
+}
+#app-wrapper #thread-list li:hover .delete-thread-btn { opacity: 0.7; }
+#app-wrapper .delete-thread-btn:hover { opacity: 1; background-color: rgba(255, 255, 255, 0.1); color: var(--chatbot-system-blue-dark); }
+
+#app-wrapper #sidebar-footer { padding-top: 15px; border-top: 1px solid var(--chatbot-border-subtle); margin-top: auto; }
+#app-wrapper #model-selector-label {
+  font-size: 0.85em; font-weight: 500; color: var(--chatbot-text-secondary);
+  margin-bottom: 8px; display: block;
+}
+#app-wrapper #model-selector {
+  width: 100%; padding: 10px; border-radius: var(--chatbot-border-radius-buttons);
+  background: var(--chatbot-input-field-bg); color: var(--chatbot-text-primary);
+  border: 1px solid var(--chatbot-border-subtle); font-size: 0.9em; appearance: none;
+  background-image: url('data:image/svg+xml;charset=US-ASCII,%3Csvg%20width%3D%2220%22%20height%3D%2220%22%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%3E%3Cpath%20d%3D%22M5%208l5%205%205-5z%22%20fill%3D%22%23${encodeURIComponent(getComputedStyle(document.documentElement).getPropertyValue('--chatbot-text-secondary').substring(1))}%22/%3E%3C/svg%3E'); /* Dynamic color for arrow */
+  background-repeat: no-repeat; background-position: right 10px center; padding-right: 30px;
+}
+ #app-wrapper #model-selector:focus { border-color: var(--chatbot-accent-color-primary); box-shadow: 0 0 0 2px rgba(0, 122, 255, 0.3); }
+
+#app-wrapper #main-chat-area { flex-grow: 1; display: flex; min-width: 0; background: transparent; }
+#app-wrapper #chat-container { width: 100%; height: 100%; display: flex; flex-direction: column; }
+#app-wrapper #chat-header {
+  background: rgba(28, 28, 30, 0.7); 
+  backdrop-filter: blur(10px) saturate(180%); -webkit-backdrop-filter: blur(10px) saturate(180%);
+  padding: 12px 20px; display: flex; align-items: center; color: var(--chatbot-text-primary);
+  font-weight: 600; font-size: 1.1em; flex-shrink: 0; border-bottom: 1px solid var(--chatbot-border-subtle);
+}
+#app-wrapper #current-thread-model { font-size: 0.8em; font-weight: 500; margin-left: auto; color: var(--chatbot-text-secondary); }
+#app-wrapper #messages { flex: 1; padding: 20px; overflow-y: auto; display: flex; flex-direction: column; gap: 5px; }
+#app-wrapper .message {
+  padding: 10px 16px; border-radius: var(--chatbot-border-radius-messages); max-width: 75%;
+  word-break: break-word; line-height: 1.45; position: relative; margin-bottom: 8px;
+  box-shadow: var(--chatbot-shadow-subtle); font-size: 0.95em;
+}
+#app-wrapper .message.bot { background: var(--chatbot-accent-color-primary); color: white; align-self: flex-start; border-bottom-left-radius: 5px; }
+#app-wrapper .message.user { background: var(--chatbot-accent-color-user); color: black; align-self: flex-end; border-bottom-right-radius: 5px; }
+#app-wrapper .message-content a { color: inherit; text-decoration: underline; }
+#app-wrapper .message.bot .message-content a { color: #c1eaff; }
+#app-wrapper .message.user .message-content a { color: #004d15; }
+#app-wrapper .message-content p:first-child, #app-wrapper .message-content ul:first-child, #app-wrapper .message-content ol:first-child { margin-top: 0; }
+#app-wrapper .message-content p:last-child, #app-wrapper .message-content ul:last-child, #app-wrapper .message-content ol:last-child { margin-bottom: 0; }
+#app-wrapper .message-content ul, #app-wrapper .message-content ol { padding-left: 20px; }
+#app-wrapper .timestamp { font-size: 0.7em; color: var(--chatbot-system-tertiary-label-dark); display: block; margin-top: 6px; text-align: right; }
+#app-wrapper .message.bot .timestamp { color: rgba(255,255,255,0.7); text-align: left; }
+#app-wrapper .message.user .timestamp { color: rgba(0,0,0,0.6); text-align: right; }
+#app-wrapper #typing-indicator {
+  align-self: flex-start; padding: 10px 15px; border-radius: var(--chatbot-border-radius-messages);
+  border-bottom-left-radius: 5px; background: var(--chatbot-accent-color-primary);
+  display: none; align-items: center; justify-content: center; margin-bottom: 8px;
+}
+#app-wrapper #typing-indicator .dot {
+  display: inline-block; width: 8px; height: 8px; border-radius: 50%; background: white;
+  margin: 0 2.5px; animation: chatbot-typing-anim 1.2s infinite ease-in-out; 
+}
+#app-wrapper #typing-indicator .dot:nth-child(2) { animation-delay: 0.

@@ -1,0 +1,552 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NoFriction - IP Monetization Consulting</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.0.0/css/all.min.css">
+    <style>
+        body {
+            background-color: #111;
+            color: #f5f5f5;
+            font-family: 'Inter', sans-serif;
+        }
+        
+        .nav-link {
+            position: relative;
+            padding-bottom: 4px;
+        }
+        
+        .nav-link.active::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background-color: #f05252;
+        }
+        
+        .hero-section {
+            min-height: 90vh;
+            display: flex;
+            align-items: center;
+        }
+        
+        .code-window {
+            background-color: #1a1a1a;
+            border-radius: 0.5rem;
+            padding: 1rem;
+            margin: 1rem 0;
+        }
+        
+        .code-dots {
+            display: flex;
+            gap: 5px;
+            margin-bottom: 10px;
+        }
+        
+        .dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+        }
+        
+        .dot-red {
+            background-color: #ff5f56;
+        }
+        
+        .dot-yellow {
+            background-color: #ffbd2e;
+        }
+        
+        .dot-green {
+            background-color: #27c93f;
+        }
+        
+        .code-content {
+            color: #f8f8f2;
+            font-family: monospace;
+        }
+        
+        .keyword {
+            color: #ff79c6;
+        }
+        
+        .property {
+            color: #bd93f9;
+        }
+        
+        .string {
+            color: #f1fa8c;
+        }
+        
+        .highlight-section {
+            padding: 6rem 0;
+        }
+        
+        .card {
+            background-color: #1a1a1a;
+            border-radius: 0.5rem;
+            padding: 1.5rem;
+            transition: transform 0.3s ease;
+        }
+        
+        .card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .section-title {
+            position: relative;
+            display: inline-block;
+        }
+        
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 0;
+            width: 60px;
+            height: 3px;
+            background-color: #f05252;
+        }
+        
+        .btn-primary {
+            background-color: transparent;
+            color: #f5f5f5;
+            border: 1px solid #f5f5f5;
+            padding: 0.75rem 1.5rem;
+            border-radius: 0.375rem;
+            transition: all 0.3s ease;
+            display: inline-block;
+        }
+        
+        .btn-primary:hover {
+            background-color: rgba(255, 255, 255, 0.1);
+        }
+        
+        .quote {
+            position: relative;
+            padding: 1.5rem;
+            background-color: rgba(255, 255, 255, 0.05);
+            border-left: 4px solid #f05252;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <header class="fixed w-full bg-black bg-opacity-80 z-50 py-4 backdrop-filter backdrop-blur-lg">
+        <div class="container mx-auto px-4 flex items-center justify-between">
+            <a href="#" class="flex items-center">
+                <img src="https://page.genspark.site/v1/base64_upload/3ced5bb1a137097e11aacf33af0bde73" alt="NoFriction Logo" class="h-10">
+            </a>
+            
+            <nav class="hidden md:flex items-center space-x-8">
+                <a href="#about" class="nav-link text-gray-300 hover:text-white transition-colors">About</a>
+                <a href="#projects" class="nav-link text-gray-300 hover:text-white transition-colors">Projects</a>
+                <a href="#customers" class="nav-link text-gray-300 hover:text-white transition-colors">Customers & CV</a>
+                <a href="#secret-lab" class="nav-link text-gray-300 hover:text-white transition-colors">Secret Lab</a>
+                <a href="#contact" class="nav-link text-gray-300 hover:text-white transition-colors active">Contact</a>
+            </nav>
+            
+            <button class="md:hidden text-white focus:outline-none">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+                </svg>
+            </button>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main>
+        <!-- Hero Section -->
+        <section class="hero-section pt-24 pb-16">
+            <div class="container mx-auto px-4 grid md:grid-cols-2 gap-8 items-center">
+                <div>
+                    <h1 class="text-4xl md:text-5xl font-bold mb-6">Unlock Frictionless Growth in IP Monetization</h1>
+                    <p class="text-xl text-gray-300 mb-8">From AI orchestration to digital-first strategies, transform your IP and technology assets into powerful revenue streams with our boutique consulting approach.</p>
+                    <div class="flex flex-wrap gap-4">
+                        <a href="#approach" class="btn-primary">Discover Our Approach</a>
+                        <a href="#contact" class="btn-primary">Book a Consultation</a>
+                    </div>
+                </div>
+                
+                <div class="code-window">
+                    <div class="code-dots">
+                        <span class="dot dot-red"></span>
+                        <span class="dot dot-yellow"></span>
+                        <span class="dot dot-green"></span>
+                    </div>
+                    <div class="code-content">
+                        <pre><span class="keyword">const</span> transformation = <span class="keyword">async</span> () => {
+  <span class="keyword">await</span> NoFriction.transform({
+    ip: <span class="string">'YourTechnology'</span>,
+    approach: <span class="string">'highTouch-digitalFirst'</span>,
+    goal: <span class="string">'unlockValue'</span>
+  });
+};</pre>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+        <!-- Methodology Section -->
+        <section id="approach" class="highlight-section bg-black">
+            <div class="container mx-auto px-4 text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-bold mb-4">Our Proprietary Methodology</h2>
+                <p class="text-xl text-gray-300 max-w-3xl mx-auto">The 'High-Touch, Digital-First' approach that's redefining IP monetization and sales transformation.</p>
+            </div>
+            
+            <div class="container mx-auto px-4">
+                <div class="mb-16">
+                    <h3 class="text-2xl font-bold mb-6 section-title">High-Touch, Digital-First</h3>
+                    <p class="text-gray-300 mb-6 mt-8">At NoFriction, we employ a unique methodology that blends deeply personalized human engagement with cutting-edge digital tools. This isn't just a catchy phrase; it's a fundamental operating principle designed to eliminate the complexities often associated with commercializing innovation.</p>
+                    <blockquote class="quote mb-8">
+                        <p class="italic">As noted by IP strategy expert Dr. Marshall Phelps, former head of IP at IBM and Microsoft: "The most successful IP monetization strategies combine deep human expertise with modern technology tools to maximize return on innovation investment."</p>
+                    </blockquote>
+                </div>
+                
+                <!-- ROI Stats -->
+                <div class="bg-gray-900 rounded-lg p-8 mb-16">
+                    <div class="flex items-center mb-4">
+                        <span class="bg-blue-600 p-2 rounded-full mr-4">
+                            <i class="fas fa-chart-line text-white"></i>
+                        </span>
+                        <h4 class="text-2xl font-bold">63% Higher ROI</h4>
+                    </div>
+                    <p class="text-gray-300">Our clients achieve on average 63% higher return on investment compared to traditional IP monetization approaches, according to our internal benchmarking studies.</p>
+                </div>
+                
+                <!-- Service Cards -->
+                <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8 mb-16">
+                    <!-- High-Touch Engagement -->
+                    <div class="card">
+                        <div class="flex items-center justify-center mb-6">
+                            <span class="text-4xl text-blue-400">
+                                <i class="fas fa-users"></i>
+                            </span>
+                        </div>
+                        <h5 class="text-xl font-semibold mb-4">High-Touch Engagement</h5>
+                        <p class="text-gray-300">Expert strategists build deep relationships, understand client needs, and craft bespoke strategies tailored to your unique IP assets.</p>
+                    </div>
+                    
+                    <!-- Digital-First Execution -->
+                    <div class="card">
+                        <div class="flex items-center justify-center mb-6">
+                            <span class="text-4xl text-blue-400">
+                                <i class="fas fa-laptop-code"></i>
+                            </span>
+                        </div>
+                        <h5 class="text-xl font-semibold mb-4">Digital-First Execution</h5>
+                        <p class="text-gray-300">Leveraging AI, automation, and data analytics to streamline processes, scale outreach, and optimize every interaction for maximum impact.</p>
+                    </div>
+                    
+                    <!-- IP Storycrafting -->
+                    <div class="card">
+                        <div class="flex items-center justify-center mb-6">
+                            <span class="text-4xl text-blue-400">
+                                <i class="fas fa-book-open"></i>
+                            </span>
+                        </div>
+                        <h5 class="text-xl font-semibold mb-4">IP Storycrafting</h5>
+                        <p class="text-gray-300">Transforming complex technology into compelling narratives that resonate with investors, partners, and customers.</p>
+                    </div>
+                    
+                    <!-- Strategic Monetization -->
+                    <div class="card">
+                        <div class="flex items-center justify-center mb-6">
+                            <span class="text-4xl text-blue-400">
+                                <i class="fas fa-dollar-sign"></i>
+                            </span>
+                        </div>
+                        <h5 class="text-xl font-semibold mb-4">Strategic Monetization</h5>
+                        <p class="text-gray-300">Developing comprehensive go-to-market strategies to maximize the commercial value of your technology assets.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Technology Editor Model -->
+        <section class="highlight-section bg-gray-900">
+            <div class="container mx-auto px-4 grid md:grid-cols-2 gap-12">
+                <div>
+                    <h3 class="text-2xl font-bold mb-6 section-title">The Technology Editor Model</h3>
+                    <p class="text-gray-300 mb-6 mt-8">Much like a film editor, we recut technology and remix the storyline. By pushing the boundaries of product marketing and IP monetization, we turn amazing inventions into incredible successes.</p>
+                    <p class="text-gray-300 mb-6">As the pace of transformation accelerates exponentially with new AI capabilities, organizations must respond or risk obsolescence. We help you transform your IP and sales strategy to thrive in this new digital-first AI world.</p>
+                </div>
+                
+                <div>
+                    <h3 class="text-2xl font-bold mb-6 section-title">Visionary Leadership</h3>
+                    <p class="text-gray-300 mb-8 mt-8">Our approach is guided by proven expertise in transformation and crisis leadership—turning around complex situations, hitting ambitious targets, and inventing new technologies that reshape markets.</p>
+                    
+                    <div class="mb-6">
+                        <div class="flex items-center mb-2">
+                            <span class="text-red-500 mr-2">
+                                <i class="fas fa-bullseye"></i>
+                            </span>
+                            <h5 class="font-semibold">Revenue Architecture:</h5>
+                        </div>
+                        <p class="text-gray-300 pl-7">Designing sales strategies that align technology solutions with market needs, consistently exceeding targets.</p>
+                    </div>
+                    
+                    <div>
+                        <div class="flex items-center mb-2">
+                            <span class="text-red-500 mr-2">
+                                <i class="fas fa-lightbulb"></i>
+                            </span>
+                            <h5 class="font-semibold">Product Innovation & Productization:</h5>
+                        </div>
+                        <p class="text-gray-300 pl-7">Shaping nascent technologies into market-ready, commercially viable products.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Success Stories -->
+        <section class="highlight-section bg-black">
+            <div class="container mx-auto px-4 text-center">
+                <h2 class="text-3xl md:text-4xl font-bold mb-4">Success Stories in IP Monetization</h2>
+                <p class="text-xl text-gray-300 max-w-3xl mx-auto mb-16">Discover how leading organizations transformed their intellectual property into powerful revenue streams and strategic advantages.</p>
+                
+                <!-- Success Story Cards -->
+                <div class="grid md:grid-cols-3 gap-8">
+                    <div class="card flex flex-col items-center">
+                        <div class="text-5xl text-gray-500 mb-6">
+                            <i class="fas fa-play-circle"></i>
+                        </div>
+                        <h4 class="text-xl font-semibold">Case Study Video</h4>
+                    </div>
+                    
+                    <div class="card flex flex-col items-center">
+                        <div class="text-5xl text-gray-500 mb-6">
+                            <i class="fas fa-book"></i>
+                        </div>
+                        <h4 class="text-xl font-semibold">Detailed Report</h4>
+                    </div>
+                    
+                    <div class="card flex flex-col items-center">
+                        <div class="text-5xl text-gray-500 mb-6">
+                            <i class="fas fa-chart-line"></i>
+                        </div>
+                        <h4 class="text-xl font-semibold">Results Analysis</h4>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Measuring Transformation -->
+        <section class="highlight-section bg-gray-900">
+            <div class="container mx-auto px-4">
+                <h2 class="text-3xl md:text-4xl font-bold mb-4 text-center">Measuring Transformation Success</h2>
+                <p class="text-xl text-gray-300 max-w-3xl mx-auto text-center mb-16">Beyond financials: Key indicators spanning operations, customer impact, and innovation for a holistic view of your tech revitalization.</p>
+                
+                <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8 mb-16">
+                    <!-- Financial Health -->
+                    <div class="card">
+                        <h4 class="text-xl font-semibold mb-4 text-blue-400">Financial Health</h4>
+                        <ul class="text-gray-300 space-y-2 list-disc pl-5">
+                            <li>Return on IP Investments</li>
+                            <li>Revenue Growth</li>
+                            <li>Cash Flow Improvements</li>
+                        </ul>
+                    </div>
+                    
+                    <!-- Operational Excellence -->
+                    <div class="card">
+                        <h4 class="text-xl font-semibold mb-4 text-blue-400">Operational Excellence</h4>
+                        <ul class="text-gray-300 space-y-2 list-disc pl-5">
+                            <li>Sales Velocity</li>
+                            <li>Deployment Frequency</li>
+                            <li>Resource Utilization</li>
+                        </ul>
+                    </div>
+                    
+                    <!-- Customer Impact -->
+                    <div class="card">
+                        <h4 class="text-xl font-semibold mb-4 text-blue-400">Customer Impact</h4>
+                        <ul class="text-gray-300 space-y-2 list-disc pl-5">
+                            <li>Net Promoter Score</li>
+                            <li>Customer Retention</li>
+                            <li>Brand Perception</li>
+                        </ul>
+                    </div>
+                    
+                    <!-- Innovation Adoption -->
+                    <div class="card">
+                        <h4 class="text-xl font-semibold mb-4 text-blue-400">Innovation Adoption</h4>
+                        <ul class="text-gray-300 space-y-2 list-disc pl-5">
+                            <li>User Adoption Rate</li>
+                            <li>Feature Utilization</li>
+                            <li>Time To Value</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <blockquote class="quote max-w-4xl mx-auto">
+                    <p class="italic mb-2">"The difference between a successful technology transformation and an expensive failure often comes down to measuring what truly matters—not just financial outcomes, but the fundamental operational, customer, and innovation metrics that drive sustainable growth."</p>
+                    <p class="text-sm text-gray-400">Harvard Business Review, "Measuring Digital Transformation Success," 2023</p>
+                </blockquote>
+            </div>
+        </section>
+        
+        <!-- Testimonials -->
+        <section class="highlight-section bg-black">
+            <div class="container mx-auto px-4">
+                <h2 class="text-3xl md:text-4xl font-bold mb-4 text-center">What Clients Say</h2>
+                <p class="text-xl text-gray-300 max-w-3xl mx-auto text-center mb-16">Insights from leaders who have experienced our frictionless approach to growth.</p>
+                
+                <div class="grid md:grid-cols-2 gap-8">
+                    <div class="card">
+                        <div class="flex items-start mb-6">
+                            <div class="ml-4">
+                                <h5 class="text-xl font-semibold">Sarah Chen</h5>
+                                <p class="text-gray-400">CTO, BioTech Innovations</p>
+                            </div>
+                        </div>
+                        <p class="text-gray-300">"NoFriction transformed our approach to commercializing our IP portfolio. Their High-Touch, Digital-First methodology helped us secure strategic partnerships that would have been impossible through traditional channels. The ROI has been extraordinary."</p>
+                    </div>
+                    
+                    <div class="card">
+                        <div class="flex items-start mb-6">
+                            <div class="ml-4">
+                                <h5 class="text-xl font-semibold">Michael Rodriguez</h5>
+                                <p class="text-gray-400">Founder & CEO, TechVision Startup</p>
+                            </div>
+                        </div>
+                        <p class="text-gray-300">"As a startup with limited resources but valuable IP, we needed a strategic approach to monetization. NoFriction helped us leverage our patents to secure non-dilutive financing, increasing our valuation by nearly 30% ahead of our Series B round."</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Call to Action -->
+        <section id="contact" class="highlight-section bg-gradient-to-b from-gray-900 to-black">
+            <div class="container mx-auto px-4 text-center">
+                <h2 class="text-3xl md:text-4xl font-bold mb-4">Ready to Unlock Frictionless Growth?</h2>
+                <p class="text-xl text-gray-300 max-w-3xl mx-auto mb-12">Transform your IP and sales strategy to thrive in the digital-first AI world. Schedule a consultation to learn how we can help.</p>
+                
+                <div class="max-w-4xl mx-auto bg-gray-800 p-8 rounded-lg">
+                    <div class="mb-8">
+                        <h3 class="text-2xl font-bold mb-6">Get In Touch</h3>
+                        <p class="text-gray-300">We're excited to learn about your project and explore how we can help transform your vision into reality.</p>
+                    </div>
+                    
+                    <form class="grid md:grid-cols-2 gap-6">
+                        <div>
+                            <label class="block text-gray-400 mb-2">Your Name</label>
+                            <input type="text" class="w-full bg-gray-700 text-white p-3 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="John Smith">
+                        </div>
+                        <div>
+                            <label class="block text-gray-400 mb-2">Email Address</label>
+                            <input type="email" class="w-full bg-gray-700 text-white p-3 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="john@example.com">
+                        </div>
+                        <div class="md:col-span-2">
+                            <label class="block text-gray-400 mb-2">Message</label>
+                            <textarea rows="5" class="w-full bg-gray-700 text-white p-3 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="Tell us about your project..."></textarea>
+                        </div>
+                        <div class="md:col-span-2">
+                            <button type="submit" class="bg-red-600 hover:bg-red-700 text-white py-3 px-6 rounded-md transition-colors">Send Message</button>
+                        </div>
+                    </form>
+                </div>
+                
+                <div class="grid md:grid-cols-3 gap-8 mt-16">
+                    <div class="card">
+                        <div class="text-3xl text-blue-400 mb-4 flex justify-center">
+                            <i class="fas fa-envelope"></i>
+                        </div>
+                        <h4 class="text-xl font-semibold mb-2">Email Us</h4>
+                        <p class="text-gray-400 mb-2">Send us an email directly</p>
+                        <a href="/cdn-cgi/l/email-protection#1b7874756f7a786f5b75747d6972786f727475357274" class="text-blue-400 hover:underline"><span class="__cf_email__" data-cfemail="95f6fafbe1f4f6e1d5fbfaf3e7fcf6e1fcfafbbbfcfa">[email&#160;protected]</span></a>
+                    </div>
+                    
+                    <div class="card">
+                        <div class="text-3xl text-blue-400 mb-4 flex justify-center">
+                            <i class="fas fa-map-marker-alt"></i>
+                        </div>
+                        <h4 class="text-xl font-semibold mb-2">Our Location</h4>
+                        <p class="text-gray-400 mb-2">Available for meetings globally</p>
+                        <p class="text-gray-300">Europe • USA • UAE</p>
+                    </div>
+                    
+                    <div class="card">
+                        <div class="text-3xl text-blue-400 mb-4 flex justify-center">
+                            <i class="fas fa-calendar"></i>
+                        </div>
+                        <h4 class="text-xl font-semibold mb-2">Schedule a Call</h4>
+                        <p class="text-gray-400 mb-2">Book a consultation</p>
+                        <a href="#" class="text-blue-400 hover:underline">View Availability</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+    
+    <!-- Footer -->
+    <footer class="bg-black text-gray-400 py-12">
+        <div class="container mx-auto px-4">
+            <div class="border-t border-gray-800 pt-8 mt-8">
+                <div class="flex flex-col md:flex-row justify-between items-center">
+                    <p>&copy; 2023 NoFriction. All rights reserved.</p>
+                    
+                    <div class="mt-4 md:mt-0">
+                        <h5 class="text-sm font-semibold mb-2">California Residents Privacy Notice</h5>
+                        <p class="text-xs max-w-2xl">
+                            Under the California Consumer Privacy Act (CCPA), California residents have specific rights regarding their personal information. 
+                            <a href="#" class="text-blue-400 hover:underline">Learn More</a>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+    
+    <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+        // Mobile menu toggle
+        document.addEventListener('DOMContentLoaded', function() {
+            const mobileMenuButton = document.querySelector('.md\\:hidden');
+            const mobileMenu = document.querySelector('.md\\:flex');
+            
+            mobileMenuButton.addEventListener('click', function() {
+                mobileMenu.classList.toggle('hidden');
+                mobileMenu.classList.toggle('flex');
+                mobileMenu.classList.toggle('flex-col');
+                mobileMenu.classList.toggle('absolute');
+                mobileMenu.classList.toggle('top-16');
+                mobileMenu.classList.toggle('left-0');
+                mobileMenu.classList.toggle('right-0');
+                mobileMenu.classList.toggle('bg-black');
+                mobileMenu.classList.toggle('p-4');
+            });
+        });
+        
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                if (targetId === '#') return;
+                
+                const targetElement = document.querySelector(targetId);
+                if (targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>
+    <script id="html_badge_script1">
+        window.__genspark_remove_badge_link = "https://www.genspark.ai/api/html_badge/" +
+            "remove_badge?token=To%2FBnjzloZ3UfQdcSaYfDsnTFo2yLtzB9Xk0npf6ax%2BJtKvQKszHSSBSdTQd0s6pebxBXClQQ4K%2FC6yDWFzWDKDC7H4xoasDBtyLqA5BEq0saKhSphF%2FU2fM66sg79UT1uydYinVrgF7mcOcWxmPSRe3o2fPedSrCinr5%2BFmIEWM5%2FDKO%2BjYEUlKJ6p%2Bt1os9LJ9KoNYVrqU3ZctegvIGsm2sFLVXglh5WPR7NlPWAqTSsZgCn0TJjNo9fbz0ACVEboXn9ss2%2B8wpPyHsqZpWSZzzBeOx6%2Fh7Thqz6Mn6rs2YmzV8q0OJlANgTd0QiOraZIL84Ku7IpLoHMefZEJ0llMFOrV%2BxDnHKNVYC%2Bt63Hl%2FIWXYUjTqKNs07PHkwOzCIHKZGXxj3HoJabeV7uUcUYW%2BAOnU1Q%2B%2BX5p4oCJII0bNOAq44%2FLBZ42EkPcIOtiVx1QiPxAal7gCQm9s%2BTIOwBc2fTdRcGpsjsO31O7%2BUQlgSlzxa6uF6CJIzJO8Bck3pR2s7SOgQGRmyFE53xORw%3D%3D";
+        window.__genspark_locale = "en-US";
+        window.__genspark_token = "To/BnjzloZ3UfQdcSaYfDsnTFo2yLtzB9Xk0npf6ax+JtKvQKszHSSBSdTQd0s6pebxBXClQQ4K/C6yDWFzWDKDC7H4xoasDBtyLqA5BEq0saKhSphF/U2fM66sg79UT1uydYinVrgF7mcOcWxmPSRe3o2fPedSrCinr5+FmIEWM5/DKO+jYEUlKJ6p+t1os9LJ9KoNYVrqU3ZctegvIGsm2sFLVXglh5WPR7NlPWAqTSsZgCn0TJjNo9fbz0ACVEboXn9ss2+8wpPyHsqZpWSZzzBeOx6/h7Thqz6Mn6rs2YmzV8q0OJlANgTd0QiOraZIL84Ku7IpLoHMefZEJ0llMFOrV+xDnHKNVYC+t63Hl/IWXYUjTqKNs07PHkwOzCIHKZGXxj3HoJabeV7uUcUYW+AOnU1Q++X5p4oCJII0bNOAq44/LBZ42EkPcIOtiVx1QiPxAal7gCQm9s+TIOwBc2fTdRcGpsjsO31O7+UQlgSlzxa6uF6CJIzJO8Bck3pR2s7SOgQGRmyFE53xORw==";
+    </script>
+    

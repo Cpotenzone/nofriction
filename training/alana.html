@@ -1,0 +1,815 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Complete Metabolic Analysis for 5'10" 148lb Black Mother - Precision Health Guide</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        .gradient-bg { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); }
+        .card-shadow { box-shadow: 0 10px 25px rgba(0,0,0,0.1); }
+        .text-gradient { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+    </style>
+</head>
+<body class="bg-gray-50 text-gray-800 leading-relaxed">
+
+    <!-- Header -->
+    <header class="gradient-bg text-white py-8">
+        <div class="container mx-auto px-6">
+            <h1 class="text-4xl font-bold mb-4">Complete Metabolic Analysis</h1>
+            <h2 class="text-2xl font-light mb-2">5'10" 148lb Black Mother - Precision Health Guide</h2>
+            <p class="text-lg opacity-90">Evidence-based analysis for a tall, lean Black woman with school-age child</p>
+        </div>
+    </header>
+
+    <!-- Executive Summary -->
+    <section class="py-12 bg-white">
+        <div class="container mx-auto px-6">
+            <div class="bg-blue-50 rounded-lg p-8 card-shadow">
+                <h2 class="text-3xl font-bold text-gradient mb-6"><i class="fas fa-chart-line mr-3"></i>Your Unique Metabolic Profile</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                    <div class="bg-white p-6 rounded-lg text-center">
+                        <i class="fas fa-weight text-3xl text-blue-600 mb-3"></i>
+                        <h3 class="font-bold text-lg">BMI Status</h3>
+                        <p class="text-2xl font-bold text-green-600">21.2</p>
+                        <p class="text-sm text-gray-600">Healthy/Lean Range</p>
+                    </div>
+                    <div class="bg-white p-6 rounded-lg text-center">
+                        <i class="fas fa-fire text-3xl text-red-600 mb-3"></i>
+                        <h3 class="font-bold text-lg">BMR (Adjusted)</h3>
+                        <p class="text-2xl font-bold text-red-600">1,330</p>
+                        <p class="text-sm text-gray-600">calories/day</p>
+                    </div>
+                    <div class="bg-white p-6 rounded-lg text-center">
+                        <i class="fas fa-running text-3xl text-purple-600 mb-3"></i>
+                        <h3 class="font-bold text-lg">TDEE (Active)</h3>
+                        <p class="text-2xl font-bold text-purple-600">2,080</p>
+                        <p class="text-sm text-gray-600">with 350-cal exercise</p>
+                    </div>
+                    <div class="bg-white p-6 rounded-lg text-center">
+                        <i class="fas fa-target text-3xl text-green-600 mb-3"></i>
+                        <h3 class="font-bold text-lg">Maintenance</h3>
+                        <p class="text-2xl font-bold text-green-600">1,730</p>
+                        <p class="text-sm text-gray-600">base calories</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Detailed Metabolic Calculations -->
+    <section class="py-12">
+        <div class="container mx-auto px-6">
+            <h2 class="text-3xl font-bold text-gradient mb-8"><i class="fas fa-calculator mr-3"></i>Precise Metabolic Calculations</h2>
+            
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                <div class="bg-white rounded-lg p-8 card-shadow">
+                    <h3 class="text-2xl font-bold mb-6 text-gray-800">BMR Breakdown & Ethnic Adjustments</h3>
+                    
+                    <div class="space-y-4">
+                        <div class="bg-gray-50 p-4 rounded-lg">
+                            <h4 class="font-bold text-lg mb-2">Standard Mifflin-St Jeor Formula:</h4>
+                            <p class="text-gray-700">BMR = 655 + (4.35 × 148lb) + (4.7 × 70in) - (4.7 × 40 years)</p>
+                            <p class="text-xl font-bold text-blue-600">= 1,440 calories/day</p>
+                        </div>
+                        
+                        <div class="bg-red-50 p-4 rounded-lg">
+                            <h4 class="font-bold text-lg mb-2">Black Women Adjustment (-7.5%):</h4>
+                            <p class="text-gray-700">Research shows Black women have 5-10% lower BMR due to:</p>
+                            <ul class="list-disc list-inside mt-2 text-sm space-y-1">
+                                <li>Different muscle fiber composition</li>
+                                <li>Lower sympathetic nervous system activity</li>
+                                <li>Genetic metabolic variations</li>
+                                <li>Different fat distribution patterns</li>
+                            </ul>
+                            <p class="text-xl font-bold text-red-600 mt-3">Adjusted BMR: 1,330 calories/day</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="bg-white rounded-lg p-8 card-shadow">
+                    <h3 class="text-2xl font-bold mb-6 text-gray-800">Daily Calorie Requirements</h3>
+                    <div style="height: 400px;">
+                        <canvas id="calorieChart"></canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Unique Considerations for Tall, Lean Black Women -->
+    <section class="py-12 bg-gray-100">
+        <div class="container mx-auto px-6">
+            <h2 class="text-3xl font-bold text-gradient mb-8"><i class="fas fa-dna mr-3"></i>Unique Physiological Considerations</h2>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="bg-white rounded-lg p-6 card-shadow">
+                    <div class="text-center mb-4">
+                        <i class="fas fa-ruler-vertical text-4xl text-purple-600"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-4 text-center">Tall Stature Benefits</h3>
+                    <ul class="space-y-2 text-gray-700">
+                        <li><i class="fas fa-check text-green-600 mr-2"></i>Higher overall calorie needs</li>
+                        <li><i class="fas fa-check text-green-600 mr-2"></i>Better leverage for strength training</li>
+                        <li><i class="fas fa-check text-green-600 mr-2"></i>Lower risk of metabolic syndrome</li>
+                        <li><i class="fas fa-check text-green-600 mr-2"></i>More forgiving weight distribution</li>
+                    </ul>
+                </div>
+                
+                <div class="bg-white rounded-lg p-6 card-shadow">
+                    <div class="text-center mb-4">
+                        <i class="fas fa-weight-hanging text-4xl text-blue-600"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-4 text-center">Lean Body Advantages</h3>
+                    <ul class="space-y-2 text-gray-700">
+                        <li><i class="fas fa-check text-green-600 mr-2"></i>High insulin sensitivity</li>
+                        <li><i class="fas fa-check text-green-600 mr-2"></i>Efficient nutrient utilization</li>
+                        <li><i class="fas fa-check text-green-600 mr-2"></i>Lower inflammation markers</li>
+                        <li><i class="fas fa-check text-green-600 mr-2"></i>Optimal hormone profiles</li>
+                    </ul>
+                </div>
+                
+                <div class="bg-white rounded-lg p-6 card-shadow">
+                    <div class="text-center mb-4">
+                        <i class="fas fa-heartbeat text-4xl text-red-600"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-4 text-center">Black Women Health Factors</h3>
+                    <ul class="space-y-2 text-gray-700">
+                        <li><i class="fas fa-exclamation-triangle text-orange-500 mr-2"></i>Higher baseline insulin resistance</li>
+                        <li><i class="fas fa-exclamation-triangle text-orange-500 mr-2"></i>Different cortisol patterns</li>
+                        <li><i class="fas fa-exclamation-triangle text-orange-500 mr-2"></i>Unique vitamin D metabolism</li>
+                        <li><i class="fas fa-exclamation-triangle text-orange-500 mr-2"></i>Hair care chemical exposure</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- School-Age Parenting Considerations -->
+    <section class="py-12 bg-white">
+        <div class="container mx-auto px-6">
+            <h2 class="text-3xl font-bold text-gradient mb-8"><i class="fas fa-school mr-3"></i>School-Age Parenting: Unique Challenges & Opportunities</h2>
+            
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                <div class="space-y-6">
+                    <div class="bg-green-50 rounded-lg p-6">
+                        <h3 class="text-xl font-bold mb-4 text-green-800"><i class="fas fa-clock mr-2"></i>Time Management Advantages</h3>
+                        <ul class="space-y-3 text-gray-700">
+                            <li><i class="fas fa-check-circle text-green-600 mr-2"></i><strong>School Schedule:</strong> 7+ hours of structured time for self-care</li>
+                            <li><i class="fas fa-check-circle text-green-600 mr-2"></i><strong>Better Sleep:</strong> No night feedings or toddler wake-ups</li>
+                            <li><i class="fas fa-check-circle text-green-600 mr-2"></i><strong>Exercise Freedom:</strong> Morning workouts before school</li>
+                            <li><i class="fas fa-check-circle text-green-600 mr-2"></i><strong>Meal Prep Time:</strong> Uninterrupted kitchen access</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="bg-orange-50 rounded-lg p-6">
+                        <h3 class="text-xl font-bold mb-4 text-orange-800"><i class="fas fa-exclamation-triangle mr-2"></i>New Stressors to Manage</h3>
+                        <ul class="space-y-3 text-gray-700">
+                            <li><i class="fas fa-clock text-orange-600 mr-2"></i><strong>Schedule Coordination:</strong> School, activities, appointments</li>
+                            <li><i class="fas fa-users text-orange-600 mr-2"></i><strong>Social Pressures:</strong> Other parents, academic expectations</li>
+                            <li><i class="fas fa-car text-orange-600 mr-2"></i><strong>Transportation:</strong> Multiple daily trips and pickups</li>
+                            <li><i class="fas fa-utensils text-orange-600 mr-2"></i><strong>Food Battles:</strong> Lunch prep, snack requests, picky eating</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="bg-blue-50 rounded-lg p-6">
+                    <h3 class="text-xl font-bold mb-4 text-blue-800"><i class="fas fa-bullseye mr-2"></i>Optimized Daily Schedule</h3>
+                    <div class="space-y-4">
+                        <div class="bg-white p-4 rounded border-l-4 border-blue-500">
+                            <h4 class="font-bold">6:00-7:00 AM - Power Hour</h4>
+                            <p class="text-sm text-gray-600">Personal workout (350 calories), meditation, meal prep</p>
+                        </div>
+                        <div class="bg-white p-4 rounded border-l-4 border-green-500">
+                            <h4 class="font-bold">7:00-8:30 AM - Family Time</h4>
+                            <p class="text-sm text-gray-600">Breakfast, school prep, quality connection</p>
+                        </div>
+                        <div class="bg-white p-4 rounded border-l-4 border-purple-500">
+                            <h4 class="font-bold">9:00 AM-3:00 PM - Personal Focus</h4>
+                            <p class="text-sm text-gray-600">Work, errands, self-care, meal prep</p>
+                        </div>
+                        <div class="bg-white p-4 rounded border-l-4 border-orange-500">
+                            <h4 class="font-bold">3:00-8:00 PM - Family Priority</h4>
+                            <p class="text-sm text-gray-600">After-school activities, homework, dinner</p>
+                        </div>
+                        <div class="bg-white p-4 rounded border-l-4 border-indigo-500">
+                            <h4 class="font-bold">8:00-10:00 PM - Wind Down</h4>
+                            <p class="text-sm text-gray-600">Family time, prep for tomorrow, self-care</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Nutrition Strategy -->
+    <section class="py-12 bg-gray-100">
+        <div class="container mx-auto px-6">
+            <h2 class="text-3xl font-bold text-gradient mb-8"><i class="fas fa-apple-alt mr-3"></i>Precision Nutrition Strategy</h2>
+            
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+                <div class="lg:col-span-2">
+                    <div class="bg-white rounded-lg p-8 card-shadow">
+                        <h3 class="text-2xl font-bold mb-6">Macronutrient Distribution</h3>
+                        <div style="height: 400px;">
+                            <canvas id="macroChart"></canvas>
+                        </div>
+                        
+                        <div class="mt-6 grid grid-cols-3 gap-4">
+                            <div class="text-center bg-red-50 p-4 rounded">
+                                <h4 class="font-bold text-red-700">Protein</h4>
+                                <p class="text-2xl font-bold text-red-600">118-148g</p>
+                                <p class="text-sm text-gray-600">0.8-1.0g per lb</p>
+                            </div>
+                            <div class="text-center bg-blue-50 p-4 rounded">
+                                <h4 class="font-bold text-blue-700">Carbohydrates</h4>
+                                <p class="text-2xl font-bold text-blue-600">173-216g</p>
+                                <p class="text-sm text-gray-600">40-50% of calories</p>
+                            </div>
+                            <div class="text-center bg-yellow-50 p-4 rounded">
+                                <h4 class="font-bold text-yellow-700">Fats</h4>
+                                <p class="text-2xl font-bold text-yellow-600">58-77g</p>
+                                <p class="text-sm text-gray-600">25-35% of calories</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="space-y-6">
+                    <div class="bg-white rounded-lg p-6 card-shadow">
+                        <h3 class="text-xl font-bold mb-4"><i class="fas fa-leaf mr-2 text-green-600"></i>Nutrient Priorities</h3>
+                        <ul class="space-y-3 text-sm">
+                            <li><i class="fas fa-check text-green-600 mr-2"></i><strong>Iron:</strong> 18mg/day (higher needs for Black women)</li>
+                            <li><i class="fas fa-check text-green-600 mr-2"></i><strong>Vitamin D:</strong> 2000-4000 IU (melanin reduces synthesis)</li>
+                            <li><i class="fas fa-check text-green-600 mr-2"></i><strong>Folate:</strong> 400mcg+ (cardiovascular protection)</li>
+                            <li><i class="fas fa-check text-green-600 mr-2"></i><strong>Magnesium:</strong> 350mg (stress & muscle function)</li>
+                            <li><i class="fas fa-check text-green-600 mr-2"></i><strong>Omega-3:</strong> 2-3g daily (inflammation control)</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="bg-white rounded-lg p-6 card-shadow">
+                        <h3 class="text-xl font-bold mb-4"><i class="fas fa-clock mr-2 text-blue-600"></i>Meal Timing</h3>
+                        <div class="space-y-3 text-sm">
+                            <div class="bg-gray-50 p-3 rounded">
+                                <h4 class="font-bold">6:30 AM - Pre-Workout</h4>
+                                <p>15g protein + 20g carbs</p>
+                            </div>
+                            <div class="bg-gray-50 p-3 rounded">
+                                <h4 class="font-bold">8:00 AM - Breakfast</h4>
+                                <p>25g protein + 45g carbs + 15g fat</p>
+                            </div>
+                            <div class="bg-gray-50 p-3 rounded">
+                                <h4 class="font-bold">12:00 PM - Lunch</h4>
+                                <p>30g protein + 40g carbs + 20g fat</p>
+                            </div>
+                            <div class="bg-gray-50 p-3 rounded">
+                                <h4 class="font-bold">3:00 PM - Snack</h4>
+                                <p>15g protein + 25g carbs + 10g fat</p>
+                            </div>
+                            <div class="bg-gray-50 p-3 rounded">
+                                <h4 class="font-bold">6:30 PM - Dinner</h4>
+                                <p>35g protein + 30g carbs + 18g fat</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 350-Calorie Workout Protocols -->
+    <section class="py-12 bg-white">
+        <div class="container mx-auto px-6">
+            <h2 class="text-3xl font-bold text-gradient mb-8"><i class="fas fa-dumbbell mr-3"></i>350-Calorie Workout Protocols</h2>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                <div class="bg-gradient-to-br from-red-400 to-red-600 text-white rounded-lg p-6 card-shadow">
+                    <div class="text-center mb-4">
+                        <i class="fas fa-fire text-4xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3 text-center">HIIT Circuit</h3>
+                    <div class="text-sm space-y-2">
+                        <p><strong>Duration:</strong> 25-30 minutes</p>
+                        <p><strong>Format:</strong> 4 rounds, 45s work/15s rest</p>
+                        <p><strong>Exercises:</strong></p>
+                        <ul class="text-xs space-y-1 mt-2">
+                            <li>• Burpees</li>
+                            <li>• Mountain climbers</li>
+                            <li>• Jump squats</li>
+                            <li>• Push-ups</li>
+                            <li>• High knees</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="bg-gradient-to-br from-blue-400 to-blue-600 text-white rounded-lg p-6 card-shadow">
+                    <div class="text-center mb-4">
+                        <i class="fas fa-weight-hanging text-4xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3 text-center">Strength Training</h3>
+                    <div class="text-sm space-y-2">
+                        <p><strong>Duration:</strong> 35-40 minutes</p>
+                        <p><strong>Format:</strong> 3 sets, 8-12 reps</p>
+                        <p><strong>Compound Focus:</strong></p>
+                        <ul class="text-xs space-y-1 mt-2">
+                            <li>• Deadlifts</li>
+                            <li>• Squats</li>
+                            <li>• Rows</li>
+                            <li>• Overhead press</li>
+                            <li>• Lunges</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="bg-gradient-to-br from-green-400 to-green-600 text-white rounded-lg p-6 card-shadow">
+                    <div class="text-center mb-4">
+                        <i class="fas fa-running text-4xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3 text-center">Cardio Mix</h3>
+                    <div class="text-sm space-y-2">
+                        <p><strong>Duration:</strong> 30-35 minutes</p>
+                        <p><strong>Format:</strong> Interval training</p>
+                        <p><strong>Options:</strong></p>
+                        <ul class="text-xs space-y-1 mt-2">
+                            <li>• Treadmill intervals</li>
+                            <li>• Bike sprints</li>
+                            <li>• Stair climbing</li>
+                            <li>• Rowing machine</li>
+                            <li>• Dance fitness</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="bg-gradient-to-br from-purple-400 to-purple-600 text-white rounded-lg p-6 card-shadow">
+                    <div class="text-center mb-4">
+                        <i class="fas fa-heart text-4xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3 text-center">Active Recovery</h3>
+                    <div class="text-sm space-y-2">
+                        <p><strong>Duration:</strong> 45-50 minutes</p>
+                        <p><strong>Format:</strong> Low intensity</p>
+                        <p><strong>Activities:</strong></p>
+                        <ul class="text-xs space-y-1 mt-2">
+                            <li>• Yoga flow</li>
+                            <li>• Walking/hiking</li>
+                            <li>• Swimming</li>
+                            <li>• Stretching</li>
+                            <li>• Tai chi</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="mt-8 bg-yellow-50 rounded-lg p-6">
+                <h3 class="text-xl font-bold mb-4 text-yellow-800"><i class="fas fa-clock mr-2"></i>Weekly Schedule Recommendation</h3>
+                <div class="grid grid-cols-7 gap-2 text-center text-sm">
+                    <div class="bg-red-100 p-3 rounded font-bold">Mon<br>HIIT</div>
+                    <div class="bg-blue-100 p-3 rounded font-bold">Tue<br>Strength</div>
+                    <div class="bg-purple-100 p-3 rounded font-bold">Wed<br>Recovery</div>
+                    <div class="bg-green-100 p-3 rounded font-bold">Thu<br>Cardio</div>
+                    <div class="bg-blue-100 p-3 rounded font-bold">Fri<br>Strength</div>
+                    <div class="bg-purple-100 p-3 rounded font-bold">Sat<br>Recovery</div>
+                    <div class="bg-gray-100 p-3 rounded">Sun<br>Rest</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Cultural Considerations -->
+    <section class="py-12 bg-gray-100">
+        <div class="container mx-auto px-6">
+            <h2 class="text-3xl font-bold text-gradient mb-8"><i class="fas fa-users mr-3"></i>Cultural Health Considerations</h2>
+            
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                <div class="bg-white rounded-lg p-8 card-shadow">
+                    <h3 class="text-2xl font-bold mb-6 text-gray-800"><i class="fas fa-utensils mr-2 text-orange-600"></i>Traditional Foods - Healthy Modifications</h3>
+                    
+                    <div class="space-y-4">
+                        <div class="border-l-4 border-green-500 pl-4">
+                            <h4 class="font-bold text-green-700">Soul Food Makeovers</h4>
+                            <ul class="text-sm text-gray-700 mt-2 space-y-1">
+                                <li>• Baked "fried" chicken with almond flour coating</li>
+                                <li>• Collard greens with turkey instead of pork</li>
+                                <li>• Cauliflower mac and cheese</li>
+                                <li>• Sweet potato alternatives to regular potatoes</li>
+                                <li>• Black bean burgers instead of beef</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="border-l-4 border-blue-500 pl-4">
+                            <h4 class="font-bold text-blue-700">Cooking Method Swaps</h4>
+                            <ul class="text-sm text-gray-700 mt-2 space-y-1">
+                                <li>• Air frying instead of deep frying</li>
+                                <li>• Grilling or baking proteins</li>
+                                <li>• Steaming vegetables to preserve nutrients</li>
+                                <li>• Using herbs/spices instead of salt</li>
+                                <li>• Coconut oil instead of vegetable oils</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="border-l-4 border-purple-500 pl-4">
+                            <h4 class="font-bold text-purple-700">Portion Control Strategies</h4>
+                            <ul class="text-sm text-gray-700 mt-2 space-y-1">
+                                <li>• Use smaller plates for visual satisfaction</li>
+                                <li>• Fill half plate with vegetables first</li>
+                                <li>• Measure starches (rice, potatoes) to 1/2 cup</li>
+                                <li>• Palm-size protein portions</li>
+                                <li>• Save room for healthy dessert alternatives</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="space-y-6">
+                    <div class="bg-white rounded-lg p-6 card-shadow">
+                        <h3 class="text-xl font-bold mb-4 text-gray-800"><i class="fas fa-flask mr-2 text-red-600"></i>Hair Care & Hormonal Health</h3>
+                        <div class="bg-red-50 p-4 rounded-lg mb-4">
+                            <p class="text-sm text-red-800 font-bold">⚠️ Chemical Hair Products & Metabolism:</p>
+                            <p class="text-xs text-red-700 mt-1">Research shows hair relaxers contain endocrine disruptors that can affect hormone balance, insulin sensitivity, and metabolism.</p>
+                        </div>
+                        
+                        <h4 class="font-bold mb-2">Safer Alternatives:</h4>
+                        <ul class="text-sm space-y-1">
+                            <li>• Natural protective styles (braids, twists)</li>
+                            <li>• Heat styling instead of chemical relaxers</li>
+                            <li>• Organic/natural hair products</li>
+                            <li>• Regular scalp detox treatments</li>
+                            <li>• Minimize chemical exposure frequency</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="bg-white rounded-lg p-6 card-shadow">
+                        <h3 class="text-xl font-bold mb-4 text-gray-800"><i class="fas fa-sun mr-2 text-yellow-600"></i>Vitamin D Optimization</h3>
+                        <div class="space-y-3">
+                            <div class="bg-yellow-50 p-3 rounded">
+                                <h4 class="font-bold text-yellow-800">Higher Needs Due to Melanin</h4>
+                                <p class="text-sm text-yellow-700">Melanin reduces vitamin D synthesis by 99%</p>
+                            </div>
+                            <div class="text-sm space-y-1">
+                                <p><strong>Recommended:</strong> 2000-4000 IU daily</p>
+                                <p><strong>Food Sources:</strong> Fatty fish, fortified foods, egg yolks</p>
+                                <p><strong>Timing:</strong> With fat-containing meals</p>
+                                <p><strong>Testing:</strong> Annual 25(OH)D blood test</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="bg-white rounded-lg p-6 card-shadow">
+                        <h3 class="text-xl font-bold mb-4 text-gray-800"><i class="fas fa-heart mr-2 text-pink-600"></i>Stress & Community Support</h3>
+                        <ul class="text-sm space-y-2">
+                            <li><i class="fas fa-users text-blue-600 mr-2"></i>Connect with other Black mothers for support</li>
+                            <li><i class="fas fa-church text-purple-600 mr-2"></i>Utilize faith community resources</li>
+                            <li><i class="fas fa-spa text-green-600 mr-2"></i>Prioritize self-care without guilt</li>
+                            <li><i class="fas fa-book text-orange-600 mr-2"></i>Address generational health patterns</li>
+                            <li><i class="fas fa-phone text-pink-600 mr-2"></i>Seek culturally competent healthcare</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Supplement Protocol -->
+    <section class="py-12 bg-white">
+        <div class="container mx-auto px-6">
+            <h2 class="text-3xl font-bold text-gradient mb-8"><i class="fas fa-pills mr-3"></i>Targeted Supplement Protocol</h2>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                <div class="bg-gradient-to-br from-orange-100 to-orange-200 rounded-lg p-6 card-shadow">
+                    <div class="text-center mb-4">
+                        <i class="fas fa-sun text-4xl text-orange-600"></i>
+                    </div>
+                    <h3 class="text-lg font-bold text-center text-orange-800 mb-3">Foundation Stack</h3>
+                    <ul class="text-sm space-y-2">
+                        <li><strong>Vitamin D3:</strong> 3000 IU</li>
+                        <li><strong>Magnesium:</strong> 350mg</li>
+                        <li><strong>Omega-3:</strong> 2000mg EPA/DHA</li>
+                        <li><strong>B-Complex:</strong> High-potency</li>
+                    </ul>
+                </div>
+                
+                <div class="bg-gradient-to-br from-red-100 to-red-200 rounded-lg p-6 card-shadow">
+                    <div class="text-center mb-4">
+                        <i class="fas fa-heartbeat text-4xl text-red-600"></i>
+                    </div>
+                    <h3 class="text-lg font-bold text-center text-red-800 mb-3">Metabolic Support</h3>
+                    <ul class="text-sm space-y-2">
+                        <li><strong>Chromium:</strong> 200mcg</li>
+                        <li><strong>Alpha-Lipoic Acid:</strong> 300mg</li>
+                        <li><strong>Berberine:</strong> 500mg (2x daily)</li>
+                        <li><strong>Green Tea Extract:</strong> 400mg</li>
+                    </ul>
+                </div>
+                
+                <div class="bg-gradient-to-br from-green-100 to-green-200 rounded-lg p-6 card-shadow">
+                    <div class="text-center mb-4">
+                        <i class="fas fa-shield-alt text-4xl text-green-600"></i>
+                    </div>
+                    <h3 class="text-lg font-bold text-center text-green-800 mb-3">Hormonal Balance</h3>
+                    <ul class="text-sm space-y-2">
+                        <li><strong>Ashwagandha:</strong> 600mg</li>
+                        <li><strong>Maca Root:</strong> 1500mg</li>
+                        <li><strong>DIM:</strong> 200mg</li>
+                        <li><strong>Zinc:</strong> 15mg (with copper)</li>
+                    </ul>
+                </div>
+                
+                <div class="bg-gradient-to-br from-purple-100 to-purple-200 rounded-lg p-6 card-shadow">
+                    <div class="text-center mb-4">
+                        <i class="fas fa-dumbbell text-4xl text-purple-600"></i>
+                    </div>
+                    <h3 class="text-lg font-bold text-center text-purple-800 mb-3">Performance & Recovery</h3>
+                    <ul class="text-sm space-y-2">
+                        <li><strong>Creatine:</strong> 5g daily</li>
+                        <li><strong>BCAAs:</strong> 10g (workout days)</li>
+                        <li><strong>Curcumin:</strong> 1000mg</li>
+                        <li><strong>CoQ10:</strong> 100mg</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="mt-8 bg-blue-50 rounded-lg p-6">
+                <h3 class="text-xl font-bold mb-4 text-blue-800"><i class="fas fa-calendar-alt mr-2"></i>Timing Protocol</h3>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                    <div class="bg-white p-4 rounded-lg">
+                        <h4 class="font-bold text-center mb-2">Morning (with breakfast)</h4>
+                        <ul class="text-sm space-y-1">
+                            <li>• Vitamin D3 + K2</li>
+                            <li>• B-Complex</li>
+                            <li>• Omega-3</li>
+                            <li>• Ashwagandha</li>
+                        </ul>
+                    </div>
+                    <div class="bg-white p-4 rounded-lg">
+                        <h4 class="font-bold text-center mb-2">Pre/Post Workout</h4>
+                        <ul class="text-sm space-y-1">
+                            <li>• Creatine (anytime)</li>
+                            <li>• BCAAs (during workout)</li>
+                            <li>• Green tea extract</li>
+                            <li>• Berberine (with carbs)</li>
+                        </ul>
+                    </div>
+                    <div class="bg-white p-4 rounded-lg">
+                        <h4 class="font-bold text-center mb-2">Evening (with dinner)</h4>
+                        <ul class="text-sm space-y-1">
+                            <li>• Magnesium</li>
+                            <li>• Zinc + Copper</li>
+                            <li>• Curcumin</li>
+                            <li>• DIM</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Progress Tracking -->
+    <section class="py-12 bg-gray-100">
+        <div class="container mx-auto px-6">
+            <h2 class="text-3xl font-bold text-gradient mb-8"><i class="fas fa-chart-bar mr-3"></i>Progress Tracking & Adjustments</h2>
+            
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                <div class="bg-white rounded-lg p-8 card-shadow">
+                    <h3 class="text-2xl font-bold mb-6">Weekly Metrics to Monitor</h3>
+                    
+                    <div class="space-y-4">
+                        <div class="bg-blue-50 p-4 rounded-lg">
+                            <h4 class="font-bold text-blue-800 mb-2"><i class="fas fa-weight mr-2"></i>Body Composition</h4>
+                            <ul class="text-sm space-y-1">
+                                <li>• Weekly weigh-ins (same day, same time)</li>
+                                <li>• Monthly body fat percentage</li>
+                                <li>• Waist circumference (narrowest point)</li>
+                                <li>• Progress photos (front, side, back)</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="bg-green-50 p-4 rounded-lg">
+                            <h4 class="font-bold text-green-800 mb-2"><i class="fas fa-heartbeat mr-2"></i>Performance Metrics</h4>
+                            <ul class="text-sm space-y-1">
+                                <li>• Resting heart rate (morning)</li>
+                                <li>• Workout performance (weights, reps, time)</li>
+                                <li>• Energy levels (1-10 scale)</li>
+                                <li>• Sleep quality and duration</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="bg-purple-50 p-4 rounded-lg">
+                            <h4 class="font-bold text-purple-800 mb-2"><i class="fas fa-brain mr-2"></i>Wellness Indicators</h4>
+                            <ul class="text-sm space-y-1">
+                                <li>• Mood and stress levels</li>
+                                <li>• Hunger and cravings patterns</li>
+                                <li>• Menstrual cycle regularity</li>
+                                <li>• Skin and hair health</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="bg-white rounded-lg p-8 card-shadow">
+                    <h3 class="text-2xl font-bold mb-6">When to Adjust Your Plan</h3>
+                    
+                    <div class="space-y-6">
+                        <div class="border-l-4 border-red-500 pl-4">
+                            <h4 class="font-bold text-red-700">Reduce Calories If:</h4>
+                            <ul class="text-sm text-gray-700 mt-2 space-y-1">
+                                <li>• No weight change for 2+ weeks</li>
+                                <li>• Energy remains high</li>
+                                <li>• Not feeling hungry between meals</li>
+                                <li>• Performance isn't declining</li>
+                            </ul>
+                            <p class="text-sm font-bold text-red-600 mt-2">Reduce by 100-150 calories</p>
+                        </div>
+                        
+                        <div class="border-l-4 border-green-500 pl-4">
+                            <h4 class="font-bold text-green-700">Increase Calories If:</h4>
+                            <ul class="text-sm text-gray-700 mt-2 space-y-1">
+                                <li>• Losing weight too quickly (&gt;2lbs/week)</li>
+                                <li>• Energy consistently low</li>
+                                <li>• Performance declining</li>
+                                <li>• Mood or sleep disrupted</li>
+                            </ul>
+                            <p class="text-sm font-bold text-green-600 mt-2">Increase by 100-200 calories</p>
+                        </div>
+                        
+                        <div class="border-l-4 border-blue-500 pl-4">
+                            <h4 class="font-bold text-blue-700">Take a Diet Break If:</h4>
+                            <ul class="text-sm text-gray-700 mt-2 space-y-1">
+                                <li>• Plateaued for 3+ weeks</li>
+                                <li>• Experiencing high stress</li>
+                                <li>• Sleep quality poor</li>
+                                <li>• Extreme hunger or cravings</li>
+                            </ul>
+                            <p class="text-sm font-bold text-blue-600 mt-2">Return to maintenance for 1-2 weeks</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Action Plan -->
+    <section class="py-12 bg-white">
+        <div class="container mx-auto px-6">
+            <h2 class="text-3xl font-bold text-gradient mb-8"><i class="fas fa-rocket mr-3"></i>4-Week Implementation Plan</h2>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                <div class="bg-gradient-to-br from-blue-400 to-blue-600 text-white rounded-lg p-6 card-shadow">
+                    <h3 class="text-xl font-bold mb-4 text-center">Week 1: Foundation</h3>
+                    <ul class="text-sm space-y-2">
+                        <li><i class="fas fa-check mr-2"></i>Calculate exact calorie needs</li>
+                        <li><i class="fas fa-check mr-2"></i>Plan and prep meals</li>
+                        <li><i class="fas fa-check mr-2"></i>Start basic supplement stack</li>
+                        <li><i class="fas fa-check mr-2"></i>Establish morning routine</li>
+                        <li><i class="fas fa-check mr-2"></i>Begin 3x/week workouts</li>
+                    </ul>
+                </div>
+                
+                <div class="bg-gradient-to-br from-green-400 to-green-600 text-white rounded-lg p-6 card-shadow">
+                    <h3 class="text-xl font-bold mb-4 text-center">Week 2: Optimization</h3>
+                    <ul class="text-sm space-y-2">
+                        <li><i class="fas fa-check mr-2"></i>Fine-tune portion sizes</li>
+                        <li><i class="fas fa-check mr-2"></i>Add metabolic supplements</li>
+                        <li><i class="fas fa-check mr-2"></i>Increase workout intensity</li>
+                        <li><i class="fas fa-check mr-2"></i>Track sleep patterns</li>
+                        <li><i class="fas fa-check mr-2"></i>Start progress photos</li>
+                    </ul>
+                </div>
+                
+                <div class="bg-gradient-to-br from-purple-400 to-purple-600 text-white rounded-lg p-6 card-shadow">
+                    <h3 class="text-xl font-bold mb-4 text-center">Week 3: Expansion</h3>
+                    <ul class="text-sm space-y-2">
+                        <li><i class="fas fa-check mr-2"></i>Add 4th workout day</li>
+                        <li><i class="fas fa-check mr-2"></i>Include family in meal plans</li>
+                        <li><i class="fas fa-check mr-2"></i>Implement stress management</li>
+                        <li><i class="fas fa-check mr-2"></i>Full supplement protocol</li>
+                        <li><i class="fas fa-check mr-2"></i>Assess and adjust calories</li>
+                    </ul>
+                </div>
+                
+                <div class="bg-gradient-to-br from-orange-400 to-orange-600 text-white rounded-lg p-6 card-shadow">
+                    <h3 class="text-xl font-bold mb-4 text-center">Week 4: Mastery</h3>
+                    <ul class="text-sm space-y-2">
+                        <li><i class="fas fa-check mr-2"></i>Full workout schedule</li>
+                        <li><i class="fas fa-check mr-2"></i>Intuitive eating skills</li>
+                        <li><i class="fas fa-check mr-2"></i>Establish long-term habits</li>
+                        <li><i class="fas fa-check mr-2"></i>Plan next month's goals</li>
+                        <li><i class="fas fa-check mr-2"></i>Celebrate progress made</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="gradient-bg text-white py-8">
+        <div class="container mx-auto px-6 text-center">
+            <h3 class="text-2xl font-bold mb-4">Your Journey to Optimal Health Starts Now</h3>
+            <p class="text-lg opacity-90 mb-4">This evidence-based guide is specifically designed for your unique profile as a tall, lean Black mother.</p>
+            <p class="opacity-75">Remember: Consistency over perfection. Progress over perfection. Your health journey is a marathon, not a sprint.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Calorie Chart
+        const calorieCtx = document.getElementById('calorieChart').getContext('2d');
+        new Chart(calorieCtx, {
+            type: 'bar',
+            data: {
+                labels: ['BMR (Adjusted)', 'Sedentary TDEE', 'Light Activity', 'Moderate Activity', 'With 350-cal Exercise'],
+                datasets: [{
+                    label: 'Daily Calories',
+                    data: [1330, 1595, 1730, 1865, 2080],
+                    backgroundColor: [
+                        'rgba(239, 68, 68, 0.8)',
+                        'rgba(245, 158, 11, 0.8)',
+                        'rgba(34, 197, 94, 0.8)',
+                        'rgba(59, 130, 246, 0.8)',
+                        'rgba(147, 51, 234, 0.8)'
+                    ],
+                    borderColor: [
+                        'rgba(239, 68, 68, 1)',
+                        'rgba(245, 158, 11, 1)',
+                        'rgba(34, 197, 94, 1)',
+                        'rgba(59, 130, 246, 1)',
+                        'rgba(147, 51, 234, 1)'
+                    ],
+                    borderWidth: 2
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        display: false
+                    },
+                    title: {
+                        display: true,
+                        text: 'Daily Calorie Requirements by Activity Level',
+                        font: {
+                            size: 16,
+                            weight: 'bold'
+                        }
+                    }
+                },
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        ticks: {
+                            callback: function(value) {
+                                return value + ' cal';
+                            }
+                        }
+                    }
+                }
+            }
+        });
+
+        // Macro Chart
+        const macroCtx = document.getElementById('macroChart').getContext('2d');
+        new Chart(macroCtx, {
+            type: 'doughnut',
+            data: {
+                labels: ['Protein (30%)', 'Carbohydrates (40%)', 'Fats (30%)'],
+                datasets: [{
+                    data: [30, 40, 30],
+                    backgroundColor: [
+                        'rgba(239, 68, 68, 0.8)',
+                        'rgba(59, 130, 246, 0.8)',
+                        'rgba(245, 158, 11, 0.8)'
+                    ],
+                    borderColor: [
+                        'rgba(239, 68, 68, 1)',
+                        'rgba(59, 130, 246, 1)',
+                        'rgba(245, 158, 11, 1)'
+                    ],
+                    borderWidth: 2
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        position: 'bottom',
+                        labels: {
+                            padding: 20,
+                            usePointStyle: true
+                        }
+                    },
+                    title: {
+                        display: true,
+                        text: 'Optimal Macronutrient Distribution',
+                        font: {
+                            size: 16,
+                            weight: 'bold'
+                        }
+                    }
+                }
+            }
+        });
+    </script>
+</body>
+</html>

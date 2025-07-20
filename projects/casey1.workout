@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<gymbookWorkouts>
+  <workout name="Routine 1: Full-Body Foundation" notes="A foundational full-body routine focusing on compound movements.">
+    <exercise name="Squats (Dumbbell Goblet Squat)" identifier="squatsDumbbellGobletSquat" equipment="Dumbbell" targetRegion="Legs" targetMusclesPrimary="Quads, Glutes, Hamstrings, Core">
+      <notes>Primary Muscles: Quads, Glutes, Hamstrings, Core. RPE Target: 5-7. Cues: Hold 1 DB vertically at chest. Feet shoulder-width, toes slightly out. Hips back &amp; down, chest up, back straight. Thighs parallel to floor. Push through heels.</notes>
+      <set number="1" reps="15" weight="20" unit="lbs" type="default" rest_after_set_seconds="75"/>
+      <set number="2" reps="15" weight="20" unit="lbs" type="default" rest_after_set_seconds="75"/>
+      <set number="3" reps="15" weight="20" unit="lbs" type="default" rest_after_set_seconds="75"/>
+    </exercise>
+    <exercise name="Chest Press (Dumbbell Bench Press)" identifier="chestPressDumbbellBenchPress" equipment="Dumbbell, Bench" targetRegion="Chest" targetMusclesPrimary="Chest, Shoulders, Triceps">
+      <notes>Primary Muscles: Chest, Shoulders, Triceps. RPE Target: 5-7. Cues: Lie on bench, feet flat. DBs at chest, palms fwd. Press up, arms extended (not locked). Lower slowly.</notes>
+      <set number="1" reps="15" weight="10" unit="lbs" type="default" rest_after_set_seconds="75"/>
+      <set number="2" reps="15" weight="10" unit="lbs" type="default" rest_after_set_seconds="75"/>
+      <set number="3" reps="15" weight="10" unit="lbs" type="default" rest_after_set_seconds="75"/>
+    </exercise>
+    <exercise name="Rows (Dumbbell Bent-Over Row - One Arm)" identifier="rowsDumbbellBentOverRowOneArm" equipment="Dumbbell, Bench" targetRegion="Back" targetMusclesPrimary="Back (Lats, Rhomboids), Biceps">
+      <notes>Primary Muscles: Back (Lats, Rhomboids), Biceps. RPE Target: 5-7. Cues: 1 knee &amp; hand on bench, back flat. Hold DB, arm extended. Pull DB to hip, squeeze shoulder blade. Lower slowly.</notes>
+      <set number="1" reps="15" weight="10" unit="lbs" type="default" rest_after_set_seconds="75"/>
+      <set number="2" reps="15" weight="10" unit="lbs" type="default" rest_after_set_seconds="75"/>
+      <set number="3" reps="15" weight="10" unit="lbs" type="default" rest_after_set_seconds="75"/>
+    </exercise>
+    <exercise name="Overhead Press (Dumbbell Shoulder Press)" identifier="overheadPressDumbbellShoulderPress" equipment="Dumbbell" targetRegion="Shoulders" targetMusclesPrimary="Shoulders, Triceps">
+      <notes>Primary Muscles: Shoulders, Triceps. RPE Target: 5-7. Cues: Sit/stand tall. DBs at shoulder height, palms fwd. Press overhead, arms extended (not locked). Lower slowly.</notes>
+      <set number="1" reps="15" weight="8" unit="lbs" type="default" rest_after_set_seconds="75"/>
+      <set number="2" reps="15" weight="8" unit="lbs" type="default" rest_after_set_seconds="75"/>
+      <set number="3" reps="15" weight="8" unit="lbs" type="default" rest_after_set_seconds="75"/>
+    </exercise>
+    <exercise name="Glute Bridge (Dumbbell Glute Bridge)" identifier="gluteBridgeDumbbellGluteBridge" equipment="Dumbbell" targetRegion="Glutes" targetMusclesPrimary="Glutes, Hamstrings">
+      <notes>Primary Muscles: Glutes, Hamstrings. RPE Target: 5-7. Cues: Lie on back, knees bent, feet flat. DB across hips. Lift hips, squeeze glutes. Lower slowly.</notes>
+      <set number="1" reps="15" weight="20" unit="lbs" type="default" rest_after_set_seconds="75"/>
+      <set number="2" reps="15" weight="20" unit="lbs" type="default" rest_after_set_seconds="75"/>
+      <set number="3" reps="15" weight="20" unit="lbs" type="default" rest_after_set_seconds="75"/>
+    </exercise>
+    <exercise name="Core: Plank (Forearm or High Plank)" identifier="corePlankForearmOrHighPlank" equipment="Bodyweight" targetRegion="Core" targetMusclesPrimary="Full Core">
+      <notes>Primary Muscles: Full Core. RPE Target: 6-8 (hold till form breaks or RPE reached). Cues: Body straight head to heels, on forearms or hands. Engage core. (Knee plank if needed).</notes>
+      <set number="1" reps="45" unit="seconds" weight="0" type="default" rest_after_set_seconds="75"/>
+      <set number="2" reps="45" unit="seconds" weight="0" type="default" rest_after_set_seconds="75"/>
+      <set number="3" reps="45" unit="seconds" weight="0" type="default" rest_after_set_seconds="75"/>
+    </exercise>
+  </workout>
+
+  <workout name="Routine 2: Full-Body Strength Builder" notes="Builds on the foundation with varied movements and strength challenges.">
+    <exercise name="Lunges (Dumbbell Lunges)" identifier="lungesDumbbellLunges" equipment="Dumbbell" targetRegion="Legs" targetMusclesPrimary="Quads, Glutes, Hamstrings">
+      <notes>Primary Muscles: Quads, Glutes, Hamstrings. RPE Target: 5-7. Cues: Step fwd/back, lower hips till knees ~90°. Keep front knee over ankle, chest up. (Reps are per leg).</notes>
+      <set number="1" reps="12" weight="8" unit="lbs" type="default" rest_after_set_seconds="75"/>
+      <set number="2" reps="12" weight="8" unit="lbs" type="default" rest_after_set_seconds="75"/>
+      <set number="3" reps="12" weight="8" unit="lbs" type="default" rest_after_set_seconds="75"/>
+    </exercise>
+    <exercise name="Lat Pulldown (Machine)" identifier="latPulldownMachine" equipment="Machine" targetRegion="Back" targetMusclesPrimary="Back (Lats), Biceps">
+      <notes>Primary Muscles: Back (Lats), Biceps. RPE Target: 5-7. Cues: Sit, secure knees. Grasp bar. Pull to upper chest, squeeze shoulder blades. Control release.</notes>
+      <set number="1" reps="15" weight="40" unit="lbs" type="default" rest_after_set_seconds="75"/>
+      <set number="2" reps="15" weight="40" unit="lbs" type="default" rest_after_set_seconds="75"/>
+      <set number="3" reps="15" weight="40" unit="lbs" type="default" rest_after_set_seconds="75"/>
+    </exercise>
+    <exercise name="Deadlift Variation (Dumbbell Romanian Deadlift - RDL)" identifier="deadliftVariationDumbbellRomanianDeadliftRDL" equipment="Dumbbell" targetRegion="Posterior Chain" targetMusclesPrimary="Posterior Chain (Glutes, Hamstrings, Back)">
+      <notes>Primary Muscles: Posterior Chain (Glutes, Hamstrings, Back). RPE Target: 5-7. Cues: Feet hip-width, slight knee bend. Hinge at hips, lower DBs down front of legs, back straight. Feel hamstring stretch. Rise by squeezing glutes.</notes>
+      <set number="1" reps="15" weight="15" unit="lbs" type="default" rest_after_set_seconds="75"/>
+      <set number="2" reps="15" weight="15" unit="lbs" type="default" rest_after_set_seconds="75"/>
+      <set number="3" reps="15" weight="15" unit="lbs" type="default" rest_after_set_seconds="75"/>
+    </exercise>
+    <exercise name="Chest Fly (Dumbbell Fly - Flat Bench)" identifier="chestFlyDumbbellFlyFlatBench" equipment="Dumbbell, Bench" targetRegion="Chest" targetMusclesPrimary="Chest, Shoulders">
+      <notes>Primary Muscles: Chest, Shoulders. RPE Target: 5-7. Cues: Lie on bench. DBs over chest, palms facing in, slight elbow bend. Lower DBs to sides in arc. Squeeze chest to return.</notes>
+      <set number="1" reps="15" weight="5" unit="lbs" type="default" rest_after_set_seconds="75"/>
+      <set number="2" reps="15" weight="5" unit="lbs" type="default" rest_after_set_seconds="75"/>
+      <set number="3" reps="15" weight="5" unit="lbs" type="default" rest_after_set_seconds="75"/>
+    </exercise>
+    <exercise name="Bicep Curl (Dumbbell Bicep Curl)" identifier="bicepCurlDumbbellBicepCurl" equipment="Dumbbell" targetRegion="Arms" targetMusclesPrimary="Biceps">
+      <notes>Primary Muscles: Biceps. RPE Target: 6-7. Cues: Stand/sit. DBs at sides, palms fwd. Curl DBs to shoulders, keeping elbows at sides. Lower slowly.</notes>
+      <set number="1" reps="15" weight="8" unit="lbs" type="default" rest_after_set_seconds="75"/>
+      <set number="2" reps="15" weight="8" unit="lbs" type="default" rest_after_set_seconds="75"/>
+      <set number="3" reps="15" weight="8" unit="lbs" type="default" rest_after_set_seconds="75"/>
+    </exercise>
+    <exercise name="Core: Bird-Dog (Bodyweight)" identifier="coreBirdDogBodyweight" equipment="Bodyweight" targetRegion="Core" targetMusclesPrimary="Core Stability, Glutes, Back">
+      <notes>Primary Muscles: Core Stability, Glutes, Back. RPE Target: 5-6. Cues: Hands &amp; knees. Extend opposite arm &amp; leg, keep core tight, back flat. Hold. Alternate. (Reps are per side).</notes>
+      <set number="1" reps="12" weight="0" unit="bodyweight" type="default" rest_after_set_seconds="75"/>
+      <set number="2" reps="12" weight="0" unit="bodyweight" type="default" rest_after_set_seconds="75"/>
+      <set number="3" reps="12" weight="0" unit="bodyweight" type="default" rest_after_set_seconds="75"/>
+    </exercise>
+  </workout>
+
+  <workout name="Routine 3: Full-Body Conditioning Focus" notes="Incorporates movements with a conditioning element, suitable for entry-level.">
+    <exercise name="Squat to Press (Dumbbell Squat to Overhead Press)" identifier="squatToPressDumbbellSquatToOverheadPress" equipment="Dumbbell" targetRegion="Full Body" targetMusclesPrimary="Full Body (Legs, Glutes, Shoulders, Core)">
+      <notes>Primary Muscles: Full Body (Legs, Glutes, Shoulders, Core). RPE Target: 6-7. Cues: DBs at shoulders. Squat down. As you stand, press DBs overhead.</notes>
+      <set number="1" reps="15" weight="8" unit="lbs" type="default" rest_after_set_seconds="75"/>
+      <set number="2" reps="15" weight="8" unit="lbs" type="default" rest_after_set_seconds="75"/>
+      <set number="3" reps="15" weight="8" unit="lbs" type="default" rest_after_set_seconds="75"/>
+    </exercise>
+    <exercise name="Push-up Variation (Dumbbell Floor Press)" identifier="pushUpVariationDumbbellFloorPress" equipment="Dumbbell" targetRegion="Chest" targetMusclesPrimary="Chest, Shoulders, Triceps, Core">
+      <notes>Primary Muscles: Chest, Shoulders, Triceps, Core. RPE Target: 6-8. Cues: Lie on floor, knees bent. DBs at chest. Press up. Good if no bench. (Target 12 reps for AMRAP).</notes>
+      <set number="1" reps="12" weight="10" unit="lbs" type="default" rest_after_set_seconds="75"/>
+      <set number="2" reps="12" weight="10" unit="lbs" type="default" rest_after_set_seconds="75"/>
+      <set number="3" reps="12" weight="10" unit="lbs" type="default" rest_after_set_seconds="75"/>
+    </exercise>
+    <exercise name="Lunge with Rotation (Dumbbell Lunge with Torso Twist)" identifier="lungeWithRotationDumbbellLungeWithTorsoTwist" equipment="Dumbbell" targetRegion="Full Body" targetMusclesPrimary="Legs, Glutes, Core (Obliques)">
+      <notes>Primary Muscles: Legs, Glutes, Core (Obliques). RPE Target: 6-7. Cues: Lunge fwd. Twist torso over front leg. (Light DB at chest) (Reps are per side).</notes>
+      <set number="1" reps="10" weight="5" unit="lbs" type="default" rest_after_set_seconds="75"/>
+      <set number="2" reps="10" weight="5" unit="lbs" type="default" rest_after_set_seconds="75"/>
+      <set number="3" reps="10" weight="5" unit="lbs" type="default" rest_after_set_seconds="75"/>
+    </exercise>
+    <exercise name="Calf Raises (Dumbbell Calf Raises)" identifier="calfRaisesDumbbellCalfRaises" equipment="Dumbbell" targetRegion="Calves" targetMusclesPrimary="Calves">
+      <notes>Primary Muscles: Calves. RPE Target: 6-7. Cues: Stand, rise onto balls of feet. (Holding DBs)</notes>
+      <set number="1" reps="20" weight="10" unit="lbs" type="default" rest_after_set_seconds="75"/>
+      <set number="2" reps="20" weight="10" unit="lbs" type="default" rest_after_set_seconds="75"/>
+      <set number="3" reps="20" weight="10" unit="lbs" type="default" rest_after_set_seconds="75"/>
+    </exercise>
+    <exercise name="Tricep Extension (Dumbbell Overhead Tricep Extension)" identifier="tricepExtensionDumbbellOverheadTricepExtension" equipment="Dumbbell" targetRegion="Arms" targetMusclesPrimary="Triceps">
+      <notes>Primary Muscles: Triceps. RPE Target: 6-7. Cues: DB overhead. Lower behind head by bending elbows. Extend up. (1 or 2 DBs)</notes>
+      <set number="1" reps="15" weight="10" unit="lbs" type="default" rest_after_set_seconds="75"/>
+      <set number="2" reps="15" weight="10" unit="lbs" type="default" rest_after_set_seconds="75"/>
+      <set number="3" reps="15" weight="10" unit="lbs" type="default" rest_after_set_seconds="75"/>
+    </exercise>
+    <exercise name="Core: Dead Bug (Bodyweight)" identifier="coreDeadBugBodyweight" equipment="Bodyweight" targetRegion="Core" targetMusclesPrimary="Deep Core Stability">
+      <notes>Primary Muscles: Deep Core Stability. RPE Target: 5-6. Cues: Lie on back, knees 90°, arms to ceiling. Lower opposite arm &amp; leg towards floor, keep low back pressed down. Alternate. (Reps are per side).</notes>
+      <set number="1" reps="12" weight="0" unit="bodyweight" type="default" rest_after_set_seconds="75"/>
+      <set number="2" reps="12" weight="0" unit="bodyweight" type="default" rest_after_set_seconds="75"/>
+      <set number="3" reps="12" weight="0" unit="bodyweight" type="default" rest_after_set_seconds="75"/>
+    </exercise>
+  </workout>
+</gymbookWorkouts>

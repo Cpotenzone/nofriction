@@ -1,0 +1,1821 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+<script type="text/javascript" src="https://app.secureprivacy.ai/script/6832a781a32b1bf9b5b2a7ab.js"></script>
+
+<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-T3MZ43V4');</script>
+<!-- End Google Tag Manager -->
+
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-8M3X5312PN"></script>
+
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-8M3X5312PN');
+</script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NoFriction AI Chatbot - Apple Design</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            font-family: 'Inter', sans-serif;
+        }
+        
+        :root {
+            --primary-blue: #1e3a8a;
+            --secondary-blue: #1e40af;
+            --dark-blue: #1e293b;
+            --accent-blue: #3b82f6;
+            --light-blue: #60a5fa;
+            --background-dark: #0f172a;
+            --surface-dark: #1e293b;
+            --surface-light: #334155;
+        }
+
+        body {
+            background: linear-gradient(135deg, var(--background-dark) 0%, var(--dark-blue) 100%);
+            min-height: 100vh;
+        }
+
+        .chat-container {
+            background: rgba(30, 41, 59, 0.8);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(59, 130, 246, 0.2);
+        }
+
+        .message-bubble {
+            transition: all 0.3s ease;
+            padding: 8px 12px !important; /* Compressed padding */
+        }
+
+        .message-bubble:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 4px 12px rgba(59, 130, 246, 0.2);
+        }
+
+        .user-message {
+            background: linear-gradient(135deg, var(--accent-blue), var(--light-blue));
+            color: white;
+        }
+
+        .ai-message {
+            background: var(--surface-dark);
+            border: 1px solid rgba(59, 130, 246, 0.2);
+            color: #e2e8f0;
+        }
+
+        .typing-indicator {
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 0.4; }
+            50% { opacity: 1; }
+        }
+
+        .feature-card {
+            background: rgba(30, 41, 59, 0.6);
+            border: 1px solid rgba(59, 130, 246, 0.2);
+            transition: all 0.3s ease;
+            padding: 8px !important; /* Compressed padding */
+        }
+
+        .feature-card:hover {
+            background: rgba(30, 41, 59, 0.8);
+            border-color: var(--accent-blue);
+            transform: translateY(-1px);
+        }
+
+        .input-area {
+            background: var(--surface-dark);
+            border: 1px solid rgba(59, 130, 246, 0.2);
+            padding: 8px 12px !important; /* Compressed padding */
+        }
+
+        .form-input-nf {
+            background: var(--surface-dark);
+            border: 1px solid rgba(59, 130, 246, 0.2);
+            color: #e2e8f0;
+            padding: 6px 10px; /* Compressed padding */
+            border-radius: 6px;
+            font-size: 14px;
+            transition: all 0.3s ease;
+        }
+
+        .form-input-nf:focus {
+            outline: none;
+            border-color: var(--accent-blue);
+            box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.1);
+        }
+
+        .file-upload-area {
+            border: 2px dashed rgba(59, 130, 246, 0.3);
+            transition: all 0.3s ease;
+            padding: 12px !important; /* Compressed padding */
+        }
+
+        .file-upload-area:hover {
+            border-color: var(--accent-blue);
+            background: rgba(59, 130, 246, 0.05);
+        }
+
+        .message-actions {
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .message-bubble:hover .message-actions {
+            opacity: 1;
+        }
+
+        .conversation-item {
+            background: var(--surface-dark);
+            border: 1px solid rgba(59, 130, 246, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .conversation-item:hover {
+            background: var(--surface-light);
+            border-color: var(--accent-blue);
+        }
+
+        .conversation-item.active {
+            background: var(--accent-blue);
+            border-color: var(--light-blue);
+        }
+
+        .thread-item {
+            background: var(--surface-dark);
+            border: 1px solid rgba(59, 130, 246, 0.1);
+            transition: all 0.3s ease;
+            cursor: pointer;
+            padding: 8px !important; /* Compressed padding */
+            margin-bottom: 4px !important; /* Compressed margins */
+        }
+
+        .thread-item:hover {
+            background: var(--surface-light);
+            border-color: var(--accent-blue);
+        }
+
+        .thread-item.active {
+            background: var(--accent-blue);
+            border-color: var(--light-blue);
+        }
+
+        .logo-triangle {
+            width: 0;
+            height: 0;
+            border-left: 10px solid transparent;
+            border-right: 10px solid transparent;
+            border-bottom: 17px solid var(--accent-blue);
+            margin-right: 8px;
+            display: inline-block;
+        }
+
+        .scrollbar-hide {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+
+        .scrollbar-hide::-webkit-scrollbar {
+            display: none;
+        }
+
+        .code-block {
+            background: #0f172a;
+            border: 1px solid rgba(59, 130, 246, 0.2);
+            border-radius: 6px;
+            padding: 8px; /* Compressed padding */
+            margin: 4px 0; /* Compressed margins */
+            overflow-x: auto;
+        }
+
+        .code-block pre {
+            margin: 0;
+            color: #e2e8f0;
+            font-family: 'Courier New', monospace;
+        }
+
+        .model-badge {
+            font-size: 9px;
+            padding: 1px 4px; /* Compressed padding */
+            border-radius: 8px;
+            background: var(--accent-blue);
+            color: white;
+            margin-left: 6px;
+        }
+
+        .sidebar-toggle {
+            display: none;
+        }
+
+        /* Compressed sidebar sections */
+        .sidebar-section {
+            margin-bottom: 16px !important; /* Compressed spacing */
+        }
+
+        .sidebar-section h2 {
+            margin-bottom: 8px !important; /* Compressed spacing */
+            font-size: 16px !important; /* Smaller heading */
+        }
+
+        /* Visual separator between threads and AI capabilities */
+        .section-separator {
+            height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(59, 130, 246, 0.3), transparent);
+            margin: 20px 0;
+            position: relative;
+        }
+
+        .section-separator::before {
+            content: '';
+            position: absolute;
+            left: 50%;
+            top: -2px;
+            transform: translateX(-50%);
+            width: 6px;
+            height: 6px;
+            background: var(--accent-blue);
+            border-radius: 50%;
+        }
+
+        /* Compressed message spacing */
+        #messages {
+            gap: 8px !important; /* Reduced gap between messages */
+        }
+
+        /* Compressed header */
+        header {
+            padding: 8px 16px !important; /* Compressed header padding */
+        }
+
+        /* Compressed thread info bar */
+        #threadInfo {
+            padding: 6px 16px !important; /* Compressed padding */
+        }
+
+        /* Compressed main content padding */
+        #messagesContainer {
+            padding: 12px 16px !important; /* Compressed padding */
+        }
+
+        /* Compressed input area */
+        .input-container {
+            padding: 8px 16px 12px 16px !important; /* Compressed padding */
+        }
+
+        /* Quick actions compressed */
+        .quick-action {
+            padding: 2px 6px !important; /* Compressed padding */
+            font-size: 11px !important;
+            margin-right: 4px !important; /* Compressed margins */
+            margin-bottom: 2px !important;
+        }
+
+        /* Desktop layout */
+        .main-layout {
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .content-wrapper {
+            flex: 1;
+            display: flex;
+            overflow: hidden;
+        }
+
+        @media (max-width: 1024px) {
+            .sidebar {
+                position: fixed;
+                left: -100%;
+                top: 0;
+                bottom: 0;
+                width: 320px;
+                z-index: 50;
+                transition: left 0.3s ease;
+                background: var(--background-dark);
+                padding: 12px; /* Compressed padding */
+                overflow-y: auto;
+            }
+
+            .sidebar.open {
+                left: 0;
+            }
+
+            .sidebar-toggle {
+                display: block;
+            }
+
+            .main-content {
+                width: 100%;
+                height: calc(100vh - 60px); /* Account for header */
+                display: flex;
+                flex-direction: column;
+            }
+
+            .chat-container {
+                height: 100%;
+                margin: 0;
+                border-radius: 0;
+                display: flex;
+                flex-direction: column;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .main-layout {
+                height: 100vh;
+            }
+
+            header {
+                flex-shrink: 0;
+                padding: 6px 12px !important;
+            }
+
+            .content-wrapper {
+                flex: 1;
+                overflow: hidden;
+            }
+
+            .main-content {
+                height: 100%;
+                display: flex;
+                flex-direction: column;
+            }
+
+            .chat-container {
+                height: 100%;
+                margin: 0;
+                border-radius: 0;
+                display: flex;
+                flex-direction: column;
+                border: none;
+            }
+
+            #threadInfo {
+                flex-shrink: 0;
+                padding: 4px 12px !important;
+            }
+
+            #messagesContainer {
+                flex: 1;
+                overflow-y: auto;
+                padding: 8px 12px !important;
+            }
+
+            .input-container {
+                flex-shrink: 0;
+                padding: 8px 12px 12px 12px !important;
+            }
+
+            .feature-card {
+                text-align: center;
+                padding: 6px !important; /* More compressed on mobile */
+            }
+
+            .message-bubble {
+                max-width: 95%;
+                padding: 6px 10px !important; /* More compressed on mobile */
+            }
+
+            .input-area {
+                padding: 6px 10px !important; /* More compressed on mobile */
+            }
+
+            .form-input-nf {
+                font-size: 16px; /* Prevent zoom on iOS */
+                padding: 8px 12px; /* Larger touch target */
+            }
+
+            .header-controls {
+                flex-wrap: wrap;
+                gap: 4px;
+            }
+
+            /* Ensure input stays at bottom */
+            textarea[name="messages"] {
+                font-size: 16px !important; /* Prevent zoom on iOS */
+                min-height: 40px;
+            }
+
+            .quick-actions {
+                flex-wrap: wrap;
+                gap: 4px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .logo-text {
+                font-size: 16px;
+            }
+
+            .header-controls button {
+                padding: 4px 8px; /* More compressed on mobile */
+                font-size: 14px;
+            }
+
+            .quick-action {
+                font-size: 10px !important;
+                padding: 1px 4px !important; /* Very compressed on small mobile */
+            }
+
+            #messagesContainer {
+                padding: 6px 8px !important;
+            }
+
+            .input-container {
+                padding: 6px 8px 8px 8px !important;
+            }
+        }
+
+        /* PDF Export styles */
+         {
+            .sidebar {
+                display: none !important;
+            }
+            
+            .chat-container {
+                height: auto !important;
+                max-height: none !important;
+                overflow: visible !important;
+                box-shadow: none !important;
+                border: none !important;
+            }
+
+            .input-area,
+            .file-upload-area,
+            .message-actions,
+            .quick-actions {
+                display: none !important;
+            }
+
+            .messages {
+                overflow: visible !important;
+                height: auto !important;
+            }
+
+            .message-bubble {
+                break-inside: avoid;
+                margin-bottom: 1rem;
+            }
+
+            body {
+                background: white !important;
+                color: black !important;
+            }
+
+            .ai-message,
+            .user-message {
+                background: #f5f5f5 !important;
+                color: black !important;
+                border: 1px solid #ddd !important;
+            }
+        }
+
+        /* Additional Apple-style refinements */
+        .apple-button {
+            background: var(--accent-blue);
+            border: none;
+            border-radius: 6px;
+            padding: 4px 8px; /* Compressed button padding */
+            font-weight: 500;
+            transition: all 0.2s ease;
+            font-size: 13px;
+        }
+
+        .apple-button:hover {
+            background: var(--light-blue);
+            transform: translateY(-0.5px);
+        }
+
+        .apple-input {
+            border-radius: 6px;
+            border: 1px solid rgba(59, 130, 246, 0.2);
+            background: var(--surface-dark);
+            transition: all 0.2s ease;
+            font-size: 14px;
+        }
+
+        .apple-input:focus {
+            border-color: var(--accent-blue);
+            box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.1);
+        }
+
+        /* Refined typography hierarchy */
+        .text-hierarchy-1 {
+            font-size: 16px;
+            font-weight: 600;
+            line-height: 1.3;
+        }
+
+        .text-hierarchy-2 {
+            font-size: 14px;
+            font-weight: 500;
+            line-height: 1.3;
+        }
+
+        .text-hierarchy-3 {
+            font-size: 12px;
+            font-weight: 400;
+            line-height: 1.3;
+        }
+
+        /* Force proper mobile layout */
+        @media (max-width: 768px) {
+            .main-layout {
+                position: fixed;
+                top: 0;
+                left: 0;
+                right: 0;
+                bottom: 0;
+                overflow: hidden;
+            }
+
+            .content-wrapper {
+                position: relative;
+                height: 100%;
+            }
+
+            .main-content {
+                position: absolute;
+                top: 0;
+                left: 0;
+                right: 0;
+                bottom: 0;
+            }
+        }
+    </style>
+</head>
+<body class="text-gray-100">
+    <div class="main-layout">
+        <!-- Mobile Sidebar Overlay -->
+        <div id="sidebarOverlay" class="fixed inset-0 bg-black bg-opacity-50 z-40 hidden lg:hidden"></div>
+
+        <!-- Header -->
+        <header class="border-b border-gray-700 flex-shrink-0">
+            <div class="flex items-center justify-between">
+                <div class="flex items-center">
+                    <button id="sidebarToggle" class="sidebar-toggle mr-3 p-2 text-gray-400 hover:text-white lg:hidden">
+                        <i class="fas fa-bars text-lg"></i>
+                    </button>
+                    <div class="logo-triangle"></div>
+                    <div class="logo-triangle" style="margin-left: -8px; border-bottom-color: #60a5fa;"></div>
+                    <div class="logo-triangle" style="margin-left: -8px; border-bottom-color: #93c5fd;"></div>
+                    <h1 class="logo-text text-lg lg:text-xl font-bold text-white ml-3">NoFriction AI</h1>
+                </div>
+                <div class="header-controls flex items-center space-x-2">
+                    <div class="flex items-center space-x-2">
+                        <label class="text-xs text-gray-400 hidden sm:block">Model:</label>
+                        <select name="model" class="form-input-nf text-xs lg:text-sm apple-input"> 
+                            <option value="gemini">Gemini</option>
+                            <option value="chatgpt">ChatGPT</option>
+                            <option value="claude">Claude</option>
+                            <option value="deepseek">DeepSeek</option>
+                            <option value="perplexity">Perplexity</option>
+                            <option value="Mistral">Mistral</option>
+                            <option value="ollama">Ollama</option>
+                        </select>
+                    </div>
+                    <button id="newThreadBtn" class="apple-button text-white">
+                        <i class="fas fa-plus mr-1"></i><span class="hidden sm:inline">New</span>
+                    </button>
+                    <button id="settingsBtn" class="p-1 text-gray-400 hover:text-white transition-colors">
+                        <i class="fas fa-cog text-lg"></i>
+                    </button>
+                </div>
+            </div>
+        </header>
+
+        <div class="content-wrapper">
+            <!-- Sidebar -->
+            <aside id="sidebar" class="sidebar lg:relative lg:left-0 w-80 flex-shrink-0 lg:border-r lg:border-gray-700">
+                <div class="space-y-4">
+                    <!-- Thread Management -->
+                    <div class="sidebar-section">
+                        <div class="flex items-center justify-between">
+                            <h2 class="text-hierarchy-1 text-blue-300">Threads</h2>
+                            <button id="newThreadSidebarBtn" class="p-1 text-gray-400 hover:text-white transition-colors">
+                                <i class="fas fa-plus text-xs"></i>
+                            </button>
+                        </div>
+                        <div id="threadsList" class="space-y-1 max-h-40 overflow-y-auto scrollbar-hide">
+                            <!-- Threads will be loaded here -->
+                        </div>
+                    </div>
+
+                    <!-- Visual Separator -->
+                    <div class="section-separator"></div>
+
+                    <!-- AI Capabilities -->
+                    <div class="sidebar-section">
+                        <h2 class="text-hierarchy-1 text-blue-300">AI Capabilities</h2>
+                        <div class="grid grid-cols-1 gap-2">
+                            <div class="feature-card rounded-lg cursor-pointer" data-feature="text">
+                                <i class="fas fa-comments text-blue-400 mb-1 text-sm"></i>
+                                <div class="text-hierarchy-2">Text Generation</div>
+                                <div class="text-hierarchy-3 text-gray-400">Advanced language processing</div>
+                            </div>
+                            <div class="feature-card rounded-lg cursor-pointer" data-feature="code">
+                                <i class="fas fa-code text-green-400 mb-1 text-sm"></i>
+                                <div class="text-hierarchy-2">Code Generation</div>
+                                <div class="text-hierarchy-3 text-gray-400">Multi-language programming</div>
+                            </div>
+                            <div class="feature-card rounded-lg cursor-pointer" data-feature="analysis">
+                                <i class="fas fa-chart-bar text-purple-400 mb-1 text-sm"></i>
+                                <div class="text-hierarchy-2">Data Analysis</div>
+                                <div class="text-hierarchy-3 text-gray-400">Insights and visualization</div>
+                            </div>
+                            <div class="feature-card rounded-lg cursor-pointer" data-feature="research">
+                                <i class="fas fa-search text-yellow-400 mb-1 text-sm"></i>
+                                <div class="text-hierarchy-2">Research</div>
+                                <div class="text-hierarchy-3 text-gray-400">Information gathering</div>
+                            </div>
+                            <div class="feature-card rounded-lg cursor-pointer" data-feature="image">
+                                <i class="fas fa-image text-pink-400 mb-1 text-sm"></i>
+                                <div class="text-hierarchy-2">Image Analysis</div>
+                                <div class="text-hierarchy-3 text-gray-400">Visual understanding</div>
+                            </div>
+                            <div class="feature-card rounded-lg cursor-pointer" data-feature="document">
+                                <i class="fas fa-file-alt text-orange-400 mb-1 text-sm"></i>
+                                <div class="text-hierarchy-2">Document Processing</div>
+                                <div class="text-hierarchy-3 text-gray-400">PDF, Word, Excel analysis</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Export Options -->
+                    <div class="sidebar-section">
+                        <h2 class="text-hierarchy-1 text-blue-300">Export</h2>
+                        <div class="space-y-1">
+                            <button id="exportMarkdown" class="w-full apple-button text-left text-white">
+                                <i class="fas fa-file-code mr-2 text-xs"></i>Export as Markdown
+                            </button>
+                            <button id="exportJson" class="w-full apple-button text-left text-white">
+                                <i class="fas fa-file-code mr-2 text-xs"></i>Export as JSON
+                            </button>
+                            <button id="shareThread" class="w-full apple-button text-left text-white">
+                                <i class="fas fa-share mr-2 text-xs"></i>Share Thread
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </aside>
+
+            <!-- Main Chat Area -->
+            <main class="main-content flex-1 flex flex-col">
+                <div class="chat-container flex-1 flex flex-col overflow-hidden">
+                    <!-- Thread Info Bar -->
+                    <div id="threadInfo" class="border-b border-gray-600 bg-gray-800 bg-opacity-50 flex-shrink-0">
+                        <div class="flex items-center justify-between">
+                            <div class="flex items-center space-x-2">
+                                <h3 id="threadTitle" class="text-hierarchy-2 text-gray-200">New Thread</h3>
+                                <span id="currentModel" class="model-badge">Gemini</span>
+                            </div>
+                            <div class="text-hierarchy-3 text-gray-400">
+                                <span id="messageCount">0 messages</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Chat Messages -->
+                    <div id="messagesContainer" class="flex-1 overflow-y-auto scrollbar-hide">
+                        <div id="messages" class="space-y-2">
+                            <!-- Welcome Message -->
+                            <div class="ai-message message-bubble rounded-lg max-w-full lg:max-w-3xl">
+                                <div class="flex items-start space-x-2">
+                                    <div class="w-6 h-6 bg-blue-600 rounded-full flex items-center justify-center flex-shrink-0">
+                                        <i class="fas fa-robot text-white text-xs"></i>
+                                    </div>
+                                    <div class="flex-1 min-w-0">
+                                        <div class="text-hierarchy-3 text-blue-300 mb-1">NoFriction AI</div>
+                                        <div class="text-gray-100 text-hierarchy-2">
+                                            Welcome to NoFriction AI! I'm your advanced multi-model AI assistant with capabilities including:
+                                            <ul class="mt-1 space-y-0.5 text-hierarchy-3 text-gray-300">
+                                                <li>• <strong>Multi-Model Support:</strong> Switch between Gemini, ChatGPT, Claude, and more</li>
+                                                <li>• <strong>Thread Management:</strong> Multiple conversations with context preservation</li>
+                                                <li>• <strong>Code Development:</strong> Programming in multiple languages with debugging</li>
+                                                <li>• <strong>Data Analysis:</strong> Processing and visualizing complex datasets</li>
+                                                <li>• <strong>Research:</strong> Real-time information gathering and synthesis</li>
+                                                <li>• <strong>Image Analysis:</strong> Understanding and describing visual content</li>
+                                                <li>• <strong>Document Processing:</strong> Analyzing PDFs, Word docs, spreadsheets</li>
+                                            </ul>
+                                            <p class="mt-2 text-gray-300 text-hierarchy-3">You can switch models mid-conversation, manage multiple threads, upload files, and ask complex questions. What would you like to work on today?</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Typing Indicator -->
+                        <div id="typingIndicator" class="hidden ai-message message-bubble rounded-lg max-w-full lg:max-w-3xl mt-2">
+                            <div class="flex items-center space-x-2">
+                                <div class="w-6 h-6 bg-blue-600 rounded-full flex items-center justify-center">
+                                    <i class="fas fa-robot text-white text-xs"></i>
+                                </div>
+                                <div class="flex items-center space-x-1">
+                                    <div class="typing-indicator w-1.5 h-1.5 bg-blue-400 rounded-full"></div>
+                                    <div class="typing-indicator w-1.5 h-1.5 bg-blue-400 rounded-full" style="animation-delay: 0.2s;"></div>
+                                    <div class="typing-indicator w-1.5 h-1.5 bg-blue-400 rounded-full" style="animation-delay: 0.4s;"></div>
+                                    <span class="text-gray-400 text-hierarchy-3 ml-1">AI is thinking...</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- File Upload Area -->
+                    <div id="fileUploadArea" class="hidden mx-4 lg:mx-6 file-upload-area rounded-lg flex-shrink-0">
+                        <div class="text-center">
+                            <i class="fas fa-cloud-upload-alt text-blue-400 text-lg mb-1"></i>
+                            <div class="text-hierarchy-3 text-gray-300">Drop files here or click to upload</div>
+                            <div class="text-hierarchy-3 text-gray-500 mt-0.5">Supports: Images, PDFs, Word docs, Excel, text files</div>
+                        </div>
+                        <input type="file" id="fileInput" multiple class="hidden" accept="image/*,.pdf,.doc,.docx,.xls,.xlsx,.txt,.csv,.json">
+                    </div>
+
+                    <!-- Uploaded Files Display -->
+                    <div id="uploadedFiles" class="hidden mx-4 lg:mx-6 mb-2 flex-shrink-0">
+                        <div class="text-hierarchy-3 text-gray-400 mb-1">Uploaded Files:</div>
+                        <div id="filesList" class="space-y-1"></div>
+                    </div>
+
+                    <!-- Input Area -->
+                    <div class="input-container flex-shrink-0">
+                        <div class="input-area rounded-lg">
+                            <div class="flex items-end space-x-2">
+                                <button id="attachBtn" class="text-gray-400 hover:text-white p-1 rounded-lg transition-colors flex-shrink-0">
+                                    <i class="fas fa-paperclip text-sm"></i>
+                                </button>
+                                <div class="flex-1">
+                                    <textarea 
+                                        name="messages"
+                                        placeholder="Type your message... (Shift+Enter for new line, Enter to send)"
+                                        class="w-full bg-transparent text-white placeholder-gray-400 resize-none focus:outline-none max-h-24 min-h-[32px] text-hierarchy-2"
+                                        rows="1"
+                                    ></textarea>
+                                </div>
+                                <button id="sendBtn" class="apple-button p-1.5 flex-shrink-0">
+                                    <i class="fas fa-paper-plane text-white text-sm"></i>
+                                </button>
+                            </div>
+                            
+                            <!-- Quick Actions -->
+                            <div class="flex flex-col lg:flex-row lg:items-center justify-between mt-2 pt-2 border-t border-gray-600 space-y-1 lg:space-y-0">
+                                <div class="quick-actions flex items-center flex-wrap">
+                                    <button class="quick-action bg-gray-700 hover:bg-gray-600 rounded-full transition-colors" data-action="explain">
+                                        Explain this
+                                    </button>
+                                    <button class="quick-action bg-gray-700 hover:bg-gray-600 rounded-full transition-colors" data-action="summarize">
+                                        Summarize
+                                    </button>
+                                    <button class="quick-action bg-gray-700 hover:bg-gray-600 rounded-full transition-colors" data-action="code">
+                                        Write code
+                                    </button>
+                                    <button class="quick-action bg-gray-700 hover:bg-gray-600 rounded-full transition-colors" data-action="analyze">
+                                        Analyze data
+                                    </button>
+                                </div>
+                                <div class="flex items-center space-x-1 text-hierarchy-3 text-gray-500">
+                                    <span id="charCount">0</span>
+                                    <span>/</span>
+                                    <span>10000</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </main>
+        </div>
+    </div>
+
+    <!-- Settings Modal -->
+    <div id="settingsModal" class="hidden fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
+        <div class="bg-gray-800 rounded-xl p-4 w-full max-w-md">
+            <div class="flex items-center justify-between mb-3">
+                <h3 class="text-hierarchy-1 text-white">Settings</h3>
+                <button id="closeSettings" class="text-gray-400 hover:text-white">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            
+            <div class="space-y-3">
+                <div>
+                    <label class="block text-hierarchy-3 text-gray-300 mb-1">Default AI Model</label>
+                    <select id="defaultModelSelect" class="w-full form-input-nf apple-input">
+                        <option value="gemini">Gemini</option>
+                        <option value="chatgpt">ChatGPT</option>
+                        <option value="claude">Claude</option>
+                        <option value="deepseek">DeepSeek</option>
+                        <option value="perplexity">Perplexity</option>
+                        <option value="Mistral">Mistral</option>
+                        <option value="ollama">Ollama</option>
+                    </select>
+                </div>
+                
+                <div>
+                    <label class="block text-hierarchy-3 text-gray-300 mb-1">Response Style</label>
+                    <select id="styleSelect" class="w-full form-input-nf apple-input">
+                        <option value="balanced">Balanced</option>
+                        <option value="creative">Creative</option>
+                        <option value="precise">Precise</option>
+                        <option value="concise">Concise</option>
+                    </select>
+                </div>
+                
+                <div>
+                    <label class="block text-hierarchy-3 text-gray-300 mb-1">Max Response Length</label>
+                    <input type="range" id="lengthSlider" min="100" max="4000" value="2000" class="w-full">
+                    <div class="text-hierarchy-3 text-gray-400 mt-0.5">Current: <span id="lengthValue">2000</span> characters</div>
+                </div>
+
+                <div>
+                    <label class="block text-hierarchy-3 text-gray-300 mb-1">Thread Auto-Save</label>
+                    <div class="flex items-center">
+                        <input type="checkbox" id="autoSaveToggle" checked class="mr-2">
+                        <label for="autoSaveToggle" class="text-hierarchy-3 text-gray-300">Auto-save threads</label>
+                    </div>
+                </div>
+                
+                <div class="flex items-center">
+                    <input type="checkbox" id="streamingToggle" checked class="mr-2">
+                    <label for="streamingToggle" class="text-hierarchy-3 text-gray-300">Enable streaming responses</label>
+                </div>
+                
+                <div class="flex items-center">
+                    <input type="checkbox" id="soundToggle" class="mr-2">
+                    <label for="soundToggle" class="text-hierarchy-3 text-gray-300">Enable notification sounds</label>
+                </div>
+            </div>
+            
+            <div class="flex justify-end mt-4 space-x-2">
+                <button id="resetSettings" class="text-hierarchy-3 text-gray-300 hover:text-white transition-colors">Reset</button>
+                <button id="saveSettings" class="apple-button text-white">Save</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        class NoFrictionAIChatbot {
+            constructor() {
+                this.webhookUrl = 'https://caseyp.app.n8n.cloud/webhook/nofrictionchatbot';
+                this.threads = JSON.parse(localStorage.getItem('nf_threads') || '[]');
+                this.currentThreadId = null;
+                this.currentThread = null;
+                this.settings = JSON.parse(localStorage.getItem('nf_settings') || '{}');
+                this.uploadedFiles = [];
+                this.currentModel = 'gemini';
+                
+                this.initializeElements();
+                this.bindEvents();
+                this.loadSettings();
+                this.initializeFirstThread();
+                this.setupAutoResize();
+                this.setupMobileHandling();
+            }
+
+            initializeElements() {
+                this.elements = {
+                    userInput: document.querySelector('textarea[name="messages"]'),
+                    modelSelector: document.querySelector('select[name="model"]'),
+                    sendBtn: document.getElementById('sendBtn'),
+                    messagesContainer: document.getElementById('messagesContainer'),
+                    messages: document.getElementById('messages'),
+                    typingIndicator: document.getElementById('typingIndicator'),
+                    attachBtn: document.getElementById('attachBtn'),
+                    fileInput: document.getElementById('fileInput'),
+                    fileUploadArea: document.getElementById('fileUploadArea'),
+                    uploadedFiles: document.getElementById('uploadedFiles'),
+                    filesList: document.getElementById('filesList'),
+                    charCount: document.getElementById('charCount'),
+                    newThreadBtn: document.getElementById('newThreadBtn'),
+                    newThreadSidebarBtn: document.getElementById('newThreadSidebarBtn'),
+                    settingsBtn: document.getElementById('settingsBtn'),
+                    settingsModal: document.getElementById('settingsModal'),
+                    closeSettings: document.getElementById('closeSettings'),
+                    threadsList: document.getElementById('threadsList'),
+                    threadInfo: document.getElementById('threadInfo'),
+                    threadTitle: document.getElementById('threadTitle'),
+                    currentModel: document.getElementById('currentModel'),
+                    messageCount: document.getElementById('messageCount'),
+                    exportMarkdown: document.getElementById('exportMarkdown'),
+                    exportJson: document.getElementById('exportJson'),
+                    shareThread: document.getElementById('shareThread'),
+                    sidebar: document.getElementById('sidebar'),
+                    sidebarToggle: document.getElementById('sidebarToggle'),
+                    sidebarOverlay: document.getElementById('sidebarOverlay')
+                };
+            }
+
+            bindEvents() {
+                // Message input events
+                this.elements.userInput.addEventListener('keydown', (e) => this.handleKeyDown(e));
+                this.elements.userInput.addEventListener('input', () => this.updateCharCount());
+                this.elements.sendBtn.addEventListener('click', () => this.sendMessage());
+
+                // Model selector
+                this.elements.modelSelector.addEventListener('change', (e) => this.switchModel(e.target.value));
+
+                // Thread management
+                this.elements.newThreadBtn.addEventListener('click', () => this.createNewThread());
+                this.elements.newThreadSidebarBtn.addEventListener('click', () => this.createNewThread());
+
+                // Sidebar mobile handling
+                this.elements.sidebarToggle.addEventListener('click', () => this.toggleSidebar());
+                this.elements.sidebarOverlay.addEventListener('click', () => this.closeSidebar());
+
+                // File upload events
+                this.elements.attachBtn.addEventListener('click', () => this.toggleFileUpload());
+                this.elements.fileInput.addEventListener('change', (e) => this.handleFileUpload(e));
+                this.elements.fileUploadArea.addEventListener('click', () => this.elements.fileInput.click());
+                this.elements.fileUploadArea.addEventListener('dragover', (e) => this.handleDragOver(e));
+                this.elements.fileUploadArea.addEventListener('drop', (e) => this.handleFileDrop(e));
+
+                // Quick actions
+                document.querySelectorAll('.quick-action').forEach(btn => {
+                    btn.addEventListener('click', (e) => this.handleQuickAction(e));
+                });
+
+                // Feature cards
+                document.querySelectorAll('.feature-card').forEach(card => {
+                    card.addEventListener('click', (e) => this.handleFeatureSelect(e));
+                });
+
+                // Settings
+                this.elements.settingsBtn.addEventListener('click', () => this.showSettings());
+                this.elements.closeSettings.addEventListener('click', () => this.hideSettings());
+                document.getElementById('saveSettings').addEventListener('click', () => this.saveSettings());
+                document.getElementById('resetSettings').addEventListener('click', () => this.resetSettings());
+
+                // Export functions
+                this.elements.exportMarkdown.addEventListener('click', () => this.exportAsMarkdown());
+                this.elements.exportJson.addEventListener('click', () => this.exportAsJson());
+                this.elements.shareThread.addEventListener('click', () => this.shareThread());
+
+                // Settings controls
+                document.getElementById('lengthSlider').addEventListener('input', (e) => {
+                    document.getElementById('lengthValue').textContent = e.target.value;
+                });
+
+                // Window resize handler for mobile
+                window.addEventListener('resize', () => this.handleResize());
+            }
+
+            setupMobileHandling() {
+                document.addEventListener('click', (e) => {
+                    if (window.innerWidth < 1024) {
+                        if (!this.elements.sidebar.contains(e.target) && 
+                            !this.elements.sidebarToggle.contains(e.target) &&
+                            !this.elements.sidebar.classList.contains('hidden')) {
+                            this.closeSidebar();
+                        }
+                    }
+                });
+            }
+
+            toggleSidebar() {
+                this.elements.sidebar.classList.toggle('open');
+                this.elements.sidebarOverlay.classList.toggle('hidden');
+            }
+
+            closeSidebar() {
+                this.elements.sidebar.classList.remove('open');
+                this.elements.sidebarOverlay.classList.add('hidden');
+            }
+
+            handleResize() {
+                if (window.innerWidth >= 1024) {
+                    this.elements.sidebar.classList.remove('open');
+                    this.elements.sidebarOverlay.classList.add('hidden');
+                }
+            }
+
+            setupAutoResize() {
+                const textarea = this.elements.userInput;
+                textarea.addEventListener('input', () => {
+                    textarea.style.height = 'auto';
+                    textarea.style.height = Math.min(textarea.scrollHeight, 96) + 'px';
+                });
+            }
+
+            initializeFirstThread() {
+                if (this.threads.length === 0) {
+                    this.createNewThread();
+                } else {
+                    this.loadThread(this.threads[0]);
+                }
+                this.updateThreadsList();
+            }
+
+            createNewThread() {
+                const thread = {
+                    id: Date.now().toString(),
+                    title: 'New Thread',
+                    messages: [],
+                    model: this.currentModel,
+                    createdAt: new Date().toISOString(),
+                    lastUpdated: new Date().toISOString()
+                };
+
+                this.threads.unshift(thread);
+                this.loadThread(thread);
+                this.updateThreadsList();
+                this.saveThreads();
+
+                this.elements.userInput.focus();
+
+                if (window.innerWidth < 1024) {
+                    this.closeSidebar();
+                }
+            }
+
+            loadThread(thread) {
+                this.currentThread = thread;
+                this.currentThreadId = thread.id;
+                this.currentModel = thread.model || 'gemini';
+                
+                this.elements.modelSelector.value = this.currentModel;
+                this.elements.messages.innerHTML = '';
+                
+                thread.messages.forEach(message => this.displayMessage(message));
+                this.updateThreadInfo();
+                this.scrollToBottom();
+
+                this.updateThreadsList();
+            }
+
+            switchModel(newModel) {
+                const oldModel = this.currentModel;
+                this.currentModel = newModel;
+                
+                if (this.currentThread) {
+                    this.currentThread.model = newModel;
+                    this.saveThreads();
+                }
+
+                this.updateThreadInfo();
+
+                if (this.currentThread && this.currentThread.messages.length > 0) {
+                    const switchMessage = {
+                        id: Date.now(),
+                        type: 'system',
+                        content: `🔄 Switched from ${oldModel} to ${newModel}`,
+                        timestamp: new Date().toISOString(),
+                        model: newModel
+                    };
+                    
+                    this.currentThread.messages.push(switchMessage);
+                    this.displayMessage(switchMessage);
+                    this.updateThreadInfo();
+                }
+            }
+
+            updateThreadsList() {
+                this.elements.threadsList.innerHTML = '';
+                
+                this.threads.forEach(thread => {
+                    const item = document.createElement('div');
+                    item.className = `thread-item rounded-lg ${thread.id === this.currentThreadId ? 'active' : ''}`;
+                    item.innerHTML = `
+                        <div class="flex items-center justify-between">
+                            <div class="flex-1 min-w-0">
+                                <div class="text-hierarchy-2 text-gray-200 truncate">${thread.title}</div>
+                                <div class="text-hierarchy-3 text-gray-400 mt-0.5 flex items-center space-x-1">
+                                    <span>${this.formatTimestamp(thread.lastUpdated)}</span>
+                                    <span class="model-badge">${thread.model || 'gemini'}</span>
+                                </div>
+                                <div class="text-hierarchy-3 text-gray-500">${thread.messages.length} messages</div>
+                            </div>
+                            <button class="delete-thread ml-1 p-0.5 text-gray-400 hover:text-red-400 transition-opacity" data-thread-id="${thread.id}">
+                                <i class="fas fa-trash text-xs"></i>
+                            </button>
+                        </div>
+                    `;
+                    
+                    item.addEventListener('click', (e) => {
+                        if (!e.target.closest('.delete-thread')) {
+                            this.loadThread(thread);
+                            if (window.innerWidth < 1024) {
+                                this.closeSidebar();
+                            }
+                        }
+                    });
+
+                    const deleteBtn = item.querySelector('.delete-thread');
+                    deleteBtn.addEventListener('click', (e) => {
+                        e.stopPropagation();
+                        this.deleteThread(thread.id);
+                    });
+                    
+                    this.elements.threadsList.appendChild(item);
+                });
+            }
+
+            deleteThread(threadId) {
+                if (this.threads.length <= 1) {
+                    this.showNotification('Cannot delete the last thread', 'warning');
+                    return;
+                }
+
+                const threadIndex = this.threads.findIndex(t => t.id === threadId);
+                if (threadIndex === -1) return;
+
+                this.threads.splice(threadIndex, 1);
+                
+                if (threadId === this.currentThreadId) {
+                    const newThread = this.threads[0] || this.threads[Math.max(0, threadIndex - 1)];
+                    this.loadThread(newThread);
+                }
+                
+                this.updateThreadsList();
+                this.saveThreads();
+                this.showNotification('Thread deleted', 'info');
+            }
+
+            updateThreadInfo() {
+                if (this.currentThread) {
+                    this.elements.threadTitle.textContent = this.currentThread.title;
+                    this.elements.currentModel.textContent = this.currentModel;
+                    this.elements.messageCount.textContent = `${this.currentThread.messages.length} messages`;
+                }
+            }
+
+            generateThreadTitle() {
+                if (!this.currentThread || this.currentThread.messages.length === 0) return 'New Thread';
+                
+                const firstUserMessage = this.currentThread.messages.find(m => m.type === 'user');
+                if (firstUserMessage) {
+                    const title = firstUserMessage.content.substring(0, 50) + (firstUserMessage.content.length > 50 ? '...' : '');
+                    this.currentThread.title = title;
+                    return title;
+                }
+                return 'New Thread';
+            }
+
+            handleKeyDown(e) {
+                if (e.key === 'Enter' && !e.shiftKey) {
+                    e.preventDefault();
+                    this.sendMessage();
+                }
+            }
+
+            updateCharCount() {
+                const count = this.elements.userInput.value.length;
+                this.elements.charCount.textContent = count;
+                
+                if (count > 9000) {
+                    this.elements.charCount.style.color = '#ef4444';
+                } else if (count > 7000) {
+                    this.elements.charCount.style.color = '#f59e0b';
+                } else {
+                    this.elements.charCount.style.color = '#6b7280';
+                }
+            }
+
+            toggleFileUpload() {
+                const isHidden = this.elements.fileUploadArea.classList.contains('hidden');
+                if (isHidden) {
+                    this.elements.fileUploadArea.classList.remove('hidden');
+                } else {
+                    this.elements.fileUploadArea.classList.add('hidden');
+                }
+            }
+
+            handleFileUpload(e) {
+                const files = Array.from(e.target.files);
+                this.processFiles(files);
+            }
+
+            handleDragOver(e) {
+                e.preventDefault();
+                e.stopPropagation();
+            }
+
+            handleFileDrop(e) {
+                e.preventDefault();
+                e.stopPropagation();
+                const files = Array.from(e.dataTransfer.files);
+                this.processFiles(files);
+            }
+
+            async processFiles(files) {
+                for (const file of files) {
+                    if (file.size > 50 * 1024 * 1024) {
+                        this.showNotification('File too large. Maximum size is 50MB.', 'error');
+                        continue;
+                    }
+
+                    const fileData = {
+                        name: file.name,
+                        size: file.size,
+                        type: file.type,
+                        data: null
+                    };
+
+                    if (file.type.startsWith('image/') || file.type === 'application/pdf' || file.type.includes('document') || file.type.includes('sheet') || file.type === 'text/plain') {
+                        fileData.data = await this.fileToBase64(file);
+                    }
+
+                    this.uploadedFiles.push(fileData);
+                    this.displayUploadedFile(fileData);
+                }
+
+                this.elements.uploadedFiles.classList.remove('hidden');
+                this.elements.fileUploadArea.classList.add('hidden');
+            }
+
+            fileToBase64(file) {
+                return new Promise((resolve, reject) => {
+                    const reader = new FileReader();
+                    reader.readAsDataURL(file);
+                    reader.onload = () => resolve(reader.result);
+                    reader.onerror = error => reject(error);
+                });
+            }
+
+            displayUploadedFile(fileData) {
+                const fileElement = document.createElement('div');
+                fileElement.className = 'flex items-center justify-between bg-gray-700 p-1.5 rounded-lg';
+                fileElement.innerHTML = `
+                    <div class="flex items-center space-x-1.5">
+                        <i class="fas ${this.getFileIcon(fileData.type)} text-blue-400 text-xs"></i>
+                        <span class="text-hierarchy-3 text-gray-200 truncate">${fileData.name}</span>
+                        <span class="text-hierarchy-3 text-gray-400">(${this.formatFileSize(fileData.size)})</span>
+                    </div>
+                    <button class="text-gray-400 hover:text-red-400 remove-file flex-shrink-0 p-0.5" data-filename="${fileData.name}">
+                        <i class="fas fa-times text-xs"></i>
+                    </button>
+                `;
+
+                fileElement.querySelector('.remove-file').addEventListener('click', () => {
+                    this.removeUploadedFile(fileData.name);
+                    fileElement.remove();
+                    if (this.uploadedFiles.length === 0) {
+                        this.elements.uploadedFiles.classList.add('hidden');
+                    }
+                });
+
+                this.elements.filesList.appendChild(fileElement);
+            }
+
+            removeUploadedFile(filename) {
+                this.uploadedFiles = this.uploadedFiles.filter(file => file.name !== filename);
+            }
+
+            getFileIcon(type) {
+                if (type.startsWith('image/')) return 'fa-image';
+                if (type === 'application/pdf') return 'fa-file-pdf';
+                if (type.includes('document')) return 'fa-file-word';
+                if (type.includes('sheet')) return 'fa-file-excel';
+                if (type === 'text/plain') return 'fa-file-alt';
+                return 'fa-file';
+            }
+
+            formatFileSize(bytes) {
+                const sizes = ['Bytes', 'KB', 'MB', 'GB'];
+                if (bytes === 0) return '0 Byte';
+                const i = parseInt(Math.floor(Math.log(bytes) / Math.log(1024)));
+                return Math.round(bytes / Math.pow(1024, i) * 100) / 100 + ' ' + sizes[i];
+            }
+
+            handleQuickAction(e) {
+                const action = e.target.dataset.action;
+                const prompts = {
+                    explain: "Please explain this in detail: ",
+                    summarize: "Please provide a summary of: ",
+                    code: "Please write code for: ",
+                    analyze: "Please analyze this data: "
+                };
+                
+                this.elements.userInput.value = prompts[action];
+                this.elements.userInput.focus();
+            }
+
+            handleFeatureSelect(e) {
+                const feature = e.currentTarget.dataset.feature;
+                const featurePrompts = {
+                    text: "I need help with text generation. Can you assist with creative writing, technical documentation, or content creation?",
+                    code: "I need programming help. Can you write, debug, or explain code in any language?",
+                    analysis: "I have data that needs analysis. Can you help me process and visualize it?",
+                    research: "I need research assistance. Can you help me gather and synthesize information?",
+                    image: "I have images to analyze. Can you describe, extract text, or understand visual content?",
+                    document: "I have documents to process. Can you analyze PDFs, Word docs, or spreadsheets?"
+                };
+
+                if (featurePrompts[feature]) {
+                    this.elements.userInput.value = featurePrompts[feature];
+                    this.elements.userInput.focus();
+                    
+                    // Auto-collapse sidebar on mobile after selecting feature
+                    if (window.innerWidth < 1024) {
+                        this.closeSidebar();
+                    }
+                }
+            }
+
+            async sendMessage() {
+                const message = this.elements.userInput.value.trim();
+                if (!message && this.uploadedFiles.length === 0) return;
+
+                this.elements.sendBtn.disabled = true;
+                this.elements.userInput.disabled = true;
+
+                const userMessage = {
+                    id: Date.now(),
+                    type: 'user',
+                    content: message,
+                    files: [...this.uploadedFiles],
+                    timestamp: new Date().toISOString(),
+                    model: this.currentModel
+                };
+
+                this.currentThread.messages.push(userMessage);
+                this.displayMessage(userMessage);
+
+                if (this.currentThread.title === 'New Thread') {
+                    this.generateThreadTitle();
+                    this.updateThreadInfo();
+                    this.updateThreadsList();
+                }
+
+                this.elements.userInput.value = '';
+                this.uploadedFiles = [];
+                this.elements.uploadedFiles.classList.add('hidden');
+                this.elements.filesList.innerHTML = '';
+                this.updateCharCount();
+
+                this.showTypingIndicator();
+
+                try {
+                    const response = await this.sendToWebhook(userMessage);
+                    console.log('Webhook response:', response);
+                    
+                    // Handle different possible response formats
+                    let aiResponseContent = '';
+                    
+                    if (typeof response === 'string') {
+                        aiResponseContent = response;
+                    } else if (response && typeof response === 'object') {
+                        // Try different common response field names
+                        aiResponseContent = response.response || 
+                                         response.content || 
+                                         response.message || 
+                                         response.reply || 
+                                         response.output || 
+                                         response.text ||
+                                         response.data ||
+                                         JSON.stringify(response, null, 2);
+                    } else {
+                        aiResponseContent = 'I received your message and processed it successfully, but the response format was unexpected.';
+                    }
+
+                    const aiMessage = {
+                        id: Date.now() + 1,
+                        type: 'ai',
+                        content: aiResponseContent,
+                        timestamp: new Date().toISOString(),
+                        model: this.currentModel
+                    };
+
+                    this.currentThread.messages.push(aiMessage);
+                    this.hideTypingIndicator();
+                    this.displayMessage(aiMessage);
+
+                } catch (error) {
+                    console.error('Error sending message:', error);
+                    this.hideTypingIndicator();
+                    
+                    const errorMessage = {
+                        id: Date.now() + 1,
+                        type: 'ai',
+                        content: `I apologize, but I encountered an error processing your request: ${error.message}. Please check your connection and try again.`,
+                        timestamp: new Date().toISOString(),
+                        isError: true,
+                        model: this.currentModel
+                    };
+
+                    this.currentThread.messages.push(errorMessage);
+                    this.displayMessage(errorMessage);
+                }
+
+                this.elements.sendBtn.disabled = false;
+                this.elements.userInput.disabled = false;
+                this.elements.userInput.focus();
+
+                this.currentThread.lastUpdated = new Date().toISOString();
+                this.saveThreads();
+                this.updateThreadInfo();
+                this.updateThreadsList();
+            }
+
+            async sendToWebhook(message) {
+                const payload = {
+                    model: this.currentModel,
+                    messages: message.content,
+                    files: message.files,
+                    timestamp: message.timestamp,
+                    threadId: this.currentThreadId,
+                    threadContext: this.currentThread.messages.slice(-10).map(m => ({
+                        type: m.type,
+                        content: m.content,
+                        model: m.model
+                    })),
+                    settings: this.settings
+                };
+
+                console.log('Sending to webhook:', payload);
+
+                const response = await fetch(this.webhookUrl, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Accept': 'application/json',
+                    },
+                    body: JSON.stringify(payload),
+                    timeout: 30000 // 30 second timeout
+                });
+
+                console.log('Response status:', response.status);
+                console.log('Response headers:', response.headers);
+
+                if (!response.ok) {
+                    const errorText = await response.text();
+                    console.error('Response error text:', errorText);
+                    throw new Error(`HTTP error! status: ${response.status}, message: ${errorText}`);
+                }
+
+                const contentType = response.headers.get('content-type');
+                let responseData;
+                
+                if (contentType && contentType.includes('application/json')) {
+                    responseData = await response.json();
+                } else {
+                    responseData = await response.text();
+                }
+
+                console.log('Parsed response data:', responseData);
+                return responseData;
+            }
+
+            displayMessage(message) {
+                const messageElement = document.createElement('div');
+                messageElement.className = `${message.type}-message message-bubble rounded-lg max-w-full lg:max-w-3xl ${message.type === 'user' ? 'ml-auto' : ''} ${message.type === 'system' ? 'mx-auto bg-gray-700 border-gray-600' : ''}`;
+                
+                if (message.type === 'user') {
+                    messageElement.innerHTML = this.createUserMessageHTML(message);
+                } else if (message.type === 'system') {
+                    messageElement.innerHTML = this.createSystemMessageHTML(message);
+                } else {
+                    messageElement.innerHTML = this.createAIMessageHTML(message);
+                }
+
+                this.elements.messages.appendChild(messageElement);
+                this.scrollToBottom();
+
+                if (message.type === 'ai') {
+                    this.bindMessageActions(messageElement, message);
+                }
+            }
+
+            createUserMessageHTML(message) {
+                let filesHTML = '';
+                if (message.files && message.files.length > 0) {
+                    filesHTML = '<div class="mt-1 space-y-0.5">';
+                    message.files.forEach(file => {
+                        filesHTML += `
+                            <div class="flex items-center space-x-1 text-hierarchy-3 opacity-80">
+                                <i class="fas ${this.getFileIcon(file.type)}"></i>
+                                <span class="truncate">${file.name}</span>
+                            </div>
+                        `;
+                    });
+                    filesHTML += '</div>';
+                }
+
+                return `
+                    <div class="flex items-start space-x-2 justify-end">
+                        <div class="text-right flex-1 min-w-0">
+                            <div class="text-hierarchy-3 text-blue-100 mb-1 flex items-center justify-end">
+                                <span>You</span>
+                                <span class="model-badge ml-1">${message.model}</span>
+                            </div>
+                            <div class="text-white text-hierarchy-2">${this.formatMessageContent(message.content)}</div>
+                            ${filesHTML}
+                            <div class="text-hierarchy-3 text-blue-100 opacity-60 mt-1">${this.formatTimestamp(message.timestamp)}</div>
+                        </div>
+                        <div class="w-6 h-6 bg-blue-800 rounded-full flex items-center justify-center flex-shrink-0">
+                            <i class="fas fa-user text-white text-xs"></i>
+                        </div>
+                    </div>
+                `;
+            }
+
+            createSystemMessageHTML(message) {
+                return `
+                    <div class="text-center">
+                        <div class="text-hierarchy-3 text-gray-300">${message.content}</div>
+                        <div class="text-hierarchy-3 text-gray-500 mt-0.5">${this.formatTimestamp(message.timestamp)}</div>
+                    </div>
+                `;
+            }
+
+            createAIMessageHTML(message) {
+                const modelBadge = message.model ? `<span class="model-badge">${message.model}</span>` : '';
+                const errorClass = message.isError ? 'border-red-500 bg-red-900 bg-opacity-20' : '';
+                
+                return `
+                    <div class="flex items-start space-x-2">
+                        <div class="w-6 h-6 bg-blue-600 rounded-full flex items-center justify-center flex-shrink-0">
+                            <i class="fas fa-robot text-white text-xs"></i>
+                        </div>
+                        <div class="flex-1 min-w-0">
+                            <div class="text-hierarchy-3 text-blue-300 mb-1 flex items-center">
+                                <span>NoFriction AI</span>
+                                ${modelBadge}
+                            </div>
+                            <div class="text-gray-100 text-hierarchy-2 ${errorClass}">${this.formatMessageContent(message.content)}</div>
+                            <div class="text-hierarchy-3 text-gray-400 mt-1">${this.formatTimestamp(message.timestamp)}</div>
+                            <div class="message-actions flex items-center space-x-1 mt-1">
+                                <button class="copy-btn text-gray-400 hover:text-white p-0.5 rounded" title="Copy message">
+                                    <i class="fas fa-copy text-xs"></i>
+                                </button>
+                                <button class="like-btn text-gray-400 hover:text-green-400 p-0.5 rounded" title="Good response">
+                                    <i class="fas fa-thumbs-up text-xs"></i>
+                                </button>
+                                <button class="dislike-btn text-gray-400 hover:text-red-400 p-0.5 rounded" title="Poor response">
+                                    <i class="fas fa-thumbs-down text-xs"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            }
+
+            formatMessageContent(content) {
+                if (!content) return '';
+                
+                // Handle code blocks
+                content = content.replace(/```(\w+)?\n([\s\S]*?)```/g, (match, language, code) => {
+                    return `<div class="code-block"><pre><code>${this.escapeHtml(code.trim())}</code></pre></div>`;
+                });
+
+                // Handle inline code
+                content = content.replace(/`([^`]+)`/g, '<code class="bg-gray-800 px-1 py-0.5 rounded text-blue-300">$1</code>');
+                
+                // Handle line breaks
+                content = content.replace(/\n/g, '<br>');
+                
+                // Handle bold text
+                content = content.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
+                
+                // Handle italic text
+                content = content.replace(/\*(.*?)\*/g, '<em>$1</em>');
+                
+                // Handle links
+                content = content.replace(/(https?:\/\/[^\s]+)/g, '<a href="$1" target="_blank" class="text-blue-400 hover:text-blue-300 underline">$1</a>');
+
+                return content;
+            }
+
+            escapeHtml(text) {
+                const div = document.createElement('div');
+                div.textContent = text;
+                return div.innerHTML;
+            }
+
+            formatTimestamp(timestamp) {
+                const date = new Date(timestamp);
+                return date.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+            }
+
+            bindMessageActions(messageElement, message) {
+                const copyBtn = messageElement.querySelector('.copy-btn');
+                const likeBtn = messageElement.querySelector('.like-btn');
+                const dislikeBtn = messageElement.querySelector('.dislike-btn');
+
+                copyBtn?.addEventListener('click', () => this.copyMessage(message.content));
+                likeBtn?.addEventListener('click', () => this.rateMessage(message.id, 'like'));
+                dislikeBtn?.addEventListener('click', () => this.rateMessage(message.id, 'dislike'));
+            }
+
+            copyMessage(content) {
+                const textContent = content.replace(/<[^>]*>/g, '').replace(/&lt;/g, '<').replace(/&gt;/g, '>').replace(/&amp;/g, '&');
+                navigator.clipboard.writeText(textContent).then(() => {
+                    this.showNotification('Message copied to clipboard', 'success');
+                });
+            }
+
+            rateMessage(messageId, rating) {
+                const ratings = JSON.parse(localStorage.getItem('nf_ratings') || '{}');
+                ratings[messageId] = { rating, timestamp: new Date().toISOString() };
+                localStorage.setItem('nf_ratings', JSON.stringify(ratings));
+                
+                this.showNotification(`Feedback recorded: ${rating}`, 'info');
+            }
+
+            showTypingIndicator() {
+                this.elements.typingIndicator.classList.remove('hidden');
+                this.scrollToBottom();
+            }
+
+            hideTypingIndicator() {
+                this.elements.typingIndicator.classList.add('hidden');
+            }
+
+            scrollToBottom() {
+                setTimeout(() => {
+                    this.elements.messagesContainer.scrollTop = this.elements.messagesContainer.scrollHeight;
+                }, 100);
+            }
+
+            saveThreads() {
+                localStorage.setItem('nf_threads', JSON.stringify(this.threads));
+            }
+
+            showSettings() {
+                this.elements.settingsModal.classList.remove('hidden');
+                this.loadSettingsToForm();
+            }
+
+            hideSettings() {
+                this.elements.settingsModal.classList.add('hidden');
+            }
+
+            loadSettingsToForm() {
+                document.getElementById('defaultModelSelect').value = this.settings.defaultModel || 'gemini';
+                document.getElementById('styleSelect').value = this.settings.style || 'balanced';
+                document.getElementById('lengthSlider').value = this.settings.maxLength || 2000;
+                document.getElementById('lengthValue').textContent = this.settings.maxLength || 2000;
+                document.getElementById('autoSaveToggle').checked = this.settings.autoSave !== false;
+                document.getElementById('streamingToggle').checked = this.settings.streaming !== false;
+                document.getElementById('soundToggle').checked = this.settings.sounds || false;
+            }
+
+            saveSettings() {
+                this.settings = {
+                    defaultModel: document.getElementById('defaultModelSelect').value,
+                    style: document.getElementById('styleSelect').value,
+                    maxLength: parseInt(document.getElementById('lengthSlider').value),
+                    autoSave: document.getElementById('autoSaveToggle').checked,
+                    streaming: document.getElementById('streamingToggle').checked,
+                    sounds: document.getElementById('soundToggle').checked
+                };
+                
+                localStorage.setItem('nf_settings', JSON.stringify(this.settings));
+                this.hideSettings();
+                this.showNotification('Settings saved successfully', 'success');
+            }
+
+            resetSettings() {
+                this.settings = {};
+                localStorage.removeItem('nf_settings');
+                this.loadSettingsToForm();
+                this.showNotification('Settings reset to default', 'info');
+            }
+
+            loadSettings() {
+                const saved = localStorage.getItem('nf_settings');
+                if (saved) {
+                    this.settings = JSON.parse(saved);
+                }
+                
+                if (this.settings.defaultModel) {
+                    this.currentModel = this.settings.defaultModel;
+                    this.elements.modelSelector.value = this.currentModel;
+                }
+            }
+
+            exportAsMarkdown() {
+                if (!this.currentThread || this.currentThread.messages.length === 0) {
+                    this.showNotification('No thread to export', 'warning');
+                    return;
+                }
+
+                let markdown = `# NoFriction AI Thread: ${this.currentThread.title}\n\n`;
+                markdown += `**Created:** ${new Date(this.currentThread.createdAt).toLocaleDateString()}\n`;
+                markdown += `**Last Updated:** ${new Date(this.currentThread.lastUpdated).toLocaleDateString()}\n`;
+                markdown += `**Model:** ${this.currentThread.model}\n\n`;
+
+                this.currentThread.messages.forEach(message => {
+                    if (message.type === 'system') {
+                        markdown += `*${message.content}*\n\n`;
+                    } else {
+                        const role = message.type === 'user' ? 'You' : `NoFriction AI (${message.model})`;
+                        const content = message.content.replace(/<[^>]*>/g, '');
+                        markdown += `## ${role}\n\n${content}\n\n`;
+                        
+                        if (message.files && message.files.length > 0) {
+                            markdown += `**Files:**\n`;
+                            message.files.forEach(file => {
+                                markdown += `- ${file.name} (${this.formatFileSize(file.size)})\n`;
+                            });
+                            markdown += '\n';
+                        }
+                    }
+                });
+
+                this.downloadFile(markdown, `thread-${this.currentThread.id}.md`, 'text/markdown');
+            }
+
+            exportAsJson() {
+                if (!this.currentThread || this.currentThread.messages.length === 0) {
+                    this.showNotification('No thread to export', 'warning');
+                    return;
+                }
+
+                const exportData = {
+                    thread: this.currentThread,
+                    exportDate: new Date().toISOString(),
+                    settings: this.settings
+                };
+
+                this.downloadFile(JSON.stringify(exportData, null, 2), `thread-${this.currentThread.id}.json`, 'application/json');
+            }
+
+            shareThread() {
+                if (!this.currentThread || this.currentThread.messages.length === 0) {
+                    this.showNotification('No thread to share', 'warning');
+                    return;
+                }
+
+                const shareData = {
+                    title: this.currentThread.title,
+                    model: this.currentThread.model,
+                    messages: this.currentThread.messages.map(m => ({
+                        type: m.type,
+                        content: m.content.replace(/<[^>]*>/g, ''),
+                        timestamp: m.timestamp,
+                        model: m.model
+                    }))
+                };
+
+                if (navigator.share) {
+                    navigator.share({
+                        title: `NoFriction AI Thread: ${this.currentThread.title}`,
+                        text: this.currentThread.title,
+                        url: window.location.href
+                    });
+                } else {
+                    navigator.clipboard.writeText(JSON.stringify(shareData, null, 2)).then(() => {
+                        this.showNotification('Thread data copied to clipboard', 'success');
+                    });
+                }
+            }
+
+            downloadFile(content, filename, mimeType) {
+                const blob = new Blob([content], { type: mimeType });
+                const url = URL.createObjectURL(blob);
+                const a = document.createElement('a');
+                a.href = url;
+                a.download = filename;
+                document.body.appendChild(a);
+                a.click();
+                document.body.removeChild(a);
+                URL.revokeObjectURL(url);
+                
+                this.showNotification(`Downloaded ${filename}`, 'success');
+            }
+
+            showNotification(message, type = 'info') {
+                const notification = document.createElement('div');
+                notification.className = `fixed top-2 right-2 p-2 rounded-lg z-50 transition-opacity duration-300 max-w-xs ${
+                    type === 'success' ? 'bg-green-600' :
+                    type === 'error' ? 'bg-red-600' :
+                    type === 'warning' ? 'bg-yellow-600' :
+                    'bg-blue-600'
+                }`;
+                notification.innerHTML = `
+                    <div class="text-white text-hierarchy-3">${message}</div>
+                `;
+                
+                document.body.appendChild(notification);
+                
+                setTimeout(() => {
+                    notification.style.opacity = '0';
+                    setTimeout(() => {
+                        if (document.body.contains(notification)) {
+                            document.body.removeChild(notification);
+                        }
+                    }, 300);
+                }, 3000);
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            new NoFrictionAIChatbot();
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,1020 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Complete Calorie & Macro Analysis for 47-Year-Old Male (100kg)</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+        body { font-family: 'Inter', sans-serif; }
+        .gradient-bg { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); }
+        .shadow-custom { box-shadow: 0 10px 25px rgba(0,0,0,0.1); }
+        .chart-container { height: 400px; }
+    </style>
+</head>
+<body class="bg-gray-50 leading-relaxed">
+    <!-- Header -->
+    <div class="gradient-bg text-white py-8">
+        <div class="max-w-6xl mx-auto px-6">
+            <h1 class="text-4xl font-bold mb-2">Complete Calorie & Macro Analysis</h1>
+            <p class="text-xl opacity-90">47-Year-Old Male (100kg) - Carb-Sensitive Weight Loss Protocol</p>
+            <div class="mt-4 grid grid-cols-1 md:grid-cols-4 gap-4 text-center">
+                <div class="bg-white bg-opacity-20 rounded-lg p-3">
+                    <i class="fas fa-user text-2xl mb-2"></i>
+                    <div class="font-semibold">Age: 47</div>
+                </div>
+                <div class="bg-white bg-opacity-20 rounded-lg p-3">
+                    <i class="fas fa-weight text-2xl mb-2"></i>
+                    <div class="font-semibold">Weight: 100kg</div>
+                </div>
+                <div class="bg-white bg-opacity-20 rounded-lg p-3">
+                    <i class="fas fa-bicycle text-2xl mb-2"></i>
+                    <div class="font-semibold">Active Cyclist</div>
+                </div>
+                <div class="bg-white bg-opacity-20 rounded-lg p-3">
+                    <i class="fas fa-bullseye text-2xl mb-2"></i>
+                    <div class="font-semibold">Last 5-10 lbs</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="max-w-6xl mx-auto px-6 py-8">
+        
+        <!-- Strava Activity Analysis -->
+        <div class="bg-white rounded-xl shadow-custom p-6 mb-8">
+            <h2 class="text-2xl font-bold text-gray-800 mb-4 flex items-center">
+                <i class="fas fa-chart-line text-blue-600 mr-3"></i>Training Analysis - Latest Strava Activity
+            </h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div class="bg-orange-50 border-l-4 border-orange-500 p-4 rounded">
+                    <h3 class="font-semibold text-orange-800">Distance</h3>
+                    <p class="text-2xl font-bold text-orange-600">17.6 miles</p>
+                    <p class="text-sm text-orange-700">Gravel ride duration</p>
+                </div>
+                <div class="bg-green-50 border-l-4 border-green-500 p-4 rounded">
+                    <h3 class="font-semibold text-green-800">Time</h3>
+                    <p class="text-2xl font-bold text-green-600">1h 7m 55s</p>
+                    <p class="text-sm text-green-700">Consistent endurance pace</p>
+                </div>
+                <div class="bg-purple-50 border-l-4 border-purple-500 p-4 rounded">
+                    <h3 class="font-semibold text-purple-800">Elevation</h3>
+                    <p class="text-2xl font-bold text-purple-600">886 ft</p>
+                    <p class="text-sm text-purple-700">Moderate climbing effort</p>
+                </div>
+            </div>
+            <div class="mt-4 p-4 bg-blue-50 rounded-lg">
+                <p class="text-blue-800"><strong>Estimated Calories Burned:</strong> ~894 calories (based on 8 METs for moderate gravel cycling at 100kg body weight)</p>
+            </div>
+        </div>
+
+        <!-- BMR and TDEE Calculations -->
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-8">
+            <!-- BMR Chart -->
+            <div class="bg-white rounded-xl shadow-custom p-6">
+                <h2 class="text-xl font-bold text-gray-800 mb-4 flex items-center">
+                    <i class="fas fa-fire text-red-500 mr-3"></i>Basal Metabolic Rate (BMR)
+                </h2>
+                <div class="chart-container">
+                    <canvas id="bmrChart"></canvas>
+                </div>
+                <div class="mt-4 p-4 bg-red-50 rounded-lg">
+                    <p class="text-red-800 font-semibold">BMR: 1,895 calories/day</p>
+                    <p class="text-sm text-red-600">Using Mifflin-St Jeor equation for 47-year-old male, 100kg</p>
+                </div>
+            </div>
+
+            <!-- TDEE Chart -->
+            <div class="bg-white rounded-xl shadow-custom p-6">
+                <h2 class="text-xl font-bold text-gray-800 mb-4 flex items-center">
+                    <i class="fas fa-chart-bar text-green-500 mr-3"></i>Total Daily Energy Expenditure
+                </h2>
+                <div class="chart-container">
+                    <canvas id="tdeeChart"></canvas>
+                </div>
+                <div class="mt-4 p-4 bg-green-50 rounded-lg">
+                    <p class="text-green-800 font-semibold">Your TDEE: 2,937 calories/day</p>
+                    <p class="text-sm text-green-600">Moderately active lifestyle baseline</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Calorie Requirements Table -->
+        <div class="bg-white rounded-xl shadow-custom p-6 mb-8">
+            <h2 class="text-2xl font-bold text-gray-800 mb-6 flex items-center">
+                <i class="fas fa-calculator text-blue-600 mr-3"></i>Detailed Calorie Requirements
+            </h2>
+            
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                <!-- Without Exercise -->
+                <div>
+                    <h3 class="text-lg font-semibold text-gray-700 mb-4 bg-gray-100 p-3 rounded">
+                        <i class="fas fa-bed text-gray-600 mr-2"></i>WITHOUT Daily Exercise Burn
+                    </h3>
+                    <div class="space-y-3">
+                        <div class="flex justify-between p-3 bg-blue-50 rounded">
+                            <span class="font-medium">TDEE (Moderately Active)</span>
+                            <span class="font-bold text-blue-600">2,937 cal</span>
+                        </div>
+                        <div class="flex justify-between p-3 bg-yellow-50 rounded">
+                            <span class="font-medium">Maintenance Calories</span>
+                            <span class="font-bold text-yellow-600">2,937 cal</span>
+                        </div>
+                        <div class="flex justify-between p-3 bg-orange-50 rounded">
+                            <span class="font-medium">Moderate Deficit (-500)</span>
+                            <span class="font-bold text-orange-600">2,437 cal</span>
+                        </div>
+                        <div class="flex justify-between p-3 bg-red-50 rounded">
+                            <span class="font-medium">Aggressive Deficit (-750)</span>
+                            <span class="font-bold text-red-600">2,187 cal</span>
+                        </div>
+                        <div class="flex justify-between p-3 bg-purple-50 rounded">
+                            <span class="font-medium">Last 5-10 lbs Target</span>
+                            <span class="font-bold text-purple-600">2,337 cal</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- With Exercise -->
+                <div>
+                    <h3 class="text-lg font-semibold text-gray-700 mb-4 bg-gray-100 p-3 rounded">
+                        <i class="fas fa-bicycle text-green-600 mr-2"></i>WITH Daily Exercise Burn (+894 cal)
+                    </h3>
+                    <div class="space-y-3">
+                        <div class="flex justify-between p-3 bg-blue-50 rounded">
+                            <span class="font-medium">TDEE + Exercise</span>
+                            <span class="font-bold text-blue-600">3,831 cal</span>
+                        </div>
+                        <div class="flex justify-between p-3 bg-yellow-50 rounded">
+                            <span class="font-medium">Maintenance Calories</span>
+                            <span class="font-bold text-yellow-600">3,831 cal</span>
+                        </div>
+                        <div class="flex justify-between p-3 bg-orange-50 rounded">
+                            <span class="font-medium">Moderate Deficit (-500)</span>
+                            <span class="font-bold text-orange-600">3,331 cal</span>
+                        </div>
+                        <div class="flex justify-between p-3 bg-red-50 rounded">
+                            <span class="font-medium">Aggressive Deficit (-750)</span>
+                            <span class="font-bold text-red-600">3,081 cal</span>
+                        </div>
+                        <div class="flex justify-between p-3 bg-purple-50 rounded">
+                            <span class="font-medium">Last 5-10 lbs Target</span>
+                            <span class="font-bold text-purple-600">3,231 cal</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="mt-6 p-4 bg-indigo-50 border border-indigo-200 rounded-lg">
+                <h4 class="font-semibold text-indigo-800 mb-2">🎯 Recommended Calorie Target</h4>
+                <p class="text-indigo-700"><strong>On Training Days:</strong> 3,100-3,200 calories (moderate deficit accounting for exercise)</p>
+                <p class="text-indigo-700"><strong>On Rest Days:</strong> 2,300-2,400 calories (moderate deficit without exercise)</p>
+                <p class="text-sm text-indigo-600 mt-2">This creates a weekly average deficit perfect for losing the last 5-10 pounds while maintaining energy for training.</p>
+            </div>
+        </div>
+
+        <!-- Macronutrient Distribution -->
+        <div class="bg-white rounded-xl shadow-custom p-6 mb-8">
+            <h2 class="text-2xl font-bold text-gray-800 mb-6 flex items-center">
+                <i class="fas fa-chart-pie text-purple-600 mr-3"></i>Optimized Macronutrient Distribution
+            </h2>
+            
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                <!-- Training Days -->
+                <div>
+                    <h3 class="text-lg font-semibold text-gray-700 mb-4 bg-green-100 p-3 rounded">
+                        <i class="fas fa-bicycle text-green-600 mr-2"></i>Training Days (3,200 calories)
+                    </h3>
+                    <div class="chart-container mb-4">
+                        <canvas id="trainingMacroChart"></canvas>
+                    </div>
+                    <div class="space-y-2">
+                        <div class="flex justify-between items-center p-2 bg-red-50 rounded">
+                            <span class="font-medium text-red-700">Protein (35%)</span>
+                            <span class="font-bold">280g (1,120 cal)</span>
+                        </div>
+                        <div class="flex justify-between items-center p-2 bg-blue-50 rounded">
+                            <span class="font-medium text-blue-700">Carbohydrates (30%)</span>
+                            <span class="font-bold">240g (960 cal)</span>
+                        </div>
+                        <div class="flex justify-between items-center p-2 bg-yellow-50 rounded">
+                            <span class="font-medium text-yellow-700">Fats (35%)</span>
+                            <span class="font-bold">124g (1,120 cal)</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Rest Days -->
+                <div>
+                    <h3 class="text-lg font-semibold text-gray-700 mb-4 bg-orange-100 p-3 rounded">
+                        <i class="fas fa-bed text-orange-600 mr-2"></i>Rest Days (2,400 calories)
+                    </h3>
+                    <div class="chart-container mb-4">
+                        <canvas id="restMacroChart"></canvas>
+                    </div>
+                    <div class="space-y-2">
+                        <div class="flex justify-between items-center p-2 bg-red-50 rounded">
+                            <span class="font-medium text-red-700">Protein (40%)</span>
+                            <span class="font-bold">240g (960 cal)</span>
+                        </div>
+                        <div class="flex justify-between items-center p-2 bg-blue-50 rounded">
+                            <span class="font-medium text-blue-700">Carbohydrates (20%)</span>
+                            <span class="font-bold">120g (480 cal)</span>
+                        </div>
+                        <div class="flex justify-between items-center p-2 bg-yellow-50 rounded">
+                            <span class="font-medium text-yellow-700">Fats (40%)</span>
+                            <span class="font-bold">107g (960 cal)</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Meal Timing Schedule -->
+        <div class="bg-white rounded-xl shadow-custom p-6 mb-8">
+            <h2 class="text-2xl font-bold text-gray-800 mb-6 flex items-center">
+                <i class="fas fa-clock text-indigo-600 mr-3"></i>Optimized Meal Timing Schedule
+            </h2>
+            <p class="text-gray-600 mb-6">Adjusted for 3-5 PM nap and 12-1 AM bedtime schedule</p>
+            
+            <div class="space-y-4">
+                <!-- Early Morning -->
+                <div class="border-l-4 border-purple-500 bg-purple-50 p-4 rounded-r-lg">
+                    <div class="flex items-center justify-between mb-2">
+                        <h3 class="font-semibold text-purple-800">6:00-7:00 AM - Wake Up Protocol</h3>
+                        <span class="bg-purple-200 text-purple-800 px-2 py-1 rounded text-sm">Fasted State</span>
+                    </div>
+                    <ul class="text-purple-700 space-y-1">
+                        <li><i class="fas fa-capsules mr-2"></i><strong>10-15g BCAAs:</strong> Enhanced fat oxidation while preserving muscle</li>
+                        <li><i class="fas fa-tint mr-2"></i><strong>500ml water:</strong> With sea salt and lemon</li>
+                        <li><i class="fas fa-coffee mr-2"></i><strong>Black coffee:</strong> Optional, for metabolic boost</li>
+                    </ul>
+                </div>
+
+                <!-- Breakfast -->
+                <div class="border-l-4 border-green-500 bg-green-50 p-4 rounded-r-lg">
+                    <div class="flex items-center justify-between mb-2">
+                        <h3 class="font-semibold text-green-800">8:00-9:00 AM - Breakfast (High Carb Window)</h3>
+                        <span class="bg-green-200 text-green-800 px-2 py-1 rounded text-sm">Peak Insulin Sensitivity</span>
+                    </div>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div>
+                            <p class="font-medium text-green-700 mb-2">Training Days:</p>
+                            <ul class="text-green-600 space-y-1">
+                                <li>• Protein: 50g</li>
+                                <li>• Carbs: 80g</li>
+                                <li>• Fats: 20g</li>
+                                <li>• ~620 calories</li>
+                            </ul>
+                        </div>
+                        <div>
+                            <p class="font-medium text-green-700 mb-2">Rest Days:</p>
+                            <ul class="text-green-600 space-y-1">
+                                <li>• Protein: 45g</li>
+                                <li>• Carbs: 40g</li>
+                                <li>• Fats: 25g</li>
+                                <li>• ~485 calories</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <p class="text-green-700 mt-2"><strong>Foods:</strong> Oats with berries, Greek yogurt, eggs, spinach</p>
+                </div>
+
+                <!-- Pre-Training -->
+                <div class="border-l-4 border-blue-500 bg-blue-50 p-4 rounded-r-lg">
+                    <div class="flex items-center justify-between mb-2">
+                        <h3 class="font-semibold text-blue-800">10:00-11:00 AM - Pre-Training (1-2 hours before ride)</h3>
+                        <span class="bg-blue-200 text-blue-800 px-2 py-1 rounded text-sm">Fuel Loading</span>
+                    </div>
+                    <ul class="text-blue-700 space-y-1">
+                        <li><i class="fas fa-capsules mr-2"></i><strong>5g BCAAs:</strong> If training fasted</li>
+                        <li><i class="fas fa-apple-alt mr-2"></i><strong>Option 1:</strong> 30g carbs + 20g protein (banana + whey)</li>
+                        <li><i class="fas fa-tint mr-2"></i><strong>Hydration:</strong> 500ml water with electrolytes</li>
+                    </ul>
+                </div>
+
+                <!-- Post-Training -->
+                <div class="border-l-4 border-orange-500 bg-orange-50 p-4 rounded-r-lg">
+                    <div class="flex items-center justify-between mb-2">
+                        <h3 class="font-semibold text-orange-800">1:00-2:00 PM - Post-Training (within 30 minutes)</h3>
+                        <span class="bg-orange-200 text-orange-800 px-2 py-1 rounded text-sm">Recovery Window</span>
+                    </div>
+                    <ul class="text-orange-700 space-y-1">
+                        <li><i class="fas fa-drumstick-bite mr-2"></i><strong>Protein:</strong> 40g fast-digesting whey</li>
+                        <li><i class="fas fa-seedling mr-2"></i><strong>Carbs:</strong> 30-40g (white rice, banana)</li>
+                        <li><i class="fas fa-tint mr-2"></i><strong>Fluids:</strong> Replace 150% of fluid lost</li>
+                    </ul>
+                </div>
+
+                <!-- Pre-Nap Meal -->
+                <div class="border-l-4 border-indigo-500 bg-indigo-50 p-4 rounded-r-lg">
+                    <div class="flex items-center justify-between mb-2">
+                        <h3 class="font-semibold text-indigo-800">2:30 PM - Pre-Nap Strategic Meal</h3>
+                        <span class="bg-indigo-200 text-indigo-800 px-2 py-1 rounded text-sm">Stabilizing</span>
+                    </div>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div>
+                            <p class="font-medium text-indigo-700 mb-2">Training Days:</p>
+                            <ul class="text-indigo-600 space-y-1">
+                                <li>• Protein: 45g</li>
+                                <li>• Carbs: 50g</li>
+                                <li>• Fats: 25g</li>
+                                <li>• ~540 calories</li>
+                            </ul>
+                        </div>
+                        <div>
+                            <p class="font-medium text-indigo-700 mb-2">Rest Days:</p>
+                            <ul class="text-indigo-600 space-y-1">
+                                <li>• Protein: 40g</li>
+                                <li>• Carbs: 25g</li>
+                                <li>• Fats: 20g</li>
+                                <li>• ~405 calories</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <p class="text-indigo-700 mt-2"><strong>Purpose:</strong> Prevents insulin crashes during nap, provides steady energy</p>
+                </div>
+
+                <!-- Nap Period -->
+                <div class="border-l-4 border-gray-500 bg-gray-50 p-4 rounded-r-lg">
+                    <div class="flex items-center justify-between mb-2">
+                        <h3 class="font-semibold text-gray-800">3:00-5:00 PM - Nap Period</h3>
+                        <span class="bg-gray-200 text-gray-800 px-2 py-1 rounded text-sm">Recovery & Restoration</span>
+                    </div>
+                    <ul class="text-gray-700 space-y-1">
+                        <li><i class="fas fa-bed mr-2"></i><strong>Duration:</strong> 2 hours maximum</li>
+                        <li><i class="fas fa-thermometer-half mr-2"></i><strong>Environment:</strong> Cool, dark room</li>
+                        <li><i class="fas fa-volume-mute mr-2"></i><strong>Setup:</strong> No food, phone on silent</li>
+                    </ul>
+                </div>
+
+                <!-- Post-Nap -->
+                <div class="border-l-4 border-teal-500 bg-teal-50 p-4 rounded-r-lg">
+                    <div class="flex items-center justify-between mb-2">
+                        <h3 class="font-semibold text-teal-800">5:00-5:30 PM - Post-Nap Reactivation</h3>
+                        <span class="bg-teal-200 text-teal-800 px-2 py-1 rounded text-sm">Metabolic Restart</span>
+                    </div>
+                    <ul class="text-teal-700 space-y-1">
+                        <li><i class="fas fa-capsules mr-2"></i><strong>5g BCAAs:</strong> With 250ml water</li>
+                        <li><i class="fas fa-coffee mr-2"></i><strong>Optional:</strong> Green tea for alertness</li>
+                        <li><i class="fas fa-walking mr-2"></i><strong>Movement:</strong> 5-10 minutes light walking</li>
+                    </ul>
+                </div>
+
+                <!-- Dinner -->
+                <div class="border-l-4 border-red-500 bg-red-50 p-4 rounded-r-lg">
+                    <div class="flex items-center justify-between mb-2">
+                        <h3 class="font-semibold text-red-800">7:30-8:00 PM - Dinner (Last Main Meal)</h3>
+                        <span class="bg-red-200 text-red-800 px-2 py-1 rounded text-sm">Extended Carb Window</span>
+                    </div>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div>
+                            <p class="font-medium text-red-700 mb-2">Training Days:</p>
+                            <ul class="text-red-600 space-y-1">
+                                <li>• Protein: 60g</li>
+                                <li>• Carbs: 40g (vegetables only)</li>
+                                <li>• Fats: 35g</li>
+                                <li>• ~635 calories</li>
+                            </ul>
+                        </div>
+                        <div>
+                            <p class="font-medium text-red-700 mb-2">Rest Days:</p>
+                            <ul class="text-red-600 space-y-1">
+                                <li>• Protein: 55g</li>
+                                <li>• Carbs: 20g (vegetables only)</li>
+                                <li>• Fats: 30g</li>
+                                <li>• ~530 calories</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <p class="text-red-700 mt-2"><strong>Foods:</strong> Salmon/chicken, leafy greens, avocado, nuts, olive oil</p>
+                </div>
+
+                <!-- Late Evening -->
+                <div class="border-l-4 border-pink-500 bg-pink-50 p-4 rounded-r-lg">
+                    <div class="flex items-center justify-between mb-2">
+                        <h3 class="font-semibold text-pink-800">10:00 PM - Strategic Mini-Meal</h3>
+                        <span class="bg-pink-200 text-pink-800 px-2 py-1 rounded text-sm">Hunger Prevention</span>
+                    </div>
+                    <ul class="text-pink-700 space-y-1">
+                        <li><i class="fas fa-cheese mr-2"></i><strong>Protein Focus:</strong> 25-30g casein or Greek yogurt</li>
+                        <li><i class="fas fa-leaf mr-2"></i><strong>Minimal carbs:</strong> 10g max (vegetables)</li>
+                        <li><i class="fas fa-moon mr-2"></i><strong>Purpose:</strong> Prevent midnight hunger, overnight muscle preservation</li>
+                    </ul>
+                </div>
+
+                <!-- Bedtime -->
+                <div class="border-l-4 border-purple-600 bg-purple-50 p-4 rounded-r-lg">
+                    <div class="flex items-center justify-between mb-2">
+                        <h3 class="font-semibold text-purple-800">12:00-1:00 AM - Bedtime Protocol</h3>
+                        <span class="bg-purple-200 text-purple-800 px-2 py-1 rounded text-sm">Sleep Optimization</span>
+                    </div>
+                    <ul class="text-purple-700 space-y-1">
+                        <li><i class="fas fa-pills mr-2"></i><strong>Magnesium:</strong> 400mg glycinate</li>
+                        <li><i class="fas fa-seedling mr-2"></i><strong>Glycine:</strong> 3g for improved sleep and cortisol reduction</li>
+                        <li><i class="fas fa-ban mr-2"></i><strong>No food:</strong> 2-3 hours before bed</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- BCAA Protocol -->
+        <div class="bg-white rounded-xl shadow-custom p-6 mb-8">
+            <h2 class="text-2xl font-bold text-gray-800 mb-6 flex items-center">
+                <i class="fas fa-capsules text-blue-600 mr-3"></i>Comprehensive BCAA Strategy
+            </h2>
+            
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                <div>
+                    <h3 class="text-lg font-semibold text-gray-700 mb-4">Daily BCAA Protocol</h3>
+                    <div class="space-y-4">
+                        <div class="bg-blue-50 border border-blue-200 p-4 rounded-lg">
+                            <h4 class="font-semibold text-blue-800 mb-2">Morning Dose (6-7 AM)</h4>
+                            <ul class="text-blue-700 space-y-1">
+                                <li>• <strong>Dosage:</strong> 10-15g</li>
+                                <li>• <strong>Purpose:</strong> Fasted fat oxidation</li>
+                                <li>• <strong>Timing:</strong> Upon waking</li>
+                            </ul>
+                        </div>
+                        <div class="bg-green-50 border border-green-200 p-4 rounded-lg">
+                            <h4 class="font-semibold text-green-800 mb-2">Pre-Training (10-11 AM)</h4>
+                            <ul class="text-green-700 space-y-1">
+                                <li>• <strong>Dosage:</strong> 5g</li>
+                                <li>• <strong>Purpose:</strong> Muscle preservation</li>
+                                <li>• <strong>Condition:</strong> If training fasted</li>
+                            </ul>
+                        </div>
+                        <div class="bg-teal-50 border border-teal-200 p-4 rounded-lg">
+                            <h4 class="font-semibold text-teal-800 mb-2">Post-Nap (5 PM)</h4>
+                            <ul class="text-teal-700 space-y-1">
+                                <li>• <strong>Dosage:</strong> 5g</li>
+                                <li>• <strong>Purpose:</strong> Metabolic reactivation</li>
+                                <li>• <strong>Timing:</strong> With 250ml water</li>
+                            </ul>
+                        </div>
+                        <div class="bg-purple-50 border border-purple-200 p-4 rounded-lg">
+                            <h4 class="font-semibold text-purple-800 mb-2">Evening (9-10 PM)</h4>
+                            <ul class="text-purple-700 space-y-1">
+                                <li>• <strong>Dosage:</strong> 5g</li>
+                                <li>• <strong>Purpose:</strong> Overnight muscle preservation</li>
+                                <li>• <strong>Condition:</strong> If hungry between meals</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div>
+                    <h3 class="text-lg font-semibold text-gray-700 mb-4">Scientific Benefits</h3>
+                    <div class="space-y-4">
+                        <div class="p-4 bg-yellow-50 border border-yellow-200 rounded-lg">
+                            <h4 class="font-semibold text-yellow-800 mb-2">Enhanced Fat Oxidation</h4>
+                            <p class="text-yellow-700 text-sm">Research shows BCAA supplementation increases postprandial fat oxidation while reducing carbohydrate oxidation - ideal for carb-sensitive individuals.</p>
+                        </div>
+                        <div class="p-4 bg-orange-50 border border-orange-200 rounded-lg">
+                            <h4 class="font-semibold text-orange-800 mb-2">Muscle Preservation</h4>
+                            <p class="text-orange-700 text-sm">BCAAs form 1/3 of muscle protein and stimulate mTOR pathway, crucial during caloric deficit for the last 5-10 pounds.</p>
+                        </div>
+                        <div class="p-4 bg-red-50 border border-red-200 rounded-lg">
+                            <h4 class="font-semibold text-red-800 mb-2">Appetite Control</h4>
+                            <p class="text-red-700 text-sm">BCAAs help reduce hunger between meals without spiking insulin, perfect for your late-night eating struggles.</p>
+                        </div>
+                        <div class="p-4 bg-indigo-50 border border-indigo-200 rounded-lg">
+                            <h4 class="font-semibold text-indigo-800 mb-2">Metabolic Support</h4>
+                            <p class="text-indigo-700 text-sm">Leucine activates cellular energy metabolism and promotes mitochondrial biogenesis, supporting your plateau-breaking goals.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Night Eating Solutions -->
+        <div class="bg-white rounded-xl shadow-custom p-6 mb-8">
+            <h2 class="text-2xl font-bold text-gray-800 mb-6 flex items-center">
+                <i class="fas fa-moon text-indigo-600 mr-3"></i>Night Eating Solutions (9 PM - 12 AM)
+            </h2>
+            
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                <div>
+                    <h3 class="text-lg font-semibold text-gray-700 mb-4 bg-green-100 p-3 rounded">Best Late-Night Options</h3>
+                    <div class="space-y-3">
+                        <div class="flex items-center p-3 bg-green-50 rounded-lg border">
+                            <i class="fas fa-glass text-green-600 mr-3 text-xl"></i>
+                            <div>
+                                <h4 class="font-medium text-green-800">Casein Protein Shake</h4>
+                                <p class="text-sm text-green-600">30-40g slow-digesting protein, minimal insulin impact</p>
+                            </div>
+                        </div>
+                        <div class="flex items-center p-3 bg-green-50 rounded-lg border">
+                            <i class="fas fa-seedling text-green-600 mr-3 text-xl"></i>
+                            <div>
+                                <h4 class="font-medium text-green-800">Raw Almonds</h4>
+                                <p class="text-sm text-green-600">15-20 pieces, high satiety, minimal carbs</p>
+                            </div>
+                        </div>
+                        <div class="flex items-center p-3 bg-green-50 rounded-lg border">
+                            <i class="fas fa-cheese text-green-600 mr-3 text-xl"></i>
+                            <div>
+                                <h4 class="font-medium text-green-800">Greek Yogurt</h4>
+                                <p class="text-sm text-green-600">Plain, full-fat, with beneficial bacteria</p>
+                            </div>
+                        </div>
+                        <div class="flex items-center p-3 bg-green-50 rounded-lg border">
+                            <i class="fas fa-carrot text-green-600 mr-3 text-xl"></i>
+                            <div>
+                                <h4 class="font-medium text-green-800">Celery + Almond Butter</h4>
+                                <p class="text-sm text-green-600">High fiber, minimal calories, very satiating</p>
+                            </div>
+                        </div>
+                        <div class="flex items-center p-3 bg-green-50 rounded-lg border">
+                            <i class="fas fa-egg text-green-600 mr-3 text-xl"></i>
+                            <div>
+                                <h4 class="font-medium text-green-800">Hard-Boiled Eggs</h4>
+                                <p class="text-sm text-green-600">1-2 eggs, pure protein, extremely satiating</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div>
+                    <h3 class="text-lg font-semibold text-gray-700 mb-4 bg-blue-100 p-3 rounded">Hunger Management Strategies</h3>
+                    <div class="space-y-4">
+                        <div class="p-4 bg-blue-50 border border-blue-200 rounded-lg">
+                            <h4 class="font-semibold text-blue-800 mb-2">Increase Dinner Protein</h4>
+                            <p class="text-blue-700 text-sm">Boost dinner protein to 60-70g for better satiety lasting until bedtime.</p>
+                        </div>
+                        <div class="p-4 bg-blue-50 border border-blue-200 rounded-lg">
+                            <h4 class="font-semibold text-blue-800 mb-2">Glycine Supplementation</h4>
+                            <p class="text-blue-700 text-sm">3g glycine 30 minutes before bed improves sleep quality and reduces cortisol-driven hunger.</p>
+                        </div>
+                        <div class="p-4 bg-blue-50 border border-blue-200 rounded-lg">
+                            <h4 class="font-semibold text-blue-800 mb-2">Herbal Tea Protocol</h4>
+                            <p class="text-blue-700 text-sm">Chamomile, passionflower, or peppermint tea provides satiety without calories.</p>
+                        </div>
+                        <div class="p-4 bg-blue-50 border border-blue-200 rounded-lg">
+                            <h4 class="font-semibold text-blue-800 mb-2">Strategic Distraction</h4>
+                            <p class="text-blue-700 text-sm">Reading, light stretching, or meditation when hunger strikes between 9 PM-12 AM.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Carb Cycling Protocol -->
+        <div class="bg-white rounded-xl shadow-custom p-6 mb-8">
+            <h2 class="text-2xl font-bold text-gray-800 mb-6 flex items-center">
+                <i class="fas fa-sync-alt text-orange-600 mr-3"></i>Carb Cycling for Plateau Breaking
+            </h2>
+            
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+                <!-- High Carb Days -->
+                <div class="bg-green-50 border border-green-200 rounded-lg p-4">
+                    <h3 class="font-semibold text-green-800 mb-3 flex items-center">
+                        <i class="fas fa-arrow-up text-green-600 mr-2"></i>High Carb Days (3-4/week)
+                    </h3>
+                    <div class="space-y-2">
+                        <p class="text-green-700"><strong>Carbs:</strong> 2.5-3.0g per kg (250-300g)</p>
+                        <p class="text-green-700"><strong>Timing:</strong> Training days</p>
+                        <p class="text-green-700"><strong>Focus:</strong> Pre/post workout</p>
+                        <p class="text-green-700"><strong>Sources:</strong> Oats, rice, sweet potato</p>
+                    </div>
+                    <div class="mt-3 p-2 bg-green-100 rounded">
+                        <p class="text-sm text-green-600">Supports performance and recovery</p>
+                    </div>
+                </div>
+
+                <!-- Moderate Carb Days -->
+                <div class="bg-yellow-50 border border-yellow-200 rounded-lg p-4">
+                    <h3 class="font-semibold text-yellow-800 mb-3 flex items-center">
+                        <i class="fas fa-minus text-yellow-600 mr-2"></i>Moderate Carb Days (2-3/week)
+                    </h3>
+                    <div class="space-y-2">
+                        <p class="text-yellow-700"><strong>Carbs:</strong> 1.5-2.0g per kg (150-200g)</p>
+                        <p class="text-yellow-700"><strong>Timing:</strong> Light activity days</p>
+                        <p class="text-yellow-700"><strong>Focus:</strong> Vegetables + minimal starches</p>
+                        <p class="text-yellow-700"><strong>Sources:</strong> Quinoa, fruits, vegetables</p>
+                    </div>
+                    <div class="mt-3 p-2 bg-yellow-100 rounded">
+                        <p class="text-sm text-yellow-600">Maintains energy while promoting fat loss</p>
+                    </div>
+                </div>
+
+                <!-- Low Carb Days -->
+                <div class="bg-red-50 border border-red-200 rounded-lg p-4">
+                    <h3 class="font-semibold text-red-800 mb-3 flex items-center">
+                        <i class="fas fa-arrow-down text-red-600 mr-2"></i>Low Carb Days (1/week)
+                    </h3>
+                    <div class="space-y-2">
+                        <p class="text-red-700"><strong>Carbs:</strong> 0.5-1.0g per kg (50-100g)</p>
+                        <p class="text-red-700"><strong>Timing:</strong> Complete rest days</p>
+                        <p class="text-red-700"><strong>Focus:</strong> Vegetables only</p>
+                        <p class="text-red-700"><strong>Sources:</strong> Leafy greens, cruciferous vegetables</p>
+                    </div>
+                    <div class="mt-3 p-2 bg-red-100 rounded">
+                        <p class="text-sm text-red-600">Maximizes fat oxidation and insulin sensitivity</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="mt-6 p-4 bg-purple-50 border border-purple-200 rounded-lg">
+                <h4 class="font-semibold text-purple-800 mb-2">Weekly Refeed Strategy</h4>
+                <p class="text-purple-700">Every 7-10 days, implement a strategic refeed day with 4-5g carbs per kg (400-500g) to reset leptin and thyroid hormones. This prevents metabolic adaptation during the final weight loss phase.</p>
+            </div>
+        </div>
+
+        <!-- Supplement Stack -->
+        <div class="bg-white rounded-xl shadow-custom p-6 mb-8">
+            <h2 class="text-2xl font-bold text-gray-800 mb-6 flex items-center">
+                <i class="fas fa-pills text-green-600 mr-3"></i>Advanced Supplement Stack for Carb Sensitivity
+            </h2>
+            
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                <!-- Core Supplements -->
+                <div>
+                    <h3 class="text-lg font-semibold text-gray-700 mb-4 bg-green-100 p-3 rounded">Core Supplements</h3>
+                    <div class="space-y-4">
+                        <div class="border border-green-200 bg-green-50 p-4 rounded-lg">
+                            <h4 class="font-semibold text-green-800">Berberine</h4>
+                            <p class="text-green-700"><strong>Dosage:</strong> 500mg with carb-containing meals</p>
+                            <p class="text-sm text-green-600">Improves glucose uptake and insulin sensitivity</p>
+                        </div>
+                        <div class="border border-blue-200 bg-blue-50 p-4 rounded-lg">
+                            <h4 class="font-semibold text-blue-800">Chromium Picolinate</h4>
+                            <p class="text-blue-700"><strong>Dosage:</strong> 200mcg daily with breakfast</p>
+                            <p class="text-sm text-blue-600">Enhances insulin function and glucose metabolism</p>
+                        </div>
+                        <div class="border border-yellow-200 bg-yellow-50 p-4 rounded-lg">
+                            <h4 class="font-semibold text-yellow-800">Alpha-Lipoic Acid</h4>
+                            <p class="text-yellow-700"><strong>Dosage:</strong> 300mg with largest carb meal</p>
+                            <p class="text-sm text-yellow-600">Powerful antioxidant that improves glucose disposal</p>
+                        </div>
+                        <div class="border border-orange-200 bg-orange-50 p-4 rounded-lg">
+                            <h4 class="font-semibold text-orange-800">Cinnamon Extract</h4>
+                            <p class="text-orange-700"><strong>Dosage:</strong> 1g daily with meals</p>
+                            <p class="text-sm text-orange-600">Naturally improves insulin sensitivity</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Support Supplements -->
+                <div>
+                    <h3 class="text-lg font-semibold text-gray-700 mb-4 bg-purple-100 p-3 rounded">Support & Recovery</h3>
+                    <div class="space-y-4">
+                        <div class="border border-purple-200 bg-purple-50 p-4 rounded-lg">
+                            <h4 class="font-semibold text-purple-800">Magnesium Glycinate</h4>
+                            <p class="text-purple-700"><strong>Dosage:</strong> 400mg before bed</p>
+                            <p class="text-sm text-purple-600">Improves sleep quality and insulin sensitivity</p>
+                        </div>
+                        <div class="border border-teal-200 bg-teal-50 p-4 rounded-lg">
+                            <h4 class="font-semibold text-teal-800">Omega-3 (EPA/DHA)</h4>
+                            <p class="text-teal-700"><strong>Dosage:</strong> 2-3g daily with meals</p>
+                            <p class="text-sm text-teal-600">Reduces inflammation and supports fat oxidation</p>
+                        </div>
+                        <div class="border border-indigo-200 bg-indigo-50 p-4 rounded-lg">
+                            <h4 class="font-semibold text-indigo-800">Vitamin D3 + K2</h4>
+                            <p class="text-indigo-700"><strong>Dosage:</strong> 4000 IU D3 + 100mcg K2</p>
+                            <p class="text-sm text-indigo-600">Supports metabolic health and hormone optimization</p>
+                        </div>
+                        <div class="border border-pink-200 bg-pink-50 p-4 rounded-lg">
+                            <h4 class="font-semibold text-pink-800">Digestive Enzymes</h4>
+                            <p class="text-pink-700"><strong>Dosage:</strong> 1-2 capsules with meals</p>
+                            <p class="text-sm text-pink-600">Improves nutrient absorption and reduces bloating</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Three-Phase Implementation -->
+        <div class="bg-white rounded-xl shadow-custom p-6 mb-8">
+            <h2 class="text-2xl font-bold text-gray-800 mb-6 flex items-center">
+                <i class="fas fa-road text-blue-600 mr-3"></i>3-Phase Implementation Strategy
+            </h2>
+            
+            <div class="space-y-6">
+                <!-- Phase 1 -->
+                <div class="border-l-4 border-blue-500 bg-blue-50 p-6 rounded-r-lg">
+                    <h3 class="text-xl font-bold text-blue-800 mb-4 flex items-center">
+                        <span class="bg-blue-600 text-white rounded-full w-8 h-8 flex items-center justify-center mr-3 text-sm">1</span>
+                        Phase 1: Foundation (Weeks 1-3)
+                    </h3>
+                    <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                        <div>
+                            <h4 class="font-semibold text-blue-700 mb-2">Chrono-Nutrition Implementation</h4>
+                            <ul class="text-blue-600 space-y-1">
+                                <li>• Establish 12-hour eating window (8 AM - 8 PM)</li>
+                                <li>• Move 80% of carbs before 6 PM</li>
+                                <li>• Implement pre/post-nap meal timing</li>
+                                <li>• Begin BCAA protocol</li>
+                            </ul>
+                        </div>
+                        <div>
+                            <h4 class="font-semibold text-blue-700 mb-2">Calorie Targets</h4>
+                            <ul class="text-blue-600 space-y-1">
+                                <li>• Training days: 3,100-3,200 calories</li>
+                                <li>• Rest days: 2,300-2,400 calories</li>
+                                <li>• Focus on consistency over perfection</li>
+                                <li>• Track sleep quality and energy levels</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Phase 2 -->
+                <div class="border-l-4 border-green-500 bg-green-50 p-6 rounded-r-lg">
+                    <h3 class="text-xl font-bold text-green-800 mb-4 flex items-center">
+                        <span class="bg-green-600 text-white rounded-full w-8 h-8 flex items-center justify-center mr-3 text-sm">2</span>
+                        Phase 2: Optimization (Weeks 4-6)
+                    </h3>
+                    <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                        <div>
+                            <h4 class="font-semibold text-green-700 mb-2">Carb Cycling Introduction</h4>
+                            <ul class="text-green-600 space-y-1">
+                                <li>• Add high/moderate/low carb rotation</li>
+                                <li>• Implement weekly refeed day</li>
+                                <li>• Fine-tune meal timing around nap</li>
+                                <li>• Add insulin sensitivity supplements</li>
+                            </ul>
+                        </div>
+                        <div>
+                            <h4 class="font-semibold text-green-700 mb-2">Performance Metrics</h4>
+                            <ul class="text-green-600 space-y-1">
+                                <li>• Weekly weight and measurements</li>
+                                <li>• Training power/endurance tracking</li>
+                                <li>• Sleep quality scores</li>
+                                <li>• Hunger level assessments</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Phase 3 -->
+                <div class="border-l-4 border-purple-500 bg-purple-50 p-6 rounded-r-lg">
+                    <h3 class="text-xl font-bold text-purple-800 mb-4 flex items-center">
+                        <span class="bg-purple-600 text-white rounded-full w-8 h-8 flex items-center justify-center mr-3 text-sm">3</span>
+                        Phase 3: Advanced Techniques (Weeks 7+)
+                    </h3>
+                    <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                        <div>
+                            <h4 class="font-semibold text-purple-700 mb-2">Plateau-Breaking Tools</h4>
+                            <ul class="text-purple-600 space-y-1">
+                                <li>• Strategic 2-3 day mini-cuts</li>
+                                <li>• Higher frequency BCAA timing</li>
+                                <li>• Advanced supplement stack</li>
+                                <li>• Metabolic flexibility training</li>
+                            </ul>
+                        </div>
+                        <div>
+                            <h4 class="font-semibold text-purple-700 mb-2">Fine-Tuning</h4>
+                            <ul class="text-purple-600 space-y-1">
+                                <li>• Diet breaks every 4-6 weeks</li>
+                                <li>• Personalized carb tolerance testing</li>
+                                <li>• Advanced meal timing adjustments</li>
+                                <li>• Body composition focus over scale weight</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Monitoring Guidelines -->
+        <div class="bg-white rounded-xl shadow-custom p-6 mb-8">
+            <h2 class="text-2xl font-bold text-gray-800 mb-6 flex items-center">
+                <i class="fas fa-chart-line text-indigo-600 mr-3"></i>Monitoring & Adjustment Guidelines
+            </h2>
+            
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                <!-- Weekly Metrics -->
+                <div>
+                    <h3 class="text-lg font-semibold text-gray-700 mb-4 bg-indigo-100 p-3 rounded">Weekly Metrics to Track</h3>
+                    <div class="space-y-3">
+                        <div class="flex items-center p-3 bg-indigo-50 rounded-lg border">
+                            <i class="fas fa-weight text-indigo-600 mr-3"></i>
+                            <div>
+                                <h4 class="font-medium text-indigo-800">Morning Weight</h4>
+                                <p class="text-sm text-indigo-600">Same time daily, after bathroom, before eating</p>
+                            </div>
+                        </div>
+                        <div class="flex items-center p-3 bg-indigo-50 rounded-lg border">
+                            <i class="fas fa-ruler-horizontal text-indigo-600 mr-3"></i>
+                            <div>
+                                <h4 class="font-medium text-indigo-800">Waist Circumference</h4>
+                                <p class="text-sm text-indigo-600">At navel level, weekly measurement</p>
+                            </div>
+                        </div>
+                        <div class="flex items-center p-3 bg-indigo-50 rounded-lg border">
+                            <i class="fas fa-bicycle text-indigo-600 mr-3"></i>
+                            <div>
+                                <h4 class="font-medium text-indigo-800">Training Performance</h4>
+                                <p class="text-sm text-indigo-600">Power output, endurance, recovery rate</p>
+                            </div>
+                        </div>
+                        <div class="flex items-center p-3 bg-indigo-50 rounded-lg border">
+                            <i class="fas fa-bed text-indigo-600 mr-3"></i>
+                            <div>
+                                <h4 class="font-medium text-indigo-800">Sleep Quality</h4>
+                                <p class="text-sm text-indigo-600">Duration, REM percentage, morning alertness</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Adjustment Triggers -->
+                <div>
+                    <h3 class="text-lg font-semibold text-gray-700 mb-4 bg-orange-100 p-3 rounded">When to Adjust</h3>
+                    <div class="space-y-4">
+                        <div class="p-4 bg-orange-50 border border-orange-200 rounded-lg">
+                            <h4 class="font-semibold text-orange-800 mb-2">No Weight Loss (2+ weeks)</h4>
+                            <p class="text-orange-700 text-sm">Reduce daily calories by 200-300 or add an extra low-carb day</p>
+                        </div>
+                        <div class="p-4 bg-red-50 border border-red-200 rounded-lg">
+                            <h4 class="font-semibold text-red-800 mb-2">Energy Crashes</h4>
+                            <p class="text-red-700 text-sm">Increase carbs on training days by 30-50g or add refeed day</p>
+                        </div>
+                        <div class="p-4 bg-yellow-50 border border-yellow-200 rounded-lg">
+                            <h4 class="font-semibold text-yellow-800 mb-2">Poor Recovery</h4>
+                            <p class="text-yellow-700 text-sm">Implement 5-7 day diet break at maintenance calories</p>
+                        </div>
+                        <div class="p-4 bg-green-50 border border-green-200 rounded-lg">
+                            <h4 class="font-semibold text-green-800 mb-2">Increased Night Hunger</h4>
+                            <p class="text-green-700 text-sm">Boost dinner protein by 10-15g or adjust BCAA timing</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Key Success Factors -->
+        <div class="bg-gradient-to-r from-purple-500 to-blue-600 text-white rounded-xl p-6">
+            <h2 class="text-2xl font-bold mb-6 flex items-center">
+                <i class="fas fa-trophy mr-3"></i>Key Success Factors for the Last 5-10 Pounds
+            </h2>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <div class="bg-white bg-opacity-20 rounded-lg p-4">
+                    <h3 class="font-semibold mb-2 flex items-center">
+                        <i class="fas fa-clock mr-2"></i>Meal Timing Consistency
+                    </h3>
+                    <p class="text-sm opacity-90">More important than perfect macros - stick to the 8 AM - 8 PM window religiously</p>
+                </div>
+                <div class="bg-white bg-opacity-20 rounded-lg p-4">
+                    <h3 class="font-semibold mb-2 flex items-center">
+                        <i class="fas fa-drumstick-bite mr-2"></i>Adequate Protein
+                    </h3>
+                    <p class="text-sm opacity-90">Never skip protein at any meal - it's your metabolism's best friend</p>
+                </div>
+                <div class="bg-white bg-opacity-20 rounded-lg p-4">
+                    <h3 class="font-semibold mb-2 flex items-center">
+                        <i class="fas fa-capsules mr-2"></i>Strategic BCAA Use
+                    </p>
+                    <p class="text-sm opacity-90">Your secret weapon for fat oxidation and appetite control</p>
+                </div>
+                <div class="bg-white bg-opacity-20 rounded-lg p-4">
+                    <h3 class="font-semibold mb-2 flex items-center">
+                        <i class="fas fa-bed mr-2"></i>Sleep Optimization
+                    </h3>
+                    <p class="text-sm opacity-90">7-9 hours crucial for insulin sensitivity and cortisol management</p>
+                </div>
+                <div class="bg-white bg-opacity-20 rounded-lg p-4">
+                    <h3 class="font-semibold mb-2 flex items-center">
+                        <i class="fas fa-brain mr-2"></i>Stress Management
+                    </h3>
+                    <p class="text-sm opacity-90">Cortisol directly impacts carb sensitivity and stubborn fat</p>
+                </div>
+                <div class="bg-white bg-opacity-20 rounded-lg p-4">
+                    <h3 class="font-semibold mb-2 flex items-center">
+                        <i class="fas fa-chart-line mr-2"></i>Patient Consistency
+                    </h3>
+                    <p class="text-sm opacity-90">The last pounds take time - trust the process and track trends</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // BMR Breakdown Chart
+        const bmrCtx = document.getElementById('bmrChart').getContext('2d');
+        new Chart(bmrCtx, {
+            type: 'doughnut',
+            data: {
+                labels: ['Liver & Kidneys', 'Brain', 'Heart', 'Skeletal Muscle', 'Other Organs'],
+                datasets: [{
+                    data: [26, 20, 7, 26, 21],
+                    backgroundColor: [
+                        '#ef4444',
+                        '#3b82f6',
+                        '#10b981',
+                        '#f59e0b',
+                        '#8b5cf6'
+                    ]
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    title: {
+                        display: true,
+                        text: 'BMR Distribution by Organ System',
+                        font: { size: 16, weight: 'bold' }
+                    },
+                    legend: {
+                        position: 'bottom'
+                    }
+                }
+            }
+        });
+
+        // TDEE Chart
+        const tdeeCtx = document.getElementById('tdeeChart').getContext('2d');
+        new Chart(tdeeCtx, {
+            type: 'bar',
+            data: {
+                labels: ['Sedentary', 'Light Activity', 'Moderate Activity', 'Very Active', 'Extremely Active'],
+                datasets: [{
+                    label: 'TDEE (calories)',
+                    data: [2274, 2606, 2937, 3269, 3600],
+                    backgroundColor: [
+                        '#ef4444',
+                        '#f59e0b',
+                        '#10b981',
+                        '#3b82f6',
+                        '#8b5cf6'
+                    ]
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    title: {
+                        display: true,
+                        text: 'TDEE by Activity Level',
+                        font: { size: 16, weight: 'bold' }
+                    }
+                },
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        title: {
+                            display: true,
+                            text: 'Calories per Day'
+                        }
+                    }
+                }
+            }
+        });
+
+        // Training Day Macros
+        const trainingCtx = document.getElementById('trainingMacroChart').getContext('2d');
+        new Chart(trainingCtx, {
+            type: 'pie',
+            data: {
+                labels: ['Protein (35%)', 'Carbohydrates (30%)', 'Fats (35%)'],
+                datasets: [{
+                    data: [35, 30, 35],
+                    backgroundColor: ['#ef4444', '#3b82f6', '#f59e0b']
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    title: {
+                        display: true,
+                        text: 'Training Day Macros',
+                        font: { size: 14, weight: 'bold' }
+                    }
+                }
+            }
+        });
+
+        // Rest Day Macros
+        const restCtx = document.getElementById('restMacroChart').getContext('2d');
+        new Chart(restCtx, {
+            type: 'pie',
+            data: {
+                labels: ['Protein (40%)', 'Carbohydrates (20%)', 'Fats (40%)'],
+                datasets: [{
+                    data: [40, 20, 40],
+                    backgroundColor: ['#ef4444', '#3b82f6', '#f59e0b']
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    title: {
+                        display: true,
+                        text: 'Rest Day Macros',
+                        font: { size: 14, weight: 'bold' }
+                    }
+                }
+            }
+        });
+    </script>
+</body>
+</html>

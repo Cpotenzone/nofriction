@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Enhanced Workout Timer</title>
+  <style>
+    /* Root & Theme */
+    :root {
+      --bg-color: #121212;
+      --text-color: #fafafa;
+      --accent-color: #00bcd4;
+      --accent-alt: #ff5722;
+      --font-sans: 'Helvetica Neue', Arial, sans-serif;
+      --transition: 0.3s ease;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { background: var(--bg-color); color: var(--text-color); font-family: var(--font-sans); line-height: 1.4; }
+    a { color: var(--accent-color); text-decoration: none; }
+    h1, h2, h3, h4 { margin-bottom: 0.5em; }
+    p { margin-bottom: 1em; }
+
+    /* Layout */
+    header { padding: 1em; text-align: center; border-bottom: 1px solid rgba(255,255,255,0.1); }
+    header h1 { font-size: 2rem; }
+    header p { font-size: 1rem; color: rgba(255,255,255,0.7); }
+    .container { display: flex; flex-wrap: wrap; padding: 1em; max-width: 1200px; margin: auto; }
+    .sidebar { flex: 1 1 300px; padding: 1em; }
+    .main { flex: 2 1 600px; padding: 1em; }
+
+    /* Workout Selection */
+    .workout-select { margin-bottom: 1.5em; }
+    .workout-select select { width: 100%; padding: 0.75em; font-size: 1rem; background: #1a1a1a; color: var(--text-color); border: none; border-radius: 5px; transition: var(--transition); }
+    .workout-select select:hover { background: #2a2a2a; }
+
+    /* Timer Display */
+    .timer { text-align: center; margin-bottom: 1em; }
+    .timer .time { font-size: 4rem; margin-bottom: 0.5em; }
+    .timer .exercise-name { font-size: 1.5rem; margin-bottom: 0.5em; }
+
+    /* Context Display */
+    .context { display: flex; justify-content: space-between; margin-bottom: 1em; }
+    .context div { flex: 1; padding: 0.5em; background: #1a1a1a; border-radius: 5px; margin: 0 0.25em; cursor: pointer; transition: var(--transition); }
+    .context div:hover { background: #2a2a2a; }
+    .context div h4 { font-size: 0.9rem; color: rgba(255,255,255,0.7); }
+    .context div p { font-size: 1rem; margin-top: 0.25em; }
+
+    /* Controls */
+    .controls { display: flex; justify-content: center; gap: 1em; margin-bottom: 1em; }
+    .controls button { padding: 0.75em 1.5em; font-size: 1rem; border: none; border-radius: 5px; cursor: pointer; background: var(--accent-color); color: #121212; transition: var(--transition); }
+    .controls button:hover { background: var(--accent-alt); }
+
+    /* Progress Bar */
+    .progress-bar { background: #1a1a1a; border-radius: 5px; overflow: hidden; height: 10px; margin-bottom: 1em; }
+    .progress-bar-inner { height: 100%; width: 0%; background: var(--accent-color); transition: width 0.25s ease; }
+
+    /* Exercise Info */
+    .exercise-info { background: #1a1a1a; padding: 1em; border-radius: 5px; }
+    .exercise-info h3 { margin-bottom: 0.5em; }
+    .visual-placeholder { width: 100%; height: 150px; background: #2a2a2a; display: flex; align-items: center; justify-content: center; margin-bottom: 1em; font-size: 0.9rem; color: rgba(255,255,255,0.6); }
+    .exercise-info ul { list-style: disc inside; margin-bottom: 1em; }
+    .exercise-info li { margin-bottom: 0.5em; }
+
+    /* Skip Extended Rest */
+    #skip-rest { display: none; margin-top: 1em; }
+
+    /* Responsive */
+    @media (max-width: 768px) { .container { flex-direction: column; } }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Workout Timer Pro</h1>
+    <p>Stay motivated. Stay on track.</p>
+  </header>
+  <div class="container">
+    <div class="sidebar">
+      <div class="workout-select">
+        <label for="workoutPlan">Choose a workout:</label>
+        <select id="workoutPlan"></select>
+      </div>
+      <div class="exercise-info" id="exerciseInfo">
+        <!-- Populated dynamically -->
+      </div>
+    </div>
+    <div class="main">
+      <div class="timer">
+        <div class="time" id="timerDisplay">00:45</div>
+        <div class="exercise-name" id="exerciseName">Ready?</div>
+      </div>
+      <div class="context">
+        <div id="prevContext"><h4>Previous</h4><p id="prevEx">-</p></div>
+        <div id="currentContext"><h4>Current</h4><p id="currentEx">-</p></div>
+        <div id="nextContext"><h4>Next</h4><p id="nextEx">-</p></div>
+      </div>
+      <div class="controls">
+        <button id="prevBtn">Prev</button>
+        <button id="startBtn">Start</button>
+        <button id="pauseBtn">Pause</button>
+        <button id="resetBtn">Reset</button>
+        <button id="nextBtn">Next</button>
+      </div>
+      <div class="progress-bar"><div class="progress-bar-inner" id="progressBar"></div></div>
+      <button id="skip-rest">Skip Extended Rest</button>
+    </div>
+  </div>
+
+  <script>
+    // Data Structure
+    const workouts = {
+      "TRX & Dumbbell Garage Blitz": [
+        { name: "TRX Chest Press", type: "exercise", duration: 45,
+          visual: "Visual for TRX Chest Press - animated GIF or short video",
+          muscles: "Chest, Shoulders, Triceps", equipment: "TRX Suspension Trainer",
+          instructions: [
+            "Adjust TRX straps to mid-length and stand facing away from anchor.",
+            "Lean forward into plank; arms extended.",
+            "Lower chest by bending elbows at 45°.",
+            "Press back, squeezing chest muscles."
+          ],
+          formTips: ["Keep body straight from head to heels.", "Engage core throughout."],
+          mistakes: ["Flaring elbows too wide.", "Letting hips sag."]
+        },
+        // ... Add all other exercises with similar detail
+        { name: "Extended Rest", type: "extended_rest", duration: 180 },
+        // Repeat pattern: exercise, rest, exercise, rest, ...
+      ],
+      "Full Arms Blast": [ /* Detailed array */ ],
+      "Full Legs Power": [ /* Detailed array */ ],
+      "Full Body Burn": [ /* Detailed array */ ],
+      "Upper Body Sculpt": [ /* Detailed array */ ],
+      "Lower Body Grind": [ /* Detailed array */ ]
+    };
+
+    // State Variables
+    let currentWorkout = [];
+    let currentIndex = 0;
+    let timerInterval;
+    let remainingTime = 0;
+
+    // Elements
+    const workoutPlanSelect = document.getElementById('workoutPlan');
+    const timerDisplay = document.getElementById('timerDisplay');
+    const exName = document.getElementById('exerciseName');
+    const prevEx = document.getElementById('prevEx');
+    const currentEx = document.getElementById('currentEx');
+    const nextEx = document.getElementById('nextEx');
+    const startBtn = document.getElementById('startBtn');
+    const pauseBtn = document.getElementById('pauseBtn');
+    const resetBtn = document.getElementById('resetBtn');
+    const prevBtn = document.getElementById('prevBtn');
+    const nextBtn = document.getElementById('nextBtn');
+    const progressBar = document.getElementById('progressBar');
+    const skipRestBtn = document.getElementById('skip-rest');
+    const exerciseInfo = document.getElementById('exerciseInfo');
+
+    // Initialize
+    function init() {
+      Object.keys(workouts).forEach(plan => {
+        const opt = document.createElement('option');
+        opt.value = plan;
+        opt.textContent = plan;
+        workoutPlanSelect.appendChild(opt);
+      });
+      workoutPlanSelect.addEventListener('change', () => loadWorkout(workoutPlanSelect.value));
+      startBtn.addEventListener('click', startTimer);
+      pauseBtn.addEventListener('click', pauseTimer);
+      resetBtn.addEventListener('click', resetTimer);
+      prevBtn.addEventListener('click', prevExercise);
+      nextBtn.addEventListener('click', nextExercise);
+      skipRestBtn.addEventListener('click', () => {
+        clearInterval(timerInterval);
+        nextExercise();
+      });
+      // Auto-load first
+      if (workoutPlanSelect.options.length) loadWorkout(workoutPlanSelect.options[0].value);
+    }
+
+    function loadWorkout(name) {
+      clearInterval(timerInterval);
+      currentWorkout = workouts[name];
+      currentIndex = 0;
+      updateDisplay();
+    }
+
+    function startTimer() {
+      if (!currentWorkout.length) return;
+      if (!remainingTime) remainingTime = currentWorkout[currentIndex].duration;
+      timerInterval = setInterval(() => {
+        remainingTime--;
+        updateTimeDisplay();
+        if (remainingTime <= 0) {
+          clearInterval(timerInterval);
+          speak(currentWorkout[currentIndex].name);
+          nextExercise();
+        }
+      }, 1000);
+    }
+
+    function pauseTimer() {
+      clearInterval(timerInterval);
+    }
+
+    function resetTimer() {
+      clearInterval(timerInterval);
+      remainingTime = currentWorkout[currentIndex].duration;
+      updateTimeDisplay();
+    }
+
+    function prevExercise() {
+      if (currentIndex > 0) currentIndex--;
+      resetTimer();
+      updateDisplay();
+    }
+
+    function nextExercise() {
+      if (currentIndex < currentWorkout.length - 1) currentIndex++;
+      remainingTime = currentWorkout[currentIndex].duration;
+      updateDisplay();
+      startTimer();
+    }
+
+    function updateDisplay() {
+      const ex = currentWorkout[currentIndex];
+      exName.textContent = ex.name;
+      updateTimeDisplay();
+      prevEx.textContent = currentWorkout[currentIndex-1]?.name || '-';
+      currentEx.textContent = ex.name;
+      nextEx.textContent = currentWorkout[currentIndex+1]?.name || '-';
+
+      // Progress
+      const percent = ((currentIndex) / (currentWorkout.length - 1)) * 100;
+      progressBar.style.width = percent + '%';
+
+      // Extended rest skip
+      if (ex.type === 'extended_rest') skipRestBtn.style.display = 'block';
+      else skipRestBtn.style.display = 'none';
+
+      // Update Exercise Info
+      if (ex.type === 'exercise') {
+        exerciseInfo.innerHTML = `
+          <h3>${ex.name}</h3>
+          <div class="visual-placeholder">${ex.visual}</div>
+          <p><strong>Target Muscles:</strong> ${ex.muscles}</p>
+          <p><strong>Equipment:</strong> ${ex.equipment}</p>
+          <h4>Instructions:</h4>
+          <ul>${ex.instructions.map(i => `<li>${i}</li>`).join('')}</ul>
+          <h4>Proper Form:</h4>
+          <ul>${ex.formTips.map(t => `<li>${t}</li>`).join('')}</ul>
+          <h4>Common Mistakes:</h4>
+          <ul>${ex.mistakes.map(m => `<li>${m}</li>`).join('')}</ul>
+        `;
+      } else {
+        exerciseInfo.innerHTML = `<p>${ex.name.replace('_', ' ')}</p>`;
+      }
+
+      // Clickable context
+      document.getElementById('prevContext').onclick = () => selectIndex(currentIndex-1);
+      document.getElementById('nextContext').onclick = () => selectIndex(currentIndex+1);
+    }
+
+    function selectIndex(idx) {
+      if (idx >= 0 && idx < currentWorkout.length) {
+        currentIndex = idx;
+        remainingTime = 0;
+        clearInterval(timerInterval);
+        updateDisplay();
+      }
+    }
+
+    function updateTimeDisplay() {
+      const m = String(Math.floor(remainingTime / 60)).padStart(2,'0');
+      const s = String(remainingTime % 60).padStart(2,'0');
+      timerDisplay.textContent = `${m}:${s}`;
+    }
+
+    function speak(text) {
+      if ('speechSynthesis' in window) {
+        const utter = new SpeechSynthesisUtterance(text);
+        window.speechSynthesis.speak(utter);
+      }
+    }
+
+    // Kickoff
+    document.addEventListener('DOMContentLoaded', init);
+  </script>
+</body>
+</html>

@@ -1,0 +1,463 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-8M3X5312PN"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-8M3X5312PN');
+</script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Secret Lab | NoFriction</title>
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css">
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.12.0/dist/cdn.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css">
+
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/emoji-toolkit@8.0.0/extras/css/joypixels.min.css"/>
+    <script src="https://cdn.jsdelivr.net/npm/emoji-toolkit@8.0.0/lib/js/joypixels.min.js"></script>
+
+    <link rel="stylesheet" href="https://www.nofriction.io/css/style.css"> 
+    <link rel="stylesheet" href="https://www.nofriction.io/css/chatbot-style.css">
+    <style>
+        /* Custom styles for the new input area */
+        #input-wrapper {
+            display: flex;
+            flex-direction: column;
+            flex: 1;
+            margin: 0 8px;
+            background-color: #1e293b; /* bg-slate-800 */
+            border-radius: 12px;
+            border: 1px solid #334155; /* border-slate-700 */
+            overflow: hidden;
+        }
+        #image-preview-container {
+            padding: 0;
+            position: relative;
+            max-height: 0;
+            transition: all 0.3s ease-in-out;
+            overflow: hidden;
+        }
+        #image-preview-container.visible {
+            padding: 8px 8px 0 8px;
+            max-height: 100px; /* Limit preview height */
+        }
+        #image-preview-container img {
+            max-width: 90px;
+            max-height: 90px;
+            border-radius: 8px;
+            object-fit: cover;
+        }
+        #remove-image-btn {
+            position: absolute;
+            top: 12px;
+            left: 12px;
+            background-color: rgba(0,0,0,0.6);
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 22px;
+            height: 22px;
+            cursor: pointer;
+            font-size: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            line-height: 1;
+            font-weight: bold;
+        }
+        #user-input {
+            border: none;
+            padding: 12px;
+            background-color: transparent;
+        }
+        #user-input:focus {
+            outline: none;
+            box-shadow: none;
+        }
+    </style>
+</head>
+<body class="min-h-screen"> 
+    <nav class="gradient-bg text-white py-4 px-6 shadow-lg fixed w-full z-50">
+        <div class="container mx-auto flex justify-between items-center">
+        <a href="/index.html" class="inline-block"> <img src="/images/nofrictionlogo3(12).png" alt="NoFriction Logo" class="h-10 w-auto">
+        </a>
+            <div class="hidden md:flex space-x-8 items-center nav-links"> 
+                <a href="/about.html" class="nav-link font-medium hover:text-gray-300 transition duration-300">About</a>
+                <a href="/cv.html" class="nav-link font-medium hover:text-gray-300 transition duration-300">Customers & CV</a>
+                <a href="/lab.html" class="nav-link font-medium hover:text-gray-300 transition duration-300">Secret Lab</a> <a href="/contact.html" class="btn-primary text-white px-6 py-2 rounded-full font-medium hover:opacity-90 transition duration-300">Contact</a>
+            </div>
+            <div class="md:hidden flex items-center">
+                <button id="mobile-menu-button" class="text-white focus:outline-none">
+                    <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                    </svg>
+                </button>
+            </div>
+        </div>
+        <div id="mobile-menu" class="md:hidden hidden mt-3 space-y-2 px-2 pb-3">
+            <a href="/about.html" class="block nav-link font-medium hover:text-gray-300 transition duration-300">About</a>
+            <a href="/cv.html" class="block nav-link font-medium hover:text-gray-300 transition duration-300">Customers & CV</a>
+            <a href="/lab.html" class="block nav-link font-medium hover:text-gray-300 transition duration-300">Secret Lab</a>
+            <a href="/contact.html" class="block btn-primary text-white px-6 py-2 rounded-full font-medium hover:opacity-90 transition duration-300 mt-2 text-center">Contact</a>
+        </div>
+    </nav>
+
+    <section class="relative pt-32 pb-0 px-6 md:px-12 overflow-hidden">
+        <div class="rotating-circle" style="top: -200px; left: -200px;"></div>
+        <div class="rotating-circle" style="bottom: -200px; right: -200px;"></div>
+        <div class="max-w-6xl mx-auto relative z-10">
+            <div class="grid md:grid-cols-2 gap-12 items-center">
+                <div>
+                    <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight mb-4">Specifications, <span class="text-blue-400" >Briefings and Intel.</span></h1>
+                    <p class="text-xl mb-0 opacity-80">Dive into a world of information, detailed analysis, technical specifications and cyber intel.</p>
+            </div></div></div>
+    </section>
+    
+    <section id="projects" class="py-16 px-6 md:px-12 bg-gradient-to-b from-transparent to-gray-900">
+        <div class="max-w-6xl mx-auto">            
+            <div class="mb-0">
+                <div class="marquee py-2">
+                    <div class="marquee-content">
+                        <span class="inline-block mx-4 text-gray-500"># AI Orchestration</span><span class="inline-block mx-4 text-gray-500"># Palantir</span><span class="inline-block mx-4 text-gray-500"># Webhooks</span><span class="inline-block mx-4 text-gray-500"># Cybersecurity</span><span class="inline-block mx-4 text-gray-500"># Threat Detection</span><span class="inline-block mx-4 text-gray-500"># Risk Mitigation</span><span class="inline-block mx-4 text-gray-500"># Insurance Analysis</span><span class="inline-block mx-4 text-gray-500"># CCDCOE</span><span class="inline-block mx-4 text-gray-500"># Agentic Defence</span><span class="inline-block mx-4 text-gray-500"># Cybersecurity</span><span class="inline-block mx-4 text-gray-500"># IP Monetization</span>
+                        <span class="inline-block mx-4 text-gray-500"># AI Orchestration</span><span class="inline-block mx-4 text-gray-500"># Palantir</span><span class="inline-block mx-4 text-gray-500"># Webhooks</span><span class="inline-block mx-4 text-gray-500"># Cybersecurity</span><span class="inline-block mx-4 text-gray-500"># Threat Detection</span><span class="inline-block mx-4 text-gray-500"># Risk Mitigation</span><span class="inline-block mx-4 text-gray-500"># Insurance Analysis</span><span class="inline-block mx-4 text-gray-500"># CCDCOE</span><span class="inline-block mx-4 text-gray-500"># Agentic Defence</span><span class="inline-block mx-4 text-gray-500"># Cybersecurity</span><span class="inline-block mx-4 text-gray-500"># IP Monetization</span>
+                    </div></div></div></div>
+    </section>
+
+    <div class="container mx-auto px-4 py-8 max-w-6xl">
+        <main>
+            <div class="section-divider mb-2"></div>
+            <div class="mb-12">
+                <h2 class="text-2xl text-blue-400 mb-6 font-semibold">Intelligence Documentation</h2>
+                <div class="grid gap-4">
+                    <a href="agingdocsandAI.html" class="document-card p-4 rounded flex justify-between items-center"><div><h3 class="font-medium text-white">Aging Documentation & AI</h3><p class="text-sm text-blue-300 mt-1">agingdocsandAI.html</p></div><div class="text-blue-400"><svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd" /></svg></div></a>
+                    <a href="brandguide.html" class="document-card p-4 rounded flex justify-between items-center"><div><h3 class="font-medium text-white">Brand Guidelines</h3><p class="text-sm text-blue-300 mt-1">brandguide.html</p></div><div class="text-blue-400"><svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd" /></svg></div></a>
+                    <a href="ca-ai-market.html" class="document-card p-4 rounded flex justify-between items-center"><div><h3 class="font-medium text-white">AI Market Analysis</h3><p class="text-sm text-blue-300 mt-1">ca-ai-market.html</p></div><div class="text-blue-400"><svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd" /></svg></div></a>
+                    <a href="ccdcoe.html" class="document-card p-4 rounded flex justify-between items-center"><div><h3 class="font-medium text-white">CCDCOE Documentation</h3><p class="text-sm text-blue-300 mt-1">ccdcoe.html</p></div><div class="text-blue-400"><svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd" /></svg></div></a>
+                    <a href="crmspec.html" class="document-card p-4 rounded flex justify-between items-center"><div><h3 class="font-medium text-white">CRM Specifications</h3><p class="text-sm text-blue-300 mt-1">crmspec.html</p></div><div class="text-blue-400"><svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd" /></svg></div></a>
+                    <a href="/intel/bigtosmall.html" class="document-card p-4 rounded flex justify-between items-center"><div><h3 class="font-medium text-white">Large Model Distillation and ERPs</h3><p class="text-sm text-blue-300 mt-1">bigtosmall.html</p></div><div class="text-blue-400"><svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd" /></svg></div></a>
+                    <a href="lawenforcement.html" class="document-card p-4 rounded flex justify-between items-center"><div><h3 class="font-medium text-white">Law Enforcement Response Guidelines</h3><p class="text-sm text-blue-300 mt-1">lawenforcement.html</p></div><div class="text-blue-400"><svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd" /></svg></div></a>
+                    <a href="palantirstandards.html" class="document-card p-4 rounded flex justify-between items-center"><div><h3 class="font-medium text-white">Palantir Standards</h3><p class="text-sm text-blue-300 mt-1">palantirstandards.html</p></div><div class="text-blue-400"><svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd" /></svg></div></a>
+                    <a href="spec.html" class="document-card p-4 rounded flex justify-between items-center"><div><h3 class="font-medium text-white">Technical Specifications</h3><p class="text-sm text-blue-300 mt-1">spec.html</p></div><div class="text-blue-400"><svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd" /></svg></div></a>
+                    <a href="spec2.html" class="document-card p-4 rounded flex justify-between items-center"><div><h3 class="font-medium text-white">Technical Specifications (Version 2)</h3><p class="text-sm text-blue-300 mt-1">spec2.html</p></div><div class="text-blue-400"><svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd" /></svg></div></a>
+                    <a href="thingstodo.html" class="document-card p-4 rounded flex justify-between items-center"><div><h3 class="font-medium text-white">Action Items & Tasks</h3><p class="text-sm text-blue-300 mt-1">thingstodo.html</p></div><div class="text-blue-400"><svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd" /></svg></div></a>
+                </div>
+            </div>
+            <div class="section-divider mb-8"></div>
+            <div class="mb-12 bg-opacity-30 bg-blue-900 rounded-lg p-6">
+                <h2 class="text-xl text-blue-400 mb-4">Repository Status</h2>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                    <div class="bg-blue-900 bg-opacity-50 p-4 rounded"><div class="text-blue-300 text-sm mb-1">Document Count</div><div class="text-2xl font-bold text-white">13</div><div class="text-xs text-blue-200 mt-1">HTML Files</div></div>
+                    <div class="bg-blue-900 bg-opacity-50 p-4 rounded"><div class="text-blue-300 text-sm mb-1">Status</div><div class="text-lg font-bold text-green-400">All Documents Available</div><div class="text-xs text-blue-200 mt-1">Local Repository</div></div>
+                    <div class="bg-blue-900 bg-opacity-50 p-4 rounded"><div class="text-blue-300 text-sm mb-1">System</div><div class="text-lg font-bold text-white">Intel Directory</div><div class="text-xs text-blue-200 mt-1">Technical Documents</div></div>
+                </div>
+            </div>
+            <div class="section-divider mb-8"></div>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12">
+                <div>
+                    <h3 class="text-xl text-blue-400 mb-4">Document Types</h3>
+                    <div class="grid grid-cols-2 gap-3">
+                        <div class="tech-badge px-3 py-2 rounded text-blue-300 text-sm">Technical Specifications</div><div class="tech-badge px-3 py-2 rounded text-blue-300 text-sm">Guidelines</div>
+                        <div class="tech-badge px-3 py-2 rounded text-blue-300 text-sm">Analysis Reports</div><div class="tech-badge px-3 py-2 rounded text-blue-300 text-sm">Standards</div>
+                        <div class="tech-badge px-3 py-2 rounded text-blue-300 text-sm">Tasks</div><div class="tech-badge px-3 py-2 rounded text-blue-300 text-sm">Documentation</div>
+                    </div>
+                </div>
+                <div>
+                    <h3 class="text-xl text-blue-400 mb-4">Repository Info</h3>
+                    <table class="w-full text-sm">
+                        <tbody> 
+                            <tr><td class="py-1 text-gray-400">Format</td><td class="py-1 text-white">HTML Documents</td></tr>
+                            <tr><td class="py-1 text-gray-400">Directory</td><td class="py-1 text-white">Intel</td></tr>
+                            <tr><td class="py-1 text-gray-400">Access</td><td class="py-1 text-white">Local File System</td></tr>
+                            <tr><td class="py-1 text-gray-400">Updated</td><td class="py-1 text-white">Current</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <footer class="py-12 px-6 md:px-12 mt-12">
+      <div class="max-w-6xl mx-auto">
+        <div class="flex flex-col md:flex-row justify-between items-center mb-12">
+          <div class="mb-8 md:mb-0"><img src="https://page.genspark.site/v1/base64_upload/3ced5bb1a137097e11aacf33af0bde73" alt="NoFriction Logo" class="h-8 mb-4"><p class="text-sm text-gray-500 max-w-sm">NoFriction transforms IP and technology assets into powerful revenue streams with our boutique consulting approach.</p></div>
+          <div class="flex flex-wrap justify-center md:justify-end gap-8">
+            <div><h4 class="font-semibold mb-3 text-white">Company</h4><ul class="space-y-2"><li><a href="/about.html" class="footer-link text-sm">About</a></li><li><a href="#projects" class="footer-link text-sm">Projects</a></li><li><a href="/cv.html" class="footer-link text-sm">Customers & CV</a></li><li><a href="/lab.html" class="footer-link text-sm">Secret Lab</a></li></ul></div>
+            <div><h4 class="font-semibold mb-3 text-white">Resources</h4><ul class="space-y-2"><li><a href="#" class="footer-link text-sm">Blog</a></li><li><a href="#" class="footer-link text-sm">Case Studies</a></li><li><a href="#" class="footer-link text-sm">White Papers</a></li></ul></div>
+            <div><h4 class="font-semibold mb-3 text-white">Connect</h4><ul class="space-y-2"><li><a href="/contact.html" class="footer-link text-sm">Contact</a></li><li><a href="#" class="footer-link text-sm">LinkedIn</a></li><li><a href="#" class="footer-link text-sm">Twitter</a></li></ul></div>
+          </div>
+        </div>
+        <div class="border-t border-gray-800 pt-8 flex flex-col md:flex-row justify-between items-center">
+          <div class="text-sm text-gray-600 mb-4 md:mb-0">&copy; 2025 NoFriction. All rights reserved.</div>
+          <div class="flex space-x-6"><a href="#" class="footer-link text-sm">Privacy Policy</a><a href="#" class="footer-link text-sm">Terms of Service</a><a href="#" class="footer-link text-sm">Cookie Policy</a></div>
+        </div>
+      </div>
+    </footer>
+
+    <button id="chat-toggle">💬</button> 
+    <div id="app-wrapper">
+        <div id="resize-handle-tl"></div>
+        <div id="sidebar">
+          <div id="sidebar-header"><button id="new-chat-btn">+ New Conversation</button></div>
+          <ul id="thread-list"></ul>
+          <div id="sidebar-footer">
+            <label for="model-selector" id="model-selector-label">AI Model:</label>
+            <select id="model-selector">
+              <option value="gemini">Gemini</option><option value="chatgpt">ChatGPT</option><option value="claude">Claude</option><option value="deepseek">DeepSeek</option><option value="perplexity">Perplexity</option><option value="genspark">GenSpark</option><option value="google">Google</option>
+            </select>
+          </div>
+        </div>
+        <div id="main-chat-area">
+          <div id="chat-container">
+            <div id="chat-header">NoFriction Assistant <span id="current-thread-model"></span></div>
+            <div id="messages"><div id="typing-indicator" class="message"><span class="dot"></span><span class="dot"></span><span class="dot"></span></div></div>
+            <div id="controls">
+              <label id="file-label" title="Attach File">📎<input type="file" id="file-btn" style="display: none;"></label>
+              <button id="speak-btn" disabled title="Speak Message (Mic)">🎤</button>
+              <button id="send-btn" title="Send Message">➤</button>
+              <label class="switch" title="Enable/Disable Voice Output"><input type="checkbox" id="audio-enable"><span class="slider"></span></label>
+            </div>
+            <input type="text" id="user-input" placeholder="Type a message..." autocomplete="off">
+            <div id="chat-footer">Powered by <a href="https://www.nofriction.io" target="_blank">NoFriction</a></div>
+          </div>
+        </div>
+    </div>
+    <script src="https://www.nofriction.io/js/main.js"></script>
+    <script src="https://www.nofriction.io/js/chatbot.js"></script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const controls = document.getElementById('controls');
+            const messages = document.getElementById('messages');
+            const typingIndicator = document.getElementById('typing-indicator');
+            const sendBtn = document.getElementById('send-btn');
+            // Directly get the userInput element, it should now be visible by default
+            const userInput = document.getElementById('user-input'); 
+            const fileInput = document.getElementById('file-btn'); 
+            const modelSelector = document.getElementById('model-selector'); 
+
+            let stagedImageData = null;
+            let stagedFile = null;
+
+            // 1. Create a new, enhanced input area (only if it hasn't been created by main.js/chatbot.js)
+            // It's crucial to check if your external scripts (main.js, chatbot.js) are already manipulating
+            // the input area. If they are, this re-creation might be redundant or conflict.
+            // Assuming your external scripts primarily handle the chatbot's core logic
+            // and don't extensively modify the DOM structure of controls area in a way that
+            // conflicts with this custom input wrapper.
+
+            // The original logic for creating and inserting inputWrapper
+            // is still valid if main.js/chatbot.js don't already handle it.
+            const inputWrapper = document.createElement('div');
+            inputWrapper.id = 'input-wrapper';
+
+            const imagePreviewContainer = document.createElement('div');
+            imagePreviewContainer.id = 'image-preview-container';
+
+            const filePreviewContainer = document.createElement('div');
+            filePreviewContainer.id = 'file-preview-container';
+            filePreviewContainer.style.cssText = `
+                display: flex;
+                align-items: center;
+                padding: 8px;
+                background-color: #334155; /* slate-700 */
+                border-radius: 8px;
+                margin-bottom: 8px;
+                max-height: 0;
+                overflow: hidden;
+                transition: max-height 0.3s ease-in-out;
+            `;
+            const fileNameSpan = document.createElement('span');
+            fileNameSpan.id = 'file-name';
+            fileNameSpan.style.color = '#cbd5e1'; // slate-300
+            fileNameSpan.style.fontSize = '0.875rem'; // text-sm
+            fileNameSpan.style.marginRight = '8px';
+            filePreviewContainer.appendChild(fileNameSpan);
+
+            const removeFileBtn = document.createElement('button');
+            removeFileBtn.id = 'remove-file-btn';
+            removeFileBtn.innerHTML = '&times;';
+            removeFileBtn.style.cssText = `
+                background-color: rgba(0,0,0,0.6);
+                color: white;
+                border: none;
+                border-radius: 50%;
+                width: 22px;
+                height: 22px;
+                cursor: pointer;
+                font-size: 14px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                line-height: 1;
+                font-weight: bold;
+            `;
+            removeFileBtn.onclick = clearStagedFile;
+            filePreviewContainer.appendChild(removeFileBtn);
+
+            // Append containers and userInput to the wrapper
+            inputWrapper.appendChild(imagePreviewContainer);
+            inputWrapper.appendChild(filePreviewContainer); 
+            inputWrapper.appendChild(userInput);
+            
+            // Insert the new wrapper into the controls area
+            // Check if inputWrapper already exists or if controls already has an inputWrapper before inserting
+            if (!document.getElementById('input-wrapper-already-present')) { // Simple check to prevent re-insertion if this script runs multiple times or a previous script created it
+                if (sendBtn && controls.contains(sendBtn)) {
+                    controls.insertBefore(inputWrapper, sendBtn);
+                } else {
+                    controls.appendChild(inputWrapper);
+                }
+                // Add a dummy ID to signify it's been handled, if necessary
+                // This is a more advanced technique if you suspect multiple DOM manipulations
+                // inputWrapper.id = 'input-wrapper-already-present'; // For debugging/preventing re-creation
+            }
+
+            // --- Core Functions ---
+            
+            function clearStagedImage() {
+                stagedImageData = null;
+                imagePreviewContainer.innerHTML = '';
+                imagePreviewContainer.classList.remove('visible');
+            }
+
+            function clearStagedFile() {
+                stagedFile = null;
+                fileNameSpan.textContent = '';
+                filePreviewContainer.style.maxHeight = '0';
+                filePreviewContainer.style.padding = '0';
+            }
+
+            function handleSubmission() {
+                const text = userInput.value.trim();
+                const selectedModel = modelSelector.value;
+
+                if (!text && !stagedImageData && !stagedFile) {
+                    return; 
+                }
+
+                const userMessageContainer = document.createElement('div');
+                userMessageContainer.classList.add('message', 'user-message');
+
+                if (stagedImageData) {
+                    const img = document.createElement('img');
+                    img.src = stagedImageData;
+                    img.style.cssText = "max-width: 250px; border-radius: 12px;";
+                    if (text || stagedFile) img.style.marginBottom = '8px';
+                    userMessageContainer.appendChild(img);
+                }
+
+                if (stagedFile) {
+                    const fileInfo = document.createElement('p');
+                    fileInfo.textContent = `Attached File: ${stagedFile.name} (${(stagedFile.size / 1024).toFixed(2)} KB)`;
+                    fileInfo.style.fontSize = '0.875rem';
+                    fileInfo.style.color = '#94a3b8'; 
+                    if (text) fileInfo.style.marginBottom = '8px';
+                    userMessageContainer.appendChild(fileInfo);
+                }
+
+                if (text) {
+                    const p = document.createElement('p');
+                    p.textContent = text;
+                    userMessageContainer.appendChild(p);
+                }
+                
+                const modelInfo = document.createElement('p');
+                modelInfo.textContent = `Model: ${selectedModel}`;
+                modelInfo.style.fontSize = '0.75rem';
+                modelInfo.style.color = '#64748b'; 
+                userMessageContainer.appendChild(modelInfo);
+
+
+                messages.appendChild(userMessageContainer);
+                
+                userInput.value = '';
+                clearStagedImage();
+                clearStagedFile();
+                userInput.focus();
+                
+                messages.scrollTop = messages.scrollHeight;
+                typingIndicator.style.display = 'flex';
+                setTimeout(() => {
+                    typingIndicator.style.display = 'none';
+                    const botMessageContainer = document.createElement('div');
+                    botMessageContainer.classList.add('message');
+                    let responseText = "Received your message.";
+                    if (text) responseText += ` Text: "${text}"`;
+                    if (stagedImageData) responseText += " (with image)";
+                    if (stagedFile) responseText += ` (with file: ${stagedFile.name})`;
+                    responseText += ` using model: ${selectedModel}. (Demonstration)`;
+
+                    botMessageContainer.innerHTML = responseText;
+                    messages.appendChild(botMessageContainer);
+                    messages.scrollTop = messages.scrollHeight;
+                }, 1500);
+            }
+
+            // --- Event Listeners ---
+
+            sendBtn.addEventListener('click', (event) => {
+                event.preventDefault();
+                event.stopPropagation();
+                handleSubmission();
+            }, true); 
+
+            userInput.addEventListener('keydown', (event) => {
+                if (event.key === 'Enter' && !event.shiftKey) {
+                    event.preventDefault();
+                    event.stopPropagation();
+                    handleSubmission();
+                }
+            }, true);
+
+            userInput.addEventListener('paste', (event) => {
+                const items = (event.clipboardData || window.clipboardData).items;
+                for (const item of items) {
+                    if (item.type.startsWith('image/')) {
+                        event.preventDefault();
+                        const blob = item.getAsFile();
+                        if (!blob) continue;
+
+                        const reader = new FileReader();
+                        reader.onload = (e) => {
+                            stagedImageData = e.target.result;
+                            imagePreviewContainer.innerHTML = ''; 
+                            const img = document.createElement('img');
+                            img.src = e.target.result;
+                            const removeBtn = document.createElement('button');
+                            removeBtn.id = 'remove-image-btn';
+                            removeBtn.innerHTML = '&times;';
+                            removeBtn.onclick = clearStagedImage;
+                            imagePreviewContainer.appendChild(img);
+                            imagePreviewContainer.appendChild(removeBtn);
+                            imagePreviewContainer.classList.add('visible');
+                        };
+                        reader.readAsDataURL(blob);
+                        return;
+                    }
+                }
+            });
+
+            fileInput.addEventListener('change', (event) => {
+                if (event.target.files.length > 0) {
+                    stagedFile = event.target.files[0];
+                    fileNameSpan.textContent = stagedFile.name;
+                    filePreviewContainer.style.maxHeight = '50px'; 
+                    filePreviewContainer.style.padding = '8px';
+                } else {
+                    clearStagedFile();
+                }
+            });
+        });
+    </script>
+</body>
+</html>

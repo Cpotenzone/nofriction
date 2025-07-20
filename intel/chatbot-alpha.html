@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>NoFriction Chatbot - Refined</title>
+  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/emoji-toolkit@6.6.0/lib/js/joypixels.min.js"></script>
+  <style>
+    /* Refined Apple-inspired design with enhanced controls */
+    :root {
+      --bg: #f2f2f5;
+      --surface: rgba(255,255,255,0.9);
+      --accent: #007aff;
+      --text: #1c1c1e;
+      --muted: #3c3c4399;
+      --border: #d1d1d6;
+      --radius: 16px;
+      --shadow: 0 4px 16px rgba(0,0,0,0.1);
+    }
+    * { box-sizing: border-box; }
+    body { margin:0; font-family:-apple-system,'SF Pro Text',sans-serif; background:var(--bg); }
+    #app-wrapper {
+      position:absolute; top:50%; left:50%; transform:translate(-50%,-50%);
+      width:900px; height:600px; display:none;
+      background:var(--surface); backdrop-filter:blur(20px);
+      border-radius:var(--radius); box-shadow:var(--shadow);
+      overflow:hidden; display:grid; grid-template-columns:280px 1fr;
+    }
+    #chat-toggle {
+      position:fixed; bottom:24px; right:24px;
+      width:64px; height:64px; background:var(--surface);
+      border:1px solid var(--border); border-radius:50%;
+      font-size:28px; color:var(--accent); cursor:pointer;
+      backdrop-filter:blur(20px); box-shadow:var(--shadow);
+    }
+    #sidebar { padding:24px; display:flex; flex-direction:column; }
+    #new-chat-btn {
+      padding:12px; background:var(--accent); color:#fff;
+      border:none; border-radius:var(--radius); font-size:16px;
+      cursor:pointer; box-shadow:0 2px 6px rgba(0,122,255,0.3);
+    }
+    #new-chat-btn:hover { background:#005ecb; }
+    #thread-list { flex:1; margin-top:16px; padding:0; list-style:none; overflow-y:auto; }
+    #thread-list li {
+      padding:12px; margin-bottom:8px;
+      border-radius:var(--radius); background:var(--surface);
+      border:1px solid var(--border); cursor:pointer;
+      transition:background 0.2s;
+    }
+    #thread-list li.active-thread { background:rgba(0,122,255,0.2); }
+    #thread-list li:hover { background:rgba(255,255,255,0.7); }
+    .thread-title { margin:0; font-weight:600; color:var(--text); }
+    .thread-details { font-size:13px; color:var(--muted); margin-top:4px; }
+    #sidebar-footer { padding-top:16px; border-top:1px solid var(--border); }
+    label[for="model-selector"] { font-size:14px; color:var(--text); }
+    #model-selector {
+      width:100%; padding:10px; margin-top:4px;
+      border:1px solid var(--border); border-radius:var(--radius);
+      background:#fff; color:var(--text);
+    }
+    #main-chat-area { display:flex; flex-direction:column; }
+    #chat-header {
+      padding:16px 24px; font-size:18px; font-weight:600;
+      border-bottom:1px solid var(--border);
+      display:flex; align-items:center; justify-content:space-between;
+    }
+    #current-thread-model { font-size:14px; color:var(--muted); }
+    #messages {
+      flex:1; padding:24px; overflow-y:auto;
+      display:flex; flex-direction:column; gap:16px;
+      background:var(--surface);
+    }
+    .message {
+      padding:16px; border-radius:var(--radius);
+      position:relative; font-size:15px; line-height:1.4;
+      background:rgba(255,255,255,0.8);
+    }
+    .message.user { background:var(--accent); color:#fff; align-self:flex-end; }
+    .timestamp {
+      position:absolute; bottom:4px; right:12px;
+      font-size:13px; color:var(--muted);
+    }
+    #controls {
+      padding:16px 24px; display:flex; align-items:center; gap:12px;
+      border-top:1px solid var(--border); background:var(--surface);
+    }
+    #controls label, #controls button {
+      width:44px; height:44px;
+      display:flex; align-items:center; justify-content:center;
+      background:var(--surface);
+      border:1px solid var(--border);
+      border-radius:50%; color:var(--accent);
+      cursor:pointer; font-size:18px;
+    }
+    #controls label:hover, #controls button:hover { background:rgba(255,255,255,0.9); }
+    #controls input[type="text"] {
+      flex:1; padding:12px;
+      border:1px solid var(--border);
+      border-radius:var(--radius);
+      background:#fff; color:var(--text);
+      font-size:15px; outline:none;
+    }
+    .switch { position:relative; width:50px; height:28px; }
+    .switch input { display:none; }
+    .slider {
+      position:absolute; inset:0; border-radius:28px;
+      background:var(--border); transition:background 0.3s;
+    }
+    .slider:before {
+      content:""; position:absolute;
+      width:24px; height:24px; top:2px; left:2px;
+      border-radius:50%; background:#fff;
+      transition:transform 0.3s;
+    }
+    .switch input:checked + .slider { background:var(--accent); }
+    .switch input:checked + .slider:before { transform:translateX(22px); }
+    #chat-footer { text-align:center; padding:12px; font-size:13px; color:var(--muted); }
+    #chat-footer a { color:var(--accent); text-decoration:none; }
+  </style>
+</head>
+<body>
+  <button id="chat-toggle">💬</button>
+  <div id="app-wrapper">
+    <div id="sidebar">
+      <button id="new-chat-btn">+ New Chat</button>
+      <ul id="thread-list"></ul>
+      <div id="sidebar-footer">
+        <label for="model-selector">AI Model</label>
+        <select id="model-selector">
+          <option value="gemini">Gemini</option>
+          <option value="chatgpt">ChatGPT</option>
+          <option value="claude">Claude</option>
+          <option value="deepseek">DeepSeek</option>
+          <option value="perplexity">Perplexity</option>
+          <option value="genspark">GenSpark</option>
+          <option value="google">Google</option>
+        </select>
+      </div>
+    </div>
+    <div id="main-chat-area">
+      <div id="chat-header">
+        NoFriction Assistant <span id="current-thread-model"></span>
+      </div>
+      <div id="messages"><div id="typing-indicator"><span class="dot"></span><span class="dot"></span><span class="dot"></span></div></div>
+      <div id="controls">
+        <label id="file-label"><input type="file" id="file-btn" hidden>📎</label>
+        <button id="speak-btn" disabled>🎤</button>
+        <input type="text" id="user-input" placeholder="Type a message…">
+        <button id="send-btn">➤</button>
+        <label class="switch"><input type="checkbox" id="audio-enable"><span class="slider"></span></label>
+      </div>
+      <div id="chat-footer">Powered by <a href="https://www.nofriction.io" target="_blank">NoFriction</a></div>
+    </div>
+  </div>
+  <script>
+    const BASE = 'https://caseyp.app.n8n.cloud/webhook/';
+    const ENDPOINT = BASE + 'nofrictionchatbot';
+    const toggle = document.getElementById('chat-toggle');
+    const app = document.getElementById('app-wrapper');
+    const newBtn = document.getElementById('new-chat-btn');
+    const threadsEl = document.getElementById('thread-list');
+    const modelEl = document.getElementById('model-selector');
+    const headerModel = document.getElementById('current-thread-model');
+    const msgsEl = document.getElementById('messages');
+    const inputEl = document.getElementById('user-input');
+    const sendBtn = document.getElementById('send-btn');
+    const fileBtn = document.getElementById('file-btn');
+    const speakBtn = document.getElementById('speak-btn');
+    const audioChk = document.getElementById('audio-enable');
+    const typing = document.getElementById('typing-indicator');
+    let currentId, msgs=[], threads=[];
+
+    toggle.onclick = ()=>{
+      if(app.style.display==='grid'){ app.style.display='none'; toggle.textContent='💬'; }
+      else{ app.style.display='grid'; toggle.textContent='✕'; init(); }
+    };
+    function init(){ loadThreads(); speakBtn.disabled=!audioChk.checked; }
+    function loadThreads(){ threads = JSON.parse(localStorage.getItem('threads')||'[]'); renderThreads(); if(threads.length) openThread(threads[0].id); else newThread(); }
+    function renderThreads(){ threadsEl.innerHTML=''; threads.forEach(t=>{ const li=document.createElement('li'); li.textContent=t.title; if(t.id===currentId) li.classList.add('active-thread'); li.onclick=()=>openThread(t.id); threadsEl.appendChild(li);} ); }
+    function newThread(){ currentId='t'+Date.now(); msgs=[]; threads.unshift({id:currentId,title:'New Chat',model:modelEl.value}); persist(); renderThreads(); openThread(currentId);}    
+    function openThread(id){ currentId=id; const meta=threads.find(t=>t.id===id); modelEl.value=meta.model; headerModel.textContent=`(${meta.model})`; msgs=JSON.parse(localStorage.getItem(id)||'[]')||[]; renderMsgs(); renderThreads(); }
+    function renderMsgs(){ msgsEl.innerHTML=''; msgs.forEach(m=>{ const d=document.createElement('div'); d.className='message '+m.role; d.innerHTML=`<div>${joypixels.shortnameToImage(marked.parse(m.content))}</div><span class='timestamp'>${new Date(m.time).toLocaleTimeString([], {hour:'2-digit',minute:'2-digit'})}</span>`; msgsEl.appendChild(d); }); msgsEl.appendChild(typing); scroll(); }
+    function scroll(){ msgsEl.scrollTop=msgsEl.scrollHeight; }
+    sendBtn.onclick=send;
+    inputEl.onkeypress=e=>{ if(e.key==='Enter') send(); };
+    function send(){ const text=inputEl.value.trim(); if(!text) return; inputEl.value=''; addMsg('user',text); fetch(ENDPOINT,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({message:text})}).then(r=>r.json()).then(j=>addMsg('bot',j.reply)).catch(()=>addMsg('bot','Error'));
+    }
+    function addMsg(role,content){ msgs.push({role,content,time:Date.now()}); persistMsgs(); renderMsgs(); }
+    function persist(){ localStorage.setItem('threads',JSON.stringify(threads)); }
+    function persistMsgs(){ localStorage.setItem(currentId,JSON.stringify(msgs)); const meta=threads.find(t=>t.id===currentId); meta.title=msgs[0]?.content.slice(0,30)||meta.title; meta.model=modelEl.value; persist(); renderThreads(); }
+    fileBtn.onchange=e=>{ if(!e.target.files[0]) return; addMsg('user','Uploaded: '+e.target.files[0].name); send(); };
+    audioChk.onchange=()=>speakBtn.disabled=!audioChk.checked;
+    function speak(text){ if(!audioChk.checked||!text) return; const u=new SpeechSynthesisUtterance(text); window.speechSynthesis.cancel(); window.speechSynthesis.speak(u); }
+  </script>
+</body>
+</html>

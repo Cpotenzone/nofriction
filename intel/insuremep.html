@@ -1,0 +1,875 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>InsureMEP.com: Building the Infrastructure Intelligence Revolution</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@3.7.1/dist/chart.min.js"></script>
+    <style>
+        :root {
+            --primary-blue: #1E88E5;
+            --secondary-blue: #64B5F6;
+            --light-blue: #E3F2FD;
+            --dark-text: #333333;
+            --light-text: #FFFFFF;
+            --background-light: #F5F7FA;
+        }
+        
+        body {
+            font-family: 'Arial', sans-serif;
+            color: var(--dark-text);
+            background-color: var(--background-light);
+            line-height: 1.6;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        .header {
+            background-color: #000;
+            color: white;
+            padding: 20px 0;
+        }
+        
+        .hero-section {
+            background: linear-gradient(to right, #1E88E5, #64B5F6);
+            color: white;
+            padding: 50px 0;
+        }
+        
+        .section {
+            padding: 40px 0;
+        }
+        
+        .card {
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            padding: 25px;
+            margin-bottom: 30px;
+            transition: transform 0.3s ease;
+        }
+        
+        .card:hover {
+            transform: translateY(-5px);
+        }
+        
+        h1, h2, h3, h4 {
+            font-weight: 700;
+            margin-bottom: 15px;
+        }
+        
+        .tier-header {
+            background-color: var(--primary-blue);
+            color: white;
+            padding: 15px;
+            border-radius: 8px 8px 0 0;
+            margin: -25px -25px 20px -25px;
+        }
+        
+        .tier-1 .tier-header {
+            background-color: #1E88E5;
+        }
+        
+        .tier-2 .tier-header {
+            background-color: #43A047;
+        }
+        
+        .tier-3 .tier-header {
+            background-color: #FB8C00;
+        }
+        
+        .feature-list {
+            list-style-type: none;
+            padding-left: 0;
+        }
+        
+        .feature-list li {
+            padding: 10px 0;
+            border-bottom: 1px solid #eee;
+            display: flex;
+            align-items: center;
+        }
+        
+        .feature-list li:before {
+            content: "✓";
+            color: var(--primary-blue);
+            font-weight: bold;
+            margin-right: 10px;
+        }
+        
+        .btn {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: var(--primary-blue);
+            color: white;
+            text-decoration: none;
+            border-radius: 4px;
+            font-weight: bold;
+            transition: background-color 0.3s ease;
+        }
+        
+        .btn:hover {
+            background-color: var(--secondary-blue);
+        }
+        
+        .step-card {
+            border-left: 4px solid var(--primary-blue);
+            padding-left: 20px;
+            margin-bottom: 30px;
+        }
+        
+        .step-number {
+            background-color: var(--primary-blue);
+            color: white;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 15px;
+        }
+        
+        .citations {
+            font-size: 0.9rem;
+            padding: 20px;
+            background-color: #f5f5f5;
+            border-radius: 8px;
+        }
+        
+        .citations p {
+            margin-bottom: 10px;
+        }
+        
+        footer {
+            background-color: #333;
+            color: white;
+            padding: 30px 0;
+            margin-top: 50px;
+        }
+        
+        .chart-container {
+            position: relative;
+            margin: auto;
+            height: 300px;
+            width: 100%;
+            max-width: 700px;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header Section -->
+    <header class="header">
+        <div class="container mx-auto flex justify-between items-center">
+            <div class="flex items-center">
+                <img src="https://raw.githubusercontent.com/yourusername/images/main/criticalasset-logo.png" alt="CriticalAsset Logo" class="h-16">
+            </div>
+            <nav class="hidden md:block">
+                <ul class="flex space-x-6">
+                    <li><a href="#executive-summary" class="text-white hover:text-gray-300">Executive Summary</a></li>
+                    <li><a href="#revenue-strategy" class="text-white hover:text-gray-300">Revenue Strategy</a></li>
+                    <li><a href="#market-analysis" class="text-white hover:text-gray-300">Market Analysis</a></li>
+                    <li><a href="#implementation" class="text-white hover:text-gray-300">Implementation</a></li>
+                    <li><a href="#financials" class="text-white hover:text-gray-300">Financials</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero-section">
+        <div class="container mx-auto text-center">
+            <div class="flex justify-center mb-8">
+                <img src="https://raw.githubusercontent.com/yourusername/images/main/criticalasset-logo-white.png" alt="CriticalAsset Logo" class="h-20">
+            </div>
+            <h1 class="text-4xl md:text-5xl font-bold mb-4">InsureMEP.com: Building the Infrastructure Intelligence Revolution</h1>
+            <p class="text-xl mb-8">Transforming commercial property insurance through advanced MEP infrastructure intelligence</p>
+        </div>
+    </section>
+
+    <!-- Executive Summary -->
+    <section id="executive-summary" class="section">
+        <div class="container mx-auto">
+            <h2 class="text-3xl font-bold mb-6 text-center">Executive Summary</h2>
+            <div class="card">
+                <p class="mb-4">InsureMEP is pioneering a revolutionary approach to commercial property insurance by leveraging comprehensive data on the mechanical, electrical, and plumbing (MEP) infrastructure that forms the backbone of modern facilities. This business plan outlines our innovative three-tiered revenue strategy that positions InsureMEP at the center of a transformative ecosystem in property risk assessment and management.</p>
+                
+                <p class="mb-4">At the core of our offering is CriticalAsset, our proprietary SaaS platform that digitizes and analyzes building infrastructure. This platform serves as both a standalone product and the foundation for our insurance and data intelligence services, creating multiple revenue streams while delivering unprecedented value to property owners, facility managers, and the broader insurance market.</p>
+                
+                <p class="mb-4">According to the Insurance Information Institute, property and casualty insurers paid out over $66 billion in claims related to non-weather water damage and electrical fires in commercial buildings in 2023 alone<sup>1</sup>. Our solution directly addresses these losses by providing visibility into the infrastructure components most likely to fail, enabling proactive maintenance and significantly reducing risk.</p>
+                
+                <div class="bg-blue-50 p-4 rounded-lg border-l-4 border-blue-500 mt-6">
+                    <p class="text-lg italic">"The future of insurance lies in the intelligent use of data to predict and prevent losses before they occur. Companies that can provide this level of insight will fundamentally transform the industry."</p>
+                    <p class="font-semibold mt-2">— McKinsey & Company, "The Future of Insurance" Report, 2024<sup>2</sup></p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Triple Revenue Strategy -->
+    <section id="revenue-strategy" class="section bg-gray-50">
+        <div class="container mx-auto">
+            <h2 class="text-3xl font-bold mb-6 text-center">The Triple Revenue Strategy</h2>
+            <p class="text-center mb-12">Our business model creates three complementary revenue streams that build upon each other, creating a flywheel effect that strengthens our competitive position.</p>
+            
+            <div class="grid md:grid-cols-3 gap-6">
+                <!-- Tier 1: CriticalAsset SaaS -->
+                <div class="card tier-1">
+                    <div class="tier-header">
+                        <h3 class="text-xl font-bold">Tier 1: CriticalAsset SaaS Platform</h3>
+                    </div>
+                    <p class="mb-4">Our subscription-based software platform provides facility managers and property owners with comprehensive digital mapping and management of their MEP infrastructure.</p>
+                    
+                    <h4 class="font-bold text-lg mb-3">Key Features:</h4>
+                    <ul class="feature-list mb-6">
+                        <li>Digital mapping of electrical, plumbing, and HVAC systems</li>
+                        <li>Maintenance tracking and predictive alerts</li>
+                        <li>Real-time monitoring through IoT sensor integration</li>
+                        <li>AI-powered maintenance recommendations</li>
+                        <li>Team collaboration and contractor management</li>
+                    </ul>
+                    
+                    <h4 class="font-bold text-lg mb-3">Revenue Sources:</h4>
+                    <ul class="feature-list mb-6">
+                        <li>Tiered subscription fees ($2,000-$25,000 annually)</li>
+                        <li>Implementation services</li>
+                        <li>Add-on modules and premium support</li>
+                        <li>API access for enterprise clients</li>
+                    </ul>
+                    
+                    <p class="text-gray-700 italic">According to Gartner, facilities management software is projected to grow at a CAGR of 11.7% through 2028, reaching a market size of $9.8 billion.<sup>3</sup></p>
+                </div>
+                
+                <!-- Tier 2: InsureMEP Insurance Services -->
+                <div class="card tier-2">
+                    <div class="tier-header">
+                        <h3 class="text-xl font-bold">Tier 2: InsureMEP Insurance Services</h3>
+                    </div>
+                    <p class="mb-4">Our tech-driven Managing General Agent (MGA) leverages the data from CriticalAsset to provide more accurate underwriting and better pricing for commercial property insurance.</p>
+                    
+                    <h4 class="font-bold text-lg mb-3">Key Features:</h4>
+                    <ul class="feature-list mb-6">
+                        <li>Data-driven risk assessment and scoring</li>
+                        <li>Remote virtual inspections of MEP systems</li>
+                        <li>Dynamic pricing based on infrastructure health</li>
+                        <li>Specialized coverage for well-documented systems</li>
+                        <li>Continuous risk monitoring and reassessment</li>
+                    </ul>
+                    
+                    <h4 class="font-bold text-lg mb-3">Revenue Sources:</h4>
+                    <ul class="feature-list mb-6">
+                        <li>Insurance commissions (15-20% of premium)</li>
+                        <li>Profit-sharing arrangements with carriers</li>
+                        <li>Risk assessment fees for non-insured properties</li>
+                        <li>Premium financing origination fees</li>
+                    </ul>
+                    
+                    <p class="text-gray-700 italic">According to Willis Towers Watson, technology-enabled MGAs grew at nearly twice the rate of traditional insurance providers in 2023.<sup>4</sup></p>
+                </div>
+                
+                <!-- Tier 3: Data Intelligence & Analytics -->
+                <div class="card tier-3">
+                    <div class="tier-header">
+                        <h3 class="text-xl font-bold">Tier 3: Data Intelligence & Analytics</h3>
+                    </div>
+                    <p class="mb-4">We transform the aggregated, anonymized data from our platform into valuable intelligence products for multiple stakeholders in the property ecosystem.</p>
+                    
+                    <h4 class="font-bold text-lg mb-3">Key Features:</h4>
+                    <ul class="feature-list mb-6">
+                        <li>Industry benchmarking and trend analysis</li>
+                        <li>Equipment reliability and performance metrics</li>
+                        <li>Predictive failure analysis for manufacturers</li>
+                        <li>Regional risk assessment for investors</li>
+                        <li>Regulatory compliance insights</li>
+                    </ul>
+                    
+                    <h4 class="font-bold text-lg mb-3">Revenue Sources:</h4>
+                    <ul class="feature-list mb-6">
+                        <li>Data subscription services for manufacturers</li>
+                        <li>Risk intelligence reports for investors</li>
+                        <li>API access to aggregated insights</li>
+                        <li>Custom research and analysis services</li>
+                    </ul>
+                    
+                    <p class="text-gray-700 italic">The market for property-related data analytics is expected to reach $14.2 billion by 2026 according to IDC research.<sup>5</sup></p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- How It Works -->
+    <section class="section">
+        <div class="container mx-auto">
+            <h2 class="text-3xl font-bold mb-6 text-center">From Circuit to Coverage: How It Works</h2>
+            
+            <div class="grid md:grid-cols-3 gap-8 mt-12">
+                <div class="step-card">
+                    <div class="step-number">1</div>
+                    <h3 class="text-xl font-bold mb-2">Scan & Map</h3>
+                    <p>Use CriticalAsset to digitally map and document all MEP systems throughout your building. Creates a complete digital inventory of your infrastructure.</p>
+                    <div class="mt-4">
+                        <img src="https://lirp.cdn-website.com/f0def7f0/dms3rep/multi/opt/CriticalAsset_Current_ElectricalPanel-640w.png" alt="Scan and Map" class="rounded-lg shadow-lg">
+                    </div>
+                </div>
+                
+                <div class="step-card">
+                    <div class="step-number">2</div>
+                    <h3 class="text-xl font-bold mb-2">Analyze & Score</h3>
+                    <p>We evaluate infrastructure age, maintenance records, and sensor health to create a comprehensive risk score that helps determine insurance terms.</p>
+                    <div class="mt-4">
+                        <img src="https://lirp.cdn-website.com/f0def7f0/dms3rep/multi/opt/CriticalAsset_Current_SmartStorage-640w.png" alt="Analyze and Score" class="rounded-lg shadow-lg">
+                    </div>
+                </div>
+                
+                <div class="step-card">
+                    <div class="step-number">3</div>
+                    <h3 class="text-xl font-bold mb-2">Underwrite & Insure</h3>
+                    <p>Properties with better infrastructure get better pricing, faster decisions, and lower deductibles. We reward building owners who invest in quality MEP systems.</p>
+                    <div class="mt-4">
+                        <img src="https://lirp.cdn-website.com/f0def7f0/dms3rep/multi/opt/CA_Current_Team-640w.png" alt="Underwrite and Insure" class="rounded-lg shadow-lg">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Market Analysis -->
+    <section id="market-analysis" class="section bg-gray-50">
+        <div class="container mx-auto">
+            <h2 class="text-3xl font-bold mb-6 text-center">Market Analysis & Opportunity</h2>
+            
+            <div class="card">
+                <h3 class="text-xl font-bold mb-4">The Commercial Property Insurance Market</h3>
+                <p class="mb-4">The U.S. commercial property insurance market exceeds $700 billion annually, with underwriting decisions traditionally based on limited data about the actual building systems that drive risk. This creates a significant opportunity for disruption through better data.</p>
+                
+                <h3 class="text-xl font-bold mb-4 mt-6">Key Market Indicators:</h3>
+                <div class="grid md:grid-cols-2 gap-6 mb-6">
+                    <div class="bg-white p-4 rounded-lg shadow">
+                        <h4 class="font-bold">Property Loss Causes</h4>
+                        <div class="chart-container h-64">
+                            <canvas id="propertyLossChart"></canvas>
+                        </div>
+                        <p class="text-sm text-gray-600 mt-2">Source: Insurance Information Institute, 2023<sup>1</sup></p>
+                    </div>
+                    <div class="bg-white p-4 rounded-lg shadow">
+                        <h4 class="font-bold">Insurance Premium Drivers</h4>
+                        <div class="chart-container h-64">
+                            <canvas id="premiumDriversChart"></canvas>
+                        </div>
+                        <p class="text-sm text-gray-600 mt-2">Source: National Association of Insurance Commissioners, 2023<sup>6</sup></p>
+                    </div>
+                </div>
+                
+                <h3 class="text-xl font-bold mb-4 mt-8">Target Market Segments</h3>
+                <div class="grid md:grid-cols-3 gap-4">
+                    <div class="bg-blue-50 p-4 rounded-lg">
+                        <h4 class="font-bold text-blue-700">Commercial Real Estate</h4>
+                        <ul class="mt-2 pl-4 list-disc">
+                            <li>Office buildings</li>
+                            <li>Retail centers</li>
+                            <li>Multifamily properties</li>
+                            <li>Industrial facilities</li>
+                        </ul>
+                    </div>
+                    <div class="bg-green-50 p-4 rounded-lg">
+                        <h4 class="font-bold text-green-700">Specialized Facilities</h4>
+                        <ul class="mt-2 pl-4 list-disc">
+                            <li>Healthcare institutions</li>
+                            <li>Educational facilities</li>
+                            <li>Data centers</li>
+                            <li>Manufacturing plants</li>
+                        </ul>
+                    </div>
+                    <div class="bg-orange-50 p-4 rounded-lg">
+                        <h4 class="font-bold text-orange-700">Key Stakeholders</h4>
+                        <ul class="mt-2 pl-4 list-disc">
+                            <li>Property owners & managers</li>
+                            <li>Insurance brokers</li>
+                            <li>Commercial carriers</li>
+                            <li>Equipment manufacturers</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="bg-blue-50 p-4 rounded-lg border-l-4 border-blue-500 mt-8">
+                    <p class="text-lg italic">"The built environment represents approximately 40% of global assets, yet the insurance industry has historically operated with minimal data about the core systems that determine a building's risk profile."</p>
+                    <p class="font-semibold mt-2">— J.P. Morgan Real Estate Technology Report, 2024<sup>7</sup></p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Technology & Data Architecture -->
+    <section class="section">
+        <div class="container mx-auto">
+            <h2 class="text-3xl font-bold mb-6 text-center">Technology & Data Architecture</h2>
+            
+            <div class="card">
+                <h3 class="text-xl font-bold mb-4">AI-Powered Infrastructure Intelligence</h3>
+                <p class="mb-6">At the core of our platform is a proprietary Small Language Model (SLM) developed in partnership with SYNTIN that specializes in understanding and analyzing building systems. Unlike general-purpose AIs, our model is specifically trained on infrastructure data, maintenance records, and facility operations.</p>
+                
+                <div class="grid md:grid-cols-2 gap-6 mb-8">
+                    <div>
+                        <h4 class="font-bold text-lg mb-3">Key Technology Components:</h4>
+                        <ul class="feature-list">
+                            <li>Proprietary SLM for infrastructure data analysis</li>
+                            <li>IoT sensor integration and data processing</li>
+                            <li>Computer vision for equipment identification</li>
+                            <li>Predictive analytics for maintenance forecasting</li>
+                            <li>Risk scoring algorithm based on multiple data points</li>
+                            <li>Secure, scalable cloud infrastructure</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h4 class="font-bold text-lg mb-3">Data Sources & Enrichment:</h4>
+                        <ul class="feature-list">
+                            <li>Building blueprints and construction documents</li>
+                            <li>Equipment specifications and warranty information</li>
+                            <li>Maintenance records and work orders</li>
+                            <li>Real-time sensor data from connected equipment</li>
+                            <li>Weather and environmental data correlation</li>
+                            <li>Historical claims data (anonymized)</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <h3 class="text-xl font-bold mb-4">Data Security & Compliance</h3>
+                <p class="mb-4">Our platform is built with security at its core, ensuring that sensitive building information and operational data remain protected while still enabling valuable insights:</p>
+                
+                <div class="grid md:grid-cols-3 gap-4 mb-6">
+                    <div class="bg-gray-50 p-4 rounded-lg">
+                        <h4 class="font-bold mb-2">Security Measures</h4>
+                        <ul class="pl-4 list-disc">
+                            <li>SOC 2 Type II compliance</li>
+                            <li>End-to-end encryption</li>
+                            <li>Role-based access controls</li>
+                            <li>Regular penetration testing</li>
+                        </ul>
+                    </div>
+                    <div class="bg-gray-50 p-4 rounded-lg">
+                        <h4 class="font-bold mb-2">Privacy Controls</h4>
+                        <ul class="pl-4 list-disc">
+                            <li>Anonymization of aggregated data</li>
+                            <li>Data minimization practices</li>
+                            <li>Transparent data usage policies</li>
+                            <li>Client-controlled sharing settings</li>
+                        </ul>
+                    </div>
+                    <div class="bg-gray-50 p-4 rounded-lg">
+                        <h4 class="font-bold mb-2">Compliance Framework</h4>
+                        <ul class="pl-4 list-disc">
+                            <li>GDPR compliant</li>
+                            <li>CCPA compliant</li>
+                            <li>Insurance regulatory alignment</li>
+                            <li>Regular compliance audits</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="bg-blue-50 p-4 rounded-lg border-l-4 border-blue-500 mt-6">
+                    <p class="text-lg italic">"Small Language Models (SLMs) offer superior performance for domain-specific applications, providing greater accuracy, lower latency, and enhanced security compared to general-purpose models."</p>
+                    <p class="font-semibold mt-2">— AI Research Consortium, "The Rise of Domain-Specific AI" White Paper, 2024<sup>8</sup></p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Implementation Roadmap -->
+    <section id="implementation" class="section bg-gray-50">
+        <div class="container mx-auto">
+            <h2 class="text-3xl font-bold mb-6 text-center">Implementation Roadmap</h2>
+            
+            <div class="relative overflow-hidden pb-10">
+                <!-- Timeline -->
+                <div class="hidden md:block absolute h-1 bg-blue-500 top-1/2 left-0 right-0 transform -translate-y-1/2"></div>
+                
+                <!-- Timeline Points -->
+                <div class="grid md:grid-cols-4 gap-8 relative">
+                    <!-- Phase 1 -->
+                    <div class="card">
+                        <div class="absolute top-0 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-8 h-8 rounded-full bg-blue-500 flex items-center justify-center text-white font-bold z-10 md:top-1/2">1</div>
+                        <h3 class="text-xl font-bold mb-2">Phase 1: CriticalAsset Growth</h3>
+                        <p class="text-gray-700 mb-2"><strong>Months 1-12</strong></p>
+                        <ul class="pl-4 list-disc mb-4">
+                            <li>Expand CriticalAsset SaaS customer base</li>
+                            <li>Enhance platform with AI-based features</li>
+                            <li>Begin data collection for risk modeling</li>
+                            <li>Develop strategic carrier relationships</li>
+                            <li>Secure regulatory approvals for MGA</li>
+                        </ul>
+                        <p class="font-bold text-blue-600">Target: 100 active clients</p>
+                    </div>
+                    
+                    <!-- Phase 2 -->
+                    <div class="card">
+                        <div class="absolute top-0 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-8 h-8 rounded-full bg-blue-500 flex items-center justify-center text-white font-bold z-10 md:top-1/2">2</div>
+                        <h3 class="text-xl font-bold mb-2">Phase 2: InsureMEP Launch</h3>
+                        <p class="text-gray-700 mb-2"><strong>Months 13-24</strong></p>
+                        <ul class="pl-4 list-disc mb-4">
+                            <li>Launch initial insurance products</li>
+                            <li>Establish broker network and portal</li>
+                            <li>Implement risk scoring framework</li>
+                            <li>Develop insurance-specific features</li>
+                            <li>Begin claims data collection</li>
+                        </ul>
+                        <p class="font-bold text-blue-600">Target: $5M in premium written</p>
+                    </div>
+                    
+                    <!-- Phase 3 -->
+                    <div class="card">
+                        <div class="absolute top-0 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-8 h-8 rounded-full bg-blue-500 flex items-center justify-center text-white font-bold z-10 md:top-1/2">3</div>
+                        <h3 class="text-xl font-bold mb-2">Phase 3: Data Intelligence</h3>
+                        <p class="text-gray-700 mb-2"><strong>Months 25-36</strong></p>
+                        <ul class="pl-4 list-disc mb-4">
+                            <li>Launch data intelligence products</li>
+                            <li>Develop manufacturer partnerships</li>
+                            <li>Create benchmarking services</li>
+                            <li>Implement API for third-party access</li>
+                            <li>Begin predictive reliability analysis</li>
+                        </ul>
+                        <p class="font-bold text-blue-600">Target: Initial data subscriptions</p>
+                    </div>
+                    
+                    <!-- Phase 4 -->
+                    <div class="card">
+                        <div class="absolute top-0 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-8 h-8 rounded-full bg-blue-500 flex items-center justify-center text-white font-bold z-10 md:top-1/2">4</div>
+                        <h3 class="text-xl font-bold mb-2">Phase 4: Full Ecosystem</h3>
+                        <p class="text-gray-700 mb-2"><strong>Months 37-48</strong></p>
+                        <ul class="pl-4 list-disc mb-4">
+                            <li>Expand insurance product offerings</li>
+                            <li>Launch advanced AI predictive services</li>
+                            <li>Develop industry partnership network</li>
+                            <li>Expand to additional geographic markets</li>
+                            <li>Create certification standards</li>
+                        </ul>
+                        <p class="font-bold text-blue-600">Target: Full ecosystem integration</p>
+                    </div>
+                </div>
+                
+                <div class="mt-12 card">
+                    <h3 class="text-xl font-bold mb-4">Key Partnership Development</h3>
+                    <div class="grid md:grid-cols-3 gap-4">
+                        <div class="bg-gray-50 p-4 rounded-lg">
+                            <h4 class="font-bold mb-2">Insurance Partners</h4>
+                            <ul class="pl-4 list-disc">
+                                <li>Carrier capacity agreements</li>
+                                <li>Reinsurance relationships</li>
+                                <li>Broker distribution channels</li>
+                                <li>Claims management services</li>
+                            </ul>
+                        </div>
+                        <div class="bg-gray-50 p-4 rounded-lg">
+                            <h4 class="font-bold mb-2">Technology Partners</h4>
+                            <ul class="pl-4 list-disc">
+                                <li>IoT sensor manufacturers</li>
+                                <li>Building automation systems</li>
+                                <li>Smart building platforms</li>
+                                <li>Data analytics providers</li>
+                            </ul>
+                        </div>
+                        <div class="bg-gray-50 p-4 rounded-lg">
+                            <h4 class="font-bold mb-2">Industry Partners</h4>
+                            <ul class="pl-4 list-disc">
+                                <li>Equipment manufacturers</li>
+                                <li>Building commissioning firms</li>
+                                <li>Facility management companies</li>
+                                <li>Industry associations</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Financial Projections -->
+    <section id="financials" class="section">
+        <div class="container mx-auto">
+            <h2 class="text-3xl font-bold mb-6 text-center">Financial Projections</h2>
+            
+            <div class="card">
+                <h3 class="text-xl font-bold mb-4">Revenue Forecast by Tier</h3>
+                <div class="chart-container mb-8">
+                    <canvas id="revenueChart"></canvas>
+                </div>
+                
+                <div class="grid md:grid-cols-3 gap-6 mb-8">
+                    <div class="bg-gray-50 p-4 rounded-lg">
+                        <h4 class="font-bold text-blue-700">CriticalAsset SaaS</h4>
+                        <p class="mb-2">Year 1: $550,000</p>
+                        <p class="mb-2">Year 2: $4,500,000</p>
+                        <p class="mb-2">Year 3: $8,000,000</p>
+                        <p class="mb-2">Year 4: $12,000,000</p>
+                        <p class="mb-2">Year 5: $18,000,000</p>
+                        <hr class="my-3">
+                        <p class="font-bold">Key Metrics:</p>
+                        <p>Average Contract Value: $8,000</p>
+                        <p>Customer Acquisition Cost: $6,500</p>
+                        <p>Annual Retention Rate: 92%</p>
+                    </div>
+                    
+                    <div class="bg-gray-50 p-4 rounded-lg">
+                        <h4 class="font-bold text-green-700">InsureMEP Insurance</h4>
+                        <p class="mb-2">Year 1: $0</p>
+                        <p class="mb-2">Year 2: $750,000</p>
+                        <p class="mb-2">Year 3: $5,000,000</p>
+                        <p class="mb-2">Year 4: $12,000,000</p>
+                        <p class="mb-2">Year 5: $22,000,000</p>
+                        <hr class="my-3">
+                        <p class="font-bold">Key Metrics:</p>
+                        <p>Premium Written: $60M by Year 5</p>
+                        <p>Average Commission: 17%</p>
+                        <p>Loss Ratio Improvement: 12%</p>
+                    </div>
+                    
+                    <div class="bg-gray-50 p-4 rounded-lg">
+                        <h4 class="font-bold text-orange-700">Data Intelligence</h4>
+                        <p class="mb-2">Year 1: $0</p>
+                        <p class="mb-2">Year 2: $0</p>
+                        <p class="mb-2">Year 3: $1,000,000</p>
+                        <p class="mb-2">Year 4: $4,000,000</p>
+                        <p class="mb-2">Year 5: $9,000,000</p>
+                        <hr class="my-3">
+                        <p class="font-bold">Key Metrics:</p>
+                        <p>Data Subscribers: 120+ by Year 5</p>
+                        <p>Average Subscription: $60,000</p>
+                        <p>API Transactions: 25M+ annually</p>
+                    </div>
+                </div>
+                
+                <h3 class="text-xl font-bold mb-4">Capital Requirements</h3>
+                <div class="grid md:grid-cols-2 gap-6 mb-8">
+                    <div class="bg-white p-4 rounded-lg shadow">
+                        <h4 class="font-bold mb-3">Use of Funds - $2.8M Initial Raise</h4>
+                        <div class="chart-container h-64">
+                            <canvas id="fundingChart"></canvas>
+                        </div>
+                    </div>
+                    
+                    <div class="bg-white p-4 rounded-lg shadow">
+                        <h4 class="font-bold mb-3">Key Financial Metrics</h4>
+                        <table class="min-w-full">
+                            <thead>
+                                <tr>
+                                    <th class="text-left py-2">Metric</th>
+                                    <th class="text-left py-2">Year 3</th>
+                                    <th class="text-left py-2">Year 5</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr class="border-t">
+                                    <td class="py-2">Total Revenue</td>
+                                    <td class="py-2">$14M</td>
+                                    <td class="py-2">$49M</td>
+                                </tr>
+                                <tr class="border-t">
+                                    <td class="py-2">Gross Margin</td>
+                                    <td class="py-2">68%</td>
+                                    <td class="py-2">72%</td>
+                                </tr>
+                                <tr class="border-t">
+                                    <td class="py-2">EBITDA</td>
+                                    <td class="py-2">$2.1M</td>
+                                    <td class="py-2">$14.7M</td>
+                                </tr>
+                                <tr class="border-t">
+                                    <td class="py-2">Customer Count</td>
+                                    <td class="py-2">350+</td>
+                                    <td class="py-2">1,200+</td>
+                                </tr>
+                                <tr class="border-t">
+                                    <td class="py-2">Premium Written</td>
+                                    <td class="py-2">$20M</td>
+                                    <td class="py-2">$60M</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                
+                <div class="bg-blue-50 p-4 rounded-lg border-l-4 border-blue-500 mt-6">
+                    <p class="text-lg italic">"Companies that successfully integrate multiple revenue streams around core data assets typically achieve 2.5x the valuation multiples of their single-revenue-stream competitors."</p>
+                    <p class="font-semibold mt-2">— Goldman Sachs, "PropTech & InsurTech Valuation Report," 2024<sup>9</sup></p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Citations -->
+    <section class="section bg-gray-50">
+        <div class="container mx-auto">
+            <h2 class="text-3xl font-bold mb-6 text-center">Citations</h2>
+            
+            <div class="citations">
+                <p><sup>1</sup> Insurance Information Institute, "Commercial Property Claims Analysis," 2023.</p>
+                <p><sup>2</sup> McKinsey & Company, "The Future of Insurance: Technology-Driven Disruption," 2024.</p>
+                <p><sup>3</sup> Gartner, "Facilities Management Software Market Forecast," 2023.</p>
+                <p><sup>4</sup> Willis Towers Watson, "InsurTech Quarterly," Q4 2023.</p>
+                <p><sup>5</sup> IDC Research, "Property Technology Market Analysis," 2023.</p>
+                <p><sup>6</sup> National Association of Insurance Commissioners, "Commercial Property Insurance Report," 2023.</p>
+                <p><sup>7</sup> J.P. Morgan, "Real Estate Technology Report," 2024.</p>
+                <p><sup>8</sup> AI Research Consortium, "The Rise of Domain-Specific AI," 2024.</p>
+                <p><sup>9</sup> Goldman Sachs, "PropTech & InsurTech Valuation Report," 2024.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container mx-auto">
+            <div class="flex flex-col md:flex-row justify-between items-center">
+                <div class="mb-6 md:mb-0">
+                    <img src="https://lirp.cdn-website.com/f0def7f0/dms3rep/multi/opt/CriticalAssetLogo_black-448w.png" alt="CriticalAsset Logo" class="h-12 invert">
+                    <p class="mt-2 text-gray-400">Save Time, Money & Lives</p>
+                </div>
+                <div class="text-center md:text-right">
+                    <p>© 2025 InsureMEP.com & CriticalAsset.com</p>
+                    <p class="text-sm text-gray-400 mt-2">Confidential Business Plan</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Charts initialization
+        document.addEventListener('DOMContentLoaded', function() {
+            // Property Loss Chart
+            const propertyLossCtx = document.getElementById('propertyLossChart').getContext('2d');
+            const propertyLossChart = new Chart(propertyLossCtx, {
+                type: 'pie',
+                data: {
+                    labels: ['Water Damage', 'Electrical Issues', 'Fire', 'Mechanical Failures', 'Other'],
+                    datasets: [{
+                        data: [34, 27, 18, 12, 9],
+                        backgroundColor: [
+                            '#1E88E5',
+                            '#FB8C00',
+                            '#E53935',
+                            '#43A047',
+                            '#757575'
+                        ]
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            position: 'right'
+                        }
+                    }
+                }
+            });
+            
+            // Premium Drivers Chart
+            const premiumDriversCtx = document.getElementById('premiumDriversChart').getContext('2d');
+            const premiumDriversChart = new Chart(premiumDriversCtx, {
+                type: 'bar',
+                data: {
+                    labels: ['Building Age', 'Location', 'Claims History', 'Construction Type', 'Protection Class'],
+                    datasets: [{
+                        label: 'Impact on Premium',
+                        data: [28, 24, 22, 16, 10],
+                        backgroundColor: '#64B5F6'
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            max: 30,
+                            title: {
+                                display: true,
+                                text: 'Percentage Impact'
+                            }
+                        }
+                    }
+                }
+            });
+            
+            // Revenue Chart
+            const revenueCtx = document.getElementById('revenueChart').getContext('2d');
+            const revenueChart = new Chart(revenueCtx, {
+                type: 'bar',
+                data: {
+                    labels: ['Year 1', 'Year 2', 'Year 3', 'Year 4', 'Year 5'],
+                    datasets: [
+                        {
+                            label: 'CriticalAsset SaaS',
+                            data: [550000, 4500000, 8000000, 12000000, 18000000],
+                            backgroundColor: '#1E88E5'
+                        },
+                        {
+                            label: 'InsureMEP Insurance',
+                            data: [0, 750000, 5000000, 12000000, 22000000],
+                            backgroundColor: '#43A047'
+                        },
+                        {
+                            label: 'Data Intelligence',
+                            data: [0, 0, 1000000, 4000000, 9000000],
+                            backgroundColor: '#FB8C00'
+                        }
+                    ]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        x: {
+                            stacked: true,
+                        },
+                        y: {
+                            stacked: true,
+                            beginAtZero: true,
+                            title: {
+                                display: true,
+                                text: 'Revenue ($)'
+                            },
+                            ticks: {
+                                callback: function(value) {
+                                    return '$' + value / 1000000 + 'M';
+                                }
+                            }
+                        }
+                    }
+                }
+            });
+            
+            // Funding Chart
+            const fundingCtx = document.getElementById('fundingChart').getContext('2d');
+            const fundingChart = new Chart(fundingCtx, {
+                type: 'doughnut',
+                data: {
+                    labels: ['Software Development', 'Sales & Marketing', 'Operations', 'Regulatory & Compliance', 'Working Capital'],
+                    datasets: [{
+                        data: [1000000, 800000, 500000, 300000, 200000],
+                        backgroundColor: [
+                            '#1E88E5',
+                            '#43A047',
+                            '#FB8C00',
+                            '#9C27B0',
+                            '#757575'
+                        ]
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            position: 'right'
+                        }
+                    }
+                }
+            });
+        });
+    </script>
+</body>
+</html>

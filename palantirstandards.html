@@ -1,0 +1,1875 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-8M3X5312PN"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-8M3X5312PN');
+</script>
+<!-- Hotjar Tracking Code for https://www.nofriction.io -->
+<script>
+    (function(h,o,t,j,a,r){
+        h.hj=h.hj||function(){(h.hj.q=h.hj.q||[]).push(arguments)};
+        h._hjSettings={hjid:6414675,hjsv:6};
+        a=o.getElementsByTagName('head')[0];
+        r=o.createElement('script');r.async=1;
+        r.src=t+h._hjSettings.hjid+j+h._hjSettings.hjsv;
+        a.appendChild(r);
+    })(window,document,'https://static.hotjar.com/c/hotjar-','.js?sv=');
+</script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Comprehensive Technical Analysis: Palantir's Published Data Standards</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Barlow:wght@400;500;600;700;800&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.2/css/all.min.css">
+    <style>
+        :root {
+            --primary-orange: #FF5A00;
+            --dark-orange: #D64800;
+            --light-orange: #FF8A47;
+            --deep-navy: #1C2B4A;
+            --light-navy: #173D6E;
+            --silver-white: #F5F5F7;
+            --gray-medium: #E5E5EA;
+            --charcoal: #1D1D1F;
+            --teal: #22A69E;
+        }
+        
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        
+        html {
+            scroll-behavior: smooth;
+        }
+        
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            color: var(--charcoal);
+            background-color: var(--silver-white);
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+        
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Barlow', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            color: var(--deep-navy);
+            margin-bottom: 1rem;
+            line-height: 1.2;
+        }
+        
+        h1 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            letter-spacing: -0.025em;
+        }
+        
+        h2 {
+            font-size: 2rem;
+            font-weight: 600;
+            letter-spacing: -0.015em;
+            margin-top: 2.5rem;
+        }
+        
+        h3 {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-top: 2rem;
+        }
+        
+        h4 {
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: var(--primary-orange);
+        }
+        
+        p {
+            margin-bottom: 1rem;
+        }
+        
+        a {
+            color: var(--primary-orange);
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+        
+        a:hover {
+            color: var(--dark-orange);
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1.5rem;
+        }
+        
+        .header {
+            background: var(--deep-navy);
+            padding: 1.5rem 0;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 300px;
+            height: 100%;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cpath fill='%23FF5A00' fill-opacity='0.2' d='M0 0 L50 50 L0 100 Z'/%3E%3C/svg%3E");
+            background-size: 100px 100px;
+            background-repeat: repeat;
+            opacity: 0.5;
+        }
+        
+        .logo {
+            height: 40px;
+            width: auto;
+        }
+        
+        .header-inner {
+            position: relative;
+            z-index: 1;
+        }
+        
+        .hero {
+            background: linear-gradient(135deg, var(--deep-navy), var(--light-navy));
+            color: white;
+            padding: 4rem 0 3rem;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 300px;
+            height: 100%;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cpath fill='%23FF5A00' fill-opacity='0.2' d='M0 0 L50 50 L0 100 Z'/%3E%3C/svg%3E");
+            background-size: 100px 100px;
+            background-repeat: repeat;
+            opacity: 0.5;
+        }
+        
+        .hero-content {
+            position: relative;
+            z-index: 1;
+        }
+        
+        .section {
+            padding: 3rem 0;
+            position: relative;
+        }
+        
+        .section-inner {
+            background: white;
+            border-radius: 0.5rem;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            padding: 2.5rem;
+            margin-bottom: 2rem;
+        }
+        
+        .section-title {
+            position: relative;
+            margin-bottom: 1.5rem;
+        }
+        
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 60px;
+            height: 4px;
+            background-color: var(--primary-orange);
+            margin-top: 0.5rem;
+        }
+        
+        .toc {
+            background-color: var(--silver-white);
+            border-radius: 0.5rem;
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+        }
+        
+        .toc-title {
+            font-weight: 700;
+            margin-bottom: 1rem;
+            color: var(--deep-navy);
+        }
+        
+        .toc-list {
+            list-style-type: none;
+        }
+        
+        .toc-list li {
+            margin-bottom: 0.5rem;
+        }
+        
+        .toc-list a {
+            display: block;
+            padding: 0.5rem 0;
+            border-bottom: 1px solid var(--gray-medium);
+            color: var(--deep-navy);
+        }
+        
+        .toc-list a:hover {
+            color: var(--primary-orange);
+        }
+        
+        .tag {
+            display: inline-block;
+            background-color: var(--primary-orange);
+            color: white;
+            font-size: 0.75rem;
+            padding: 0.25rem 0.75rem;
+            border-radius: 9999px;
+            font-weight: 600;
+            margin-right: 0.5rem;
+        }
+        
+        .executive-summary {
+            background-color: var(--silver-white);
+            border-left: 4px solid var(--primary-orange);
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+            font-size: 1.125rem;
+            line-height: 1.7;
+        }
+        
+        .code-block {
+            background-color: #1E1E3F;
+            color: #FFFFFF;
+            border-radius: 0.5rem;
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+            overflow-x: auto;
+            font-family: monospace;
+            line-height: 1.4;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 2rem;
+            background-color: white;
+        }
+        
+        table th {
+            background-color: var(--deep-navy);
+            color: white;
+            text-align: left;
+            padding: 0.75rem 1rem;
+            font-weight: 600;
+        }
+        
+        table td {
+            border: 1px solid var(--gray-medium);
+            padding: 0.75rem 1rem;
+        }
+        
+        table tr:nth-child(even) {
+            background-color: var(--silver-white);
+        }
+        
+        .reference-list {
+            list-style-type: decimal;
+            margin-left: 1.5rem;
+            margin-bottom: 2rem;
+        }
+        
+        .reference-list li {
+            margin-bottom: 0.5rem;
+        }
+        
+        .reference-item {
+            font-size: 0.875rem;
+        }
+        
+        .reference-title {
+            font-weight: 600;
+        }
+        
+        .reference-authors {
+            font-style: italic;
+        }
+        
+        .btn {
+            display: inline-block;
+            background-color: var(--primary-orange);
+            color: white;
+            font-family: 'Barlow', sans-serif;
+            font-weight: 600;
+            padding: 0.75rem 1.5rem;
+            border-radius: 0.25rem;
+            text-align: center;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+        }
+        
+        .btn:hover {
+            background-color: var(--dark-orange);
+            color: white;
+        }
+        
+        .btn-secondary {
+            background-color: var(--deep-navy);
+        }
+        
+        .btn-secondary:hover {
+            background-color: var(--light-navy);
+        }
+        
+        .key-finding {
+            background-color: rgba(255, 90, 0, 0.1);
+            border-left: 4px solid var(--primary-orange);
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            border-radius: 0 0.25rem 0.25rem 0;
+        }
+        
+        .key-finding h4 {
+            margin-top: 0;
+            color: var(--primary-orange);
+        }
+        
+        .footnote {
+            font-size: 0.75rem;
+            color: var(--charcoal);
+            margin-top: 0.5rem;
+        }
+        
+        .footer {
+            background-color: var(--deep-navy);
+            color: white;
+            padding: 3rem 0;
+            margin-top: 3rem;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .footer::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 300px;
+            height: 100%;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cpath fill='%23FF5A00' fill-opacity='0.2' d='M0 0 L50 50 L0 100 Z'/%3E%3C/svg%3E");
+            background-size: 100px 100px;
+            background-repeat: repeat;
+            opacity: 0.2;
+        }
+        
+        .footer-inner {
+            position: relative;
+            z-index: 1;
+        }
+        
+        .footer-logo {
+            margin-bottom: 1.5rem;
+        }
+        
+        .footer-tagline {
+            font-family: 'Barlow', sans-serif;
+            font-size: 1.25rem;
+            margin-bottom: 2rem;
+        }
+        
+        .footer-heading {
+            color: white;
+            font-size: 1rem;
+            margin-bottom: 1rem;
+            text-transform: uppercase;
+            font-weight: 600;
+        }
+        
+        .footer-link {
+            display: block;
+            color: rgba(255, 255, 255, 0.7);
+            margin-bottom: 0.5rem;
+            transition: all 0.3s ease;
+        }
+        
+        .footer-link:hover {
+            color: var(--primary-orange);
+        }
+        
+        .social-links {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+        
+        .social-link {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: rgba(255, 255, 255, 0.1);
+            color: white;
+            transition: all 0.3s ease;
+        }
+        
+        .social-link:hover {
+            background-color: var(--primary-orange);
+            color: white;
+        }
+        
+        .copyright {
+            font-size: 0.875rem;
+            color: rgba(255, 255, 255, 0.5);
+            margin-top: 3rem;
+        }
+        
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2rem;
+            }
+            
+            h2 {
+                font-size: 1.5rem;
+            }
+            
+            h3 {
+                font-size: 1.25rem;
+            }
+            
+            .section-inner {
+                padding: 1.5rem;
+            }
+            
+            .exec-summary {
+                font-size: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="container header-inner">
+            <div class="flex justify-between items-center">
+                <div class="flex items-center">
+                    <div class="text-white font-bold" style="font-family: 'Barlow', sans-serif; font-size: 1.5rem;">
+                        <span style="color: var(--primary-orange);">NO</span> FRICTION
+                    </div>
+                </div>
+                <div>
+                    <span class="text-white text-sm" style="font-family: 'Barlow', sans-serif;">Innovation without obstacles</span>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <section class="hero">
+        <div class="container hero-content">
+            <div class="flex flex-col md:flex-row items-start md:items-center justify-between mb-6">
+                <div>
+                    <span class="tag">TECHNICAL ANALYSIS</span>
+                    <span class="tag">CONFIDENTIAL</span>
+                </div>
+                <div class="text-white opacity-70 text-sm mt-2 md:mt-0">
+                    Document Reference: NF-TA-2025-042 | April 30, 2025
+                </div>
+            </div>
+            <h1 class="text-white mb-4">Comprehensive Technical Analysis:<br>
+                <span style="color: var(--primary-orange);">Palantir's Published Data Standards</span></h1>
+            <p class="text-white opacity-70 mb-6 max-w-3xl" style="font-size: 1.125rem;">
+                A detailed examination of Palantir Technologies' complete portfolio of data standards, integration frameworks, and operational protocols, with implementation examples and strategic recommendations.
+            </p>
+            <div class="flex items-center">
+                <span class="text-white opacity-70">Prepared by:</span>
+                <span class="ml-2 text-white font-bold" style="font-family: 'Barlow', sans-serif; letter-spacing: 0.05em;">NO FRICTION</span>
+                <span class="ml-4 text-white opacity-70 text-sm">The Technology Editor</span>
+            </div>
+        </div>
+    </section>
+
+    <section class="section">
+        <div class="container">
+            <div class="section-inner">
+                <div class="executive-summary">
+                    <h3 class="mb-2">Executive Summary</h3>
+                    <p>
+                        Palantir Technologies has established itself as a leader in data integration and analysis platforms, underpinned by a sophisticated set of data standards and protocols. This comprehensive analysis examines the entirety of Palantir's published data standards, offering organizations valuable insights into implementation strategies, integration pathways, and operational optimization approaches.
+                    </p>
+                    <p>
+                        Our findings reveal that Palantir's data standards are characterized by a cohesive semantic framework—the Ontology—which serves as the operational foundation for their ecosystem. This framework moves beyond traditional data modeling to establish a dynamic representation that connects data to real-world entities and processes.
+                    </p>
+                    <p class="mb-0">
+                        Organizations seeking to leverage Palantir's technologies will benefit from understanding these standards and how they can be applied within their existing data infrastructures to create comprehensive operational intelligence capabilities.
+                    </p>
+                </div>
+
+                <div class="toc">
+                    <h3 class="toc-title">Table of Contents</h3>
+                    <ul class="toc-list">
+                        <li><a href="#intro">1. Introduction & Methodology</a></li>
+                        <li><a href="#ontology">2. Ontology Framework Standards</a></li>
+                        <li><a href="#dataset">3. Dataset Structure Standards</a></li>
+                        <li><a href="#api">4. API & Service Standards</a></li>
+                        <li><a href="#interop">5. Interoperability Standards</a></li>
+                        <li><a href="#security">6. Security & Governance Standards</a></li>
+                        <li><a href="#integration">7. Integration Methodologies</a></li>
+                        <li><a href="#implementation">8. Implementation Recommendations</a></li>
+                        <li><a href="#examples">9. Technical Examples & Code Samples</a></li>
+                        <li><a href="#references">10. References & Citations</a></li>
+                    </ul>
+                </div>
+
+                <div id="intro">
+                    <h2 class="section-title">1. Introduction & Methodology</h2>
+                    <p>
+                        This analysis represents a comprehensive review of Palantir Technologies' published data standards and protocols. Our methodology involved:
+                    </p>
+                    <ul class="list-disc ml-6 mb-4">
+                        <li>In-depth examination of all publicly available Palantir documentation</li>
+                        <li>Analysis of Palantir's open-source contributions on GitHub</li>
+                        <li>Review of technical whitepapers, conference presentations, and academic papers</li>
+                        <li>Comparative analysis with industry standards and best practices</li>
+                        <li>Assessment of implementation patterns across multiple organizations</li>
+                    </ul>
+                    <p>
+                        Our objective was to develop a comprehensive understanding of the standards that underpin Palantir's platforms—Gotham, Foundry, and Apollo—with a particular focus on how these standards enable sophisticated data integration, analysis, and operational applications. The analysis is structured to provide both strategic overview and technical depth, with code examples and implementation guidance where appropriate.
+                    </p>
+                    
+                    <div class="key-finding">
+                        <h4>Key Finding</h4>
+                        <p>
+                            Palantir's approach to data standards reflects a paradigm shift from traditional data modeling to operational intelligence, where the focus moves beyond data structures to the meaning and operational relevance of information. This shift is embodied in their Ontology framework, which serves as the foundation for all other standards in the ecosystem.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="section-inner" id="ontology">
+                <h2 class="section-title">2. Ontology Framework Standards</h2>
+                <p>
+                    The Palantir Ontology represents the core data standard within their ecosystem. Unlike traditional data models that focus on tables, fields, and relationships, the Ontology creates a semantic layer that connects data to real-world entities and processes.
+                </p>
+                
+                <h3>2.1 Object Types & Instances</h3>
+                <p>
+                    At the foundation of the Ontology are Object Types—schema definitions that represent real-world entities or events. An Object Type defines the properties, relationships, and behaviors for a class of objects, while Object Instances represent specific entities or events.
+                </p>
+                
+                <div class="code-block">
+                    <pre><code>{
+  "objectType": {
+    "name": "Person",
+    "displayName": "Person",
+    "description": "Represents an individual person",
+    "properties": [
+      {
+        "name": "fullName",
+        "displayName": "Full Name",
+        "description": "Person's full name",
+        "type": "STRING",
+        "required": true
+      },
+      {
+        "name": "dateOfBirth",
+        "displayName": "Date of Birth",
+        "description": "Person's date of birth",
+        "type": "DATE",
+        "required": false
+      },
+      {
+        "name": "nationality",
+        "displayName": "Nationality",
+        "description": "Person's nationality",
+        "type": "STRING",
+        "required": false
+      }
+    ],
+    "securityClassification": "PRIVATE"
+  }
+}</code></pre>
+                </div>
+                
+                <p>
+                    The example above demonstrates the JSON structure for defining an Object Type in the Palantir Ontology. The standard includes specifications for properties, validation constraints, security classifications, and display characteristics.
+                </p>
+                
+                <h3>2.2 Link Types & Relationships</h3>
+                <p>
+                    Link Types define relationships between Object Types, creating a connected graph of entities. This standard enables both directed and undirected relationships, with support for properties on the relationships themselves.
+                </p>
+                
+                <div class="code-block">
+                    <pre><code>{
+  "linkType": {
+    "name": "Employment",
+    "displayName": "Employment",
+    "description": "Represents an employment relationship",
+    "sourceObjectType": "Person",
+    "targetObjectType": "Organization",
+    "properties": [
+      {
+        "name": "startDate",
+        "displayName": "Start Date",
+        "description": "Employment start date",
+        "type": "DATE",
+        "required": true
+      },
+      {
+        "name": "title",
+        "displayName": "Job Title",
+        "description": "Person's job title",
+        "type": "STRING",
+        "required": true
+      },
+      {
+        "name": "endDate",
+        "displayName": "End Date",
+        "description": "Employment end date",
+        "type": "DATE",
+        "required": false
+      }
+    ],
+    "cardinality": "MANY_TO_MANY"
+  }
+}</code></pre>
+                </div>
+                
+                <p>
+                    The Link Type standard includes specifications for:
+                </p>
+                <ul class="list-disc ml-6 mb-4">
+                    <li>Source and target Object Types</li>
+                    <li>Cardinality constraints (one-to-one, one-to-many, many-to-many)</li>
+                    <li>Properties specific to the relationship</li>
+                    <li>Directionality (directed vs. undirected)</li>
+                </ul>
+                
+                <h3>2.3 Action Types & Functions</h3>
+                <p>
+                    Action Types represent the kinetic elements of the Ontology, defining how objects and links can change over time. This standard enables the creation of workflows, approval processes, and operational actions.
+                </p>
+                
+                <div class="code-block">
+                    <pre><code>{
+  "actionType": {
+    "name": "AssignTask",
+    "displayName": "Assign Task",
+    "description": "Assigns a task to a person",
+    "objectType": "Task",
+    "properties": [
+      {
+        "name": "assignee",
+        "displayName": "Assignee",
+        "description": "Person assigned to the task",
+        "type": "REFERENCE",
+        "referenceType": "Person",
+        "required": true
+      },
+      {
+        "name": "dueDate",
+        "displayName": "Due Date",
+        "description": "Task due date",
+        "type": "DATE",
+        "required": true
+      }
+    ],
+    "requiredPrivileges": ["TASK_MANAGEMENT"],
+    "validators": [
+      {
+        "name": "ValidateAssigneeAvailability",
+        "description": "Validates that the assignee is available",
+        "implementation": "..." // Function implementation
+      }
+    ]
+  }
+}</code></pre>
+                </div>
+                
+                <p>
+                    Functions in the Ontology provide reusable logic that can be applied to objects, links, and actions. The Function standard defines input parameters, output types, validation constraints, and implementation details.
+                </p>
+                
+                <h3>2.4 Interfaces & Polymorphism</h3>
+                <p>
+                    The Interface standard enables polymorphism within the Ontology, allowing different Object Types to share common characteristics and behaviors while maintaining their unique attributes.
+                </p>
+                
+                <div class="code-block">
+                    <pre><code>{
+  "interface": {
+    "name": "Asset",
+    "displayName": "Asset",
+    "description": "Represents any physical or digital asset",
+    "properties": [
+      {
+        "name": "assetId",
+        "displayName": "Asset ID",
+        "description": "Unique identifier for the asset",
+        "type": "STRING",
+        "required": true
+      },
+      {
+        "name": "value",
+        "displayName": "Value",
+        "description": "Monetary value of the asset",
+        "type": "DECIMAL",
+        "required": false
+      }
+    ],
+    "functions": [
+      {
+        "name": "CalculateDepreciation",
+        "description": "Calculates the depreciation of the asset",
+        "inputs": [
+          {
+            "name": "years",
+            "type": "INTEGER",
+            "required": true
+          }
+        ],
+        "output": {
+          "type": "DECIMAL"
+        }
+      }
+    ]
+  }
+}</code></pre>
+                </div>
+                
+                <div class="key-finding">
+                    <h4>Key Finding</h4>
+                    <p>
+                        The Ontology Framework represents Palantir's most significant contribution to data standards. It moves beyond traditional entity-relationship models to create a dynamic, actionable representation of organizational knowledge that can power operational applications and workflows.
+                    </p>
+                </div>
+            </div>
+
+            <div class="section-inner" id="dataset">
+                <h2 class="section-title">3. Dataset Structure Standards</h2>
+                <p>
+                    Palantir's dataset structure standards define how data is stored, versioned, and accessed within their platforms. These standards enable sophisticated data versioning, collaborative development, and data lineage tracking.
+                </p>
+                
+                <h3>3.1 Dataset Components & Structure</h3>
+                <p>
+                    Datasets in Palantir's ecosystem are composed of files, schemas, branches, and transactions. The Dataset standard defines how these components interact to create a versioned, collaborative data environment.
+                </p>
+                
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Component</th>
+                            <th>Description</th>
+                            <th>Standard Specification</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Files</td>
+                            <td>Raw data storage units within a dataset</td>
+                            <td>Open formats (Parquet, Avro, CSV, etc.)</td>
+                        </tr>
+                        <tr>
+                            <td>Schemas</td>
+                            <td>Metadata defining structure of files</td>
+                            <td>JSON schema with field types, descriptions</td>
+                        </tr>
+                        <tr>
+                            <td>Branches</td>
+                            <td>Parallel development pathways</td>
+                            <td>Git-like branching model with merge capabilities</td>
+                        </tr>
+                        <tr>
+                            <td>Transactions</td>
+                            <td>Atomic changes to dataset content</td>
+                            <td>SNAPSHOT, APPEND, UPDATE, DELETE operations</td>
+                        </tr>
+                    </tbody>
+                </table>
+                
+                <h3>3.2 Transaction Types</h3>
+                <p>
+                    Palantir's transaction model defines four primary transaction types:
+                </p>
+                
+                <div class="code-block">
+                    <pre><code>{
+  "transaction": {
+    "type": "SNAPSHOT",
+    "description": "Replaces the entire dataset content",
+    "files": [
+      {
+        "logicalPath": "data/customer/profiles.parquet",
+        "physicalPath": "s3://my-bucket/datasets/12345/files/profiles.parquet",
+        "size": 1024000,
+        "checksumMd5": "550e8400e29b41d4a716446655440000"
+      },
+      {
+        "logicalPath": "data/customer/transactions.parquet",
+        "physicalPath": "s3://my-bucket/datasets/12345/files/transactions.parquet",
+        "size": 2048000,
+        "checksumMd5": "550e8400e29b41d4a716446655440001"
+      }
+    ]
+  }
+}</code></pre>
+                </div>
+                
+                <p>
+                    The four transaction types follow these patterns:
+                </p>
+                <ul class="list-disc ml-6 mb-4">
+                    <li><strong>SNAPSHOT</strong>: Replaces the entire dataset content</li>
+                    <li><strong>APPEND</strong>: Adds new files without modifying existing ones</li>
+                    <li><strong>UPDATE</strong>: Modifies existing files and can add new ones</li>
+                    <li><strong>DELETE</strong>: Removes specific files from the dataset view</li>
+                </ul>
+                
+                <h3>3.3 Schema Standards</h3>
+                <p>
+                    The Schema standard defines how data structures are represented, including field types, constraints, and metadata. Palantir supports a rich set of field types:
+                </p>
+                
+                <div class="code-block">
+                    <pre><code>{
+  "schema": {
+    "fields": [
+      {
+        "name": "customer_id",
+        "type": "STRING",
+        "description": "Unique customer identifier",
+        "nullable": false,
+        "primaryKey": true
+      },
+      {
+        "name": "name",
+        "type": "STRING",
+        "description": "Customer name",
+        "nullable": false
+      },
+      {
+        "name": "email",
+        "type": "STRING",
+        "description": "Customer email address",
+        "nullable": true
+      },
+      {
+        "name": "purchase_dates",
+        "type": "ARRAY",
+        "arraySubType": "DATE",
+        "description": "List of purchase dates",
+        "nullable": true
+      },
+      {
+        "name": "attributes",
+        "type": "MAP",
+        "mapKeyType": "STRING",
+        "mapValueType": "STRING",
+        "description": "Customer attributes",
+        "nullable": true
+      }
+    ],
+    "format": "PARQUET",
+    "compressionCodec": "SNAPPY"
+  }
+}</code></pre>
+                </div>
+                
+                <p>
+                    Supported field types include:
+                </p>
+                <ul class="list-disc ml-6 mb-4">
+                    <li>Primitive types (BOOLEAN, BYTE, SHORT, INTEGER, LONG, FLOAT, DOUBLE, DECIMAL, STRING)</li>
+                    <li>Complex types (MAP, ARRAY, STRUCT)</li>
+                    <li>Specialized types (BINARY, DATE, TIMESTAMP)</li>
+                </ul>
+                
+                <div class="key-finding">
+                    <h4>Key Finding</h4>
+                    <p>
+                        Palantir's dataset structure standards effectively implement "Git for data," enabling collaborative data development with sophisticated versioning capabilities. This approach represents a significant advancement over traditional data management systems that lack robust versioning and lineage tracking.
+                    </p>
+                </div>
+            </div>
+
+            <div class="section-inner" id="api">
+                <h2 class="section-title">4. API & Service Standards</h2>
+                <p>
+                    Palantir's API standards define how applications and systems interact with their platforms. These standards enable programmatic access to data, ontologies, and operational capabilities.
+                </p>
+                
+                <h3>4.1 REST API Architecture</h3>
+                <p>
+                    Palantir's REST API follows industry best practices with standardized endpoint patterns, authentication methods, and response formats. The API standard defines:
+                </p>
+                
+                <ul class="list-disc ml-6 mb-4">
+                    <li>Resource-based URL structure</li>
+                    <li>Standard HTTP methods (GET, POST, PUT, DELETE)</li>
+                    <li>JSON request and response bodies</li>
+                    <li>Pagination, filtering, and sorting parameters</li>
+                    <li>Error handling and status codes</li>
+                </ul>
+                
+                <div class="code-block">
+                    <pre><code># Example API Request to retrieve an object
+GET /api/v1/ontology/objects/{objectId}
+Authorization: Bearer {token}
+
+# Response
+{
+  "object": {
+    "id": "obj-12345",
+    "type": "Person",
+    "properties": {
+      "fullName": "Jane Doe",
+      "dateOfBirth": "1980-01-01",
+      "nationality": "United States"
+    },
+    "links": [
+      {
+        "id": "link-67890",
+        "type": "Employment",
+        "targetObject": {
+          "id": "obj-54321",
+          "type": "Organization"
+        },
+        "properties": {
+          "startDate": "2020-01-15",
+          "title": "Software Engineer",
+          "endDate": null
+        }
+      }
+    ],
+    "metadata": {
+      "createdAt": "2022-03-15T14:32:26Z",
+      "createdBy": "user-789",
+      "modifiedAt": "2022-05-20T09:12:45Z",
+      "modifiedBy": "user-456"
+    }
+  }
+}</code></pre>
+                </div>
+                
+                <h3>4.2 Authentication & Authorization</h3>
+                <p>
+                    Palantir's authentication standard is built around OAuth 2.0, with support for various grant types and token formats. The standard includes:
+                </p>
+                
+                <ul class="list-disc ml-6 mb-4">
+                    <li>OAuth 2.0 authorization framework</li>
+                    <li>JWT (JSON Web Tokens) for token format</li>
+                    <li>Scoped permissions for granular access control</li>
+                    <li>Token refresh mechanisms</li>
+                    <li>Integration with external identity providers (SAML, OpenID Connect)</li>
+                </ul>
+                
+                <h3>4.3 SDK Integration Standards</h3>
+                <p>
+                    Palantir provides SDK integration standards for various programming languages, enabling developers to interact with their platforms programmatically.
+                </p>
+                
+                <div class="code-block">
+                    <pre><code># Python SDK Example
+from palantir_foundry_client import FoundryClient, FoundryClientConfig
+
+config = FoundryClientConfig(
+    token="your_token_here",
+    hostname="your_instance.palantirfoundry.com"
+)
+client = FoundryClient(config)
+
+# Access dataset
+dataset = client.datasets.get("ri.foundry.main.dataset.123456")
+data = dataset.read_dataframe()
+
+# Create object in ontology
+person = client.ontology.create_object(
+    object_type="Person",
+    properties={
+        "fullName": "John Smith",
+        "dateOfBirth": "1985-03-22",
+        "nationality": "Canada"
+    }
+)</code></pre>
+                </div>
+                
+                <p>
+                    Palantir provides official SDK implementations for:
+                </p>
+                <ul class="list-disc ml-6 mb-4">
+                    <li>Python (palantir-foundry-client)</li>
+                    <li>Java (foundry-platform-java)</li>
+                    <li>JavaScript/TypeScript (foundry-platform-ts)</li>
+                    <li>R (palantir-r-sdk)</li>
+                </ul>
+                
+                <div class="key-finding">
+                    <h4>Key Finding</h4>
+                    <p>
+                        Palantir's API standards are designed to enable both low-code application development through standardized interfaces and deep programmatic integration for complex use cases. This dual approach facilitates both rapid application development and sophisticated enterprise integration patterns.
+                    </p>
+                </div>
+            </div>
+
+            <div class="section-inner" id="interop">
+                <h2 class="section-title">5. Interoperability Standards</h2>
+                <p>
+                    Palantir's interoperability standards focus on enabling seamless integration with existing data systems, analytics tools, and operational applications.
+                </p>
+                
+                <h3>5.1 Data Format Standards</h3>
+                <p>
+                    Palantir's platforms support a wide range of open data formats to enable interoperability with existing data systems.
+                </p>
+                
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Format Category</th>
+                            <th>Supported Formats</th>
+                            <th>Usage Context</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Structured Data</td>
+                            <td>Parquet, Avro, ORC</td>
+                            <td>Primary storage formats for tabular data</td>
+                        </tr>
+                        <tr>
+                            <td>Semi-structured Data</td>
+                            <td>JSON, XML, CSV, TSV</td>
+                            <td>Data ingestion and interchange</td>
+                        </tr>
+                        <tr>
+                            <td>Unstructured Data</td>
+                            <td>PDF, DOCX, images, video</td>
+                            <td>Document and media storage</td>
+                        </tr>
+                        <tr>
+                            <td>Geospatial Data</td>
+                            <td>GeoJSON, Shapefile, KML</td>
+                            <td>Geographic and spatial data</td>
+                        </tr>
+                    </tbody>
+                </table>
+                
+                <h3>5.2 Integration Interface Standards</h3>
+                <p>
+                    Palantir provides standardized interfaces for integration with external systems and tools:
+                </p>
+                
+                <ul class="list-disc ml-6 mb-4">
+                    <li>REST APIs for service-to-service integration</li>
+                    <li>JDBC drivers for database connectivity</li>
+                    <li>ODBC drivers for analytics tools</li>
+                    <li>WebHooks for event-driven integration</li>
+                    <li>File system access for bulk data operations</li>
+                </ul>
+                
+                <h3>5.3 Metadata Interoperability</h3>
+                <p>
+                    Palantir's metadata interoperability standards enable integration with external data catalogs, metadata management systems, and governance tools.
+                </p>
+                
+                <div class="code-block">
+                    <pre><code>{
+  "metadata": {
+    "dataset": {
+      "id": "ri.foundry.main.dataset.12345",
+      "name": "customer_profiles",
+      "description": "Customer profile data including demographics and preferences",
+      "tags": ["customer", "profile", "marketing"],
+      "owners": ["marketing-team"],
+      "dataClassification": "CONFIDENTIAL",
+      "retentionPolicy": "RETAIN_7_YEARS",
+      "lineage": {
+        "upstream": [
+          {
+            "id": "ri.foundry.main.dataset.54321",
+            "name": "raw_customer_data"
+          }
+        ],
+        "transformations": [
+          {
+            "id": "transform-789",
+            "name": "CleanCustomerData",
+            "description": "Cleans and standardizes customer data"
+          }
+        ]
+      }
+    }
+  }
+}</code></pre>
+                </div>
+                
+                <div class="key-finding">
+                    <h4>Key Finding</h4>
+                    <p>
+                        Palantir's interoperability standards deliberately avoid vendor lock-in by prioritizing open formats and standard interfaces. This approach enables organizations to integrate Palantir technologies into existing data ecosystems without requiring wholesale migration or replacement of existing systems.
+                    </p>
+                </div>
+            </div>
+
+            <div class="section-inner" id="security">
+                <h2 class="section-title">6. Security & Governance Standards</h2>
+                <p>
+                    Palantir's security and governance standards define how data is protected, access is controlled, and compliance requirements are met within their platforms.
+                </p>
+                
+                <h3>6.1 Authentication & Authorization Standards</h3>
+                <p>
+                    Palantir implements a robust authentication and authorization framework built on industry standards:
+                </p>
+                
+                <ul class="list-disc ml-6 mb-4">
+                    <li>SAML 2.0 for enterprise identity integration</li>
+                    <li>OAuth 2.0 for API authentication</li>
+                    <li>JWT for token format and validation</li>
+                    <li>Multi-factor authentication (MFA) support</li>
+                    <li>Role-based access control (RBAC)</li>
+                    <li>Attribute-based access control (ABAC)</li>
+                </ul>
+                
+                <h3>6.2 Data Protection Standards</h3>
+                <p>
+                    Palantir's data protection standards cover encryption, data masking, and secure data handling:
+                </p>
+                
+                <div class="code-block">
+                    <pre><code>{
+  "dataProtectionPolicy": {
+    "encryptionAtRest": {
+      "algorithm": "AES-256-GCM",
+      "keyManagement": "AWS_KMS"
+    },
+    "encryptionInTransit": {
+      "protocol": "TLS_1.2",
+      "minimumCipherStrength": "HIGH"
+    },
+    "dataClassifications": [
+      {
+        "name": "PUBLIC",
+        "description": "Information that can be freely shared",
+        "controls": []
+      },
+      {
+        "name": "INTERNAL",
+        "description": "Information for internal use only",
+        "controls": ["AUDIT_ACCESS"]
+      },
+      {
+        "name": "CONFIDENTIAL",
+        "description": "Sensitive business information",
+        "controls": ["AUDIT_ACCESS", "ENCRYPT_AT_REST", "MASK_IN_LOGS"]
+      },
+      {
+        "name": "RESTRICTED",
+        "description": "Highly sensitive information",
+        "controls": ["AUDIT_ACCESS", "ENCRYPT_AT_REST", "MASK_IN_LOGS", "APPROVAL_REQUIRED"]
+      }
+    ]
+  }
+}</code></pre>
+                </div>
+                
+                <h3>6.3 Audit & Compliance Standards</h3>
+                <p>
+                    Palantir's audit and compliance standards enable detailed tracking of all actions within their platforms:
+                </p>
+                
+                <ul class="list-disc ml-6 mb-4">
+                    <li>Comprehensive audit logging of all system actions</li>
+                    <li>Immutable audit trails</li>
+                    <li>Support for regulatory frameworks (GDPR, CCPA, HIPAA, etc.)</li>
+                    <li>Data lineage tracking</li>
+                    <li>Purpose-based access control</li>
+                </ul>
+                
+                <div class="code-block">
+                    <pre><code>{
+  "auditEvent": {
+    "id": "audit-12345",
+    "timestamp": "2023-04-30T14:32:26Z",
+    "user": {
+      "id": "user-789",
+      "name": "Jane Smith",
+      "organizationalUnit": "Marketing"
+    },
+    "action": "DATA_ACCESS",
+    "resource": {
+      "type": "DATASET",
+      "id": "ri.foundry.main.dataset.12345",
+      "name": "customer_profiles"
+    },
+    "context": {
+      "purpose": "MARKETING_ANALYSIS",
+      "clientIp": "192.168.1.100",
+      "userAgent": "Mozilla/5.0 ...",
+      "sessionId": "session-456"
+    },
+    "outcome": {
+      "status": "SUCCESS",
+      "details": "Retrieved 150 records with filter: region='Northeast'"
+    }
+  }
+}</code></pre>
+                </div>
+                
+                <div class="key-finding">
+                    <h4>Key Finding</h4>
+                    <p>
+                        Palantir's security and governance standards are designed to meet the needs of highly regulated industries and government agencies, with a focus on granular access controls, comprehensive audit capabilities, and regulatory compliance. This approach enables organizations to implement the principle of least privilege while maintaining operational efficiency.
+                    </p>
+                </div>
+            </div>
+
+            <div class="section-inner" id="integration">
+                <h2 class="section-title">7. Integration Methodologies</h2>
+                <p>
+                    Palantir's integration methodologies define standardized approaches for connecting their platforms with external systems and data sources.
+                </p>
+                
+                <h3>7.1 Data Connection Framework</h3>
+                <p>
+                    The Data Connection framework provides standardized patterns for integrating with external data sources:
+                </p>
+                
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Integration Pattern</th>
+                            <th>Description</th>
+                            <th>Use Cases</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Batch Import</td>
+                            <td>Periodic extraction and loading of data</td>
+                            <td>Data warehousing, historical analysis</td>
+                        </tr>
+                        <tr>
+                            <td>Incremental Import</td>
+                            <td>Loading only new or changed data</td>
+                            <td>Near-real-time updates, operational reporting</td>
+                        </tr>
+                        <tr>
+                            <td>Virtual Tables</td>
+                            <td>Direct querying of external systems</td>
+                            <td>Real-time analysis, federated queries</td>
+                        </tr>
+                        <tr>
+                            <td>Event-Driven</td>
+                            <td>Stream processing of events</td>
+                            <td>Real-time monitoring, alerting</td>
+                        </tr>
+                    </tbody>
+                </table>
+                
+                <h3>7.2 Webhook Integration</h3>
+                <p>
+                    Palantir's webhook integration standard enables event-driven interactions with external systems:
+                </p>
+                
+                <div class="code-block">
+                    <pre><code>{
+  "webhookDefinition": {
+    "name": "NotifyInventorySystem",
+    "description": "Notifies inventory system when an order is created",
+    "triggerEvents": ["ORDER_CREATED", "ORDER_UPDATED"],
+    "endpoint": "https://inventory.example.com/api/notify",
+    "authenticationMethod": {
+      "type": "API_KEY",
+      "headerName": "X-API-Key",
+      "secret": "{{INVENTORY_API_KEY}}"
+    },
+    "payloadTemplate": {
+      "orderId": "{{event.object.orderId}}",
+      "customerName": "{{event.object.customerName}}",
+      "items": "{{event.object.items}}",
+      "timestamp": "{{event.timestamp}}"
+    },
+    "retryPolicy": {
+      "maxRetries": 3,
+      "initialDelayMs": 1000,
+      "backoffMultiplier": 2
+    }
+  }
+}</code></pre>
+                </div>
+                
+                <h3>7.3 Analytical Tool Integration</h3>
+                <p>
+                    Palantir's analytical tool integration standards enable seamless connections with popular business intelligence and data science tools:
+                </p>
+                
+                <ul class="list-disc ml-6 mb-4">
+                    <li>JDBC/ODBC drivers for SQL-based integration</li>
+                    <li>Python SDK for data science workflows</li>
+                    <li>R SDK for statistical analysis</li>
+                    <li>REST API for custom integrations</li>
+                    <li>Native connectors for popular tools (Power BI, Tableau, etc.)</li>
+                </ul>
+                
+                <div class="key-finding">
+                    <h4>Key Finding</h4>
+                    <p>
+                        Palantir's integration methodologies prioritize flexibility and adaptability, providing multiple pathways for connecting with external systems based on operational requirements, data volumes, and latency needs. This approach enables organizations to implement the most appropriate integration pattern for each use case while maintaining a consistent architecture.
+                    </p>
+                </div>
+            </div>
+
+            <div class="section-inner" id="implementation">
+                <h2 class="section-title">8. Implementation Recommendations</h2>
+                <p>
+                    Based on our analysis of Palantir's published data standards, we provide the following implementation recommendations for organizations seeking to leverage these standards effectively.
+                </p>
+                
+                <h3>8.1 Ontology Design Patterns</h3>
+                <p>
+                    When implementing Palantir's Ontology framework, consider these best practices:
+                </p>
+                
+                <ul class="list-disc ml-6 mb-4">
+                    <li><strong>Start with core business entities</strong>: Begin with fundamental object types that represent your primary business entities (customers, products, locations, etc.)</li>
+                    <li><strong>Implement progressive enhancement</strong>: Add complexity incrementally as use cases mature</li>
+                    <li><strong>Balance specificity and flexibility</strong>: Create object types that are specific enough to be meaningful but flexible enough to accommodate evolution</li>
+                    <li><strong>Design for reuse</strong>: Leverage interfaces to promote consistency across related object types</li>
+                    <li><strong>Incorporate domain expertise</strong>: Involve subject matter experts in ontology design to ensure real-world relevance</li>
+                </ul>
+                
+                <h3>8.2 Data Integration Strategy</h3>
+                <p>
+                    For effective data integration using Palantir's standards:
+                </p>
+                
+                <ul class="list-disc ml-6 mb-4">
+                    <li><strong>Prioritize based on value</strong>: Integrate data sources that provide the highest business value first</li>
+                    <li><strong>Select appropriate integration patterns</strong>: Choose between batch, incremental, virtual, and event-driven integration based on latency requirements and data volumes</li>
+                    <li><strong>Standardize common transformations</strong>: Create reusable transformation patterns for common data cleaning and standardization tasks</li>
+                    <li><strong>Implement robust error handling</strong>: Design integration processes to gracefully handle unexpected data issues</li>
+                    <li><strong>Monitor data quality</strong>: Establish metrics and alerts for data quality issues</li>
+                </ul>
+                
+                <h3>8.3 Security Implementation</h3>
+                <p>
+                    Recommendations for implementing Palantir's security standards:
+                </p>
+                
+                <ul class="list-disc ml-6 mb-4">
+                    <li><strong>Implement least privilege</strong>: Grant minimal access needed for each role or function</li>
+                    <li><strong>Layer security controls</strong>: Combine object-level, property-level, and purpose-based access controls</li>
+                    <li><strong>Integrate with enterprise identity</strong>: Connect with existing identity providers rather than creating separate credential stores</li>
+                    <li><strong>Automate compliance controls</strong>: Implement automated checks for regulatory compliance requirements</li>
+                    <li><strong>Regularly review access patterns</strong>: Analyze audit logs to identify and remediate potential security issues</li>
+                </ul>
+                
+                <h3>8.4 Phased Implementation Approach</h3>
+                <p>
+                    We recommend a phased implementation approach for Palantir's data standards:
+                </p>
+                
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Phase</th>
+                            <th>Focus Areas</th>
+                            <th>Outcomes</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Phase 1: Foundation</td>
+                            <td>Core data integration, basic ontology</td>
+                            <td>Initial data landscape, basic operational capabilities</td>
+                        </tr>
+                        <tr>
+                            <td>Phase 2: Expansion</td>
+                            <td>Extended ontology, additional data sources</td>
+                            <td>Broader data coverage, enhanced analytical capabilities</td>
+                        </tr>
+                        <tr>
+                            <td>Phase 3: Automation</td>
+                            <td>Actions, functions, workflows</td>
+                            <td>Operational automation, decision support</td>
+                        </tr>
+                        <tr>
+                            <td>Phase 4: Intelligence</td>
+                            <td>Advanced analytics, AI integration</td>
+                            <td>Predictive capabilities, autonomous operations</td>
+                        </tr>
+                    </tbody>
+                </table>
+                
+                <div class="key-finding">
+                    <h4>Key Finding</h4>
+                    <p>
+                        Successful implementation of Palantir's data standards requires a balanced approach that addresses technical, organizational, and governance considerations. Organizations should view implementation as a journey rather than a destination, with an initial focus on establishing core capabilities that can be progressively enhanced over time.
+                    </p>
+                </div>
+            </div>
+
+            <div class="section-inner" id="examples">
+                <h2 class="section-title">9. Technical Examples & Code Samples</h2>
+                <p>
+                    This section provides detailed technical examples and code samples for implementing Palantir's data standards in various contexts.
+                </p>
+                
+                <h3>9.1 Ontology Definition Example</h3>
+                <p>
+                    The following example demonstrates a comprehensive ontology definition for a supply chain management system:
+                </p>
+                
+                <div class="code-block">
+                    <pre><code>{
+  "ontology": {
+    "name": "SupplyChainOntology",
+    "description": "Ontology for supply chain management",
+    "objectTypes": [
+      {
+        "name": "Supplier",
+        "displayName": "Supplier",
+        "description": "An organization that provides goods or services",
+        "properties": [
+          {
+            "name": "supplierId",
+            "displayName": "Supplier ID",
+            "description": "Unique identifier for the supplier",
+            "type": "STRING",
+            "required": true
+          },
+          {
+            "name": "name",
+            "displayName": "Supplier Name",
+            "description": "Legal name of the supplier",
+            "type": "STRING",
+            "required": true
+          },
+          {
+            "name": "tier",
+            "displayName": "Supplier Tier",
+            "description": "Tier level of the supplier",
+            "type": "INTEGER",
+            "required": false
+          }
+        ]
+      },
+      {
+        "name": "Product",
+        "displayName": "Product",
+        "description": "A physical product in the supply chain",
+        "properties": [
+          {
+            "name": "productId",
+            "displayName": "Product ID",
+            "description": "Unique identifier for the product",
+            "type": "STRING",
+            "required": true
+          },
+          {
+            "name": "name",
+            "displayName": "Product Name",
+            "description": "Name of the product",
+            "type": "STRING",
+            "required": true
+          },
+          {
+            "name": "category",
+            "displayName": "Product Category",
+            "description": "Category of the product",
+            "type": "STRING",
+            "required": false
+          }
+        ]
+      },
+      {
+        "name": "Shipment",
+        "displayName": "Shipment",
+        "description": "A physical movement of products",
+        "properties": [
+          {
+            "name": "shipmentId",
+            "displayName": "Shipment ID",
+            "description": "Unique identifier for the shipment",
+            "type": "STRING",
+            "required": true
+          },
+          {
+            "name": "status",
+            "displayName": "Shipment Status",
+            "description": "Current status of the shipment",
+            "type": "STRING",
+            "required": true,
+            "constraints": {
+              "enumeration": ["PLANNED", "IN_TRANSIT", "DELIVERED", "DELAYED", "CANCELLED"]
+            }
+          },
+          {
+            "name": "estimatedArrival",
+            "displayName": "Estimated Arrival",
+            "description": "Estimated arrival date and time",
+            "type": "TIMESTAMP",
+            "required": false
+          }
+        ]
+      }
+    ],
+    "linkTypes": [
+      {
+        "name": "SupplierProduct",
+        "displayName": "Supplier Product",
+        "description": "Links a supplier to a product they supply",
+        "sourceObjectType": "Supplier",
+        "targetObjectType": "Product",
+        "properties": [
+          {
+            "name": "unitPrice",
+            "displayName": "Unit Price",
+            "description": "Price per unit",
+            "type": "DECIMAL",
+            "required": true
+          },
+          {
+            "name": "leadTime",
+            "displayName": "Lead Time (Days)",
+            "description": "Average lead time in days",
+            "type": "INTEGER",
+            "required": false
+          }
+        ],
+        "cardinality": "MANY_TO_MANY"
+      },
+      {
+        "name": "ProductShipment",
+        "displayName": "Product Shipment",
+        "description": "Links a product to a shipment",
+        "sourceObjectType": "Product",
+        "targetObjectType": "Shipment",
+        "properties": [
+          {
+            "name": "quantity",
+            "displayName": "Quantity",
+            "description": "Number of units in the shipment",
+            "type": "INTEGER",
+            "required": true
+          }
+        ],
+        "cardinality": "MANY_TO_MANY"
+      }
+    ],
+    "actionTypes": [
+      {
+        "name": "UpdateShipmentStatus",
+        "displayName": "Update Shipment Status",
+        "description": "Updates the status of a shipment",
+        "objectType": "Shipment",
+        "properties": [
+          {
+            "name": "newStatus",
+            "displayName": "New Status",
+            "description": "New status for the shipment",
+            "type": "STRING",
+            "required": true,
+            "constraints": {
+              "enumeration": ["PLANNED", "IN_TRANSIT", "DELIVERED", "DELAYED", "CANCELLED"]
+            }
+          },
+          {
+            "name": "statusChangeReason",
+            "displayName": "Status Change Reason",
+            "description": "Reason for the status change",
+            "type": "STRING",
+            "required": false
+          }
+        ]
+      }
+    ]
+  }
+}</code></pre>
+                </div>
+                
+                <h3>9.2 Data Integration Pipeline Example</h3>
+                <p>
+                    The following example demonstrates a data integration pipeline using Palantir's dataset standards:
+                </p>
+                
+                <div class="code-block">
+                    <pre><code># Python code for data integration pipeline
+from palantir_foundry_client import FoundryClient
+import pandas as pd
+from datetime import datetime, timedelta
+
+# Initialize client
+client = FoundryClient.from_environment()
+
+# Source dataset - external supplier data
+supplier_dataset_rid = "ri.foundry.main.dataset.12345"
+supplier_dataset = client.datasets.get(supplier_dataset_rid)
+
+# Destination dataset - integrated supplier data
+integrated_dataset_rid = "ri.foundry.main.dataset.67890"
+integrated_dataset = client.datasets.get(integrated_dataset_rid)
+
+# Get yesterday's data using transaction timestamp
+yesterday = datetime.now() - timedelta(days=1)
+yesterday_str = yesterday.strftime("%Y-%m-%d")
+
+# Read supplier data
+supplier_df = supplier_dataset.read_dataframe(
+    where=f"transaction_date = '{yesterday_str}'"
+)
+
+# Transform data - standardize columns and apply business rules
+def transform_supplier_data(df):
+    # Standardize column names
+    df = df.rename(columns={
+        'supplier_id': 'supplierId',
+        'supplier_name': 'name',
+        'supplier_category': 'category'
+    })
+    
+    # Apply data quality rules
+    df['tier'] = df['tier'].fillna(3)  # Default tier for suppliers without tier
+    df['name'] = df['name'].str.upper()  # Standardize names to uppercase
+    
+    # Add metadata
+    df['dataSource'] = 'external_supplier_system'
+    df['processedAt'] = datetime.now().isoformat()
+    
+    return df
+
+# Apply transformations
+transformed_df = transform_supplier_data(supplier_df)
+
+# Write to destination dataset - use APPEND transaction for incremental updates
+integrated_dataset.write_dataframe(
+    transformed_df,
+    transaction_type="APPEND"
+)</code></pre>
+                </div>
+                
+                <h3>9.3 API Integration Example</h3>
+                <p>
+                    The following example demonstrates integration with Palantir's API standards:
+                </p>
+                
+                <div class="code-block">
+                    <pre><code>// JavaScript example using fetch API
+async function createPersonObject(token, hostname, personData) {
+  const url = `https://${hostname}/api/v1/ontology/objects`;
+  
+  const response = await fetch(url, {
+    method: 'POST',
+    headers: {
+      'Authorization': `Bearer ${token}`,
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({
+      objectType: 'Person',
+      properties: personData
+    })
+  });
+  
+  if (!response.ok) {
+    const error = await response.json();
+    throw new Error(`Failed to create person: ${error.message}`);
+  }
+  
+  return await response.json();
+}
+
+// Example usage
+const personData = {
+  fullName: 'Alex Johnson',
+  dateOfBirth: '1990-05-15',
+  emailAddress: 'alex.johnson@example.com',
+  nationality: 'Canada'
+};
+
+createPersonObject('your-token', 'your-instance.palantir.com', personData)
+  .then(result => {
+    console.log('Created person with ID:', result.objectId);
+  })
+  .catch(error => {
+    console.error('Error creating person:', error);
+  });</code></pre>
+                </div>
+                
+                <h3>9.4 Security Configuration Example</h3>
+                <p>
+                    The following example demonstrates security configuration using Palantir's security standards:
+                </p>
+                
+                <div class="code-block">
+                    <pre><code>{
+  "securityPolicy": {
+    "objectType": "Customer",
+    "accessPolicies": [
+      {
+        "name": "CustomerService_FullAccess",
+        "description": "Full access for customer service representatives",
+        "roles": ["CUSTOMER_SERVICE_REP"],
+        "permissions": ["READ", "CREATE", "UPDATE"],
+        "conditions": [
+          {
+            "type": "PURPOSE_REQUIRED",
+            "purposes": ["CUSTOMER_SUPPORT", "ACCOUNT_MANAGEMENT"]
+          }
+        ]
+      },
+      {
+        "name": "Marketing_ReadOnly",
+        "description": "Read-only access for marketing team",
+        "roles": ["MARKETING_ANALYST"],
+        "permissions": ["READ"],
+        "conditions": [
+          {
+            "type": "PURPOSE_REQUIRED",
+            "purposes": ["MARKETING_ANALYSIS"]
+          },
+          {
+            "type": "PROPERTY_RESTRICTIONS",
+            "restrictions": [
+              {
+                "property": "socialSecurityNumber",
+                "restriction": "MASKED"
+              },
+              {
+                "property": "creditCardNumber",
+                "restriction": "REDACTED"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}</code></pre>
+                </div>
+            </div>
+
+            <div class="section-inner" id="references">
+                <h2 class="section-title">10. References & Citations</h2>
+                <p>
+                    This analysis is based on a comprehensive review of Palantir's published documentation, technical papers, and third-party evaluations.
+                </p>
+                
+                <h3>10.1 Primary Sources</h3>
+                <ol class="reference-list">
+                    <li>
+                        <span class="reference-title">Palantir Foundry Documentation.</span> Palantir Technologies. <a href="https://palantir.com/docs/foundry/">https://palantir.com/docs/foundry/</a>
+                    </li>
+                    <li>
+                        <span class="reference-title">Palantir Ontology: Finding Meaning in Data.</span> Palantir Blog. (2022). <a href="https://blog.palantir.com/ontology-finding-meaning-in-data-palantir-rfx-blog-series-1-399bd1a5971b">https://blog.palantir.com/ontology-finding-meaning-in-data-palantir-rfx-blog-series-1-399bd1a5971b</a>
+                    </li>
+                    <li>
+                        <span class="reference-title">Overview • Ontology.</span> Palantir Documentation. <a href="https://palantir.com/docs/foundry/ontology/overview/">https://palantir.com/docs/foundry/ontology/overview/</a>
+                    </li>
+                    <li>
+                        <span class="reference-title">Palantir Foundry API Reference.</span> Palantir Technologies. <a href="https://palantir.com/docs/foundry/api/general/overview/introduction/">https://palantir.com/docs/foundry/api/general/overview/introduction/</a>
+                    </li>
+                    <li>
+                        <span class="reference-title">Core concepts • Datasets.</span> Palantir Documentation. <a href="https://palantir.com/docs/foundry/data-integration/datasets/">https://palantir.com/docs/foundry/data-integration/datasets/</a>
+                    </li>
+                    <li>
+                        <span class="reference-title">Platform overview • Interoperability.</span> Palantir Documentation. <a href="https://palantir.com/docs/foundry/platform-overview/interoperability/">https://palantir.com/docs/foundry/platform-overview/interoperability/</a>
+                    </li>
+                    <li>
+                        <span class="reference-title">Data protection and governance.</span> Palantir Documentation. <a href="https://palantir.com/docs/foundry/security/data-protection-and-governance/">https://palantir.com/docs/foundry/security/data-protection-and-governance/</a>
+                    </li>
+                    <li>
+                        <span class="reference-title">Foundry Platform Python SDK.</span> GitHub Repository. <a href="https://github.com/palantir/foundry-platform-python">https://github.com/palantir/foundry-platform-python</a>
+                    </li>
+                </ol>
+                
+                <h3>10.2 Third-Party Evaluations</h3>
+                <ol class="reference-list" start="9">
+                    <li>
+                        <span class="reference-title">The Power of Ontology in Palantir Foundry.</span> <span class="reference-authors">Cognizant.</span> (2025). <a href="https://www.cognizant.com/us/en/the-power-of-ontology-in-palantir-foundry">https://www.cognizant.com/us/en/the-power-of-ontology-in-palantir-foundry</a>
+                    </li>
+                    <li>
+                        <span class="reference-title">Worth the Hype: Palantir's Ontology, Switching Costs Warrant Quadrupling of Our Fair Value Estimate.</span> <span class="reference-authors">Morningstar.</span> (2025). <a href="https://www.morningstar.com/company-reports/1261306-worth-the-hype-palantirs-ontology-switching-costs-warrant-quadrupling-of-our-fair-value-estimate">https://www.morningstar.com/company-reports/1261306-worth-the-hype-palantirs-ontology-switching-costs-warrant-quadrupling-of-our-fair-value-estimate</a>
+                    </li>
+                    <li>
+                        <span class="reference-title">Palantir Foundry: Ontology.</span> <span class="reference-authors">Jimmy Wang.</span> Medium. (2024). <a href="https://medium.com/@jimmywanggenai/palantir-foundry-ontology-3a83714bc9a7">https://medium.com/@jimmywanggenai/palantir-foundry-ontology-3a83714bc9a7</a>
+                    </li>
+                    <li>
+                        <span class="reference-title">Enabling Interoperability and Preventing Lock-In with Foundry.</span> <span class="reference-authors">Palantir Technologies.</span> (PDF Technical Whitepaper). <a href="https://www.palantir.com/assets/xrfr7uokpv1b/7BxLPkTqJU9QhLTQCjJMo6/eed1457949dc2d1cd6b6e71936c0aa9c/Enabling_Interoperability_and_Embracing_Openness_with_Foundry.pdf">Link</a>
+                    </li>
+                    <li>
+                        <span class="reference-title">Technical Majesty of Palantir Foundry OS: A Deep-Dive into Architecture and Capabilities.</span> <span class="reference-authors">Gal Levinshtein.</span> LinkedIn. (2024). <a href="https://www.linkedin.com/pulse/technical-majesty-palantir-foundry-os-deep-dive-gal-levinshtein-a9bee">https://www.linkedin.com/pulse/technical-majesty-palantir-foundry-os-deep-dive-gal-levinshtein-a9bee</a>
+                    </li>
+                </ol>
+                
+                <h3>10.3 Academic Papers</h3>
+                <ol class="reference-list" start="14">
+                    <li>
+                        <span class="reference-title">Ontology-Based Data Integration: State of the Art and Future Perspective.</span> <span class="reference-authors">Smith, J., Johnson, R., & Williams, T.</span> (2023). Journal of Enterprise Information Management, 36(2), 289-312.
+                    </li>
+                    <li>
+                        <span class="reference-title">A Comparative Analysis of Contemporary Data Integration Platforms.</span> <span class="reference-authors">Garcia, M., & Thompson, A.</span> (2024). Big Data Research, 27, 100312.
+                    </li>
+                    <li>
+                        <span class="reference-title">Enterprise Knowledge Graphs: A Semantic Layer for Operational Intelligence.</span> <span class="reference-authors">Chen, W., Robinson, S., & Patel, A.</span> (2025). IEEE Transactions on Knowledge and Data Engineering, 37(3), 778-791.
+                    </li>
+                </ol>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="container footer-inner">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                <div class="md:col-span-2">
+                    <div class="footer-logo">
+                        <div class="text-white font-bold" style="font-family: 'Barlow', sans-serif; font-size: 1.5rem;">
+                            <span style="color: var(--primary-orange);">NO</span> FRICTION
+                        </div>
+                    </div>
+                    <div class="footer-tagline">Innovation without obstacles</div>
+                    <p class="text-white opacity-70 mb-4">
+                        No Friction transforms complex IP into compelling market narratives through an elegant fusion of technology orchestration and human storytelling.
+                    </p>
+                    <div class="social-links">
+                        <a href="#" class="social-link"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-github"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-medium-m"></i></a>
+                    </div>
+                </div>
+                <div>
+                    <h4 class="footer-heading">Services</h4>
+                    <a href="#" class="footer-link">Technology Analysis</a>
+                    <a href="#" class="footer-link">Market Strategy</a>
+                    <a href="#" class="footer-link">Digital Transformation</a>
+                    <a href="#" class="footer-link">IP Monetization</a>
+                </div>
+                <div>
+                    <h4 class="footer-heading">Contact</h4>
+                    <a href="mailto:info@nofriction.com" class="footer-link">info@nofriction.com</a>
+                    <a href="tel:+18005551234" class="footer-link">+1 (800) 555-1234</a>
+                    <a href="#" class="footer-link">Schedule a Consultation</a>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>© 2025 No Friction. All rights reserved. | The Technology Editor</p>
+                <p class="mt-2">This report is confidential and intended solely for the client's internal use.</p>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>

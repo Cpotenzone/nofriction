@@ -1,0 +1,878 @@
+{
+  "name": "Advanced Chatbot Orchestrator",
+  "nodes": [
+    {
+      "parameters": {
+        "path": "v5/chatbot-orchestrator",
+        "httpMethod": "POST",
+        "responseMode": "onReceived",
+        "options": {
+          "binaryData": true
+        }
+      },
+      "id": "webhook-trigger",
+      "name": "Webhook Trigger",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2,
+      "position": [240, 300]
+    },
+    {
+      "parameters": {
+        "jsCode": "const body = $input.item.json.body || {};\nconst binary = $input.item.binary || {};\n\nconst text = body.text || '';\nconst userId = body.userId || 'anonymous';\nconst selectedModel = body.selectedModel || 'openai/gpt-4o';\nconst systemPrompt = body.systemPrompt || '';\n\nlet messages = [];\ntry {\n  messages = JSON.parse(body.messages || '[]');\n} catch (e) {\n  messages = [];\n}\n\nconst fileCount = parseInt(body.fileCount || '0', 10);\n\nconst files = [];\nif (fileCount > 0) {\n  for (let i = 0; i < fileCount; i++) {\n    const fileKey = `file${i}`;\n    if (binary[fileKey]) {\n      files.push({\n        fileName: binary[fileKey].fileName || `file${i}`,\n        mimeType: binary[fileKey].mimeType || 'application/octet-stream',\n        data: binary[fileKey].data\n      });\n    }\n  }\n}\n\nreturn {\n  userId,\n  userQuery: text,\n  messages,\n  fileCount,\n  files,\n  selectedModel,\n  systemPrompt,\n  binaryData: fileCount > 0 ? binary : null\n};"
+      },
+      "id": "process-input",
+      "name": "Process Input Data",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [460, 300]
+    },
+    {
+      "parameters": {
+        "model": "gemini-1.5-pro-002",
+        "messages": {
+          "values": [
+            {
+              "role": "system",
+              "content": "You are SYNTIN, the master AI orchestrator for No Friction consulting. Your role is to analyze user requests, conversation history, and uploaded files to determine the optimal workflow path.\n\nYou must respond ONLY with a JSON object following this schema:\n{\n  \"workflow_path\": \"path_name\",\n  \"parameters\": {\n    \"query\": \"refined query for the chosen workflow\",\n    \"priority\": \"high|medium|low\",\n    \"context\": \"additional context for the workflow\"\n  },\n  \"reasoning\": \"brief explanation of why this path was chosen\"\n}\n\nAVAILABLE WORKFLOW PATHS:\n\n1. **coding** - For software development, technical implementation, API integrations, automation scripts, debugging, code reviews\n   - Use when: User needs technical solutions, programming help, system integrations\n\n2. **research** - For market analysis, competitive intelligence, industry trends, academic research, fact-finding\n   - Use when: User needs data gathering, market insights, competitive analysis, industry reports\n\n3. **commercial_modeling** - For business strategy, financial modeling, pricing strategies, ROI analysis, market sizing\n   - Use when: User needs business analysis, financial projections, strategic planning, monetization strategies\n\n4. **data_analysis** - For data processing, statistical analysis, visualization, reporting, insights extraction\n   - Use when: User has datasets to analyze, needs charts/graphs, wants data insights, statistical modeling\n\n5. **writing_and_specs** - For content creation, documentation, proposals, specifications, technical writing\n   - Use when: User needs documents written, proposals created, specifications drafted, content developed\n\n6. **presentations** - For slide decks, visual presentations, pitch materials, executive summaries\n   - Use when: User needs presentation materials, slide decks, visual communication tools\n\n7. **direct_response** - For simple questions, greetings, clarifications that don't require specialized workflows\n   - Use when: Conversational responses, quick answers, general chat\n\nCONTEXT ANALYSIS:\n- File Count: {{ $json.fileCount }}\n- File Types: {{ $json.files ? JSON.stringify($json.files.map(f => f.mimeType)) : 'none' }}\n- User Query: {{ $json.userQuery }}\n- Conversation History: {{ JSON.stringify($json.messages) }}\n\nANALYSIS RULES:\n- If files are uploaded AND user asks for analysis -> likely 'data_analysis'\n- If user mentions 'code', 'API', 'development', 'automation' -> 'coding'\n- If user asks about markets, competitors, trends -> 'research' \n- If user needs business strategy, financials, ROI -> 'commercial_modeling'\n- If user wants documents, proposals, specs -> 'writing_and_specs'\n- If user needs slides, presentations, pitch deck -> 'presentations'\n- For greetings, simple questions -> 'direct_response'\n\nRespond ONLY with the JSON object. No additional text or formatting."
+            },
+            {
+              "role": "user",
+              "content": "User Query: {{ $json.userQuery }}\n\nFile Count: {{ $json.fileCount }}\n\nFile Details: {{ $json.files ? JSON.stringify($json.files.map(f => ({ name: f.fileName, type: f.mimeType }))) : 'No files uploaded' }}\n\nConversation History: {{ JSON.stringify($json.messages) }}\n\nPlease analyze this request and determine the best workflow path."
+            }
+          ]
+        },
+        "options": {
+          "temperature": 0.1,
+          "maxOutputTokens": 1000
+        }
+      },
+      "id": "gemini-orchestrator",
+      "name": "Gemini Workflow Orchestrator",
+      "type": "n8n-nodes-base.googleVertexAi",
+      "typeVersion": 1,
+      "position": [680, 300],
+      "credentials": {
+        "googleVertexAi": {
+          "id": "google-vertex-ai-creds",
+          "name": "Google Vertex AI Credentials"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "let decision;\ntry {\n  let rawResponse = $input.item.json.content || $input.item.json.response || '';\n  rawResponse = rawResponse.replace(/```json\\n?|```\\n?/g, '').trim();\n  decision = JSON.parse(rawResponse);\n  \n  if (!decision.workflow_path || !decision.parameters) {\n    throw new Error('Invalid decision structure');\n  }\n} catch (error) {\n  console.log('Failed to parse AI decision:', error.message);\n  decision = {\n    workflow_path: 'direct_response',\n    parameters: {\n      query: $('process-input').item.json.userQuery || 'Hello',\n      priority: 'low',\n      context: 'Fallback due to parsing error'\n    },\n    reasoning: 'Default fallback response'\n  };\n}\n\nreturn {\n  ...decision,\n  originalData: $('process-input').item.json\n};"
+      },
+      "id": "parse-orchestrator-decision",
+      "name": "Parse Orchestrator Decision",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [900, 300]
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "={{ $json.workflow_path }}",
+            "typeValidation": "strict"
+          },
+          "conditions": [
+            {
+              "leftValue": "={{ $json.workflow_path }}",
+              "rightValue": "coding",
+              "operator": {
+                "type": "string",
+                "operation": "equals"
+              }
+            }
+          ],
+          "combinator": "and"
+        }
+      },
+      "id": "route-coding",
+      "name": "Route to Coding",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2,
+      "position": [1120, 80]
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "={{ $json.workflow_path }}",
+            "typeValidation": "strict"
+          },
+          "conditions": [
+            {
+              "leftValue": "={{ $json.workflow_path }}",
+              "rightValue": "research",
+              "operator": {
+                "type": "string",
+                "operation": "equals"
+              }
+            }
+          ],
+          "combinator": "and"
+        }
+      },
+      "id": "route-research",
+      "name": "Route to Research",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2,
+      "position": [1120, 160]
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "={{ $json.workflow_path }}",
+            "typeValidation": "strict"
+          },
+          "conditions": [
+            {
+              "leftValue": "={{ $json.workflow_path }}",
+              "rightValue": "commercial_modeling",
+              "operator": {
+                "type": "string",
+                "operation": "equals"
+              }
+            }
+          ],
+          "combinator": "and"
+        }
+      },
+      "id": "route-commercial-modeling",
+      "name": "Route to Commercial Modeling",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2,
+      "position": [1120, 240]
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "={{ $json.workflow_path }}",
+            "typeValidation": "strict"
+          },
+          "conditions": [
+            {
+              "leftValue": "={{ $json.workflow_path }}",
+              "rightValue": "data_analysis",
+              "operator": {
+                "type": "string",
+                "operation": "equals"
+              }
+            }
+          ],
+          "combinator": "and"
+        }
+      },
+      "id": "route-data-analysis",
+      "name": "Route to Data Analysis",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2,
+      "position": [1120, 320]
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "={{ $json.workflow_path }}",
+            "typeValidation": "strict"
+          },
+          "conditions": [
+            {
+              "leftValue": "={{ $json.workflow_path }}",
+              "rightValue": "writing_and_specs",
+              "operator": {
+                "type": "string",
+                "operation": "equals"
+              }
+            }
+          ],
+          "combinator": "and"
+        }
+      },
+      "id": "route-writing-specs",
+      "name": "Route to Writing & Specs",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2,
+      "position": [1120, 400]
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "={{ $json.workflow_path }}",
+            "typeValidation": "strict"
+          },
+          "conditions": [
+            {
+              "leftValue": "={{ $json.workflow_path }}",
+              "rightValue": "presentations",
+              "operator": {
+                "type": "string",
+                "operation": "equals"
+              }
+            }
+          ],
+          "combinator": "and"
+        }
+      },
+      "id": "route-presentations",
+      "name": "Route to Presentations",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2,
+      "position": [1120, 480]
+    },
+    {
+      "parameters": {
+        "workflowId": "coding-workflow",
+        "fields": {
+          "values": [
+            {
+              "name": "query",
+              "value": "={{ $json.parameters.query }}"
+            },
+            {
+              "name": "priority",
+              "value": "={{ $json.parameters.priority }}"
+            },
+            {
+              "name": "context",
+              "value": "={{ $json.parameters.context }}"
+            },
+            {
+              "name": "userId",
+              "value": "={{ $json.originalData.userId }}"
+            },
+            {
+              "name": "files",
+              "value": "={{ JSON.stringify($json.originalData.files) }}"
+            },
+            {
+              "name": "reasoning",
+              "value": "={{ $json.reasoning }}"
+            }
+          ]
+        }
+      },
+      "id": "execute-coding",
+      "name": "Execute Coding Workflow",
+      "type": "n8n-nodes-base.executeWorkflow",
+      "typeVersion": 1,
+      "position": [1380, 80]
+    },
+    {
+      "parameters": {
+        "workflowId": "research-workflow",
+        "fields": {
+          "values": [
+            {
+              "name": "query",
+              "value": "={{ $json.parameters.query }}"
+            },
+            {
+              "name": "priority",
+              "value": "={{ $json.parameters.priority }}"
+            },
+            {
+              "name": "context",
+              "value": "={{ $json.parameters.context }}"
+            },
+            {
+              "name": "userId",
+              "value": "={{ $json.originalData.userId }}"
+            },
+            {
+              "name": "files",
+              "value": "={{ JSON.stringify($json.originalData.files) }}"
+            },
+            {
+              "name": "reasoning",
+              "value": "={{ $json.reasoning }}"
+            }
+          ]
+        }
+      },
+      "id": "execute-research",
+      "name": "Execute Research Workflow",
+      "type": "n8n-nodes-base.executeWorkflow",
+      "typeVersion": 1,
+      "position": [1380, 160]
+    },
+    {
+      "parameters": {
+        "workflowId": "commercial-modeling-workflow",
+        "fields": {
+          "values": [
+            {
+              "name": "query",
+              "value": "={{ $json.parameters.query }}"
+            },
+            {
+              "name": "priority",
+              "value": "={{ $json.parameters.priority }}"
+            },
+            {
+              "name": "context",
+              "value": "={{ $json.parameters.context }}"
+            },
+            {
+              "name": "userId",
+              "value": "={{ $json.originalData.userId }}"
+            },
+            {
+              "name": "files",
+              "value": "={{ JSON.stringify($json.originalData.files) }}"
+            },
+            {
+              "name": "reasoning",
+              "value": "={{ $json.reasoning }}"
+            }
+          ]
+        }
+      },
+      "id": "execute-commercial-modeling",
+      "name": "Execute Commercial Modeling",
+      "type": "n8n-nodes-base.executeWorkflow",
+      "typeVersion": 1,
+      "position": [1380, 240]
+    },
+    {
+      "parameters": {
+        "workflowId": "data-analysis-workflow",
+        "fields": {
+          "values": [
+            {
+              "name": "query",
+              "value": "={{ $json.parameters.query }}"
+            },
+            {
+              "name": "priority",
+              "value": "={{ $json.parameters.priority }}"
+            },
+            {
+              "name": "context",
+              "value": "={{ $json.parameters.context }}"
+            },
+            {
+              "name": "userId",
+              "value": "={{ $json.originalData.userId }}"
+            },
+            {
+              "name": "files",
+              "value": "={{ JSON.stringify($json.originalData.files) }}"
+            },
+            {
+              "name": "reasoning",
+              "value": "={{ $json.reasoning }}"
+            }
+          ]
+        }
+      },
+      "id": "execute-data-analysis",
+      "name": "Execute Data Analysis",
+      "type": "n8n-nodes-base.executeWorkflow",
+      "typeVersion": 1,
+      "position": [1380, 320]
+    },
+    {
+      "parameters": {
+        "workflowId": "writing-specs-workflow",
+        "fields": {
+          "values": [
+            {
+              "name": "query",
+              "value": "={{ $json.parameters.query }}"
+            },
+            {
+              "name": "priority",
+              "value": "={{ $json.parameters.priority }}"
+            },
+            {
+              "name": "context",
+              "value": "={{ $json.parameters.context }}"
+            },
+            {
+              "name": "userId",
+              "value": "={{ $json.originalData.userId }}"
+            },
+            {
+              "name": "files",
+              "value": "={{ JSON.stringify($json.originalData.files) }}"
+            },
+            {
+              "name": "reasoning",
+              "value": "={{ $json.reasoning }}"
+            }
+          ]
+        }
+      },
+      "id": "execute-writing-specs",
+      "name": "Execute Writing & Specs",
+      "type": "n8n-nodes-base.executeWorkflow",
+      "typeVersion": 1,
+      "position": [1380, 400]
+    },
+    {
+      "parameters": {
+        "workflowId": "presentations-workflow",
+        "fields": {
+          "values": [
+            {
+              "name": "query",
+              "value": "={{ $json.parameters.query }}"
+            },
+            {
+              "name": "priority",
+              "value": "={{ $json.parameters.priority }}"
+            },
+            {
+              "name": "context",
+              "value": "={{ $json.parameters.context }}"
+            },
+            {
+              "name": "userId",
+              "value": "={{ $json.originalData.userId }}"
+            },
+            {
+              "name": "files",
+              "value": "={{ JSON.stringify($json.originalData.files) }}"
+            },
+            {
+              "name": "reasoning",
+              "value": "={{ $json.reasoning }}"
+            }
+          ]
+        }
+      },
+      "id": "execute-presentations",
+      "name": "Execute Presentations",
+      "type": "n8n-nodes-base.executeWorkflow",
+      "typeVersion": 1,
+      "position": [1380, 480]
+    },
+    {
+      "parameters": {
+        "jsCode": "const query = $json.parameters?.query || $json.originalData?.userQuery || 'Hello';\nconst context = $json.parameters?.context || 'Direct conversational response';\n\nreturn {\n  workflow_path: 'direct_response',\n  tool_output: `Direct response for: ${query}\\nContext: ${context}`,\n  originalData: $json.originalData,\n  reasoning: $json.reasoning || 'Simple conversational response'\n};"
+      },
+      "id": "direct-response-handler",
+      "name": "Direct Response Handler",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [1380, 560]
+    },
+    {
+      "parameters": {
+        "url": "https://openrouter.ai/api/v1/chat/completions",
+        "authentication": "headerAuth",
+        "requestMethod": "POST",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            }
+          ]
+        },
+        "sendBody": true,
+        "contentType": "json",
+        "jsonBody": "={{ {\n  \"model\": $('parse-orchestrator-decision').item.json.originalData.selectedModel,\n  \"messages\": [\n    {\n      \"role\": \"system\",\n      \"content\": $('parse-orchestrator-decision').item.json.originalData.systemPrompt || \"You are SYNTIN, the AI agent for No Friction consulting. Your persona is expert, insightful, commercially-focused, and you provide rich, well-formatted responses with emojis when appropriate. You have just completed a \" + $json.workflow_path + \" workflow. Synthesize the results into a compelling, actionable response that demonstrates deep expertise and provides clear value to the client.\"\n    },\n    ...$('parse-orchestrator-decision').item.json.originalData.messages,\n    {\n      \"role\": \"user\",\n      \"content\": $('parse-orchestrator-decision').item.json.originalData.userQuery\n    },\n    {\n      \"role\": \"assistant\",\n      \"content\": \"(Internal context: I executed the '\" + $json.workflow_path + \"' workflow based on this reasoning: \" + $json.reasoning + \". Here are the results to synthesize: \" + JSON.stringify($json.tool_output) + \")\"\n    }\n  ]\n} }}"
+      },
+      "id": "generate-final-response",
+      "name": "Generate Final Response",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4,
+      "position": [1600, 320],
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "openrouter-api-key",
+          "name": "OpenRouter API Key"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "const originalData = $('parse-orchestrator-decision').item.json.originalData;\nconst aiResponse = $json.choices[0].message.content;\nconst workflowPath = $('parse-orchestrator-decision').item.json.workflow_path;\nconst reasoning = $('parse-orchestrator-decision').item.json.reasoning;\n\nconst updatedHistory = [\n  ...originalData.messages,\n  {\n    role: 'user',\n    content: originalData.userQuery\n  },\n  {\n    role: 'ai',\n    content: aiResponse,\n    workflow_used: workflowPath,\n    reasoning: reasoning\n  }\n];\n\nreturn {\n  userId: originalData.userId,\n  updatedHistory: JSON.stringify(updatedHistory),\n  aiResponse: aiResponse,\n  workflowPath: workflowPath,\n  reasoning: reasoning\n};"
+      },
+      "id": "prepare-save-state",
+      "name": "Prepare Save State",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [1820, 320]
+    },
+    {
+      "parameters": {
+        "operation": "update",
+        "base": {
+          "__rl": true,
+          "value": "YOUR_AIRTABLE_BASE_ID",
+          "mode": "id"
+        },
+        "table": {
+          "__rl": true,
+          "value": "Conversations",
+          "mode": "name"
+        },
+        "updateKey": "userId",
+        "columns": {
+          "mappingMode": "defineBelow",
+          "values": [
+            {
+              "column": "ConversationHistory",
+              "value": "={{ $json.updatedHistory }}"
+            },
+            {
+              "column": "LastUpdated",
+              "value": "={{ $now }}"
+            },
+            {
+              "column": "LastWorkflowPath",
+              "value": "={{ $json.workflowPath }}"
+            },
+            {
+              "column": "LastReasoning",
+              "value": "={{ $json.reasoning }}"
+            }
+          ]
+        }
+      },
+      "id": "save-conversation",
+      "name": "Save Conversation State",
+      "type": "n8n-nodes-base.airtable",
+      "typeVersion": 2,
+      "position": [2040, 320],
+      "credentials": {
+        "airtableTokenApi": {
+          "id": "airtable-api-key",
+          "name": "Airtable API Key"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "respondWith": "json",
+        "responseBody": "={{ {\n  \"role\": \"ai\",\n  \"content\": $('prepare-save-state').item.json.aiResponse,\n  \"workflow_path\": $('prepare-save-state').item.json.workflowPath,\n  \"reasoning\": $('prepare-save-state').item.json.reasoning\n} }}"
+      },
+      "id": "respond-to-webhook",
+      "name": "Respond to Webhook",
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1,
+      "position": [2260, 320]
+    },
+    {
+      "parameters": {},
+      "id": "error-trigger",
+      "name": "Error Trigger",
+      "type": "n8n-nodes-base.errorTrigger",
+      "typeVersion": 1,
+      "position": [240, 600]
+    },
+    {
+      "parameters": {
+        "respondWith": "json",
+        "responseBody": "={{ {\n  \"role\": \"ai\",\n  \"content\": \"🚨 I apologize, but I encountered an error while processing your request. Please try again or contact support if the issue persists.\",\n  \"error\": true,\n  \"workflow_path\": \"error\"\n} }}"
+      },
+      "id": "error-response",
+      "name": "Error Response",
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1,
+      "position": [460, 600]
+    }
+  ],
+  "connections": {
+    "Webhook Trigger": {
+      "main": [
+        [
+          {
+            "node": "Process Input Data",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Process Input Data": {
+      "main": [
+        [
+          {
+            "node": "Gemini Workflow Orchestrator",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Gemini Workflow Orchestrator": {
+      "main": [
+        [
+          {
+            "node": "Parse Orchestrator Decision",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Parse Orchestrator Decision": {
+      "main": [
+        [
+          {
+            "node": "Route to Coding",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Route to Research",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Route to Commercial Modeling",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Route to Data Analysis",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Route to Writing & Specs",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Route to Presentations",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Direct Response Handler",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Route to Coding": {
+      "main": [
+        [
+          {
+            "node": "Execute Coding Workflow",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Route to Research": {
+      "main": [
+        [
+          {
+            "node": "Execute Research Workflow",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Route to Commercial Modeling": {
+      "main": [
+        [
+          {
+            "node": "Execute Commercial Modeling",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Route to Data Analysis": {
+      "main": [
+        [
+          {
+            "node": "Execute Data Analysis",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Route to Writing & Specs": {
+      "main": [
+        [
+          {
+            "node": "Execute Writing & Specs",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Route to Presentations": {
+      "main": [
+        [
+          {
+            "node": "Execute Presentations",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Execute Coding Workflow": {
+      "main": [
+        [
+          {
+            "node": "Generate Final Response",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Execute Research Workflow": {
+      "main": [
+        [
+          {
+            "node": "Generate Final Response",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Execute Commercial Modeling": {
+      "main": [
+        [
+          {
+            "node": "Generate Final Response",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Execute Data Analysis": {
+      "main": [
+        [
+          {
+            "node": "Generate Final Response",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Execute Writing & Specs": {
+      "main": [
+        [
+          {
+            "node": "Generate Final Response",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Execute Presentations": {
+      "main": [
+        [
+          {
+            "node": "Generate Final Response",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Direct Response Handler": {
+      "main": [
+        [
+          {
+            "node": "Generate Final Response",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Generate Final Response": {
+      "main": [
+        [
+          {
+            "node": "Generate Final Response": {
+      "main": [
+        [
+          {
+            "node": "Prepare Save State",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Prepare Save State": {
+      "main": [
+        [
+          {
+            "node": "Save Conversation State",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Save Conversation State": {
+      "main": [
+        [
+          {
+            "node": "Respond to Webhook",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Error Trigger": {
+      "main": [
+        [
+          {
+            "node": "Error Response",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "pinData": {},
+  "settings": {
+    "errorWorkflow": {
+      "id": "error-trigger"
+    },
+    "timezone": "America/New_York",
+    "saveManualExecutions": true,
+    "callerPolicy": "workflowsFromSameOwner"
+  },
+  "staticData": {},
+  "tags": [
+    {
+      "createdAt": "2024-01-01T00:00:00.000Z",
+      "updatedAt": "2024-01-01T00:00:00.000Z",
+      "id": "chatbot-orchestrator",
+      "name": "Chatbot Orchestrator"
+    }
+  ],
+  "triggerCount": 1,
+  "updatedAt": "2024-01-01T00:00:00.000Z",
+  "versionId": "1"
+}

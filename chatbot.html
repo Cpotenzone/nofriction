@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-8M3X5312PN"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-8M3X5312PN');
+</script>
+<!-- Hotjar Tracking Code for https://www.nofriction.io -->
+<script>
+    (function(h,o,t,j,a,r){
+        h.hj=h.hj||function(){(h.hj.q=h.hj.q||[]).push(arguments)};
+        h._hjSettings={hjid:6414675,hjsv:6};
+        a=o.getElementsByTagName('head')[0];
+        r=o.createElement('script');r.async=1;
+        r.src=t+h._hjSettings.hjid+j+h._hjSettings.hjsv;
+        a.appendChild(r);
+    })(window,document,'https://static.hotjar.com/c/hotjar-','.js?sv=');
+</script>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>NoFriction Chatbot</title>
+  <style>
+    :root {
+      --bg-color: #0a0a0a;
+      --text-color: #ffffff;
+      --accent-color: #00bcd4;
+      --user-color: #ff4081;
+      --bot-color: #00bcd4;
+      --input-bg: #1a1a1a;
+      --input-text: #ffffff;
+      --input-border: #333333;
+    }
+
+    body {
+      margin: 0;
+      padding: 0;
+      background-color: var(--bg-color);
+      color: var(--text-color);
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+
+    #chat-container {
+      width: 100%;
+      max-width: 600px;
+      height: 80vh;
+      display: flex;
+      flex-direction: column;
+      border: 1px solid var(--input-border);
+      border-radius: 8px;
+      overflow: hidden;
+      box-shadow: 0 0 10px rgba(0, 188, 212, 0.5);
+    }
+
+    #messages {
+      flex: 1;
+      padding: 20px;
+      overflow-y: auto;
+      background-color: var(--bg-color);
+    }
+
+    .message {
+      margin-bottom: 15px;
+      line-height: 1.4;
+    }
+
+    .user {
+      color: var(--user-color);
+      text-align: right;
+    }
+
+    .bot {
+      color: var(--bot-color);
+      text-align: left;
+    }
+
+    #input-area {
+      display: flex;
+      border-top: 1px solid var(--input-border);
+      background-color: var(--input-bg);
+    }
+
+    #user-input {
+      flex: 1;
+      padding: 15px;
+      border: none;
+      background-color: var(--input-bg);
+      color: var(--input-text);
+      font-size: 16px;
+      outline: none;
+    }
+
+    #send-button {
+      padding: 15px 20px;
+      background-color: var(--accent-color);
+      border: none;
+      color: #fff;
+      font-size: 16px;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+
+    #send-button:hover {
+      background-color: #0097a7;
+    }
+
+    /* Scrollbar Styling */
+    #messages::-webkit-scrollbar {
+      width: 8px;
+    }
+
+    #messages::-webkit-scrollbar-track {
+      background: var(--bg-color);
+    }
+
+    #messages::-webkit-scrollbar-thumb {
+      background-color: var(--accent-color);
+      border-radius: 4px;
+    }
+  </style>
+</head>
+<body>
+
+  <div id="chat-container">
+    <div id="messages">
+      <div class="message bot">🤖 Hello! I'm your NoFriction Assistant. How can I help you today?</div>
+    </div>
+    <div id="input-area">
+      <input type="text" id="user-input" placeholder="Type your message..." autocomplete="off" />
+      <button id="send-button">Send</button>
+    </div>
+  </div>
+
+  <script>
+    const messagesContainer = document.getElementById('messages');
+    const userInput = document.getElementById('user-input');
+    const sendButton = document.getElementById('send-button');
+
+    function addMessage(text, sender) {
+      const msg = document.createElement('div');
+      msg.classList.add('message', sender);
+      msg.textContent = text;
+      messagesContainer.appendChild(msg);
+      messagesContainer.scrollTop = messagesContainer.scrollHeight;
+    }
+
+    function sendMessage() {
+      const message = userInput.value.trim();
+      if (!message) return;
+
+      addMessage(message, 'user');
+      userInput.value = '';
+
+      fetch('https://caseyp.app.n8n.cloud/webhook/nofrictionchatbot', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ message })
+      })
+      .then(response => response.json())
+      .then(data => {
+        const reply = data.reply || '🤖 Sorry, I did not understand that.';
+        addMessage(reply, 'bot');
+      })
+      .catch(error => {
+        console.error('Error:', error);
+        addMessage('🤖 Error connecting to the server.', 'bot');
+      });
+    }
+
+    sendButton.addEventListener('click', sendMessage);
+    userInput.addEventListener('keypress', function(e) {
+      if (e.key === 'Enter') sendMessage();
+    });
+  </script>
+
+</body>
+</html>

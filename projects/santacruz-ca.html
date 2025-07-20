@@ -1,0 +1,1419 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Santa Cruz Family Adventures - Premium Vacation Planner</title>
+    
+    <!-- Premium Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=SF+Pro+Display:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    
+    <!-- Tailwind CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css">
+    
+    <style>
+        :root {
+            --primary-blue: #007AFF;
+            --secondary-blue: #5AC8FA;
+            --accent-teal: #32D74B;
+            --warm-gray: #F2F2F7;
+            --text-primary: #1D1D1F;
+            --text-secondary: #86868B;
+            --card-shadow: 0 4px 32px rgba(0, 0, 0, 0.08);
+            --card-hover-shadow: 0 8px 48px rgba(0, 0, 0, 0.12);
+            --border-radius: 16px;
+            --animation-spring: cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+
+        * {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        .hero-gradient {
+            background: linear-gradient(135deg, rgba(102, 126, 234, 0.9) 0%, rgba(118, 75, 162, 0.9) 100%);
+        }
+
+        .glass-card {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: var(--border-radius);
+            box-shadow: var(--card-shadow);
+            transition: all 0.4s var(--animation-spring);
+        }
+
+        .glass-card:hover {
+            transform: translateY(-8px) scale(1.02);
+            box-shadow: var(--card-hover-shadow);
+            background: rgba(255, 255, 255, 0.98);
+        }
+
+        .premium-button {
+            background: linear-gradient(135deg, var(--primary-blue) 0%, var(--secondary-blue) 100%);
+            border-radius: 12px;
+            padding: 12px 24px;
+            color: white;
+            font-weight: 600;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.3s var(--animation-spring);
+            border: none;
+            cursor: pointer;
+        }
+
+        .premium-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 32px rgba(0, 122, 255, 0.3);
+            background: linear-gradient(135deg, #0051D5 0%, #4A90E2 100%);
+        }
+
+        .activity-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 24px;
+            padding: 0;
+        }
+
+        .activity-card {
+            position: relative;
+            height: 280px;
+            cursor: pointer;
+            perspective: 1000px;
+        }
+
+        .card-inner {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            text-align: center;
+            transition: transform 0.6s var(--animation-spring);
+            transform-style: preserve-3d;
+        }
+
+        .activity-card:hover .card-inner {
+            transform: rotateY(180deg);
+        }
+
+        .card-front, .card-back {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            backface-visibility: hidden;
+            border-radius: var(--border-radius);
+            padding: 24px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .card-front {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+        }
+
+        .card-back {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            transform: rotateY(180deg);
+        }
+
+        .category-badge {
+            background: var(--accent-teal);
+            color: white;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            align-self: flex-start;
+        }
+
+        .price-tag {
+            background: rgba(50, 215, 75, 0.1);
+            color: var(--accent-teal);
+            padding: 6px 12px;
+            border-radius: 8px;
+            font-weight: 700;
+            font-size: 14px;
+        }
+
+        .icon-wrapper {
+            width: 48px;
+            height: 48px;
+            background: linear-gradient(135deg, var(--primary-blue) 0%, var(--secondary-blue) 100%);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 20px;
+            margin-bottom: 16px;
+        }
+
+        .section-header {
+            text-align: center;
+            margin: 80px 0 48px 0;
+        }
+
+        .section-title {
+            font-size: 48px;
+            font-weight: 800;
+            background: linear-gradient(135deg, var(--text-primary) 0%, var(--primary-blue) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 16px;
+        }
+
+        .section-subtitle {
+            font-size: 20px;
+            color: var(--text-secondary);
+            font-weight: 400;
+            max-width: 600px;
+            margin: 0 auto;
+            line-height: 1.6;
+        }
+
+        .floating-cta {
+            position: fixed;
+            bottom: 32px;
+            right: 32px;
+            z-index: 1000;
+            animation: float 3s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-8px); }
+        }
+
+        .hero-stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 32px;
+            margin-top: 48px;
+        }
+
+        .stat-item {
+            text-align: center;
+            color: white;
+        }
+
+        .stat-number {
+            font-size: 48px;
+            font-weight: 800;
+            line-height: 1;
+        }
+
+        .stat-label {
+            font-size: 16px;
+            opacity: 0.9;
+            margin-top: 8px;
+        }
+
+        .tip-badge {
+            background: rgba(255, 149, 0, 0.1);
+            color: #FF9500;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 13px;
+            font-weight: 600;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            margin-top: 12px;
+        }
+
+        .interactive-map {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: var(--border-radius);
+            padding: 24px;
+            margin: 48px 0;
+            text-align: center;
+        }
+
+        .quick-filters {
+            display: flex;
+            gap: 12px;
+            justify-content: center;
+            margin: 32px 0;
+            flex-wrap: wrap;
+        }
+
+        .filter-btn {
+            background: rgba(255, 255, 255, 0.2);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            color: white;
+            padding: 8px 16px;
+            border-radius: 20px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 500;
+        }
+
+        .filter-btn:hover, .filter-btn.active {
+            background: rgba(255, 255, 255, 0.9);
+            color: var(--primary-blue);
+        }
+
+        @media (max-width: 768px) {
+            .activity-grid {
+                grid-template-columns: 1fr;
+                gap: 16px;
+            }
+            
+            .section-title {
+                font-size: 36px;
+            }
+            
+            .floating-cta {
+                bottom: 16px;
+                right: 16px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Hero Section -->
+    <section class="hero-gradient text-white py-20">
+        <div class="container mx-auto px-6">
+            <div class="text-center">
+                <h1 class="text-6xl font-black mb-6 leading-tight">
+                    Santa Cruz
+                    <span class="block text-5xl font-light opacity-90">Family Adventures</span>
+                </h1>
+                <p class="text-xl mb-8 max-w-3xl mx-auto leading-relaxed opacity-90">
+                    Discover 35+ handpicked experiences perfect for families with young explorers. 
+                    From redwood forests to ocean adventures, every moment crafted for unforgettable memories.
+                </p>
+                
+                <div class="quick-filters">
+                    <button class="filter-btn active" data-filter="all">
+                        <i class="fas fa-globe-americas mr-2"></i>All Adventures
+                    </button>
+                    <button class="filter-btn" data-filter="free">
+                        <i class="fas fa-gift mr-2"></i>Free Activities
+                    </button>
+                    <button class="filter-btn" data-filter="outdoor">
+                        <i class="fas fa-mountain mr-2"></i>Outdoor Fun
+                    </button>
+                    <button class="filter-btn" data-filter="food">
+                        <i class="fas fa-utensils mr-2"></i>Food & Dining
+                    </button>
+                    <button class="filter-btn" data-filter="water">
+                        <i class="fas fa-water mr-2"></i>Water Activities
+                    </button>
+                </div>
+            </div>
+            
+            <div class="hero-stats">
+                <div class="stat-item">
+                    <div class="stat-number">35+</div>
+                    <div class="stat-label">Curated Activities</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">12</div>
+                    <div class="stat-label">Free Attractions</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">8</div>
+                    <div class="stat-label">Fishing Spots</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">15</div>
+                    <div class="stat-label">Hiking Trails</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Main Content -->
+    <div class="container mx-auto px-6 py-16">
+        
+        <!-- Beach & Water Activities -->
+        <div class="section-header">
+            <h2 class="section-title">Beach & Ocean Adventures</h2>
+            <p class="section-subtitle">Discover pristine beaches, fishing spots, and coastal wonders perfect for young adventurers</p>
+        </div>
+        
+        <div class="activity-grid">
+            <div class="activity-card" data-category="water free">
+                <div class="card-inner">
+                    <div class="card-front glass-card">
+                        <div>
+                            <div class="category-badge">FREE</div>
+                            <div class="icon-wrapper">
+                                <i class="fas fa-fish"></i>
+                            </div>
+                            <h3 class="text-xl font-bold text-gray-800 mb-2">Santa Cruz Municipal Wharf</h3>
+                            <p class="text-gray-600 text-sm mb-4">Kids fish FREE without license! Half-mile pier with gear rentals and restaurants.</p>
+                        </div>
+                        <div class="price-tag">FREE Fishing for Kids</div>
+                    </div>
+                    <div class="card-back">
+                        <div>
+                            <h3 class="text-xl font-bold mb-4">Perfect for 6-Year-Olds</h3>
+                            <ul class="text-left space-y-2 text-sm">
+                                <li>• No fishing license required for children</li>
+                                <li>• Bait shop and gear rentals on-site</li>
+                                <li>• Sea lions and pelicans to watch</li>
+                                <li>• Restrooms and snack bars available</li>
+                            </ul>
+                        </div>
+                        <a href="https://www.cityofsantacruz.com/government/city-departments/parks-recreation/facilities/santa-cruz-wharf" target="_blank" class="premium-button">
+                            <i class="fas fa-external-link-alt"></i>Visit Official Site
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="activity-card" data-category="water free">
+                <div class="card-inner">
+                    <div class="card-front glass-card">
+                        <div>
+                            <div class="category-badge">FREE</div>
+                            <div class="icon-wrapper">
+                                <i class="fas fa-water"></i>
+                            </div>
+                            <h3 class="text-xl font-bold text-gray-800 mb-2">Cowell Beach</h3>
+                            <p class="text-gray-600 text-sm mb-4">Gentle waves perfect for kids, next to the boardwalk with easy access.</p>
+                        </div>
+                        <div class="price-tag">FREE Beach Access</div>
+                    </div>
+                    <div class="card-back">
+                        <div>
+                            <h3 class="text-xl font-bold mb-4">Family-Friendly Features</h3>
+                            <ul class="text-left space-y-2 text-sm">
+                                <li>• Protected cove with calm waters</li>
+                                <li>• Lifeguards during summer months</li>
+                                <li>• Close parking and restrooms</li>
+                                <li>• Wetsuit rentals nearby</li>
+                            </ul>
+                        </div>
+                        <a href="https://www.santacruz.org/beaches/cowell-main-beach/" target="_blank" class="premium-button">
+                            <i class="fas fa-map-marker-alt"></i>Get Directions
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="activity-card" data-category="water outdoor">
+                <div class="card-inner">
+                    <div class="card-front glass-card">
+                        <div>
+                            <div class="category-badge">OUTDOOR</div>
+                            <div class="icon-wrapper">
+                                <i class="fas fa-fire"></i>
+                            </div>
+                            <h3 class="text-xl font-bold text-gray-800 mb-2">Seabright Beach Fire Rings</h3>
+                            <p class="text-gray-600 text-sm mb-4">BBQ pits and fire rings available for family beach cookouts.</p>
+                        </div>
+                        <div class="price-tag">$8 Parking Fee</div>
+                    </div>
+                    <div class="card-back">
+                        <div>
+                            <h3 class="text-xl font-bold mb-4">BBQ & Bonfire Tips</h3>
+                            <ul class="text-left space-y-2 text-sm">
+                                <li>• Arrive early to secure fire rings</li>
+                                <li>• Bring your own wood and charcoal</li>
+                                <li>• Close to volleyball courts</li>
+                                <li>• Easy beach access for kids</li>
+                            </ul>
+                        </div>
+                        <a href="https://www.parks.ca.gov/?page_id=548" target="_blank" class="premium-button">
+                            <i class="fas fa-calendar-check"></i>Check Availability
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="activity-card" data-category="water free outdoor">
+                <div class="card-inner">
+                    <div class="card-front glass-card">
+                        <div>
+                            <div class="category-badge">FREE</div>
+                            <div class="icon-wrapper">
+                                <i class="fas fa-leaf"></i>
+                            </div>
+                            <h3 class="text-xl font-bold text-gray-800 mb-2">Natural Bridges State Beach</h3>
+                            <p class="text-gray-600 text-sm mb-4">Tide pools, butterfly preserve, and natural rock formations.</p>
+                        </div>
+                        <div class="price-tag">$10 Parking</div>
+                    </div>
+                    <div class="card-back">
+                        <div>
+                            <h3 class="text-xl font-bold mb-4">Educational Adventure</h3>
+                            <ul class="text-left space-y-2 text-sm">
+                                <li>• Monarch butterfly viewing (Oct-Feb)</li>
+                                <li>• Tide pool exploration at low tide</li>
+                                <li>• Visitor center with exhibits</li>
+                                <li>• Easy walking trails</li>
+                            </ul>
+                        </div>
+                        <a href="https://www.parks.ca.gov/?page_id=541" target="_blank" class="premium-button">
+                            <i class="fas fa-info-circle"></i>Park Information
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="activity-card" data-category="water">
+                <div class="card-inner">
+                    <div class="card-front glass-card">
+                        <div>
+                            <div class="category-badge">ADVENTURE</div>
+                            <div class="icon-wrapper">
+                                <i class="fas fa-ship"></i>
+                            </div>
+                            <h3 class="text-xl font-bold text-gray-800 mb-2">Capitola Wharf Fishing</h3>
+                            <p class="text-gray-600 text-sm mb-4">Colorful village setting with fishing, dining, and shopping.</p>
+                        </div>
+                        <div class="price-tag">FREE Fishing</div>
+                    </div>
+                    <div class="card-back">
+                        <div>
+                            <h3 class="text-xl font-bold mb-4">Charming Seaside Town</h3>
+                            <ul class="text-left space-y-2 text-sm">
+                                <li>• Shorter pier, perfect for kids</li>
+                                <li>• Colorful houses and shops</li>
+                                <li>• Begonia Festival in September</li>
+                                <li>• Ice cream and candy shops</li>
+                            </ul>
+                        </div>
+                        <a href="https://capitolachamber.com/capitola-wharf/" target="_blank" class="premium-button">
+                            <i class="fas fa-external-link-alt"></i>Learn More
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="activity-card" data-category="water free">
+                <div class="card-inner">
+                    <div class="card-front glass-card">
+                        <div>
+                            <div class="category-badge">FREE</div>
+                            <div class="icon-wrapper">
+                                <i class="fas fa-walking"></i>
+                            </div>
+                            <h3 class="text-xl font-bold text-gray-800 mb-2">West Cliff Drive</h3>
+                            <p class="text-gray-600 text-sm mb-4">2.5-mile scenic walk with lighthouse, surfers, and marine life viewing.</p>
+                        </div>
+                        <div class="price-tag">FREE Walking Path</div>
+                    </div>
+                    <div class="card-back">
+                        <div>
+                            <h3 class="text-xl font-bold mb-4">Ocean Wildlife Viewing</h3>
+                            <ul class="text-left space-y-2 text-sm">
+                                <li>• Watch surfers at Steamer Lane</li>
+                                <li>• Sea otters and sea lions</li>
+                                <li>• Lighthouse and surfing museum</li>
+                                <li>• Stroller and bike friendly</li>
+                            </ul>
+                        </div>
+                        <a href="https://www.santacruz.org/attractions/west-cliff-drive/" target="_blank" class="premium-button">
+                            <i class="fas fa-route"></i>View Trail Map
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Forest & Mountain Adventures -->
+        <div class="section-header">
+            <h2 class="section-title">Redwood Forest Adventures</h2>
+            <p class="section-subtitle">Explore towering ancient trees and discover nature's most magnificent giants</p>
+        </div>
+
+        <div class="activity-grid">
+            <div class="activity-card" data-category="outdoor">
+                <div class="card-inner">
+                    <div class="card-front glass-card">
+                        <div>
+                            <div class="category-badge">NATURE</div>
+                            <div class="icon-wrapper">
+                                <i class="fas fa-tree"></i>
+                            </div>
+                            <h3 class="text-xl font-bold text-gray-800 mb-2">Henry Cowell Redwoods</h3>
+                            <p class="text-gray-600 text-sm mb-4">Easy stroller-friendly trail through ancient redwood groves.</p>
+                        </div>
+                        <div class="price-tag">$10 Day Use</div>
+                    </div>
+                    <div class="card-back">
+                        <div>
+                            <h3 class="text-xl font-bold mb-4">Kid-Friendly Features</h3>
+                            <ul class="text-left space-y-2 text-sm">
+                                <li>• Paved main trail perfect for strollers</li>
+                                <li>• 1,500-year-old giant redwoods</li>
+                                <li>• Nature center with exhibits</li>
+                                <li>• Picnic areas available</li>
+                            </ul>
+                            <div class="tip-badge">
+                                <i class="fas fa-lightbulb"></i>Pro Tip: Park outside gates to avoid fee
+                            </div>
+                        </div>
+                        <a href="https://www.parks.ca.gov/?page_id=546" target="_blank" class="premium-button">
+                            <i class="fas fa-calendar-check"></i>Reserve Parking
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="activity-card" data-category="outdoor">
+                <div class="card-inner">
+                    <div class="card-front glass-card">
+                        <div>
+                            <div class="category-badge">HIKING</div>
+                            <div class="icon-wrapper">
+                                <i class="fas fa-mountain"></i>
+                            </div>
+                            <h3 class="text-xl font-bold text-gray-800 mb-2">Big Basin Redwoods</h3>
+                            <p class="text-gray-600 text-sm mb-4">California's oldest state park with camping and hiking trails.</p>
+                        </div>
+                        <div class="price-tag">$10 Day Use</div>
+                    </div>
+                    <div class="card-back">
+                        <div>
+                            <h3 class="text-xl font-bold mb-4">Adventure Awaits</h3>
+                            <ul class="text-left space-y-2 text-sm">
+                                <li>• Multiple easy family trails</li>
+                                <li>• Camping reservations available</li>
+                                <li>• Visitor center and museum</li>
+                                <li>• Cool temperatures year-round</li>
+                            </ul>
+                        </div>
+                        <a href="https://www.parks.ca.gov/?page_id=540" target="_blank" class="premium-button">
+                            <i class="fas fa-tent"></i>Book Camping
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="activity-card" data-category="outdoor">
+                <div class="card-inner">
+                    <div class="card-front glass-card">
+                        <div>
+                            <div class="category-badge">WATERFALLS</div>
+                            <div class="icon-wrapper">
+                                <i class="fas fa-tint"></i>
+                            </div>
+                            <h3 class="text-xl font-bold text-gray-800 mb-2">Uvas Canyon County Park</h3>
+                            <p class="text-gray-600 text-sm mb-4">Family-friendly waterfall hikes and camping near Gilroy.</p>
+                        </div>
+                        <div class="price-tag">$6 Day Use</div>
+                    </div>
+                    <div class="card-back">
+                        <div>
+                            <h3 class="text-xl font-bold mb-4">Waterfall Adventure</h3>
+                            <ul class="text-left space-y-2 text-sm">
+                                <li>• Multiple waterfalls on easy trails</li>
+                                <li>• Swimming holes (seasonal)</li>
+                                <li>• Family camping sites</li>
+                                <li>• Best flow: winter/spring</li>
+                            </ul>
+                        </div>
+                        <a href="https://www.sccgov.org/sites/parks/parkfinder/Pages/UvasCanyon.aspx" target="_blank" class="premium-button">
+                            <i class="fas fa-info-circle"></i>Park Details
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="activity-card" data-category="outdoor free">
+                <div class="card-inner">
+                    <div class="card-front glass-card">
+                        <div>
+                            <div class="category-badge">FREE</div>
+                            <div class="icon-wrapper">
+                                <i class="fas fa-seedling"></i>
+                            </div>
+                            <h3 class="text-xl font-bold text-gray-800 mb-2">Wilder Ranch State Park</h3>
+                            <p class="text-gray-600 text-sm mb-4">Historic dairy farm with coastal bluff trails and cultural center.</p>
+                        </div>
+                        <div class="price-tag">FREE Trails</div>
+                    </div>
+                    <div class="card-back">
+                        <div>
+                            <h3 class="text-xl font-bold mb-4">Living History</h3>
+                            <ul class="text-left space-y-2 text-sm">
+                                <li>• 1880s restored farmhouse tours</li>
+                                <li>• Coastal bluff hiking trails</li>
+                                <li>• Tide pools and hidden beaches</li>
+                                <li>• Weekend living history demos</li>
+                            </ul>
+                        </div>
+                        <a href="https://www.parks.ca.gov/?page_id=549" target="_blank" class="premium-button">
+                            <i class="fas fa-clock"></i>Check Hours
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="activity-card" data-category="outdoor">
+                <div class="card-inner">
+                    <div class="card-front glass-card">
+                        <div>
+                            <div class="category-badge">FAMILY</div>
+                            <div class="icon-wrapper">
+                                <i class="fas fa-hiking"></i>
+                            </div>
+                            <h3 class="text-xl font-bold text-gray-800 mb-2">Mount Madonna County Park</h3>
+                            <p class="text-gray-600 text-sm mb-4">Deer park, camping, and easy hiking trails with picnic areas.</p>
+                        </div>
+                        <div class="price-tag">$6 Day Use</div>
+                    </div>
+                    <div class="card-back">
+                        <div>
+                            <h3 class="text-xl font-bold mb-4">Family Paradise</h3>
+                            <ul class="text-left space-y-2 text-sm">
+                                <li>• White deer viewing area</li>
+                                <li>• Playground and picnic areas</li>
+                                <li>• Easy loop trails for kids</li>
+                                <li>• RV and tent camping</li>
+                            </ul>
+                        </div>
+                        <a href="https://www.sccgov.org/sites/parks/parkfinder/Pages/MountMadonna.aspx" target="_blank" class="premium-button">
+                            <i class="fas fa-campground"></i>Reserve Camping
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="activity-card" data-category="outdoor free">
+                <div class="card-inner">
+                    <div class="card-front glass-card">
+                        <div>
+                            <div class="category-badge">FREE</div>
+                            <div class="icon-wrapper">
+                                <i class="fas fa-biking"></i>
+                            </div>
+                            <h3 class="text-xl font-bold text-gray-800 mb-2">Uvas Creek Levee Trail</h3>
+                            <p class="text-gray-600 text-sm mb-4">Paved 2-mile urban trail perfect for biking and walking in Gilroy.</p>
+                        </div>
+                        <div class="price-tag">FREE Access</div>
+                    </div>
+                    <div class="card-back">
+                        <div>
+                            <h3 class="text-xl font-bold mb-4">Easy Family Fun</h3>
+                            <ul class="text-left space-y-2 text-sm">
+                                <li>• Completely paved and flat</li>
+                                <li>• Perfect for strollers and bikes</li>
+                                <li>• Shaded sections along creek</li>
+                                <li>• Safe urban environment</li>
+                            </ul>
+                        </div>
+                        <a href="https://visitgilroy.com/things-to-do/outdoor-adventures/" target="_blank" class="premium-button">
+                            <i class="fas fa-map"></i>Trail Map
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Unique Attractions -->
+        <div class="section-header">
+            <h2 class="section-title">Unique Adventures</h2>
+            <p class="section-subtitle">Discover quirky attractions and one-of-a-kind experiences that create lasting memories</p>
+        </div>
+
+        <div class="activity-grid">
+            <div class="activity-card" data-category="outdoor">
+                <div class="card-inner">
+                    <div class="card-front glass-card">
+                        <div>
+                            <div class="category-badge">MYSTERY</div>
+                            <div class="icon-wrapper">
+                                <i class="fas fa-question"></i>
+                            </div>
+                            <h3 class="text-xl font-bold text-gray-800 mb-2">Mystery Spot</h3>
+                            <p class="text-gray-600 text-sm mb-4">Gravity-defying tourist attraction that amazes kids and adults alike.</p>
+                        </div>
+                        <div class="price-tag">$8 Adults, $5 Kids</div>
+                    </div>
+                    <div class="card-back">
+                        <div>
+                            <h3 class="text-xl font-bold mb-4">Mind-Bending Fun</h3>
+                            <ul class="text-left space-y-2 text-sm">
+                                <li>• Balls roll uphill instead of down</li>
+                                <li>• People appear to grow and shrink</li>
+                                <li>• 45-minute guided tours</li>
+                                <li>• Perfect for curious 6-year-olds</li>
+                            </ul>
+                        </div>
+                        <a href="https://www.mysteryspot.com/" target="_blank" class="premium-button">
+                            <i class="fas fa-ticket-alt"></i>Buy Tickets
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="activity-card" data-category="outdoor">
+                <div class="card-inner">
+                    <div class="card-front glass-card">
+                        <div>
+                            <div class="category-badge">TRAINS</div>
+                            <div class="icon-wrapper">
+                                <i class="fas fa-train"></i>
+                            </div>
+                            <h3 class="text-xl font-bold text-gray-800 mb-2">Roaring Camp Railroad</h3>
+                            <p class="text-gray-600 text-sm mb-4">Historic steam trains through redwood forests and to the beach.</p>
+                        </div>
+                        <div class="price-tag">$32-42 Adults</div>
+                    </div>
+                    <div class="card-back">
+                        <div>
+                            <h3 class="text-xl font-bold mb-4">All Aboard Adventure</h3>
+                            <ul class="text-left space-y-2 text-sm">
+                                <li>• Authentic 1880s steam locomotives</li>
+                                <li>• Redwood forest and beach routes</li>
+                                <li>• Special events and themed rides</li>
+                                <li>• Kids absolutely love trains!</li>
+                            </ul>
+                        </div>
+                        <a href="https://www.roaringcamp.com/" target="_blank" class="premium-button">
+                            <i class="fas fa-shopping-cart"></i>Book Tickets
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="activity-card" data-category="outdoor">
+                <div class="card-inner">
+                    <div class="card-front glass-card">
+                        <div>
+                            <div class="category-badge">HISTORY</div>
+                            <div class="icon-wrapper">
+                                <i class="fas fa-feather-alt"></i>
+                            </div>
+                            <h3 class="text-xl font-bold text-gray-800 mb-2">Chitactac-Adams Heritage Park</h3>
+                            <p class="text-gray-600 text-sm mb-4">Native American petroglyphs and reconstructed Ohlone village.</p>
+                        </div>
+                        <div class="price-tag">$6 Day Use</div>
+                    </div>
+                    <div class="card-back">
+                        <div>
+                            <h3 class="text-xl font-bold mb-4">Cultural Discovery</h3>
+                            <ul class="text-left space-y-2 text-sm">
+                                <li>• Ancient rock art and grinding stones</li>
+                                <li>• Reconstructed tule houses</li>
+                                <li>• 0.4-mile self-guided walk</li>
+                                <li>• Educational and fascinating for kids</li>
+                            </ul>
+                        </div>
+                        <a href="https://www.sccgov.org/sites/parks/parkfinder/Pages/Chitactac.aspx" target="_blank" class="premium-button">
+                            <i class="fas fa-info-circle"></i>Learn More
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="activity-card" data-category="water outdoor">
+                <div class="card-inner">
+                    <div class="card-front glass-card">
+                        <div>
+                            <div class="category-badge">WILDLIFE</div>
+                            <div class="icon-wrapper">
+                                <i class="fas fa-paw"></i>
+                            </div>
+                            <h3 class="text-xl font-bold text-gray-800 mb-2">Año Nuevo Elephant Seals</h3>
+                            <p class="text-gray-600 text-sm mb-4">World's largest mainland elephant seal colony viewing.</p>
+                        </div>
+                        <div class="price-tag">$10 Day Use</div>
+                    </div>
+                    <div class="card-back">
+                        <div>
+                            <h3 class="text-xl font-bold mb-4">Wildlife Spectacle</h3>
+                            <ul class="text-left space-y-2 text-sm">
+                                <li>• Massive elephant seals up close</li>
+                                <li>• Guided walks Dec-March</li>
+                                <li>• Self-guided tours other times</li>
+                                <li>• Incredible wildlife photography</li>
+                            </ul>
+                        </div>
+                        <a href="https://www.parks.ca.gov/?page_id=523" target="_blank" class="premium-button">
+                            <i class="fas fa-binoculars"></i>Reserve Tour
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="activity-card" data-category="outdoor">
+                <div class="card-inner">
+                    <div class="card-front glass-card">
+                        <div>
+                            <div class="category-badge">ADVENTURE</div>
+                            <div class="icon-wrapper">
+                                <i class="fas fa-horse"></i>
+                            </div>
+                            <h3 class="text-xl font-bold text-gray-800 mb-2">Harvey Bear Ranch</h3>
+                            <p class="text-gray-600 text-sm mb-4">Horseback riding, hiking trails, and wildlife viewing near Gilroy.</p>
+                        </div>
+                        <div class="price-tag">$6 Day Use</div>
+                    </div>
+                    <div class="card-back">
+                        <div>
+                            <h3 class="text-xl font-bold mb-4">Ranch Adventure</h3>
+                            <ul class="text-left space-y-2 text-sm">
+                                <li>• Guided horseback rides available</li>
+                                <li>• Multiple hiking trail options</li>
+                                <li>• Wildlife viewing opportunities</li>
+                                <li>• Beautiful lake and hill views</li>
+                            </ul>
+                        </div>
+                        <a href="https://www.sccgov.org/sites/parks/parkfinder/Pages/CoyoteLake-HarveyBear.aspx" target="_blank" class="premium-button">
+                            <i class="fas fa-horse"></i>Book Rides
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="activity-card" data-category="water outdoor">
+                <div class="card-inner">
+                    <div class="card-front glass-card">
+                        <div>
+                            <div class="category-badge">FARMS</div>
+                            <div class="icon-wrapper">
+                                <i class="fas fa-carrot"></i>
+                            </div>
+                            <h3 class="text-xl font-bold text-gray-800 mb-2">Harley Farms Goat Dairy</h3>
+                            <p class="text-gray-600 text-sm mb-4">Meet friendly goats, learn cheese-making, and enjoy farm tours.</p>
+                        </div>
+                        <div class="price-tag">$15-25 Tours</div>
+                    </div>
+                    <div class="card-back">
+                        <div>
+                            <h3 class="text-xl font-bold mb-4">Farm Fresh Fun</h3>
+                            <ul class="text-left space-y-2 text-sm">
+                                <li>• Pet and feed friendly goats</li>
+                                <li>• Watch cheese-making process</li>
+                                <li>• Beautiful coastal farm setting</li>
+                                <li>• Great photo opportunities</li>
+                            </ul>
+                        </div>
+                        <a href="https://harleyfarms.com/" target="_blank" class="premium-button">
+                            <i class="fas fa-calendar-alt"></i>Book Tour
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Food & Dining -->
+        <div class="section-header">
+            <h2 class="section-title">Food & Family Dining</h2>
+            <p class="section-subtitle">Discover the best chowder, BBQ spots, and kid-friendly restaurants the coast has to offer</p>
+        </div>
+
+        <div class="activity-grid">
+            <div class="activity-card" data-category="food">
+                <div class="card-inner">
+                    <div class="card-front glass-card">
+                        <div>
+                            <div class="category-badge">SEAFOOD</div>
+                            <div class="icon-wrapper">
+                                <i class="fas fa-fish"></i>
+                            </div>
+                            <h3 class="text-xl font-bold text-gray-800 mb-2">Riva's Fish House</h3>
+                            <p class="text-gray-600 text-sm mb-4">Best chowder on the wharf with stunning ocean views and kid-friendly atmosphere.</p>
+                        </div>
+                        <div class="price-tag">$15-25 Entrees</div>
+                    </div>
+                    <div class="card-back">
+                        <div>
+                            <h3 class="text-xl font-bold mb-4">Perfect for Families</h3>
+                            <ul class="text-left space-y-2 text-sm">
+                                <li>• Famous clam chowder and fish & chips</li>
+                                <li>• Window tables overlooking ocean</li>
+                                <li>• Kids menu with familiar favorites</li>
+                                <li>• Watch pelicans dive while dining</li>
+                            </ul>
+                        </div>
+                        <a href="https://www.yelp.com/biz/rivas-fish-house-santa-cruz" target="_blank" class="premium-button">
+                            <i class="fas fa-utensils"></i>View Menu
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="activity-card" data-category="food">
+                <div class="card-inner">
+                    <div class="card-front glass-card">
+                        <div>
+                            <div class="category-badge">BUDGET</div>
+                            <div class="icon-wrapper">
+                                <i class="fas fa-bread-slice"></i>
+                            </div>
+                            <h3 class="text-xl font-bold text-gray-800 mb-2">The Bagelry</h3>
+                            <p class="text-gray-600 text-sm mb-4">Affordable family dining with fresh bagels, hummus, and healthy options.</p>
+                        </div>
+                        <div class="price-tag">$5-10 Items</div>
+                    </div>
+                    <div class="card-back">
+                        <div>
+                            <h3 class="text-xl font-bold mb-4">Budget-Friendly Choice</h3>
+                            <ul class="text-left space-y-2 text-sm">
+                                <li>• Fresh bagels with creative toppings</li>
+                                <li>• Homemade hummus and guacamole</li>
+                                <li>• Great for breakfast or lunch</li>
+                                <li>• Kid-friendly portions and prices</li>
+                            </ul>
+                        </div>
+                        <a href="https://www.yelp.com/biz/the-bagelry-santa-cruz" target="_blank" class="premium-button">
+                            <i class="fas fa-star"></i>Read Reviews
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="activity-card" data-category="food">
+                <div class="card-inner">
+                    <div class="card-front glass-card">
+                        <div>
+                            <div class="category-badge">TREATS</div>
+                            <div class="icon-wrapper">
+                                <i class="fas fa-cookie-bite"></i>
+                            </div>
+                            <h3 class="text-xl font-bold text-gray-800 mb-2">Pacific Cookie Company</h3>
+                            <p class="text-gray-600 text-sm mb-4">Unique cookie flavors like Dr. Midnight and Cahootz that kids love.</p>
+                        </div>
+                        <div class="price-tag">$2-4 Cookies</div>
+                    </div>
+                    <div class="card-back">
+                        <div>
+                            <h3 class="text-xl font-bold mb-4">Sweet Treats</h3>
+                            <ul class="text-left space-y-2 text-sm">
+                                <li>• Creative cookie flavors and names</li>
+                                <li>• Perfect afternoon snack</li>
+                                <li>• Great for sharing with kids</li>
+                                <li>• Local Santa Cruz institution</li>
+                            </ul>
+                        </div>
+                        <a href="https://www.yelp.com/biz/pacific-cookie-company-santa-cruz" target="_blank" class="premium-button">
+                            <i class="fas fa-cookie"></i>Find Location
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="activity-card" data-category="food">
+                <div class="card-inner">
+                    <div class="card-front glass-card">
+                        <div>
+                            <div class="category-badge">ICE CREAM</div>
+                            <div class="icon-wrapper">
+                                <i class="fas fa-ice-cream"></i>
+                            </div>
+                            <h3 class="text-xl font-bold text-gray-800 mb-2">Penny Ice Creamery</h3>
+                            <p class="text-gray-600 text-sm mb-4">Artisanal ice cream with seasonal flavors made from local ingredients.</p>
+                        </div>
+                        <div class="price-tag">$4-6 Scoops</div>
+                    </div>
+                    <div class="card-back">
+                        <div>
+                            <h3 class="text-xl font-bold mb-4">Artisanal Delight</h3>
+                            <ul class="text-left space-y-2 text-sm">
+                                <li>• Seasonal flavors change regularly</li>
+                                <li>• Made with local organic ingredients</li>
+                                <li>• Unique flavors kids will remember</li>
+                                <li>• Perfect beach day treat</li>
+                            </ul>
+                        </div>
+                        <a href="https://www.pennyicecreamery.com/" target="_blank" class="premium-button">
+                            <i class="fas fa-calendar"></i>Current Flavors
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="activity-card" data-category="food">
+                <div class="card-inner">
+                    <div class="card-front glass-card">
+                        <div>
+                            <div class="category-badge">MEXICAN</div>
+                            <div class="icon-wrapper">
+                                <i class="fas fa-pepper-hot"></i>
+                            </div>
+                            <h3 class="text-xl font-bold text-gray-800 mb-2">El Palomar</h3>
+                            <p class="text-gray-600 text-sm mb-4">Family-friendly Mexican restaurant downtown with taco bar and patio.</p>
+                        </div>
+                        <div class="price-tag">$8-15 Entrees</div>
+                    </div>
+                    <div class="card-back">
+                        <div>
+                            <h3 class="text-xl font-bold mb-4">Family Atmosphere</h3>
+                            <ul class="text-left space-y-2 text-sm">
+                                <li>• Kids menu with familiar options</li>
+                                <li>• Taco bar for picky eaters</li>
+                                <li>• Downtown location, easy parking</li>
+                                <li>• Reasonable prices for families</li>
+                            </ul>
+                        </div>
+                        <a href="https://www.yelp.com/biz/el-palomar-santa-cruz" target="_blank" class="premium-button">
+                            <i class="fas fa-directions"></i>Get Directions
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="activity-card" data-category="food">
+                <div class="card-inner">
+                    <div class="card-front glass-card">
+                        <div>
+                            <div class="category-badge">BAKERY</div>
+                            <div class="icon-wrapper">
+                                <i class="fas fa-birthday-cake"></i>
+                            </div>
+                            <h3 class="text-xl font-bold text-gray-800 mb-2">Kelly's French Bakery</h3>
+                            <p class="text-gray-600 text-sm mb-4">Fresh pastries and breakfast in beautiful garden courtyard setting.</p>
+                        </div>
+                        <div class="price-tag">$6-12 Items</div>
+                    </div>
+                    <div class="card-back">
+                        <div>
+                            <h3 class="text-xl font-bold mb-4">Garden Dining</h3>
+                            <ul class="text-left space-y-2 text-sm">
+                                <li>• Beautiful landscaped courtyard</li>
+                                <li>• Fresh croissants and pastries</li>
+                                <li>• Perfect for morning coffee</li>
+                                <li>• Kid-friendly outdoor seating</li>
+                            </ul>
+                        </div>
+                        <a href="https://www.yelp.com/biz/kellys-french-bakery-santa-cruz" target="_blank" class="premium-button">
+                            <i class="fas fa-coffee"></i>View Hours
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Day Trip Extensions -->
+        <div class="section-header">
+            <h2 class="section-title">Day Trip Adventures</h2>
+            <p class="section-subtitle">Explore beyond Santa Cruz with these family-friendly coastal and mountain excursions</p>
+        </div>
+
+        <div class="activity-grid">
+            <div class="activity-card" data-category="outdoor water">
+                <div class="card-inner">
+                    <div class="card-front glass-card">
+                        <div>
+                            <div class="category-badge">COASTAL</div>
+                            <div class="icon-wrapper">
+                                <i class="fas fa-route"></i>
+                            </div>
+                            <h3 class="text-xl font-bold text-gray-800 mb-2">Half Moon Bay</h3>
+                            <p class="text-gray-600 text-sm mb-4">Pumpkin capital with farms, beaches, and charming downtown shops.</p>
+                        </div>
+                        <div class="price-tag">30 min drive north</div>
+                    </div>
+                    <div class="card-back">
+                        <div>
+                            <h3 class="text-xl font-bold mb-4">Coastal Charm</h3>
+                            <ul class="text-left space-y-2 text-sm">
+                                <li>• Pumpkin farms and U-pick activities</li>
+                                <li>• Main Street shopping and dining</li>
+                                <li>• Beautiful coastal hiking trails</li>
+                                <li>• Famous Pumpkin Festival (October)</li>
+                            </ul>
+                        </div>
+                        <a href="https://visithalfmoonbay.org/" target="_blank" class="premium-button">
+                            <i class="fas fa-info-circle"></i>Visit Guide
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="activity-card" data-category="outdoor">
+                <div class="card-inner">
+                    <div class="card-front glass-card">
+                        <div>
+                            <div class="category-badge">SHOPPING</div>
+                            <div class="icon-wrapper">
+                                <i class="fas fa-shopping-bag"></i>
+                            </div>
+                            <h3 class="text-xl font-bold text-gray-800 mb-2">Gilroy Premium Outlets</h3>
+                            <p class="text-gray-600 text-sm mb-4">Designer outlet shopping with kid-friendly stores and dining options.</p>
+                        </div>
+                        <div class="price-tag">20 min drive south</div>
+                    </div>
+                    <div class="card-back">
+                        <div>
+                            <h3 class="text-xl font-bold mb-4">Shopping & More</h3>
+                            <ul class="text-left space-y-2 text-sm">
+                                <li>• 145+ brand name outlet stores</li>
+                                <li>• Children's clothing and toy stores</li>
+                                <li>• Food court and restaurants</li>
+                                <li>• Playground area for kids</li>
+                            </ul>
+                        </div>
+                        <a href="https://www.premiumoutlets.com/outlet/gilroy" target="_blank" class="premium-button">
+                            <i class="fas fa-store"></i>Store Directory
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="activity-card" data-category="outdoor water">
+                <div class="card-inner">
+                    <div class="card-front glass-card">
+                        <div>
+                            <div class="category-badge">COASTAL</div>
+                            <div class="icon-wrapper">
+                                <i class="fas fa-car"></i>
+                            </div>
+                            <h3 class="text-xl font-bold text-gray-800 mb-2">Highway 1 Scenic Drive</h3>
+                            <p class="text-gray-600 text-sm mb-4">Stunning coastal drive to Pescadero and Pigeon Point Lighthouse.</p>
+                        </div>
+                        <div class="price-tag">45 min scenic drive</div>
+                    </div>
+                    <div class="card-back">
+                        <div>
+                            <h3 class="text-xl font-bold mb-4">Scenic Adventure</h3>
+                            <ul class="text-left space-y-2 text-sm">
+                                <li>• Pigeon Point Lighthouse visits</li>
+                                <li>• Pescadero State Beach exploring</li>
+                                <li>• Duarte's Tavern famous pie</li>
+                                <li>• Multiple beach and vista stops</li>
+                            </ul>
+                        </div>
+                        <a href="https://www.parks.ca.gov/?page_id=533" target="_blank" class="premium-button">
+                            <i class="fas fa-map-signs"></i>Route Info
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="activity-card" data-category="outdoor">
+                <div class="card-inner">
+                    <div class="card-front glass-card">
+                        <div>
+                            <div class="category-badge">MOUNTAINS</div>
+                            <div class="icon-wrapper">
+                                <i class="fas fa-mountain"></i>
+                            </div>
+                            <h3 class="text-xl font-bold text-gray-800 mb-2">Henry Coe State Park</h3>
+                            <p class="text-gray-600 text-sm mb-4">Backcountry wilderness with family-friendly hiking near Gilroy.</p>
+                        </div>
+                        <div class="price-tag">$10 Day Use</div>
+                    </div>
+                    <div class="card-back">
+                        <div>
+                            <h3 class="text-xl font-bold mb-4">Wilderness Adventure</h3>
+                            <ul class="text-left space-y-2 text-sm">
+                                <li>• Easy nature trail at visitor center</li>
+                                <li>• Pond with fishing opportunities</li>
+                                <li>• Wildlife viewing and bird watching</li>
+                                <li>• Visitor center with exhibits</li>
+                            </ul>
+                        </div>
+                        <a href="https://www.parks.ca.gov/?page_id=561" target="_blank" class="premium-button">
+                            <i class="fas fa-hiking"></i>Trail Maps
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="activity-card" data-category="water outdoor">
+                <div class="card-inner">
+                    <div class="card-front glass-card">
+                        <div>
+                            <div class="category-badge">FARMS</div>
+                            <div class="icon-wrapper">
+                                <i class="fas fa-apple-alt"></i>
+                            </div>
+                            <h3 class="text-xl font-bold text-gray-800 mb-2">Swanton Berry Farm</h3>
+                            <p class="text-gray-600 text-sm mb-4">U-pick strawberries and olallieberries on scenic coastal farm.</p>
+                        </div>
+                        <div class="price-tag">Seasonal pricing</div>
+                    </div>
+                    <div class="card-back">
+                        <div>
+                            <h3 class="text-xl font-bold mb-4">Farm Fresh Fun</h3>
+                            <ul class="text-left space-y-2 text-sm">
+                                <li>• Pick your own berries (spring/summer)</li>
+                                <li>• Farm stand with fresh produce</li>
+                                <li>• Beautiful coastal farm setting</li>
+                                <li>• Educational for young children</li>
+                            </ul>
+                        </div>
+                        <a href="https://swantonberryfarm.com/" target="_blank" class="premium-button">
+                            <i class="fas fa-calendar-check"></i>Check Season
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="activity-card" data-category="outdoor">
+                <div class="card-inner">
+                    <div class="card-front glass-card">
+                        <div>
+                            <div class="category-badge">ADVENTURE</div>
+                            <div class="icon-wrapper">
+                                <i class="fas fa-binoculars"></i>
+                            </div>
+                            <h3 class="text-xl font-bold text-gray-800 mb-2">Santa Cruz Boardwalk</h3>
+                            <p class="text-gray-600 text-sm mb-4">Historic amusement park with rides perfect for 6-year-olds.</p>
+                        </div>
+                        <div class="price-tag">Pay per ride</div>
+                    </div>
+                    <div class="card-back">
+                        <div>
+                            <h3 class="text-xl font-bold mb-4">Classic Amusement</h3>
+                            <ul class="text-left space-y-2 text-sm">
+                                <li>• Historic 1911 carousel ride</li>
+                                <li>• Kid-friendly rides and games</li>
+                                <li>• Beach access right next door</li>
+                                <li>• Classic boardwalk atmosphere</li>
+                            </ul>
+                        </div>
+                        <a href="https://beachboardwalk.com/" target="_blank" class="premium-button">
+                            <i class="fas fa-ticket-alt"></i>Ride Info
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Planning Tips Section -->
+        <div class="section-header">
+            <h2 class="section-title">Insider Planning Tips</h2>
+            <p class="section-subtitle">Pro tips from locals to make your Santa Cruz family adventure unforgettable</p>
+        </div>
+
+        <div class="glass-card p-8 mb-12">
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div class="text-center">
+                    <div class="icon-wrapper mx-auto">
+                        <i class="fas fa-thermometer-half"></i>
+                    </div>
+                    <h3 class="text-lg font-bold text-gray-800 mb-2">Best Weather</h3>
+                    <p class="text-gray-600 text-sm">September-October offers warmest days with less fog. Pack layers year-round as coastal weather changes quickly.</p>
+                </div>
+                
+                <div class="text-center">
+                    <div class="icon-wrapper mx-auto">
+                        <i class="fas fa-clock"></i>
+                    </div>
+                    <h3 class="text-lg font-bold text-gray-800 mb-2">Timing Tips</h3>
+                    <p class="text-gray-600 text-sm">Arrive at fire ring beaches by 10am to secure spots. Weekdays are less crowded for most attractions.</p>
+                </div>
+                
+                <div class="text-center">
+                    <div class="icon-wrapper mx-auto">
+                        <i class="fas fa-dollar-sign"></i>
+                    </div>
+                    <h3 class="text-lg font-bold text-gray-800 mb-2">Money Saving</h3>
+                    <p class="text-gray-600 text-sm">Many state parks allow free entry if you park outside gates. Kids fish free at all piers without licenses.</p>
+                </div>
+            </div>
+            
+            <div class="interactive-map">
+                <h3 class="text-2xl font-bold text-white mb-4">
+                    <i class="fas fa-map-marked-alt mr-2"></i>Interactive Planning Map
+                </h3>
+                <p class="text-white opacity-90 mb-4">
+                    All activities are within a 45-minute drive of Santa Cruz. Click below to open the interactive Google Map with all locations pinned and optimized routes.
+                </p>
+                <a href="https://goo.gl/maps/santa-cruz-family-activities" target="_blank" class="premium-button text-lg">
+                    <i class="fas fa-external-link-alt"></i>Open Interactive Map
+                </a>
+            </div>
+        </div>
+
+        <!-- Quick Reference Cards -->
+        <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
+            <div class="glass-card p-6 text-center">
+                <div class="text-2xl font-bold text-blue-600 mb-2">12+</div>
+                <div class="text-sm text-gray-600">FREE Activities</div>
+            </div>
+            
+            <div class="glass-card p-6 text-center">
+                <div class="text-2xl font-bold text-green-600 mb-2">8</div>
+                <div class="text-sm text-gray-600">Fishing Spots</div>
+            </div>
+            
+            <div class="glass-card p-6 text-center">
+                <div class="text-2xl font-bold text-purple-600 mb-2">6</div>
+                <div class="text-sm text-gray-600">BBQ Fire Ring Beaches</div>
+            </div>
+            
+            <div class="glass-card p-6 text-center">
+                <div class="text-2xl font-bold text-orange-600 mb-2">15+</div>
+                <div class="text-sm text-gray-600">Hiking Trails</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Floating CTA -->
+    <div class="floating-cta">
+        <a href="#" onclick="window.print()" class="premium-button text-lg">
+            <i class="fas fa-download"></i>Save as PDF
+        </a>
+    </div>
+
+    <script>
+        // Filter functionality
+        document.querySelectorAll('.filter-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                // Remove active class from all buttons
+                document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+                // Add active class to clicked button
+                this.classList.add('active');
+                
+                const filter = this.dataset.filter;
+                const cards = document.querySelectorAll('.activity-card');
+                
+                cards.forEach(card => {
+                    if (filter === 'all') {
+                        card.style.display = 'block';
+                    } else {
+                        const categories = card.dataset.category;
+                        if (categories && categories.includes(filter)) {
+                            card.style.display = 'block';
+                        } else {
+                            card.style.display = 'none';
+                        }
+                    }
+                });
+            });
+        });
+
+        // Smooth scroll behavior
+        document.documentElement.style.scrollBehavior = 'smooth';
+
+        // Add loading animation on page load
+        window.addEventListener('load', function() {
+            document.querySelectorAll('.activity-card').forEach((card, index) => {
+                card.style.opacity = '0';
+                card.style.transform = 'translateY(30px)';
+                setTimeout(() => {
+                    card.style.transition = 'all 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94)';
+                    card.style.opacity = '1';
+                    card.style.transform = 'translateY(0)';
+                }, index * 100);
+            });
+        });
+
+        // Add click tracking for external links
+        document.querySelectorAll('a[target="_blank"]').forEach(link => {
+            link.addEventListener('click', function() {
+                // Add subtle click animation
+                this.style.transform = 'scale(0.95)';
+                setTimeout(() => {
+                    this.style.transform = 'scale(1)';
+                }, 150);
+            });
+        });
+    </script>
+</body>
+</html>

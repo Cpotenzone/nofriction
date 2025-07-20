@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-8M3X5312PN"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-8M3X5312PN');
+</script>
+<!-- Hotjar Tracking Code for https://www.nofriction.io -->
+<script>
+    (function(h,o,t,j,a,r){
+        h.hj=h.hj||function(){(h.hj.q=h.hj.q||[]).push(arguments)};
+        h._hjSettings={hjid:6414675,hjsv:6};
+        a=o.getElementsByTagName('head')[0];
+        r=o.createElement('script');r.async=1;
+        r.src=t+h._hjSettings.hjid+j+h._hjSettings.hjsv;
+        a.appendChild(r);
+    })(window,document,'https://static.hotjar.com/c/hotjar-','.js?sv=');
+</script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SaaS User Analytics Dashboard</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.0.0/css/all.min.css">
+    <style>
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+            background-color: #f9fafb;
+            color: #1f2937;
+        }
+        .dashboard-container {
+            max-width: 1500px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+        .card {
+            background-color: white;
+            border-radius: 0.5rem;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+        .card-header {
+            border-bottom: 1px solid #e5e7eb;
+            padding-bottom: 1rem;
+            margin-bottom: 1rem;
+        }
+        .metric-card {
+            background-color: white;
+            border-radius: 0.5rem;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            padding: 1.25rem;
+            text-align: center;
+        }
+        .bg-primary {
+            background-color: #3b82f6;
+        }
+        .text-primary {
+            color: #3b82f6;
+        }
+        .bg-secondary {
+            background-color: #10b981;
+        }
+        .text-secondary {
+            color: #10b981;
+        }
+        .bg-warning {
+            background-color: #f59e0b;
+        }
+        .text-warning {
+            color: #f59e0b;
+        }
+        .bg-info {
+            background-color: #6366f1;
+        }
+        .text-info {
+            color: #6366f1;
+        }
+        .bg-danger {
+            background-color: #ef4444;
+        }
+        .text-danger {
+            color: #ef4444;
+        }
+        .dashboard-img {
+            width: 100%;
+            height: auto;
+            border-radius: 0.5rem;
+        }
+        .insight-card {
+            border-left: 4px solid #3b82f6;
+            padding-left: 1rem;
+            margin-bottom: 1rem;
+        }
+        .avatar {
+            width: 40px;
+            height: 40px;
+            background-color: #dbeafe;
+            color: #3b82f6;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div class="dashboard-container">
+        <!-- Header -->
+        <div class="card bg-gradient-to-r from-blue-500 to-indigo-600 text-white">
+            <div class="flex justify-between items-center">
+                <div>
+                    <h1 class="text-3xl font-bold mb-2">SaaS User Analytics Dashboard</h1>
+                    <p class="text-lg opacity-90">Comprehensive analysis of user activity and engagement</p>
+                </div>
+                <div class="text-right">
+                    <p class="text-sm opacity-80">Date Range: Dec 13, 2024 - Mar 6, 2025</p>
+                    <p class="text-sm opacity-80">Last Updated: May 2023</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Key Metrics Summary -->
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-4 mb-6">
+            <div class="metric-card">
+                <div class="flex flex-col items-center">
+                    <div class="w-12 h-12 mb-4 rounded-full bg-blue-100 flex items-center justify-center">
+                        <i class="fas fa-users text-blue-500 text-xl"></i>
+                    </div>
+                    <h3 class="text-gray-500 text-sm uppercase font-medium">Total Users</h3>
+                    <p class="text-3xl font-bold">737</p>
+                </div>
+            </div>
+            <div class="metric-card">
+                <div class="flex flex-col items-center">
+                    <div class="w-12 h-12 mb-4 rounded-full bg-green-100 flex items-center justify-center">
+                        <i class="fas fa-building text-green-500 text-xl"></i>
+                    </div>
+                    <h3 class="text-gray-500 text-sm uppercase font-medium">Companies</h3>
+                    <p class="text-3xl font-bold">5</p>
+                </div>
+            </div>
+            <div class="metric-card">
+                <div class="flex flex-col items-center">
+                    <div class="w-12 h-12 mb-4 rounded-full bg-purple-100 flex items-center justify-center">
+                        <i class="fas fa-chart-line text-purple-500 text-xl"></i>
+                    </div>
+                    <h3 class="text-gray-500 text-sm uppercase font-medium">Total Activities</h3>
+                    <p class="text-3xl font-bold">11,109</p>
+                </div>
+            </div>
+            <div class="metric-card">
+                <div class="flex flex-col items-center">
+                    <div class="w-12 h-12 mb-4 rounded-full bg-yellow-100 flex items-center justify-center">
+                        <i class="fas fa-sign-in-alt text-yellow-500 text-xl"></i>
+                    </div>
+                    <h3 class="text-gray-500 text-sm uppercase font-medium">Login Events</h3>
+                    <p class="text-3xl font-bold">114</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Main Dashboard Content -->
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+            <!-- Most Active Users -->
+            <div class="card">
+                <div class="card-header">
+                    <h2 class="text-xl font-bold text-gray-800">Top 10 Most Active Users</h2>
+                    <p class="text-sm text-gray-500">Highest engagement users across all companies</p>
+                </div>
+                <div>
+                    <img src="https://gensparkpublicblob.blob.core.windows.net/user-upload-image/generate_and_execute_python_tool_call/tooluse_ig8-YGqITZeRiAOk196Jig/python_result_images/top_10_most_active_users.png" alt="Top 10 Most Active Users" class="dashboard-img">
+                    
+                    <div class="mt-4">
+                        <h3 class="font-semibold text-gray-700 mb-2">High-Value User Analysis</h3>
+                        <ul class="space-y-3 mt-2">
+                            <li class="flex items-center space-x-3 p-2 bg-blue-50 rounded">
+                                <span class="avatar">ST</span>
+                                <div>
+                                    <p class="font-medium">Strip Light T4F (Amteck)</p>
+                                    <p class="text-sm text-gray-600">1,171 activities</p>
+                                </div>
+                            </li>
+                            <li class="flex items-center space-x-3 p-2 rounded">
+                                <span class="avatar" style="background-color: #fef3c7; color: #d97706;">R</span>
+                                <div>
+                                    <p class="font-medium">Receptacle (Amteck)</p>
+                                    <p class="text-sm text-gray-600">1,008 activities</p>
+                                </div>
+                            </li>
+                            <li class="flex items-center space-x-3 p-2 bg-blue-50 rounded">
+                                <span class="avatar" style="background-color: #e0e7ff; color: #4f46e5;">ST</span>
+                                <div>
+                                    <p class="font-medium">Strip Light T2F (Amteck)</p>
+                                    <p class="text-sm text-gray-600">430 activities</p>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Activity Types Distribution -->
+            <div class="card">
+                <div class="card-header">
+                    <h2 class="text-xl font-bold text-gray-800">Distribution of Activity Types</h2>
+                    <p class="text-sm text-gray-500">Breakdown of how users interact with the platform</p>
+                </div>
+                <div>
+                    <img src="https://gensparkpublicblob.blob.core.windows.net/user-upload-image/generate_and_execute_python_tool_call/tooluse_ig8-YGqITZeRiAOk196Jig/python_result_images/distribution_of_activity_types.png" alt="Distribution of Activity Types" class="dashboard-img">
+                    
+                    <div class="mt-4 grid grid-cols-2 gap-3">
+                        <div class="bg-blue-50 p-3 rounded-lg">
+                            <p class="text-sm text-gray-500 uppercase">Updated</p>
+                            <p class="text-xl font-bold">5,772</p>
+                            <p class="text-sm text-gray-600">52% of total</p>
+                        </div>
+                        <div class="bg-green-50 p-3 rounded-lg">
+                            <p class="text-sm text-gray-500 uppercase">Created</p>
+                            <p class="text-xl font-bold">3,960</p>
+                            <p class="text-sm text-gray-600">36% of total</p>
+                        </div>
+                        <div class="bg-red-50 p-3 rounded-lg">
+                            <p class="text-sm text-gray-500 uppercase">Deleted</p>
+                            <p class="text-xl font-bold">1,261</p>
+                            <p class="text-sm text-gray-600">11% of total</p>
+                        </div>
+                        <div class="bg-yellow-50 p-3 rounded-lg">
+                            <p class="text-sm text-gray-500 uppercase">Signed In</p>
+                            <p class="text-xl font-bold">114</p>
+                            <p class="text-sm text-gray-600">1% of total</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Login Frequency by Company -->
+            <div class="card">
+                <div class="card-header">
+                    <h2 class="text-xl font-bold text-gray-800">Login Frequency by Company</h2>
+                    <p class="text-sm text-gray-500">Comparison of user login frequency across different companies</p>
+                </div>
+                <img src="https://gensparkpublicblob.blob.core.windows.net/user-upload-image/generate_and_execute_python_tool_call/tooluse_ig8-YGqITZeRiAOk196Jig/python_result_images/total_login_frequency_by_company.png" alt="Login Frequency by Company" class="dashboard-img">
+                
+                <div class="mt-4">
+                    <h3 class="font-semibold text-gray-700">Company Engagement Analysis</h3>
+                    <div class="bg-gray-50 p-3 mt-2 rounded">
+                        <p class="text-sm"><span class="font-medium">Nintendo</span> appears to have the most consistent user login pattern, with high engagement across multiple users.</p>
+                    </div>
+                    <div class="bg-gray-50 p-3 mt-2 rounded">
+                        <p class="text-sm"><span class="font-medium">CSU</span> shows strong user engagement with regular login activity from their key users.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- User Engagement Trend -->
+            <div class="card">
+                <div class="card-header">
+                    <h2 class="text-xl font-bold text-gray-800">User Engagement Trend (Last 90 Days)</h2>
+                    <p class="text-sm text-gray-500">Daily activity patterns over the past three months</p>
+                </div>
+                <img src="https://gensparkpublicblob.blob.core.windows.net/user-upload-image/generate_and_execute_python_tool_call/tooluse_ig8-YGqITZeRiAOk196Jig/python_result_images/user_engagement_trend_last_90_days.png" alt="User Engagement Trend" class="dashboard-img">
+                
+                <div class="mt-4 p-4 bg-blue-50 rounded-lg">
+                    <h3 class="font-semibold text-blue-800"><i class="fas fa-lightbulb mr-2"></i>Engagement Insight</h3>
+                    <p class="text-sm text-gray-700 mt-1">Activity peaks are visible in late January and mid-February, suggesting potential product updates or feature releases driving increased engagement.</p>
+                </div>
+            </div>
+
+            <!-- Most Accessed Pages -->
+            <div class="card">
+                <div class="card-header">
+                    <h2 class="text-xl font-bold text-gray-800">Most Frequently Accessed Pages</h2>
+                    <p class="text-sm text-gray-500">Pages with highest user interaction</p>
+                </div>
+                <div>
+                    <img src="https://gensparkpublicblob.blob.core.windows.net/user-upload-image/generate_and_execute_python_tool_call/tooluse_ig8-YGqITZeRiAOk196Jig/python_result_images/most_frequently_accessed_pages.png" alt="Most Frequently Accessed Pages" class="dashboard-img">
+                    
+                    <div class="mt-4">
+                        <table class="min-w-full bg-white">
+                            <thead class="bg-gray-50">
+                                <tr>
+                                    <th class="py-2 px-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Page</th>
+                                    <th class="py-2 px-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Access Count</th>
+                                </tr>
+                            </thead>
+                            <tbody class="divide-y divide-gray-200">
+                                <tr>
+                                    <td class="py-2 px-3 text-sm font-medium text-gray-900">Asset</td>
+                                    <td class="py-2 px-3 text-sm text-gray-500">7,131</td>
+                                </tr>
+                                <tr>
+                                    <td class="py-2 px-3 text-sm font-medium text-gray-900">Asset Plan</td>
+                                    <td class="py-2 px-3 text-sm text-gray-500">1,589</td>
+                                </tr>
+                                <tr>
+                                    <td class="py-2 px-3 text-sm font-medium text-gray-900">Breaker</td>
+                                    <td class="py-2 px-3 text-sm text-gray-500">555</td>
+                                </tr>
+                                <tr>
+                                    <td class="py-2 px-3 text-sm font-medium text-gray-900">Fed from for Receptacle</td>
+                                    <td class="py-2 px-3 text-sm text-gray-500">390</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Activity Heatmap -->
+            <div class="card">
+                <div class="card-header">
+                    <h2 class="text-xl font-bold text-gray-800">User Activity Heatmap</h2>
+                    <p class="text-sm text-gray-500">When users are most active by day and hour</p>
+                </div>
+                <img src="https://gensparkpublicblob.blob.core.windows.net/user-upload-image/generate_and_execute_python_tool_call/tooluse_ig8-YGqITZeRiAOk196Jig/python_result_images/user_activity_heatmap_by_day_and_hour.png" alt="User Activity Heatmap" class="dashboard-img">
+                
+                <div class="mt-4 p-4 bg-yellow-50 rounded-lg">
+                    <h3 class="font-semibold text-yellow-800"><i class="fas fa-clock mr-2"></i>Peak Activity Times</h3>
+                    <p class="text-sm text-gray-700 mt-1">Users are most active during midweek business hours, with peak engagement on Wednesdays and Thursdays around 10am-2pm.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Full Width Sections -->
+        <div class="mt-6">
+            <!-- User Retention -->
+            <div class="card">
+                <div class="card-header">
+                    <h2 class="text-xl font-bold text-gray-800">User Retention Distribution</h2>
+                    <p class="text-sm text-gray-500">Analysis of user retention patterns</p>
+                </div>
+                <img src="https://gensparkpublicblob.blob.core.windows.net/user-upload-image/generate_and_execute_python_tool_call/tooluse_ig8-YGqITZeRiAOk196Jig/python_result_images/user_retention_distribution.png" alt="User Retention Distribution" class="dashboard-img">
+            </div>
+
+            <!-- Activity Types by Company -->
+            <div class="card">
+                <div class="card-header">
+                    <h2 class="text-xl font-bold text-gray-800">Activity Types by Company</h2>
+                    <p class="text-sm text-gray-500">How different companies use the platform</p>
+                </div>
+                <img src="https://gensparkpublicblob.blob.core.windows.net/user-upload-image/generate_and_execute_python_tool_call/tooluse_ig8-YGqITZeRiAOk196Jig/python_result_images/activity_types_by_company.png" alt="Activity Types by Company" class="dashboard-img">
+            </div>
+
+            <!-- Insights & Recommendations -->
+            <div class="card">
+                <div class="card-header">
+                    <h2 class="text-xl font-bold text-gray-800">Key Insights & Recommendations</h2>
+                    <p class="text-sm text-gray-500">Strategic opportunities to improve user engagement and product experience</p>
+                </div>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-5 mt-4">
+                    <div class="insight-card" style="border-left-color: #3b82f6;">
+                        <h3 class="font-bold text-blue-600">High-Value User Focus</h3>
+                        <p class="text-sm text-gray-700 mt-1">Amteck users dominate activity, particularly with lighting assets (Strip Light T4F, Strip Light T2F). Consider developing deeper integrations and premium features for lighting components to enhance value for these power users.</p>
+                    </div>
+                    
+                    <div class="insight-card" style="border-left-color: #10b981;">
+                        <h3 class="font-bold text-green-600">Feature Development Priority</h3>
+                        <p class="text-sm text-gray-700 mt-1">The Asset page receives over 64% of all activity. Prioritize enhancements to asset management workflows, improved bulk editing capabilities, and advanced filtering options to increase efficiency.</p>
+                    </div>
+                    
+                    <div class="insight-card" style="border-left-color: #f59e0b;">
+                        <h3 class="font-bold text-yellow-600">Engagement Opportunity</h3>
+                        <p class="text-sm text-gray-700 mt-1">User activity peaks midweek during business hours (10am-2pm). Schedule product announcements, webinars and support resources during these peak engagement times to maximize reach and impact.</p>
+                    </div>
+                    
+                    <div class="insight-card" style="border-left-color: #ef4444;">
+                        <h3 class="font-bold text-red-600">Retention Strategy</h3>
+                        <p class="text-sm text-gray-700 mt-1">Implement targeted onboarding improvements for companies with lower engagement patterns. Consider dedicated account management for Nintendo and CSU users who demonstrate high retention and consistent engagement.</p>
+                    </div>
+                    
+                    <div class="insight-card" style="border-left-color: #8b5cf6;">
+                        <h3 class="font-bold text-purple-600">Growth Opportunity</h3>
+                        <p class="text-sm text-gray-700 mt-1">Creation events (36%) and updating assets (52%) dominate user activities. Consider adding collaborative features like commenting, sharing, and version control to enhance team workflows and drive deeper platform adoption.</p>
+                    </div>
+                    
+                    <div class="insight-card" style="border-left-color: #0ea5e9;">
+                        <h3 class="font-bold text-sky-600">Product Development</h3>
+                        <p class="text-sm text-gray-700 mt-1">The high frequency of Asset Plan page usage suggests users need better ways to visualize relationships. Develop enhanced visualization tools and reporting capabilities to better serve this need.</p>
+                    </div>
+                </div>
+                
+                <div class="mt-8 p-5 bg-gradient-to-r from-blue-50 to-indigo-50 rounded-lg">
+                    <h3 class="text-lg font-bold text-indigo-700">Executive Summary</h3>
+                    <p class="text-gray-700 mt-2">The user data reveals a platform with strong engagement from technical users primarily focused on asset management and planning. Amteck emerges as the most active company with significant activity around lighting components. Users demonstrate consistent engagement patterns with high retention rates among Nintendo and CSU users.</p>
+                    <p class="text-gray-700 mt-2">To drive growth, focus product development on enhancing asset management capabilities, adding collaboration features, and improving visualization tools. Target marketing efforts toward electrical engineering firms with similar profiles to your top users, and consider developing industry-specific templates to accelerate onboarding.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

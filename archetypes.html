@@ -1,0 +1,980 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Brand Archetypes: Complete Strategic Framework Guide</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css">
+    <style>
+        body {
+            background: linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #334155 100%);
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+        }
+        
+        .flip-card {
+            background-color: transparent;
+            perspective: 1000px;
+            height: 500px;
+        }
+        
+        .flip-card-inner {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            text-align: center;
+            transition: transform 0.8s cubic-bezier(0.4, 0.0, 0.2, 1);
+            transform-style: preserve-3d;
+        }
+        
+        .flip-card:hover .flip-card-inner {
+            transform: rotateY(180deg);
+        }
+        
+        .flip-card-front, .flip-card-back {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            -webkit-backface-visibility: hidden;
+            backface-visibility: hidden;
+            border-radius: 16px;
+            border: 1px solid rgba(59, 130, 246, 0.3);
+            background: linear-gradient(145deg, rgba(15, 23, 42, 0.95) 0%, rgba(30, 41, 59, 0.95) 100%);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.3), 0 10px 10px -5px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+        }
+        
+        .flip-card-back {
+            transform: rotateY(180deg);
+        }
+        
+        .flip-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 25px 50px -12px rgba(59, 130, 246, 0.25);
+        }
+        
+        .archetype-icon {
+            background: linear-gradient(135deg, #3b82f6, #06b6d4);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .hero-gradient {
+            background: linear-gradient(135deg, #3b82f6 0%, #06b6d4 50%, #8b5cf6 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .tech-logo {
+            width: 32px;
+            height: 32px;
+            border-radius: 8px;
+            background: linear-gradient(135deg, #3b82f6, #06b6d4);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            font-size: 14px;
+        }
+        
+        .pulse-animation {
+            animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+        }
+        
+        @keyframes pulse {
+            0%, 100% {
+                opacity: 1;
+            }
+            50% {
+                opacity: .7;
+            }
+        }
+        
+        .glow-effect {
+            box-shadow: 0 0 20px rgba(59, 130, 246, 0.3);
+        }
+        
+        @media print {
+            .flip-card-inner {
+                transform: none !important;
+            }
+            .flip-card-back {
+                transform: none !important;
+                position: relative !important;
+                margin-top: 20px;
+            }
+        }
+    </style>
+</head>
+<body class="min-h-screen text-white">
+    <div class="container mx-auto px-6 py-12">
+        <!-- Header Section -->
+        <div class="text-center mb-16">
+            <h1 class="text-5xl md:text-6xl font-bold mb-6 hero-gradient">Brand Archetypes</h1>
+            <p class="text-xl md:text-2xl text-blue-100 mb-8 max-w-4xl mx-auto leading-relaxed">
+                Master the strategic framework that creates authentic brand voices and immediate market recognition
+            </p>
+            <div class="inline-flex items-center space-x-4 bg-blue-900/30 px-8 py-4 rounded-full border border-blue-400/30">
+                <i class="fas fa-lightbulb text-blue-400 text-lg"></i>
+                <span class="text-blue-100">12 Strategic Archetypes • Tech Examples • Implementation Guide</span>
+            </div>
+        </div>
+
+        <!-- Archetypes Grid -->
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-16">
+            <!-- The Sage -->
+            <div class="flip-card">
+                <div class="flip-card-inner">
+                    <div class="flip-card-front p-8 flex flex-col justify-between">
+                        <div>
+                            <div class="text-center mb-6">
+                                <i class="fas fa-brain archetype-icon text-6xl mb-4"></i>
+                                <h3 class="text-2xl font-bold text-blue-100 mb-2">The Sage</h3>
+                                <p class="text-blue-300 text-sm uppercase tracking-wide">Knowledge & Wisdom</p>
+                            </div>
+                            
+                            <div class="space-y-4 text-sm">
+                                <div>
+                                    <h4 class="text-blue-400 font-semibold mb-2">Core Motivation</h4>
+                                    <p class="text-gray-300">To understand the world and share knowledge that helps others make informed decisions</p>
+                                </div>
+                                
+                                <div>
+                                    <h4 class="text-blue-400 font-semibold mb-2">Communication Style</h4>
+                                    <p class="text-gray-300">Authoritative, educational, research-backed, and intellectually rigorous</p>
+                                </div>
+                                
+                                <div>
+                                    <h4 class="text-blue-400 font-semibold mb-2">Strategic Application</h4>
+                                    <p class="text-gray-300">Perfect for thought leadership, complex B2B solutions, and educational technology</p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="mt-6 text-center">
+                            <span class="text-xs text-blue-400 uppercase tracking-wide">Hover to see examples</span>
+                        </div>
+                    </div>
+                    
+                    <div class="flip-card-back p-8 flex flex-col justify-center">
+                        <h3 class="text-xl font-bold text-blue-100 mb-6 text-center">Tech Examples</h3>
+                        
+                        <div class="space-y-6">
+                            <div class="flex items-start space-x-4">
+                                <div class="tech-logo">G</div>
+                                <div>
+                                    <h4 class="text-blue-400 font-semibold">Google</h4>
+                                    <p class="text-gray-300 text-sm">Organizes world's information, emphasizes search intelligence and data-driven insights</p>
+                                </div>
+                            </div>
+                            
+                            <div class="flex items-start space-x-4">
+                                <div class="tech-logo">IBM</div>
+                                <div>
+                                    <h4 class="text-blue-400 font-semibold">IBM</h4>
+                                    <p class="text-gray-300 text-sm">Positions as technology thought leader with deep expertise in enterprise solutions</p>
+                                </div>
+                            </div>
+                            
+                            <div class="flex items-start space-x-4">
+                                <div class="tech-logo">MS</div>
+                                <div>
+                                    <h4 class="text-blue-400 font-semibold">Microsoft</h4>
+                                    <p class="text-gray-300 text-sm">Empowers knowledge workers with intelligent productivity tools and platforms</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- The Creator -->
+            <div class="flip-card">
+                <div class="flip-card-inner">
+                    <div class="flip-card-front p-8 flex flex-col justify-between">
+                        <div>
+                            <div class="text-center mb-6">
+                                <i class="fas fa-palette archetype-icon text-6xl mb-4"></i>
+                                <h3 class="text-2xl font-bold text-blue-100 mb-2">The Creator</h3>
+                                <p class="text-blue-300 text-sm uppercase tracking-wide">Innovation & Imagination</p>
+                            </div>
+                            
+                            <div class="space-y-4 text-sm">
+                                <div>
+                                    <h4 class="text-blue-400 font-semibold mb-2">Core Motivation</h4>
+                                    <p class="text-gray-300">To create something of enduring value and help others express their creativity</p>
+                                </div>
+                                
+                                <div>
+                                    <h4 class="text-blue-400 font-semibold mb-2">Communication Style</h4>
+                                    <p class="text-gray-300">Inspiring, artistic, innovative, and focused on possibilities and imagination</p>
+                                </div>
+                                
+                                <div>
+                                    <h4 class="text-blue-400 font-semibold mb-2">Strategic Application</h4>
+                                    <p class="text-gray-300">Ideal for design tools, creative platforms, and innovation-focused brands</p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="mt-6 text-center">
+                            <span class="text-xs text-blue-400 uppercase tracking-wide">Hover to see examples</span>
+                        </div>
+                    </div>
+                    
+                    <div class="flip-card-back p-8 flex flex-col justify-center">
+                        <h3 class="text-xl font-bold text-blue-100 mb-6 text-center">Tech Examples</h3>
+                        
+                        <div class="space-y-6">
+                            <div class="flex items-start space-x-4">
+                                <div class="tech-logo">🍎</div>
+                                <div>
+                                    <h4 class="text-blue-400 font-semibold">Apple</h4>
+                                    <p class="text-gray-300 text-sm">Think Different - empowers creative expression through beautifully designed technology</p>
+                                </div>
+                            </div>
+                            
+                            <div class="flex items-start space-x-4">
+                                <div class="tech-logo">Ad</div>
+                                <div>
+                                    <h4 class="text-blue-400 font-semibold">Adobe</h4>
+                                    <p class="text-gray-300 text-sm">Creativity for All - provides tools that unleash human creativity and imagination</p>
+                                </div>
+                            </div>
+                            
+                            <div class="flex items-start space-x-4">
+                                <div class="tech-logo">F</div>
+                                <div>
+                                    <h4 class="text-blue-400 font-semibold">Figma</h4>
+                                    <p class="text-gray-300 text-sm">Makes design accessible and collaborative, empowering creative teams worldwide</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- The Ruler -->
+            <div class="flip-card">
+                <div class="flip-card-inner">
+                    <div class="flip-card-front p-8 flex flex-col justify-between">
+                        <div>
+                            <div class="text-center mb-6">
+                                <i class="fas fa-crown archetype-icon text-6xl mb-4"></i>
+                                <h3 class="text-2xl font-bold text-blue-100 mb-2">The Ruler</h3>
+                                <p class="text-blue-300 text-sm uppercase tracking-wide">Leadership & Control</p>
+                            </div>
+                            
+                            <div class="space-y-4 text-sm">
+                                <div>
+                                    <h4 class="text-blue-400 font-semibold mb-2">Core Motivation</h4>
+                                    <p class="text-gray-300">To create prosperity and success through leadership, responsibility, and control</p>
+                                </div>
+                                
+                                <div>
+                                    <h4 class="text-blue-400 font-semibold mb-2">Communication Style</h4>
+                                    <p class="text-gray-300">Authoritative, confident, exclusive, and focused on premium quality and status</p>
+                                </div>
+                                
+                                <div>
+                                    <h4 class="text-blue-400 font-semibold mb-2">Strategic Application</h4>
+                                    <p class="text-gray-300">Perfect for enterprise software, luxury tech, and market-leading platforms</p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="mt-6 text-center">
+                            <span class="text-xs text-blue-400 uppercase tracking-wide">Hover to see examples</span>
+                        </div>
+                    </div>
+                    
+                    <div class="flip-card-back p-8 flex flex-col justify-center">
+                        <h3 class="text-xl font-bold text-blue-100 mb-6 text-center">Tech Examples</h3>
+                        
+                        <div class="space-y-6">
+                            <div class="flex items-start space-x-4">
+                                <div class="tech-logo">SF</div>
+                                <div>
+                                    <h4 class="text-blue-400 font-semibold">Salesforce</h4>
+                                    <p class="text-gray-300 text-sm">The Customer Company - dominates CRM with enterprise-grade solutions and leadership</p>
+                                </div>
+                            </div>
+                            
+                            <div class="flex items-start space-x-4">
+                                <div class="tech-logo">O</div>
+                                <div>
+                                    <h4 class="text-blue-400 font-semibold">Oracle</h4>
+                                    <p class="text-gray-300 text-sm">Enterprise database leader with comprehensive, premium business solutions</p>
+                                </div>
+                            </div>
+                            
+                            <div class="flex items-start space-x-4">
+                                <div class="tech-logo">AWS</div>
+                                <div>
+                                    <h4 class="text-blue-400 font-semibold">Amazon AWS</h4>
+                                    <p class="text-gray-300 text-sm">Cloud infrastructure ruler - commands market with comprehensive, enterprise solutions</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- The Hero -->
+            <div class="flip-card">
+                <div class="flip-card-inner">
+                    <div class="flip-card-front p-8 flex flex-col justify-between">
+                        <div>
+                            <div class="text-center mb-6">
+                                <i class="fas fa-shield-alt archetype-icon text-6xl mb-4"></i>
+                                <h3 class="text-2xl font-bold text-blue-100 mb-2">The Hero</h3>
+                                <p class="text-blue-300 text-sm uppercase tracking-wide">Courage & Determination</p>
+                            </div>
+                            
+                            <div class="space-y-4 text-sm">
+                                <div>
+                                    <h4 class="text-blue-400 font-semibold mb-2">Core Motivation</h4>
+                                    <p class="text-gray-300">To prove worth through courageous action and help others overcome challenges</p>
+                                </div>
+                                
+                                <div>
+                                    <h4 class="text-blue-400 font-semibold mb-2">Communication Style</h4>
+                                    <p class="text-gray-300">Bold, inspirational, action-oriented, and focused on overcoming obstacles</p>
+                                </div>
+                                
+                                <div>
+                                    <h4 class="text-blue-400 font-semibold mb-2">Strategic Application</h4>
+                                    <p class="text-gray-300">Great for disruptive tech, sports/fitness apps, and challenge-solving platforms</p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="mt-6 text-center">
+                            <span class="text-xs text-blue-400 uppercase tracking-wide">Hover to see examples</span>
+                        </div>
+                    </div>
+                    
+                    <div class="flip-card-back p-8 flex flex-col justify-center">
+                        <h3 class="text-xl font-bold text-blue-100 mb-6 text-center">Tech Examples</h3>
+                        
+                        <div class="space-y-6">
+                            <div class="flex items-start space-x-4">
+                                <div class="tech-logo">T</div>
+                                <div>
+                                    <h4 class="text-blue-400 font-semibold">Tesla</h4>
+                                    <p class="text-gray-300 text-sm">Accelerating world's transition to sustainable energy - bold mission to save the planet</p>
+                                </div>
+                            </div>
+                            
+                            <div class="flex items-start space-x-4">
+                                <div class="tech-logo">N</div>
+                                <div>
+                                    <h4 class="text-blue-400 font-semibold">Nike (Tech)</h4>
+                                    <p class="text-gray-300 text-sm">Just Do It - empowers athletes to push limits through innovative fitness technology</p>
+                                </div>
+                            </div>
+                            
+                            <div class="flex items-start space-x-4">
+                                <div class="tech-logo">💪</div>
+                                <div>
+                                    <h4 class="text-blue-400 font-semibold">Peloton</h4>
+                                    <p class="text-gray-300 text-sm">Empowers fitness heroes to conquer personal challenges through connected experiences</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- The Magician -->
+            <div class="flip-card">
+                <div class="flip-card-inner">
+                    <div class="flip-card-front p-8 flex flex-col justify-between">
+                        <div>
+                            <div class="text-center mb-6">
+                                <i class="fas fa-magic archetype-icon text-6xl mb-4"></i>
+                                <h3 class="text-2xl font-bold text-blue-100 mb-2">The Magician</h3>
+                                <p class="text-blue-300 text-sm uppercase tracking-wide">Transformation & Vision</p>
+                            </div>
+                            
+                            <div class="space-y-4 text-sm">
+                                <div>
+                                    <h4 class="text-blue-400 font-semibold mb-2">Core Motivation</h4>
+                                    <p class="text-gray-300">To understand fundamental laws of the universe and transform reality through innovation</p>
+                                </div>
+                                
+                                <div>
+                                    <h4 class="text-blue-400 font-semibold mb-2">Communication Style</h4>
+                                    <p class="text-gray-300">Visionary, transformative, mystical, and focused on making the impossible possible</p>
+                                </div>
+                                
+                                <div>
+                                    <h4 class="text-blue-400 font-semibold mb-2">Strategic Application</h4>
+                                    <p class="text-gray-300">Ideal for AI/ML companies, transformative platforms, and breakthrough technologies</p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="mt-6 text-center">
+                            <span class="text-xs text-blue-400 uppercase tracking-wide">Hover to see examples</span>
+                        </div>
+                    </div>
+                    
+                    <div class="flip-card-back p-8 flex flex-col justify-center">
+                        <h3 class="text-xl font-bold text-blue-100 mb-6 text-center">Tech Examples</h3>
+                        
+                        <div class="space-y-6">
+                            <div class="flex items-start space-x-4">
+                                <div class="tech-logo">AI</div>
+                                <div>
+                                    <h4 class="text-blue-400 font-semibold">OpenAI</h4>
+                                    <p class="text-gray-300 text-sm">Transforming reality through artificial intelligence - making magic real through technology</p>
+                                </div>
+                            </div>
+                            
+                            <div class="flex items-start space-x-4">
+                                <div class="tech-logo">X</div>
+                                <div>
+                                    <h4 class="text-blue-400 font-semibold">SpaceX</h4>
+                                    <p class="text-gray-300 text-sm">Making life multiplanetary - transforming space exploration through breakthrough innovation</p>
+                                </div>
+                            </div>
+                            
+                            <div class="flex items-start space-x-4">
+                                <div class="tech-logo">M</div>
+                                <div>
+                                    <h4 class="text-blue-400 font-semibold">Meta</h4>
+                                    <p class="text-gray-300 text-sm">Building the metaverse - transforming human connection through virtual reality magic</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- The Innocent -->
+            <div class="flip-card">
+                <div class="flip-card-inner">
+                    <div class="flip-card-front p-8 flex flex-col justify-between">
+                        <div>
+                            <div class="text-center mb-6">
+                                <i class="fas fa-dove archetype-icon text-6xl mb-4"></i>
+                                <h3 class="text-2xl font-bold text-blue-100 mb-2">The Innocent</h3>
+                                <p class="text-blue-300 text-sm uppercase tracking-wide">Purity & Optimism</p>
+                            </div>
+                            
+                            <div class="space-y-4 text-sm">
+                                <div>
+                                    <h4 class="text-blue-400 font-semibold mb-2">Core Motivation</h4>
+                                    <p class="text-gray-300">To be happy and help others find joy through simple, honest, and pure experiences</p>
+                                </div>
+                                
+                                <div>
+                                    <h4 class="text-blue-400 font-semibold mb-2">Communication Style</h4>
+                                    <p class="text-gray-300">Simple, honest, optimistic, and focused on fundamental goodness and purity</p>
+                                </div>
+                                
+                                <div>
+                                    <h4 class="text-blue-400 font-semibold mb-2">Strategic Application</h4>
+                                    <p class="text-gray-300">Perfect for family-friendly apps, simple utility tools, and wholesome platforms</p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="mt-6 text-center">
+                            <span class="text-xs text-blue-400 uppercase tracking-wide">Hover to see examples</span>
+                        </div>
+                    </div>
+                    
+                    <div class="flip-card-back p-8 flex flex-col justify-center">
+                        <h3 class="text-xl font-bold text-blue-100 mb-6 text-center">Tech Examples</h3>
+                        
+                        <div class="space-y-6">
+                            <div class="flex items-start space-x-4">
+                                <div class="tech-logo">💧</div>
+                                <div>
+                                    <h4 class="text-blue-400 font-semibold">Dropbox</h4>
+                                    <p class="text-gray-300 text-sm">Simple, pure cloud storage - makes file sharing effortless and trustworthy</p>
+                                </div>
+                            </div>
+                            
+                            <div class="flex items-start space-x-4">
+                                <div class="tech-logo">Z</div>
+                                <div>
+                                    <h4 class="text-blue-400 font-semibold">Zoom</h4>
+                                    <p class="text-gray-300 text-sm">Bringing the world closer through simple, reliable video communication</p>
+                                </div>
+                            </div>
+                            
+                            <div class="flex items-start space-x-4">
+                                <div class="tech-logo">🍎</div>
+                                <div>
+                                    <h4 class="text-blue-400 font-semibold">WhatsApp</h4>
+                                    <p class="text-gray-300 text-sm">Simple, pure messaging - connecting people with honest, straightforward communication</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- The Explorer -->
+            <div class="flip-card">
+                <div class="flip-card-inner">
+                    <div class="flip-card-front p-8 flex flex-col justify-between">
+                        <div>
+                            <div class="text-center mb-6">
+                                <i class="fas fa-compass archetype-icon text-6xl mb-4"></i>
+                                <h3 class="text-2xl font-bold text-blue-100 mb-2">The Explorer</h3>
+                                <p class="text-blue-300 text-sm uppercase tracking-wide">Freedom & Discovery</p>
+                            </div>
+                            
+                            <div class="space-y-4 text-sm">
+                                <div>
+                                    <h4 class="text-blue-400 font-semibold mb-2">Core Motivation</h4>
+                                    <p class="text-gray-300">To experience freedom and find yourself through exploration and authentic experiences</p>
+                                </div>
+                                
+                                <div>
+                                    <h4 class="text-blue-400 font-semibold mb-2">Communication Style</h4>
+                                    <p class="text-gray-300">Adventurous, authentic, individualistic, and focused on discovery and experiences</p>
+                                </div>
+                                
+                                <div>
+                                    <h4 class="text-blue-400 font-semibold mb-2">Strategic Application</h4>
+                                    <p class="text-gray-300">Great for travel tech, outdoor apps, and platforms that enable discovery</p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="mt-6 text-center">
+                            <span class="text-xs text-blue-400 uppercase tracking-wide">Hover to see examples</span>
+                        </div>
+                    </div>
+                    
+                    <div class="flip-card-back p-8 flex flex-col justify-center">
+                        <h3 class="text-xl font-bold text-blue-100 mb-6 text-center">Tech Examples</h3>
+                        
+                        <div class="space-y-6">
+                            <div class="flex items-start space-x-4">
+                                <div class="tech-logo">🏠</div>
+                                <div>
+                                    <h4 class="text-blue-400 font-semibold">Airbnb</h4>
+                                    <p class="text-gray-300 text-sm">Belong Anywhere - enables authentic travel experiences and cultural exploration</p>
+                                </div>
+                            </div>
+                            
+                            <div class="flex items-start space-x-4">
+                                <div class="tech-logo">📍</div>
+                                <div>
+                                    <h4 class="text-blue-400 font-semibold">Foursquare</h4>
+                                    <p class="text-gray-300 text-sm">Discover new places and experiences through location-based exploration</p>
+                                </div>
+                            </div>
+                            
+                            <div class="flex items-start space-x-4">
+                                <div class="tech-logo">🗺️</div>
+                                <div>
+                                    <h4 class="text-blue-400 font-semibold">Google Maps</h4>
+                                    <p class="text-gray-300 text-sm">Enables exploration and discovery of the world around you</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- The Outlaw -->
+            <div class="flip-card">
+                <div class="flip-card-inner">
+                    <div class="flip-card-front p-8 flex flex-col justify-between">
+                        <div>
+                            <div class="text-center mb-6">
+                                <i class="fas fa-fist-raised archetype-icon text-6xl mb-4"></i>
+                                <h3 class="text-2xl font-bold text-blue-100 mb-2">The Outlaw</h3>
+                                <p class="text-blue-300 text-sm uppercase tracking-wide">Revolution & Change</p>
+                            </div>
+                            
+                            <div class="space-y-4 text-sm">
+                                <div>
+                                    <h4 class="text-blue-400 font-semibold mb-2">Core Motivation</h4>
+                                    <p class="text-gray-300">To overturn what isn't working and create revolutionary change or disruption</p>
+                                </div>
+                                
+                                <div>
+                                    <h4 class="text-blue-400 font-semibold mb-2">Communication Style</h4>
+                                    <p class="text-gray-300">Rebellious, disruptive, edgy, and focused on challenging the status quo</p>
+                                </div>
+                                
+                                <div>
+                                    <h4 class="text-blue-400 font-semibold mb-2">Strategic Application</h4>
+                                    <p class="text-gray-300">Perfect for disruptive startups, alternative platforms, and revolutionary tech</p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="mt-6 text-center">
+                            <span class="text-xs text-blue-400 uppercase tracking-wide">Hover to see examples</span>
+                        </div>
+                    </div>
+                    
+                    <div class="flip-card-back p-8 flex flex-col justify-center">
+                        <h3 class="text-xl font-bold text-blue-100 mb-6 text-center">Tech Examples</h3>
+                        
+                        <div class="space-y-6">
+                            <div class="flex items-start space-x-4">
+                                <div class="tech-logo">🟢</div>
+                                <div>
+                                    <h4 class="text-blue-400 font-semibold">Spotify</h4>
+                                    <p class="text-gray-300 text-sm">Disrupted music industry - revolutionized how we discover and consume music</p>
+                                </div>
+                            </div>
+                            
+                            <div class="flex items-start space-x-4">
+                                <div class="tech-logo">U</div>
+                                <div>
+                                    <h4 class="text-blue-400 font-semibold">Uber</h4>
+                                    <p class="text-gray-300 text-sm">Challenged traditional transportation - revolutionized urban mobility</p>
+                                </div>
+                            </div>
+                            
+                            <div class="flex items-start space-x-4">
+                                <div class="tech-logo">💰</div>
+                                <div>
+                                    <h4 class="text-blue-400 font-semibold">Bitcoin</h4>
+                                    <p class="text-gray-300 text-sm">Disrupting traditional finance through decentralized cryptocurrency revolution</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- The Regular Guy/Girl -->
+            <div class="flip-card">
+                <div class="flip-card-inner">
+                    <div class="flip-card-front p-8 flex flex-col justify-between">
+                        <div>
+                            <div class="text-center mb-6">
+                                <i class="fas fa-users archetype-icon text-6xl mb-4"></i>
+                                <h3 class="text-2xl font-bold text-blue-100 mb-2">The Everyman</h3>
+                                <p class="text-blue-300 text-sm uppercase tracking-wide">Belonging & Connection</p>
+                            </div>
+                            
+                            <div class="space-y-4 text-sm">
+                                <div>
+                                    <h4 class="text-blue-400 font-semibold mb-2">Core Motivation</h4>
+                                    <p class="text-gray-300">To belong and connect with others through shared values and common experiences</p>
+                                </div>
+                                
+                                <div>
+                                    <h4 class="text-blue-400 font-semibold mb-2">Communication Style</h4>
+                                    <p class="text-gray-300">Friendly, down-to-earth, relatable, and focused on community and inclusivity</p>
+                                </div>
+                                
+                                <div>
+                                    <h4 class="text-blue-400 font-semibold mb-2">Strategic Application</h4>
+                                    <p class="text-gray-300">Excellent for social platforms, community tools, and everyday utility apps</p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="mt-6 text-center">
+                            <span class="text-xs text-blue-400 uppercase tracking-wide">Hover to see examples</span>
+                        </div>
+                    </div>
+                    
+                    <div class="flip-card-back p-8 flex flex-col justify-center">
+                        <h3 class="text-xl font-bold text-blue-100 mb-6 text-center">Tech Examples</h3>
+                        
+                        <div class="space-y-6">
+                            <div class="flex items-start space-x-4">
+                                <div class="tech-logo">f</div>
+                                <div>
+                                    <h4 class="text-blue-400 font-semibold">Facebook</h4>
+                                    <p class="text-gray-300 text-sm">Connecting people everywhere - building community through shared experiences</p>
+                                </div>
+                            </div>
+                            
+                            <div class="flex items-start space-x-4">
+                                <div class="tech-logo">MS</div>
+                                <div>
+                                    <h4 class="text-blue-400 font-semibold">Microsoft Teams</h4>
+                                    <p class="text-gray-300 text-sm">Bringing teams together - enabling everyday workplace collaboration and connection</p>
+                                </div>
+                            </div>
+                            
+                            <div class="flex items-start space-x-4">
+                                <div class="tech-logo">R</div>
+                                <div>
+                                    <h4 class="text-blue-400 font-semibold">Reddit</h4>
+                                    <p class="text-gray-300 text-sm">Front page of the internet - communities built by and for regular people</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- The Lover -->
+            <div class="flip-card">
+                <div class="flip-card-inner">
+                    <div class="flip-card-front p-8 flex flex-col justify-between">
+                        <div>
+                            <div class="text-center mb-6">
+                                <i class="fas fa-heart archetype-icon text-6xl mb-4"></i>
+                                <h3 class="text-2xl font-bold text-blue-100 mb-2">The Lover</h3>
+                                <p class="text-blue-300 text-sm uppercase tracking-wide">Passion & Relationships</p>
+                            </div>
+                            
+                            <div class="space-y-4 text-sm">
+                                <div>
+                                    <h4 class="text-blue-400 font-semibold mb-2">Core Motivation</h4>
+                                    <p class="text-gray-300">To find and give love, achieve intimacy, and experience passionate connections</p>
+                                </div>
+                                
+                                <div>
+                                    <h4 class="text-blue-400 font-semibold mb-2">Communication Style</h4>
+                                    <p class="text-gray-300">Passionate, intimate, emotional, and focused on beauty, romance, and connection</p>
+                                </div>
+                                
+                                <div>
+                                    <h4 class="text-blue-400 font-semibold mb-2">Strategic Application</h4>
+                                    <p class="text-gray-300">Perfect for dating apps, luxury brands, and platforms focused on relationships</p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="mt-6 text-center">
+                            <span class="text-xs text-blue-400 uppercase tracking-wide">Hover to see examples</span>
+                        </div>
+                    </div>
+                    
+                    <div class="flip-card-back p-8 flex flex-col justify-center">
+                        <h3 class="text-xl font-bold text-blue-100 mb-6 text-center">Tech Examples</h3>
+                        
+                        <div class="space-y-6">
+                            <div class="flex items-start space-x-4">
+                                <div class="tech-logo">T</div>
+                                <div>
+                                    <h4 class="text-blue-400 font-semibold">Tinder</h4>
+                                    <p class="text-gray-300 text-sm">Sparking connections and romantic relationships through passionate matching</p>
+                                </div>
+                            </div>
+                            
+                            <div class="flex items-start space-x-4">
+                                <div class="tech-logo">📷</div>
+                                <div>
+                                    <h4 class="text-blue-400 font-semibold">Instagram</h4>
+                                    <p class="text-gray-300 text-sm">Share beautiful moments - focused on aesthetic beauty and passionate self-expression</p>
+                                </div>
+                            </div>
+                            
+                            <div class="flex items-start space-x-4">
+                                <div class="tech-logo">♪</div>
+                                <div>
+                                    <h4 class="text-blue-400 font-semibold">Spotify</h4>
+                                    <p class="text-gray-300 text-sm">Music for every mood and moment - connecting people through passionate musical experiences</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- The Jester -->
+            <div class="flip-card">
+                <div class="flip-card-inner">
+                    <div class="flip-card-front p-8 flex flex-col justify-between">
+                        <div>
+                            <div class="text-center mb-6">
+                                <i class="fas fa-laugh archetype-icon text-6xl mb-4"></i>
+                                <h3 class="text-2xl font-bold text-blue-100 mb-2">The Jester</h3>
+                                <p class="text-blue-300 text-sm uppercase tracking-wide">Joy & Entertainment</p>
+                            </div>
+                            
+                            <div class="space-y-4 text-sm">
+                                <div>
+                                    <h4 class="text-blue-400 font-semibold mb-2">Core Motivation</h4>
+                                    <p class="text-gray-300">To have fun and help others enjoy life through humor and entertainment</p>
+                                </div>
+                                
+                                <div>
+                                    <h4 class="text-blue-400 font-semibold mb-2">Communication Style</h4>
+                                    <p class="text-gray-300">Playful, humorous, lighthearted, and focused on fun and positive experiences</p>
+                                </div>
+                                
+                                <div>
+                                    <h4 class="text-blue-400 font-semibold mb-2">Strategic Application</h4>
+                                    <p class="text-gray-300">Great for gaming platforms, entertainment apps, and fun social experiences</p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="mt-6 text-center">
+                            <span class="text-xs text-blue-400 uppercase tracking-wide">Hover to see examples</span>
+                        </div>
+                    </div>
+                    
+                    <div class="flip-card-back p-8 flex flex-col justify-center">
+                        <h3 class="text-xl font-bold text-blue-100 mb-6 text-center">Tech Examples</h3>
+                        
+                        <div class="space-y-6">
+                            <div class="flex items-start space-x-4">
+                                <div class="tech-logo">📱</div>
+                                <div>
+                                    <h4 class="text-blue-400 font-semibold">TikTok</h4>
+                                    <p class="text-gray-300 text-sm">Entertainment for everyone - bringing joy through short-form video content</p>
+                                </div>
+                            </div>
+                            
+                            <div class="flex items-start space-x-4">
+                                <div class="tech-logo">👻</div>
+                                <div>
+                                    <h4 class="text-blue-400 font-semibold">Snapchat</h4>
+                                    <p class="text-gray-300 text-sm">Playful communication through filters, games, and ephemeral messaging</p>
+                                </div>
+                            </div>
+                            
+                            <div class="flex items-start space-x-4">
+                                <div class="tech-logo">D</div>
+                                <div>
+                                    <h4 class="text-blue-400 font-semibold">Discord</h4>
+                                    <p class="text-gray-300 text-sm">Where gaming communities come together for fun, conversation, and entertainment</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- The Caregiver -->
+            <div class="flip-card">
+                <div class="flip-card-inner">
+                    <div class="flip-card-front p-8 flex flex-col justify-between">
+                        <div>
+                            <div class="text-center mb-6">
+                                <i class="fas fa-hand-holding-heart archetype-icon text-6xl mb-4"></i>
+                                <h3 class="text-2xl font-bold text-blue-100 mb-2">The Caregiver</h3>
+                                <p class="text-blue-300 text-sm uppercase tracking-wide">Service & Compassion</p>
+                            </div>
+                            
+                            <div class="space-y-4 text-sm">
+                                <div>
+                                    <h4 class="text-blue-400 font-semibold mb-2">Core Motivation</h4>
+                                    <p class="text-gray-300">To help and protect others, providing care and support to those in need</p>
+                                </div>
+                                
+                                <div>
+                                    <h4 class="text-blue-400 font-semibold mb-2">Communication Style</h4>
+                                    <p class="text-gray-300">Caring, supportive, nurturing, and focused on service and protection</p>
+                                </div>
+                                
+                                <div>
+                                    <h4 class="text-blue-400 font-semibold mb-2">Strategic Application</h4>
+                                    <p class="text-gray-300">Perfect for healthcare tech, educational platforms, and service-oriented tools</p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="mt-6 text-center">
+                            <span class="text-xs text-blue-400 uppercase tracking-wide">Hover to see examples</span>
+                        </div>
+                    </div>
+                    
+                    <div class="flip-card-back p-8 flex flex-col justify-center">
+                        <h3 class="text-xl font-bold text-blue-100 mb-6 text-center">Tech Examples</h3>
+                        
+                        <div class="space-y-6">
+                            <div class="flex items-start space-x-4">
+                                <div class="tech-logo">💊</div>
+                                <div>
+                                    <h4 class="text-blue-400 font-semibold">Teladoc</h4>
+                                    <p class="text-gray-300 text-sm">Healthcare anywhere - providing caring medical support through technology</p>
+                                </div>
+                            </div>
+                            
+                            <div class="flex items-start space-x-4">
+                                <div class="tech-logo">K</div>
+                                <div>
+                                    <h4 class="text-blue-400 font-semibold">Khan Academy</h4>
+                                    <p class="text-gray-300 text-sm">Free education for everyone - nurturing learning and growth for all students</p>
+                                </div>
+                            </div>
+                            
+                            <div class="flex items-start space-x-4">
+                                <div class="tech-logo">🏥</div>
+                                <div>
+                                    <h4 class="text-blue-400 font-semibold">Epic Systems</h4>
+                                    <p class="text-gray-300 text-sm">Healthcare software that helps providers deliver better patient care</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Strategic Implementation Section -->
+        <div class="bg-gradient-to-r from-blue-900/30 to-purple-900/30 rounded-2xl p-12 border border-blue-400/30 mb-16">
+            <h2 class="text-4xl font-bold text-center mb-8 hero-gradient">Strategic Implementation Guide</h2>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="bg-slate-800/50 rounded-xl p-6 border border-blue-400/20">
+                    <div class="text-center mb-4">
+                        <i class="fas fa-crosshairs text-blue-400 text-3xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-blue-100 mb-4 text-center">1. Choose Your Archetype</h3>
+                    <p class="text-gray-300 text-sm">Select the archetype that best aligns with your brand values, target audience, and market positioning goals.</p>
+                </div>
+                
+                <div class="bg-slate-800/50 rounded-xl p-6 border border-blue-400/20">
+                    <div class="text-center mb-4">
+                        <i class="fas fa-comments text-blue-400 text-3xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-blue-100 mb-4 text-center">2. Develop Voice & Tone</h3>
+                    <p class="text-gray-300 text-sm">Create consistent communication guidelines based on your archetype's motivation and communication style.</p>
+                </div>
+                
+                <div class="bg-slate-800/50 rounded-xl p-6 border border-blue-400/20">
+                    <div class="text-center mb-4">
+                        <i class="fas fa-rocket text-blue-400 text-3xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-blue-100 mb-4 text-center">3. Execute Consistently</h3>
+                    <p class="text-gray-300 text-sm">Apply your archetype across all touchpoints - marketing, product, support, and company culture.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <div class="text-center">
+            <p class="text-blue-300 text-lg">Choose your archetype. Define your voice. Build your brand.</p>
+            <div class="mt-4 text-gray-400 text-sm">
+                Based on Margaret Mark and Carol S. Pearson's "The Hero and the Outlaw" framework
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Add subtle hover animations
+        document.addEventListener('DOMContentLoaded', function() {
+            const cards = document.querySelectorAll('.flip-card');
+            
+            cards.forEach(card => {
+                card.addEventListener('mouseenter', function() {
+                    this.style.transform = 'translateY(-8px)';
+                    this.style.transition = 'transform 0.3s ease';
+                });
+                
+                card.addEventListener('mouseleave', function() {
+                    this.style.transform = 'translateY(0)';
+                });
+            });
+        });
+    </script>
+</body>
+</html>

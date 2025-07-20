@@ -1,0 +1,1712 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ultimate Workout Companion</title>
+    <style>
+        :root {
+            --primary-bg: #1e272e; /* Darker Slate Blue */
+            --secondary-bg: #2c3e50; /* Slate Blue */
+            --tertiary-bg: #34495e; /* Lighter Slate Blue */
+            --accent-color1: #3498db; /* Bright Blue */
+            --accent-color2: #e74c3c; /* Bright Red (Timer) */
+            --accent-color3: #f1c40f; /* Yellow (Current Exercise) */
+            --accent-color4: #2ecc71; /* Green (Skip/Progress) */
+            --text-light: #ecf0f1; /* Light Grey */
+            --text-medium: #bdc3c7; /* Medium Grey */
+            --text-dark: #95a5a6; /* Darker Grey */
+            --border-radius-sm: 8px;
+            --border-radius-md: 15px;
+            --box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--primary-bg);
+            color: var(--text-light);
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+            line-height: 1.6;
+        }
+
+        .site-header {
+            background-color: var(--secondary-bg);
+            color: var(--accent-color1);
+            padding: 15px 20px;
+            width: 100%;
+            text-align: center;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+            margin-bottom: 20px;
+        }
+
+        .site-header h1 {
+            margin: 0;
+            font-size: 2em;
+        }
+
+        .main-container {
+            display: flex;
+            flex-direction: column;
+            width: 95%;
+            max-width: 1200px;
+            gap: 20px;
+            padding-bottom: 20px;
+        }
+
+        .timer-section, .exercise-info-section {
+            background-color: var(--secondary-bg);
+            padding: 20px;
+            border-radius: var(--border-radius-md);
+            box-shadow: var(--box-shadow);
+        }
+
+        /* Timer Section Specifics */
+        .timer-section h2 {
+            color: var(--accent-color1);
+            margin-top: 0;
+            text-align: center;
+        }
+
+        .settings-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 15px;
+            margin-bottom: 20px;
+            padding: 15px;
+            background-color: var(--tertiary-bg);
+            border-radius: var(--border-radius-sm);
+        }
+        
+        .duration-setting {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start; /* Labels on left */
+        }
+
+        .duration-setting label {
+            font-size: 0.9em;
+            color: var(--text-medium);
+            margin-bottom: 5px;
+        }
+
+        .duration-setting input[type="number"] {
+            width: 100%; /* Full width of its grid cell */
+            padding: 8px 10px;
+            border-radius: var(--border-radius-sm);
+            border: 2px solid var(--accent-color1);
+            background-color: var(--primary-bg);
+            color: var(--text-light);
+            font-size: 1em;
+            box-sizing: border-box; /* Include padding and border in the element's total width and height */
+        }
+        .duration-setting input[type="number"]:focus {
+            border-color: var(--accent-color3);
+            outline: none;
+            box-shadow: 0 0 8px rgba(241, 196, 15, 0.4);
+        }
+
+
+        .workout-select-container {
+            margin-bottom: 25px;
+            text-align: center;
+        }
+
+        #workoutSelect {
+            padding: 12px 18px;
+            border-radius: var(--border-radius-sm);
+            border: 2px solid var(--accent-color1);
+            background-color: var(--tertiary-bg);
+            color: var(--text-light);
+            font-size: 1em;
+            cursor: pointer;
+            outline: none;
+            transition: border-color 0.3s, box-shadow 0.3s;
+        }
+
+        #workoutSelect:hover, #workoutSelect:focus {
+            border-color: var(--accent-color3);
+            box-shadow: 0 0 10px rgba(241, 196, 15, 0.5);
+        }
+
+        .exercise-context {
+            display: flex;
+            justify-content: space-around;
+            align-items: stretch; /* Make items same height */
+            margin-bottom: 20px;
+            font-size: 0.9em;
+            gap: 10px;
+        }
+
+        .context-item {
+            background-color: var(--tertiary-bg);
+            padding: 10px 15px;
+            border-radius: var(--border-radius-sm);
+            flex: 1;
+            opacity: 0.7;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+        .context-item strong {
+            display: block;
+            margin-bottom: 5px;
+            color: var(--text-medium);
+        }
+        .context-item span {
+            font-size: 0.9em;
+        }
+        .context-item.active {
+            opacity: 1;
+            font-weight: bold;
+            border: 2px solid var(--accent-color3);
+        }
+        .context-item.active strong {
+            color: var(--accent-color3);
+        }
+        .context-item.completed {
+            text-decoration: line-through;
+            opacity: 0.5;
+        }
+
+        .timer-display-area {
+            text-align: center;
+        }
+
+        .timer-display {
+            font-size: 5em;
+            font-weight: bold;
+            color: var(--accent-color2);
+            margin-bottom: 10px;
+            padding: 10px;
+            background-color: rgba(0,0,0,0.15);
+            border-radius: var(--border-radius-sm);
+        }
+
+        .current-exercise-name {
+            font-size: 2.2em;
+            color: var(--accent-color3);
+            margin-bottom: 15px;
+            min-height: 65px; /* Ensure space */
+        }
+        .current-exercise-details {
+            font-size: 1.1em;
+            color: var(--text-medium);
+            margin-bottom: 15px;
+            text-transform: capitalize;
+        }
+
+        .progress-bar-container {
+            width: 100%;
+            background-color: var(--tertiary-bg);
+            border-radius: var(--border-radius-sm);
+            margin: 20px 0;
+            height: 25px;
+            overflow: hidden;
+        }
+
+        .progress-bar {
+            width: 0%;
+            height: 100%;
+            background-color: var(--accent-color4);
+            transition: width 0.3s ease-in-out;
+            text-align: center;
+            line-height: 25px;
+            font-size: 0.9em;
+            color: var(--primary-bg);
+            font-weight: bold;
+        }
+
+        .controls, .nav-controls {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-bottom: 10px;
+        }
+
+        .controls button, .nav-controls button, #skipRestButton {
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            margin: 5px;
+            border-radius: var(--border-radius-sm);
+            font-size: 1em;
+            cursor: pointer;
+            transition: background-color 0.3s, transform 0.2s;
+            min-width: 110px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+        }
+        .controls button:hover, .nav-controls button:hover, #skipRestButton:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+        }
+        .controls button:active, .nav-controls button:active, #skipRestButton:active {
+            transform: translateY(0px);
+        }
+
+        #startButton { background-color: var(--accent-color1); }
+        #startButton:hover { background-color: #2980b9; }
+        #pauseButton { background-color: #e67e22; } /* Orange */
+        #pauseButton:hover { background-color: #d35400; }
+        #resetButton { background-color: #c0392b; } /* Red */
+        #resetButton:hover { background-color: #a93226; }
+        #skipRestButton { background-color: var(--accent-color4); margin-top: 10px; display: none; }
+        #skipRestButton:hover { background-color: #27ae60; }
+        .nav-controls button { background-color: var(--tertiary-bg); }
+        .nav-controls button:hover { background-color: #4a637a; }
+
+
+        .info-message {
+            margin-top: 15px;
+            font-style: italic;
+            color: var(--text-dark);
+            text-align: center;
+        }
+
+        /* Exercise Info Section Specifics */
+        .exercise-info-section h2 {
+            color: var(--accent-color3);
+            margin-top: 0;
+            text-align: center;
+            border-bottom: 2px solid var(--tertiary-bg);
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+        }
+        #currentExerciseInfoName {
+             font-size: 1.8em;
+             color: var(--accent-color1);
+             margin-bottom: 15px;
+        }
+
+        .visual-placeholder {
+            width: 100%;
+            height: 200px; /* Adjust as needed */
+            background-color: var(--tertiary-bg);
+            border-radius: var(--border-radius-sm);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-medium);
+            font-style: italic;
+            margin-bottom: 20px;
+            border: 2px dashed var(--text-dark);
+        }
+
+        .exercise-details-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 15px;
+        }
+
+        .detail-item h3 {
+            color: var(--accent-color1);
+            font-size: 1.2em;
+            margin-bottom: 8px;
+            border-left: 3px solid var(--accent-color3);
+            padding-left: 10px;
+        }
+        .detail-item ul, .detail-item p {
+            margin: 0;
+            padding-left: 20px; /* For ul bullets */
+            color: var(--text-light);
+        }
+         .detail-item p {
+            padding-left: 0; /* For p tags */
+         }
+        .detail-item ul li {
+            margin-bottom: 5px;
+        }
+
+
+        /* Responsive adjustments */
+        @media (min-width: 600px) { /* Small tablets and up */
+             .settings-grid {
+                grid-template-columns: repeat(3, 1fr); /* Three columns for duration settings */
+            }
+        }
+
+        @media (min-width: 768px) { /* Tablet and up */
+            .main-container {
+                flex-direction: row;
+            }
+            .timer-section {
+                flex: 2; /* Timer takes more space */
+            }
+            .exercise-info-section {
+                flex: 1; /* Exercise info takes less space */
+                max-height: calc(100vh - 120px); /* Approximate height */
+                overflow-y: auto;
+            }
+             .exercise-details-grid {
+                grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            }
+        }
+        @media (max-width: 599px) { /* Mobile specific */
+            .site-header h1 { font-size: 1.5em; }
+            .timer-display { font-size: 3.5em; }
+            .current-exercise-name { font-size: 1.8em; }
+            .exercise-context { flex-direction: column; font-size: 0.8em; }
+            .context-item { width: 90%; margin: 5px auto; }
+            .controls button, .nav-controls button, #skipRestButton { padding: 10px 15px; font-size: 0.9em; }
+            #currentExerciseInfoName { font-size: 1.5em; }
+            .settings-grid { /* Stack settings on mobile */
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Scrollbar styling for exercise info section on larger screens */
+        .exercise-info-section::-webkit-scrollbar {
+            width: 8px;
+        }
+        .exercise-info-section::-webkit-scrollbar-track {
+            background: var(--tertiary-bg);
+            border-radius: var(--border-radius-sm);
+        }
+        .exercise-info-section::-webkit-scrollbar-thumb {
+            background: var(--accent-color1);
+            border-radius: var(--border-radius-sm);
+        }
+        .exercise-info-section::-webkit-scrollbar-thumb:hover {
+            background: #2980b9;
+        }
+
+    </style>
+</head>
+<body>
+    <header class="site-header">
+        <h1>Ultimate Workout Companion</h1>
+    </header>
+
+    <div class="main-container">
+        <section class="timer-section">
+            <h2>Workout Zone</h2>
+
+            <div class="settings-grid">
+                <div class="duration-setting">
+                    <label for="intervalLength">Exercise Interval (s):</label>
+                    <input id="intervalLength" type="number" value="45" min="5">
+                </div>
+                <div class="duration-setting">
+                    <label for="restLength">Short Rest (s):</label>
+                    <input id="restLength" type="number" value="45" min="0">
+                </div>
+                <div class="duration-setting">
+                    <label for="setRestLength">Set Rest (s):</label>
+                    <input id="setRestLength" type="number" value="180" min="0">
+                </div>
+            </div>
+
+            <div class="workout-select-container">
+                <label for="workoutSelect">Choose your workout: </label>
+                <select id="workoutSelect">
+                    <option value="trxDumbbellGarage">TRX & Dumbbell Garage Blitz</option>
+                    <option value="fullArms">Full Arms Blast (DB & TRX)</option>
+                    <option value="fullLegs">Full Legs Power (DB & Bodyweight)</option>
+                    <option value="fullBody">Full Body Burn (DB, TRX & Bodyweight)</option>
+                    <option value="upperBody">Upper Body Sculpt (DB & TRX)</option>
+                    <option value="lowerBody">Lower Body Grind (DB & Bodyweight)</option>
+                </select>
+            </div>
+
+            <div class="exercise-context">
+                <div class="context-item" id="prevExercise"><strong>Previous</strong><span>---</span></div>
+                <div class="context-item active" id="currExerciseContext"><strong>Current</strong><span>---</span></div>
+                <div class="context-item" id="nextExerciseContext"><strong>Next</strong><span>---</span></div>
+            </div>
+
+            <div class="timer-display-area">
+                <div class="timer-display" id="timerDisplay">00:00</div>
+                <div class="current-exercise-name" id="exerciseName">Select a workout &amp; Start!</div>
+                <div class="current-exercise-details" id="exerciseDetails"></div>
+            </div>
+
+            <div class="progress-bar-container">
+                <div class="progress-bar" id="progressBar">0%</div>
+            </div>
+
+            <div class="controls">
+                <button id="startButton">Start</button>
+                <button id="pauseButton">Pause</button>
+                <button id="resetButton">Reset</button>
+            </div>
+            <div style="text-align: center;">
+                 <button id="skipRestButton">Skip Extended Rest</button>
+            </div>
+
+
+            <div class="nav-controls">
+                <button id="prevButton" title="Previous Exercise">≪ Prev</button>
+                <button id="nextButton" title="Next Exercise">Next ≫</button>
+            </div>
+
+            <p class="info-message" id="infoMessage">Load a workout to begin.</p>
+        </section>
+
+        <section class="exercise-info-section">
+            <h2>Exercise Guide</h2>
+            <div id="exerciseInfoContent">
+                <h3 id="currentExerciseInfoName">Select an exercise to see details</h3>
+                <div class="visual-placeholder" id="visualPlaceholder">
+                    Exercise visual will appear here
+                </div>
+                <div class="exercise-details-grid">
+                    <div class="detail-item">
+                        <h3>Target Muscles</h3>
+                        <p id="targetMusclesDisplay">---</p>
+                    </div>
+                    <div class="detail-item">
+                        <h3>Equipment</h3>
+                        <p id="equipmentDisplay">---</p>
+                    </div>
+                    <div class="detail-item">
+                        <h3>Instructions</h3>
+                        <ul id="instructionsDisplay"><li>---</li></ul>
+                    </div>
+                    <div class="detail-item">
+                        <h3>Proper Form Tips</h3>
+                        <ul id="formTipsDisplay"><li>---</li></ul>
+                    </div>
+                    <div class="detail-item">
+                        <h3>Common Mistakes</h3>
+                        <ul id="commonMistakesDisplay"><li>---</li></ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <script>
+        // --- START OF MASSIVE WORKOUTS OBJECT ---
+        // This object remains the same as in the previous version, defining the structure
+        // and default descriptive content. Durations will be overridden.
+        const workouts = {
+            // --- TRX & Dumbbell Garage Blitz ---
+            trxDumbbellGarage: {
+                name: "TRX & Dumbbell Garage Blitz", // Removed "(45s Intervals)" as it's now dynamic
+                exercises: [
+                    { name: "Warm-up Start", type: "info", duration: 0 },
+                    { 
+                        name: "Arm Circles", type: "exercise", duration: 45, // Default duration, will be overridden
+                        visualPlaceholder: "Visual for Arm Circles", targetMuscles: "Shoulders, Upper Back", equipment: "Bodyweight",
+                        instructions: ["Stand with feet shoulder-width apart, arms extended to sides at shoulder height.", "Make small circles forward, gradually increasing size.", "After 22s, reverse direction: small circles backward, gradually increasing size."],
+                        formTips: ["Keep core engaged.", "Control the movement, don't swing wildly."],
+                        commonMistakes: ["Shrugging shoulders.", "Moving too fast."]
+                    },
+                    { name: "Rest", type: "rest", duration: 45 },
+                    { 
+                        name: "Push-ups", type: "exercise", duration: 45,
+                        visualPlaceholder: "Visual for Push-ups", targetMuscles: "Chest, Shoulders, Triceps, Core", equipment: "Bodyweight",
+                        instructions: ["Start in a high plank position, hands slightly wider than shoulders.", "Lower your body until your chest nearly touches the floor, keeping elbows tucked.", "Push back up to the starting position. Maintain a straight line from head to heels."],
+                        formTips: ["Engage core to prevent hip sag.", "Elbows at 45-degree angle to body."],
+                        commonMistakes: ["Sagging hips.", "Flaring elbows too wide."]
+                    },
+                    { name: "Rest", type: "rest", duration: 45 },
+                    { 
+                        name: "TRX Chest Fly", type: "exercise", duration: 45,
+                        visualPlaceholder: "Visual for TRX Chest Fly", targetMuscles: "Chest, Shoulders", equipment: "TRX",
+                        instructions: ["Set TRX straps to longest length. Face away from anchor, grab handles.", "Lean forward, arms extended wide in a slight bend (like hugging a tree).", "Control the movement as you bring hands together in front of your chest, squeezing chest muscles.", "Slowly return to the starting wide position."],
+                        formTips: ["Maintain core tension.", "Keep a slight bend in elbows throughout."],
+                        commonMistakes: ["Bending elbows too much (becomes a press).", "Losing core stability."]
+                    },
+                    { name: "Rest", type: "rest", duration: 45 },
+                    { 
+                        name: "Jumping Jacks", type: "exercise", duration: 45,
+                        visualPlaceholder: "Visual for Jumping Jacks", targetMuscles: "Full Body Cardio", equipment: "Bodyweight",
+                        instructions: ["Stand with feet together, arms at sides.", "Simultaneously jump feet out to shoulder-width while raising arms overhead.", "Jump back to starting position."],
+                        formTips: ["Land softly on the balls of your feet.", "Keep a steady rhythm."],
+                        commonMistakes: ["Not bringing arms fully overhead.", "Landing too hard."]
+                    },
+                    { name: "Rest", type: "rest", duration: 45 },
+                    { 
+                        name: "Plank Shoulder Taps", type: "exercise", duration: 45,
+                        visualPlaceholder: "Visual for Plank Shoulder Taps", targetMuscles: "Core, Shoulders", equipment: "Bodyweight",
+                        instructions: ["Start in a high plank position, feet shoulder-width apart for stability.", "Keeping hips as still as possible, lift one hand to tap the opposite shoulder.", "Return hand to floor and repeat with the other side."],
+                        formTips: ["Engage core to minimize hip rotation.", "Keep weight distributed evenly."],
+                        commonMistakes: ["Rocking hips excessively.", "Rushing the movement."]
+                    },
+                    { name: "Rest", type: "rest", duration: 45 },
+                    { name: "Extended Rest", type: "extended_rest", duration: 180 },
+
+                    { name: "Superset 1 (Round 1/4)", type: "info", duration: 0 },
+                    { 
+                        name: "TRX Chest Press", type: "exercise", duration: 45,
+                        visualPlaceholder: "Visual for TRX Chest Press", targetMuscles: "Chest, Shoulders, Triceps", equipment: "TRX",
+                        instructions: ["Set TRX straps to mid-length. Face away from anchor, hold handles.", "Lean forward into plank, arms extended. Body straight.", "Lower chest by bending elbows (45-degree angle).", "Press back to start, squeezing chest."],
+                        formTips: ["Maintain straight line head to heels.", "Core engaged."],
+                        commonMistakes: ["Hips sagging.", "Straps rubbing arms."]
+                    },
+                    { name: "Rest", type: "rest", duration: 45 },
+                    { 
+                        name: "DB Curl to Press", type: "exercise", duration: 45,
+                        visualPlaceholder: "Visual for DB Curl to Press", targetMuscles: "Biceps, Shoulders, Triceps", equipment: "Dumbbells",
+                        instructions: ["Stand holding dumbbells, palms facing forward.", "Curl dumbbells to shoulders.", "Rotate wrists so palms face forward, then press dumbbells overhead.", "Reverse motion: lower to shoulders, rotate wrists, lower to start."],
+                        formTips: ["Keep core tight.", "Avoid using momentum to lift."],
+                        commonMistakes: ["Swinging body during curl.", "Arching back during press."]
+                    },
+                    { name: "Rest", type: "rest", duration: 45 },
+                    // Repeat Superset 1 for rounds 2, 3, 4
+                    ...Array(3).fill(null).flatMap((_, i) => [
+                        { name: `Superset 1 (Round ${i+2}/4)`, type: "info", duration: 0 },
+                        { name: "TRX Chest Press", type: "exercise", duration: 45, visualPlaceholder: "Visual for TRX Chest Press", targetMuscles: "Chest, Shoulders, Triceps", equipment: "TRX", instructions: ["Set TRX straps to mid-length. Face away from anchor, hold handles.", "Lean forward into plank, arms extended. Body straight.", "Lower chest by bending elbows (45-degree angle).", "Press back to start, squeezing chest."], formTips: ["Maintain straight line head to heels.", "Core engaged."], commonMistakes: ["Hips sagging.", "Straps rubbing arms."] },
+                        { name: "Rest", type: "rest", duration: 45 },
+                        { name: "DB Curl to Press", type: "exercise", duration: 45, visualPlaceholder: "Visual for DB Curl to Press", targetMuscles: "Biceps, Shoulders, Triceps", equipment: "Dumbbells", instructions: ["Stand holding dumbbells, palms facing forward.", "Curl dumbbells to shoulders.", "Rotate wrists so palms face forward, then press dumbbells overhead.", "Reverse motion: lower to shoulders, rotate wrists, lower to start."], formTips: ["Keep core tight.", "Avoid using momentum to lift."], commonMistakes: ["Swinging body during curl.", "Arching back during press."] },
+                        { name: "Rest", type: "rest", duration: 45 },
+                    ]),
+                    { name: "Extended Rest", type: "extended_rest", duration: 180 },
+
+                    { name: "Superset 2 (Round 1/4)", type: "info", duration: 0 },
+                    { 
+                        name: "TRX Triceps Extension", type: "exercise", duration: 45,
+                        visualPlaceholder: "Visual for TRX Triceps Extension", targetMuscles: "Triceps", equipment: "TRX",
+                        instructions: ["Set TRX straps to mid-length. Face away from anchor, grab handles, arms extended overhead, slight forward lean.", "Keeping elbows high and relatively fixed, bend elbows to lower handles behind your head.", "Extend arms to press back to start, squeezing triceps."],
+                        formTips: ["Keep core tight to prevent back arch.", "Elbows should point forward/up, not flare out."],
+                        commonMistakes: ["Letting elbows drop.", "Arching lower back."]
+                    },
+                    { name: "Rest", type: "rest", duration: 45 },
+                    { 
+                        name: "DB Floor Press", type: "exercise", duration: 45,
+                        visualPlaceholder: "Visual for DB Floor Press", targetMuscles: "Chest, Triceps, Shoulders", equipment: "Dumbbells",
+                        instructions: ["Lie on floor, knees bent, feet flat. Hold dumbbells over chest, palms facing each other or slightly inward.", "Lower dumbbells until triceps touch floor.", "Press dumbbells back up, squeezing chest."],
+                        formTips: ["Keep lower back flat or with a natural arch, not hyperextended.", "Control the descent."],
+                        commonMistakes: ["Bouncing elbows off floor.", "Flaring elbows too wide."]
+                    },
+                    { name: "Rest", type: "rest", duration: 45 },
+                    // Repeat Superset 2 for rounds 2, 3, 4
+                     ...Array(3).fill(null).flatMap((_, i) => [
+                        { name: `Superset 2 (Round ${i+2}/4)`, type: "info", duration: 0 },
+                        { name: "TRX Triceps Extension", type: "exercise", duration: 45, visualPlaceholder: "Visual for TRX Triceps Extension", targetMuscles: "Triceps", equipment: "TRX", instructions: ["Set TRX straps to mid-length. Face away from anchor, grab handles, arms extended overhead, slight forward lean.", "Keeping elbows high and relatively fixed, bend elbows to lower handles behind your head.", "Extend arms to press back to start, squeezing triceps."], formTips: ["Keep core tight to prevent back arch.", "Elbows should point forward/up, not flare out."], commonMistakes: ["Letting elbows drop.", "Arching lower back."] },
+                        { name: "Rest", type: "rest", duration: 45 },
+                        { name: "DB Floor Press", type: "exercise", duration: 45, visualPlaceholder: "Visual for DB Floor Press", targetMuscles: "Chest, Triceps, Shoulders", equipment: "Dumbbells", instructions: ["Lie on floor, knees bent, feet flat. Hold dumbbells over chest, palms facing each other or slightly inward.", "Lower dumbbells until triceps touch floor.", "Press dumbbells back up, squeezing chest."], formTips: ["Keep lower back flat or with a natural arch, not hyperextended.", "Control the descent."], commonMistakes: ["Bouncing elbows off floor.", "Flaring elbows too wide."] },
+                        { name: "Rest", type: "rest", duration: 45 },
+                    ]),
+                    { name: "Extended Rest", type: "extended_rest", duration: 180 },
+                    
+                    { name: "Core Tri-set (Round 1/3)", type: "info", duration: 0 },
+                    { 
+                        name: "TRX Pike", type: "exercise", duration: 45,
+                        visualPlaceholder: "Visual for TRX Pike", targetMuscles: "Core (Abs, Obliques), Shoulders", equipment: "TRX",
+                        instructions: ["Start in TRX plank: feet in cradles, hands under shoulders.", "Keeping legs straight, lift hips towards ceiling, forming an inverted 'V'.", "Slowly lower back to plank position."],
+                        formTips: ["Engage core deeply.", "Control movement in both directions."],
+                        commonMistakes: ["Bending knees.", "Dropping hips too low in plank."]
+                    }, 
+                    { name: "Rest", type: "rest", duration: 45 },
+                    { 
+                        name: "DB Russian Twists", type: "exercise", duration: 45,
+                        visualPlaceholder: "Visual for DB Russian Twists", targetMuscles: "Obliques, Abs", equipment: "Dumbbell (optional)",
+                        instructions: ["Sit on floor, knees bent, lean back slightly (V-sit). Hold one dumbbell with both hands (optional).", "Lift feet off floor (optional for more challenge).", "Twist torso from side to side, touching dumbbell (or hands) to floor beside hip."],
+                        formTips: ["Keep back straight, not rounded.", "Rotate from torso, not just arms."],
+                        commonMistakes: ["Rounding lower back.", "Moving too quickly with no control."]
+                    }, 
+                    { name: "Rest", type: "rest", duration: 45 },
+                    { 
+                        name: "TRX Body Saw", type: "exercise", duration: 45,
+                        visualPlaceholder: "Visual for TRX Body Saw", targetMuscles: "Core (Abs)", equipment: "TRX",
+                        instructions: ["Start in TRX forearm plank: feet in cradles, forearms on floor, elbows under shoulders.", "Keeping body rigid, slowly push body backward using forearms, then pull forward.", "Movement range should be a few inches back and forth."],
+                        formTips: ["Maintain a perfectly straight line from head to heels.", "Squeeze glutes and abs tightly."],
+                        commonMistakes: ["Hips sagging.", "Piking hips up."]
+                    }, 
+                    { name: "Rest", type: "rest", duration: 45 },
+                    // Repeat Core Tri-set for rounds 2, 3
+                    ...Array(2).fill(null).flatMap((_, i) => [
+                        { name: `Core Tri-set (Round ${i+2}/3)`, type: "info", duration: 0 },
+                        { name: "TRX Pike", type: "exercise", duration: 45, visualPlaceholder: "Visual for TRX Pike", targetMuscles: "Core (Abs, Obliques), Shoulders", equipment: "TRX", instructions: ["Start in TRX plank: feet in cradles, hands under shoulders.", "Keeping legs straight, lift hips towards ceiling, forming an inverted 'V'.", "Slowly lower back to plank position."], formTips: ["Engage core deeply.", "Control movement in both directions."], commonMistakes: ["Bending knees.", "Dropping hips too low in plank."] }, 
+                        { name: "Rest", type: "rest", duration: 45 },
+                        { name: "DB Russian Twists", type: "exercise", duration: 45, visualPlaceholder: "Visual for DB Russian Twists", targetMuscles: "Obliques, Abs", equipment: "Dumbbell (optional)", instructions: ["Sit on floor, knees bent, lean back slightly (V-sit). Hold one dumbbell with both hands (optional).", "Lift feet off floor (optional for more challenge).", "Twist torso from side to side, touching dumbbell (or hands) to floor beside hip."], formTips: ["Keep back straight, not rounded.", "Rotate from torso, not just arms."], commonMistakes: ["Rounding lower back.", "Moving too quickly with no control."] }, 
+                        { name: "Rest", type: "rest", duration: 45 },
+                        { name: "TRX Body Saw", type: "exercise", duration: 45, visualPlaceholder: "Visual for TRX Body Saw", targetMuscles: "Core (Abs)", equipment: "TRX", instructions: ["Start in TRX forearm plank: feet in cradles, forearms on floor, elbows under shoulders.", "Keeping body rigid, slowly push body backward using forearms, then pull forward.", "Movement range should be a few inches back and forth."], formTips: ["Maintain a perfectly straight line from head to heels.", "Squeeze glutes and abs tightly."], commonMistakes: ["Hips sagging.", "Piking hips up."] }, 
+                        { name: "Rest", type: "rest", duration: 45 },
+                    ]),
+                    { name: "Extended Rest", type: "extended_rest", duration: 180 },
+
+                    { name: "Finisher Burnout (Round 1/2)", type: "info", duration: 0 },
+                    { 
+                        name: "TRX Atomic Push-ups", type: "exercise", duration: 45,
+                        visualPlaceholder: "Visual for TRX Atomic Push-ups", targetMuscles: "Chest, Shoulders, Triceps, Core, Hip Flexors", equipment: "TRX",
+                        instructions: ["Start in TRX plank: feet in cradles, hands under shoulders.", "Perform a push-up.", "As you push up, immediately pull knees towards chest (crunch).", "Extend legs back to plank. That's one rep."],
+                        formTips: ["Maintain core stability throughout.", "Control the knee tuck."],
+                        commonMistakes: ["Hips sagging during push-up.", "Losing balance during tuck."]
+                    }, 
+                    { name: "Rest", type: "rest", duration: 45 },
+                    { 
+                        name: "DB Hammer Curls", type: "exercise", duration: 45,
+                        visualPlaceholder: "Visual for DB Hammer Curls", targetMuscles: "Biceps, Forearms (Brachialis, Brachioradialis)", equipment: "Dumbbells",
+                        instructions: ["Stand holding dumbbells at sides, palms facing your body (neutral grip).", "Keeping elbows tucked, curl one dumbbell up towards shoulder.", "Lower with control and repeat with other arm, or curl both simultaneously."],
+                        formTips: ["Keep upper arms stationary.", "Avoid swinging body."],
+                        commonMistakes: ["Using momentum.", "Elbows moving forward too much."]
+                    }, 
+                    { name: "Rest", type: "rest", duration: 45 },
+                    { 
+                        name: "TRX Low Row", type: "exercise", duration: 45,
+                        visualPlaceholder: "Visual for TRX Low Row", targetMuscles: "Back (Lats, Rhomboids, Traps), Biceps", equipment: "TRX",
+                        instructions: ["Set TRX straps to mid-length. Face anchor, grab handles, lean back with arms extended, body straight.", "Pull chest towards handles, squeezing shoulder blades together. Elbows close to body.", "Slowly lower back to start."],
+                        formTips: ["Maintain a strong plank position.", "Initiate pull with back muscles."],
+                        commonMistakes: ["Rounding shoulders.", "Using too much bicep, not enough back."]
+                    }, 
+                    { name: "Rest", type: "rest", duration: 45 },
+                    // Repeat Finisher for round 2
+                    { name: "Finisher Burnout (Round 2/2)", type: "info", duration: 0 },
+                    { name: "TRX Atomic Push-ups", type: "exercise", duration: 45, visualPlaceholder: "Visual for TRX Atomic Push-ups", targetMuscles: "Chest, Shoulders, Triceps, Core, Hip Flexors", equipment: "TRX", instructions: ["Start in TRX plank: feet in cradles, hands under shoulders.", "Perform a push-up.", "As you push up, immediately pull knees towards chest (crunch).", "Extend legs back to plank. That's one rep."], formTips: ["Maintain core stability throughout.", "Control the knee tuck."], commonMistakes: ["Hips sagging during push-up.", "Losing balance during tuck."] }, 
+                    { name: "Rest", type: "rest", duration: 45 },
+                    { name: "DB Hammer Curls", type: "exercise", duration: 45, visualPlaceholder: "Visual for DB Hammer Curls", targetMuscles: "Biceps, Forearms (Brachialis, Brachioradialis)", equipment: "Dumbbells", instructions: ["Stand holding dumbbells at sides, palms facing your body (neutral grip).", "Keeping elbows tucked, curl one dumbbell up towards shoulder.", "Lower with control and repeat with other arm, or curl both simultaneously."], formTips: ["Keep upper arms stationary.", "Avoid swinging body."], commonMistakes: ["Using momentum.", "Elbows moving forward too much."] }, 
+                    { name: "Rest", type: "rest", duration: 45 },
+                    { name: "TRX Low Row", type: "exercise", duration: 45, visualPlaceholder: "Visual for TRX Low Row", targetMuscles: "Back (Lats, Rhomboids, Traps), Biceps", equipment: "TRX", instructions: ["Set TRX straps to mid-length. Face anchor, grab handles, lean back with arms extended, body straight.", "Pull chest towards handles, squeezing shoulder blades together. Elbows close to body.", "Slowly lower back to start."], formTips: ["Maintain a strong plank position.", "Initiate pull with back muscles."], commonMistakes: ["Rounding shoulders.", "Using too much bicep, not enough back."] }, 
+                    { name: "Rest", type: "rest", duration: 45 },
+                    { name: "Extended Rest", type: "extended_rest", duration: 180 },
+
+                    { name: "Cool-down Start", type: "info", duration: 0 },
+                    { 
+                        name: "Chest Stretch (Doorway/Wall)", type: "exercise", duration: 45,
+                        visualPlaceholder: "Visual for Chest Stretch", targetMuscles: "Chest, Shoulders", equipment: "Doorway or Wall",
+                        instructions: ["Place forearm on a wall or doorway edge, elbow at shoulder height.", "Gently lean forward/turn away until you feel a stretch in your chest and front shoulder.", "Hold. Repeat on other side after 22s."],
+                        formTips: ["Keep shoulder down, away from ear.", "Don't force the stretch."],
+                        commonMistakes: ["Overstretching.", "Holding breath."]
+                    }, 
+                    { name: "Rest", type: "rest", duration: 45 },
+                    { 
+                        name: "TRX Triceps Stretch", type: "exercise", duration: 45,
+                        visualPlaceholder: "Visual for TRX Triceps Stretch", targetMuscles: "Triceps", equipment: "TRX",
+                        instructions: ["Hold one TRX handle, reach arm overhead, bend elbow so hand is behind your back.", "Gently use other hand to press elbow down/back or use TRX for slight lean.", "Feel stretch in triceps. Hold. Repeat on other side after 22s."],
+                        formTips: ["Keep back straight.", "Breathe deeply."],
+                        commonMistakes: ["Arching back.", "Pulling too hard."]
+                    }, 
+                    { name: "Rest", type: "rest", duration: 45 },
+                    { 
+                        name: "Seated Forward Fold", type: "exercise", duration: 45,
+                        visualPlaceholder: "Visual for Seated Forward Fold", targetMuscles: "Hamstrings, Lower Back", equipment: "Bodyweight",
+                        instructions: ["Sit on floor, legs extended straight.", "Inhale, lengthen spine. Exhale, hinge at hips and reach towards toes.", "Relax head and neck. Hold."],
+                        formTips: ["Keep a slight bend in knees if hamstrings are tight.", "Focus on hinging from hips, not rounding back excessively."],
+                        commonMistakes: ["Forcing the stretch by rounding upper back.", "Bouncing."]
+                    }, 
+                    { name: "Rest", type: "rest", duration: 45 },
+                    { 
+                        name: "Cobra Stretch", type: "exercise", duration: 45,
+                        visualPlaceholder: "Visual for Cobra Stretch", targetMuscles: "Abs, Chest, Spine extensors", equipment: "Bodyweight",
+                        instructions: ["Lie face down, hands under shoulders.", "Press into hands to lift chest and head off floor. Keep hips on floor.", "Look slightly upward or straight ahead. Hold."],
+                        formTips: ["Keep shoulders relaxed away from ears.", "Engage glutes slightly to protect lower back."],
+                        commonMistakes: ["Pushing up too high and straining back.", "Shrugging shoulders."]
+                    }, 
+                    { name: "Rest", type: "rest", duration: 45 },
+                    { 
+                        name: "Wrist Rolls", type: "exercise", duration: 45,
+                        visualPlaceholder: "Visual for Wrist Rolls", targetMuscles: "Wrists, Forearms", equipment: "Bodyweight",
+                        instructions: ["Extend arms forward or rest elbows on knees.", "Make gentle fists or keep hands relaxed.", "Slowly roll wrists clockwise for 22s, then counter-clockwise for 22s."],
+                        formTips: ["Keep movements smooth and controlled.", "Focus on full range of motion."],
+                        commonMistakes: ["Moving too quickly.", "Forcing range of motion."]
+                    },
+                    { name: "Workout Complete!", type: "info", duration: 0 }
+                ]
+            },
+            // --- Full Arms Blast ---
+            fullArms: {
+                name: "Full Arms Blast (DB & TRX)",
+                exercises: [
+                    { name: "Warm-up Start", type: "info", duration: 0 },
+                    { name: "Arm Circles", type: "exercise", duration: 45, visualPlaceholder: "Visual for Arm Circles", targetMuscles: "Shoulders, Upper Back", equipment: "Bodyweight", instructions: ["Stand with feet shoulder-width apart, arms extended to sides at shoulder height.", "Make small circles forward, gradually increasing size.", "After 22s, reverse direction: small circles backward, gradually increasing size."], formTips: ["Keep core engaged.", "Control the movement, don't swing wildly."], commonMistakes: ["Shrugging shoulders.", "Moving too fast."] }, 
+                    { name: "Rest", type: "rest", duration: 45 },
+                    { 
+                        name: "TRX Bicep Curls (light)", type: "exercise", duration: 45,
+                        visualPlaceholder: "Visual for TRX Bicep Curls (light)", targetMuscles: "Biceps", equipment: "TRX",
+                        instructions: ["Face anchor, hold TRX handles with underhand grip, lean back slightly.", "Keeping elbows high and stable, pull handles towards your temples, squeezing biceps.", "Slowly extend arms back to start. Use a light lean for warm-up."],
+                        formTips: ["Keep body in a straight line.", "Isolate the bicep movement."],
+                        commonMistakes: ["Dropping elbows.", "Using back to pull."]
+                    }, 
+                    { name: "Rest", type: "rest", duration: 45 },
+                    { 
+                        name: "TRX Tricep Press (light)", type: "exercise", duration: 45,
+                        visualPlaceholder: "Visual for TRX Tricep Press (light)", targetMuscles: "Triceps", equipment: "TRX",
+                        instructions: ["Face away from anchor, hold TRX handles with overhand grip, arms extended forward at chest height, slight lean.", "Bend elbows, lowering body forward while keeping elbows close to head.", "Press back to start, extending triceps. Use a light lean for warm-up."],
+                        formTips: ["Maintain core tension.", "Elbows point forward."],
+                        commonMistakes: ["Flaring elbows wide.", "Sagging hips."]
+                    }, 
+                    { name: "Rest", type: "rest", duration: 45 },
+                    { name: "Extended Rest", type: "extended_rest", duration: 180 },
+
+                    { name: "Biceps Superset (Round 1/3)", type: "info", duration: 0 },
+                    { 
+                        name: "DB Bicep Curl", type: "exercise", duration: 45,
+                        visualPlaceholder: "Visual for DB Bicep Curl", targetMuscles: "Biceps", equipment: "Dumbbells",
+                        instructions: ["Stand or sit, hold dumbbells with underhand grip, arms extended.", "Keeping elbows pinned to sides, curl dumbbells up towards shoulders.", "Squeeze biceps at top, then slowly lower with control."],
+                        formTips: ["Keep upper arms stationary.", "Full range of motion."],
+                        commonMistakes: ["Swinging body/using momentum.", "Not fully extending at bottom."]
+                    }, 
+                    { name: "Rest", type: "rest", duration: 45 },
+                    { 
+                        name: "TRX Bicep Curl", type: "exercise", duration: 45,
+                        visualPlaceholder: "Visual for TRX Bicep Curl", targetMuscles: "Biceps", equipment: "TRX",
+                        instructions: ["Face anchor, hold TRX handles with underhand grip, lean back (more lean = harder).", "Keeping elbows high and stable, pull handles towards your temples, squeezing biceps.", "Slowly extend arms back to start."],
+                        formTips: ["Body straight as a plank.", "Focus on bicep contraction."],
+                        commonMistakes: ["Elbows dropping.", "Using momentum from hips/back."]
+                    }, 
+                    { name: "Rest", type: "rest", duration: 45 },
+                     // Repeat Biceps Superset for rounds 2, 3
+                    ...Array(2).fill(null).flatMap((_, i) => [
+                        { name: `Biceps Superset (Round ${i+2}/3)`, type: "info", duration: 0 },
+                        { name: "DB Bicep Curl", type: "exercise", duration: 45, visualPlaceholder: "Visual for DB Bicep Curl", targetMuscles: "Biceps", equipment: "Dumbbells", instructions: ["Stand or sit, hold dumbbells with underhand grip, arms extended.", "Keeping elbows pinned to sides, curl dumbbells up towards shoulders.", "Squeeze biceps at top, then slowly lower with control."], formTips: ["Keep upper arms stationary.", "Full range of motion."], commonMistakes: ["Swinging body/using momentum.", "Not fully extending at bottom."] }, 
+                        { name: "Rest", type: "rest", duration: 45 },
+                        { name: "TRX Bicep Curl", type: "exercise", duration: 45, visualPlaceholder: "Visual for TRX Bicep Curl", targetMuscles: "Biceps", equipment: "TRX", instructions: ["Face anchor, hold TRX handles with underhand grip, lean back (more lean = harder).", "Keeping elbows high and stable, pull handles towards your temples, squeezing biceps.", "Slowly extend arms back to start."], formTips: ["Body straight as a plank.", "Focus on bicep contraction."], commonMistakes: ["Elbows dropping.", "Using momentum from hips/back."] }, 
+                        { name: "Rest", type: "rest", duration: 45 },
+                    ]),
+                    { name: "Extended Rest", type: "extended_rest", duration: 180 },
+
+                    { name: "Triceps Superset (Round 1/3)", type: "info", duration: 0 },
+                    { 
+                        name: "DB Overhead Triceps Extension", type: "exercise", duration: 45,
+                        visualPlaceholder: "Visual for DB Overhead Triceps Extension", targetMuscles: "Triceps", equipment: "Dumbbell(s)",
+                        instructions: ["Sit or stand, hold one dumbbell with both hands (or one in each hand) overhead, arms extended.", "Keeping elbows relatively close to head, lower dumbbell(s) behind head by bending elbows.", "Extend arms to lift dumbbell(s) back overhead, squeezing triceps."],
+                        formTips: ["Keep core engaged.", "Elbows should point forward/up, not flare out wide."],
+                        commonMistakes: ["Flaring elbows.", "Arching lower back excessively."]
+                    }, 
+                    { name: "Rest", type: "rest", duration: 45 },
+                    { name: "TRX Triceps Extension", type: "exercise", duration: 45, visualPlaceholder: "Visual for TRX Triceps Extension", targetMuscles: "Triceps", equipment: "TRX", instructions: ["Set TRX straps to mid-length. Face away from anchor, grab handles, arms extended overhead, slight forward lean.", "Keeping elbows high and relatively fixed, bend elbows to lower handles behind your head.", "Extend arms to press back to start, squeezing triceps."], formTips: ["Keep core tight to prevent back arch.", "Elbows should point forward/up, not flare out."], commonMistakes: ["Letting elbows drop.", "Arching lower back."] },
+                    { name: "Rest", type: "rest", duration: 45 },
+                    // Repeat Triceps Superset for rounds 2, 3
+                    ...Array(2).fill(null).flatMap((_, i) => [
+                        { name: `Triceps Superset (Round ${i+2}/3)`, type: "info", duration: 0 },
+                        { name: "DB Overhead Triceps Extension", type: "exercise", duration: 45, visualPlaceholder: "Visual for DB Overhead Triceps Extension", targetMuscles: "Triceps", equipment: "Dumbbell(s)", instructions: ["Sit or stand, hold one dumbbell with both hands (or one in each hand) overhead, arms extended.", "Keeping elbows relatively close to head, lower dumbbell(s) behind head by bending elbows.", "Extend arms to lift dumbbell(s) back overhead, squeezing triceps."], formTips: ["Keep core engaged.", "Elbows should point forward/up, not flare out wide."], commonMistakes: ["Flaring elbows.", "Arching lower back excessively."] }, 
+                        { name: "Rest", type: "rest", duration: 45 },
+                        { name: "TRX Triceps Extension", type: "exercise", duration: 45, visualPlaceholder: "Visual for TRX Triceps Extension", targetMuscles: "Triceps", equipment: "TRX", instructions: ["Set TRX straps to mid-length. Face away from anchor, grab handles, arms extended overhead, slight forward lean.", "Keeping elbows high and relatively fixed, bend elbows to lower handles behind your head.", "Extend arms to press back to start, squeezing triceps."], formTips: ["Keep core tight to prevent back arch.", "Elbows should point forward/up, not flare out."], commonMistakes: ["Letting elbows drop.", "Arching lower back."] },
+                        { name: "Rest", type: "rest", duration: 45 },
+                    ]),
+                    { name: "Extended Rest", type: "extended_rest", duration: 180 },
+
+                    { name: "Forearms & Shoulders (Round 1/2)", type: "info", duration: 0 },
+                    { name: "DB Hammer Curls", type: "exercise", duration: 45, visualPlaceholder: "Visual for DB Hammer Curls", targetMuscles: "Biceps, Forearms (Brachialis, Brachioradialis)", equipment: "Dumbbells", instructions: ["Stand holding dumbbells at sides, palms facing your body (neutral grip).", "Keeping elbows tucked, curl one dumbbell up towards shoulder.", "Lower with control and repeat with other arm, or curl both simultaneously."], formTips: ["Keep upper arms stationary.", "Avoid swinging body."], commonMistakes: ["Using momentum.", "Elbows moving forward too much."] }, 
+                    { name: "Rest", type: "rest", duration: 45 },
+                    { 
+                        name: "DB Front Raises", type: "exercise", duration: 45,
+                        visualPlaceholder: "Visual for DB Front Raises", targetMuscles: "Front Deltoids (Shoulders)", equipment: "Dumbbells",
+                        instructions: ["Stand holding dumbbells in front of thighs, palms facing body or down.", "Keeping arms relatively straight (slight bend in elbow), raise one dumbbell straight in front to shoulder height.", "Lower with control. Alternate arms or raise both simultaneously."],
+                        formTips: ["Keep core engaged to avoid leaning back.", "Control the descent, don't let arms drop."],
+                        commonMistakes: ["Using momentum/swinging.", "Raising weight above shoulder height."]
+                    }, 
+                    { name: "Rest", type: "rest", duration: 45 },
+                    { 
+                        name: "DB Lateral Raises", type: "exercise", duration: 45,
+                        visualPlaceholder: "Visual for DB Lateral Raises", targetMuscles: "Side Deltoids (Shoulders)", equipment: "Dumbbells",
+                        instructions: ["Stand holding dumbbells at sides, palms facing body.", "Keeping a slight bend in elbows, raise arms out to sides up to shoulder height (like a 'T').", "Lead with elbows slightly, pinkies slightly higher than thumbs at top.", "Lower with control."],
+                        formTips: ["Avoid shrugging shoulders.", "Keep core tight."],
+                        commonMistakes: ["Using momentum/swinging.", "Raising arms too high or too far forward."]
+                    }, 
+                    { name: "Rest", type: "rest", duration: 45 },
+                    // Repeat Forearms & Shoulders for round 2
+                    { name: "Forearms & Shoulders (Round 2/2)", type: "info", duration: 0 },
+                    { name: "DB Hammer Curls", type: "exercise", duration: 45, visualPlaceholder: "Visual for DB Hammer Curls", targetMuscles: "Biceps, Forearms (Brachialis, Brachioradialis)", equipment: "Dumbbells", instructions: ["Stand holding dumbbells at sides, palms facing your body (neutral grip).", "Keeping elbows tucked, curl one dumbbell up towards shoulder.", "Lower with control and repeat with other arm, or curl both simultaneously."], formTips: ["Keep upper arms stationary.", "Avoid swinging body."], commonMistakes: ["Using momentum.", "Elbows moving forward too much."] }, 
+                    { name: "Rest", type: "rest", duration: 45 },
+                    { name: "DB Front Raises", type: "exercise", duration: 45, visualPlaceholder: "Visual for DB Front Raises", targetMuscles: "Front Deltoids (Shoulders)", equipment: "Dumbbells", instructions: ["Stand holding dumbbells in front of thighs, palms facing body or down.", "Keeping arms relatively straight (slight bend in elbow), raise one dumbbell straight in front to shoulder height.", "Lower with control. Alternate arms or raise both simultaneously."], formTips: ["Keep core engaged to avoid leaning back.", "Control the descent, don't let arms drop."], commonMistakes: ["Using momentum/swinging.", "Raising weight above shoulder height."] }, 
+                    { name: "Rest", type: "rest", duration: 45 },
+                    { name: "DB Lateral Raises", type: "exercise", duration: 45, visualPlaceholder: "Visual for DB Lateral Raises", targetMuscles: "Side Deltoids (Shoulders)", equipment: "Dumbbells", instructions: ["Stand holding dumbbells at sides, palms facing body.", "Keeping a slight bend in elbows, raise arms out to sides up to shoulder height (like a 'T').", "Lead with elbows slightly, pinkies slightly higher than thumbs at top.", "Lower with control."], formTips: ["Avoid shrugging shoulders.", "Keep core tight."], commonMistakes: ["Using momentum/swinging.", "Raising arms too high or too far forward."] }, 
+                    { name: "Rest", type: "rest", duration: 45 },
+                    { name: "Extended Rest", type: "extended_rest", duration: 180 },
+
+                    { name: "Cool-down Start", type: "info", duration: 0 },
+                    { 
+                        name: "Bicep Stretch (Doorway/TRX)", type: "exercise", duration: 45,
+                        visualPlaceholder: "Visual for Bicep Stretch", targetMuscles: "Biceps, Front Shoulder", equipment: "Doorway or TRX",
+                        instructions: ["Doorway: Place forearm on doorway, thumb up. Gently turn body away. TRX: Hold handle, arm extended, turn away.", "Feel stretch in bicep and front shoulder. Hold. Repeat other side after 22s."],
+                        formTips: ["Keep shoulder down.", "Adjust arm height for different stretch angles."],
+                        commonMistakes: ["Overstretching.", "Shrugging shoulder."]
+                    }, 
+                    { name: "Rest", type: "rest", duration: 45 },
+                    { 
+                        name: "Triceps Stretch (Overhead)", type: "exercise", duration: 45,
+                        visualPlaceholder: "Visual for Overhead Triceps Stretch", targetMuscles: "Triceps", equipment: "Bodyweight",
+                        instructions: ["Reach one arm overhead, bend elbow, let hand fall behind head.", "Use other hand to gently press on elbow, deepening stretch.", "Hold. Repeat other side after 22s."],
+                        formTips: ["Keep back straight.", "Don't force the stretch."],
+                        commonMistakes: ["Arching back.", "Pulling too aggressively."]
+                    }, 
+                    { name: "Rest", type: "rest", duration: 45 },
+                    { name: "Wrist Rolls", type: "exercise", duration: 45, visualPlaceholder: "Visual for Wrist Rolls", targetMuscles: "Wrists, Forearms", equipment: "Bodyweight", instructions: ["Extend arms forward or rest elbows on knees.", "Make gentle fists or keep hands relaxed.", "Slowly roll wrists clockwise for 22s, then counter-clockwise for 22s."], formTips: ["Keep movements smooth and controlled.", "Focus on full range of motion."], commonMistakes: ["Moving too quickly.", "Forcing range of motion."] },
+                    { name: "Workout Complete!", type: "info", duration: 0 }
+                ]
+            },
+             // --- Full Legs Power ---
+            fullLegs: {
+                name: "Full Legs Power (DB & Bodyweight)",
+                exercises: [
+                    { name: "Warm-up Start", type: "info", duration: 0 },
+                    { name: "Jumping Jacks", type: "exercise", duration: 45, visualPlaceholder: "Visual for Jumping Jacks", targetMuscles: "Full Body Cardio", equipment: "Bodyweight", instructions: ["Stand with feet together, arms at sides.", "Simultaneously jump feet out to shoulder-width while raising arms overhead.", "Jump back to starting position."], formTips: ["Land softly on the balls of your feet.", "Keep a steady rhythm."], commonMistakes: ["Not bringing arms fully overhead.", "Landing too hard."] }, 
+                    { name: "Rest", type: "rest", duration: 45 },
+                    { 
+                        name: "Bodyweight Squats", type: "exercise", duration: 45,
+                        visualPlaceholder: "Visual for Bodyweight Squats", targetMuscles: "Quads, Glutes, Hamstrings", equipment: "Bodyweight",
+                        instructions: ["Stand with feet shoulder-width apart, toes slightly out.", "Lower hips back and down as if sitting in a chair, keeping chest up.", "Go as low as comfortable (thighs parallel to floor ideal).", "Push through heels to return to start."],
+                        formTips: ["Keep chest up, back straight.", "Knees track in line with toes."],
+                        commonMistakes: ["Knees caving inward.", "Rounding lower back."]
+                    }, 
+                    { name: "Rest", type: "rest", duration: 45 },
+                    { 
+                        name: "Leg Swings (Forward & Lateral)", type: "exercise", duration: 45,
+                        visualPlaceholder: "Visual for Leg Swings", targetMuscles: "Hips, Hamstrings, Quads (Dynamic Stretch)", equipment: "Bodyweight (optional wall for balance)",
+                        instructions: ["Stand tall, hold onto wall if needed. Swing one leg forward and backward like a pendulum for 22s.", "Switch to swinging leg side-to-side (laterally) across body for 22s. Repeat other leg."],
+                        formTips: ["Keep core engaged.", "Movement should be controlled, not forced."],
+                        commonMistakes: ["Arching back excessively.", "Swinging too high too soon."]
+                    }, 
+                    { name: "Rest", type: "rest", duration: 45 },
+                    { name: "Extended Rest", type: "extended_rest", duration: 180 },
+
+                    { name: "Quads & Glutes Focus (Round 1/3)", type: "info", duration: 0 },
+                    { 
+                        name: "DB Goblet Squats", type: "exercise", duration: 45,
+                        visualPlaceholder: "Visual for DB Goblet Squats", targetMuscles: "Quads, Glutes, Core", equipment: "Dumbbell",
+                        instructions: ["Hold one dumbbell vertically against chest with both hands.", "Stand with feet shoulder-width apart, toes slightly out.", "Lower hips back and down, keeping chest up and elbows inside knees.", "Push through heels to return to start."],
+                        formTips: ["Keep dumbbell close to chest.", "Maintain upright torso."],
+                        commonMistakes: ["Leaning too far forward.", "Knees caving in."]
+                    }, 
+                    { name: "Rest", type: "rest", duration: 45 },
+                    { 
+                        name: "Bodyweight Lunges (Alternating)", type: "exercise", duration: 45,
+                        visualPlaceholder: "Visual for Bodyweight Lunges", targetMuscles: "Quads, Glutes, Hamstrings", equipment: "Bodyweight",
+                        instructions: ["Stand tall. Step forward with one leg, lowering hips until both knees are bent at 90-degree angle.", "Front knee over ankle, back knee close to floor.", "Push off front foot to return to start. Alternate legs."],
+                        formTips: ["Keep torso upright.", "Ensure front knee doesn't go past toes."],
+                        commonMistakes: ["Front knee caving inward.", "Leaning too far forward or back."]
+                    }, 
+                    { name: "Rest", type: "rest", duration: 45 },
+                    // Repeat Quads & Glutes for rounds 2, 3
+                    ...Array(2).fill(null).flatMap((_, i) => [
+                        { name: `Quads & Glutes Focus (Round ${i+2}/3)`, type: "info", duration: 0 },
+                        { name: "DB Goblet Squats", type: "exercise", duration: 45, visualPlaceholder: "Visual for DB Goblet Squats", targetMuscles: "Quads, Glutes, Core", equipment: "Dumbbell", instructions: ["Hold one dumbbell vertically against chest with both hands.", "Stand with feet shoulder-width apart, toes slightly out.", "Lower hips back and down, keeping chest up and elbows inside knees.", "Push through heels to return to start."], formTips: ["Keep dumbbell close to chest.", "Maintain upright torso."], commonMistakes: ["Leaning too far forward.", "Knees caving in."] }, 
+                        { name: "Rest", type: "rest", duration: 45 },
+                        { name: "Bodyweight Lunges (Alternating)", type: "exercise", duration: 45, visualPlaceholder: "Visual for Bodyweight Lunges", targetMuscles: "Quads, Glutes, Hamstrings", equipment: "Bodyweight", instructions: ["Stand tall. Step forward with one leg, lowering hips until both knees are bent at 90-degree angle.", "Front knee over ankle, back knee close to floor.", "Push off front foot to return to start. Alternate legs."], formTips: ["Keep torso upright.", "Ensure front knee doesn't go past toes."], commonMistakes: ["Front knee caving inward.", "Leaning too far forward or back."] }, 
+                        { name: "Rest", type: "rest", duration: 45 },
+                    ]),
+                    { name: "Extended Rest", type: "extended_rest", duration: 180 },
+                    
+                    { name: "Hamstrings & Calves (Round 1/3)", type: "info", duration: 0 },
+                    { 
+                        name: "DB Romanian Deadlifts (RDLs)", type: "exercise", duration: 45,
+                        visualPlaceholder: "Visual for DB RDLs", targetMuscles: "Hamstrings, Glutes, Lower Back", equipment: "Dumbbells",
+                        instructions: ["Stand holding dumbbells in front of thighs, palms facing body. Slight bend in knees.", "Hinge at hips, keeping back straight, lower dumbbells towards floor (as far as flexibility allows, keeping back straight).", "Feel stretch in hamstrings. Squeeze glutes to return to upright position."],
+                        formTips: ["Keep back flat/neutral spine throughout.", "Dumbbells stay close to legs."],
+                        commonMistakes: ["Rounding lower back.", "Bending knees too much (becomes a squat)."]
+                    }, 
+                    { name: "Rest", type: "rest", duration: 45 },
+                    { 
+                        name: "Calf Raises", type: "exercise", duration: 45,
+                        visualPlaceholder: "Visual for Calf Raises", targetMuscles: "Calves (Gastrocnemius, Soleus)", equipment: "Bodyweight or Dumbbells",
+                        instructions: ["Stand with feet flat, hip-width apart. Hold dumbbells for added weight if desired.", "Rise up onto balls of feet, lifting heels as high as possible.", "Hold briefly, then slowly lower heels back to floor."],
+                        formTips: ["Full range of motion.", "Control both upward and downward phases."],
+                        commonMistakes: ["Bouncing.", "Not going high enough."]
+                    }, 
+                    { name: "Rest", type: "rest", duration: 45 },
+                    // Repeat Hamstrings & Calves for rounds 2, 3
+                    ...Array(2).fill(null).flatMap((_, i) => [
+                        { name: `Hamstrings & Calves (Round ${i+2}/3)`, type: "info", duration: 0 },
+                        { name: "DB Romanian Deadlifts (RDLs)", type: "exercise", duration: 45, visualPlaceholder: "Visual for DB RDLs", targetMuscles: "Hamstrings, Glutes, Lower Back", equipment: "Dumbbells", instructions: ["Stand holding dumbbells in front of thighs, palms facing body. Slight bend in knees.", "Hinge at hips, keeping back straight, lower dumbbells towards floor (as far as flexibility allows, keeping back straight).", "Feel stretch in hamstrings. Squeeze glutes to return to upright position."], formTips: ["Keep back flat/neutral spine throughout.", "Dumbbells stay close to legs."], commonMistakes: ["Rounding lower back.", "Bending knees too much (becomes a squat)."] }, 
+                        { name: "Rest", type: "rest", duration: 45 },
+                        { name: "Calf Raises", type: "exercise", duration: 45, visualPlaceholder: "Visual for Calf Raises", targetMuscles: "Calves (Gastrocnemius, Soleus)", equipment: "Bodyweight or Dumbbells", instructions: ["Stand with feet flat, hip-width apart. Hold dumbbells for added weight if desired.", "Rise up onto balls of feet, lifting heels as high as possible.", "Hold briefly, then slowly lower heels back to floor."], formTips: ["Full range of motion.", "Control both upward and downward phases."], commonMistakes: ["Bouncing.", "Not going high enough."] }, 
+                        { name: "Rest", type: "rest", duration: 45 },
+                    ]),
+                    { name: "Extended Rest", type: "extended_rest", duration: 180 },
+
+                    { name: "Finisher Circuit", type: "info", duration: 0 },
+                    { 
+                        name: "Wall Sit", type: "exercise", duration: 45,
+                        visualPlaceholder: "Visual for Wall Sit", targetMuscles: "Quads, Glutes (Isometric)", equipment: "Wall",
+                        instructions: ["Lean against a wall, slide down until knees are at 90-degree angle, thighs parallel to floor.", "Ensure feet are flat on floor, back flat against wall.", "Hold this position."],
+                        formTips: ["Keep weight in heels.", "Ensure knees are behind toes."],
+                        commonMistakes: ["Not going low enough.", "Letting knees cave in."]
+                    }, 
+                    { name: "Rest", type: "rest", duration: 45 },
+                    { 
+                        name: "Jump Squats", type: "exercise", duration: 45,
+                        visualPlaceholder: "Visual for Jump Squats", targetMuscles: "Quads, Glutes, Hamstrings, Calves (Explosive)", equipment: "Bodyweight",
+                        instructions: ["Start in squat position (feet shoulder-width, hips back, chest up).", "Explosively jump upwards, extending legs fully.", "Land softly back into squat position and immediately repeat."],
+                        formTips: ["Land softly to absorb impact.", "Use arms for momentum if needed."],
+                        commonMistakes: ["Landing with stiff legs.", "Not squatting deep enough before jump."]
+                    }, 
+                    { name: "Rest", type: "rest", duration: 45 },
+                    { name: "Extended Rest", type: "extended_rest", duration: 180 },
+
+                    { name: "Cool-down Start", type: "info", duration: 0 },
+                    { 
+                        name: "Quad Stretch (Standing)", type: "exercise", duration: 45,
+                        visualPlaceholder: "Visual for Standing Quad Stretch", targetMuscles: "Quads, Hip Flexors", equipment: "Bodyweight (optional wall for balance)",
+                        instructions: ["Stand tall. Grab one ankle and pull heel towards glute. Hold onto wall for balance if needed.", "Keep knees close together, hips pressed slightly forward.", "Hold. Repeat other side after 22s."],
+                        formTips: ["Avoid arching back.", "Keep standing leg slightly bent."],
+                        commonMistakes: ["Letting knee flare out to side.", "Leaning too far forward."]
+                    }, 
+                    { name: "Rest", type: "rest", duration: 45 },
+                    { name: "Seated Forward Fold", type: "exercise", duration: 45, visualPlaceholder: "Visual for Seated Forward Fold", targetMuscles: "Hamstrings, Lower Back", equipment: "Bodyweight", instructions: ["Sit on floor, legs extended straight.", "Inhale, lengthen spine. Exhale, hinge at hips and reach towards toes.", "Relax head and neck. Hold."], formTips: ["Keep a slight bend in knees if hamstrings are tight.", "Focus on hinging from hips, not rounding back excessively."], commonMistakes: ["Forcing the stretch by rounding upper back.", "Bouncing."] }, 
+                    { name: "Rest", type: "rest", duration: 45 },
+                    { 
+                        name: "Calf Stretch (Wall)", type: "exercise", duration: 45,
+                        visualPlaceholder: "Visual for Wall Calf Stretch", targetMuscles: "Calves", equipment: "Wall",
+                        instructions: ["Face a wall, place hands on it for support. Step one foot back, keeping leg straight and heel on floor.", "Lean forward, bending front knee, until you feel stretch in back calf.", "Hold. To stretch soleus (lower calf), slightly bend back knee. Repeat other side after 22s."],
+                        formTips: ["Keep back heel down.", "Don't bounce."],
+                        commonMistakes: ["Lifting back heel.", "Not keeping back leg straight for gastrocnemius stretch."]
+                    },
+                    { name: "Workout Complete!", type: "info", duration: 0 }
+                ]
+            },
+            // --- Full Body Burn ---
+            fullBody: {
+                name: "Full Body Burn (DB, TRX & Bodyweight)",
+                exercises: [
+                    { name: "Warm-up Start", type: "info", duration: 0 },
+                    { name: "Jumping Jacks", type: "exercise", duration: 45, visualPlaceholder: "Visual for Jumping Jacks", targetMuscles: "Full Body Cardio", equipment: "Bodyweight", instructions: ["Stand with feet together, arms at sides.", "Simultaneously jump feet out to shoulder-width while raising arms overhead.", "Jump back to starting position."], formTips: ["Land softly on the balls of your feet.", "Keep a steady rhythm."], commonMistakes: ["Not bringing arms fully overhead.", "Landing too hard."] }, 
+                    { name: "Rest", type: "rest", duration: 45 },
+                    { 
+                        name: "TRX Squat to Row", type: "exercise", duration: 45,
+                        visualPlaceholder: "Visual for TRX Squat to Row", targetMuscles: "Quads, Glutes, Back, Biceps, Core", equipment: "TRX",
+                        instructions: ["Face anchor, hold TRX handles, arms extended, lean back slightly into squat position.", "Perform a squat. As you stand up, pull handles to chest, performing a row.", "Extend arms as you lower back into next squat."],
+                        formTips: ["Keep core engaged throughout.", "Smooth transition between squat and row."],
+                        commonMistakes: ["Rounding back during row.", "Not squatting deep enough."]
+                    }, 
+                    { name: "Rest", type: "rest", duration: 45 },
+                    { 
+                        name: "Inchworms", type: "exercise", duration: 45,
+                        visualPlaceholder: "Visual for Inchworms", targetMuscles: "Core, Shoulders, Hamstrings (Dynamic Stretch)", equipment: "Bodyweight",
+                        instructions: ["Stand tall. Hinge at hips, place hands on floor (bend knees if needed).", "Walk hands forward into a high plank position.", "Keeping legs straight (or slightly bent), walk feet towards hands.", "Stand up or repeat by walking hands out again."],
+                        formTips: ["Keep core tight in plank.", "Move slowly and with control."],
+                        commonMistakes: ["Sagging hips in plank.", "Rushing the movement."]
+                    }, 
+                    { name: "Rest", type: "rest", duration: 45 },
+                    { name: "Extended Rest", type: "extended_rest", duration: 180 },
+
+                    { name: "Compound Set 1 (Round 1/3)", type: "info", duration: 0 },
+                    { name: "DB Squat to Press", type: "exercise", duration: 45, visualPlaceholder: "Visual for DB Squat to Press", targetMuscles: "Quads, Glutes, Shoulders, Triceps, Core", equipment: "Dumbbells", instructions: ["Hold dumbbells at shoulder height, palms facing forward.", "Perform a squat (hips back, chest up).", "As you stand from squat, press dumbbells overhead.", "Lower dumbbells back to shoulders as you prepare for next squat."], formTips: ["Keep core engaged.", "Smooth, controlled movement."], commonMistakes: ["Arching back during press.", "Letting knees cave in during squat."] },
+                    { name: "Rest", type: "rest", duration: 45 },
+                    { name: "TRX Rows", type: "exercise", duration: 45, visualPlaceholder: "Visual for TRX Rows", targetMuscles: "Back (Lats, Rhomboids, Traps), Biceps", equipment: "TRX", instructions: ["Set TRX straps to mid-length. Face anchor, grab handles, lean back with arms extended, body straight.", "Pull chest towards handles, squeezing shoulder blades together. Elbows close to body.", "Slowly lower back to start. Adjust foot position to change difficulty."], formTips: ["Maintain a strong plank position.", "Initiate pull with back muscles."], commonMistakes: ["Rounding shoulders.", "Using too much bicep, not enough back."] },
+                    { name: "Rest", type: "rest", duration: 45 },
+                    // Repeat Compound Set 1 for rounds 2, 3
+                    ...Array(2).fill(null).flatMap((_, i) => [
+                        { name: `Compound Set 1 (Round ${i+2}/3)`, type: "info", duration: 0 },
+                        { name: "DB Squat to Press", type: "exercise", duration: 45, visualPlaceholder: "Visual for DB Squat to Press", targetMuscles: "Quads, Glutes, Shoulders, Triceps, Core", equipment: "Dumbbells", instructions: ["Hold dumbbells at shoulder height, palms facing forward.", "Perform a squat (hips back, chest up).", "As you stand from squat, press dumbbells overhead.", "Lower dumbbells back to shoulders as you prepare for next squat."], formTips: ["Keep core engaged.", "Smooth, controlled movement."], commonMistakes: ["Arching back during press.", "Letting knees cave in during squat."] },
+                        { name: "Rest", type: "rest", duration: 45 },
+                        { name: "TRX Rows", type: "exercise", duration: 45, visualPlaceholder: "Visual for TRX Rows", targetMuscles: "Back (Lats, Rhomboids, Traps), Biceps", equipment: "TRX", instructions: ["Set TRX straps to mid-length. Face anchor, grab handles, lean back with arms extended, body straight.", "Pull chest towards handles, squeezing shoulder blades together. Elbows close to body.", "Slowly lower back to start. Adjust foot position to change difficulty."], formTips: ["Maintain a strong plank position.", "Initiate pull with back muscles."], commonMistakes: ["Rounding shoulders.", "Using too much bicep, not enough back."] },
+                        { name: "Rest", type: "rest", duration: 45 },
+                    ]),
+                    { name: "Extended Rest", type: "extended_rest", duration: 180 },
+
+                    { name: "Compound Set 2 (Round 1/3)", type: "info", duration: 0 },
+                    { name: "DB Lunges (Alternating, holding DBs)", type: "exercise", duration: 45, visualPlaceholder: "Visual for DB Lunges", targetMuscles: "Quads, Glutes, Hamstrings", equipment: "Dumbbells", instructions: ["Hold dumbbells at sides.", "Step forward with one leg, lowering hips until both knees are bent at 90-degree angle.", "Front knee over ankle, back knee close to floor.", "Push off front foot to return to start. Alternate legs."], formTips: ["Keep torso upright.", "Ensure front knee doesn't go past toes."], commonMistakes: ["Front knee caving inward.", "Leaning too far forward or back."] },
+                    { name: "Rest", type: "rest", duration: 45 },
+                    { name: "Push-ups (on floor or TRX)", type: "exercise", duration: 45, visualPlaceholder: "Visual for Push-ups (floor/TRX)", targetMuscles: "Chest, Shoulders, Triceps, Core", equipment: "Bodyweight or TRX", instructions: ["Floor: High plank, hands slightly wider than shoulders. Lower body, chest near floor, push up.", "TRX: Feet in cradles (harder) or hands in handles facing away (easier). Perform push-up maintaining plank.", "Maintain straight line head to heels."], formTips: ["Engage core.", "Elbows at 45-degree angle."], commonMistakes: ["Sagging hips.", "Flaring elbows."] },
+                    { name: "Rest", type: "rest", duration: 45 },
+                    // Repeat Compound Set 2 for rounds 2, 3
+                    ...Array(2).fill(null).flatMap((_, i) => [
+                        { name: `Compound Set 2 (Round ${i+2}/3)`, type: "info", duration: 0 },
+                        { name: "DB Lunges (Alternating, holding DBs)", type: "exercise", duration: 45, visualPlaceholder: "Visual for DB Lunges", targetMuscles: "Quads, Glutes, Hamstrings", equipment: "Dumbbells", instructions: ["Hold dumbbells at sides.", "Step forward with one leg, lowering hips until both knees are bent at 90-degree angle.", "Front knee over ankle, back knee close to floor.", "Push off front foot to return to start. Alternate legs."], formTips: ["Keep torso upright.", "Ensure front knee doesn't go past toes."], commonMistakes: ["Front knee caving inward.", "Leaning too far forward or back."] },
+                        { name: "Rest", type: "rest", duration: 45 },
+                        { name: "Push-ups (on floor or TRX)", type: "exercise", duration: 45, visualPlaceholder: "Visual for Push-ups (floor/TRX)", targetMuscles: "Chest, Shoulders, Triceps, Core", equipment: "Bodyweight or TRX", instructions: ["Floor: High plank, hands slightly wider than shoulders. Lower body, chest near floor, push up.", "TRX: Feet in cradles (harder) or hands in handles facing away (easier). Perform push-up maintaining plank.", "Maintain straight line head to heels."], formTips: ["Engage core.", "Elbows at 45-degree angle."], commonMistakes: ["Sagging hips.", "Flaring elbows."] },
+                        { name: "Rest", type: "rest", duration: 45 },
+                    ]),
+                    { name: "Extended Rest", type: "extended_rest", duration: 180 },
+
+                    { name: "Core & Conditioning (Round 1/2)", type: "info", duration: 0 },
+                    { name: "DB Russian Twists", type: "exercise", duration: 45, visualPlaceholder: "Visual for DB Russian Twists", targetMuscles: "Obliques, Abs", equipment: "Dumbbell (optional)", instructions: ["Sit on floor, knees bent, lean back slightly (V-sit). Hold one dumbbell with both hands (optional).", "Lift feet off floor (optional for more challenge).", "Twist torso from side to side, touching dumbbell (or hands) to floor beside hip."], formTips: ["Keep back straight, not rounded.", "Rotate from torso, not just arms."], commonMistakes: ["Rounding lower back.", "Moving too quickly with no control."] }, 
+                    { name: "Rest", type: "rest", duration: 45 },
+                    { 
+                        name: "TRX Mountain Climbers", type: "exercise", duration: 45,
+                        visualPlaceholder: "Visual for TRX Mountain Climbers", targetMuscles: "Core, Hip Flexors, Shoulders (Cardio)", equipment: "TRX",
+                        instructions: ["Start in TRX plank: feet in cradles, hands under shoulders.", "Alternately bring one knee towards chest, then the other, in a running motion.", "Keep core tight and hips stable."],
+                        formTips: ["Maintain a strong plank throughout.", "Control the knee drive."],
+                        commonMistakes: ["Hips bouncing up and down.", "Not keeping shoulders over wrists."]
+                    }, 
+                    { name: "Rest", type: "rest", duration: 45 },
+                    { 
+                        name: "Burpees (Bodyweight)", type: "exercise", duration: 45,
+                        visualPlaceholder: "Visual for Burpees", targetMuscles: "Full Body (Explosive Cardio & Strength)", equipment: "Bodyweight",
+                        instructions: ["Start standing. Squat down, place hands on floor.", "Jump feet back to plank. Optional: add a push-up.", "Jump feet forward to hands.", "Explosively jump up, reaching arms overhead."],
+                        formTips: ["Maintain core control.", "Land softly from jump."],
+                        commonMistakes: ["Sagging hips in plank.", "Not getting full extension on jump."]
+                    }, 
+                    { name: "Rest", type: "rest", duration: 45 },
+                    // Repeat Core & Conditioning for round 2
+                    { name: "Core & Conditioning (Round 2/2)", type: "info", duration: 0 },
+                    { name: "DB Russian Twists", type: "exercise", duration: 45, visualPlaceholder: "Visual for DB Russian Twists", targetMuscles: "Obliques, Abs", equipment: "Dumbbell (optional)", instructions: ["Sit on floor, knees bent, lean back slightly (V-sit). Hold one dumbbell with both hands (optional).", "Lift feet off floor (optional for more challenge).", "Twist torso from side to side, touching dumbbell (or hands) to floor beside hip."], formTips: ["Keep back straight, not rounded.", "Rotate from torso, not just arms."], commonMistakes: ["Rounding lower back.", "Moving too quickly with no control."] }, 
+                    { name: "Rest", type: "rest", duration: 45 },
+                    { name: "TRX Mountain Climbers", type: "exercise", duration: 45, visualPlaceholder: "Visual for TRX Mountain Climbers", targetMuscles: "Core, Hip Flexors, Shoulders (Cardio)", equipment: "TRX", instructions: ["Start in TRX plank: feet in cradles, hands under shoulders.", "Alternately bring one knee towards chest, then the other, in a running motion.", "Keep core tight and hips stable."], formTips: ["Maintain a strong plank throughout.", "Control the knee drive."], commonMistakes: ["Hips bouncing up and down.", "Not keeping shoulders over wrists."] }, 
+                    { name: "Rest", type: "rest", duration: 45 },
+                    { name: "Burpees (Bodyweight)", type: "exercise", duration: 45, visualPlaceholder: "Visual for Burpees", targetMuscles: "Full Body (Explosive Cardio & Strength)", equipment: "Bodyweight", instructions: ["Start standing. Squat down, place hands on floor.", "Jump feet back to plank. Optional: add a push-up.", "Jump feet forward to hands.", "Explosively jump up, reaching arms overhead."], formTips: ["Maintain core control.", "Land softly from jump."], commonMistakes: ["Sagging hips in plank.", "Not getting full extension on jump."] }, 
+                    { name: "Rest", type: "rest", duration: 45 },
+                    { name: "Extended Rest", type: "extended_rest", duration: 180 },
+
+                    { name: "Cool-down Start", type: "info", duration: 0 },
+                    { 
+                        name: "Full Body Stretch (Cat-Cow, Downward Dog)", type: "exercise", duration: 45,
+                        visualPlaceholder: "Visual for Cat-Cow & Downward Dog", targetMuscles: "Spine, Core, Shoulders, Hamstrings", equipment: "Bodyweight",
+                        instructions: ["Cat-Cow: Start on all fours. Inhale, drop belly, arch back, look up (Cow). Exhale, round spine, tuck chin (Cat). Repeat for 22s.", "Downward Dog: From all fours, lift hips up and back, forming inverted 'V'. Press heels towards floor. Hold for 22s."],
+                        formTips: ["Coordinate breath with movement in Cat-Cow.", "In Downward Dog, keep slight bend in knees if hamstrings tight."],
+                        commonMistakes: ["Forcing movements.", "Holding breath."]
+                    }, 
+                    { name: "Rest", type: "rest", duration: 45 },
+                    { 
+                        name: "Child's Pose", type: "exercise", duration: 45,
+                        visualPlaceholder: "Visual for Child's Pose", targetMuscles: "Lower Back, Hips, Shoulders (Restorative)", equipment: "Bodyweight",
+                        instructions: ["Kneel on floor, big toes touching. Sit back on heels (or as close as comfortable).", "Fold torso forward, resting forehead on floor. Arms can be extended forward or alongside body.", "Breathe deeply and relax."],
+                        formTips: ["Allow body to sink into the stretch.", "If uncomfortable, widen knees."],
+                        commonMistakes: ["Tensing shoulders.", "Not relaxing into pose."]
+                    },
+                    { name: "Workout Complete!", type: "info", duration: 0 }
+                ]
+            },
+            // --- Upper Body Sculpt ---
+            upperBody: {
+                name: "Upper Body Sculpt (DB & TRX)",
+                exercises: [
+                    { name: "Warm-up Start", type: "info", duration: 0 },
+                    { name: "Arm Circles", type: "exercise", duration: 45, visualPlaceholder: "Visual for Arm Circles", targetMuscles: "Shoulders, Upper Back", equipment: "Bodyweight", instructions: ["Stand with feet shoulder-width apart, arms extended to sides at shoulder height.", "Make small circles forward, gradually increasing size.", "After 22s, reverse direction: small circles backward, gradually increasing size."], formTips: ["Keep core engaged.", "Control the movement, don't swing wildly."], commonMistakes: ["Shrugging shoulders.", "Moving too fast."] }, 
+                    { name: "Rest", type: "rest", duration: 45 },
+                    { name: "TRX Chest Press (light)", type: "exercise", duration: 45, visualPlaceholder: "Visual for TRX Chest Press (light)", targetMuscles: "Chest, Shoulders, Triceps", equipment: "TRX", instructions: ["Set TRX straps to mid-length. Face away from anchor, hold handles.", "Lean forward into plank, arms extended. Body straight. Use a light lean for warm-up.", "Lower chest by bending elbows (45-degree angle).", "Press back to start, squeezing chest."], formTips: ["Maintain straight line head to heels.", "Core engaged."], commonMistakes: ["Hips sagging.", "Straps rubbing arms."] },
+                    { name: "Rest", type: "rest", duration: 45 },
+                    { name: "TRX Low Row (light)", type: "exercise", duration: 45, visualPlaceholder: "Visual for TRX Low Row (light)", targetMuscles: "Back (Lats, Rhomboids, Traps), Biceps", equipment: "TRX", instructions: ["Set TRX straps to mid-length. Face anchor, grab handles, lean back with arms extended, body straight. Use a light lean for warm-up.", "Pull chest towards handles, squeezing shoulder blades together. Elbows close to body.", "Slowly lower back to start."], formTips: ["Maintain a strong plank position.", "Initiate pull with back muscles."], commonMistakes: ["Rounding shoulders.", "Using too much bicep, not enough back."] },
+                    { name: "Rest", type: "rest", duration: 45 },
+                    { name: "Extended Rest", type: "extended_rest", duration: 180 },
+
+                    { name: "Chest & Back Superset (Round 1/3)", type: "info", duration: 0 },
+                    { name: "DB Floor Press", type: "exercise", duration: 45, visualPlaceholder: "Visual for DB Floor Press", targetMuscles: "Chest, Triceps, Shoulders", equipment: "Dumbbells", instructions: ["Lie on floor, knees bent, feet flat. Hold dumbbells over chest, palms facing each other or slightly inward.", "Lower dumbbells until triceps touch floor.", "Press dumbbells back up, squeezing chest."], formTips: ["Keep lower back flat or with a natural arch, not hyperextended.", "Control the descent."], commonMistakes: ["Bouncing elbows off floor.", "Flaring elbows too wide."] },
+                    { name: "Rest", type: "rest", duration: 45 },
+                    { name: "TRX Low Row", type: "exercise", duration: 45, visualPlaceholder: "Visual for TRX Low Row", targetMuscles: "Back (Lats, Rhomboids, Traps), Biceps", equipment: "TRX", instructions: ["Set TRX straps to mid-length. Face anchor, grab handles, lean back with arms extended, body straight.", "Pull chest towards handles, squeezing shoulder blades together. Elbows close to body.", "Slowly lower back to start."], formTips: ["Maintain a strong plank position.", "Initiate pull with back muscles."], commonMistakes: ["Rounding shoulders.", "Using too much bicep, not enough back."] },
+                    { name: "Rest", type: "rest", duration: 45 },
+                    // Repeat Chest & Back Superset for rounds 2, 3
+                    ...Array(2).fill(null).flatMap((_, i) => [
+                        { name: `Chest & Back Superset (Round ${i+2}/3)`, type: "info", duration: 0 },
+                        { name: "DB Floor Press", type: "exercise", duration: 45, visualPlaceholder: "Visual for DB Floor Press", targetMuscles: "Chest, Triceps, Shoulders", equipment: "Dumbbells", instructions: ["Lie on floor, knees bent, feet flat. Hold dumbbells over chest, palms facing each other or slightly inward.", "Lower dumbbells until triceps touch floor.", "Press dumbbells back up, squeezing chest."], formTips: ["Keep lower back flat or with a natural arch, not hyperextended.", "Control the descent."], commonMistakes: ["Bouncing elbows off floor.", "Flaring elbows too wide."] },
+                        { name: "Rest", type: "rest", duration: 45 },
+                        { name: "TRX Low Row", type: "exercise", duration: 45, visualPlaceholder: "Visual for TRX Low Row", targetMuscles: "Back (Lats, Rhomboids, Traps), Biceps", equipment: "TRX", instructions: ["Set TRX straps to mid-length. Face anchor, grab handles, lean back with arms extended, body straight.", "Pull chest towards handles, squeezing shoulder blades together. Elbows close to body.", "Slowly lower back to start."], formTips: ["Maintain a strong plank position.", "Initiate pull with back muscles."], commonMistakes: ["Rounding shoulders.", "Using too much bicep, not enough back."] },
+                        { name: "Rest", type: "rest", duration: 45 },
+                    ]),
+                    { name: "Extended Rest", type: "extended_rest", duration: 180 },
+
+                    { name: "Shoulders & Arms Superset (Round 1/3)", type: "info", duration: 0 },
+                    { 
+                        name: "DB Arnold Press", type: "exercise", duration: 45,
+                        visualPlaceholder: "Visual for DB Arnold Press", targetMuscles: "Shoulders (All Heads), Triceps", equipment: "Dumbbells",
+                        instructions: ["Sit or stand, hold dumbbells at shoulder height, palms facing body.", "Begin pressing dumbbells overhead while rotating wrists so palms face forward at top.", "Reverse rotation as you lower dumbbells back to start."],
+                        formTips: ["Keep core engaged.", "Smooth, controlled rotation and press."],
+                        commonMistakes: ["Arching back.", "Rushing the rotation."]
+                    }, 
+                    { name: "Rest", type: "rest", duration: 45 },
+                    { name: "TRX Bicep Curl", type: "exercise", duration: 45, visualPlaceholder: "Visual for TRX Bicep Curl", targetMuscles: "Biceps", equipment: "TRX", instructions: ["Face anchor, hold TRX handles with underhand grip, lean back (more lean = harder).", "Keeping elbows high and stable, pull handles towards your temples, squeezing biceps.", "Slowly extend arms back to start."], formTips: ["Body straight as a plank.", "Focus on bicep contraction."], commonMistakes: ["Elbows dropping.", "Using momentum from hips/back."] }, 
+                    { name: "Rest", type: "rest", duration: 45 },
+                    { name: "TRX Triceps Extension", type: "exercise", duration: 45, visualPlaceholder: "Visual for TRX Triceps Extension", targetMuscles: "Triceps", equipment: "TRX", instructions: ["Set TRX straps to mid-length. Face away from anchor, grab handles, arms extended overhead, slight forward lean.", "Keeping elbows high and relatively fixed, bend elbows to lower handles behind your head.", "Extend arms to press back to start, squeezing triceps."], formTips: ["Keep core tight to prevent back arch.", "Elbows should point forward/up, not flare out."], commonMistakes: ["Letting elbows drop.", "Arching lower back."] },
+                    { name: "Rest", type: "rest", duration: 45 },
+                    // Repeat Shoulders & Arms Superset for rounds 2, 3
+                    ...Array(2).fill(null).flatMap((_, i) => [
+                        { name: `Shoulders & Arms Superset (Round ${i+2}/3)`, type: "info", duration: 0 },
+                        { name: "DB Arnold Press", type: "exercise", duration: 45, visualPlaceholder: "Visual for DB Arnold Press", targetMuscles: "Shoulders (All Heads), Triceps", equipment: "Dumbbells", instructions: ["Sit or stand, hold dumbbells at shoulder height, palms facing body.", "Begin pressing dumbbells overhead while rotating wrists so palms face forward at top.", "Reverse rotation as you lower dumbbells back to start."], formTips: ["Keep core engaged.", "Smooth, controlled rotation and press."], commonMistakes: ["Arching back.", "Rushing the rotation."] }, 
+                        { name: "Rest", type: "rest", duration: 45 },
+                        { name: "TRX Bicep Curl", type: "exercise", duration: 45, visualPlaceholder: "Visual for TRX Bicep Curl", targetMuscles: "Biceps", equipment: "TRX", instructions: ["Face anchor, hold TRX handles with underhand grip, lean back (more lean = harder).", "Keeping elbows high and stable, pull handles towards your temples, squeezing biceps.", "Slowly extend arms back to start."], formTips: ["Body straight as a plank.", "Focus on bicep contraction."], commonMistakes: ["Elbows dropping.", "Using momentum from hips/back."] }, 
+                        { name: "Rest", type: "rest", duration: 45 },
+                        { name: "TRX Triceps Extension", type: "exercise", duration: 45, visualPlaceholder: "Visual for TRX Triceps Extension", targetMuscles: "Triceps", equipment: "TRX", instructions: ["Set TRX straps to mid-length. Face away from anchor, grab handles, arms extended overhead, slight forward lean.", "Keeping elbows high and relatively fixed, bend elbows to lower handles behind your head.", "Extend arms to press back to start, squeezing triceps."], formTips: ["Keep core tight to prevent back arch.", "Elbows should point forward/up, not flare out."], commonMistakes: ["Letting elbows drop.", "Arching lower back."] },
+                        { name: "Rest", type: "rest", duration: 45 },
+                    ]),
+                    { name: "Extended Rest", type: "extended_rest", duration: 180 },
+
+                    { name: "Finisher Circuit (Round 1/2)", type: "info", duration: 0 },
+                    { name: "TRX Chest Fly", type: "exercise", duration: 45, visualPlaceholder: "Visual for TRX Chest Fly", targetMuscles: "Chest, Shoulders", equipment: "TRX", instructions: ["Set TRX straps to longest length. Face away from anchor, grab handles.", "Lean forward, arms extended wide in a slight bend (like hugging a tree).", "Control the movement as you bring hands together in front of your chest, squeezing chest muscles.", "Slowly return to the starting wide position."], formTips: ["Maintain core tension.", "Keep a slight bend in elbows throughout."], commonMistakes: ["Bending elbows too much (becomes a press).", "Losing core stability."] },
+                    { name: "Rest", type: "rest", duration: 45 },
+                    { 
+                        name: "DB Renegade Rows", type: "exercise", duration: 45,
+                        visualPlaceholder: "Visual for DB Renegade Rows", targetMuscles: "Back, Core, Shoulders, Triceps", equipment: "Dumbbells",
+                        instructions: ["Start in plank position, hands on dumbbells directly under shoulders, feet wide for stability.", "Keeping hips square to floor, row one dumbbell up to chest, elbow close to body.", "Lower dumbbell with control. Repeat on other side. Alternate."],
+                        formTips: ["Minimize hip rotation by engaging core and glutes.", "Keep supporting arm strong."],
+                        commonMistakes: ["Twisting hips excessively.", "Rushing the movement."]
+                    }, 
+                    { name: "Rest", type: "rest", duration: 45 },
+                    // Repeat Finisher Circuit for round 2
+                    { name: "Finisher Circuit (Round 2/2)", type: "info", duration: 0 },
+                    { name: "TRX Chest Fly", type: "exercise", duration: 45, visualPlaceholder: "Visual for TRX Chest Fly", targetMuscles: "Chest, Shoulders", equipment: "TRX", instructions: ["Set TRX straps to longest length. Face away from anchor, grab handles.", "Lean forward, arms extended wide in a slight bend (like hugging a tree).", "Control the movement as you bring hands together in front of your chest, squeezing chest muscles.", "Slowly return to the starting wide position."], formTips: ["Maintain core tension.", "Keep a slight bend in elbows throughout."], commonMistakes: ["Bending elbows too much (becomes a press).", "Losing core stability."] },
+                    { name: "Rest", type: "rest", duration: 45 },
+                    { name: "DB Renegade Rows", type: "exercise", duration: 45, visualPlaceholder: "Visual for DB Renegade Rows", targetMuscles: "Back, Core, Shoulders, Triceps", equipment: "Dumbbells", instructions: ["Start in plank position, hands on dumbbells directly under shoulders, feet wide for stability.", "Keeping hips square to floor, row one dumbbell up to chest, elbow close to body.", "Lower dumbbell with control. Repeat on other side. Alternate."], formTips: ["Minimize hip rotation by engaging core and glutes.", "Keep supporting arm strong."], commonMistakes: ["Twisting hips excessively.", "Rushing the movement."] }, 
+                    { name: "Rest", type: "rest", duration: 45 },
+                    { name: "Extended Rest", type: "extended_rest", duration: 180 },
+
+                    { name: "Cool-down Start", type: "info", duration: 0 },
+                    { name: "Chest Stretch (Doorway/Wall)", type: "exercise", duration: 45, visualPlaceholder: "Visual for Chest Stretch", targetMuscles: "Chest, Shoulders", equipment: "Doorway or Wall", instructions: ["Place forearm on a wall or doorway edge, elbow at shoulder height.", "Gently lean forward/turn away until you feel a stretch in your chest and front shoulder.", "Hold. Repeat on other side after 22s."], formTips: ["Keep shoulder down, away from ear.", "Don't force the stretch."], commonMistakes: ["Overstretching.", "Holding breath."] }, 
+                    { name: "Rest", type: "rest", duration: 45 },
+                    { 
+                        name: "Lat Stretch (TRX/Wall)", type: "exercise", duration: 45,
+                        visualPlaceholder: "Visual for Lat Stretch", targetMuscles: "Lats, Shoulders", equipment: "TRX or Wall",
+                        instructions: ["TRX: Hold handle(s), lean away, dropping hip and feeling stretch down side. Wall: Stand side to wall, reach arm overhead, grab wall, lean away.", "Hold. Repeat other side after 22s."],
+                        formTips: ["Breathe into the stretch.", "Keep feet planted."],
+                        commonMistakes: ["Rounding back.", "Not feeling stretch in lats."]
+                    }, 
+                    { name: "Rest", type: "rest", duration: 45 },
+                    { 
+                        name: "Shoulder Stretch (Across Body)", type: "exercise", duration: 45,
+                        visualPlaceholder: "Visual for Across Body Shoulder Stretch", targetMuscles: "Shoulders (Deltoids)", equipment: "Bodyweight",
+                        instructions: ["Bring one arm straight across your body.", "Use other hand to gently pull arm closer to chest, feeling stretch in shoulder.", "Hold. Repeat other side after 22s."],
+                        formTips: ["Keep shoulder of stretching arm down, not shrugged.", "Don't pull on elbow joint."],
+                        commonMistakes: ["Shrugging shoulder.", "Pulling too hard."]
+                    },
+                    { name: "Workout Complete!", type: "info", duration: 0 }
+                ]
+            },
+            // --- Lower Body Grind ---
+            lowerBody: {
+                name: "Lower Body Grind (DB & Bodyweight)",
+                exercises: [
+                    { name: "Warm-up Start", type: "info", duration: 0 },
+                    { 
+                        name: "High Knees", type: "exercise", duration: 45,
+                        visualPlaceholder: "Visual for High Knees", targetMuscles: "Hip Flexors, Quads, Core (Cardio)", equipment: "Bodyweight",
+                        instructions: ["Stand tall. Begin running in place, bringing knees up towards chest as high as possible.", "Use arms in a running motion.", "Maintain a quick pace."],
+                        formTips: ["Land softly on balls of feet.", "Keep core engaged."],
+                        commonMistakes: ["Leaning back too far.", "Not lifting knees high enough."]
+                    }, 
+                    { name: "Rest", type: "rest", duration: 45 },
+                    { name: "Bodyweight Squats", type: "exercise", duration: 45, visualPlaceholder: "Visual for Bodyweight Squats", targetMuscles: "Quads, Glutes, Hamstrings", equipment: "Bodyweight", instructions: ["Stand with feet shoulder-width apart, toes slightly out.", "Lower hips back and down as if sitting in a chair, keeping chest up.", "Go as low as comfortable (thighs parallel to floor ideal).", "Push through heels to return to start."], formTips: ["Keep chest up, back straight.", "Knees track in line with toes."], commonMistakes: ["Knees caving inward.", "Rounding lower back."] }, 
+                    { name: "Rest", type: "rest", duration: 45 },
+                    { 
+                        name: "Butt Kicks", type: "exercise", duration: 45,
+                        visualPlaceholder: "Visual for Butt Kicks", targetMuscles: "Hamstrings, Glutes (Cardio)", equipment: "Bodyweight",
+                        instructions: ["Stand tall. Begin jogging in place or moving slightly forward.", "Focus on kicking heels up towards your glutes.", "Use arms in a running motion."],
+                        formTips: ["Keep torso upright.", "Aim for a quick rhythm."],
+                        commonMistakes: ["Leaning too far forward.", "Not kicking heels high enough."]
+                    }, 
+                    { name: "Rest", type: "rest", duration: 45 },
+                    { name: "Extended Rest", type: "extended_rest", duration: 180 },
+
+                    { name: "Strength Circuit 1 (Round 1/3)", type: "info", duration: 0 },
+                    { name: "DB Goblet Squats", type: "exercise", duration: 45, visualPlaceholder: "Visual for DB Goblet Squats", targetMuscles: "Quads, Glutes, Core", equipment: "Dumbbell", instructions: ["Hold one dumbbell vertically against chest with both hands.", "Stand with feet shoulder-width apart, toes slightly out.", "Lower hips back and down, keeping chest up and elbows inside knees.", "Push through heels to return to start."], formTips: ["Keep dumbbell close to chest.", "Maintain upright torso."], commonMistakes: ["Leaning too far forward.", "Knees caving in."] }, 
+                    { name: "Rest", type: "rest", duration: 45 },
+                    { 
+                        name: "DB Single Leg RDL (Right)", type: "exercise", duration: 45,
+                        visualPlaceholder: "Visual for DB Single Leg RDL", targetMuscles: "Hamstrings, Glutes, Balance (Unilateral)", equipment: "Dumbbell(s)",
+                        instructions: ["Stand on right leg, slight bend in knee. Hold dumbbell(s) in front.", "Hinge at hip, lowering torso and dumbbell(s) towards floor, while extending left leg straight back for balance.", "Keep back straight. Return to upright position. Focus on right leg for 45s."],
+                        formTips: ["Keep hips square to floor.", "Focus on a point on floor for balance."],
+                        commonMistakes: ["Rounding back.", "Opening hips to side."]
+                    }, 
+                    { name: "Rest", type: "rest", duration: 45 },
+                    { 
+                        name: "DB Single Leg RDL (Left)", type: "exercise", duration: 45,
+                        visualPlaceholder: "Visual for DB Single Leg RDL", targetMuscles: "Hamstrings, Glutes, Balance (Unilateral)", equipment: "Dumbbell(s)",
+                        instructions: ["Stand on left leg, slight bend in knee. Hold dumbbell(s) in front.", "Hinge at hip, lowering torso and dumbbell(s) towards floor, while extending right leg straight back for balance.", "Keep back straight. Return to upright position. Focus on left leg for 45s."],
+                        formTips: ["Keep hips square to floor.", "Focus on a point on floor for balance."],
+                        commonMistakes: ["Rounding back.", "Opening hips to side."]
+                    }, 
+                    { name: "Rest", type: "rest", duration: 45 },
+                    // Repeat Strength Circuit 1 for rounds 2, 3
+                    ...Array(2).fill(null).flatMap((_, i) => [
+                        { name: `Strength Circuit 1 (Round ${i+2}/3)`, type: "info", duration: 0 },
+                        { name: "DB Goblet Squats", type: "exercise", duration: 45, visualPlaceholder: "Visual for DB Goblet Squats", targetMuscles: "Quads, Glutes, Core", equipment: "Dumbbell", instructions: ["Hold one dumbbell vertically against chest with both hands.", "Stand with feet shoulder-width apart, toes slightly out.", "Lower hips back and down, keeping chest up and elbows inside knees.", "Push through heels to return to start."], formTips: ["Keep dumbbell close to chest.", "Maintain upright torso."], commonMistakes: ["Leaning too far forward.", "Knees caving in."] }, 
+                        { name: "Rest", type: "rest", duration: 45 },
+                        { name: "DB Single Leg RDL (Right)", type: "exercise", duration: 45, visualPlaceholder: "Visual for DB Single Leg RDL", targetMuscles: "Hamstrings, Glutes, Balance (Unilateral)", equipment: "Dumbbell(s)", instructions: ["Stand on right leg, slight bend in knee. Hold dumbbell(s) in front.", "Hinge at hip, lowering torso and dumbbell(s) towards floor, while extending left leg straight back for balance.", "Keep back straight. Return to upright position. Focus on right leg for 45s."], formTips: ["Keep hips square to floor.", "Focus on a point on floor for balance."], commonMistakes: ["Rounding back.", "Opening hips to side."] }, 
+                        { name: "Rest", type: "rest", duration: 45 },
+                        { name: "DB Single Leg RDL (Left)", type: "exercise", duration: 45, visualPlaceholder: "Visual for DB Single Leg RDL", targetMuscles: "Hamstrings, Glutes, Balance (Unilateral)", equipment: "Dumbbell(s)", instructions: ["Stand on left leg, slight bend in knee. Hold dumbbell(s) in front.", "Hinge at hip, lowering torso and dumbbell(s) towards floor, while extending right leg straight back for balance.", "Keep back straight. Return to upright position. Focus on left leg for 45s."], formTips: ["Keep hips square to floor.", "Focus on a point on floor for balance."], commonMistakes: ["Rounding back.", "Opening hips to side."] }, 
+                        { name: "Rest", type: "rest", duration: 45 },
+                    ]),
+                    { name: "Extended Rest", type: "extended_rest", duration: 180 },
+
+                    { name: "Hypertrophy Circuit 2 (Round 1/3)", type: "info", duration: 0 },
+                    { 
+                        name: "DB Walking Lunges", type: "exercise", duration: 45,
+                        visualPlaceholder: "Visual for DB Walking Lunges", targetMuscles: "Quads, Glutes, Hamstrings", equipment: "Dumbbells",
+                        instructions: ["Hold dumbbells at sides. Step forward with one leg into a lunge (both knees 90 degrees).", "Push off back foot and step forward with that leg into the next lunge, continuing to move forward.", "Alternate legs with each step."],
+                        formTips: ["Keep torso upright.", "Control each step and lunge."],
+                        commonMistakes: ["Leaning too far forward.", "Front knee going past toe."]
+                    }, 
+                    { name: "Rest", type: "rest", duration: 45 },
+                    { 
+                        name: "Bodyweight Glute Bridges", type: "exercise", duration: 45,
+                        visualPlaceholder: "Visual for Glute Bridges", targetMuscles: "Glutes, Hamstrings, Lower Back", equipment: "Bodyweight",
+                        instructions: ["Lie on back, knees bent, feet flat on floor hip-width apart, arms by sides.", "Squeeze glutes and lift hips off floor until body forms straight line from shoulders to knees.", "Hold briefly at top, then slowly lower hips."],
+                        formTips: ["Focus on glute contraction, not arching lower back.", "Push through heels."],
+                        commonMistakes: ["Hyperextending lower back.", "Not lifting hips high enough."]
+                    }, 
+                    { name: "Rest", type: "rest", duration: 45 },
+                    { name: "DB Calf Raises", type: "exercise", duration: 45, visualPlaceholder: "Visual for DB Calf Raises", targetMuscles: "Calves", equipment: "Dumbbells", instructions: ["Stand with feet flat, hip-width apart. Hold dumbbells at sides.", "Rise up onto balls of feet, lifting heels as high as possible.", "Hold briefly, then slowly lower heels back to floor."], formTips: ["Full range of motion.", "Control both upward and downward phases."], commonMistakes: ["Bouncing.", "Not going high enough."] },
+                    { name: "Rest", type: "rest", duration: 45 },
+                    // Repeat Hypertrophy Circuit 2 for rounds 2, 3
+                    ...Array(2).fill(null).flatMap((_, i) => [
+                        { name: `Hypertrophy Circuit 2 (Round ${i+2}/3)`, type: "info", duration: 0 },
+                        { name: "DB Walking Lunges", type: "exercise", duration: 45, visualPlaceholder: "Visual for DB Walking Lunges", targetMuscles: "Quads, Glutes, Hamstrings", equipment: "Dumbbells", instructions: ["Hold dumbbells at sides. Step forward with one leg into a lunge (both knees 90 degrees).", "Push off back foot and step forward with that leg into the next lunge, continuing to move forward.", "Alternate legs with each step."], formTips: ["Keep torso upright.", "Control each step and lunge."], commonMistakes: ["Leaning too far forward.", "Front knee going past toe."] }, 
+                        { name: "Rest", type: "rest", duration: 45 },
+                        { name: "Bodyweight Glute Bridges", type: "exercise", duration: 45, visualPlaceholder: "Visual for Glute Bridges", targetMuscles: "Glutes, Hamstrings, Lower Back", equipment: "Bodyweight", instructions: ["Lie on back, knees bent, feet flat on floor hip-width apart, arms by sides.", "Squeeze glutes and lift hips off floor until body forms straight line from shoulders to knees.", "Hold briefly at top, then slowly lower hips."], formTips: ["Focus on glute contraction, not arching lower back.", "Push through heels."], commonMistakes: ["Hyperextending lower back.", "Not lifting hips high enough."] }, 
+                        { name: "Rest", type: "rest", duration: 45 },
+                        { name: "DB Calf Raises", type: "exercise", duration: 45, visualPlaceholder: "Visual for DB Calf Raises", targetMuscles: "Calves", equipment: "Dumbbells", instructions: ["Stand with feet flat, hip-width apart. Hold dumbbells at sides.", "Rise up onto balls of feet, lifting heels as high as possible.", "Hold briefly, then slowly lower heels back to floor."], formTips: ["Full range of motion.", "Control both upward and downward phases."], commonMistakes: ["Bouncing.", "Not going high enough."] },
+                        { name: "Rest", type: "rest", duration: 45 },
+                    ]),
+                    { name: "Extended Rest", type: "extended_rest", duration: 180 },
+
+                    { name: "Finisher Circuit", type: "info", duration: 0 },
+                    { name: "Jump Squats", type: "exercise", duration: 45, visualPlaceholder: "Visual for Jump Squats", targetMuscles: "Quads, Glutes, Hamstrings, Calves (Explosive)", equipment: "Bodyweight", instructions: ["Start in squat position (feet shoulder-width, hips back, chest up).", "Explosively jump upwards, extending legs fully.", "Land softly back into squat position and immediately repeat."], formTips: ["Land softly to absorb impact.", "Use arms for momentum if needed."], commonMistakes: ["Landing with stiff legs.", "Not squatting deep enough before jump."] }, 
+                    { name: "Rest", type: "rest", duration: 45 },
+                    { 
+                        name: "Plank", type: "exercise", duration: 45,
+                        visualPlaceholder: "Visual for Plank", targetMuscles: "Core (Abs, Obliques, Lower Back), Shoulders", equipment: "Bodyweight",
+                        instructions: ["Lie face down. Place forearms on floor, elbows directly under shoulders, hands clasped or flat.", "Lift hips so body forms straight line from head to heels.", "Engage core and glutes. Hold."],
+                        formTips: ["Don't let hips sag or pike up.", "Keep neck in line with spine."],
+                        commonMistakes: ["Hips too high or too low.", "Holding breath."]
+                    }, 
+                    { name: "Rest", type: "rest", duration: 45 },
+                    { name: "Extended Rest", type: "extended_rest", duration: 180 },
+
+                    { name: "Cool-down Start", type: "info", duration: 0 },
+                    { name: "Quad Stretch (Standing)", type: "exercise", duration: 45, visualPlaceholder: "Visual for Standing Quad Stretch", targetMuscles: "Quads, Hip Flexors", equipment: "Bodyweight (optional wall for balance)", instructions: ["Stand tall. Grab one ankle and pull heel towards glute. Hold onto wall for balance if needed.", "Keep knees close together, hips pressed slightly forward.", "Hold. Repeat other side after 22s."], formTips: ["Avoid arching back.", "Keep standing leg slightly bent."], commonMistakes: ["Letting knee flare out to side.", "Leaning too far forward."] }, 
+                    { name: "Rest", type: "rest", duration: 45 },
+                    { 
+                        name: "Pigeon Pose / Figure Four Stretch", type: "exercise", duration: 45,
+                        visualPlaceholder: "Visual for Pigeon Pose / Figure Four", targetMuscles: "Hips (External Rotators, Glutes), Piriformis", equipment: "Bodyweight",
+                        instructions: ["Pigeon: From all fours, bring one knee forward behind wrist, angle shin. Extend other leg back. Or Figure Four: Lie on back, cross one ankle over opposite knee, pull thigh towards you.", "Feel stretch in hip/glute. Hold. Repeat other side after 22s."],
+                        formTips: ["Keep hips square in Pigeon.", "Flex foot of crossed ankle in Figure Four."],
+                        commonMistakes: ["Forcing stretch.", "Not keeping hips level (Pigeon)."]
+                    }, 
+                    { name: "Rest", type: "rest", duration: 45 },
+                    { 
+                        name: "Downward Dog Calf Stretch", type: "exercise", duration: 45,
+                        visualPlaceholder: "Visual for Downward Dog Calf Stretch", targetMuscles: "Calves, Hamstrings, Shoulders", equipment: "Bodyweight",
+                        instructions: ["Start in Downward Dog (hips high, inverted 'V').", "Gently 'pedal' feet by bending one knee while pressing opposite heel towards floor.", "Alternate sides, holding each heel press for a few seconds to deepen calf stretch."],
+                        formTips: ["Keep hands shoulder-width, feet hip-width.", "Distribute weight evenly."],
+                        commonMistakes: ["Shoulders too far forward over wrists.", "Rounding back."]
+                    },
+                    { name: "Workout Complete!", type: "info", duration: 0 }
+                ]
+            }
+        };
+        // --- END OF MASSIVE WORKOUTS OBJECT ---
+
+
+        let currentWorkout = [];
+        let currentExerciseIndex = 0;
+        let timerInterval;
+        let timeLeft = 0;
+        let originalTime = 0;
+        let isPaused = false;
+        const synth = window.speechSynthesis;
+        let utterance = new SpeechSynthesisUtterance();
+
+        // DOM Elements for Timer
+        const timerDisplayEl = document.getElementById('timerDisplay');
+        const exerciseNameDisplay = document.getElementById('exerciseName');
+        const exerciseDetailsDisplay = document.getElementById('exerciseDetails');
+        const startButton = document.getElementById('startButton');
+        const pauseButton = document.getElementById('pauseButton');
+        const resetButton = document.getElementById('resetButton');
+        const nextButton = document.getElementById('nextButton');
+        const prevButton = document.getElementById('prevButton');
+        const workoutSelect = document.getElementById('workoutSelect');
+        const progressBar = document.getElementById('progressBar');
+        const infoMessage = document.getElementById('infoMessage');
+        const skipRestButton = document.getElementById('skipRestButton');
+        const prevExerciseDisplay = document.getElementById('prevExercise').querySelector('span');
+        const currExerciseContextDisplay = document.getElementById('currExerciseContext').querySelector('span');
+        const nextExerciseContextDisplay = document.getElementById('nextExerciseContext').querySelector('span');
+        
+        // DOM Elements for Custom Durations
+        const intervalLengthInput = document.getElementById('intervalLength');
+        const restLengthInput = document.getElementById('restLength');
+        const setRestLengthInput = document.getElementById('setRestLength');
+
+        // DOM Elements for Exercise Info Area
+        const currentExerciseInfoNameEl = document.getElementById('currentExerciseInfoName');
+        const visualPlaceholderEl = document.getElementById('visualPlaceholder');
+        const targetMusclesDisplayEl = document.getElementById('targetMusclesDisplay');
+        const equipmentDisplayEl = document.getElementById('equipmentDisplay');
+        const instructionsDisplayEl = document.getElementById('instructionsDisplay');
+        const formTipsDisplayEl = document.getElementById('formTipsDisplay');
+        const commonMistakesDisplayEl = document.getElementById('commonMistakesDisplay');
+
+        function getCustomDurations() {
+            const exerciseDuration = parseInt(intervalLengthInput.value) || 45;
+            const shortRestDuration = parseInt(restLengthInput.value) || 45;
+            const extendedRestDuration = parseInt(setRestLengthInput.value) || 180;
+            return {
+                exercise: exerciseDuration >= 5 ? exerciseDuration : 5, // Min 5s for exercise
+                rest: shortRestDuration >= 0 ? shortRestDuration : 0, // Min 0s for rest
+                extended_rest: extendedRestDuration >= 0 ? extendedRestDuration : 0 // Min 0s for set rest
+            };
+        }
+
+        function loadWorkout(workoutKey) {
+            if (workouts[workoutKey]) {
+                // Deep copy the base workout structure
+                let baseWorkout = JSON.parse(JSON.stringify(workouts[workoutKey]));
+                currentWorkout = baseWorkout.exercises;
+
+                const customDurations = getCustomDurations();
+
+                // Apply custom durations
+                currentWorkout.forEach(exercise => {
+                    if (exercise.type === 'exercise') {
+                        exercise.duration = customDurations.exercise;
+                    } else if (exercise.type === 'rest') {
+                        exercise.duration = customDurations.rest;
+                    } else if (exercise.type === 'extended_rest') {
+                        exercise.duration = customDurations.extended_rest;
+                    }
+                    // 'info' types keep their original duration (usually 0)
+                });
+                
+                // Update workout name in display if needed (optional)
+                // workouts[workoutKey].name could be updated here if we want to show "(Custom Durations)"
+                // For now, the base name is fine.
+
+                currentExerciseIndex = 0;
+                isPaused = false;
+                resetTimerState(); // Resets timer specific vars, not the whole workout structure
+                updateDisplay(); 
+                updateContextDisplays();
+                updateProgressBar();
+                infoMessage.textContent = `Workout: ${baseWorkout.name} loaded. Press Start.`;
+                startButton.disabled = false;
+                pauseButton.disabled = true;
+                resetButton.disabled = false;
+                nextButton.disabled = false;
+                prevButton.disabled = false;
+                skipRestButton.style.display = 'none';
+            } else {
+                infoMessage.textContent = 'Error: Could not load workout.';
+                clearExerciseInfoArea();
+            }
+        }
+
+        function updateExerciseInfoArea() {
+            if (currentWorkout.length === 0 || currentExerciseIndex >= currentWorkout.length) {
+                clearExerciseInfoArea();
+                currentExerciseInfoNameEl.textContent = "Workout Complete!";
+                return;
+            }
+            const exercise = currentWorkout[currentExerciseIndex];
+
+            currentExerciseInfoNameEl.textContent = exercise.name;
+            visualPlaceholderEl.textContent = exercise.visualPlaceholder || `Visual for ${exercise.name}`;
+            targetMusclesDisplayEl.textContent = exercise.targetMuscles || "N/A";
+            equipmentDisplayEl.textContent = exercise.equipment || "N/A";
+
+            instructionsDisplayEl.innerHTML = exercise.instructions ? exercise.instructions.map(item => `<li>${item}</li>`).join('') : "<li>N/A</li>";
+            formTipsDisplayEl.innerHTML = exercise.formTips ? exercise.formTips.map(item => `<li>${item}</li>`).join('') : "<li>N/A</li>";
+            commonMistakesDisplayEl.innerHTML = exercise.commonMistakes ? exercise.commonMistakes.map(item => `<li>${item}</li>`).join('') : "<li>N/A</li>";
+            
+            if (exercise.type === 'rest' || exercise.type === 'extended_rest' || exercise.type === 'info') {
+                 visualPlaceholderEl.textContent = "Take a breather or get ready!";
+                 targetMusclesDisplayEl.textContent = "---";
+                 equipmentDisplayEl.textContent = "---";
+                 instructionsDisplayEl.innerHTML = `<li>${exercise.name}</li>`;
+                 formTipsDisplayEl.innerHTML = `<li>Relax and prepare for the next exercise.</li>`;
+                 commonMistakesDisplayEl.innerHTML = `<li>Don't skip your rest unless intended!</li>`;
+            }
+        }
+        
+        function clearExerciseInfoArea() {
+            currentExerciseInfoNameEl.textContent = "Select an exercise";
+            visualPlaceholderEl.textContent = "Exercise visual will appear here";
+            targetMusclesDisplayEl.textContent = "---";
+            equipmentDisplayEl.textContent = "---";
+            instructionsDisplayEl.innerHTML = "<li>---</li>";
+            formTipsDisplayEl.innerHTML = "<li>---</li>";
+            commonMistakesDisplayEl.innerHTML = "<li>---</li>";
+        }
+
+
+        function updateDisplay() {
+            if (currentWorkout.length === 0 || currentExerciseIndex >= currentWorkout.length) {
+                exerciseNameDisplay.textContent = "Workout Complete!";
+                timerDisplayEl.textContent = "00:00";
+                exerciseDetailsDisplay.textContent = "";
+                speak("Workout Complete!");
+                infoMessage.textContent = "Great job!";
+                updateProgressBar(1, 1); // Full progress
+                skipRestButton.style.display = 'none';
+                updateExerciseInfoArea(); 
+                return;
+            }
+
+            const exercise = currentWorkout[currentExerciseIndex];
+            exerciseNameDisplay.textContent = exercise.name;
+
+            if (exercise.type === 'info') {
+                timerDisplayEl.textContent = "--:--";
+                exerciseDetailsDisplay.textContent = "Get Ready!";
+                 if(timeLeft === 0 && originalTime === 0) { 
+                     setTimeout(() => { 
+                        if (!isPaused && currentWorkout[currentExerciseIndex]?.type === 'info') {
+                           nextExercise();
+                        }
+                    }, 1500); 
+                }
+            } else {
+                timerDisplayEl.textContent = formatTime(timeLeft);
+                // Use the (potentially customized) duration from the currentWorkout item
+                exerciseDetailsDisplay.textContent = `Type: ${exercise.type.replace('_', ' ')} | Duration: ${exercise.duration}s`;
+            }
+
+            if (exercise.type === 'extended_rest' && timeLeft > 0 && !isPaused) {
+                skipRestButton.style.display = 'inline-block';
+            } else {
+                skipRestButton.style.display = 'none';
+            }
+            
+            updateExerciseInfoArea(); 
+            updateContextDisplays();
+            updateProgressBar(originalTime - timeLeft, originalTime);
+        }
+
+        function updateContextDisplays() {
+            const prevCtx = document.getElementById('prevExercise');
+            const currCtx = document.getElementById('currExerciseContext');
+            const nextCtx = document.getElementById('nextExerciseContext');
+
+            if (currentExerciseIndex > 0) {
+                let prevEx = currentWorkout[currentExerciseIndex - 1];
+                prevExerciseDisplay.textContent = prevEx.name;
+                prevCtx.classList.add('completed');
+                prevCtx.classList.remove('active');
+            } else {
+                prevExerciseDisplay.textContent = "---";
+                prevCtx.classList.remove('completed');
+                prevCtx.classList.remove('active');
+            }
+
+            if (currentExerciseIndex < currentWorkout.length) {
+                currExerciseContextDisplay.textContent = currentWorkout[currentExerciseIndex].name;
+                currCtx.classList.add('active');
+                prevCtx.classList.remove('active'); 
+                nextCtx.classList.remove('active');
+            } else {
+                currExerciseContextDisplay.textContent = "---";
+                currCtx.classList.remove('active');
+            }
+
+            if (currentExerciseIndex < currentWorkout.length - 1) {
+                let nextEx = currentWorkout[currentExerciseIndex + 1];
+                nextExerciseContextDisplay.textContent = nextEx.name;
+                nextCtx.classList.remove('completed');
+            } else {
+                nextExerciseContextDisplay.textContent = "---";
+                nextCtx.classList.remove('completed');
+            }
+        }
+
+
+        function formatTime(seconds) {
+            const minutes = Math.floor(seconds / 60);
+            const remainingSeconds = seconds % 60;
+            return `${String(minutes).padStart(2, '0')}:${String(remainingSeconds).padStart(2, '0')}`;
+        }
+
+        function speak(text) {
+            if (synth && 'speechSynthesis' in window && utterance) {
+                utterance.text = text;
+                utterance.lang = 'en-US'; 
+                utterance.rate = 1.0; 
+                synth.cancel(); 
+                synth.speak(utterance);
+            }
+        }
+
+        function startTimer() {
+            if (currentWorkout.length === 0) {
+                infoMessage.textContent = "Please select a workout first.";
+                return;
+            }
+
+            const currentExercise = currentWorkout[currentExerciseIndex];
+            if (currentExercise.type === 'info' && !isPaused) { 
+                 nextExercise(); 
+                 return;
+            }
+            
+            // Ensure durations are set from currentWorkout item, which has custom values
+            if (timeLeft === 0 && originalTime === 0) { // Only reset if it's truly a new segment
+                 timeLeft = currentExercise.duration;
+                 originalTime = currentExercise.duration;
+            }
+
+
+            if (currentExercise.type !== 'info') { 
+                 if (currentExercise.type === 'rest' || currentExercise.type === 'extended_rest') {
+                    speak("Rest");
+                } else {
+                    speak(currentExercise.name);
+                }
+            }
+
+            isPaused = false;
+            startButton.disabled = true;
+            pauseButton.disabled = false;
+            infoMessage.textContent = "Workout in progress...";
+            updateDisplay(); 
+
+            timerInterval = setInterval(() => {
+                if (isPaused) return;
+
+                if (timeLeft > 0) {
+                    timeLeft--;
+                    updateDisplay();
+                } else {
+                    nextExercise();
+                }
+            }, 1000);
+        }
+
+        function pauseTimer() {
+            isPaused = true;
+            clearInterval(timerInterval);
+            startButton.disabled = false;
+            pauseButton.disabled = true;
+            infoMessage.textContent = "Workout paused.";
+            if (currentWorkout[currentExerciseIndex]?.type === 'extended_rest') {
+                 skipRestButton.style.display = 'inline-block';
+            }
+            if (synth && 'speechSynthesis' in window) {
+                synth.pause(); 
+            }
+        }
+
+        function resetTimerState() { // This function resets timer-specific variables for the current exercise segment
+            clearInterval(timerInterval);
+            timeLeft = 0;
+            originalTime = 0;
+            // isPaused is handled by the calling function (e.g. resetWorkout, nextExercise)
+            // skipRestButton.style.display = 'none'; // This might hide it prematurely if pausing during ext rest
+            if (synth && 'speechSynthesis' in window) {
+                synth.cancel();
+            }
+        }
+
+        function resetWorkout() { // This function resets the entire workout to its beginning
+            resetTimerState(); // Clear any active timer interval and time left for current segment
+            currentExerciseIndex = 0;
+            isPaused = false; // Ensure workout is not paused on reset
+            loadWorkout(workoutSelect.value); // This will re-apply custom durations
+            // updateDisplay() is called within loadWorkout
+            startButton.disabled = false;
+            pauseButton.disabled = true;
+            infoMessage.textContent = "Workout reset. Press Start.";
+        }
+
+        function nextExercise() {
+            resetTimerState(); 
+            isPaused = false; 
+
+            currentExerciseIndex++;
+            if (currentExerciseIndex >= currentWorkout.length) {
+                updateDisplay(); 
+                startButton.disabled = true;
+                pauseButton.disabled = true;
+                nextButton.disabled = true;
+                prevButton.disabled = true; 
+                skipRestButton.style.display = 'none';
+                return;
+            }
+
+            const nextEx = currentWorkout[currentExerciseIndex];
+            // Durations are already set by loadWorkout
+            timeLeft = nextEx.duration; 
+            originalTime = nextEx.duration;
+            
+            if (nextEx.type === 'info') {
+                 updateDisplay(); 
+            } else {
+                startTimer(); 
+            }
+        }
+
+        function prevExercise() {
+            resetTimerState();
+            isPaused = false;
+
+            if (currentExerciseIndex > 0) {
+                currentExerciseIndex--;
+            } else { 
+                infoMessage.textContent = "Already at the first exercise.";
+                isPaused = true; 
+                updateDisplay(); 
+                return;
+            }
+            
+            const prevEx = currentWorkout[currentExerciseIndex];
+            timeLeft = prevEx.duration;
+            originalTime = prevEx.duration;
+
+            if (prevEx.type === 'info') {
+                updateDisplay(); 
+            } else {
+                startTimer(); 
+            }
+            startButton.disabled = true; 
+            pauseButton.disabled = false;
+        }
+
+        function updateProgressBar(current, total) {
+            let percentage = 0;
+            if (currentWorkout.length > 0) {
+                percentage = (currentExerciseIndex / Math.max(1, currentWorkout.length -1) ) * 100;
+                 if (currentExerciseIndex >= currentWorkout.length -1 && currentWorkout[currentWorkout.length-1]?.type === 'info' && currentWorkout[currentWorkout.length-1]?.name === "Workout Complete!") {
+                    percentage = 100; 
+                }
+            }
+            
+            progressBar.style.width = `${percentage}%`;
+            progressBar.textContent = `${Math.round(percentage)}%`;
+        }
+
+        // Event Listeners
+        startButton.addEventListener('click', startTimer);
+        pauseButton.addEventListener('click', pauseTimer);
+        resetButton.addEventListener('click', resetWorkout); // resetWorkout will call loadWorkout
+        nextButton.addEventListener('click', nextExercise);
+        prevButton.addEventListener('click', prevExercise);
+        
+        // When workout selection changes, reload with new custom durations
+        workoutSelect.addEventListener('change', (e) => {
+            resetTimerState(); 
+            loadWorkout(e.target.value);
+        });
+
+        // Add event listeners to duration inputs to reload workout if timer is not active
+        // This ensures that changes to durations are applied if the user modifies them
+        // and then e.g. selects a different workout or hits reset.
+        // For live changes while timer is running, more complex logic would be needed.
+        [intervalLengthInput, restLengthInput, setRestLengthInput].forEach(input => {
+            input.addEventListener('change', () => {
+                if (isPaused && timeLeft === 0 && originalTime === 0) { // If timer is effectively stopped
+                    loadWorkout(workoutSelect.value); // Reload to apply new durations
+                    infoMessage.textContent = "Durations updated. Press Start or select workout.";
+                } else if (!isPaused && timerInterval) {
+                     infoMessage.textContent = "Pause & Reset to apply new durations.";
+                } else { // Timer is paused or not started yet
+                    loadWorkout(workoutSelect.value);
+                    infoMessage.textContent = "Durations updated. Press Start.";
+                }
+            });
+        });
+
+
+        skipRestButton.addEventListener('click', () => {
+            const currentExercise = currentWorkout[currentExerciseIndex];
+            if (currentExercise?.type === 'extended_rest') {
+                speak("Skipping rest.");
+                timeLeft = 0; 
+                if (isPaused) { 
+                    isPaused = false; 
+                    nextExercise();
+                    const newCurrentEx = currentWorkout[currentExerciseIndex];
+                    if (newCurrentEx && newCurrentEx.type !== 'info') {
+                        // Check if the new exercise is not an info slide before pausing
+                        // This prevents pausing on an info slide which should auto-advance
+                        if (timerInterval) { // If a timer was started for the new exercise
+                           pauseTimer(); 
+                        }
+                    }
+                } else {
+                    // If running, the interval check `if (timeLeft > 0)` will fail, triggering nextExercise()
+                    // Forcing it here ensures immediate transition.
+                    clearInterval(timerInterval); // Stop current interval
+                    nextExercise(); // Move to next
+                }
+                skipRestButton.style.display = 'none';
+            }
+        });
+
+        // Initial Load
+        document.addEventListener('DOMContentLoaded', () => {
+            loadWorkout(workoutSelect.value); 
+            pauseButton.disabled = true; 
+        });
+
+    </script>
+</body>
+</html>

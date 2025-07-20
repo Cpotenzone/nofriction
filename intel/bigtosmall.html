@@ -1,0 +1,466 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Model Comparison: Understanding Large vs. Small Models and Knowledge Distillation | No Friction Intel</title>
+    <meta name="description" content="A comprehensive examination of AI model differences, knowledge distillation techniques, and their application to ERP systems">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.4/css/all.min.css">
+    <style>
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            color: #333;
+            line-height: 1.6;
+            background-color: #f5f5f5;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        header {
+            background-color: #121212;
+            color: white;
+            padding: 1rem 0;
+        }
+        footer {
+            background-color: #121212;
+            color: white;
+            padding: 2rem 0;
+        }
+        .knowledge-article {
+            background-color: white;
+            padding: 2rem;
+            margin: 2rem 0;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            border-radius: 8px;
+        }
+        h1 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            color: #121212;
+        }
+        h2 {
+            font-size: 1.8rem;
+            font-weight: 600;
+            margin: 2rem 0 1rem;
+            color: #121212;
+            border-bottom: 2px solid #eaeaea;
+            padding-bottom: 0.5rem;
+        }
+        h3 {
+            font-size: 1.4rem;
+            font-weight: 600;
+            margin: 1.5rem 0 0.75rem;
+            color: #121212;
+        }
+        h4 {
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin: 1.25rem 0 0.5rem;
+            color: #121212;
+        }
+        p {
+            margin-bottom: 1rem;
+        }
+        ul, ol {
+            margin: 1rem 0;
+            padding-left: 2rem;
+        }
+        li {
+            margin-bottom: 0.5rem;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1rem 0;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 0.75rem;
+            text-align: left;
+        }
+        th {
+            background-color: #f0f0f0;
+            font-weight: 600;
+        }
+        img {
+            max-width: 100%;
+            height: auto;
+            margin: 1rem auto;
+            display: block;
+            border-radius: 4px;
+        }
+        hr {
+            border: 0;
+            border-top: 1px solid #eaeaea;
+            margin: 2rem 0;
+        }
+        blockquote {
+            border-left: 4px solid #121212;
+            padding-left: 1rem;
+            font-style: italic;
+            margin: 1rem 0;
+            color: #555;
+        }
+        iframe {
+            max-width: 100%;
+            margin: 1rem auto;
+            display: block;
+        }
+        .produced-by {
+            background-color: #f0f0f0;
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+            display: inline-block;
+            margin: 1rem 0;
+            font-size: 0.9rem;
+            color: #555;
+        }
+        .nav-link {
+            color: white;
+            margin: 0 1rem;
+            text-decoration: none;
+            font-weight: 600;
+        }
+        .nav-link:hover {
+            text-decoration: underline;
+        }
+        .footer-link {
+            color: #aaa;
+            margin-right: 1rem;
+            text-decoration: none;
+        }
+        .footer-link:hover {
+            color: white;
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <header class="sticky top-0 z-50">
+        <div class="container mx-auto px-4 py-3 flex justify-between items-center">
+        <a href="index.html" class="inline-block">
+          <img src="/images/nofrictionlogo3(16).png" alt="NoFriction Logo" class="h-10 w-auto">
+        </a>
+            <nav class="hidden md:block">
+                <a href="https://www.nofriction.io/intel/index.html" class="nav-link">Intel</a>
+                <a href="https://www.nofriction.io/contact.html" class="nav-link">Contact</a>
+            </nav>
+            <div class="md:hidden">
+                <button class="text-white focus:outline-none">
+                    <i class="fas fa-bars text-xl"></i>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <div class="container mx-auto px-4">
+        <div class="knowledge-article">
+            <div class="produced-by">
+                <i class="fas fa-bookmark mr-2"></i>Produced by No Friction
+            </div>
+            
+            <h1>Artificial Intelligence (AI) Model Comparison: Distillation & ERP Applications</h1>
+            
+            <p>AI models come in various sizes and complexities, each tailored for different purposes. Understanding the distinctions between large and small models, particularly in the realm of language processing, is crucial. Furthermore, a fascinating technique known as knowledge distillation allows for the creation of compact, efficient models that inherit capabilities from their larger counterparts. This exploration will delve into these differences, explain distillation, and consider how such a process could conceptually be applied to streamline massive systems like Enterprise Resource Planning (ERP) software.</p>
+
+            <h2>Key Insights: The Big Picture on AI Model Scaling and Distillation</h2>
+            <ul>
+                <li><strong>Model Size is a Trade-off:</strong> Large AI models, including Large Language Models (LLMs), offer broad capabilities and high performance on complex tasks but come with significant computational costs and resource demands. Small models, including Small Language Models (SLMs), are optimized for efficiency, speed, and specific tasks, making them ideal for resource-constrained environments.</li>
+                <li><strong>Knowledge Distillation Bridges the Gap:</strong> This technique enables the creation of smaller, more efficient "student" models that learn from larger, more complex "teacher" models, aiming to retain performance while reducing size and computational requirements.</li>
+                <li><strong>ERP "Distillation" is Conceptual:</strong> Directly distilling an entire ERP system isn't standard. Instead, it involves identifying key ERP functions, training AI models (potentially large ones) on relevant ERP data and logic, and then distilling these specialized AI models into smaller, efficient "AI brains" to automate or augment those functions.</li>
+            </ul>
+
+            <hr>
+
+            <h2>Language Models: A Tale of Two Sizes LLMs vs. SLMs</h2>
+            <p>Language models are AI systems designed to understand, generate, and interact with human language. The distinction between Large Language Models (LLMs) and Small Language Models (SLMs) is primarily based on scale, complexity, and intended application.</p>
+
+            <img src="https://storage.googleapis.com/e-object-409003.firebasestorage.app/ai-model-comparison-distillation-erp-58srj8v9oy.jpg" alt="Diagram illustrating the architecture of language models">
+            <p class="text-sm text-center italic text-gray-600">Visualizing the complex architecture often found in modern language models.</p>
+
+            <h3>Large Language Models (LLMs)</h3>
+
+            <h4>Defining Characteristics</h4>
+            <p>LLMs, such as GPT-3, GPT-4, BERT, and T5, are characterized by their massive scale. They often possess hundreds of millions to billions, or even trillions, of parameters. These parameters are the variables the model learns from data during training.</p>
+
+            <h4>Training Data and Capabilities</h4>
+            <p>LLMs are trained on vast and diverse datasets, typically encompassing enormous swathes of text and code from the internet, books, and other sources. This extensive training allows them to develop a broad, general-purpose understanding of language, context, and various domains. Consequently, LLMs excel at a wide array of natural language processing (NLP) tasks, including:</p>
+            <ul>
+                <li>Complex language understanding and generation</li>
+                <li>Few-shot learning (performing tasks with minimal examples)</li>
+                <li>Translation and summarization</li>
+                <li>Handling long contexts and nuanced reasoning</li>
+                <li>Open-ended content creation</li>
+            </ul>
+
+            <h4>Resource Profile</h4>
+            <p>The power of LLMs comes at a cost. They demand significant computational resources (high-end GPUs/TPUs) and substantial memory for both training and inference (generating responses). This often necessitates deployment in large cloud data centers and can lead to higher operational costs and energy consumption.</p>
+
+            <h3>Small Language Models (SLMs)</h3>
+
+            <h4>Defining Characteristics</h4>
+            <p>SLMs, like ALBERT, DistilBERT, or TinyBERT, are more compact, typically containing parameters in the range of millions to tens of millions. They are designed for efficiency and optimized for specific tasks or domains.</p>
+
+            <h4>Training Data and Capabilities</h4>
+            <p>SLMs are usually trained on smaller, more focused datasets, often tailored to a particular domain (e.g., customer service, medical text) or a specific task (e.g., sentiment analysis, spam detection). While they may not possess the broad general knowledge of LLMs, they can achieve high performance on their specialized tasks. Their capabilities include:</p>
+            <ul>
+                <li>High efficiency for targeted applications</li>
+                <li>Faster execution and response times (lower latency)</li>
+                <li>Suitability for environments with limited computational resources</li>
+                <li>Easier fine-tuning for custom needs</li>
+            </ul>
+
+            <h4>Resource Profile</h4>
+            <p>SLMs require significantly fewer computational resources. They can often run on standard hardware, edge devices (like smartphones and IoT systems), or on-premise servers with limited processing power. This makes them more cost-effective to train and deploy, with lower energy consumption.</p>
+
+            <h3>Comparative Overview: LLMs vs. SLMs</h3>
+            <p>The following table summarizes the key distinctions between Large and Small Language Models:</p>
+
+            <table>
+                <thead>
+                    <tr>
+                        <th>Aspect</th>
+                        <th>Large Language Models (LLMs)</th>
+                        <th>Small Language Models (SLMs)</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Parameters</strong></td>
+                        <td>Hundreds of millions to trillions</td>
+                        <td>Millions to tens of millions</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Training Data</strong></td>
+                        <td>Vast, diverse, general corpora</td>
+                        <td>Smaller, domain-specific, or task-focused datasets</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Knowledge Scope</strong></td>
+                        <td>Broad, general-purpose</td>
+                        <td>Narrow, specialized expertise</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Key Capabilities</strong></td>
+                        <td>Complex reasoning, open-ended generation, few-shot learning, multimodal tasks</td>
+                        <td>High-precision on specific tasks, fast inference, efficient deployment</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Processing Speed (Inference)</strong></td>
+                        <td>Slower</td>
+                        <td>Faster</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Resource Requirements</strong></td>
+                        <td>High computational power, memory, and energy</td>
+                        <td>Lower computational power, memory, and energy; can run on standard hardware/edge devices</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Cost (Training & Deployment)</strong></td>
+                        <td>High</td>
+                        <td>Low to moderate</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Customization</strong></td>
+                        <td>Can be fine-tuned, but often requires significant resources</td>
+                        <td>Easier and cheaper to fine-tune for specific domains</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Primary Use Cases</strong></td>
+                        <td>Creative writing, advanced chatbots, complex data analysis, general NLP tasks</td>
+                        <td>Domain-specific chatbots, text classification, on-device NLP, specific automation tasks</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <hr>
+
+            <h2>Beyond Language: Large vs. Small AI Models in General</h2>
+            <p>The concepts distinguishing LLMs and SLMs extend to the broader landscape of AI models, which includes systems for image recognition, object detection, speech recognition, predictive analytics, and more. A "large AI model" generally refers to any AI system with a vast number of parameters and extensive training data, capable of tackling complex tasks across diverse domains. Conversely, a "small AI model" has fewer parameters and is typically designed for more specific tasks, often prioritizing efficiency and resource conservation.</p>
+
+            <h3>Large AI Models</h3>
+            <p>These models might be deep neural networks with numerous layers, ensemble systems combining multiple models, or multi-modal architectures processing different types of data (e.g., text and images). They excel in:</p>
+            <ul>
+                <li>Complex, multi-step reasoning and problem-solving.</li>
+                <li>High-accuracy image and video understanding.</li>
+                <li>Real-time translation or sophisticated predictive analytics.</li>
+            </ul>
+
+            <p>However, they also come with high development and maintenance overhead, including data collection, labeling, and frequent retraining. Their sheer size can also make them "black boxes," challenging to interpret and debug.</p>
+
+            <h3>Small AI Models</h3>
+            <p>These are often single neural networks with fewer layers or classical machine learning algorithms (e.g., logistic regression, decision trees). They are designed for:</p>
+            <ul>
+                <li>Single, well-defined tasks with consistent data distributions (e.g., sensor data classification in IoT, simple anomaly detection).</li>
+                <li>Low power consumption and minimal latency, making them suitable for embedded systems or battery-powered devices.</li>
+            </ul>
+
+            <p>While they might trade some broad accuracy for efficiency, well-designed small AI models can achieve excellent performance on their specialized tasks and are generally easier to interpret and maintain.</p>
+
+            <h3>Comparative Analysis: AI Model Attributes</h3>
+            <p>This radar chart illustrates a conceptual comparison of different AI model types based on key attributes. It highlights the trade-offs inherent in choosing a model size and type for a given application. "Large General AI" refers to complex, versatile models beyond just language, while "Small Specialized AI" refers to focused, efficient models for specific non-language tasks.</p>
+
+            <p>The choice between a large and small AI model, much like with language models, depends critically on the specific requirements of the task, available resources, performance expectations, and deployment environment.</p>
+
+            <hr>
+
+            <h2>The Art of Shrinking Giants: Understanding Knowledge Distillation</h2>
+            <p>Knowledge distillation, also known as model distillation, is a model compression technique where a smaller, more compact model (the "student") is trained to replicate the performance of a larger, more complex, pre-trained model (the "teacher"). The primary goal is to transfer the "knowledge" learned by the cumbersome teacher model to the lightweight student model, thereby creating an efficient model that retains much of the teacher's accuracy while significantly reducing size, computational cost, and inference latency.</p>
+
+            <img src="https://storage.googleapis.com/e-object-409003.firebasestorage.app/ai-model-comparison-distillation-erp-58srj8v9oy-1.jpg" alt="Abstract representation of AI knowledge transfer">
+            <p class="text-sm text-center italic text-gray-600">Conceptualizing the transfer of learned patterns in AI models.</p>
+
+            <h3>The Teacher-Student Paradigm</h3>
+            <p>The core idea, introduced by Geoffrey Hinton and colleagues, involves a supervised learning process:</p>
+            <ul>
+                <li><strong>Teacher Model:</strong> A high-capacity model that has already been trained and exhibits strong performance on a target task.</li>
+                <li><strong>Student Model:</strong> A smaller model with a simpler architecture (e.g., fewer layers, fewer parameters) that needs to be trained.</li>
+            </ul>
+
+            <p>The student learns by trying to mimic the teacher's behavior. This often involves using the teacher's output probabilities (known as "soft targets") rather than just the hard labels (the ground truth). These soft targets provide richer information about how the teacher model "thinks" and generalizes, guiding the student to learn more effectively.</p>
+
+            <h3>Key Steps in Knowledge Distillation</h3>
+            <ol>
+                <li><strong>Train or Obtain a Teacher Model:</strong> Start with a powerful, pre-trained large model.</li>
+                <li><strong>Define the Student Model Architecture:</strong> Design a smaller, more efficient architecture for the student.</li>
+                <li><strong>Generate Soft Targets:</strong> Pass input data through the teacher model. Instead of using its final discrete predictions, use the probability distributions it produces over the output classes. Often, a "temperature" scaling is applied to the teacher's logits (pre-softmax outputs) to soften these distributions, making them more informative for the student.</li>
+                <li><strong>Define a Distillation Loss Function:</strong> The student is trained to minimize a loss function that typically combines two components:
+                    <ul>
+                        <li>A term that measures how well the student's predictions match the teacher's soft targets (e.g., using Kullback-Leibler divergence).</li>
+                        <li>A term that measures how well the student's predictions match the true "hard" labels from the original training data (e.g., using cross-entropy).</li>
+                    </ul>
+                </li>
+                <li><strong>Train the Student Model:</strong> Optimize the student model's parameters using this combined loss function.</li>
+            </ol>
+
+            <h3>Benefits of Distillation</h3>
+            <ul>
+                <li><strong>Model Compression:</strong> Achieves significant reduction in model size.</li>
+                <li><strong>Faster Inference:</strong> Smaller models execute more quickly.</li>
+                <li><strong>Reduced Computational Costs:</strong> Lower resource requirements for deployment.</li>
+                <li><strong>Deployment on Edge Devices:</strong> Enables powerful AI capabilities on resource-constrained hardware like mobile phones or IoT devices.</li>
+                <li><strong>Improved Efficiency:</strong> Balances performance with operational feasibility.</li>
+            </ul>
+
+            <h3>Visualizing the Distillation Process</h3>
+            <p>The knowledge distillation process involves transferring the learned patterns from a complex teacher model to a simpler student model, allowing the student to achieve similar performance with fewer resources. This process includes temperature scaling to soften probability distributions, combined loss functions to optimize the student model, and careful architectural design to maintain essential capabilities while reducing parameters.</p>
+
+            <iframe width="560" height="315" src="https://www.youtube.com/embed/Ko0jM3YjprY" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+            <p class="text-sm text-center italic text-gray-600">This video provides an overview of AI model distillation, explaining how knowledge is transferred from larger to smaller models for efficiency.</p>
+
+            <hr>
+
+            <h2>Distilling a Massive ERP System: A Conceptual Approach</h2>
+            <p>Enterprise Resource Planning (ERP) systems are complex, integrated software suites that manage core business processes across an organization—finance, human resources, supply chain, manufacturing, services, procurement, and more. These systems are typically monolithic, containing vast amounts of data and intricate business logic, often implemented as large rule-based engines or complex workflows. Directly "distilling" an entire ERP system in the same way one distills a neural network is not a straightforward or standard application of the technique.</p>
+
+            <p>However, the <em>principles</em> of knowledge distillation—extracting essential knowledge and functionality from a large, complex source and embedding it into smaller, more efficient components—can be conceptually applied. The goal would be to create lean, specialized "AI brains" that can automate or augment specific tasks currently handled by the massive ERP, rather than shrinking the ERP software itself.</p>
+
+            <img src="https://storage.googleapis.com/e-object-409003.firebasestorage.app/ai-model-comparison-distillation-erp-58srj8v9oy-2.jpg" alt="Conceptual integration of AI with ERP systems">
+            <p class="text-sm text-center italic text-gray-600">Illustrating the integration of AI capabilities within ERP frameworks to enhance business processes.</p>
+
+            <h3>Conceptual Steps to Create "Small AI Brains" from ERP Functionality</h3>
+            <p>Instead of distilling the ERP software, the process would involve using the ERP as a source of knowledge to train and then distill specialized AI models:</p>
+
+            <ol>
+                <li><strong>Identify Core Tasks and Scope Definition:</strong> Pinpoint specific, high-value functions within the ERP that could benefit from AI automation or enhancement. Examples include invoice processing, demand forecasting, anomaly detection in financial transactions, inventory alerts, or customer query routing. Trim non-essential features for these targeted AI components.</li>
+                <li><strong>Data Extraction and "Teacher Signal" Generation:</strong> Extract relevant historical data, transaction logs, workflow rules, and decision outputs from the ERP related to the identified tasks. This data, representing the ERP's "knowledge" and operational logic, will serve as the basis for training. For instance, for an invoice processing AI, extract past invoices, their classifications, and approval decisions.</li>
+                <li><strong>Develop a "Teacher" AI Model (if necessary):</strong> For complex tasks, it might be necessary to first train a larger, capable AI model (e.g., an LLM or a sophisticated predictive model) on the extracted ERP data and logic. This model would act as the "teacher" in the subsequent distillation phase. It would learn to replicate or improve upon the ERP's decision-making for the specific task.</li>
+                <li><strong>Design and Train "Student" AI Models (The Small AI Brains):</strong> Develop smaller, specialized AI models (the "student models" or "AI brains") designed for efficiency and specific functionality. Train these student models using knowledge distillation techniques. The student would learn from the outputs (soft targets) of the teacher AI model or directly from the processed ERP data patterns if a separate teacher model isn't used. The goal is for the student model to mimic the critical decision logic or predictive capabilities related to the ERP task.</li>
+                <li><strong>Optimization and Compression:</strong> Further optimize the student models using techniques like pruning (removing unnecessary parameters) or quantization (reducing the precision of parameters) to make them even smaller and faster, without significant performance loss.</li>
+                <li><strong>Integration and Validation:</strong> Integrate these small AI brains back into the business workflow, possibly interacting with the ERP system via APIs or operating as standalone agents. Validate their performance against real-world scenarios, comparing their outputs to the original ERP functionality and actual business outcomes.</li>
+                <li><strong>Monitor and Iterate:</strong> Continuously monitor the performance of the distilled AI models and retrain or refine them as business processes evolve or new data becomes available.</li>
+            </ol>
+
+            <h3>Potential Benefits</h3>
+            <ul>
+                <li><strong>Reduced Latency:</strong> Small AI models can provide near real-time responses for specific tasks, improving efficiency.</li>
+                <li><strong>Lower Operational Costs:</strong> Running smaller, specialized models can be more cost-effective than relying on resource-intensive parts of a large ERP for every decision.</li>
+                <li><strong>Enhanced Agility and Scalability:</strong> Specialized AI components can be updated and scaled independently.</li>
+                <li><strong>Edge Deployment:</strong> Enables AI-powered decision-making on local devices or at the edge of the network, reducing reliance on centralized ERP processing for certain tasks.</li>
+                <li><strong>Improved User Experience:</strong> Faster, more intelligent assistance for users interacting with ERP-related processes.</li>
+            </ul>
+
+            <p>While not a direct distillation of the ERP codebase, this approach leverages distillation principles to create intelligent, efficient modules that can significantly enhance and streamline operations typically managed by massive enterprise systems.</p>
+
+            <hr>
+
+            <h2>Frequently Asked Questions (FAQ)</h2>
+
+            <h3>What are the main trade-offs when choosing between an LLM and an SLM?</h3>
+            <p>The primary trade-offs involve performance breadth versus resource efficiency. LLMs offer wide-ranging capabilities and handle complex, nuanced tasks but require significant computational resources and have higher operational costs. SLMs are faster, more resource-efficient, and cost-effective but typically excel only at specific, narrower tasks with less general knowledge.</p>
+
+            <h3>Is knowledge distillation a lossless compression technique?</h3>
+            <p>No, knowledge distillation is not lossless. It inherently involves some performance trade-offs, as the smaller student model typically cannot perfectly replicate all the capabilities of the larger teacher model. However, well-executed distillation can preserve a surprising amount of the teacher's performance while significantly reducing model size and computational requirements.</p>
+
+            <h3>Can SLMs be used for tasks traditionally handled by LLMs?</h3>
+            <p>In some cases, yes, especially for narrower, well-defined tasks. Through techniques like knowledge distillation, fine-tuning, and task-specific optimization, SLMs can effectively handle certain tasks that would otherwise require an LLM. However, for tasks requiring broad knowledge, complex reasoning, or extensive contextual understanding, LLMs will generally outperform SLMs.</p>
+
+            <h3>What are the main challenges in applying "distillation" concepts to ERP functionalities?</h3>
+            <p>The key challenges include: mapping complex business rules and workflows to AI-tractable problems; ensuring data quality and representativeness when extracting from ERP systems; accurately representing business logic in AI models; managing the integration between distilled AI components and existing ERP infrastructure; and maintaining compliance, security, and traceability in business-critical processes.</p>
+
+            <hr>
+
+            <h2>Recommended Further Exploration</h2>
+            <ul>
+                <li><a href="https://ithy.com/?query=What%20are%20the%20latest%20advancements%20in%20making%20Large%20Language%20Models%20more%20efficient?">What are the latest advancements in making Large Language Models more efficient?</a></li>
+                <li><a href="https://ithy.com/?query=Explore%20real-world%20case%20studies%20of%20Small%20Language%20Models%20deployed%20in%20enterprise%20applications.">Explore real-world case studies of Small Language Models deployed in enterprise applications.</a></li>
+                <li><a href="https://ithy.com/?query=How%20does%20feature-based%20distillation%20compare%20to%20response-based%20distillation%20in%20practice?">How does feature-based distillation compare to response-based distillation in practice?</a></li>
+                <li><a href="https://ithy.com/?query=What%20are%20the%20ethical%20considerations%20when%20using%20AI%20models,%20large%20or%20small,%20to%20automate%20business%20decisions%20previously%20handled%20by%20ERP%20systems?">What are the ethical considerations when using AI models, large or small, to automate business decisions previously handled by ERP systems?</a></li>
+            </ul>
+
+            <hr>
+
+            <h2>References</h2>
+            <ul>
+                <li><a href="https://labelbox.com/blog/a-pragmatic-introduction-to-model-distillation-for-ai-developers/">A pragmatic introduction to model distillation for AI developers - Labelbox</a></li>
+                <li><a href="https://snorkel.ai/blog/llm-distillation-demystified-a-complete-guide/">LLM distillation demystified: a complete guide - Snorkel AI</a></li>
+                <li><a href="https://www.ibm.com/think/topics/knowledge-distillation">What is Knowledge distillation? - IBM Think</a></li>
+                <li><a href="https://www.microsoft.com/en-us/microsoft-cloud/blog/2024/11/11/explore-ai-models-key-differences-between-small-language-models-and-large-language-models/">Explore AI models: Key differences between small language models and large language models - Microsoft Cloud Blog</a></li>
+                <li><a href="https://www.splunk.com/en_us/blog/learn/language-models-slm-vs-llm.html">Language Models: SLM vs. LLM - Splunk</a></li>
+                <li><a href="https://en.wikipedia.org/wiki/Knowledge_distillation">Knowledge distillation - Wikipedia</a></li>
+                <li><a href="https://venturebeat.com/ai/why-small-language-models-are-the-next-big-thing-in-ai/">Why small language models are the next big thing in AI - VentureBeat</a></li>
+                <li><a href="https://www.scientificamerican.com/article/when-it-comes-to-ai-models-bigger-isnt-always-better/">When It Comes to AI Models, Bigger Isn't Always Better - Scientific American</a></li>
+            </ul>
+
+            <div class="produced-by mt-8">
+                <i class="fas fa-bookmark mr-2"></i>Produced by No Friction
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <div class="container mx-auto px-4">
+            <div class="flex flex-wrap justify-between">
+                <div class="w-full md:w-1/3 mb-6 md:mb-0">
+                    <h4 class="text-xl font-bold mb-4">NO FRICTION</h4>
+                    <p class="text-gray-400">Providing intelligence, knowledge and technical specifications.</p>
+                </div>
+                <div class="w-full md:w-1/3 mb-6 md:mb-0">
+                    <h4 class="text-xl font-bold mb-4">Quick Links</h4>
+                    <ul>
+                        <li><a href="https://www.nofriction.io/intel/index.html" class="footer-link">Intel</a></li>
+                        <li><a href="https://www.nofriction.io/briefings/index.html" class="footer-link">Briefings</a></li>
+                        <li><a href="https://www.nofriction.io/specs/index.html" class="footer-link">Specs</a></li>
+                        <li><a href="https://www.nofriction.io/contact/index.html" class="footer-link">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="w-full md:w-1/3">
+                    <h4 class="text-xl font-bold mb-4">Follow Us</h4>
+                    <div class="flex">
+                        <a href="#" class="mr-4 text-gray-400 hover:text-white"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="mr-4 text-gray-400 hover:text-white"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#" class="mr-4 text-gray-400 hover:text-white"><i class="fab fa-github"></i></a>
+                    </div>
+                </div>
+            </div>
+            <hr class="border-gray-800 my-6">
+            <div class="text-center text-gray-500 text-sm">
+                <p>&copy; 2023 No Friction. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>

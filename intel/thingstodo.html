@@ -1,0 +1,795 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Free Activities for Kids in Aliso Viejo</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.4/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #FF5A00;
+            --primary-light: #FF8C40;
+            --secondary: #00B5AD;
+            --secondary-light: #30D5CE;
+            --background: #FFFAF5;
+            --text: #333333;
+        }
+        
+        body {
+            font-family: 'Nunito', sans-serif;
+            background-color: var(--background);
+            color: var(--text);
+        }
+        
+        .header-bg {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
+        }
+        
+        .accent-color {
+            color: var(--secondary);
+        }
+        
+        .primary-button {
+            background-color: var(--primary);
+            transition: all 0.3s ease;
+        }
+        
+        .primary-button:hover {
+            background-color: var(--primary-light);
+            transform: translateY(-2px);
+        }
+        
+        .secondary-button {
+            background-color: var(--secondary);
+            transition: all 0.3s ease;
+        }
+        
+        .secondary-button:hover {
+            background-color: var(--secondary-light);
+            transform: translateY(-2px);
+        }
+        
+        .category-button {
+            border: 2px solid var(--primary);
+            color: var(--primary);
+            transition: all 0.3s ease;
+        }
+        
+        .category-button:hover, .category-button.active {
+            background-color: var(--primary);
+            color: white;
+        }
+        
+        .card {
+            border-radius: 12px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+            transition: all 0.3s ease;
+            border-top: 4px solid var(--primary);
+        }
+        
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .icon-circle {
+            background-color: rgba(255, 90, 0, 0.1);
+            color: var(--primary);
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 16px;
+        }
+        
+        .map-container {
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            height: 400px;
+        }
+        
+        @media print {
+            .no-print {
+                display: none !important;
+            }
+            
+            .page-break {
+                page-break-before: avoid;
+            }
+            
+            html, body {
+                width: 100%;
+                margin: 0;
+                padding: 0;
+            }
+            
+            .card {
+                break-inside: avoid;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header Section -->
+    <header class="header-bg text-white py-10">
+        <div class="container mx-auto px-4 text-center">
+            <h1 class="text-4xl md:text-5xl font-bold mb-4">Free Activities for 5-Year-Olds</h1>
+            <h2 class="text-2xl md:text-3xl font-semibold mb-6">Near Aliso Viejo, CA</h2>
+            <p class="text-lg max-w-2xl mx-auto">Discover exciting, cost-free adventures for your little ones within a 35-minute drive. Perfect for family outings without spending a penny!</p>
+        </div>
+    </header>
+    
+    <!-- Navigation & Filter Bar -->
+    <nav class="bg-white sticky top-0 z-10 shadow-md no-print">
+        <div class="container mx-auto p-4">
+            <div class="flex flex-wrap items-center justify-center gap-2 md:gap-4">
+                <button class="category-button px-4 py-2 rounded-full text-sm md:text-base font-semibold active" data-category="all">All Activities</button>
+                <button class="category-button px-4 py-2 rounded-full text-sm md:text-base font-semibold" data-category="parks">Parks & Playgrounds</button>
+                <button class="category-button px-4 py-2 rounded-full text-sm md:text-base font-semibold" data-category="nature">Nature & Wildlife</button>
+                <button class="category-button px-4 py-2 rounded-full text-sm md:text-base font-semibold" data-category="beaches">Beaches</button>
+                <button class="category-button px-4 py-2 rounded-full text-sm md:text-base font-semibold" data-category="splash">Splash Pads</button>
+                <button class="category-button px-4 py-2 rounded-full text-sm md:text-base font-semibold" data-category="libraries">Libraries</button>
+                <button class="category-button px-4 py-2 rounded-full text-sm md:text-base font-semibold" data-category="museums">Museums & Culture</button>
+            </div>
+        </div>
+    </nav>
+    
+    <!-- Introduction -->
+    <section class="py-8 bg-white">
+        <div class="container mx-auto px-4">
+            <div class="flex flex-col md:flex-row items-center">
+                <div class="md:w-1/2 p-4">
+                    <h2 class="text-3xl font-bold mb-4">Family Adventures Await!</h2>
+                    <p class="text-lg mb-4">Welcome to your interactive guide to free activities perfect for 5-year-olds in and around Aliso Viejo. We've carefully curated this list to help your family create wonderful memories without spending money.</p>
+                    <p class="text-lg mb-4">Use the category filters above to find exactly what you're looking for, whether it's a shaded playground, nature hike, beach day, or educational experience.</p>
+                    <div class="flex flex-wrap gap-4 mt-6">
+                        <a href="#map-section" class="primary-button text-white font-bold py-2 px-6 rounded-lg">View Map</a>
+                        <a href="#all-activities" class="secondary-button text-white font-bold py-2 px-6 rounded-lg">Browse Activities</a>
+                    </div>
+                </div>
+                <div class="md:w-1/2 p-4">
+                    <div class="bg-gray-100 p-4 rounded-lg shadow">
+                        <h3 class="text-xl font-bold mb-2 text-center">Pro Tips for Parents</h3>
+                        <ul class="list-disc pl-6 space-y-2">
+                            <li><span class="font-semibold">Pack essentials:</span> Water, snacks, sunscreen, and a change of clothes</li>
+                            <li><span class="font-semibold">Best times:</span> Early mornings for parks, weekdays for beaches</li>
+                            <li><span class="font-semibold">Bathroom availability:</span> Most parks have restrooms, but check ahead</li>
+                            <li><span class="font-semibold">Parking:</span> Free at most locations except some beach areas</li>
+                            <li><span class="font-semibold">Picnics welcome:</span> Almost all parks have tables for mealtime</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Map Section -->
+    <section id="map-section" class="py-8 bg-gray-50">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl font-bold text-center mb-8">Explore Locations</h2>
+            <div class="map-container">
+                <iframe width="100%" height="100%" frameborder="0" style="border:0" 
+                src="https://www.google.com/maps/embed/v1/search?q=parks%20and%20playgrounds%20near%20Aliso%20Viejo,%20CA&key=AIzaSyBFw0Qbyq9zTFTd-tUY6dZWTgaQzuU17R8" 
+                allowfullscreen></iframe>
+            </div>
+            <p class="text-center text-sm mt-2 text-gray-600">Interactive map showing locations of activities near Aliso Viejo</p>
+        </div>
+    </section>
+    
+    <!-- Activity Categories -->
+    <section id="all-activities" class="py-8">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl font-bold text-center mb-8">All Free Activities</h2>
+            
+            <!-- Parks & Playgrounds -->
+            <div class="category-section mb-10" data-category="parks">
+                <h3 class="text-2xl font-bold mb-6 flex items-center">
+                    <span class="icon-circle text-xl"><i class="fas fa-tree"></i></span>
+                    Parks & Playgrounds
+                </h3>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    <!-- Park 1 -->
+                    <div class="card bg-white p-6">
+                        <h4 class="text-lg font-bold mb-2">Aliso Viejo Community Park</h4>
+                        <p class="text-sm text-gray-500 mb-3">150 Cedarbrook, Aliso Viejo</p>
+                        <p class="mb-3">Shaded playground with separate areas for tots and bigger kids, baseball fields, picnic areas, and trails.</p>
+                        <div class="flex items-center text-sm text-gray-600">
+                            <div class="mr-4"><i class="fas fa-clock mr-1"></i> 6AM-10PM</div>
+                            <div><i class="fas fa-restroom mr-1"></i> Restrooms</div>
+                        </div>
+                    </div>
+                    
+                    <!-- Park 2 -->
+                    <div class="card bg-white p-6">
+                        <h4 class="text-lg font-bold mb-2">Canyon View Park</h4>
+                        <p class="text-sm text-gray-500 mb-3">22144 Canyon Vistas, Aliso Viejo</p>
+                        <p class="mb-3">12-acre park with a sand-covered playground, hiking paths overlooking the canyon, and clean restrooms.</p>
+                        <div class="flex items-center text-sm text-gray-600">
+                            <div class="mr-4"><i class="fas fa-clock mr-1"></i> 6AM-8PM</div>
+                            <div><i class="fas fa-restroom mr-1"></i> Restrooms</div>
+                        </div>
+                    </div>
+                    
+                    <!-- Park 3 -->
+                    <div class="card bg-white p-6">
+                        <h4 class="text-lg font-bold mb-2">Ridgecrest Park</h4>
+                        <p class="text-sm text-gray-500 mb-3">25354 Eastwing, Aliso Viejo</p>
+                        <p class="mb-3">Covered playground area for sunny days, tennis courts, basketball courts, and picnic tables.</p>
+                        <div class="flex items-center text-sm text-gray-600">
+                            <div class="mr-4"><i class="fas fa-clock mr-1"></i> Open 24 hours</div>
+                            <div><i class="fas fa-restroom mr-1"></i> Restrooms</div>
+                        </div>
+                    </div>
+                    
+                    <!-- Park 4 -->
+                    <div class="card bg-white p-6">
+                        <h4 class="text-lg font-bold mb-2">Grand Park</h4>
+                        <p class="text-sm text-gray-500 mb-3">6101 City Lights Dr, Aliso Viejo</p>
+                        <p class="mb-3">Large grassy areas and a playground with sand. Great for family outings.</p>
+                        <div class="flex items-center text-sm text-gray-600">
+                            <div class="mr-4"><i class="fas fa-clock mr-1"></i> 6AM-10PM</div>
+                            <div><i class="fas fa-child mr-1"></i> Kid-friendly</div>
+                        </div>
+                    </div>
+                    
+                    <!-- Park 5 -->
+                    <div class="card bg-white p-6">
+                        <h4 class="text-lg font-bold mb-2">Acorn Park</h4>
+                        <p class="text-sm text-gray-500 mb-3">22705 Sanborn, Aliso Viejo</p>
+                        <p class="mb-3">Plenty of sand to dig in, grassy areas to run on, and equipment rated for 5-12 year olds.</p>
+                        <div class="flex items-center text-sm text-gray-600">
+                            <div class="mr-4"><i class="fas fa-clock mr-1"></i> 6AM-9:30PM</div>
+                            <div><i class="fas fa-child mr-1"></i> Kid-friendly</div>
+                        </div>
+                    </div>
+                    
+                    <!-- Park 6 -->
+                    <div class="card bg-white p-6">
+                        <h4 class="text-lg font-bold mb-2">Springdale Park</h4>
+                        <p class="text-sm text-gray-500 mb-3">2 Mayfair, Aliso Viejo</p>
+                        <p class="mb-3">Nicknamed "Spiderman Park" by local kids due to its unique climbing structures. Great for all ages.</p>
+                        <div class="flex items-center text-sm text-gray-600">
+                            <div class="mr-4"><i class="fas fa-clock mr-1"></i> Open daily</div>
+                            <div><i class="fas fa-child mr-1"></i> Kid-friendly</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="mt-6 text-center">
+                    <span class="text-gray-600 text-sm">And many more parks in the area!</span>
+                </div>
+            </div>
+            
+            <!-- Nature & Wildlife -->
+            <div class="category-section mb-10" data-category="nature">
+                <h3 class="text-2xl font-bold mb-6 flex items-center">
+                    <span class="icon-circle text-xl"><i class="fas fa-leaf"></i></span>
+                    Nature & Wildlife
+                </h3>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    <!-- Nature 1 -->
+                    <div class="card bg-white p-6">
+                        <h4 class="text-lg font-bold mb-2">Aliso & Wood Canyons Wilderness Park</h4>
+                        <p class="text-sm text-gray-500 mb-3">28373 Alicia Pkwy, Aliso Viejo</p>
+                        <p class="mb-3">4,500-acre wildlife sanctuary with rolling hills, trails, and several types of trees. Great for hiking with kids.</p>
+                        <div class="flex items-center text-sm text-gray-600">
+                            <div class="mr-4"><i class="fas fa-clock mr-1"></i> 7AM-8PM</div>
+                            <div><i class="fas fa-hiking mr-1"></i> Kid-friendly trails</div>
+                        </div>
+                    </div>
+                    
+                    <!-- Nature 2 -->
+                    <div class="card bg-white p-6">
+                        <h4 class="text-lg font-bold mb-2">Nix Nature Center</h4>
+                        <p class="text-sm text-gray-500 mb-3">18751 Laguna Canyon Rd, Laguna Beach</p>
+                        <p class="mb-3">Educational center with trails that offer varied terrain for exploring, approximately 20 minutes from Aliso Viejo.</p>
+                        <div class="flex items-center text-sm text-gray-600">
+                            <div class="mr-4"><i class="fas fa-clock mr-1"></i> 8AM-5PM</div>
+                            <div><i class="fas fa-restroom mr-1"></i> Restrooms</div>
+                        </div>
+                    </div>
+                    
+                    <!-- Nature 3 -->
+                    <div class="card bg-white p-6">
+                        <h4 class="text-lg font-bold mb-2">Turtle Rock Nature Center</h4>
+                        <p class="text-sm text-gray-500 mb-3">1 Sunnyhill, Irvine</p>
+                        <p class="mb-3">Five-acre nature preserve with trails for viewing wildlife and habitats, plus an outdoor classroom.</p>
+                        <div class="flex items-center text-sm text-gray-600">
+                            <div class="mr-4"><i class="fas fa-clock mr-1"></i> 9AM-4PM</div>
+                            <div><i class="fas fa-child mr-1"></i> Kid-friendly</div>
+                        </div>
+                    </div>
+                    
+                    <!-- Nature 4 -->
+                    <div class="card bg-white p-6">
+                        <h4 class="text-lg font-bold mb-2">Dripping Cave Trail</h4>
+                        <p class="text-sm text-gray-500 mb-3">Aliso Viejo, CA</p>
+                        <p class="mb-3">Kid-friendly hiking trail with interesting natural features and easy paths to explore.</p>
+                        <div class="flex items-center text-sm text-gray-600">
+                            <div class="mr-4"><i class="fas fa-clock mr-1"></i> Open daily</div>
+                            <div><i class="fas fa-hiking mr-1"></i> Easy trail</div>
+                        </div>
+                    </div>
+                    
+                    <!-- Nature 5 -->
+                    <div class="card bg-white p-6">
+                        <h4 class="text-lg font-bold mb-2">Aliso Summit Hiking Trail</h4>
+                        <p class="text-sm text-gray-500 mb-3">29292 Ridgeview Dr, Laguna Niguel</p>
+                        <p class="mb-3">Nice quiet trails with beautiful views overlooking the coastline. Perfect for family walks.</p>
+                        <div class="flex items-center text-sm text-gray-600">
+                            <div class="mr-4"><i class="fas fa-clock mr-1"></i> Open daily</div>
+                            <div><i class="fas fa-dog mr-1"></i> Dog-friendly</div>
+                        </div>
+                    </div>
+                    
+                    <!-- Nature 6 -->
+                    <div class="card bg-white p-6">
+                        <h4 class="text-lg font-bold mb-2">Laguna Coast Wilderness Park: Big Bend</h4>
+                        <p class="text-sm text-gray-500 mb-3">18751 Laguna Canyon Rd, Laguna Beach</p>
+                        <p class="mb-3">Kid-friendly trails with moderate difficulty and great views. Explore nature with the family.</p>
+                        <div class="flex items-center text-sm text-gray-600">
+                            <div class="mr-4"><i class="fas fa-clock mr-1"></i> 8AM-5PM</div>
+                            <div><i class="fas fa-restroom mr-1"></i> Restrooms</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Beaches -->
+            <div class="category-section mb-10" data-category="beaches">
+                <h3 class="text-2xl font-bold mb-6 flex items-center">
+                    <span class="icon-circle text-xl"><i class="fas fa-umbrella-beach"></i></span>
+                    Beaches
+                </h3>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    <!-- Beach 1 -->
+                    <div class="card bg-white p-6">
+                        <h4 class="text-lg font-bold mb-2">Aliso Beach</h4>
+                        <p class="text-sm text-gray-500 mb-3">2 Monterey St, Laguna Beach</p>
+                        <p class="mb-3">Popular spot for families with a playground and public showers/restrooms. Approximately 15 minutes from Aliso Viejo.</p>
+                        <div class="flex items-center text-sm text-gray-600">
+                            <div class="mr-4"><i class="fas fa-clock mr-1"></i> 6AM-8PM</div>
+                            <div><i class="fas fa-restroom mr-1"></i> Restrooms</div>
+                        </div>
+                    </div>
+                    
+                    <!-- Beach 2 -->
+                    <div class="card bg-white p-6">
+                        <h4 class="text-lg font-bold mb-2">Treasure Island Beach</h4>
+                        <p class="text-sm text-gray-500 mb-3">Wesley Dr, Laguna Beach</p>
+                        <p class="mb-3">Beautiful scenic beach approximately 20 minutes away. Great for exploring and relaxing.</p>
+                        <div class="flex items-center text-sm text-gray-600">
+                            <div class="mr-4"><i class="fas fa-clock mr-1"></i> Open daily</div>
+                            <div><i class="fas fa-child mr-1"></i> Kid-friendly</div>
+                        </div>
+                    </div>
+                    
+                    <!-- Beach 3 -->
+                    <div class="card bg-white p-6">
+                        <h4 class="text-lg font-bold mb-2">Main Beach</h4>
+                        <p class="text-sm text-gray-500 mb-3">Laguna Beach, CA</p>
+                        <p class="mb-3">Features a boardwalk, perfect for relaxed walks along the shore. Very accessible for families.</p>
+                        <div class="flex items-center text-sm text-gray-600">
+                            <div class="mr-4"><i class="fas fa-clock mr-1"></i> Open daily</div>
+                            <div><i class="fas fa-restroom mr-1"></i> Restrooms nearby</div>
+                        </div>
+                    </div>
+                    
+                    <!-- Beach 4 -->
+                    <div class="card bg-white p-6">
+                        <h4 class="text-lg font-bold mb-2">Table Rock Beach</h4>
+                        <p class="text-sm text-gray-500 mb-3">31561 Table Rock Dr, Laguna Beach</p>
+                        <p class="mb-3">Quieter beach with striking cliffs and outcroppings. Great for adventure-seeking families.</p>
+                        <div class="flex items-center text-sm text-gray-600">
+                            <div class="mr-4"><i class="fas fa-clock mr-1"></i> Open daily</div>
+                            <div><i class="fas fa-exclamation-triangle mr-1"></i> Stairs required</div>
+                        </div>
+                    </div>
+                    
+                    <!-- Beach 5 -->
+                    <div class="card bg-white p-6">
+                        <h4 class="text-lg font-bold mb-2">1000 Steps Beach</h4>
+                        <p class="text-sm text-gray-500 mb-3">31972 Coast Hwy, Laguna Beach</p>
+                        <p class="mb-3">Iconic stairs lead to this public beach popular for playing in the sand and exploring.</p>
+                        <div class="flex items-center text-sm text-gray-600">
+                            <div class="mr-4"><i class="fas fa-clock mr-1"></i> Open daily</div>
+                            <div><i class="fas fa-exclamation-triangle mr-1"></i> Many steps</div>
+                        </div>
+                        <p class="text-sm text-gray-500 mt-2">Note: The many steps might be challenging for very young children.</p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Splash Pads -->
+            <div class="category-section mb-10" data-category="splash">
+                <h3 class="text-2xl font-bold mb-6 flex items-center">
+                    <span class="icon-circle text-xl"><i class="fas fa-water"></i></span>
+                    Splash Pads & Water Play
+                </h3>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    <!-- Splash 1 -->
+                    <div class="card bg-white p-6">
+                        <h4 class="text-lg font-bold mb-2">Crown Valley Park</h4>
+                        <p class="text-sm text-gray-500 mb-3">29751 Crown Valley Pkwy, Laguna Niguel</p>
+                        <p class="mb-3">Features a free splash pad and water play area, plus parking is free. Great for hot days.</p>
+                        <div class="flex items-center text-sm text-gray-600">
+                            <div class="mr-4"><i class="fas fa-clock mr-1"></i> 6AM-10PM</div>
+                            <div><i class="fas fa-restroom mr-1"></i> Restrooms</div>
+                        </div>
+                        <p class="text-sm text-gray-500 mt-2">Note: Water features may be seasonal. Check before visiting.</p>
+                    </div>
+                    
+                    <!-- Splash 2 -->
+                    <div class="card bg-white p-6">
+                        <h4 class="text-lg font-bold mb-2">Hummingbird Park</h4>
+                        <p class="text-sm text-gray-500 mb-3">21933 Aliso Creek Rd, Aliso Viejo</p>
+                        <p class="mb-3">Has water features during summer months. Covered playground area for shade.</p>
+                        <div class="flex items-center text-sm text-gray-600">
+                            <div class="mr-4"><i class="fas fa-clock mr-1"></i> 6AM-9PM</div>
+                            <div><i class="fas fa-child mr-1"></i> Kid-friendly</div>
+                        </div>
+                        <p class="text-sm text-gray-500 mt-2">Note: Water features may be seasonal. Check before visiting.</p>
+                    </div>
+                    
+                    <!-- Splash 3 -->
+                    <div class="card bg-white p-6">
+                        <h4 class="text-lg font-bold mb-2">Grand Park</h4>
+                        <p class="text-sm text-gray-500 mb-3">6101 City Lights Dr, Aliso Viejo</p>
+                        <p class="mb-3">Has seasonal water features for kids. Large grassy areas for picnics and play.</p>
+                        <div class="flex items-center text-sm text-gray-600">
+                            <div class="mr-4"><i class="fas fa-clock mr-1"></i> 6AM-10PM</div>
+                            <div><i class="fas fa-child mr-1"></i> Kid-friendly</div>
+                        </div>
+                        <p class="text-sm text-gray-500 mt-2">Note: Water features may be seasonal. Check before visiting.</p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Libraries -->
+            <div class="category-section mb-10" data-category="libraries">
+                <h3 class="text-2xl font-bold mb-6 flex items-center">
+                    <span class="icon-circle text-xl"><i class="fas fa-book"></i></span>
+                    Libraries & Indoor Play
+                </h3>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    <!-- Library 1 -->
+                    <div class="card bg-white p-6">
+                        <h4 class="text-lg font-bold mb-2">OC Library - Laguna Hills Technology Branch</h4>
+                        <p class="text-sm text-gray-500 mb-3">25555 Alicia Pkwy, Laguna Hills</p>
+                        <p class="mb-3">Free story times and children's activities. Comfortable environment for young readers.</p>
+                        <div class="flex items-center text-sm text-gray-600">
+                            <div class="mr-4"><i class="fas fa-clock mr-1"></i> Hours vary</div>
+                            <div><i class="fas fa-book-reader mr-1"></i> Story time</div>
+                        </div>
+                        <p class="text-sm text-gray-500 mt-2">Check website for current story time schedule</p>
+                    </div>
+                    
+                    <!-- Library 2 -->
+                    <div class="card bg-white p-6">
+                        <h4 class="text-lg font-bold mb-2">Mission Viejo Library</h4>
+                        <p class="text-sm text-gray-500 mb-3">100 Civic Center, Mission Viejo</p>
+                        <p class="mb-3">Larger library with dedicated children's section and regular story times. Great resources for families.</p>
+                        <div class="flex items-center text-sm text-gray-600">
+                            <div class="mr-4"><i class="fas fa-clock mr-1"></i> Hours vary</div>
+                            <div><i class="fas fa-book-reader mr-1"></i> Children's area</div>
+                        </div>
+                        <p class="text-sm text-gray-500 mt-2">Special events for kids throughout the year</p>
+                    </div>
+                    
+                    <!-- Library 3 -->
+                    <div class="card bg-white p-6">
+                        <h4 class="text-lg font-bold mb-2">OC Library - Laguna Niguel Branch</h4>
+                        <p class="text-sm text-gray-500 mb-3">30341 Crown Valley Pkwy, Laguna Niguel</p>
+                        <p class="mb-3">Children's programming and books. Welcoming environment for young readers.</p>
+                        <div class="flex items-center text-sm text-gray-600">
+                            <div class="mr-4"><i class="fas fa-clock mr-1"></i> Hours vary</div>
+                            <div><i class="fas fa-child mr-1"></i> Kid-friendly</div>
+                        </div>
+                        <p class="text-sm text-gray-500 mt-2">Check website for current children's activities</p>
+                    </div>
+                </div>
+                <div class="mt-4 p-4 bg-blue-50 rounded-lg">
+                    <p class="text-sm"><i class="fas fa-info-circle text-blue-500 mr-2"></i> Note: The Aliso Viejo Library branch at 1 Journey is temporarily closed, but other branches are within 15-20 minutes' drive.</p>
+                </div>
+            </div>
+            
+            <!-- Museums & Culture -->
+            <div class="category-section mb-10" data-category="museums">
+                <h3 class="text-2xl font-bold mb-6 flex items-center">
+                    <span class="icon-circle text-xl"><i class="fas fa-landmark"></i></span>
+                    Museums & Culture
+                </h3>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    <!-- Museum 1 -->
+                    <div class="card bg-white p-6">
+                        <h4 class="text-lg font-bold mb-2">Laguna Art Museum</h4>
+                        <p class="text-sm text-gray-500 mb-3">307 Cliff Dr, Laguna Beach</p>
+                        <p class="mb-3">Free admission on first Thursdays of the month from 5-9 pm. Great introduction to art for kids.</p>
+                        <div class="flex items-center text-sm text-gray-600">
+                            <div class="mr-4"><i class="fas fa-clock mr-1"></i> Hours vary</div>
+                            <div><i class="fas fa-palette mr-1"></i> Free days available</div>
+                        </div>
+                    </div>
+                    
+                    <!-- Museum 2 -->
+                    <div class="card bg-white p-6">
+                        <h4 class="text-lg font-bold mb-2">Heritage Museum of Orange County</h4>
+                        <p class="text-sm text-gray-500 mb-3">3101 W Harvard St, Santa Ana</p>
+                        <p class="mb-3">Check website for free admission days and special events. Historical experiences for families.</p>
+                        <div class="flex items-center text-sm text-gray-600">
+                            <div class="mr-4"><i class="fas fa-clock mr-1"></i> Hours vary</div>
+                            <div><i class="fas fa-history mr-1"></i> Historical exhibits</div>
+                        </div>
+                    </div>
+                    
+                    <!-- Museum 3 -->
+                    <div class="card bg-white p-6">
+                        <h4 class="text-lg font-bold mb-2">Dana Point Nature Interpretive Center</h4>
+                        <p class="text-sm text-gray-500 mb-3">34558 Scenic Dr, Dana Point</p>
+                        <p class="mb-3">Educational center with trails showcasing local ecology. Free exhibits about local wildlife.</p>
+                        <div class="flex items-center text-sm text-gray-600">
+                            <div class="mr-4"><i class="fas fa-clock mr-1"></i> Hours vary</div>
+                            <div><i class="fas fa-leaf mr-1"></i> Nature education</div>
+                        </div>
+                    </div>
+                    
+                    <!-- Museum 4 -->
+                    <div class="card bg-white p-6">
+                        <h4 class="text-lg font-bold mb-2">Laguna Beach Arts Festivals</h4>
+                        <p class="text-sm text-gray-500 mb-3">Laguna Beach, CA</p>
+                        <p class="mb-3">Seasonally, many outdoor art displays can be viewed for free even if the festivals themselves have admission fees.</p>
+                        <div class="flex items-center text-sm text-gray-600">
+                            <div class="mr-4"><i class="fas fa-clock mr-1"></i> Seasonal</div>
+                            <div><i class="fas fa-palette mr-1"></i> Cultural experience</div>
+                        </div>
+                    </div>
+                    
+                    <!-- Museum 5 -->
+                    <div class="card bg-white p-6">
+                        <h4 class="text-lg font-bold mb-2">Aliso Viejo Ranch Historical Site</h4>
+                        <p class="text-sm text-gray-500 mb-3">Aliso Viejo, CA</p>
+                        <p class="mb-3">Learn about local history through exterior displays. Educational opportunity for young learners.</p>
+                        <div class="flex items-center text-sm text-gray-600">
+                            <div class="mr-4"><i class="fas fa-clock mr-1"></i> Open daily</div>
+                            <div><i class="fas fa-history mr-1"></i> Historical site</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Seasonal Activities -->
+    <section class="py-8 bg-gray-50">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl font-bold text-center mb-8">Seasonal Activities</h2>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div class="card bg-white p-6">
+                    <div class="text-center mb-4">
+                        <span class="text-3xl text-primary"><i class="fas fa-snowflake"></i></span>
+                    </div>
+                    <h3 class="text-xl font-bold mb-2 text-center">Winter</h3>
+                    <ul class="space-y-2">
+                        <li><i class="fas fa-check-circle text-secondary mr-2"></i> Holiday Light Displays in neighborhoods</li>
+                        <li><i class="fas fa-check-circle text-secondary mr-2"></i> Winter-themed library story times</li>
+                        <li><i class="fas fa-check-circle text-secondary mr-2"></i> Holiday community events in parks</li>
+                    </ul>
+                </div>
+                
+                <div class="card bg-white p-6">
+                    <div class="text-center mb-4">
+                        <span class="text-3xl text-primary"><i class="fas fa-sun"></i></span>
+                    </div>
+                    <h3 class="text-xl font-bold mb-2 text-center">Summer</h3>
+                    <ul class="space-y-2">
+                        <li><i class="fas fa-check-circle text-secondary mr-2"></i> Outdoor movies in the park</li>
+                        <li><i class="fas fa-check-circle text-secondary mr-2"></i> Splash pad water features (seasonal)</li>
+                        <li><i class="fas fa-check-circle text-secondary mr-2"></i> Summer reading programs at libraries</li>
+                    </ul>
+                </div>
+                
+                <div class="card bg-white p-6">
+                    <div class="text-center mb-4">
+                        <span class="text-3xl text-primary"><i class="fas fa-leaf"></i></span>
+                    </div>
+                    <h3 class="text-xl font-bold mb-2 text-center">Year-Round</h3>
+                    <ul class="space-y-2">
+                        <li><i class="fas fa-check-circle text-secondary mr-2"></i> Farmer's Markets (browsing is free!)</li>
+                        <li><i class="fas fa-check-circle text-secondary mr-2"></i> Community events at parks</li>
+                        <li><i class="fas fa-check-circle text-secondary mr-2"></i> Nature center special programs</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Tips Section -->
+    <section class="py-8">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl font-bold text-center mb-8">Tips For Making the Most of Your Adventures</h2>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div class="bg-white p-6 rounded-lg shadow">
+                    <h3 class="text-xl font-bold mb-4 flex items-center">
+                        <span class="icon-circle text-lg mr-3"><i class="fas fa-check-double"></i></span>
+                        What to Pack
+                    </h3>
+                    <ul class="space-y-3">
+                        <li class="flex items-start">
+                            <span class="text-secondary mr-2"><i class="fas fa-water"></i></span>
+                            <span><strong>Water bottles</strong> - Stay hydrated, especially during hot days</span>
+                        </li>
+                        <li class="flex items-start">
+                            <span class="text-secondary mr-2"><i class="fas fa-apple-alt"></i></span>
+                            <span><strong>Snacks</strong> - Pack healthy options that won't melt</span>
+                        </li>
+                        <li class="flex items-start">
+                            <span class="text-secondary mr-2"><i class="fas fa-sun"></i></span>
+                            <span><strong>Sun protection</strong> - Sunscreen, hats, and sunglasses</span>
+                        </li>
+                        <li class="flex items-start">
+                            <span class="text-secondary mr-2"><i class="fas fa-tshirt"></i></span>
+                            <span><strong>Change of clothes</strong> - Especially for water activities</span>
+                        </li>
+                        <li class="flex items-start">
+                            <span class="text-secondary mr-2"><i class="fas fa-first-aid"></i></span>
+                            <span><strong>Basic first aid</strong> - Bandages for minor scrapes</span>
+                        </li>
+                    </ul>
+                </div>
+                
+                <div class="bg-white p-6 rounded-lg shadow">
+                    <h3 class="text-xl font-bold mb-4 flex items-center">
+                        <span class="icon-circle text-lg mr-3"><i class="fas fa-lightbulb"></i></span>
+                        Planning Tips
+                    </h3>
+                    <ul class="space-y-3">
+                        <li class="flex items-start">
+                            <span class="text-secondary mr-2"><i class="far fa-clock"></i></span>
+                            <span><strong>Timing matters</strong> - Early mornings are less crowded</span>
+                        </li>
+                        <li class="flex items-start">
+                            <span class="text-secondary mr-2"><i class="fas fa-parking"></i></span>
+                            <span><strong>Parking</strong> - Free at most locations except some beaches</span>
+                        </li>
+                        <li class="flex items-start">
+                            <span class="text-secondary mr-2"><i class="fas fa-restroom"></i></span>
+                            <span><strong>Bathroom breaks</strong> - Know which locations have facilities</span>
+                        </li>
+                        <li class="flex items-start">
+                            <span class="text-secondary mr-2"><i class="fas fa-utensils"></i></span>
+                            <span><strong>Picnic meals</strong> - Most parks have tables for dining</span>
+                        </li>
+                        <li class="flex items-start">
+                            <span class="text-secondary mr-2"><i class="fas fa-cloud-sun"></i></span>
+                            <span><strong>Check weather</strong> - Plan indoor options on rainy days</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- FAQ Section -->
+    <section class="py-8 bg-gray-50">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl font-bold text-center mb-8">Frequently Asked Questions</h2>
+            
+            <div class="max-w-3xl mx-auto">
+                <div class="mb-4 bg-white p-4 rounded-lg shadow">
+                    <h3 class="font-bold text-lg">What if it rains on our planned outing day?</h3>
+                    <p class="mt-2">Libraries and museums make great rainy day alternatives. The Mission Viejo Library and Laguna Hills Library both have excellent children's areas.</p>
+                </div>
+                
+                <div class="mb-4 bg-white p-4 rounded-lg shadow">
+                    <h3 class="font-bold text-lg">Which parks have the best playground equipment for 5-year-olds?</h3>
+                    <p class="mt-2">Aliso Viejo Community Park, Canyon View Park, and Ridgecrest Park all have excellent play structures appropriate for this age group with climbing elements, slides, and swings.</p>
+                </div>
+                
+                <div class="mb-4 bg-white p-4 rounded-lg shadow">
+                    <h3 class="font-bold text-lg">Which locations have shaded areas for hot days?</h3>
+                    <p class="mt-2">Ridgecrest Park, Acorn Park, and Hummingbird Park all feature covered playground areas. Also consider early morning visits to reduce sun exposure.</p>
+                </div>
+                
+                <div class="mb-4 bg-white p-4 rounded-lg shadow">
+                    <h3 class="font-bold text-lg">Are there any free events specifically for children?</h3>
+                    <p class="mt-2">Libraries regularly hold free story times, and museums often have free family days. Check city website event calendars for community gatherings in parks.</p>
+                </div>
+                
+                <div class="bg-white p-4 rounded-lg shadow">
+                    <h3 class="font-bold text-lg">What beaches are most appropriate for young children?</h3>
+                    <p class="mt-2">Aliso Beach is particularly good for young children as it has a playground, restrooms, and showers. Main Beach in Laguna Beach has a boardwalk that's easy for small children to navigate.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Final CTA -->
+    <section class="py-12 header-bg text-white">
+        <div class="container mx-auto px-4 text-center">
+            <h2 class="text-3xl font-bold mb-4">Ready For Your Next Adventure?</h2>
+            <p class="text-xl mb-8 max-w-2xl mx-auto">The best childhood memories don't require spending money - just quality time together exploring all that Aliso Viejo and surrounding areas have to offer!</p>
+            <div class="flex justify-center gap-4 flex-wrap">
+                <a href="#all-activities" class="bg-white text-primary font-bold py-3 px-8 rounded-lg hover:bg-gray-100 transition">Browse Activities</a>
+                <a href="#map-section" class="border-2 border-white text-white font-bold py-3 px-8 rounded-lg hover:bg-white hover:text-primary transition">View Map</a>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-white py-8">
+        <div class="container mx-auto px-4">
+            <div class="flex flex-col md:flex-row justify-between items-center">
+                <div class="mb-4 md:mb-0">
+                    <h2 class="text-2xl font-bold">Aliso Viejo Family Adventures</h2>
+                    <p class="text-gray-400">Your guide to free family fun near Aliso Viejo, CA</p>
+                </div>
+                <div class="flex gap-4">
+                    <a href="#" class="text-gray-400 hover:text-white"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#" class="text-gray-400 hover:text-white"><i class="fab fa-instagram"></i></a>
+                    <a href="#" class="text-gray-400 hover:text-white"><i class="fab fa-pinterest"></i></a>
+                </div>
+            </div>
+            <div class="mt-8 pt-4 border-t border-gray-700 text-center text-gray-400 text-sm">
+                <p>Created with ❤️ for families looking to create memories without spending money.</p>
+                <p class="mt-2">Information last updated: May 2025. Please verify details before visiting.</p>
+            </div>
+        </div>
+    </footer>
+    
+    <script>
+        // Category filtering
+        document.addEventListener('DOMContentLoaded', function() {
+            const categoryButtons = document.querySelectorAll('.category-button');
+            const categorySections = document.querySelectorAll('.category-section');
+            
+            categoryButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    const category = this.getAttribute('data-category');
+                    
+                    // Update active button
+                    categoryButtons.forEach(btn => btn.classList.remove('active'));
+                    this.classList.add('active');
+                    
+                    // Show/hide categories
+                    if (category === 'all') {
+                        categorySections.forEach(section => {
+                            section.style.display = 'block';
+                        });
+                    } else {
+                        categorySections.forEach(section => {
+                            if (section.getAttribute('data-category') === category) {
+                                section.style.display = 'block';
+                            } else {
+                                section.style.display = 'none';
+                            }
+                        });
+                    }
+                });
+            });
+            
+            // Smooth scroll for anchor links
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    document.querySelector(this.getAttribute('href')).scrollIntoView({
+                        behavior: 'smooth'
+                    });
+                });
+            });
+        });
+    </script>
+</body>
+</html>

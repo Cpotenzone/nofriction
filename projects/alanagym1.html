@@ -1,0 +1,609 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Renewed Vitality: Interactive Workout Program</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            scroll-behavior: smooth;
+        }
+        .tab-active {
+            border-bottom-color: #6366f1; /* indigo-500 */
+            color: #6366f1;
+            font-weight: 600;
+        }
+        .tab-inactive {
+            border-bottom-color: transparent;
+            color: #6b7280; /* gray-500 */
+        }
+        .completed-set {
+            background-color: #d1fae5; /* green-100 */
+            border-color: #10b981; /* green-500 */
+        }
+        /* Custom scrollbar for better aesthetics if needed */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #f1f1f1;
+            border-radius: 10px;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #888;
+            border-radius: 10px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #555;
+        }
+        [x-cloak] { display: none !important; }
+    </style>
+    <script>
+    const ALL_WORKOUT_DATA = {
+        warmUp: [
+            { name: "Marching on the Spot", duration: "2 minutes", cues: "March in place, then forwards and backwards. Pump arms in rhythm, elbows bent, fists soft." },
+            { name: "Arm Circles", duration: "10-12 forward & back", cues: "Stand tall, extend arms to sides at shoulder height. Make small circles, gradually increasing size. Reverse direction." },
+            { name: "Shoulder Rolls", duration: "10 forward & back", cues: "Stand or continue marching slowly. Roll shoulders up, forward, down, and back. Then reverse: up, back, down, forward." },
+            { name: "Torso Twists", duration: "10-12 per side", cues: "Stand with feet shoulder-width apart, knees slightly bent. Gently twist torso from side to side, arms relaxed." },
+            { name: "Heel Digs", duration: "30 seconds", cues: "Alternate placing one heel forward, toes pointing up. Keep a slight bend in the supporting leg. Add a gentle arm punch." },
+            { name: "Bodyweight Squats", duration: "8-10 repetitions", cues: "Feet shoulder-width apart. Lower hips back and down as if sitting, keeping chest up. Go to a comfortable depth." },
+            { name: "Bodyweight Lunges (Alternating, shallow)", duration: "5-6 per leg", cues: "Step forward with one leg, lowering hips until both knees are bent at a comfortable angle. Keep front knee over ankle. Push back to start." }
+        ],
+        coolDown: [
+            { name: "Triceps Stretch", muscles: "Triceps, Shoulders", hold: "20-30 sec/arm", cues: "Extend one arm overhead, bend elbow, let hand drop behind head. Gently press down on elbow with other hand." },
+            { name: "Chest Stretch", muscles: "Chest, Front of Shoulders", hold: "20-30 seconds", cues: "Stand in a doorway, place forearms on frame, elbows slightly below shoulders. Gently lean forward until a stretch is felt in chest/shoulders." },
+            { name: "Shoulder Stretch", muscles: "Shoulders (Deltoids)", hold: "20-30 sec/arm", cues: "Bring one arm across chest, use other hand to gently pull it closer to body." },
+            { name: "Quadriceps Stretch", muscles: "Quadriceps (Front of Thigh)", hold: "20-30 sec/leg", cues: "Stand tall, hold onto a wall for balance if needed. Bend one knee, grasp ankle, gently pull heel towards glutes. Keep knees close together." },
+            { name: "Hamstring Stretch", muscles: "Hamstrings (Back of Thigh)", hold: "20-30 sec/leg", cues: "Sit with one leg extended, other foot by inner thigh. Hinge at hips, lean forward over extended leg, keeping back straight. (Or standing version)" },
+            { name: "Calf Stretch", muscles: "Calves (Gastrocnemius, Soleus)", hold: "20-30 sec/leg", cues: "Face a wall, place hands on wall. Step one foot back, keeping heel on floor and leg straight. Lean into wall. Bend back knee for soleus." },
+            { name: "Glute Stretch (Figure 4)", muscles: "Glutes, Hips", hold: "20-30 sec/leg", cues: "Lie on back, knees bent. Cross one ankle over opposite knee. Gently pull thigh of bottom leg towards chest." },
+            { name: "Lower Back/Spinal Twist", muscles: "Lower Back, Obliques", hold: "20-30 sec/side", cues: "Lie on back, knees bent. Extend arms to sides. Gently let both knees fall to one side, keeping shoulders on floor. Turn head to opposite side." }
+        ],
+        routines: {
+            routine1: {
+                name: "Routine 1: Full-Body Foundation",
+                exercises: [
+                    {
+                        name: "Squats", muscles: "Quads, Glutes, Hamstrings, Core", setsReps: "2-3 sets of 10-15 reps", rpeTarget: "5-7",
+                        variations: {
+                            weights: { title: "Dumbbell Goblet Squat", cues: "Hold 1 DB vertically at chest. Feet shoulder-width, toes slightly out. Hips back & down, chest up, back straight. Thighs parallel to floor. Push through heels.", est: "Est. Wt: 20-25 lbs" },
+                            cables: { title: "Cable Squat", cues: "Straight bar/rope, low pulley. Face machine, hold attachment, arms extended. Sit back into squat, tension on cable. Chest up, back straight.", est: "Est. Setting: 30-40 lbs" },
+                            bodyweight: { title: "Bodyweight Squat", cues: "Feet shoulder-width. Chest up. Hips back & down, arms fwd for balance. Thighs parallel.", est: null },
+                            freestyle: { title: "Stability Ball Wall Squat", cues: "Ball between low back & wall. Walk feet fwd. Squat, ball rolls up back. Provides support.", est: null }
+                        }
+                    },
+                    {
+                        name: "Chest Press / Push-ups", muscles: "Chest, Shoulders, Triceps", setsReps: "2-3 sets of 10-15 reps (or AMRAP for push-ups)", rpeTarget: "5-7",
+                        variations: {
+                            weights: { title: "Dumbbell Bench Press", cues: "Lie on bench, feet flat. DBs at chest, palms fwd. Press up, arms extended (not locked). Lower slowly.", est: "Est. Wt: 10-15 lbs/DB" },
+                            cables: { title: "Standing Cable Chest Press", cues: "Staggered stance, handles at chest height. Press fwd until hands meet. Control return.", est: "Est. Setting: 15-20 lbs/side" },
+                            bodyweight: { title: "Incline Push-up", cues: "Hands on bench/wall, slightly wider than shoulders. Body straight. Lower chest to surface, push up. (Wall Push-up if bench too hard)", est: null },
+                            freestyle: { title: "Resistance Band Chest Press", cues: "Band around back, hold ends. Press hands fwd.", est: "Est. Resistance: Light-Medium band" }
+                        }
+                    },
+                    {
+                        name: "Rows", muscles: "Back (Lats, Rhomboids), Biceps", setsReps: "2-3 sets of 10-15 reps", rpeTarget: "5-7",
+                        variations: {
+                            weights: { title: "Dumbbell Bent-Over Row (One Arm)", cues: "1 knee & hand on bench, back flat. Hold DB, arm extended. Pull DB to hip, squeeze shoulder blade. Lower slowly.", est: "Est. Wt: 10-15 lbs" },
+                            cables: { title: "Seated Cable Row", cues: "V-grip/wide bar. Feet on platform, knees bent. Sit tall. Pull to torso, squeeze shoulder blades. Control release.", est: "Est. Setting: 30-40 lbs" },
+                            bodyweight: { title: "Inverted Row", cues: "Under sturdy table/low bar. Lie under, grasp edge. Body straight. Pull chest to edge. Lower. Adjust feet to change difficulty.", est: null },
+                            freestyle: { title: "Resistance Band Bent-Over Row", cues: "Stand on band mid, feet hip-width. Hinge at hips, back flat. Hold ends, pull to hips, elbows close.", est: "Est. Resistance: Medium band" }
+                        }
+                    },
+                    {
+                        name: "Overhead Press", muscles: "Shoulders, Triceps", setsReps: "2-3 sets of 10-15 reps", rpeTarget: "5-7",
+                        variations: {
+                            weights: { title: "Dumbbell Shoulder Press (Seated/Standing)", cues: "Sit/stand tall. DBs at shoulder height, palms fwd. Press overhead, arms extended (not locked). Lower slowly.", est: "Est. Wt: 8-12 lbs/DB" },
+                            cables: { title: "Cable Shoulder Press", cues: "Stand/sit between low pulleys, grasp handles. Press overhead.", est: "Est. Setting: 10-15 lbs/side" },
+                            bodyweight: { title: "Pike Push-up", cues: "From plank, walk feet in, hips high (inverted V). Bend elbows, lower top of head to floor. Press up.", est: null },
+                            freestyle: { title: "Resistance Band Shoulder Press", cues: "Stand on band mid, hold ends at shoulders. Press overhead.", est: "Est. Resistance: Light-Medium band" }
+                        }
+                    },
+                    {
+                        name: "Glute Bridge / Hip Hinge", muscles: "Glutes, Hamstrings", setsReps: "2-3 sets of 12-15 reps", rpeTarget: "5-7",
+                        variations: {
+                            weights: { title: "Dumbbell Glute Bridge", cues: "Lie on back, knees bent, feet flat. DB across hips. Lift hips, squeeze glutes. Lower slowly.", est: "Est. Wt: 20-30 lbs" },
+                            cables: { title: "Cable Pull-Through", cues: "Face away from low pulley, rope attachment between legs. Hinge at hips, thrust hips fwd, squeeze glutes.", est: "Est. Setting: 25-35 lbs" },
+                            bodyweight: { title: "Bodyweight Glute Bridge", cues: "Lie on back, knees bent, feet flat. Lift hips, squeeze glutes.", est: null },
+                            freestyle: { title: "Stability Ball Hip Bridge", cues: "Lie on back, heels on ball. Lift hips. (Or upper back on ball, feet on floor).", est: null }
+                        }
+                    },
+                    {
+                        name: "Core: Plank", muscles: "Full Core", setsReps: "2-3 sets of 20-45 sec holds", rpeTarget: "6-8 (hold till form breaks or RPE reached)",
+                        variations: {
+                            weights: { title: "Weighted Plank (Advanced)", cues: "Plate on back, if form is perfect & with partner - likely skip for entry.", est: "Use with caution" },
+                            cables: { title: "N/A", cues: "Not applicable for basic plank.", est: null },
+                            bodyweight: { title: "Forearm or High Plank", cues: "Body straight head to heels, on forearms or hands. Engage core. (Knee plank if needed).", est: null },
+                            freestyle: { title: "Stability Ball Plank", cues: "Forearms on ball or feet on ball. Increases instability. Maintain straight line.", est: null }
+                        }
+                    }
+                ]
+            },
+            routine2: {
+                name: "Routine 2: Full-Body Strength Builder",
+                exercises: [
+                    {
+                        name: "Lunges", muscles: "Quads, Glutes, Hamstrings", setsReps: "2-3 sets of 10-12 reps/leg", rpeTarget: "5-7",
+                        variations: {
+                            weights: { title: "Dumbbell Lunges (Walking/Stationary)", cues: "Step fwd/back, lower hips till knees ~90°. Keep front knee over ankle, chest up.", est: "Est. Wt: 8-12 lbs/DB" },
+                            cables: { title: "Cable Reverse Lunge", cues: "Single D-handle, low pulley. Hold handle in one hand. Step back with opposite leg into lunge. Cable provides resistance as you return.", est: "Est. Setting: 15-20 lbs" },
+                            bodyweight: { title: "Stationary or Reverse Lunges", cues: "Controlled descent and ascent. Maintain balance.", est: null },
+                            freestyle: { title: "Slider Lunges (Reverse/Lateral)", cues: "Use sliders/towels. Slide foot back/side into lunge. Control movement.", est: "Est. Resistance: Bodyweight" }
+                        }
+                    },
+                    {
+                        name: "Lat Pulldown / Vertical Pull", muscles: "Back (Lats), Biceps", setsReps: "2-3 sets of 10-15 reps", rpeTarget: "5-7",
+                        variations: {
+                            weights: { title: "Dumbbell Pullover (on bench)", cues: "Lie on bench, hold 1 DB with both hands over chest. Lower DB behind head, keeping slight elbow bend. Pull back over chest.", est: "Est. Wt: 15-20 lbs" },
+                            cables: { title: "Lat Pulldown Machine (Close/Wide grip)", cues: "Sit, secure knees. Grasp bar. Pull to upper chest, squeeze shoulder blades. Control release.", est: "Est. Setting: 40-50 lbs" },
+                            bodyweight: { title: "Assisted Pull-ups (band/machine) or Doorway Rows", cues: "For doorway row, grip frame, lean back, pull chest to hands.", est: null },
+                            freestyle: { title: "Resistance Band Lat Pulldown (Band anchored high)", cues: "Kneel/sit, pull band down to chest.", est: "Est. Resistance: Medium-Heavy band" }
+                        }
+                    },
+                    {
+                        name: "Deadlift Variation", muscles: "Posterior Chain (Glutes, Hamstrings, Back)", setsReps: "2-3 sets of 10-15 reps", rpeTarget: "5-7",
+                        variations: {
+                            weights: { title: "Dumbbell Romanian Deadlift (RDL)", cues: "Feet hip-width, slight knee bend. Hinge at hips, lower DBs down front of legs, back straight. Feel hamstring stretch. Rise by squeezing glutes.", est: "Est. Wt: 15-20 lbs/DB" },
+                            cables: { title: "Cable Good Morning", cues: "Rope, low pulley, face away. Rope over shoulders. Hinge at hips, keeping back straight, slight knee bend. Extend hips to return.", est: "Est. Setting: 20-30 lbs" },
+                            bodyweight: { title: "Bodyweight Hip Hinge / Good Morning", cues: "Hands behind head or on hips. Hinge at hips, back straight, slight knee bend. Squeeze glutes to stand.", est: null },
+                            freestyle: { title: "Resistance Band Good Morning or RDL", cues: "Band under feet, loop over neck (Good Morning) or hold ends (RDL). Hinge at hips.", est: "Est. Resistance: Medium-Heavy band" }
+                        }
+                    },
+                    {
+                        name: "Chest Fly / Horizontal Press Variation", muscles: "Chest, Shoulders", setsReps: "2-3 sets of 12-15 reps", rpeTarget: "5-7",
+                        variations: {
+                            weights: { title: "Dumbbell Fly (Flat/Incline Bench)", cues: "Lie on bench. DBs over chest, palms facing in, slight elbow bend. Lower DBs to sides in arc. Squeeze chest to return.", est: "Est. Wt: 5-10 lbs/DB" },
+                            cables: { title: "Cable Fly (Standing/Seated)", cues: "Handles at chest height. Arms out to sides, slight elbow bend. Bring handles together in front of chest.", est: "Est. Setting: 10-15 lbs/side" },
+                            bodyweight: { title: "Wide Grip Push-up (Knees/Incline if needed)", cues: "Hands wider than shoulders. Lower chest to floor.", est: null },
+                            freestyle: { title: "Resistance Band Chest Fly", cues: "Anchor band behind. Step fwd. Arms out to sides, bring hands together in front.", est: "Est. Resistance: Light-Medium band" }
+                        }
+                    },
+                    {
+                        name: "Bicep Curl", muscles: "Biceps", setsReps: "2-3 sets of 10-15 reps", rpeTarget: "6-7",
+                        variations: {
+                            weights: { title: "Dumbbell Bicep Curl", cues: "Stand/sit. DBs at sides, palms fwd. Curl DBs to shoulders, keeping elbows at sides. Lower slowly.", est: "Est. Wt: 8-12 lbs/DB" },
+                            cables: { title: "Cable Bicep Curl (Straight bar/D-handles)", cues: "Low pulley. Curl bar/handles to shoulders. Control release.", est: "Est. Setting: 20-30 lbs" },
+                            bodyweight: { title: "Bodyweight Bicep Curl (Towel Curls / Underhand Inverted Rows)", cues: "For towel, loop under foot, pull against own leg. For rows, focus on bicep pull.", est: null },
+                            freestyle: { title: "Resistance Band Bicep Curl", cues: "Stand on band, hold ends. Curl to shoulders.", est: "Est. Resistance: Light-Medium band" }
+                        }
+                    },
+                    {
+                        name: "Core: Bird-Dog", muscles: "Core Stability, Glutes, Back", setsReps: "2-3 sets of 10-12 reps/side (or 30s hold/side)", rpeTarget: "5-6",
+                        variations: {
+                            weights: { title: "Weighted Bird-Dog (Advanced)", cues: "Can add ankle/wrist weights later.", est: "Light weights" },
+                            cables: { title: "N/A", cues: "Not applicable.", est: null },
+                            bodyweight: { title: "Bird-Dog", cues: "Hands & knees. Extend opposite arm & leg, keep core tight, back flat. Hold. Alternate.", est: null },
+                            freestyle: { title: "Stability Ball Bird-Dog", cues: "Torso on ball for more challenge, or hands on ball.", est: null }
+                        }
+                    }
+                ]
+            },
+            routine3: {
+                name: "Routine 3: Full-Body Conditioning Focus",
+                exercises: [
+                    {
+                        name: "Squat to Press", muscles: "Full Body (Legs, Glutes, Shoulders, Core)", setsReps: "2-3 sets of 10-15 reps", rpeTarget: "6-7",
+                        variations: {
+                            weights: { title: "Dumbbell Squat to Overhead Press", cues: "DBs at shoulders. Squat down. As you stand, press DBs overhead.", est: "Est. Wt: 8-10 lbs/DB" },
+                            cables: { title: "Cable Squat with Rope Face Pull/High Row", cues: "Low pulley squat (rope), as you stand, pull rope towards face/upper chest. (Complex, may separate).", est: "Est. Setting: Squat 25-35lbs, Row 15-20lbs" },
+                            bodyweight: { title: "Bodyweight Squat with Overhead Reach", cues: "Squat, as you stand, reach arms overhead.", est: null },
+                            freestyle: { title: "Medicine Ball Squat to Overhead Lift", cues: "Hold MB at chest. Squat. Stand & press MB overhead.", est: "Est. Wt: 8-12 lb MB" }
+                        }
+                    },
+                    {
+                        name: "Push-up Variation", muscles: "Chest, Shoulders, Triceps, Core", setsReps: "2-3 sets of AMRAP", rpeTarget: "6-8",
+                        variations: {
+                            weights: { title: "Dumbbell Floor Press", cues: "Lie on floor, knees bent. DBs at chest. Press up. Good if no bench.", est: "Est. Wt: 10-15 lbs/DB" },
+                            cables: { title: "Kneeling Cable Press", cues: "Kneel facing away from mid-pulley. Press handles forward.", est: "Est. Setting: 15-20 lbs/side" },
+                            bodyweight: { title: "Kneeling Push-up or Standard Push-up", cues: "Maintain straight line from head to knees/heels.", est: null },
+                            freestyle: { title: "Stability Ball Push-up (Hands or feet on ball)", cues: "Increases instability.", est: null }
+                        }
+                    },
+                    {
+                        name: "Lunge with Rotation", muscles: "Legs, Glutes, Core (Obliques)", setsReps: "2-3 sets of 8-10 reps/side", rpeTarget: "6-7",
+                        variations: {
+                            weights: { title: "Dumbbell Lunge with Torso Twist (Light DB at chest)", cues: "Lunge fwd. Twist torso over front leg.", est: "Est. Wt: 5-8 lbs" },
+                            cables: { title: "Cable Woodchop (Mid pulley, can integrate lunge stance)", cues: "Stand side to cable. Pull handle across body, rotating torso.", est: "Est. Setting: 10-15 lbs" },
+                            bodyweight: { title: "Bodyweight Lunge with Torso Twist", cues: "Lunge, twist torso over front leg.", est: null },
+                            freestyle: { title: "Medicine Ball Lunge with Rotation", cues: "Hold MB. Lunge, rotate MB across front leg.", est: "Est. Wt: 6-10 lb MB" }
+                        }
+                    },
+                    {
+                        name: "Calf Raises", muscles: "Calves", setsReps: "2-3 sets of 15-20 reps", rpeTarget: "6-7",
+                        variations: {
+                            weights: { title: "Dumbbell Calf Raises (Holding DBs)", cues: "Stand, rise onto balls of feet.", est: "Est. Wt: 10-15 lbs/DB" },
+                            cables: { title: "Cable Calf Raise (Dip belt or low handle)", cues: "Stand on block, rise onto balls of feet.", est: "Est. Setting: 40-50 lbs" },
+                            bodyweight: { title: "Standing Calf Raises (Single/Double Leg)", cues: "Use stairs for more range.", est: null },
+                            freestyle: { title: "Resistance Band Calf Raises", cues: "Band under feet, ends held for resistance.", est: "Est. Resistance: Medium-Heavy band" }
+                        }
+                    },
+                    {
+                        name: "Tricep Extension", muscles: "Triceps", setsReps: "2-3 sets of 10-15 reps", rpeTarget: "6-7",
+                        variations: {
+                            weights: { title: "Dumbbell Overhead Tricep Extension (1 or 2 DBs)", cues: "DB overhead. Lower behind head by bending elbows. Extend up.", est: "Est. Wt: 10-15 lbs total" },
+                            cables: { title: "Cable Tricep Pushdown (Rope/Bar)", cues: "High pulley. Push down till arms straight. Control return.", est: "Est. Setting: 20-30 lbs" },
+                            bodyweight: { title: "Bench Dips (or Chair Dips)", cues: "Hands on bench edge, feet out. Lower body by bending elbows. Push up.", est: null },
+                            freestyle: { title: "Resistance Band Overhead Tricep Extension or Kickbacks", cues: "Band anchored or under feet. Extend arms.", est: "Est. Resistance: Light-Medium band" }
+                        }
+                    },
+                    {
+                        name: "Core: Dead Bug", muscles: "Deep Core Stability", setsReps: "2-3 sets of 10-12 reps/side", rpeTarget: "5-6",
+                        variations: {
+                            weights: { title: "Weighted Dead Bug (Advanced)", cues: "Can hold light DBs later.", est: "Light DBs" },
+                            cables: { title: "N/A", cues: "Not applicable.", est: null },
+                            bodyweight: { title: "Dead Bug", cues: "Lie on back, knees 90°, arms to ceiling. Lower opposite arm & leg towards floor, keep low back pressed down. Alternate.", est: null },
+                            freestyle: { title: "Medicine Ball Dead Bug", cues: "Hold MB between hands & knees. Extend opposite arm & leg while keeping MB stable with other limbs.", est: null }
+                        }
+                    }
+                ]
+            }
+        }
+    };
+
+    function workoutApp() {
+        return {
+            workoutData: ALL_WORKOUT_DATA,
+            currentRoutine: null,
+            currentExerciseIndex: 0,
+            currentExerciseData: null,
+            currentExerciseVariation: 'weights', // Default variation
+            workoutStage: 'selection', // selection, warmup, exercise, cooldown, finished
+            completedSets: {}, // { exerciseIndex: [true, false, true] }
+
+            timerValue: 0,
+            timerInterval: null,
+            timerPaused: false,
+            customTimerInput: 60, // Default custom timer
+            timerMessage: '',
+
+            showRPEModal: false,
+            showHealthConsiderationsModal: false,
+
+            selectRoutine(routineKey) {
+                this.currentRoutine = routineKey;
+                this.workoutStage = 'warmup';
+                this.currentExerciseIndex = 0;
+                this.completedSets = {}; // Reset completed sets for the new routine
+                this.updateCurrentExercise();
+                // Scroll to workout area
+                this.$nextTick(() => {
+                    const workoutArea = this.$root.querySelector('.bg-slate-800.p-4.md\\:p-6'); // Main workout content block
+                    if (workoutArea) workoutArea.scrollIntoView({ behavior: 'smooth' });
+                });
+            },
+            
+            updateCurrentExercise() {
+                if (this.currentRoutine && this.workoutData.routines[this.currentRoutine]) {
+                    const exercises = this.workoutData.routines[this.currentRoutine].exercises;
+                    if (this.currentExerciseIndex < exercises.length) {
+                        this.currentExerciseData = exercises[this.currentExerciseIndex];
+                        this.currentExerciseVariation = 'weights'; // Reset to default variation for new exercise
+                        // Initialize completedSets for the current exercise if not already done
+                        if (!this.completedSets[this.currentExerciseIndex]) {
+                             // Ensure currentExerciseData is available before accessing setsReps
+                             const numSetsString = this.currentExerciseData?.setsReps?.split(' ')[0]?.split('-')[1];
+                             const numSets = parseInt(numSetsString || '3'); // Default to 3 if parsing fails
+                             this.completedSets[this.currentExerciseIndex] = Array(numSets).fill(false);
+                        }
+                    } else {
+                        this.currentExerciseData = null; // No more exercises
+                    }
+                }
+            },
+
+            completeWarmup() {
+                this.workoutStage = 'exercise';
+                this.updateCurrentExercise(); // Load the first exercise
+            },
+
+            nextExercise() {
+                const exercises = this.workoutData.routines[this.currentRoutine].exercises;
+                if (this.currentExerciseIndex < exercises.length - 1) {
+                    this.currentExerciseIndex++;
+                    this.updateCurrentExercise();
+                } else {
+                    // Last exercise was completed
+                    this.workoutStage = 'cooldown';
+                }
+                 // Scroll to the top of the exercise display area for better UX
+                 this.$nextTick(() => {
+                    const exerciseArea = this.$root.querySelector('.flex.justify-between.items-center.border-b-2'); // Exercise title area
+                    if (exerciseArea) exerciseArea.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                });
+            },
+
+            prevExercise() {
+                if (this.currentExerciseIndex > 0) {
+                    this.currentExerciseIndex--;
+                    this.updateCurrentExercise();
+                }
+                // Scroll to the top of the exercise display area for better UX
+                this.$nextTick(() => {
+                    const exerciseArea = this.$root.querySelector('.flex.justify-between.items-center.border-b-2'); // Exercise title area
+                    if (exerciseArea) exerciseArea.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                });
+            },
+
+            isLastExercise() {
+                if (!this.currentRoutine || !this.workoutData.routines[this.currentRoutine]) return false;
+                return this.currentExerciseIndex === this.workoutData.routines[this.currentRoutine].exercises.length - 1;
+            },
+            
+            toggleSetComplete(exerciseIdx, setIdx) {
+                // Ensure the array for completed sets for this exercise exists
+                if (!this.completedSets[exerciseIdx]) {
+                     const numSetsString = this.workoutData.routines[this.currentRoutine]?.exercises[exerciseIdx]?.setsReps?.split(' ')[0]?.split('-')[1];
+                     const numSets = parseInt(numSetsString || '3');
+                     this.completedSets[exerciseIdx] = Array(numSets).fill(false);
+                }
+                this.completedSets[exerciseIdx][setIdx] = !this.completedSets[exerciseIdx][setIdx];
+            },
+
+            finishWorkout() {
+                this.workoutStage = 'finished';
+            },
+
+            resetWorkout() {
+                this.currentRoutine = null;
+                this.workoutStage = 'selection';
+                this.currentExerciseIndex = 0;
+                this.currentExerciseData = null;
+                this.completedSets = {};
+                this.resetTimer();
+            },
+
+            // Timer functions
+            formatTime(seconds) {
+                const minutes = Math.floor(seconds / 60);
+                const remainingSeconds = seconds % 60;
+                return `${String(minutes).padStart(2, '0')}:${String(remainingSeconds).padStart(2, '0')}`;
+            },
+
+            startTimer(duration) {
+                if (this.timerInterval) clearInterval(this.timerInterval);
+                const parsedDuration = parseInt(duration);
+                if (isNaN(parsedDuration) || parsedDuration <=0) {
+                    this.timerMessage = "Please enter a valid duration.";
+                    setTimeout(() => this.timerMessage = '', 3000);
+                    return;
+                }
+                this.timerValue = parsedDuration;
+                this.timerPaused = false;
+                this.timerMessage = ''; // Clear previous messages
+
+                this.timerInterval = setInterval(() => {
+                    if (!this.timerPaused && this.timerValue > 0) {
+                        this.timerValue--;
+                    } else if (this.timerValue === 0) {
+                        clearInterval(this.timerInterval);
+                        this.timerMessage = "Time's up!";
+                        // Optional: Play a sound - basic example
+                        try {
+                            // Simple beep sound; browser support for autoplay might vary
+                            new Audio('data:audio/wav;base64,UklGRl9vT19XQVZFZm10IBAAAAABAAEAQB8AAEAfAAABAAgAZGF0YU'+Array(300).join('123')).play();
+                        } catch(e) { console.warn("Audio notification failed. Ensure browser allows autoplay or user interaction first.")}
+                        setTimeout(() => this.timerMessage = '', 5000); // Clear message after 5s
+                    }
+                }, 1000);
+            },
+
+            pauseTimer() {
+                if (!this.timerInterval && this.timerValue === 0) return; // Can't pause if no timer running or already finished
+                this.timerPaused = !this.timerPaused;
+                if(this.timerPaused) {
+                    this.timerMessage = "Timer Paused";
+                } else {
+                     this.timerMessage = "Timer Resumed";
+                     setTimeout(() => this.timerMessage = '', 3000); // Clear resume message
+                }
+            },
+
+            resetTimer() {
+                clearInterval(this.timerInterval);
+                this.timerInterval = null;
+                this.timerValue = 0;
+                this.customTimerInput = 60; // Reset custom input to default
+                this.timerPaused = false;
+                this.timerMessage = "Timer Reset";
+                setTimeout(() => this.timerMessage = '', 3000); // Clear reset message
+            },
+            
+            // init function is called by Alpine.js when the component is initialized
+            init() {
+                // You can add any setup logic here if needed when the app starts
+                // console.log("Workout App Initialized with Alpine.js");
+            }
+        };
+    }
+    </script>
+    <script src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
+</head>
+<body class="bg-gradient-to-br from-slate-900 to-slate-700 text-gray-100 min-h-screen" x-data="workoutApp()">
+    <div class="container mx-auto p-4 md:p-8 max-w-4xl">
+
+        <header class="text-center mb-8">
+            <h1 class="text-4xl md:text-5xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-purple-400 via-pink-500 to-red-500">Renewed Vitality</h1>
+            <p class="text-lg text-slate-300 mt-2">Your Interactive Fitness Program</p>
+        </header>
+
+        <div x-show="showHealthConsiderationsModal" x-cloak class="fixed inset-0 bg-black bg-opacity-75 flex items-center justify-center p-4 z-50" @click.away="showHealthConsiderationsModal = false">
+            <div class="bg-slate-800 p-6 rounded-lg shadow-xl max-w-2xl w-full max-h-[90vh] overflow-y-auto" @click.stop>
+                <div class="flex justify-between items-center mb-4">
+                    <h2 class="text-2xl font-semibold text-purple-400">Health & Lifestyle Considerations</h2>
+                    <button @click="showHealthConsiderationsModal = false" class="text-slate-400 hover:text-white text-2xl">&times;</button>
+                </div>
+                <div class="space-y-4 text-slate-300 text-sm">
+                    <div>
+                        <h3 class="font-semibold text-purple-300 text-lg mb-1">1. Navigating Exercise with Low Iron</h3>
+                        <p>Low iron can cause fatigue. Start with lower intensity/duration, rest adequately, hydrate well. Stop if dizzy or experiencing chest pain. Exercise when feeling most energized. Avoid overexertion. Consistent exercise can improve energy. An iron-rich diet is important (red meat, poultry, fish, lentils, spinach). Consult your doctor about management and supplementation.</p>
+                    </div>
+                    <div>
+                        <h3 class="font-semibold text-purple-300 text-lg mb-1">2. Training Smart in Southern California</h3>
+                        <p>Hydrate thoroughly before, during, and after workouts. Exercise during cooler parts of the day or indoors. Wear light, breathable clothing. Recognize signs of heat exhaustion/stroke. Dehydration worsens fatigue, especially with low iron.</p>
+                    </div>
+                    <div>
+                        <h3 class="font-semibold text-purple-300 text-lg mb-1">3. Notes for African American Women</h3>
+                        <p><strong>Hair Care:</strong> Protective hairstyles (braids, twists), cooler environments, or timing workouts near wash days can help manage hair. <br><strong>Vitamin D:</strong> Higher prevalence of Vitamin D deficiency. Discuss testing/supplementation with your doctor. Fitness can positively influence Vitamin D levels.</p>
+                    </div>
+                    <div>
+                        <h3 class="font-semibold text-purple-300 text-lg mb-1">4. Fitness After 40</h3>
+                        <p>Essential for muscle mass, bone density, metabolic health, and stress management. Gradual re-entry is key. Strength training is crucial. Full-body workouts are beneficial. Consistency builds a strong foundation for long-term health.</p>
+                    </div>
+                    <p class="mt-4 text-xs text-slate-400">This is a summary. Please refer to the full conditioning plan for detailed information and consult your healthcare provider before starting any new exercise program.</p>
+                </div>
+            </div>
+        </div>
+
+        <div x-show="showRPEModal" x-cloak class="fixed inset-0 bg-black bg-opacity-75 flex items-center justify-center p-4 z-50" @click.away="showRPEModal = false">
+            <div class="bg-slate-800 p-6 rounded-lg shadow-xl max-w-md w-full" @click.stop>
+                <div class="flex justify-between items-center mb-4">
+                    <h2 class="text-2xl font-semibold text-purple-400">Rate of Perceived Exertion (RPE)</h2>
+                    <button @click="showRPEModal = false" class="text-slate-400 hover:text-white text-2xl">&times;</button>
+                </div>
+                <ul class="space-y-1 text-slate-300">
+                    <li><strong>0:</strong> No exertion (at rest)</li>
+                    <li><strong>1:</strong> Very light activity</li>
+                    <li><strong>2-3:</strong> Light activity (can easily talk or sing)</li>
+                    <li><strong>4-5:</strong> Moderate activity (can talk comfortably, not sing)</li>
+                    <li><strong>6-7:</strong> Vigorous activity (can only speak a few words)</li>
+                    <li><strong>8-9:</strong> Very hard activity (difficult to speak)</li>
+                    <li><strong>10:</strong> Maximum effort (cannot speak)</li>
+                </ul>
+                <p class="mt-4 text-sm text-slate-400">Aim for an RPE of 5-7 for most strength sets (feels "moderate" to "somewhat hard"). Listen to your body, especially with low iron.</p>
+            </div>
+        </div>
+
+        <div class="flex justify-center space-x-4 mb-6">
+            <button @click="showHealthConsiderationsModal = true" class="bg-sky-500 hover:bg-sky-600 text-white font-semibold py-2 px-4 rounded-lg shadow-md transition duration-150">Health Considerations</button>
+            <button @click="showRPEModal = true" class="bg-teal-500 hover:bg-teal-600 text-white font-semibold py-2 px-4 rounded-lg shadow-md transition duration-150">RPE Guide</button>
+        </div>
+        
+        <div x-show="!currentRoutine" class="bg-slate-800 p-6 rounded-lg shadow-xl mb-8">
+            <h2 class="text-2xl font-semibold text-purple-400 mb-4 text-center">Select Your Workout Routine</h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                <button @click="selectRoutine('routine1')" class="bg-indigo-500 hover:bg-indigo-600 text-white font-bold py-3 px-4 rounded-lg shadow-lg transition duration-150 transform hover:scale-105">
+                    Routine 1: Foundation
+                </button>
+                <button @click="selectRoutine('routine2')" class="bg-indigo-500 hover:bg-indigo-600 text-white font-bold py-3 px-4 rounded-lg shadow-lg transition duration-150 transform hover:scale-105">
+                    Routine 2: Strength Builder
+                </button>
+                <button @click="selectRoutine('routine3')" class="bg-indigo-500 hover:bg-indigo-600 text-white font-bold py-3 px-4 rounded-lg shadow-lg transition duration-150 transform hover:scale-105">
+                    Routine 3: Conditioning Focus
+                </button>
+            </div>
+            <p class="text-center text-sm text-slate-400 mt-6">Remember: Estimated weights are for a 150lb female beginner. Prioritize good form and use RPE (5-7) as your primary guide.</p>
+        </div>
+
+        <div x-show="currentRoutine" x-cloak class="space-y-6">
+            <div class="bg-slate-800 p-4 rounded-lg shadow-xl flex flex-col sm:flex-row justify-between items-center">
+                <h2 class="text-2xl font-semibold text-purple-400 mb-2 sm:mb-0" x-text="workoutData.routines[currentRoutine]?.name"></h2>
+                <button @click="resetWorkout()" class="bg-pink-500 hover:bg-pink-600 text-white font-semibold py-2 px-4 rounded-lg shadow-md transition duration-150 text-sm">Change Routine</button>
+            </div>
+
+            <div class="bg-slate-800 p-4 rounded-lg shadow-xl text-center">
+                <h3 class="text-xl font-semibold text-purple-300 mb-2">Timer</h3>
+                <div class="text-5xl font-mono text-cyan-400 mb-3" x-text="formatTime(timerValue)">00:00</div>
+                <div class="flex justify-center space-x-2 mb-3">
+                    <input type="number" x-model.number="customTimerInput" placeholder="Secs" class="bg-slate-700 text-white border border-slate-600 rounded-lg p-2 w-20 text-center focus:ring-2 focus:ring-purple-500 focus:border-purple-500">
+                    <button @click="startTimer(customTimerInput)" class="bg-green-500 hover:bg-green-600 text-white font-semibold py-2 px-3 rounded-lg shadow-md transition duration-150 text-sm">Start Custom</button>
+                </div>
+                <div class="flex flex-wrap justify-center gap-2">
+                    <button @click="startTimer(30)" class="bg-sky-500 hover:bg-sky-600 text-white font-semibold py-1 px-3 rounded-lg shadow-md transition duration-150 text-xs">30s</button>
+                    <button @click="startTimer(60)" class="bg-sky-500 hover:bg-sky-600 text-white font-semibold py-1 px-3 rounded-lg shadow-md transition duration-150 text-xs">60s</button>
+                    <button @click="startTimer(90)" class="bg-sky-500 hover:bg-sky-600 text-white font-semibold py-1 px-3 rounded-lg shadow-md transition duration-150 text-xs">90s</button>
+                    <button @click="pauseTimer()" class="bg-yellow-500 hover:bg-yellow-600 text-white font-semibold py-1 px-3 rounded-lg shadow-md transition duration-150 text-xs" x-text="timerPaused ? 'Resume' : 'Pause'"></button>
+                    <button @click="resetTimer()" class="bg-red-500 hover:bg-red-600 text-white font-semibold py-1 px-3 rounded-lg shadow-md transition duration-150 text-xs">Reset</button>
+                </div>
+                 <div x-show="timerMessage" x-text="timerMessage" class="mt-2 text-green-400 font-semibold h-5"></div> </div>
+            
+            <div class="bg-slate-800 p-4 md:p-6 rounded-lg shadow-xl">
+                <div x-show="workoutStage === 'warmup'" x-cloak>
+                    <h3 class="text-xl font-semibold text-purple-300 mb-3 border-b-2 border-purple-500 pb-2">Warm-up (5-7 minutes)</h3>
+                    <ul class="list-disc list-inside space-y-2 text-slate-300 mb-4">
+                        <template x-for="(item, index) in workoutData.warmUp" :key="index">
+                            <li><strong x-text="item.name"></strong>: <span x-text="item.duration"></span>. <span x-text="item.cues"></span></li>
+                        </template>
+                    </ul>
+                    <button @click="completeWarmup()" class="w-full bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-4 rounded-lg shadow-lg transition duration-150">Warm-up Complete, Start Workout!</button>
+                </div>
+
+                <div x-show="workoutStage === 'exercise'" x-cloak>
+                    <div x-show="currentExerciseData" class="space-y-4">
+                        <div class="flex justify-between items-center border-b-2 border-purple-500 pb-2">
+                            <h3 class="text-xl md:text-2xl font-semibold text-purple-300" x-text="currentExerciseData?.name"></h3>
+                            <span class="text-sm text-slate-400" x-text="`Exercise ${currentExerciseIndex + 1} of ${workoutData.routines[currentRoutine]?.exercises.length}`"></span>
+                        </div>
+
+                        <div class="text-sm text-slate-300 space-y-1">
+                            <p><strong>Muscles:</strong> <span x-text="currentExerciseData?.muscles"></span></p>
+                            <p><strong>Target:</strong> <span x-text="currentExerciseData?.setsReps"></span></p>
+                            <p><strong>RPE Target:</strong> <span x-text="currentExerciseData?.rpeTarget"></span> <button @click="showRPEModal = true" class="text-xs text-sky-400 hover:underline">(RPE Scale)</button></p>
+                        </div>
+
+                        <div class="flex border-b border-slate-700 mb-3">
+                            <template x-for="variationKey in Object.keys(currentExerciseData?.variations || {})" :key="variationKey">
+                                <button @click="currentExerciseVariation = variationKey"
+                                        :class="{'tab-active': currentExerciseVariation === variationKey, 'tab-inactive': currentExerciseVariation !== variationKey}"
+                                        class="flex-1 py-2 px-1 text-center text-sm font-medium border-b-2 transition-colors duration-150 capitalize"
+                                        x-text="variationKey">
+                                </button>
+                            </template>
+                        </div>
+
+                        <div class="bg-slate-700 p-3 rounded-md text-sm min-h-[100px]"> <h4 class="font-semibold text-purple-200 mb-1" x-text="currentExerciseData?.variations[currentExerciseVariation]?.title"></h4>
+                            <p class="text-slate-300 whitespace-pre-line" x-text="currentExerciseData?.variations[currentExerciseVariation]?.cues"></p>
+                            <p x-show="currentExerciseData?.variations[currentExerciseVariation]?.est" class="text-slate-400 mt-1" x-text="currentExerciseData?.variations[currentExerciseVariation]?.est"></p>
+                        </div>
+
+                        <div>
+                            <h4 class="font-semibold text-purple-300 mb-2">Track Sets:</h4>
+                            <div class="space-y-2">
+                                <template x-for="setIndex in (parseInt(currentExerciseData?.setsReps?.split(' ')[0]?.split('-')[1] || '3'))" :key="setIndex">
+                                     <div class="flex items-center justify-between p-2 border border-slate-700 rounded-md"
+                                         :class="{'completed-set text-green-800': completedSets[currentExerciseIndex] && completedSets[currentExerciseIndex][setIndex - 1]}">
+                                        <span x-text="`Set ${setIndex}`"></span>
+                                        <button @click="toggleSetComplete(currentExerciseIndex, setIndex - 1)" 
+                                                :class="(completedSets[currentExerciseIndex] && completedSets[currentExerciseIndex][setIndex - 1]) ? 'bg-green-600 hover:bg-green-700' : 'bg-indigo-500 hover:bg-indigo-600'"
+                                                class="text-white text-xs font-semibold py-1 px-3 rounded-md shadow transition duration-150"
+                                                x-text="(completedSets[currentExerciseIndex] && completedSets[currentExerciseIndex][setIndex - 1]) ? 'Undo' : 'Complete Set'">
+                                        </button>
+                                    </div>
+                                </template>
+                            </div>
+                        </div>
+                         <p class="text-xs text-slate-400 text-center mt-2">For timed holds like Plank, use the timer above. Mark sets as complete after each hold.</p>
+
+                        <div class="mt-6 flex flex-col sm:flex-row gap-2">
+                            <button @click="prevExercise()" x-show="currentExerciseIndex > 0" class="flex-1 bg-slate-600 hover:bg-slate-500 text-white font-semibold py-2 px-4 rounded-lg shadow-md transition duration-150">Previous Exercise</button>
+                            <button @click="nextExercise()" class="flex-1 bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-4 rounded-lg shadow-lg transition duration-150" x-text="isLastExercise() ? 'Finish Exercises, Go to Cool-down' : 'Next Exercise'"></button>
+                        </div>
+                    </div>
+                </div>
+
+                <div x-show="workoutStage === 'cooldown'" x-cloak>
+                    <h3 class="text-xl font-semibold text-purple-300 mb-3 border-b-2 border-purple-500 pb-2">Cool-down (5-7 minutes)</h3>
+                     <ul class="list-disc list-inside space-y-2 text-slate-300 mb-4">
+                        <template x-for="(item, index) in workoutData.coolDown" :key="index">
+                            <li><strong x-text="item.name"></strong> (<span x-text="item.muscles"></span>): Hold <span x-text="item.hold"></span>. <span x-text="item.cues"></span></li>
+                        </template>
+                    </ul>
+                    <button @click="finishWorkout()" class="w-full bg-indigo-500 hover:bg-indigo-600 text-white font-bold py-2 px-4 rounded-lg shadow-lg transition duration-150">Workout Finished! Well Done!</button>
+                </div>
+                 <div x-show="workoutStage === 'finished'" x-cloak class="text-center py-8">
+                    <h3 class="text-3xl font-bold text-green-400 mb-4">Congratulations!</h3>
+                    <p class="text-lg text-slate-300 mb-6">You've completed your workout. Remember to stay hydrated and listen to your body.</p>
+                    <button @click="resetWorkout()" class="bg-purple-500 hover:bg-purple-600 text-white font-bold py-3 px-6 rounded-lg shadow-lg transition duration-150">Start Another Routine</button>
+                </div>
+            </div>
+        </div>
+        <footer class="text-center mt-12 pb-8">
+            <p class="text-sm text-slate-400">&copy; 2025 Renewed Vitality Program. Exercise safely and consult your doctor for any health concerns.</p>
+             <p class="text-xs text-slate-500 mt-1">This program is designed based on information for a 40 y/o female, 150lbs, with low iron, in Southern California. Adjust as needed based on personal fitness level and health advice.</p>
+        </footer>
+    </div>
+
+</body>
+</html>

@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Standalone Chat</title>
+
+  <!-- JoyPixels (for emoji rendering) -->
+  <link
+    rel="stylesheet"
+    href="https://cdn.jsdelivr.net/npm/emoji-toolkit@8.0.0/extras/css/joypixels.min.css"
+  />
+  <script
+    defer
+    src="https://cdn.jsdelivr.net/npm/emoji-toolkit@8.0.0/lib/js/joypixels.min.js"
+  ></script>
+
+  <!-- Marked (for Markdown support) -->
+  <script
+    defer
+    src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"
+  ></script>
+
+  <!-- Chat CSS -->
+  <link
+    rel="stylesheet"
+    href="css/chatbot.css"
+  />
+</head>
+<body>
+  <!-- Chat Toggle Button (always visible in bottom-right) -->
+  <button id="chat-toggle">💬</button>
+
+  <!-- Chat App Wrapper -->
+  <div id="app-wrapper">
+    <!-- Resize handle (top-left corner) -->
+    <div id="resize-handle-tl"></div>
+
+    <!-- Sidebar: threads + model selector -->
+    <div id="sidebar">
+      <div id="sidebar-header">
+        <button id="new-chat-btn">+ New Conversation</button>
+      </div>
+      <ul id="thread-list"></ul>
+      <div id="sidebar-footer">
+        <label for="model-selector" id="model-selector-label">AI Model:</label>
+        <select id="model-selector">
+          <option value="gemini">Gemini</option>
+          <option value="chatgpt">ChatGPT</option>
+          <option value="claude">Claude</option>
+          <option value="deepseek">DeepSeek</option>
+          <option value="perplexity">Perplexity</option>
+          <option value="Mistral">Mistral</option>
+          <option value="ollama">Ollama</option>
+        </select>
+      </div>
+    </div>
+
+    <!-- Main Chat Area -->
+    <div id="main-chat-area">
+      <div id="chat-container">
+        <!-- Header: Chat title + model -->
+        <div id="chat-header">
+          My Assistant <span id="current-thread-model"></span>
+        </div>
+
+        <!-- Messages feed -->
+        <div id="messages">
+          <div id="typing-indicator" class="message">
+            <span class="dot"></span><span class="dot"></span
+            ><span class="dot"></span>
+          </div>
+        </div>
+
+        <!-- Controls: file upload, mic, input, send, voice toggle -->
+        <div id="controls">
+          <label id="file-label" title="Attach File"
+            >📎<input type="file" id="file-btn" /></label
+          >
+          <button id="speak-btn" disabled title="Speak Message (Mic)">
+            🎤
+          </button>
+          <input
+            type="text"
+            id="user-input"
+            placeholder="Type a message..."
+            autocomplete="off"
+          />
+          <button id="send-btn" title="Send Message">➤</button>
+          <label class="switch" title="Enable/Disable Voice Output">
+            <input type="checkbox" id="audio-enable" /><span class="slider"></span>
+          </label>
+        </div>
+
+        <!-- Footer / attribution (optional) -->
+        <div id="chat-footer">
+          Powered by Your Chatbot
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Chat JS -->
+  <script src="js/chatbot.js"></script>
+</body>
+</html>

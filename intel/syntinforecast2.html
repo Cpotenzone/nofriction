@@ -1,0 +1,763 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Revenue Forecast Model - Enterprise SaaS Growth Projection</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@3.7.1/dist/chart.min.js"></script>
+    <style>
+        :root {
+            --primary-color: #10213d;
+            --accent-color: #4361ee;
+            --text-color: #333;
+            --light-bg: #f8fafc;
+            --border-color: #e2e8f0;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+            color: var(--text-color);
+            background-color: white;
+            line-height: 1.6;
+        }
+        
+        .header-gradient {
+            background: linear-gradient(135deg, var(--primary-color), #1e3a8a);
+        }
+        
+        .card {
+            border: 1px solid var(--border-color);
+            border-radius: 0.5rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+            background-color: white;
+        }
+        
+        .metric-card {
+            transition: transform 0.2s;
+        }
+        
+        .section-title {
+            position: relative;
+            margin-bottom: 1.5rem;
+        }
+        
+        .section-title::after {
+            content: "";
+            position: absolute;
+            bottom: -0.5rem;
+            left: 0;
+            width: 3rem;
+            height: 3px;
+            background-color: var(--accent-color);
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        
+        th {
+            background-color: var(--light-bg);
+            padding: 0.75rem;
+            text-align: left;
+            font-weight: 600;
+        }
+        
+        td {
+            padding: 0.75rem;
+            border-bottom: 1px solid var(--border-color);
+        }
+        
+        .chart-container {
+            height: 400px;
+            margin-bottom: 2rem;
+        }
+        
+         {
+            .page-break {
+                margin-top: 2rem;
+                margin-bottom: 2rem;
+            }
+            
+            .chart-container {
+                height: 350px;
+            }
+        }
+    </style>
+</head>
+<body class="max-w-6xl mx-auto p-6">
+    <!-- Header Section -->
+    <header class="header-gradient text-white p-8 rounded-lg mb-8">
+        <div class="flex justify-between items-center">
+            <div>
+                <h1 class="text-4xl font-bold mb-2">Revenue Forecast Model</h1>
+                <h2 class="text-2xl font-light">Enterprise SaaS Growth Projection</h2>
+            </div>
+            <div class="text-right">
+                <p class="text-sm opacity-80">Generated: May 13, 2025</p>
+            </div>
+        </div>
+    </header>
+    
+    <!-- Executive Summary -->
+    <section class="mb-12">
+        <h2 class="text-3xl font-bold section-title">Executive Summary</h2>
+        <p class="mb-6">This forecast outlines a comprehensive 3-year growth trajectory from founder-led sales to a mature sales organization, detailing customer acquisition, revenue growth, and team scaling strategies.</p>
+        
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+            <div class="card p-6 metric-card hover:shadow-lg">
+                <h3 class="text-sm uppercase text-gray-500 mb-2">Y3 Revenue Target</h3>
+                <p class="text-3xl font-bold text-blue-800">$163.6M</p>
+                <p class="text-sm text-gray-500 mt-2">From $7M in Y1</p>
+            </div>
+            <div class="card p-6 metric-card hover:shadow-lg">
+                <h3 class="text-sm uppercase text-gray-500 mb-2">Customer Growth</h3>
+                <p class="text-3xl font-bold text-blue-800">749 Customers</p>
+                <p class="text-sm text-gray-500 mt-2">From 45 in Y1</p>
+            </div>
+            <div class="card p-6 metric-card hover:shadow-lg">
+                <h3 class="text-sm uppercase text-gray-500 mb-2">Team Scale</h3>
+                <p class="text-3xl font-bold text-blue-800">42 Team Members</p>
+                <p class="text-sm text-gray-500 mt-2">From 5 in Y1</p>
+            </div>
+        </div>
+        
+        <div class="card p-6">
+            <h3 class="text-xl font-semibold mb-4">Annual Performance Summary</h3>
+            <div class="overflow-x-auto">
+                <table class="w-full">
+                    <thead>
+                        <tr>
+                            <th>Year</th>
+                            <th>Customers</th>
+                            <th>Annual Revenue</th>
+                            <th>ARR Range</th>
+                            <th>Team Size</th>
+                            <th>CAC</th>
+                            <th>Win Rate</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Y1</td>
+                            <td>45</td>
+                            <td>$7,039,898</td>
+                            <td>$150K-$400K</td>
+                            <td>5</td>
+                            <td>$14,499</td>
+                            <td>21.6%</td>
+                        </tr>
+                        <tr>
+                            <td>Y2</td>
+                            <td>213</td>
+                            <td>$32,949,025</td>
+                            <td>$150K-$400K</td>
+                            <td>19</td>
+                            <td>$11,058</td>
+                            <td>25.2%</td>
+                        </tr>
+                        <tr>
+                            <td>Y3</td>
+                            <td>749</td>
+                            <td>$163,564,592</td>
+                            <td>$200K-$500K</td>
+                            <td>42</td>
+                            <td>$8,254</td>
+                            <td>28.9%</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Annual Growth Charts -->
+    <section class="mb-12">
+        <h2 class="text-3xl font-bold section-title">Annual Growth Projection</h2>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+            <div class="card p-6">
+                <h3 class="text-xl font-semibold mb-4">Revenue Growth</h3>
+                <div class="chart-container">
+                    <canvas id="revenueChart"></canvas>
+                </div>
+            </div>
+            <div class="card p-6">
+                <h3 class="text-xl font-semibold mb-4">Customer Base Growth</h3>
+                <div class="chart-container">
+                    <canvas id="customerChart"></canvas>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Quarterly Breakdown -->
+    <section class="mb-12 page-break">
+        <h2 class="text-3xl font-bold section-title">Quarterly Progression</h2>
+        <div class="card p-6 mb-8">
+            <h3 class="text-xl font-semibold mb-4">Quarterly Revenue Forecast</h3>
+            <div class="chart-container">
+                <canvas id="quarterlyRevenueChart"></canvas>
+            </div>
+        </div>
+        
+        <div class="card p-6">
+            <h3 class="text-xl font-semibold mb-4">Quarterly Metrics</h3>
+            <div class="overflow-x-auto">
+                <table class="w-full">
+                    <thead>
+                        <tr>
+                            <th>Quarter</th>
+                            <th>Customers</th>
+                            <th>New Customers</th>
+                            <th>Revenue</th>
+                            <th>CAC</th>
+                            <th>Team Size</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Q1 Y1</td>
+                            <td>13</td>
+                            <td>2.4</td>
+                            <td>$885,168</td>
+                            <td>$18,107</td>
+                            <td>1</td>
+                        </tr>
+                        <tr>
+                            <td>Q2 Y1</td>
+                            <td>22</td>
+                            <td>8.9</td>
+                            <td>$1,312,356</td>
+                            <td>$11,391</td>
+                            <td>3</td>
+                        </tr>
+                        <tr>
+                            <td>Q3 Y1</td>
+                            <td>32</td>
+                            <td>11.2</td>
+                            <td>$2,009,612</td>
+                            <td>$15,558</td>
+                            <td>5</td>
+                        </tr>
+                        <tr>
+                            <td>Q4 Y1</td>
+                            <td>45</td>
+                            <td>13.5</td>
+                            <td>$2,832,763</td>
+                            <td>$12,940</td>
+                            <td>5</td>
+                        </tr>
+                        <tr>
+                            <td>Q4 Y2</td>
+                            <td>213</td>
+                            <td>69.6</td>
+                            <td>$13,363,260</td>
+                            <td>$9,471</td>
+                            <td>19</td>
+                        </tr>
+                        <tr>
+                            <td>Q4 Y3</td>
+                            <td>749</td>
+                            <td>205.3</td>
+                            <td>$60,902,622</td>
+                            <td>$7,128</td>
+                            <td>42</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Team Structure Evolution -->
+    <section class="mb-12 page-break">
+        <h2 class="text-3xl font-bold section-title">Team Structure Evolution</h2>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+            <div class="card p-6">
+                <h3 class="text-xl font-semibold mb-4">Team Size Growth</h3>
+                <div class="chart-container">
+                    <canvas id="teamSizeChart"></canvas>
+                </div>
+            </div>
+            <div class="card p-6">
+                <h3 class="text-xl font-semibold mb-4">Team Composition</h3>
+                <div class="chart-container">
+                    <canvas id="teamCompositionChart"></canvas>
+                </div>
+            </div>
+        </div>
+        
+        <div class="card p-6 mt-8">
+            <h3 class="text-xl font-semibold mb-4">Team Scaling Strategy</h3>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div class="border-l-4 border-blue-500 pl-4">
+                    <h4 class="font-bold mb-2">Year 1: Foundation</h4>
+                    <ul class="list-disc list-inside text-sm">
+                        <li>Founder-led sales model</li>
+                        <li>1 SDR, 2 AEs by EOY</li>
+                        <li>1 CS, 1 Marketing</li>
+                        <li>Focus on establishing sales process</li>
+                    </ul>
+                </div>
+                <div class="border-l-4 border-green-500 pl-4">
+                    <h4 class="font-bold mb-2">Year 2: Growth</h4>
+                    <ul class="list-disc list-inside text-sm">
+                        <li>Dedicated sales team</li>
+                        <li>4 SDRs, 8 AEs, 1 Sales Leader</li>
+                        <li>3 CS, 3 Marketing</li>
+                        <li>Process optimization & scaling</li>
+                    </ul>
+                </div>
+                <div class="border-l-4 border-purple-500 pl-4">
+                    <h4 class="font-bold mb-2">Year 3: Scale</h4>
+                    <ul class="list-disc list-inside text-sm">
+                        <li>Complete sales organization</li>
+                        <li>9 SDRs, 17 AEs, 3 Sales Leaders</li>
+                        <li>7 CS, 6 Marketing</li>
+                        <li>Specialization & channel expansion</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Sales Funnel Metrics -->
+    <section class="mb-12 page-break">
+        <h2 class="text-3xl font-bold section-title">Sales Funnel Performance</h2>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+            <div class="card p-6">
+                <h3 class="text-xl font-semibold mb-4">Funnel Conversion</h3>
+                <div class="chart-container">
+                    <canvas id="funnelChart"></canvas>
+                </div>
+            </div>
+            <div class="card p-6">
+                <h3 class="text-xl font-semibold mb-4">CAC Trend</h3>
+                <div class="chart-container">
+                    <canvas id="cacChart"></canvas>
+                </div>
+            </div>
+        </div>
+        
+        <div class="card p-6 mt-8">
+            <h3 class="text-xl font-semibold mb-4">Sales Funnel Metrics</h3>
+            <div class="overflow-x-auto">
+                <table class="w-full">
+                    <thead>
+                        <tr>
+                            <th>Year</th>
+                            <th>Total Leads</th>
+                            <th>Qualified Opportunities</th>
+                            <th>New Customers Won</th>
+                            <th>Win Rate</th>
+                            <th>Avg CAC</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Y1</td>
+                            <td>4,893</td>
+                            <td>167</td>
+                            <td>36</td>
+                            <td>21.6%</td>
+                            <td>$14,499</td>
+                        </tr>
+                        <tr>
+                            <td>Y2</td>
+                            <td>17,999</td>
+                            <td>719</td>
+                            <td>181</td>
+                            <td>25.2%</td>
+                            <td>$11,058</td>
+                        </tr>
+                        <tr>
+                            <td>Y3</td>
+                            <td>44,536</td>
+                            <td>2,025</td>
+                            <td>585</td>
+                            <td>28.9%</td>
+                            <td>$8,254</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Key Insights & Recommendations -->
+    <section class="mb-12 page-break">
+        <h2 class="text-3xl font-bold section-title">Key Insights & Recommendations</h2>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+            <div class="card p-6">
+                <h3 class="text-xl font-semibold mb-4">Key Performance Insights</h3>
+                <ul class="space-y-4">
+                    <li class="flex items-start">
+                        <span class="inline-flex items-center justify-center h-6 w-6 rounded-full bg-blue-100 text-blue-800 mr-3 flex-shrink-0">1</span>
+                        <div>
+                            <p class="font-semibold">Revenue Efficiency Improves</p>
+                            <p class="text-sm text-gray-600">Revenue per employee grows from $1.4M in Y1 to $3.9M in Y3, showing operational scale.</p>
+                        </div>
+                    </li>
+                    <li class="flex items-start">
+                        <span class="inline-flex items-center justify-center h-6 w-6 rounded-full bg-blue-100 text-blue-800 mr-3 flex-shrink-0">2</span>
+                        <div>
+                            <p class="font-semibold">CAC Payback Period Shortens</p>
+                            <p class="text-sm text-gray-600">Improves from ~7 months in Y1 to ~3 months in Y3, indicating improved sales efficiency.</p>
+                        </div>
+                    </li>
+                    <li class="flex items-start">
+                        <span class="inline-flex items-center justify-center h-6 w-6 rounded-full bg-blue-100 text-blue-800 mr-3 flex-shrink-0">3</span>
+                        <div>
+                            <p class="font-semibold">Net Revenue Retention Increases</p>
+                            <p class="text-sm text-gray-600">Grows from 105% to 125% by Y3 through improved expansion and reduced churn.</p>
+                        </div>
+                    </li>
+                    <li class="flex items-start">
+                        <span class="inline-flex items-center justify-center h-6 w-6 rounded-full bg-blue-100 text-blue-800 mr-3 flex-shrink-0">4</span>
+                        <div>
+                            <p class="font-semibold">Sales Productivity Enhancement</p>
+                            <p class="text-sm text-gray-600">Sales reps reach productivity faster in later years due to improved onboarding.</p>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+            <div class="card p-6">
+                <h3 class="text-xl font-semibold mb-4">Strategic Recommendations</h3>
+                <div class="space-y-6">
+                    <div class="border-l-4 border-blue-500 pl-4">
+                        <h4 class="font-bold">Year 1 Strategy</h4>
+                        <p class="text-sm text-gray-600">Focus on product-market fit and establishing a repeatable sales process. Invest in documentation of successful sales approaches. Target high-value early adopters to maximize limited resources.</p>
+                    </div>
+                    <div class="border-l-4 border-green-500 pl-4">
+                        <h4 class="font-bold">Year 2 Strategy</h4>
+                        <p class="text-sm text-gray-600">Optimize sales funnel and build specialized team roles. Create clear territories, implement structured training programs, and add sales operations support to maximize efficiency.</p>
+                    </div>
+                    <div class="border-l-4 border-purple-500 pl-4">
+                        <h4 class="font-bold">Year 3 Strategy</h4>
+                        <p class="text-sm text-gray-600">Scale operations and implement channel partnerships. Develop industry-specific marketing and sales materials. Establish partner ecosystem for additional revenue channels.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Footer -->
+    <footer class="text-center text-gray-500 text-sm mt-16 border-t pt-8">
+        <p>Revenue Forecast Model - Enterprise SaaS Growth Projection</p>
+        <p>Generated: May 13, 2025 | Confidential & Proprietary</p>
+    </footer>
+
+    <script>
+        // Chart configurations
+        document.addEventListener('DOMContentLoaded', function() {
+            // Common chart options
+            const chartOptions = {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        position: 'top',
+                    }
+                }
+            };
+            
+            const colors = {
+                blue: '#4361ee',
+                lightBlue: '#4cc9f0',
+                purple: '#7209b7',
+                green: '#06d6a0',
+                red: '#ef476f',
+                orange: '#fb8500',
+                yellow: '#ffbe0b'
+            };
+            
+            // Revenue Chart
+            const revenueCtx = document.getElementById('revenueChart').getContext('2d');
+            const revenueData = [7039898, 32949025, 163564592];
+            new Chart(revenueCtx, {
+                type: 'bar',
+                data: {
+                    labels: ['Year 1', 'Year 2', 'Year 3'],
+                    datasets: [{
+                        label: 'Annual Revenue ($)',
+                        data: revenueData,
+                        backgroundColor: colors.blue,
+                        borderColor: colors.blue,
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    ...chartOptions,
+                    plugins: {
+                        ...chartOptions.plugins,
+                        tooltip: {
+                            callbacks: {
+                                label: function(context) {
+                                    let label = context.dataset.label || '';
+                                    if (label) {
+                                        label += ': ';
+                                    }
+                                    if (context.parsed.y !== null) {
+                                        label += new Intl.NumberFormat('en-US', { 
+                                            style: 'currency', 
+                                            currency: 'USD',
+                                            minimumFractionDigits: 0,
+                                            maximumFractionDigits: 0
+                                        }).format(context.parsed.y);
+                                    }
+                                    return label;
+                                }
+                            }
+                        }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            ticks: {
+                                callback: function(value) {
+                                    return '$' + (value / 1000000).toFixed(1) + 'M';
+                                }
+                            }
+                        }
+                    }
+                }
+            });
+            
+            // Customer Chart
+            const customerCtx = document.getElementById('customerChart').getContext('2d');
+            const customerData = [45, 213, 749];
+            new Chart(customerCtx, {
+                type: 'line',
+                data: {
+                    labels: ['Year 1', 'Year 2', 'Year 3'],
+                    datasets: [{
+                        label: 'Customer Base',
+                        data: customerData,
+                        borderColor: colors.green,
+                        backgroundColor: 'rgba(6, 214, 160, 0.2)',
+                        fill: true,
+                        tension: 0.3
+                    }]
+                },
+                options: chartOptions
+            });
+            
+            // Quarterly Revenue Chart
+            const quarterlyRevenueCtx = document.getElementById('quarterlyRevenueChart').getContext('2d');
+            const quarters = ['Q1 Y1', 'Q2 Y1', 'Q3 Y1', 'Q4 Y1', 
+                             'Q1 Y2', 'Q2 Y2', 'Q3 Y2', 'Q4 Y2', 
+                             'Q1 Y3', 'Q2 Y3', 'Q3 Y3', 'Q4 Y3'];
+            const quarterlyRevenue = [
+                885168, 1312356, 2009612, 2832763, 
+                4125875, 6217041, 9242848, 13363260, 
+                23935968, 33280491, 45445512, 60902622
+            ];
+            
+            new Chart(quarterlyRevenueCtx, {
+                type: 'bar',
+                data: {
+                    labels: quarters,
+                    datasets: [{
+                        label: 'Quarterly Revenue ($)',
+                        data: quarterlyRevenue,
+                        backgroundColor: colors.purple,
+                        borderColor: colors.purple,
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    ...chartOptions,
+                    plugins: {
+                        ...chartOptions.plugins,
+                        tooltip: {
+                            callbacks: {
+                                label: function(context) {
+                                    let label = context.dataset.label || '';
+                                    if (label) {
+                                        label += ': ';
+                                    }
+                                    if (context.parsed.y !== null) {
+                                        label += new Intl.NumberFormat('en-US', { 
+                                            style: 'currency', 
+                                            currency: 'USD',
+                                            minimumFractionDigits: 0,
+                                            maximumFractionDigits: 0
+                                        }).format(context.parsed.y);
+                                    }
+                                    return label;
+                                }
+                            }
+                        }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            ticks: {
+                                callback: function(value) {
+                                    return '$' + (value / 1000000).toFixed(1) + 'M';
+                                }
+                            }
+                        }
+                    }
+                }
+            });
+            
+            // Team Size Chart
+            const teamSizeCtx = document.getElementById('teamSizeChart').getContext('2d');
+            const teamSizeData = [5, 19, 42];
+            new Chart(teamSizeCtx, {
+                type: 'line',
+                data: {
+                    labels: ['Year 1', 'Year 2', 'Year 3'],
+                    datasets: [{
+                        label: 'Total Team Size',
+                        data: teamSizeData,
+                        borderColor: colors.orange,
+                        backgroundColor: 'rgba(251, 133, 0, 0.2)',
+                        fill: true,
+                        tension: 0.3
+                    }]
+                },
+                options: chartOptions
+            });
+            
+            // Team Composition Chart
+            const teamCompositionCtx = document.getElementById('teamCompositionChart').getContext('2d');
+            new Chart(teamCompositionCtx, {
+                type: 'bar',
+                data: {
+                    labels: ['Year 1', 'Year 2', 'Year 3'],
+                    datasets: [
+                        {
+                            label: 'SDR Team',
+                            data: [1, 4, 9],
+                            backgroundColor: colors.blue,
+                        },
+                        {
+                            label: 'AE Team',
+                            data: [2, 8, 17],
+                            backgroundColor: colors.green,
+                        },
+                        {
+                            label: 'CS Team',
+                            data: [1, 3, 7],
+                            backgroundColor: colors.purple,
+                        },
+                        {
+                            label: 'Sales Leadership',
+                            data: [0, 1, 3],
+                            backgroundColor: colors.red,
+                        },
+                        {
+                            label: 'Marketing Team',
+                            data: [1, 3, 6],
+                            backgroundColor: colors.orange,
+                        }
+                    ]
+                },
+                options: {
+                    ...chartOptions,
+                    scales: {
+                        x: {
+                            stacked: true,
+                        },
+                        y: {
+                            stacked: true,
+                            beginAtZero: true
+                        }
+                    }
+                }
+            });
+            
+            // Funnel Chart
+            const funnelCtx = document.getElementById('funnelChart').getContext('2d');
+            new Chart(funnelCtx, {
+                type: 'bar',
+                data: {
+                    labels: ['Year 1', 'Year 2', 'Year 3'],
+                    datasets: [
+                        {
+                            label: 'Total Leads',
+                            data: [4893, 17999, 44536],
+                            backgroundColor: colors.blue,
+                        },
+                        {
+                            label: 'Qualified Opportunities',
+                            data: [167, 719, 2025],
+                            backgroundColor: colors.orange,
+                        },
+                        {
+                            label: 'New Customers Won',
+                            data: [36, 181, 585],
+                            backgroundColor: colors.green,
+                        }
+                    ]
+                },
+                options: {
+                    ...chartOptions,
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            type: 'logarithmic'
+                        }
+                    }
+                }
+            });
+            
+            // CAC Chart
+            const cacCtx = document.getElementById('cacChart').getContext('2d');
+            const quarterlyCAC = [
+                18107, 11391, 15558, 12940, 
+                12822, 11157, 10784, 9471, 
+                9428, 8498, 7963, 7128
+            ];
+            new Chart(cacCtx, {
+                type: 'line',
+                data: {
+                    labels: quarters,
+                    datasets: [{
+                        label: 'Customer Acquisition Cost ($)',
+                        data: quarterlyCAC,
+                        borderColor: colors.red,
+                        backgroundColor: 'rgba(239, 71, 111, 0.2)',
+                        fill: true
+                    }]
+                },
+                options: {
+                    ...chartOptions,
+                    plugins: {
+                        ...chartOptions.plugins,
+                        tooltip: {
+                            callbacks: {
+                                label: function(context) {
+                                    let label = context.dataset.label || '';
+                                    if (label) {
+                                        label += ': ';
+                                    }
+                                    if (context.parsed.y !== null) {
+                                        label += new Intl.NumberFormat('en-US', { 
+                                            style: 'currency', 
+                                            currency: 'USD',
+                                            minimumFractionDigits: 0,
+                                            maximumFractionDigits: 0
+                                        }).format(context.parsed.y);
+                                    }
+                                    return label;
+                                }
+                            }
+                        }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: false
+                        }
+                    }
+                }
+            });
+        });
+    </script>
+</body>
+</html>
+    

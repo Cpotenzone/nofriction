@@ -1,0 +1,114 @@
+:root {
+    --primary-color: #F65F62;
+    --text-color: #e5e0df;
+    --bg-color: #191718;
+    --card-bg: rgba(25, 23, 24, 0.75);
+    --heading-font: 'Barlow', sans-serif;
+    --body-font: 'Barlow', sans-serif;
+}
+
+body {
+    font-family: var(--body-font);
+    color: var(--text-color);
+    background-color: var(--bg-color);
+    margin: 0;
+    padding: 0;
+    line-height: 1.6;
+}
+
+.main-nav {
+    position: fixed;
+    width: 100%;
+    top: 0;
+    z-index: 1000;
+    background: rgba(25, 23, 24, 0.75);
+    backdrop-filter: blur(20px);
+}
+
+.nav-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 1rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo img {
+    height: 55px;
+    width: auto;
+}
+
+.nav-links {
+    display: flex;
+    gap: 2rem;
+    align-items: center;
+}
+
+.nav-links a {
+    color: var(--text-color);
+    text-decoration: none;
+    font-weight: 500;
+}
+
+.cta-button {
+    background: var(--primary-color);
+    padding: 0.5rem 1rem;
+    border-radius: 4px;
+    color: #000 !important;
+}
+
+.hero-section {
+    min-height: 100vh;
+    padding: 6rem 2rem 2rem;
+    background: url('https://cdn.gamma.app/theme_images/canaveral-background.5dbf8d8ea7288ff1d7f1055cead80d9f.png') center/cover;
+    position: relative;
+}
+
+.hero-content {
+    max-width: 800px;
+    margin: 0 auto;
+    position: relative;
+    z-index: 1;
+}
+
+.features-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 2rem;
+    padding: 4rem 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.feature-card {
+    background: var(--card-bg);
+    padding: 2rem;
+    border-radius: 8px;
+    backdrop-filter: blur(20px);
+}
+
+footer {
+    background: var(--card-bg);
+    padding: 2rem;
+    margin-top: 4rem;
+}
+
+.footer-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+}
+
+@media (max-width: 768px) {
+    .nav-links {
+        display: none;
+    }
+    
+    .footer-content {
+        flex-direction: column;
+        gap: 2rem;
+    }
+}

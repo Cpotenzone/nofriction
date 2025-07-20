@@ -1,0 +1,1483 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CriticalAsset | Technical Building Systems for Electrical Engineers</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Roboto+Mono:wght@400;500&display=swap');
+        
+        :root {
+            --primary-dark: #0A1A2F;
+            --primary: #1A237E;
+            --primary-light: #3949AB;
+            --accent: #00B0FF;
+            --accent-bright: #40C4FF;
+            --gray-dark: #263238;
+            --gray: #546E7A;
+            --gray-light: #B0BEC5;
+            --warning: #FFEB3B;
+        }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--primary-dark);
+            color: #fff;
+            line-height: 1.6;
+        }
+        
+        .mono {
+            font-family: 'Roboto Mono', monospace;
+        }
+        
+        .section {
+            padding: 4rem 0;
+        }
+        
+        .gradient-bg {
+            background: linear-gradient(135deg, var(--primary-dark), var(--primary));
+        }
+        
+        .circuit-pattern {
+            background-image: 
+                radial-gradient(var(--accent) 1px, transparent 1px),
+                linear-gradient(to right, var(--accent) 1px, transparent 1px),
+                linear-gradient(to bottom, var(--accent) 1px, transparent 1px);
+            background-size: 20px 20px, 20px 20px, 20px 20px;
+            background-position: 0 0, 0 0, 0 0;
+            opacity: 0.05;
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+        }
+        
+        .circuit-line {
+            position: relative;
+            height: 2px;
+            background: var(--accent);
+            opacity: 0.5;
+        }
+        
+        .circuit-line::before, .circuit-line::after {
+            content: "";
+            position: absolute;
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background: var(--accent);
+            top: -2px;
+        }
+        
+        .circuit-line::before {
+            left: 0;
+        }
+        
+        .circuit-line::after {
+            right: 0;
+        }
+        
+        .accent-text {
+            color: var(--accent);
+        }
+        
+        .accent-glow {
+            text-shadow: 0 0 10px rgba(0, 176, 255, 0.7);
+        }
+        
+        .tech-card {
+            background-color: rgba(10, 26, 47, 0.9);
+            border: 1px solid var(--gray-light);
+            border-radius: 4px;
+            padding: 1.5rem;
+            position: relative;
+            overflow: hidden;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .tech-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0, 176, 255, 0.15);
+        }
+        
+        .tech-card::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: linear-gradient(to right, var(--accent), var(--accent-bright));
+        }
+        
+        .btn-primary {
+            background-color: var(--accent);
+            color: var(--primary-dark);
+            padding: 0.75rem 1.5rem;
+            border-radius: 4px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+            display: inline-block;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .btn-primary:hover {
+            background-color: var(--accent-bright);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 176, 255, 0.3);
+        }
+        
+        .data-chart {
+            height: 200px;
+            width: 100%;
+            background: linear-gradient(180deg, 
+                rgba(0, 176, 255, 0.1) 0%, 
+                rgba(0, 176, 255, 0) 100%);
+            position: relative;
+            border-bottom: 1px solid var(--accent);
+            margin-top: 1rem;
+            margin-bottom: 1rem;
+        }
+        
+        .data-chart::before {
+            content: "";
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 60px;
+            background: linear-gradient(90deg, 
+                var(--accent) 0%, 
+                var(--accent-bright) 50%, 
+                var(--accent) 100%);
+            opacity: 0.2;
+            clip-path: polygon(0 100%, 10% 60%, 20% 80%, 30% 40%, 40% 70%, 50% 20%, 60% 40%, 70% 60%, 80% 30%, 90% 50%, 100% 20%, 100% 100%);
+        }
+        
+        .data-chart::after {
+            content: "";
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 60px;
+            background: var(--accent);
+            opacity: 0.4;
+            clip-path: polygon(0 100%, 10% 80%, 20% 90%, 30% 70%, 40% 85%, 50% 60%, 60% 70%, 70% 80%, 80% 65%, 90% 75%, 100% 60%, 100% 100%);
+        }
+        
+        .grid-pattern {
+            background-size: 20px 20px;
+            background-image: linear-gradient(to right, var(--gray-light) 1px, transparent 1px),
+                             linear-gradient(to bottom, var(--gray-light) 1px, transparent 1px);
+            opacity: 0.05;
+        }
+        
+        .spec-value {
+            font-family: 'Roboto Mono', monospace;
+            color: var(--accent);
+            font-weight: 500;
+        }
+        
+        .integration-icon {
+            width: 48px;
+            height: 48px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            background-color: rgba(0, 176, 255, 0.1);
+            color: var(--accent);
+            margin-right: 1rem;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="bg-opacity-90 backdrop-filter backdrop-blur-lg fixed w-full z-50 border-b border-opacity-20" style="background-color: rgba(10, 26, 47, 0.9); border-color: var(--gray-light);">
+        <div class="container mx-auto px-4 py-3">
+            <div class="flex justify-between items-center">
+                <div class="flex items-center">
+                    <span class="text-2xl font-bold"><span class="text-white">Critical</span><span class="accent-text">Asset</span></span>
+                </div>
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="#features" class="text-gray-300 hover:text-white transition">Features</a>
+                    <a href="#specifications" class="text-gray-300 hover:text-white transition">Specifications</a>
+                    <a href="#integrations" class="text-gray-300 hover:text-white transition">Integrations</a>
+                    <a href="#efficiency" class="text-gray-300 hover:text-white transition">Efficiency Metrics</a>
+                    <a href="#contact" class="btn-primary">Contact Us</a>
+                </div>
+                <div class="md:hidden">
+                    <button class="text-white">
+                        <i class="fas fa-bars text-xl"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="relative min-h-screen flex items-center gradient-bg overflow-hidden">
+        <div class="circuit-pattern"></div>
+        <div class="container mx-auto px-4 z-10 py-20">
+            <div class="flex flex-wrap items-center">
+                <div class="w-full lg:w-1/2 px-4">
+                    <div class="mb-8">
+                        <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold mb-6">
+                            <span class="block">Advanced</span>
+                            <span class="block accent-text accent-glow">Electrical System</span>
+                            <span class="block">Management</span>
+                        </h1>
+                        <p class="text-xl text-gray-300 mb-8">
+                            Precision-engineered software for electrical engineers managing complex building infrastructure, with real-time monitoring and technical integration capabilities.
+                        </p>
+                        <div class="flex flex-wrap gap-4">
+                            <a href="#specifications" class="btn-primary">
+                                <span class="mr-2">Technical Specifications</span> 
+                                <i class="fas fa-arrow-right"></i>
+                            </a>
+                            <a href="#demo" class="border border-gray-400 text-white px-6 py-3 rounded-md hover:bg-white hover:bg-opacity-10 transition">
+                                <span class="mr-2">Request Demo</span>
+                                <i class="fas fa-desktop"></i>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="flex flex-wrap gap-6 mt-12">
+                        <div class="flex items-center">
+                            <div class="text-accent-bright mr-3">
+                                <i class="fas fa-check-circle text-lg"></i>
+                            </div>
+                            <span class="text-gray-300">IEC 60364 Compliant</span>
+                        </div>
+                        <div class="flex items-center">
+                            <div class="text-accent-bright mr-3">
+                                <i class="fas fa-check-circle text-lg"></i>
+                            </div>
+                            <span class="text-gray-300">NFPA 70E Compatible</span>
+                        </div>
+                        <div class="flex items-center">
+                            <div class="text-accent-bright mr-3">
+                                <i class="fas fa-check-circle text-lg"></i>
+                            </div>
+                            <span class="text-gray-300">ISO 50001 Ready</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="w-full lg:w-1/2 px-4 mt-12 lg:mt-0">
+                    <div class="relative">
+                        <div class="absolute inset-0 bg-accent bg-opacity-10 rounded-lg"></div>
+                        <div class="relative p-2 bg-gray-900 bg-opacity-70 rounded-lg border border-gray-700">
+                            <div class="p-1 border-b border-gray-700 flex items-center">
+                                <div class="flex space-x-2 ml-2">
+                                    <div class="w-3 h-3 bg-red-500 rounded-full"></div>
+                                    <div class="w-3 h-3 bg-yellow-500 rounded-full"></div>
+                                    <div class="w-3 h-3 bg-green-500 rounded-full"></div>
+                                </div>
+                                <div class="ml-4 text-sm text-gray-400 mono">CriticalAsset Dashboard</div>
+                            </div>
+                            <div class="p-4">
+                                <div class="mb-4 grid grid-cols-3 gap-4">
+                                    <div class="bg-gray-800 p-3 rounded">
+                                        <div class="text-xs text-gray-400">Power Consumption</div>
+                                        <div class="text-lg font-bold text-white">437.2 <span class="text-sm">kWh</span></div>
+                                        <div class="text-xs text-green-400">-12.4% vs last week</div>
+                                    </div>
+                                    <div class="bg-gray-800 p-3 rounded">
+                                        <div class="text-xs text-gray-400">System Temp</div>
+                                        <div class="text-lg font-bold text-white">28.3°<span class="text-sm">C</span></div>
+                                        <div class="text-xs text-accent">Normal range</div>
+                                    </div>
+                                    <div class="bg-gray-800 p-3 rounded">
+                                        <div class="text-xs text-gray-400">Load Balance</div>
+                                        <div class="text-lg font-bold text-white">94<span class="text-sm">%</span></div>
+                                        <div class="text-xs text-green-400">Optimal</div>
+                                    </div>
+                                </div>
+                                <div class="bg-gray-800 p-4 rounded mb-4">
+                                    <div class="flex justify-between items-center mb-2">
+                                        <div class="text-sm font-medium">System Status</div>
+                                        <div class="text-xs text-green-400">All Systems Operational</div>
+                                    </div>
+                                    <div class="data-chart"></div>
+                                    <div class="flex justify-between text-xs text-gray-400 mt-1">
+                                        <span>00:00</span>
+                                        <span>04:00</span>
+                                        <span>08:00</span>
+                                        <span>12:00</span>
+                                        <span>16:00</span>
+                                        <span>20:00</span>
+                                        <span>Now</span>
+                                    </div>
+                                </div>
+                                <div class="grid grid-cols-2 gap-3">
+                                    <div class="bg-gray-800 p-3 rounded flex items-center">
+                                        <div class="text-accent text-xl mr-3"><i class="fas fa-bolt"></i></div>
+                                        <div>
+                                            <div class="text-xs text-gray-400">Electrical Panel A</div>
+                                            <div class="text-sm">Online - Nominal</div>
+                                        </div>
+                                    </div>
+                                    <div class="bg-gray-800 p-3 rounded flex items-center">
+                                        <div class="text-accent text-xl mr-3"><i class="fas fa-bolt"></i></div>
+                                        <div>
+                                            <div class="text-xs text-gray-400">Electrical Panel B</div>
+                                            <div class="text-sm">Online - Nominal</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Key Features Section -->
+    <section id="features" class="section relative bg-gray-900 overflow-hidden">
+        <div class="circuit-pattern"></div>
+        <div class="container mx-auto px-4 z-10 relative">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl font-bold mb-4">Technical Capabilities</h2>
+                <p class="text-gray-400 max-w-2xl mx-auto">Engineered for electrical professionals managing complex building systems with precision and efficiency.</p>
+                <div class="circuit-line w-24 mx-auto mt-6"></div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div class="tech-card">
+                    <div class="flex items-start mb-4">
+                        <div class="bg-accent bg-opacity-10 p-3 rounded-lg mr-4">
+                            <i class="fas fa-sitemap text-accent text-xl"></i>
+                        </div>
+                        <div>
+                            <h3 class="text-xl font-bold mb-2">Smart Electrical Panels™</h3>
+                            <p class="text-gray-400">Digital management of electrical distribution systems with real-time monitoring and load analysis.</p>
+                        </div>
+                    </div>
+                    <ul class="text-sm text-gray-300 mt-4">
+                        <li class="flex items-center mb-2">
+                            <i class="fas fa-check text-accent mr-2"></i>
+                            <span>Full circuit mapping and labeling</span>
+                        </li>
+                        <li class="flex items-center mb-2">
+                            <i class="fas fa-check text-accent mr-2"></i>
+                            <span>Load balancing visualization</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-check text-accent mr-2"></i>
+                            <span>Anomaly detection and alerts</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="tech-card">
+                    <div class="flex items-start mb-4">
+                        <div class="bg-accent bg-opacity-10 p-3 rounded-lg mr-4">
+                            <i class="fas fa-project-diagram text-accent text-xl"></i>
+                        </div>
+                        <div>
+                            <h3 class="text-xl font-bold mb-2">System Integration</h3>
+                            <p class="text-gray-400">Connect with BMS, SCADA, and IoT sensors for comprehensive electrical infrastructure management.</p>
+                        </div>
+                    </div>
+                    <ul class="text-sm text-gray-300 mt-4">
+                        <li class="flex items-center mb-2">
+                            <i class="fas fa-check text-accent mr-2"></i>
+                            <span>REST API and MQTT support</span>
+                        </li>
+                        <li class="flex items-center mb-2">
+                            <i class="fas fa-check text-accent mr-2"></i>
+                            <span>BACnet and Modbus compatibility</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-check text-accent mr-2"></i>
+                            <span>Custom protocol adapters</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="tech-card">
+                    <div class="flex items-start mb-4">
+                        <div class="bg-accent bg-opacity-10 p-3 rounded-lg mr-4">
+                            <i class="fas fa-chart-line text-accent text-xl"></i>
+                        </div>
+                        <div>
+                            <h3 class="text-xl font-bold mb-2">Advanced Analytics</h3>
+                            <p class="text-gray-400">Data-driven insights for power quality, usage patterns, and predictive maintenance.</p>
+                        </div>
+                    </div>
+                    <ul class="text-sm text-gray-300 mt-4">
+                        <li class="flex items-center mb-2">
+                            <i class="fas fa-check text-accent mr-2"></i>
+                            <span>Power harmonics analysis</span>
+                        </li>
+                        <li class="flex items-center mb-2">
+                            <i class="fas fa-check text-accent mr-2"></i>
+                            <span>Custom reporting modules</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-check text-accent mr-2"></i>
+                            <span>ML-based failure prediction</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="tech-card">
+                    <div class="flex items-start mb-4">
+                        <div class="bg-accent bg-opacity-10 p-3 rounded-lg mr-4">
+                            <i class="fas fa-map-marked-alt text-accent text-xl"></i>
+                        </div>
+                        <div>
+                            <h3 class="text-xl font-bold mb-2">Interactive System Maps</h3>
+                            <p class="text-gray-400">Digital schematics and floor plans showing complete electrical distribution systems.</p>
+                        </div>
+                    </div>
+                    <ul class="text-sm text-gray-300 mt-4">
+                        <li class="flex items-center mb-2">
+                            <i class="fas fa-check text-accent mr-2"></i>
+                            <span>CAD/BIM integration</span>
+                        </li>
+                        <li class="flex items-center mb-2">
+                            <i class="fas fa-check text-accent mr-2"></i>
+                            <span>Real-time system status overlay</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-check text-accent mr-2"></i>
+                            <span>Interactive junction points</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="tech-card">
+                    <div class="flex items-start mb-4">
+                        <div class="bg-accent bg-opacity-10 p-3 rounded-lg mr-4">
+                            <i class="fas fa-shield-alt text-accent text-xl"></i>
+                        </div>
+                        <div>
+                            <h3 class="text-xl font-bold mb-2">Safety Compliance</h3>
+                            <p class="text-gray-400">Tools to ensure electrical systems meet relevant codes and safety standards.</p>
+                        </div>
+                    </div>
+                    <ul class="text-sm text-gray-300 mt-4">
+                        <li class="flex items-center mb-2">
+                            <i class="fas fa-check text-accent mr-2"></i>
+                            <span>Arc flash calculation</span>
+                        </li>
+                        <li class="flex items-center mb-2">
+                            <i class="fas fa-check text-accent mr-2"></i>
+                            <span>NFPA 70E documentation</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-check text-accent mr-2"></i>
+                            <span>Lockout/tagout procedures</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="tech-card">
+                    <div class="flex items-start mb-4">
+                        <div class="bg-accent bg-opacity-10 p-3 rounded-lg mr-4">
+                            <i class="fas fa-calendar-alt text-accent text-xl"></i>
+                        </div>
+                        <div>
+                            <h3 class="text-xl font-bold mb-2">Maintenance Management</h3>
+                            <p class="text-gray-400">Schedule and track essential maintenance for all electrical systems and components.</p>
+                        </div>
+                    </div>
+                    <ul class="text-sm text-gray-300 mt-4">
+                        <li class="flex items-center mb-2">
+                            <i class="fas fa-check text-accent mr-2"></i>
+                            <span>Predictive maintenance scheduling</span>
+                        </li>
+                        <li class="flex items-center mb-2">
+                            <i class="fas fa-check text-accent mr-2"></i>
+                            <span>Digital service records</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-check text-accent mr-2"></i>
+                            <span>Component lifecycle tracking</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Technical Specifications -->
+    <section id="specifications" class="section bg-gray-900">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl font-bold mb-4">Technical Specifications</h2>
+                <p class="text-gray-400 max-w-2xl mx-auto">Engineered to meet the demands of complex electrical systems management with precision and reliability.</p>
+                <div class="circuit-line w-24 mx-auto mt-6"></div>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
+                <div class="relative">
+                    <div class="absolute inset-0 grid-pattern rounded-lg"></div>
+                    <div class="tech-card relative z-10">
+                        <h3 class="text-xl font-bold mb-6 flex items-center">
+                            <i class="fas fa-server text-accent mr-3"></i>
+                            System Requirements
+                        </h3>
+
+                        <div class="space-y-4">
+                            <div class="flex justify-between border-b border-gray-700 pb-2">
+                                <span class="text-gray-300">Server Architecture</span>
+                                <span class="spec-value">Distributed Microservices</span>
+                            </div>
+                            <div class="flex justify-between border-b border-gray-700 pb-2">
+                                <span class="text-gray-300">Recommended CPU</span>
+                                <span class="spec-value">8+ cores, 3.0GHz+</span>
+                            </div>
+                            <div class="flex justify-between border-b border-gray-700 pb-2">
+                                <span class="text-gray-300">Memory</span>
+                                <span class="spec-value">16GB+ RAM</span>
+                            </div>
+                            <div class="flex justify-between border-b border-gray-700 pb-2">
+                                <span class="text-gray-300">Storage</span>
+                                <span class="spec-value">SSD, 500GB+ (RAID recommended)</span>
+                            </div>
+                            <div class="flex justify-between border-b border-gray-700 pb-2">
+                                <span class="text-gray-300">Network</span>
+                                <span class="spec-value">Gigabit Ethernet</span>
+                            </div>
+                            <div class="flex justify-between border-b border-gray-700 pb-2">
+                                <span class="text-gray-300">OS Support</span>
+                                <span class="spec-value">Linux, Windows Server, Docker</span>
+                            </div>
+                            <div class="flex justify-between border-b border-gray-700 pb-2">
+                                <span class="text-gray-300">Virtualization</span>
+                                <span class="spec-value">VMware, Hyper-V, KVM</span>
+                            </div>
+                            <div class="flex justify-between pb-2">
+                                <span class="text-gray-300">Cloud Deployment</span>
+                                <span class="spec-value">AWS, Azure, GCP</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="relative">
+                    <div class="absolute inset-0 grid-pattern rounded-lg"></div>
+                    <div class="tech-card relative z-10">
+                        <h3 class="text-xl font-bold mb-6 flex items-center">
+                            <i class="fas fa-shield-alt text-accent mr-3"></i>
+                            Capabilities & Standards
+                        </h3>
+
+                        <div class="space-y-4">
+                            <div class="flex justify-between border-b border-gray-700 pb-2">
+                                <span class="text-gray-300">Data Security</span>
+                                <span class="spec-value">AES-256, TLS 1.3</span>
+                            </div>
+                            <div class="flex justify-between border-b border-gray-700 pb-2">
+                                <span class="text-gray-300">User Authentication</span>
+                                <span class="spec-value">LDAP, SAML, MFA</span>
+                            </div>
+                            <div class="flex justify-between border-b border-gray-700 pb-2">
+                                <span class="text-gray-300">Electrical Standards</span>
+                                <span class="spec-value">IEC 60364, NFPA 70/70E, IEEE</span>
+                            </div>
+                            <div class="flex justify-between border-b border-gray-700 pb-2">
+                                <span class="text-gray-300">Data Processing</span>
+                                <span class="spec-value">15K+ points/sec</span>
+                            </div>
+                            <div class="flex justify-between border-b border-gray-700 pb-2">
+                                <span class="text-gray-300">Database</span>
+                                <span class="spec-value">TimeSeries + SQL</span>
+                            </div>
+                            <div class="flex justify-between border-b border-gray-700 pb-2">
+                                <span class="text-gray-300">API Throughput</span>
+                                <span class="spec-value">1000+ requests/sec</span>
+                            </div>
+                            <div class="flex justify-between border-b border-gray-700 pb-2">
+                                <span class="text-gray-300">Redundancy</span>
+                                <span class="spec-value">Active-Active or Active-Standby</span>
+                            </div>
+                            <div class="flex justify-between pb-2">
+                                <span class="text-gray-300">Response Time</span>
+                                <span class="spec-value">&lt;50ms typical</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="mt-12 tech-card">
+                <h3 class="text-xl font-bold mb-6 flex items-center">
+                    <i class="fas fa-network-wired text-accent mr-3"></i>
+                    Supported Protocols & Interfaces
+                </h3>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                    <div class="bg-gray-800 bg-opacity-50 p-4 rounded">
+                        <h4 class="text-accent font-bold mb-2">Building Automation</h4>
+                        <ul class="text-sm space-y-1">
+                            <li class="flex items-center">
+                                <i class="fas fa-check text-xs text-accent mr-2"></i>
+                                <span>BACnet IP/MSTP</span>
+                            </li>
+                            <li class="flex items-center">
+                                <i class="fas fa-check text-xs text-accent mr-2"></i>
+                                <span>LonWorks</span>
+                            </li>
+                            <li class="flex items-center">
+                                <i class="fas fa-check text-xs text-accent mr-2"></i>
+                                <span>KNX</span>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="bg-gray-800 bg-opacity-50 p-4 rounded">
+                        <h4 class="text-accent font-bold mb-2">Industrial Control</h4>
+                        <ul class="text-sm space-y-1">
+                            <li class="flex items-center">
+                                <i class="fas fa-check text-xs text-accent mr-2"></i>
+                                <span>Modbus RTU/TCP</span>
+                            </li>
+                            <li class="flex items-center">
+                                <i class="fas fa-check text-xs text-accent mr-2"></i>
+                                <span>OPC UA</span>
+                            </li>
+                            <li class="flex items-center">
+                                <i class="fas fa-check text-xs text-accent mr-2"></i>
+                                <span>PROFINET</span>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="bg-gray-800 bg-opacity-50 p-4 rounded">
+                        <h4 class="text-accent font-bold mb-2">IT/IoT</h4>
+                        <ul class="text-sm space-y-1">
+                            <li class="flex items-center">
+                                <i class="fas fa-check text-xs text-accent mr-2"></i>
+                                <span>MQTT</span>
+                            </li>
+                            <li class="flex items-center">
+                                <i class="fas fa-check text-xs text-accent mr-2"></i>
+                                <span>REST/GraphQL APIs</span>
+                            </li>
+                            <li class="flex items-center">
+                                <i class="fas fa-check text-xs text-accent mr-2"></i>
+                                <span>AMQP/Kafka</span>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="bg-gray-800 bg-opacity-50 p-4 rounded">
+                        <h4 class="text-accent font-bold mb-2">Energy Monitoring</h4>
+                        <ul class="text-sm space-y-1">
+                            <li class="flex items-center">
+                                <i class="fas fa-check text-xs text-accent mr-2"></i>
+                                <span>Modbus Energy Meters</span>
+                            </li>
+                            <li class="flex items-center">
+                                <i class="fas fa-check text-xs text-accent mr-2"></i>
+                                <span>IEC 61850</span>
+                            </li>
+                            <li class="flex items-center">
+                                <i class="fas fa-check text-xs text-accent mr-2"></i>
+                                <span>DNP3</span>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="bg-gray-800 bg-opacity-50 p-4 rounded">
+                        <h4 class="text-accent font-bold mb-2">Design Integration</h4>
+                        <ul class="text-sm space-y-1">
+                            <li class="flex items-center">
+                                <i class="fas fa-check text-xs text-accent mr-2"></i>
+                                <span>AutoCAD DXF/DWG</span>
+                            </li>
+                            <li class="flex items-center">
+                                <i class="fas fa-check text-xs text-accent mr-2"></i>
+                                <span>Revit BIM</span>
+                            </li>
+                            <li class="flex items-center">
+                                <i class="fas fa-check text-xs text-accent mr-2"></i>
+                                <span>ETAP/SKM</span>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="bg-gray-800 bg-opacity-50 p-4 rounded">
+                        <h4 class="text-accent font-bold mb-2">Enterprise Systems</h4>
+                        <ul class="text-sm space-y-1">
+                            <li class="flex items-center">
+                                <i class="fas fa-check text-xs text-accent mr-2"></i>
+                                <span>SAP/Oracle ERP</span>
+                            </li>
+                            <li class="flex items-center">
+                                <i class="fas fa-check text-xs text-accent mr-2"></i>
+                                <span>Maximo/IBM TRIRIGA</span>
+                            </li>
+                            <li class="flex items-center">
+                                <i class="fas fa-check text-xs text-accent mr-2"></i>
+                                <span>ServiceNow</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- System Architecture -->
+    <section class="section bg-gray-800">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl font-bold mb-4">System Architecture</h2>
+                <p class="text-gray-400 max-w-2xl mx-auto">Engineered for reliability, scalability, and security across all electrical infrastructure components.</p>
+                <div class="circuit-line w-24 mx-auto mt-6"></div>
+            </div>
+
+            <div class="tech-card mb-8 p-6">
+                <div class="relative bg-gray-900 p-6 rounded-lg overflow-hidden">
+                    <div class="absolute inset-0 opacity-10">
+                        <svg width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
+                            <defs>
+                                <pattern id="smallGrid" width="10" height="10" patternUnits="userSpaceOnUse">
+                                    <path d="M 10 0 L 0 0 0 10" fill="none" stroke="#00B0FF" stroke-width="0.5"/>
+                                </pattern>
+                            </defs>
+                            <rect width="100%" height="100%" fill="url(#smallGrid)" />
+                        </svg>
+                    </div>
+                    
+                    <div class="relative z-10">
+                        <!-- Architecture Diagram -->
+                        <div class="flex flex-col lg:flex-row lg:justify-between">
+                            <div class="p-4 bg-gray-800 bg-opacity-90 rounded-lg border border-gray-700 mb-4 lg:mb-0 lg:w-1/4">
+                                <h4 class="text-lg font-bold mb-3 text-white">Data Sources</h4>
+                                <ul class="space-y-3">
+                                    <li class="flex items-center p-2 bg-gray-700 bg-opacity-50 rounded">
+                                        <i class="fas fa-plug text-accent mr-2"></i>
+                                        <span>Smart Meters</span>
+                                    </li>
+                                    <li class="flex items-center p-2 bg-gray-700 bg-opacity-50 rounded">
+                                        <i class="fas fa-microchip text-accent mr-2"></i>
+                                        <span>IoT Sensors</span>
+                                    </li>
+                                    <li class="flex items-center p-2 bg-gray-700 bg-opacity-50 rounded">
+                                        <i class="fas fa-bolt text-accent mr-2"></i>
+                                        <span>Switchgear</span>
+                                    </li>
+                                    <li class="flex items-center p-2 bg-gray-700 bg-opacity-50 rounded">
+                                        <i class="fas fa-network-wired text-accent mr-2"></i>
+                                        <span>Panel Monitors</span>
+                                    </li>
+                                    <li class="flex items-center p-2 bg-gray-700 bg-opacity-50 rounded">
+                                        <i class="fas fa-layer-group text-accent mr-2"></i>
+                                        <span>BMS Integration</span>
+                                    </li>
+                                </ul>
+                            </div>
+                            
+                            <div class="flex items-center justify-center lg:w-1/6">
+                                <div class="hidden lg:block w-full">
+                                    <div class="text-center">
+                                        <i class="fas fa-arrow-right text-accent text-2xl"></i>
+                                    </div>
+                                </div>
+                                <div class="block lg:hidden w-full">
+                                    <div class="text-center">
+                                        <i class="fas fa-arrow-down text-accent text-2xl"></i>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="p-4 bg-gray-800 bg-opacity-90 rounded-lg border border-gray-700 mb-4 lg:mb-0 lg:w-1/4">
+                                <h4 class="text-lg font-bold mb-3 text-white">Core Platform</h4>
+                                <ul class="space-y-3">
+                                    <li class="flex items-center p-2 bg-gray-700 bg-opacity-50 rounded">
+                                        <i class="fas fa-exchange-alt text-accent mr-2"></i>
+                                        <span>Protocol Adapters</span>
+                                    </li>
+                                    <li class="flex items-center p-2 bg-gray-700 bg-opacity-50 rounded">
+                                        <i class="fas fa-database text-accent mr-2"></i>
+                                        <span>Time Series DB</span>
+                                    </li>
+                                    <li class="flex items-center p-2 bg-gray-700 bg-opacity-50 rounded">
+                                        <i class="fas fa-brain text-accent mr-2"></i>
+                                        <span>Analytics Engine</span>
+                                    </li>
+                                    <li class="flex items-center p-2 bg-gray-700 bg-opacity-50 rounded">
+                                        <i class="fas fa-code-branch text-accent mr-2"></i>
+                                        <span>System Modeling</span>
+                                    </li>
+                                    <li class="flex items-center p-2 bg-gray-700 bg-opacity-50 rounded">
+                                        <i class="fas fa-lock text-accent mr-2"></i>
+                                        <span>Security Layer</span>
+                                    </li>
+                                </ul>
+                            </div>
+                            
+                            <div class="flex items-center justify-center lg:w-1/6">
+                                <div class="hidden lg:block w-full">
+                                    <div class="text-center">
+                                        <i class="fas fa-arrow-right text-accent text-2xl"></i>
+                                    </div>
+                                </div>
+                                <div class="block lg:hidden w-full">
+                                    <div class="text-center">
+                                        <i class="fas fa-arrow-down text-accent text-2xl"></i>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="p-4 bg-gray-800 bg-opacity-90 rounded-lg border border-gray-700 lg:w-1/4">
+                                <h4 class="text-lg font-bold mb-3 text-white">User Interfaces</h4>
+                                <ul class="space-y-3">
+                                    <li class="flex items-center p-2 bg-gray-700 bg-opacity-50 rounded">
+                                        <i class="fas fa-desktop text-accent mr-2"></i>
+                                        <span>Admin Dashboard</span>
+                                    </li>
+                                    <li class="flex items-center p-2 bg-gray-700 bg-opacity-50 rounded">
+                                        <i class="fas fa-tablet-alt text-accent mr-2"></i>
+                                        <span>Mobile App</span>
+                                    </li>
+                                    <li class="flex items-center p-2 bg-gray-700 bg-opacity-50 rounded">
+                                        <i class="fas fa-code text-accent mr-2"></i>
+                                        <span>API Integration</span>
+                                    </li>
+                                    <li class="flex items-center p-2 bg-gray-700 bg-opacity-50 rounded">
+                                        <i class="fas fa-file-alt text-accent mr-2"></i>
+                                        <span>Reports & Analytics</span>
+                                    </li>
+                                    <li class="flex items-center p-2 bg-gray-700 bg-opacity-50 rounded">
+                                        <i class="fas fa-bell text-accent mr-2"></i>
+                                        <span>Alerts Management</span>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div class="tech-card">
+                    <h4 class="text-lg font-bold mb-4 flex items-center">
+                        <i class="fas fa-shield-alt text-accent mr-3"></i>
+                        Security Architecture
+                    </h4>
+                    <ul class="text-sm space-y-2 text-gray-300">
+                        <li class="flex items-start">
+                            <i class="fas fa-check text-accent mt-1 mr-2"></i>
+                            <span>Role-based access control with granular permissions</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check text-accent mt-1 mr-2"></i>
+                            <span>End-to-end encryption for all communications</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check text-accent mt-1 mr-2"></i>
+                            <span>Multi-factor authentication for privileged operations</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check text-accent mt-1 mr-2"></i>
+                            <span>Secure network segmentation between OT/IT systems</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check text-accent mt-1 mr-2"></i>
+                            <span>Comprehensive audit logging and monitoring</span>
+                        </li>
+                    </ul>
+                </div>
+                
+                <div class="tech-card">
+                    <h4 class="text-lg font-bold mb-4 flex items-center">
+                        <i class="fas fa-server text-accent mr-3"></i>
+                        Deployment Options
+                    </h4>
+                    <ul class="text-sm space-y-2 text-gray-300">
+                        <li class="flex items-start">
+                            <i class="fas fa-check text-accent mt-1 mr-2"></i>
+                            <span>On-premises installation with local hardware</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check text-accent mt-1 mr-2"></i>
+                            <span>Private cloud deployment with virtual machines</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check text-accent mt-1 mr-2"></i>
+                            <span>Containerized deployment with Kubernetes</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check text-accent mt-1 mr-2"></i>
+                            <span>Hybrid architecture with edge processing capabilities</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check text-accent mt-1 mr-2"></i>
+                            <span>SaaS option with dedicated tenant isolation</span>
+                        </li>
+                    </ul>
+                </div>
+                
+                <div class="tech-card">
+                    <h4 class="text-lg font-bold mb-4 flex items-center">
+                        <i class="fas fa-expand-arrows-alt text-accent mr-3"></i>
+                        Scalability Framework
+                    </h4>
+                    <ul class="text-sm space-y-2 text-gray-300">
+                        <li class="flex items-start">
+                            <i class="fas fa-check text-accent mt-1 mr-2"></i>
+                            <span>Horizontal scaling for data processing components</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check text-accent mt-1 mr-2"></i>
+                            <span>Distributed storage with automatic sharding</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check text-accent mt-1 mr-2"></i>
+                            <span>Multi-cluster deployments across geographic regions</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check text-accent mt-1 mr-2"></i>
+                            <span>Configurable data retention and archiving policies</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check text-accent mt-1 mr-2"></i>
+                            <span>Load balancing across processing nodes</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Integrations Section -->
+    <section id="integrations" class="section bg-gray-900">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl font-bold mb-4">Integration Ecosystem</h2>
+                <p class="text-gray-400 max-w-2xl mx-auto">Connect with the tools and systems electrical engineers rely on for comprehensive infrastructure management.</p>
+                <div class="circuit-line w-24 mx-auto mt-6"></div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div class="tech-card">
+                    <div class="flex items-center mb-4">
+                        <div class="integration-icon">
+                            <i class="fas fa-file-alt text-xl"></i>
+                        </div>
+                        <h3 class="text-xl font-bold">CAD Systems</h3>
+                    </div>
+                    <p class="text-gray-400 mb-4">Import and export electrical schematics and floor plans directly from industry-standard CAD platforms.</p>
+                    <div class="mt-4">
+                        <div class="flex items-center justify-between mb-2">
+                            <span class="text-sm text-gray-300">AutoCAD Electrical</span>
+                            <span class="text-xs bg-accent bg-opacity-20 text-accent py-1 px-2 rounded">Bidirectional</span>
+                        </div>
+                        <div class="flex items-center justify-between mb-2">
+                            <span class="text-sm text-gray-300">Revit MEP</span>
+                            <span class="text-xs bg-accent bg-opacity-20 text-accent py-1 px-2 rounded">Bidirectional</span>
+                        </div>
+                        <div class="flex items-center justify-between">
+                            <span class="text-sm text-gray-300">ETAP</span>
+                            <span class="text-xs bg-accent bg-opacity-20 text-accent py-1 px-2 rounded">Data Import</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="tech-card">
+                    <div class="flex items-center mb-4">
+                        <div class="integration-icon">
+                            <i class="fas fa-building text-xl"></i>
+                        </div>
+                        <h3 class="text-xl font-bold">Building Management</h3>
+                    </div>
+                    <p class="text-gray-400 mb-4">Seamless integration with building management systems for comprehensive facility control and monitoring.</p>
+                    <div class="mt-4">
+                        <div class="flex items-center justify-between mb-2">
+                            <span class="text-sm text-gray-300">Johnson Controls Metasys</span>
+                            <span class="text-xs bg-accent bg-opacity-20 text-accent py-1 px-2 rounded">API Integration</span>
+                        </div>
+                        <div class="flex items-center justify-between mb-2">
+                            <span class="text-sm text-gray-300">Siemens Desigo CC</span>
+                            <span class="text-xs bg-accent bg-opacity-20 text-accent py-1 px-2 rounded">BACnet/IP</span>
+                        </div>
+                        <div class="flex items-center justify-between">
+                            <span class="text-sm text-gray-300">Schneider EcoStruxure</span>
+                            <span class="text-xs bg-accent bg-opacity-20 text-accent py-1 px-2 rounded">Full Integration</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="tech-card">
+                    <div class="flex items-center mb-4">
+                        <div class="integration-icon">
+                            <i class="fas fa-tools text-xl"></i>
+                        </div>
+                        <h3 class="text-xl font-bold">Maintenance Systems</h3>
+                    </div>
+                    <p class="text-gray-400 mb-4">Coordinate maintenance activities across teams with enterprise maintenance management systems.</p>
+                    <div class="mt-4">
+                        <div class="flex items-center justify-between mb-2">
+                            <span class="text-sm text-gray-300">IBM Maximo</span>
+                            <span class="text-xs bg-accent bg-opacity-20 text-accent py-1 px-2 rounded">Bidirectional</span>
+                        </div>
+                        <div class="flex items-center justify-between mb-2">
+                            <span class="text-sm text-gray-300">SAP PM Module</span>
+                            <span class="text-xs bg-accent bg-opacity-20 text-accent py-1 px-2 rounded">Work Orders</span>
+                        </div>
+                        <div class="flex items-center justify-between">
+                            <span class="text-sm text-gray-300">ServiceNow</span>
+                            <span class="text-xs bg-accent bg-opacity-20 text-accent py-1 px-2 rounded">API Integration</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="tech-card">
+                    <div class="flex items-center mb-4">
+                        <div class="integration-icon">
+                            <i class="fas fa-chart-line text-xl"></i>
+                        </div>
+                        <h3 class="text-xl font-bold">Analytics Platforms</h3>
+                    </div>
+                    <p class="text-gray-400 mb-4">Export rich electrical system data to advanced analytics platforms for deeper insights and reporting.</p>
+                    <div class="mt-4">
+                        <div class="flex items-center justify-between mb-2">
+                            <span class="text-sm text-gray-300">Microsoft Power BI</span>
+                            <span class="text-xs bg-accent bg-opacity-20 text-accent py-1 px-2 rounded">Data Export</span>
+                        </div>
+                        <div class="flex items-center justify-between mb-2">
+                            <span class="text-sm text-gray-300">Tableau</span>
+                            <span class="text-xs bg-accent bg-opacity-20 text-accent py-1 px-2 rounded">Live Connection</span>
+                        </div>
+                        <div class="flex items-center justify-between">
+                            <span class="text-sm text-gray-300">Splunk</span>
+                            <span class="text-xs bg-accent bg-opacity-20 text-accent py-1 px-2 rounded">Data Streaming</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="tech-card">
+                    <div class="flex items-center mb-4">
+                        <div class="integration-icon">
+                            <i class="fas fa-bolt text-xl"></i>
+                        </div>
+                        <h3 class="text-xl font-bold">Power Monitoring</h3>
+                    </div>
+                    <p class="text-gray-400 mb-4">Connect with advanced power quality and monitoring systems for comprehensive electrical insights.</p>
+                    <div class="mt-4">
+                        <div class="flex items-center justify-between mb-2">
+                            <span class="text-sm text-gray-300">Fluke Power Monitoring</span>
+                            <span class="text-xs bg-accent bg-opacity-20 text-accent py-1 px-2 rounded">Data Import</span>
+                        </div>
+                        <div class="flex items-center justify-between mb-2">
+                            <span class="text-sm text-gray-300">Eaton Power Xpert</span>
+                            <span class="text-xs bg-accent bg-opacity-20 text-accent py-1 px-2 rounded">Bidirectional</span>
+                        </div>
+                        <div class="flex items-center justify-between">
+                            <span class="text-sm text-gray-300">ABB PowerLogic</span>
+                            <span class="text-xs bg-accent bg-opacity-20 text-accent py-1 px-2 rounded">Modbus Integration</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="tech-card">
+                    <div class="flex items-center mb-4">
+                        <div class="integration-icon">
+                            <i class="fas fa-mobile-alt text-xl"></i>
+                        </div>
+                        <h3 class="text-xl font-bold">Mobile Integration</h3>
+                    </div>
+                    <p class="text-gray-400 mb-4">Access and control systems from anywhere with robust mobile applications and field service tools.</p>
+                    <div class="mt-4">
+                        <div class="flex items-center justify-between mb-2">
+                            <span class="text-sm text-gray-300">Native iOS/Android Apps</span>
+                            <span class="text-xs bg-accent bg-opacity-20 text-accent py-1 px-2 rounded">Full Control</span>
+                        </div>
+                        <div class="flex items-center justify-between mb-2">
+                            <span class="text-sm text-gray-300">Field Service Mobile</span>
+                            <span class="text-xs bg-accent bg-opacity-20 text-accent py-1 px-2 rounded">Work Order Management</span>
+                        </div>
+                        <div class="flex items-center justify-between">
+                            <span class="text-sm text-gray-300">Offline Capabilities</span>
+                            <span class="text-xs bg-accent bg-opacity-20 text-accent py-1 px-2 rounded">Data Sync</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="mt-12 text-center">
+                <a href="#contact" class="btn-primary">
+                    <span class="mr-2">Request Custom Integration</span>
+                    <i class="fas fa-plug"></i>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Efficiency Metrics Section -->
+    <section id="efficiency" class="section bg-gray-800">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl font-bold mb-4">Efficiency Metrics</h2>
+                <p class="text-gray-400 max-w-2xl mx-auto">Quantifiable improvements in electrical system management and maintenance operations.</p>
+                <div class="circuit-line w-24 mx-auto mt-6"></div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-12">
+                <div class="tech-card text-center">
+                    <div class="text-accent text-4xl font-bold mb-2">27%</div>
+                    <div class="text-xl font-semibold mb-4">Reduction in Energy Costs</div>
+                    <p class="text-gray-400">Through optimized electrical load balancing and distribution pattern analysis</p>
+                </div>
+                
+                <div class="tech-card text-center">
+                    <div class="text-accent text-4xl font-bold mb-2">43%</div>
+                    <div class="text-xl font-semibold mb-4">Faster Response Time</div>
+                    <p class="text-gray-400">To electrical system issues with real-time monitoring and intelligent alerts</p>
+                </div>
+                
+                <div class="tech-card text-center">
+                    <div class="text-accent text-4xl font-bold mb-2">89%</div>
+                    <div class="text-xl font-semibold mb-4">Documentation Accuracy</div>
+                    <p class="text-gray-400">Improvement in electrical system documentation and record-keeping</p>
+                </div>
+                
+                <div class="tech-card text-center">
+                    <div class="text-accent text-4xl font-bold mb-2">65%</div>
+                    <div class="text-xl font-semibold mb-4">Reduced Downtime</div>
+                    <p class="text-gray-400">Through predictive maintenance and early issue detection</p>
+                </div>
+            </div>
+
+            <div class="tech-card p-8">
+                <h3 class="text-2xl font-bold mb-6 text-center">Case Study: Manufacturing Facility</h3>
+                
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                    <div>
+                        <h4 class="text-lg font-semibold mb-4 flex items-center">
+                            <i class="fas fa-exclamation-triangle text-accent mr-3"></i>
+                            Challenges
+                        </h4>
+                        <ul class="space-y-3">
+                            <li class="flex items-start">
+                                <i class="fas fa-angle-right text-accent mt-1 mr-2"></i>
+                                <p class="text-gray-300">Frequent electrical system failures causing production downtime</p>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-angle-right text-accent mt-1 mr-2"></i>
+                                <p class="text-gray-300">Poor documentation of electrical infrastructure leading to maintenance delays</p>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-angle-right text-accent mt-1 mr-2"></i>
+                                <p class="text-gray-300">Inefficient energy usage due to unbalanced loads and aging equipment</p>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-angle-right text-accent mt-1 mr-2"></i>
+                                <p class="text-gray-300">Lack of integration between electrical systems and maintenance workflows</p>
+                            </li>
+                        </ul>
+                    </div>
+                    
+                    <div>
+                        <h4 class="text-lg font-semibold mb-4 flex items-center">
+                            <i class="fas fa-check-circle text-accent mr-3"></i>
+                            Results
+                        </h4>
+                        <ul class="space-y-3">
+                            <li class="flex items-start">
+                                <i class="fas fa-angle-right text-accent mt-1 mr-2"></i>
+                                <p class="text-gray-300">72% reduction in unplanned electrical downtime within first 6 months</p>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-angle-right text-accent mt-1 mr-2"></i>
+                                <p class="text-gray-300">$342,000 annual energy cost savings through load optimization</p>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-angle-right text-accent mt-1 mr-2"></i>
+                                <p class="text-gray-300">Maintenance response time reduced from 4.2 hours to 37 minutes</p>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-angle-right text-accent mt-1 mr-2"></i>
+                                <p class="text-gray-300">Complete digital transformation of electrical documentation and management</p>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="mt-8">
+                    <h4 class="text-lg font-semibold mb-4 flex items-center">
+                        <i class="fas fa-chart-line text-accent mr-3"></i>
+                        Implementation Timeline
+                    </h4>
+                    <div class="relative">
+                        <div class="absolute left-4 h-full w-0.5 bg-accent bg-opacity-30"></div>
+                        
+                        <div class="relative pl-12 pb-8">
+                            <div class="absolute left-0 w-8 h-8 bg-accent bg-opacity-20 rounded-full flex items-center justify-center">
+                                <div class="w-4 h-4 bg-accent rounded-full"></div>
+                            </div>
+                            <div>
+                                <h5 class="text-white font-medium">Phase 1: System Assessment & Digital Mapping</h5>
+                                <p class="text-gray-400 mt-2">Complete documentation of all electrical systems, panels, and distribution networks. Creation of digital twins for infrastructure components.</p>
+                            </div>
+                        </div>
+                        
+                        <div class="relative pl-12 pb-8">
+                            <div class="absolute left-0 w-8 h-8 bg-accent bg-opacity-20 rounded-full flex items-center justify-center">
+                                <div class="w-4 h-4 bg-accent rounded-full"></div>
+                            </div>
+                            <div>
+                                <h5 class="text-white font-medium">Phase 2: Monitoring System Deployment</h5>
+                                <p class="text-gray-400 mt-2">Installation of IoT sensors, smart meters, and integration with existing control systems. Configuration of real-time dashboards and alerting.</p>
+                            </div>
+                        </div>
+                        
+                        <div class="relative pl-12 pb-8">
+                            <div class="absolute left-0 w-8 h-8 bg-accent bg-opacity-20 rounded-full flex items-center justify-center">
+                                <div class="w-4 h-4 bg-accent rounded-full"></div>
+                            </div>
+                            <div>
+                                <h5 class="text-white font-medium">Phase 3: Process Integration & Training</h5>
+                                <p class="text-gray-400 mt-2">Integration with maintenance workflows, training of engineering teams, and development of standard operating procedures.</p>
+                            </div>
+                        </div>
+                        
+                        <div class="relative pl-12">
+                            <div class="absolute left-0 w-8 h-8 bg-accent bg-opacity-20 rounded-full flex items-center justify-center">
+                                <div class="w-4 h-4 bg-accent rounded-full"></div>
+                            </div>
+                            <div>
+                                <h5 class="text-white font-medium">Phase 4: Optimization & Continuous Improvement</h5>
+                                <p class="text-gray-400 mt-2">Analysis of collected data to optimize electrical systems, implement predictive maintenance, and continuously refine operations.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section class="section bg-gray-900">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl font-bold mb-4">What Professionals Say</h2>
+                <p class="text-gray-400 max-w-2xl mx-auto">Feedback from electrical engineers and facility management professionals.</p>
+                <div class="circuit-line w-24 mx-auto mt-6"></div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div class="tech-card">
+                    <div class="flex items-start mb-6">
+                        <div class="text-accent text-4xl mr-4">
+                            <i class="fas fa-quote-left"></i>
+                        </div>
+                    </div>
+                    <p class="text-gray-300 mb-6 italic">
+                        "As the lead electrical engineer for a major hospital, CriticalAsset has transformed how we manage our power distribution systems. The ability to instantly access panel schedules and track load patterns has reduced our troubleshooting time by over 60%."
+                    </p>
+                    <div class="border-t border-gray-700 pt-4">
+                        <div class="font-semibold">Michael Chen</div>
+                        <div class="text-sm text-gray-400">Chief Electrical Engineer</div>
+                        <div class="text-xs text-accent mt-1">Regional Medical Center</div>
+                    </div>
+                </div>
+
+                <div class="tech-card">
+                    <div class="flex items-start mb-6">
+                        <div class="text-accent text-4xl mr-4">
+                            <i class="fas fa-quote-left"></i>
+                        </div>
+                    </div>
+                    <p class="text-gray-300 mb-6 italic">
+                        "The technical integration capabilities are what sold us on CriticalAsset. Being able to connect directly to our BMS and power monitoring systems created a single source of truth for our entire team, eliminating the information silos we struggled with."
+                    </p>
+                    <div class="border-t border-gray-700 pt-4">
+                        <div class="font-semibold">Sarah Washington</div>
+                        <div class="text-sm text-gray-400">Facilities Technology Director</div>
+                        <div class="text-xs text-accent mt-1">Global Manufacturing Corp</div>
+                    </div>
+                </div>
+
+                <div class="tech-card">
+                    <div class="flex items-start mb-6">
+                        <div class="text-accent text-4xl mr-4">
+                            <i class="fas fa-quote-left"></i>
+                        </div>
+                    </div>
+                    <p class="text-gray-300 mb-6 italic">
+                        "As someone who manages electrical systems across multiple properties, the ability to remotely diagnose issues has been game-changing. The ROI was evident within the first quarter through reduced truck rolls and faster issue resolution."
+                    </p>
+                    <div class="border-t border-gray-700 pt-4">
+                        <div class="font-semibold">Robert Jimenez</div>
+                        <div class="text-sm text-gray-400">Senior Electrical Systems Manager</div>
+                        <div class="text-xs text-accent mt-1">Commercial Properties Group</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section id="contact" class="section gradient-bg relative overflow-hidden">
+        <div class="circuit-pattern"></div>
+        <div class="container mx-auto px-4 relative z-10">
+            <div class="max-w-3xl mx-auto text-center">
+                <h2 class="text-3xl md:text-4xl font-bold mb-6">Ready to Transform Your Electrical Infrastructure?</h2>
+                <p class="text-xl text-gray-300 mb-8">
+                    Schedule a technical consultation with our engineering team to see how CriticalAsset can optimize your building's electrical systems.
+                </p>
+
+                <div class="bg-gray-900 bg-opacity-70 p-8 rounded-lg border border-gray-700">
+                    <div class="flex flex-wrap -mx-2">
+                        <div class="w-full md:w-1/2 px-2 mb-4">
+                            <input type="text" placeholder="Full Name" class="w-full bg-gray-800 border border-gray-700 rounded px-4 py-3 text-white focus:outline-none focus:border-accent">
+                        </div>
+                        <div class="w-full md:w-1/2 px-2 mb-4">
+                            <input type="email" placeholder="Work Email" class="w-full bg-gray-800 border border-gray-700 rounded px-4 py-3 text-white focus:outline-none focus:border-accent">
+                        </div>
+                    </div>
+                    
+                    <div class="flex flex-wrap -mx-2">
+                        <div class="w-full md:w-1/2 px-2 mb-4">
+                            <input type="text" placeholder="Company" class="w-full bg-gray-800 border border-gray-700 rounded px-4 py-3 text-white focus:outline-none focus:border-accent">
+                        </div>
+                        <div class="w-full md:w-1/2 px-2 mb-4">
+                            <input type="tel" placeholder="Phone Number" class="w-full bg-gray-800 border border-gray-700 rounded px-4 py-3 text-white focus:outline-none focus:border-accent">
+                        </div>
+                    </div>
+                    
+                    <div class="mb-4">
+                        <textarea placeholder="Tell us about your electrical system management needs" rows="4" class="w-full bg-gray-800 border border-gray-700 rounded px-4 py-3 text-white focus:outline-none focus:border-accent"></textarea>
+                    </div>
+
+                    <div class="mb-6">
+                        <select class="w-full bg-gray-800 border border-gray-700 rounded px-4 py-3 text-white focus:outline-none focus:border-accent">
+                            <option>What best describes your facility?</option>
+                            <option>Commercial Building</option>
+                            <option>Manufacturing Facility</option>
+                            <option>Healthcare Facility</option>
+                            <option>Data Center</option>
+                            <option>Educational Institution</option>
+                            <option>Government Facility</option>
+                            <option>Other</option>
+                        </select>
+                    </div>
+                    
+                    <button class="w-full btn-primary text-lg py-4">
+                        <span class="mr-2">Schedule Technical Consultation</span>
+                        <i class="fas fa-arrow-right"></i>
+                    </button>
+                    
+                    <div class="mt-4 text-sm text-gray-400 text-center">
+                        Your information is secure and will not be shared with third parties.
+                    </div>
+                </div>
+                
+                <div class="mt-12 flex flex-col md:flex-row items-center justify-center space-y-6 md:space-y-0 md:space-x-12">
+                    <div class="flex items-center">
+                        <i class="fas fa-phone text-accent mr-3"></i>
+                        <span>+1 (888) 555-0123</span>
+                    </div>
+                    <div class="flex items-center">
+                        <i class="fas fa-envelope text-accent mr-3"></i>
+                        <span><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="e1848f86888f848493888f86a1829388958882808d8092928495cf828e8c">[email&#160;protected]</a></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 py-12">
+        <div class="container mx-auto px-4">
+            <div class="flex flex-wrap">
+                <div class="w-full md:w-1/4 mb-8 md:mb-0">
+                    <div class="text-2xl font-bold mb-6"><span class="text-white">Critical</span><span class="accent-text">Asset</span></div>
+                    <p class="text-gray-400 mb-6">Advanced electrical system management for modern building infrastructure.</p>
+                    <div class="flex space-x-4">
+                        <a href="#" class="text-gray-400 hover:text-accent transition">
+                            <i class="fab fa-linkedin"></i>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-accent transition">
+                            <i class="fab fa-twitter"></i>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-accent transition">
+                            <i class="fab fa-facebook"></i>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-accent transition">
+                            <i class="fab fa-youtube"></i>
+                        </a>
+                    </div>
+                </div>
+                
+                <div class="w-full md:w-3/4">
+                    <div class="grid grid-cols-2 md:grid-cols-4 gap-8">
+                        <div>
+                            <h4 class="text-white font-semibold mb-4">Solutions</h4>
+                            <ul class="space-y-2">
+                                <li><a href="#" class="text-gray-400 hover:text-accent transition">Electrical Mapping</a></li>
+                                <li><a href="#" class="text-gray-400 hover:text-accent transition">Panel Management</a></li>
+                                <li><a href="#" class="text-gray-400 hover:text-accent transition">Load Monitoring</a></li>
+                                <li><a href="#" class="text-gray-400 hover:text-accent transition">Safety Compliance</a></li>
+                                <li><a href="#" class="text-gray-400 hover:text-accent transition">Maintenance</a></li>
+                            </ul>
+                        </div>
+                        
+                        <div>
+                            <h4 class="text-white font-semibold mb-4">Resources</h4>
+                            <ul class="space-y-2">
+                                <li><a href="#" class="text-gray-400 hover:text-accent transition">Documentation</a></li>
+                                <li><a href="#" class="text-gray-400 hover:text-accent transition">API Reference</a></li>
+                                <li><a href="#" class="text-gray-400 hover:text-accent transition">Case Studies</a></li>
+                                <li><a href="#" class="text-gray-400 hover:text-accent transition">Webinars</a></li>
+                                <li><a href="#" class="text-gray-400 hover:text-accent transition">White Papers</a></li>
+                            </ul>
+                        </div>
+                        
+                        <div>
+                            <h4 class="text-white font-semibold mb-4">Company</h4>
+                            <ul class="space-y-2">
+                                <li><a href="#" class="text-gray-400 hover:text-accent transition">About Us</a></li>
+                                <li><a href="#" class="text-gray-400 hover:text-accent transition">Careers</a></li>
+                                <li><a href="#" class="text-gray-400 hover:text-accent transition">Partners</a></li>
+                                <li><a href="#" class="text-gray-400 hover:text-accent transition">News</a></li>
+                                <li><a href="#" class="text-gray-400 hover:text-accent transition">Contact</a></li>
+                            </ul>
+                        </div>
+                        
+                        <div>
+                            <h4 class="text-white font-semibold mb-4">Legal</h4>
+                            <ul class="space-y-2">
+                                <li><a href="#" class="text-gray-400 hover:text-accent transition">Privacy Policy</a></li>
+                                <li><a href="#" class="text-gray-400 hover:text-accent transition">Terms of Service</a></li>
+                                <li><a href="#" class="text-gray-400 hover:text-accent transition">Cookie Policy</a></li>
+                                <li><a href="#" class="text-gray-400 hover:text-accent transition">Security</a></li>
+                                <li><a href="#" class="text-gray-400 hover:text-accent transition">Compliance</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="border-t border-gray-800 mt-12 pt-8 text-center text-gray-500 text-sm">
+                <p>&copy; 2023 CriticalAsset. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JS (Minimal for static display) -->
+    <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+        // This would typically contain interactive elements
+        // Simplified for this demonstration
+    </script>
+</body>
+</html>
+    <script id="html_badge_script1">
+        window.__genspark_remove_badge_link = "https://www.genspark.ai/api/html_badge/" +
+            "remove_badge?token=To%2FBnjzloZ3UfQdcSaYfDmwSZI639OpPBCms8Rry8%2BzYcX5SSmnIe5YZx%2F1zhI27wTTWJWJnywRcDB4UlCcDluECPwzYETjWhqSgGzjBwB2R8f%2BFM9Es4xABPpkOvOFqqeF%2BU1PVrfP0vnuIsZeBMjEZ46rg3%2B6q5%2FB%2FMQ%2F1hHSs8VADZmJiNdyCenFmabryJ9MPstyRwL4ZDTyL0vvGtvAD9Y2G7ZzQnWC%2BEL2TKQydN1h6HN3%2BVtKk%2BTdRvtl3YqMnOzlQLmT7ACLVdJCsM8XDKEvBiLzmZ04K5Ugqu9FGXkxlNsbxOMucIkpkYXJOhB62AX2w6iVJVLTzdr8w%2B1k%2FYZ7NnViFx5nnZa2DwJ7eFJlKZGQWdc1PsenOht%2FuGVaTfGMVkvFs7H3budRtrvomteg3KIX9htKI0%2B6l6CCON9daYNZKzg7XLbCSlTNggWwTNab0g43xEF8qWTN0%2BId3VzT9Mw8TiwPhhPIx3IU9EiqGJREHy8k12U%2FpML2rUNfLoRMAoOqHjm%2FAb7C8EG19vecVE72y%2Fvm4naul8k1sYjb%2BmtZj33soCHmJ3A2sVEVCJMQcvpXx9L0Gdx1xssAK1Vj7MWW4UaWBUAqJ2DE%3D";
+        window.__genspark_locale = "en-US";
+        window.__genspark_token = "To/BnjzloZ3UfQdcSaYfDmwSZI639OpPBCms8Rry8+zYcX5SSmnIe5YZx/1zhI27wTTWJWJnywRcDB4UlCcDluECPwzYETjWhqSgGzjBwB2R8f+FM9Es4xABPpkOvOFqqeF+U1PVrfP0vnuIsZeBMjEZ46rg3+6q5/B/MQ/1hHSs8VADZmJiNdyCenFmabryJ9MPstyRwL4ZDTyL0vvGtvAD9Y2G7ZzQnWC+EL2TKQydN1h6HN3+VtKk+TdRvtl3YqMnOzlQLmT7ACLVdJCsM8XDKEvBiLzmZ04K5Ugqu9FGXkxlNsbxOMucIkpkYXJOhB62AX2w6iVJVLTzdr8w+1k/YZ7NnViFx5nnZa2DwJ7eFJlKZGQWdc1PsenOht/uGVaTfGMVkvFs7H3budRtrvomteg3KIX9htKI0+6l6CCON9daYNZKzg7XLbCSlTNggWwTNab0g43xEF8qWTN0+Id3VzT9Mw8TiwPhhPIx3IU9EiqGJREHy8k12U/pML2rUNfLoRMAoOqHjm/Ab7C8EG19vecVE72y/vm4naul8k1sYjb+mtZj33soCHmJ3A2sVEVCJMQcvpXx9L0Gdx1xssAK1Vj7MWW4UaWBUAqJ2DE=";
+    </script>
+    

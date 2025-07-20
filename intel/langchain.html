@@ -1,0 +1,945 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LangChain Masterclass - Advanced AI Application Development</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            font-family: 'Inter', sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+            min-height: 100vh;
+        }
+        
+        .gradient-text {
+            background: linear-gradient(45deg, #3b82f6, #8b5cf6);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .card-hover {
+            transition: all 0.3s ease;
+            border: 1px solid #334155;
+        }
+        
+        .card-hover:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+            border-color: #3b82f6;
+        }
+        
+        .tag {
+            display: inline-block;
+            padding: 0.25rem 0.75rem;
+            margin: 0.25rem;
+            background: rgba(59, 130, 246, 0.1);
+            border: 1px solid rgba(59, 130, 246, 0.3);
+            border-radius: 0.375rem;
+            color: #3b82f6;
+            font-size: 0.875rem;
+            transition: all 0.3s ease;
+        }
+        
+        .tag:hover {
+            background: rgba(59, 130, 246, 0.2);
+            border-color: #3b82f6;
+        }
+        
+        .code-block {
+            background: #1e293b;
+            border: 1px solid #334155;
+            border-radius: 0.5rem;
+            padding: 1rem;
+            font-family: 'Courier New', monospace;
+            font-size: 0.875rem;
+            overflow-x: auto;
+            white-space: pre-wrap;
+            color: #e2e8f0;
+        }
+        
+        .nav-link {
+            transition: all 0.3s ease;
+            position: relative;
+        }
+        
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: #3b82f6;
+            transition: width 0.3s ease;
+        }
+        
+        .nav-link:hover::after {
+            width: 100%;
+        }
+        
+        .animate-fade-in {
+            animation: fadeIn 0.6s ease-in-out;
+        }
+        
+        .animate-slide-up {
+            animation: slideUp 0.8s ease-out;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        @keyframes slideUp {
+            from { 
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to { 
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .section-divider {
+            height: 1px;
+            background: linear-gradient(to right, transparent, #334155, transparent);
+            margin: 2rem 0;
+        }
+        
+        .progress-bar {
+            height: 4px;
+            background: linear-gradient(45deg, #3b82f6, #8b5cf6);
+            border-radius: 2px;
+            transition: width 0.3s ease;
+        }
+        
+        .status-badge {
+            display: inline-flex;
+            align-items: center;
+            padding: 0.25rem 0.75rem;
+            background: rgba(34, 197, 94, 0.1);
+            border: 1px solid rgba(34, 197, 94, 0.3);
+            border-radius: 9999px;
+            color: #22c55e;
+            font-size: 0.875rem;
+            font-weight: 500;
+        }
+        
+        .icon-pulse {
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+    </style>
+</head>
+<body class="text-gray-100">
+    <!-- Navigation -->
+    <nav class="bg-slate-900 bg-opacity-80 backdrop-blur-sm border-b border-slate-700 sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <div class="flex items-center">
+                    <i class="fas fa-link text-blue-500 text-2xl mr-3"></i>
+                    <span class="text-xl font-bold text-white">LangChain Masterclass</span>
+                </div>
+                <div class="hidden md:flex space-x-8">
+                    <a href="#fundamentals" class="nav-link text-gray-300 hover:text-white">Fundamentals</a>
+                    <a href="#components" class="nav-link text-gray-300 hover:text-white">Components</a>
+                    <a href="#advanced" class="nav-link text-gray-300 hover:text-white">Advanced</a>
+                    <a href="#examples" class="nav-link text-gray-300 hover:text-white">Examples</a>
+                    <a href="#resources" class="nav-link text-gray-300 hover:text-white">Resources</a>
+                </div>
+                <div class="bg-red-500 text-white px-4 py-2 rounded-lg font-medium">
+                    <i class="fas fa-graduation-cap mr-2"></i>Masterclass
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="py-20 px-4 text-center animate-fade-in">
+        <div class="max-w-4xl mx-auto">
+            <h1 class="text-5xl font-bold mb-6">
+                <span class="text-white">LangChain</span>
+                <span class="gradient-text">Masterclass</span>
+            </h1>
+            <p class="text-xl text-gray-300 mb-8 leading-relaxed">
+                Master the art of building powerful AI applications with LangChain. 
+                From fundamentals to advanced architectures, comprehensive guides and practical implementations.
+            </p>
+            
+            <!-- Tags -->
+            <div class="flex flex-wrap justify-center mb-8">
+                <span class="tag"># AI Development</span>
+                <span class="tag"># LLM Applications</span>
+                <span class="tag"># Vector Databases</span>
+                <span class="tag"># Retrieval Augmented Generation</span>
+                <span class="tag"># Agent Systems</span>
+                <span class="tag"># Memory Management</span>
+                <span class="tag"># Chain Orchestration</span>
+                <span class="tag"># Production Ready</span>
+            </div>
+            
+            <!-- Status -->
+            <div class="flex justify-center items-center space-x-4">
+                <div class="status-badge">
+                    <i class="fas fa-check-circle mr-2"></i>
+                    All Modules Available
+                </div>
+                <div class="text-gray-400">
+                    <i class="fas fa-clock mr-2"></i>
+                    Last Updated: December 2024
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Main Content -->
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-20">
+        
+        <!-- Fundamentals Section -->
+        <section id="fundamentals" class="mb-16 animate-slide-up">
+            <h2 class="text-3xl font-bold mb-8 text-center">
+                <i class="fas fa-foundation text-blue-500 mr-3"></i>
+                LangChain Fundamentals
+            </h2>
+            
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- Introduction Card -->
+                <div class="bg-slate-800 rounded-lg p-6 card-hover">
+                    <div class="flex items-center mb-4">
+                        <i class="fas fa-play-circle text-blue-500 text-2xl mr-3"></i>
+                        <h3 class="text-xl font-semibold">Introduction to LangChain</h3>
+                    </div>
+                    <p class="text-gray-300 mb-4">
+                        Understanding the core philosophy and architecture of LangChain framework for building AI applications.
+                    </p>
+                    <div class="progress-bar" style="width: 100%;"></div>
+                    <div class="text-sm text-gray-400 mt-2">intro.md</div>
+                </div>
+
+                <!-- Installation Card -->
+                <div class="bg-slate-800 rounded-lg p-6 card-hover">
+                    <div class="flex items-center mb-4">
+                        <i class="fas fa-download text-green-500 text-2xl mr-3"></i>
+                        <h3 class="text-xl font-semibold">Installation & Setup</h3>
+                    </div>
+                    <p class="text-gray-300 mb-4">
+                        Step-by-step guide to install LangChain and configure your development environment.
+                    </p>
+                    <div class="progress-bar" style="width: 100%;"></div>
+                    <div class="text-sm text-gray-400 mt-2">setup.md</div>
+                </div>
+
+                <!-- Basic Concepts Card -->
+                <div class="bg-slate-800 rounded-lg p-6 card-hover">
+                    <div class="flex items-center mb-4">
+                        <i class="fas fa-cube text-purple-500 text-2xl mr-3"></i>
+                        <h3 class="text-xl font-semibold">Core Concepts</h3>
+                    </div>
+                    <p class="text-gray-300 mb-4">
+                        Essential concepts including chains, prompts, memory, and the foundational building blocks.
+                    </p>
+                    <div class="progress-bar" style="width: 100%;"></div>
+                    <div class="text-sm text-gray-400 mt-2">concepts.md</div>
+                </div>
+            </div>
+
+            <!-- Code Example -->
+            <div class="mt-8">
+                <h4 class="text-lg font-semibold mb-4">
+                    <i class="fas fa-code text-yellow-500 mr-2"></i>
+                    Quick Start Example
+                </h4>
+                <div class="code-block">
+from langchain.llms import OpenAI
+from langchain.prompts import PromptTemplate
+from langchain.chains import LLMChain
+
+# Initialize the language model
+llm = OpenAI(temperature=0.7)
+
+# Create a prompt template
+prompt = PromptTemplate(
+    input_variables=["topic"],
+    template="Write a comprehensive guide about {topic}:"
+)
+
+# Create a chain
+chain = LLMChain(llm=llm, prompt=prompt)
+
+# Run the chain
+result = chain.run("machine learning")
+print(result)
+                </div>
+            </div>
+        </section>
+
+        <div class="section-divider"></div>
+
+        <!-- Components Section -->
+        <section id="components" class="mb-16 animate-slide-up">
+            <h2 class="text-3xl font-bold mb-8 text-center">
+                <i class="fas fa-puzzle-piece text-purple-500 mr-3"></i>
+                Core Components
+            </h2>
+            
+            <div class="grid md:grid-cols-2 gap-6">
+                <!-- LLMs and Chat Models -->
+                <div class="bg-slate-800 rounded-lg p-6 card-hover">
+                    <div class="flex items-center mb-4">
+                        <i class="fas fa-brain text-blue-500 text-2xl mr-3"></i>
+                        <h3 class="text-xl font-semibold">LLMs & Chat Models</h3>
+                    </div>
+                    <p class="text-gray-300 mb-4">
+                        Working with different language models including OpenAI, Anthropic, and local models.
+                    </p>
+                    <div class="code-block text-sm">
+from langchain.llms import OpenAI, Anthropic
+from langchain.chat_models import ChatOpenAI
+
+# Different model types
+llm = OpenAI(model_name="text-davinci-003")
+chat_model = ChatOpenAI(model_name="gpt-4")
+                    </div>
+                </div>
+
+                <!-- Prompts and Templates -->
+                <div class="bg-slate-800 rounded-lg p-6 card-hover">
+                    <div class="flex items-center mb-4">
+                        <i class="fas fa-edit text-green-500 text-2xl mr-3"></i>
+                        <h3 class="text-xl font-semibold">Prompts & Templates</h3>
+                    </div>
+                    <p class="text-gray-300 mb-4">
+                        Creating dynamic prompts with variables, few-shot examples, and conditional logic.
+                    </p>
+                    <div class="code-block text-sm">
+from langchain.prompts import PromptTemplate
+
+template = """
+Role: You are an expert {role}.
+Task: {task}
+Context: {context}
+Format: {format}
+"""
+
+prompt = PromptTemplate(
+    template=template,
+    input_variables=["role", "task", "context", "format"]
+)
+                    </div>
+                </div>
+
+                <!-- Chains -->
+                <div class="bg-slate-800 rounded-lg p-6 card-hover">
+                    <div class="flex items-center mb-4">
+                        <i class="fas fa-link text-yellow-500 text-2xl mr-3"></i>
+                        <h3 class="text-xl font-semibold">Chains</h3>
+                    </div>
+                    <p class="text-gray-300 mb-4">
+                        Sequential processing with LLMChain, SimpleSequentialChain, and custom chain implementations.
+                    </p>
+                    <div class="code-block text-sm">
+from langchain.chains import LLMChain, SimpleSequentialChain
+
+# Create sequential chains
+chain1 = LLMChain(llm=llm, prompt=prompt1)
+chain2 = LLMChain(llm=llm, prompt=prompt2)
+
+overall_chain = SimpleSequentialChain(
+    chains=[chain1, chain2],
+    verbose=True
+)
+                    </div>
+                </div>
+
+                <!-- Memory -->
+                <div class="bg-slate-800 rounded-lg p-6 card-hover">
+                    <div class="flex items-center mb-4">
+                        <i class="fas fa-memory text-red-500 text-2xl mr-3"></i>
+                        <h3 class="text-xl font-semibold">Memory Systems</h3>
+                    </div>
+                    <p class="text-gray-300 mb-4">
+                        Conversation memory, entity memory, and persistent storage for maintaining context.
+                    </p>
+                    <div class="code-block text-sm">
+from langchain.memory import ConversationBufferMemory
+
+memory = ConversationBufferMemory(
+    memory_key="chat_history",
+    return_messages=True
+)
+
+chain = LLMChain(
+    llm=llm,
+    prompt=prompt,
+    memory=memory
+)
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <div class="section-divider"></div>
+
+        <!-- Advanced Topics -->
+        <section id="advanced" class="mb-16 animate-slide-up">
+            <h2 class="text-3xl font-bold mb-8 text-center">
+                <i class="fas fa-rocket text-red-500 mr-3"></i>
+                Advanced Topics
+            </h2>
+            
+            <div class="grid lg:grid-cols-2 gap-8">
+                <!-- Vector Stores & Retrieval -->
+                <div class="bg-slate-800 rounded-lg p-6 card-hover">
+                    <div class="flex items-center mb-4">
+                        <i class="fas fa-database text-cyan-500 text-2xl mr-3"></i>
+                        <h3 class="text-xl font-semibold">Vector Stores & Retrieval</h3>
+                    </div>
+                    <p class="text-gray-300 mb-4">
+                        Implementing RAG (Retrieval Augmented Generation) with vector databases like Pinecone, Weaviate, and Chroma.
+                    </p>
+                    <div class="code-block text-sm">
+from langchain.vectorstores import Chroma
+from langchain.embeddings import OpenAIEmbeddings
+from langchain.text_splitter import CharacterTextSplitter
+
+# Create embeddings and vector store
+embeddings = OpenAIEmbeddings()
+text_splitter = CharacterTextSplitter(chunk_size=1000)
+
+# Split documents and create vector store
+texts = text_splitter.split_documents(documents)
+vectorstore = Chroma.from_documents(texts, embeddings)
+
+# Create retriever
+retriever = vectorstore.as_retriever(
+    search_type="similarity",
+    search_kwargs={"k": 4}
+)
+                    </div>
+                </div>
+
+                <!-- Agents & Tools -->
+                <div class="bg-slate-800 rounded-lg p-6 card-hover">
+                    <div class="flex items-center mb-4">
+                        <i class="fas fa-robot text-orange-500 text-2xl mr-3"></i>
+                        <h3 class="text-xl font-semibold">Agents & Tools</h3>
+                    </div>
+                    <p class="text-gray-300 mb-4">
+                        Building autonomous agents with tool usage, planning, and execution capabilities.
+                    </p>
+                    <div class="code-block text-sm">
+from langchain.agents import initialize_agent, Tool
+from langchain.tools import DuckDuckGoSearchRun
+
+# Define tools
+search = DuckDuckGoSearchRun()
+tools = [
+    Tool(
+        name="Search",
+        func=search.run,
+        description="Search for current information"
+    )
+]
+
+# Initialize agent
+agent = initialize_agent(
+    tools,
+    llm,
+    agent="zero-shot-react-description",
+    verbose=True
+)
+
+# Run agent
+result = agent.run("What's the latest news about AI?")
+                    </div>
+                </div>
+
+                <!-- Custom Chains -->
+                <div class="bg-slate-800 rounded-lg p-6 card-hover">
+                    <div class="flex items-center mb-4">
+                        <i class="fas fa-cogs text-indigo-500 text-2xl mr-3"></i>
+                        <h3 class="text-xl font-semibold">Custom Chain Development</h3>
+                    </div>
+                    <p class="text-gray-300 mb-4">
+                        Creating custom chains for specific use cases and complex workflows.
+                    </p>
+                    <div class="code-block text-sm">
+from langchain.chains.base import Chain
+from typing import Dict, List
+
+class CustomAnalysisChain(Chain):
+    """Custom chain for document analysis"""
+    
+    def __init__(self, llm, **kwargs):
+        super().__init__(**kwargs)
+        self.llm = llm
+    
+    @property
+    def input_keys(self) -> List[str]:
+        return ["document"]
+    
+    @property
+    def output_keys(self) -> List[str]:
+        return ["analysis"]
+    
+    def _call(self, inputs: Dict[str, str]) -> Dict[str, str]:
+        # Custom processing logic
+        analysis = self.llm(f"Analyze: {inputs['document']}")
+        return {"analysis": analysis}
+                    </div>
+                </div>
+
+                <!-- Performance Optimization -->
+                <div class="bg-slate-800 rounded-lg p-6 card-hover">
+                    <div class="flex items-center mb-4">
+                        <i class="fas fa-tachometer-alt text-green-500 text-2xl mr-3"></i>
+                        <h3 class="text-xl font-semibold">Performance Optimization</h3>
+                    </div>
+                    <p class="text-gray-300 mb-4">
+                        Strategies for optimizing LangChain applications including caching, streaming, and async operations.
+                    </p>
+                    <div class="code-block text-sm">
+from langchain.cache import InMemoryCache
+from langchain.callbacks.streaming_stdout import StreamingStdOutCallbackHandler
+import asyncio
+
+# Enable caching
+langchain.llm_cache = InMemoryCache()
+
+# Streaming responses
+llm = OpenAI(
+    streaming=True,
+    callbacks=[StreamingStdOutCallbackHandler()]
+)
+
+# Async operations
+async def async_chain_call(chain, input_data):
+    return await chain.acall(input_data)
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <div class="section-divider"></div>
+
+        <!-- Practical Examples -->
+        <section id="examples" class="mb-16 animate-slide-up">
+            <h2 class="text-3xl font-bold mb-8 text-center">
+                <i class="fas fa-lightbulb text-yellow-500 mr-3"></i>
+                Practical Examples
+            </h2>
+            
+            <div class="space-y-8">
+                <!-- Document Q&A System -->
+                <div class="bg-slate-800 rounded-lg p-6 card-hover">
+                    <h3 class="text-xl font-semibold mb-4">
+                        <i class="fas fa-question-circle text-blue-500 mr-2"></i>
+                        Document Q&A System
+                    </h3>
+                    <p class="text-gray-300 mb-4">
+                        Complete implementation of a document question-answering system using RAG.
+                    </p>
+                    <div class="code-block">
+from langchain.document_loaders import PyPDFLoader
+from langchain.chains import RetrievalQA
+from langchain.vectorstores import FAISS
+
+# Load and process documents
+loader = PyPDFLoader("document.pdf")
+documents = loader.load()
+
+# Split documents
+text_splitter = CharacterTextSplitter(
+    chunk_size=1000,
+    chunk_overlap=200
+)
+texts = text_splitter.split_documents(documents)
+
+# Create vector store
+embeddings = OpenAIEmbeddings()
+vectorstore = FAISS.from_documents(texts, embeddings)
+
+# Create Q&A chain
+qa_chain = RetrievalQA.from_chain_type(
+    llm=llm,
+    chain_type="stuff",
+    retriever=vectorstore.as_retriever(),
+    return_source_documents=True
+)
+
+# Ask questions
+query = "What are the main conclusions of the document?"
+result = qa_chain({"query": query})
+print(result["result"])
+                    </div>
+                </div>
+
+                <!-- Chatbot with Memory -->
+                <div class="bg-slate-800 rounded-lg p-6 card-hover">
+                    <h3 class="text-xl font-semibold mb-4">
+                        <i class="fas fa-comments text-green-500 mr-2"></i>
+                        Conversational Chatbot
+                    </h3>
+                    <p class="text-gray-300 mb-4">
+                        Building a chatbot with conversation memory and context awareness.
+                    </p>
+                    <div class="code-block">
+from langchain.memory import ConversationBufferWindowMemory
+from langchain.chains import ConversationChain
+
+# Initialize memory with window
+memory = ConversationBufferWindowMemory(
+    k=5,  # Remember last 5 exchanges
+    return_messages=True
+)
+
+# Create conversation chain
+conversation = ConversationChain(
+    llm=llm,
+    memory=memory,
+    verbose=True
+)
+
+# Chat loop
+while True:
+    user_input = input("You: ")
+    if user_input.lower() in ['quit', 'exit']:
+        break
+    
+    response = conversation.predict(input=user_input)
+    print(f"Bot: {response}")
+                    </div>
+                </div>
+
+                <!-- Multi-Agent System -->
+                <div class="bg-slate-800 rounded-lg p-6 card-hover">
+                    <h3 class="text-xl font-semibold mb-4">
+                        <i class="fas fa-users text-purple-500 mr-2"></i>
+                        Multi-Agent Collaboration
+                    </h3>
+                    <p class="text-gray-300 mb-4">
+                        Coordinating multiple specialized agents for complex task completion.
+                    </p>
+                    <div class="code-block">
+from langchain.agents import initialize_agent, Tool
+
+# Define specialized tools
+research_tool = Tool(
+    name="Research",
+    func=lambda x: f"Research results for: {x}",
+    description="Conduct research on topics"
+)
+
+analysis_tool = Tool(
+    name="Analysis",
+    func=lambda x: f"Analysis of: {x}",
+    description="Analyze data and information"
+)
+
+# Create specialized agents
+researcher = initialize_agent(
+    [research_tool],
+    llm,
+    agent="zero-shot-react-description"
+)
+
+analyst = initialize_agent(
+    [analysis_tool],
+    llm,
+    agent="zero-shot-react-description"
+)
+
+# Orchestrate agents
+def multi_agent_workflow(topic):
+    # Step 1: Research
+    research_result = researcher.run(f"Research {topic}")
+    
+    # Step 2: Analysis
+    analysis_result = analyst.run(f"Analyze {research_result}")
+    
+    return analysis_result
+
+result = multi_agent_workflow("artificial intelligence trends")
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <div class="section-divider"></div>
+
+        <!-- Best Practices -->
+        <section class="mb-16 animate-slide-up">
+            <h2 class="text-3xl font-bold mb-8 text-center">
+                <i class="fas fa-star text-yellow-500 mr-3"></i>
+                Best Practices & Guidelines
+            </h2>
+            
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <div class="bg-slate-800 rounded-lg p-6 card-hover">
+                    <h3 class="text-lg font-semibold mb-3">
+                        <i class="fas fa-shield-alt text-green-500 mr-2"></i>
+                        Error Handling
+                    </h3>
+                    <p class="text-gray-300 text-sm">
+                        Implement robust error handling and fallback mechanisms for production applications.
+                    </p>
+                </div>
+
+                <div class="bg-slate-800 rounded-lg p-6 card-hover">
+                    <h3 class="text-lg font-semibold mb-3">
+                        <i class="fas fa-key text-blue-500 mr-2"></i>
+                        API Key Management
+                    </h3>
+                    <p class="text-gray-300 text-sm">
+                        Securely manage API keys and credentials using environment variables and secret management.
+                    </p>
+                </div>
+
+                <div class="bg-slate-800 rounded-lg p-6 card-hover">
+                    <h3 class="text-lg font-semibold mb-3">
+                        <i class="fas fa-chart-line text-purple-500 mr-2"></i>
+                        Monitoring & Logging
+                    </h3>
+                    <p class="text-gray-300 text-sm">
+                        Implement comprehensive logging and monitoring for chain execution and performance tracking.
+                    </p>
+                </div>
+
+                <div class="bg-slate-800 rounded-lg p-6 card-hover">
+                    <h3 class="text-lg font-semibold mb-3">
+                        <i class="fas fa-bolt text-yellow-500 mr-2"></i>
+                        Performance Tuning
+                    </h3>
+                    <p class="text-gray-300 text-sm">
+                        Optimize chain execution with caching, batching, and efficient prompt engineering.
+                    </p>
+                </div>
+
+                <div class="bg-slate-800 rounded-lg p-6 card-hover">
+                    <h3 class="text-lg font-semibold mb-3">
+                        <i class="fas fa-test-tube text-red-500 mr-2"></i>
+                        Testing Strategies
+                    </h3>
+                    <p class="text-gray-300 text-sm">
+                        Develop comprehensive testing strategies for LLM applications including unit and integration tests.
+                    </p>
+                </div>
+
+                <div class="bg-slate-800 rounded-lg p-6 card-hover">
+                    <h3 class="text-lg font-semibold mb-3">
+                        <i class="fas fa-cloud text-cyan-500 mr-2"></i>
+                        Deployment
+                    </h3>
+                    <p class="text-gray-300 text-sm">
+                        Best practices for deploying LangChain applications to production environments.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <div class="section-divider"></div>
+
+        <!-- Resources Section -->
+        <section id="resources" class="mb-16 animate-slide-up">
+            <h2 class="text-3xl font-bold mb-8 text-center">
+                <i class="fas fa-book text-indigo-500 mr-3"></i>
+                Resources & References
+            </h2>
+            
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- Repository Status -->
+                <div class="bg-slate-800 rounded-lg p-6 card-hover">
+                    <h3 class="text-lg font-semibold mb-4 text-blue-400">Repository Status</h3>
+                    <div class="space-y-3">
+                        <div class="flex justify-between">
+                            <span class="text-gray-300">Module Count</span>
+                            <span class="text-white font-bold">24</span>
+                        </div>
+                        <div class="flex justify-between">
+                            <span class="text-gray-300">Code Examples</span>
+                            <span class="text-white font-bold">156</span>
+                        </div>
+                        <div class="flex justify-between">
+                            <span class="text-gray-300">Exercises</span>
+                            <span class="text-white font-bold">48</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- System Info -->
+                <div class="bg-slate-800 rounded-lg p-6 card-hover">
+                    <h3 class="text-lg font-semibold mb-4 text-green-400">System Requirements</h3>
+                    <div class="space-y-2 text-sm">
+                        <div class="text-gray-300">Python 3.8+</div>
+                        <div class="text-gray-300">LangChain 0.1.0+</div>
+                        <div class="text-gray-300">OpenAI API Key</div>
+                        <div class="text-gray-300">Vector Database</div>
+                    </div>
+                </div>
+
+                <!-- Documentation Types -->
+                <div class="bg-slate-800 rounded-lg p-6 card-hover">
+                    <h3 class="text-lg font-semibold mb-4 text-purple-400">Content Types</h3>
+                    <div class="space-y-2">
+                        <div class="flex items-center">
+                            <span class="tag text-xs">Tutorials</span>
+                            <span class="tag text-xs">API Reference</span>
+                        </div>
+                        <div class="flex items-center">
+                            <span class="tag text-xs">Examples</span>
+                            <span class="tag text-xs">Best Practices</span>
+                        </div>
+                        <div class="flex items-center">
+                            <span class="tag text-xs">Case Studies</span>
+                            <span class="tag text-xs">Troubleshooting</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- External Resources -->
+            <div class="mt-8 bg-slate-800 rounded-lg p-6">
+                <h3 class="text-xl font-semibold mb-4">
+                    <i class="fas fa-external-link-alt text-blue-500 mr-2"></i>
+                    External Resources
+                </h3>
+                <div class="grid md:grid-cols-2 gap-4">
+                    <div>
+                        <h4 class="font-semibold mb-2 text-blue-400">Official Documentation</h4>
+                        <ul class="space-y-1 text-sm text-gray-300">
+                            <li>• LangChain Documentation</li>
+                            <li>• LangChain Python API Reference</li>
+                            <li>• LangChain Community Hub</li>
+                            <li>• LangChain GitHub Repository</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h4 class="font-semibold mb-2 text-green-400">Community Resources</h4>
+                        <ul class="space-y-1 text-sm text-gray-300">
+                            <li>• LangChain Discord Server</li>
+                            <li>• Stack Overflow Questions</li>
+                            <li>• Reddit r/LangChain</li>
+                            <li>• YouTube Tutorials</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Final Repository Info -->
+        <section class="bg-slate-800 rounded-lg p-6 border border-slate-700">
+            <div class="grid md:grid-cols-4 gap-4 text-center">
+                <div>
+                    <div class="text-2xl font-bold text-blue-400">24</div>
+                    <div class="text-sm text-gray-400">Modules</div>
+                </div>
+                <div>
+                    <div class="text-2xl font-bold text-green-400">156</div>
+                    <div class="text-sm text-gray-400">Code Examples</div>
+                </div>
+                <div>
+                    <div class="text-2xl font-bold text-purple-400">48</div>
+                    <div class="text-sm text-gray-400">Exercises</div>
+                </div>
+                <div>
+                    <div class="text-2xl font-bold text-yellow-400">100%</div>
+                    <div class="text-sm text-gray-400">Complete</div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-slate-900 border-t border-slate-700 py-8">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid md:grid-cols-3 gap-8">
+                <div>
+                    <h4 class="text-lg font-semibold mb-4">Company</h4>
+                    <ul class="space-y-2 text-sm text-gray-400">
+                        <li>About</li>
+                        <li>Careers</li>
+                        <li>Contact</li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="text-lg font-semibold mb-4">Resources</h4>
+                    <ul class="space-y-2 text-sm text-gray-400">
+                        <li>Documentation</li>
+                        <li>API Reference</li>
+                        <li>Community</li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="text-lg font-semibold mb-4">Connect</h4>
+                    <div class="flex space-x-4">
+                        <i class="fab fa-github text-gray-400 hover:text-white cursor-pointer"></i>
+                        <i class="fab fa-twitter text-gray-400 hover:text-white cursor-pointer"></i>
+                        <i class="fab fa-linkedin text-gray-400 hover:text-white cursor-pointer"></i>
+                    </div>
+                </div>
+            </div>
+            <div class="border-t border-slate-700 mt-8 pt-8 text-center text-sm text-gray-400">
+                <p>&copy; 2025 No friction. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+
+        // Add loading animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        // Observe all animated elements
+        document.querySelectorAll('.animate-slide-up').forEach(el => {
+            el.style.opacity = '0';
+            el.style.transform = 'translateY(30px)';
+            el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+            observer.observe(el);
+        });
+
+        // Add hover effects to cards
+        document.querySelectorAll('.card-hover').forEach(card => {
+            card.addEventListener('mouseenter', () => {
+                card.style.transform = 'translateY(-4px)';
+            });
+            
+            card.addEventListener('mouseleave', () => {
+                card.style.transform = 'translateY(0)';
+            });
+        });
+    </script>
+</body>
+</html>

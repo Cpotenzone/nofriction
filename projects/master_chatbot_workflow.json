@@ -1,0 +1,691 @@
+{
+  "name": "Master Chatbot Workflow",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "chatbot",
+        "options": {
+          "rawBody": true
+        }
+      },
+      "id": "webhook-trigger",
+      "name": "Webhook Trigger",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 1,
+      "position": [240, 300],
+      "webhookId": "chatbot-webhook"
+    },
+    {
+      "parameters": {
+        "jsCode": "// Parse multipart form data and extract all fields\nconst body = $input.first().body;\nconst threadId = body.threadId;\nconst model = body.model;\nconst text = body.text || '';\nconst fileCount = parseInt(body.fileCount) || 0;\nconst messagesJson = body.messages;\n\n// Parse message history\nlet messageHistory = [];\ntry {\n  messageHistory = JSON.parse(messagesJson || '[]');\n} catch (error) {\n  console.log('Error parsing messages:', error);\n  messageHistory = [];\n}\n\n// Extract user email from Google auth (you'll need to implement this based on your auth setup)\n// For now, we'll use a placeholder - replace with actual Google auth extraction\nconst userEmail = body.userEmail || 'user@example.com'; // TODO: Extract from Google JWT/session\n\n// Process uploaded files\nconst files = [];\nfor (let i = 0; i < fileCount; i++) {\n  const fileKey = `file${i}`;\n  if (body[fileKey]) {\n    files.push({\n      index: i,\n      file: body[fileKey],\n      name: body[fileKey].filename || `file${i}`,\n      type: body[fileKey].mimeType || 'application/octet-stream'\n    });\n  }\n}\n\n// Determine if this is a new session or continuing\nconst isNewSession = !threadId || threadId === 'new';\nconst sessionId = isNewSession ? `session_${Date.now()}_${Math.random().toString(36).substr(2, 9)}` : threadId;\n\nreturn {\n  userEmail,\n  sessionId,\n  model,\n  text,\n  files,\n  fileCount,\n  messageHistory,\n  isNewSession,\n  timestamp: new Date().toISOString()\n};"
+      },
+      "id": "parse-input",
+      "name": "Parse Input Data",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [460, 300]
+    },
+    {
+      "parameters": {
+        "operation": "search",
+        "base": {
+          "__rl": true,
+          "value": "YOUR_AIRTABLE_BASE_ID",
+          "mode": "list"
+        },
+        "table": {
+          "__rl": true,
+          "value": "Users",
+          "mode": "list"
+        },
+        "filterByFormula": "email = '{{ $json.userEmail }}'"
+      },
+      "id": "find-user",
+      "name": "Find User in Airtable",
+      "type": "n8n-nodes-base.airtable",
+      "typeVersion": 2,
+      "position": [680, 300]
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict"
+          },
+          "conditions": [
+            {
+              "id": "user-exists",
+              "leftValue": "={{ $json.length }}",
+              "rightValue": 0,
+              "operator": {
+                "type": "number",
+                "operation": "gt"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "id": "check-user-exists",
+      "name": "User Exists?",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2,
+      "position": [900, 300]
+    },
+    {
+      "parameters": {
+        "operation": "create",
+        "base": {
+          "__rl": true,
+          "value": "YOUR_AIRTABLE_BASE_ID",
+          "mode": "list"
+        },
+        "table": {
+          "__rl": true,
+          "value": "Users",
+          "mode": "list"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "email": "={{ $('Parse Input Data').first().json.userEmail }}",
+            "created_at": "={{ $('Parse Input Data').first().json.timestamp }}",
+            "preferences": "{}",
+            "total_usage": 0
+          }
+        }
+      },
+      "id": "create-user",
+      "name": "Create New User",
+      "type": "n8n-nodes-base.airtable",
+      "typeVersion": 2,
+      "position": [1120, 180]
+    },
+    {
+      "parameters": {
+        "operation": "search",
+        "base": {
+          "__rl": true,
+          "value": "YOUR_AIRTABLE_BASE_ID",
+          "mode": "list"
+        },
+        "table": {
+          "__rl": true,
+          "value": "Sessions",
+          "mode": "list"
+        },
+        "filterByFormula": "session_id = '{{ $('Parse Input Data').first().json.sessionId }}'"
+      },
+      "id": "find-session",
+      "name": "Find Session",
+      "type": "n8n-nodes-base.airtable",
+      "typeVersion": 2,
+      "position": [1340, 300]
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict"
+          },
+          "conditions": [
+            {
+              "id": "session-exists",
+              "leftValue": "={{ $json.length }}",
+              "rightValue": 0,
+              "operator": {
+                "type": "number",
+                "operation": "gt"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "id": "check-session-exists",
+      "name": "Session Exists?",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2,
+      "position": [1560, 300]
+    },
+    {
+      "parameters": {
+        "operation": "create",
+        "base": {
+          "__rl": true,
+          "value": "YOUR_AIRTABLE_BASE_ID",
+          "mode": "list"
+        },
+        "table": {
+          "__rl": true,
+          "value": "Sessions",
+          "mode": "list"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "session_id": "={{ $('Parse Input Data').first().json.sessionId }}",
+            "user_email": "={{ $('Parse Input Data').first().json.userEmail }}",
+            "created_at": "={{ $('Parse Input Data').first().json.timestamp }}",
+            "last_active": "={{ $('Parse Input Data').first().json.timestamp }}",
+            "active_model": "={{ $('Parse Input Data').first().json.model }}",
+            "status": "active"
+          }
+        }
+      },
+      "id": "create-session",
+      "name": "Create New Session",
+      "type": "n8n-nodes-base.airtable",
+      "typeVersion": 2,
+      "position": [1780, 180]
+    },
+    {
+      "parameters": {
+        "operation": "update",
+        "base": {
+          "__rl": true,
+          "value": "YOUR_AIRTABLE_BASE_ID",
+          "mode": "list"
+        },
+        "table": {
+          "__rl": true,
+          "value": "Sessions",
+          "mode": "list"
+        },
+        "id": "={{ $json[0].id }}",
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "last_active": "={{ $('Parse Input Data').first().json.timestamp }}",
+            "active_model": "={{ $('Parse Input Data').first().json.model }}"
+          }
+        }
+      },
+      "id": "update-session",
+      "name": "Update Session",
+      "type": "n8n-nodes-base.airtable",
+      "typeVersion": 2,
+      "position": [1780, 420]
+    },
+    {
+      "parameters": {
+        "jsCode": "// Prepare context for AI model\nconst inputData = $('Parse Input Data').first().json;\nconst model = inputData.model.toLowerCase();\nconst text = inputData.text;\nconst files = inputData.files;\nconst messageHistory = inputData.messageHistory;\n\n// Build conversation context (last 20 messages to stay within token limits)\nconst contextMessages = messageHistory.slice(-20).map(msg => ({\n  role: msg.role === 'ai' ? 'assistant' : 'user',\n  content: msg.content\n}));\n\n// Add current message if text exists\nif (text && text.trim()) {\n  contextMessages.push({\n    role: 'user',\n    content: text\n  });\n}\n\n// Determine which API to use based on model\nlet apiProvider = 'openrouter'; // default\nlet modelName = model;\n\nif (model.includes('gemini') || model.includes('google')) {\n  apiProvider = 'google';\n  modelName = 'gemini-1.5-pro'; // or your preferred Gemini model\n} else if (model.includes('gpt') || model.includes('openai') || model.includes('chatgpt')) {\n  apiProvider = 'openai';\n  modelName = 'gpt-4o'; // or your preferred GPT model\n} else {\n  // Use OpenRouter for everything else\n  modelName = model; // Keep original model name for OpenRouter\n}\n\nreturn {\n  apiProvider,\n  modelName,\n  contextMessages,\n  hasFiles: files.length > 0,\n  files,\n  originalModel: model,\n  sessionId: inputData.sessionId,\n  userEmail: inputData.userEmail\n};"
+      },
+      "id": "prepare-context",
+      "name": "Prepare AI Context",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [2000, 300]
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict"
+          },
+          "conditions": [
+            {
+              "id": "is-google",
+              "leftValue": "={{ $json.apiProvider }}",
+              "rightValue": "google",
+              "operator": {
+                "type": "string",
+                "operation": "equals"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "id": "route-google",
+      "name": "Route to Google?",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2,
+      "position": [2220, 300]
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict"
+          },
+          "conditions": [
+            {
+              "id": "is-openai",
+              "leftValue": "={{ $('Prepare AI Context').first().json.apiProvider }}",
+              "rightValue": "openai",
+              "operator": {
+                "type": "string",
+                "operation": "equals"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "id": "route-openai",
+      "name": "Route to OpenAI?",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2,
+      "position": [2220, 500]
+    },
+    {
+      "parameters": {
+        "resource": "chat",
+        "operation": "create",
+        "model": {
+          "__rl": true,
+          "value": "={{ $('Prepare AI Context').first().json.modelName }}",
+          "mode": "name"
+        },
+        "messages": {
+          "values": "={{ $('Prepare AI Context').first().json.contextMessages }}"
+        },
+        "options": {
+          "temperature": 0.7,
+          "maxTokens": 2000
+        }
+      },
+      "id": "google-gemini",
+      "name": "Google Gemini API",
+      "type": "n8n-nodes-base.googlePaLM",
+      "typeVersion": 1,
+      "position": [2440, 180],
+      "credentials": {
+        "googlePaLMApi": {
+          "id": "YOUR_GOOGLE_CREDENTIAL_ID",
+          "name": "Google PaLM API"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "resource": "chat",
+        "operation": "create",
+        "model": {
+          "__rl": true,
+          "value": "={{ $('Prepare AI Context').first().json.modelName }}",
+          "mode": "name"
+        },
+        "messages": {
+          "values": "={{ $('Prepare AI Context').first().json.contextMessages }}"
+        },
+        "options": {
+          "temperature": 0.7,
+          "maxTokens": 2000
+        }
+      },
+      "id": "openai-gpt",
+      "name": "OpenAI GPT API",
+      "type": "n8n-nodes-base.openAi",
+      "typeVersion": 3,
+      "position": [2440, 380],
+      "credentials": {
+        "openAiApi": {
+          "id": "YOUR_OPENAI_CREDENTIAL_ID",
+          "name": "OpenAI API"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://openrouter.ai/api/v1/chat/completions",
+        "authentication": "predefinedCredentialType",
+        "nodeCredentialType": "httpHeaderAuth",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            }
+          ]
+        },
+        "sendBody": true,
+        "bodyParameters": {
+          "parameters": [
+            {
+              "name": "model",
+              "value": "={{ $('Prepare AI Context').first().json.modelName }}"
+            },
+            {
+              "name": "messages",
+              "value": "={{ $('Prepare AI Context').first().json.contextMessages }}"
+            },
+            {
+              "name": "temperature",
+              "value": "0.7"
+            },
+            {
+              "name": "max_tokens",
+              "value": "2000"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "openrouter-api",
+      "name": "OpenRouter API",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [2440, 580],
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "YOUR_OPENROUTER_CREDENTIAL_ID",
+          "name": "OpenRouter API Key"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "// Normalize responses from different APIs\nconst item = $input.first();\nlet response = '';\nlet modelUsed = '';\nlet tokenUsage = 0;\n\n// Handle different API response formats\nif (item.json.choices) {\n  // OpenAI/OpenRouter format\n  response = item.json.choices[0]?.message?.content || 'No response generated';\n  modelUsed = item.json.model || $('Prepare AI Context').first().json.originalModel;\n  tokenUsage = item.json.usage?.total_tokens || 0;\n} else if (item.json.candidates) {\n  // Google Gemini format\n  response = item.json.candidates[0]?.content?.parts[0]?.text || 'No response generated';\n  modelUsed = 'gemini-1.5-pro';\n  tokenUsage = item.json.usageMetadata?.totalTokenCount || 0;\n} else {\n  // Fallback\n  response = 'Sorry, I encountered an error processing your request.';\n  modelUsed = $('Prepare AI Context').first().json.originalModel;\n}\n\nreturn {\n  reply: response,\n  modelUsed: modelUsed,\n  tokenUsage: tokenUsage,\n  sessionId: $('Prepare AI Context').first().json.sessionId,\n  userEmail: $('Prepare AI Context').first().json.userEmail,\n  timestamp: new Date().toISOString()\n};"
+      },
+      "id": "normalize-response",
+      "name": "Normalize AI Response",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [2660, 380]
+    },
+    {
+      "parameters": {
+        "operation": "create",
+        "base": {
+          "__rl": true,
+          "value": "YOUR_AIRTABLE_BASE_ID",
+          "mode": "list"
+        },
+        "table": {
+          "__rl": true,
+          "value": "Messages",
+          "mode": "list"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "session_id": "={{ $json.sessionId }}",
+            "role": "assistant",
+            "content": "={{ $json.reply }}",
+            "model_used": "={{ $json.modelUsed }}",
+            "timestamp": "={{ $json.timestamp }}",
+            "token_count": "={{ $json.tokenUsage }}"
+          }
+        }
+      },
+      "id": "save-message",
+      "name": "Save AI Response to Airtable",
+      "type": "n8n-nodes-base.airtable",
+      "typeVersion": 2,
+      "position": [2880, 380]
+    },
+    {
+      "parameters": {
+        "respondWith": "json",
+        "responseBody": {
+          "reply": "={{ $('Normalize AI Response').first().json.reply }}",
+          "modelUsed": "={{ $('Normalize AI Response').first().json.modelUsed }}"
+        },
+        "options": {}
+      },
+      "id": "webhook-response",
+      "name": "Send Response",
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1,
+      "position": [3100, 380]
+    },
+    {
+      "parameters": {
+        "respondWith": "json",
+        "responseBody": {
+          "reply": "I'm sorry, I encountered an error processing your request. Please try again.",
+          "modelUsed": "error-handler"
+        },
+        "options": {}
+      },
+      "id": "error-response",
+      "name": "Error Response",
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1,
+      "position": [3100, 580]
+    }
+  ],
+  "connections": {
+    "Webhook Trigger": {
+      "main": [
+        [
+          {
+            "node": "Parse Input Data",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Parse Input Data": {
+      "main": [
+        [
+          {
+            "node": "Find User in Airtable",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Find User in Airtable": {
+      "main": [
+        [
+          {
+            "node": "User Exists?",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "User Exists?": {
+      "main": [
+        [
+          {
+            "node": "Find Session",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Create New User",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Create New User": {
+      "main": [
+        [
+          {
+            "node": "Find Session",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Find Session": {
+      "main": [
+        [
+          {
+            "node": "Session Exists?",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Session Exists?": {
+      "main": [
+        [
+          {
+            "node": "Update Session",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Create New Session",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Create New Session": {
+      "main": [
+        [
+          {
+            "node": "Prepare AI Context",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Update Session": {
+      "main": [
+        [
+          {
+            "node": "Prepare AI Context",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Prepare AI Context": {
+      "main": [
+        [
+          {
+            "node": "Route to Google?",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Route to Google?": {
+      "main": [
+        [
+          {
+            "node": "Google Gemini API",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Route to OpenAI?",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Route to OpenAI?": {
+      "main": [
+        [
+          {
+            "node": "OpenAI GPT API",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "OpenRouter API",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Google Gemini API": {
+      "main": [
+        [
+          {
+            "node": "Normalize AI Response",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "OpenAI GPT API": {
+      "main": [
+        [
+          {
+            "node": "Normalize AI Response",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "OpenRouter API": {
+      "main": [
+        [
+          {
+            "node": "Normalize AI Response",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Normalize AI Response": {
+      "main": [
+        [
+          {
+            "node": "Save AI Response to Airtable",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Save AI Response to Airtable": {
+      "main": [
+        [
+          {
+            "node": "Send Response",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "pinData": {},
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "staticData": null,
+  "tags": [],
+  "triggerCount": 0,
+  "updatedAt": "2025-06-06T10:00:00.000Z",
+  "versionId": "1"
+}

@@ -1,0 +1,495 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>NoFriction Chatbot - Apple Style (Debug)</title>
+  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/emoji-toolkit@8.0.0/extras/css/joypixels.min.css"/>
+  <script src="https://cdn.jsdelivr.net/npm/emoji-toolkit@8.0.0/lib/js/joypixels.min.js"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --system-background-dark: #1c1c1e;
+      --system-secondary-background-dark: #2c2c2e;
+      --system-tertiary-background-dark: #3a3a3c;
+      --system-label-dark: rgba(235, 235, 245, 0.85);
+      --system-secondary-label-dark: rgba(235, 235, 245, 0.6);
+      --system-tertiary-label-dark: rgba(235, 235, 245, 0.3);
+      --system-blue-dark: #0a84ff;
+      --system-gray-dark: #8e8e93;
+      --system-green-dark: #30d158;
+      --system-separator-dark: rgba(84, 84, 88, 0.65);
+      --system-fill-dark: rgba(120, 120, 128, 0.36);
+      --app-bg: var(--system-background-dark);
+      --sidebar-bg: var(--system-secondary-background-dark);
+      --chat-controls-bg: var(--system-secondary-background-dark);
+      --chat-header-bg: var(--system-tertiary-background-dark);
+      --text-primary: var(--system-label-dark);
+      --text-secondary: var(--system-secondary-label-dark);
+      --text-placeholder: var(--system-tertiary-label-dark);
+      --accent-color-primary: var(--system-blue-dark);
+      --accent-color-user: var(--system-green-dark);
+      --border-subtle: var(--system-separator-dark);
+      --input-field-bg: var(--system-fill-dark);
+      --font-family-main: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      --border-radius-standard: 10px;
+      --border-radius-buttons: 8px;
+      --border-radius-messages: 18px;
+      --shadow-subtle: 0 1px 3px rgba(0, 0, 0, 0.1), 0 1px 2px rgba(0, 0, 0, 0.06);
+      --shadow-medium: 0 4px 6px rgba(0, 0, 0, 0.1), 0 2px 4px rgba(0, 0, 0, 0.06);
+      --shadow-strong-for-modal: 0 15px 35px rgba(0,0,0,0.2), 0 5px 15px rgba(0,0,0,0.15);
+    }
+    body { margin: 0; font-family: var(--font-family-main); background: var(--app-bg); color: var(--text-primary); overflow: hidden; -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; }
+    #app-wrapper { position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 850px; min-width: 600px; height: 75vh; min-height: 400px; display: none; flex-direction: row; background: rgba(44, 44, 46, 0.85); backdrop-filter: blur(20px) saturate(180%); -webkit-backdrop-filter: blur(20px) saturate(180%); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: var(--border-radius-standard); box-shadow: var(--shadow-strong-for-modal); overflow: hidden; z-index: 999; }
+    #chat-toggle { position: fixed; bottom: 25px; right: 25px; width: 60px; height: 60px; background: var(--accent-color-primary); color: #fff; border: none; border-radius: 50%; font-size: 28px; cursor: pointer; box-shadow: var(--shadow-medium); z-index: 1000; display: flex; align-items: center; justify-content: center; transition: transform 0.2s ease-out; }
+    #chat-toggle:hover { transform: scale(1.05); }
+    #resize-handle-tl { position: absolute; top: 0; left: 0; width: 18px; height: 18px; cursor: nwse-resize; z-index: 10; }
+    #sidebar { width: 280px; min-width: 240px; background: transparent; border-right: 1px solid var(--border-subtle); padding: 20px; display: flex; flex-direction: column; color: var(--text-primary); flex-shrink: 0; overflow-y: auto; }
+    #sidebar-header { padding-bottom: 15px; margin-bottom: 10px; }
+    #new-chat-btn { background: var(--accent-color-primary); color: white; border: none; padding: 12px 15px; border-radius: var(--border-radius-buttons); cursor: pointer; width: 100%; font-weight: 500; font-size: 0.95em; text-align: center; transition: background-color 0.2s, transform 0.1s; }
+    #new-chat-btn:hover { background: #0070e0; }
+    #new-chat-btn:active { transform: scale(0.98); }
+    #thread-list { list-style: none; padding: 0; margin: 0; overflow-y: auto; flex-grow: 1; }
+    #thread-list li { padding: 12px 10px; cursor: pointer; border-radius: var(--border-radius-buttons); margin-bottom: 6px; transition: background-color 0.15s ease-in-out; }
+    #thread-list li:hover { background: rgba(255, 255, 255, 0.08); }
+    #thread-list li.active-thread { background: var(--accent-color-primary); color: white; }
+    #thread-list li.active-thread .thread-details { color: rgba(255,255,255,0.7); }
+    .thread-title { font-weight: 500; font-size: 0.9em; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; display: block; margin-bottom: 4px; }
+    .thread-details { font-size: 0.75em; color: var(--text-secondary); }
+    #sidebar-footer { padding-top: 15px; border-top: 1px solid var(--border-subtle); margin-top: auto; }
+    #model-selector-label { font-size: 0.85em; font-weight: 500; color: var(--text-secondary); margin-bottom: 8px; display: block; }
+    #model-selector { width: 100%; padding: 10px; border-radius: var(--border-radius-buttons); background: var(--input-field-bg); color: var(--text-primary); border: 1px solid var(--border-subtle); font-size: 0.9em; appearance: none; background-image: url('data:image/svg+xml;charset=US-ASCII,%3Csvg%20width%3D%2220%22%20height%3D%2220%22%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%3E%3Cpath%20d%3D%22M5%208l5%205%205-5z%22%20fill%3D%22%23999%22/%3E%3C/svg%3E'); background-repeat: no-repeat; background-position: right 10px center; padding-right: 30px; }
+    #model-selector:focus { border-color: var(--accent-color-primary); box-shadow: 0 0 0 2px rgba(0, 122, 255, 0.3); }
+    #main-chat-area { flex-grow: 1; display: flex; min-width: 0; background: transparent; }
+    #chat-container { width: 100%; height: 100%; display: flex; flex-direction: column; }
+    #chat-header { background: rgba(28, 28, 30, 0.7); backdrop-filter: blur(10px) saturate(180%); -webkit-backdrop-filter: blur(10px) saturate(180%); padding: 12px 20px; display: flex; align-items: center; color: var(--text-primary); font-weight: 600; font-size: 1.1em; flex-shrink: 0; border-bottom: 1px solid var(--border-subtle); }
+    #current-thread-model { font-size: 0.8em; font-weight: 500; margin-left: auto; color: var(--text-secondary); }
+    #messages { flex: 1; padding: 20px; overflow-y: auto; display: flex; flex-direction: column; gap: 5px; }
+    .message { padding: 10px 16px; border-radius: var(--border-radius-messages); max-width: 75%; word-break: break-word; line-height: 1.45; position: relative; margin-bottom: 8px; box-shadow: var(--shadow-subtle); font-size: 0.95em; }
+    .message.bot { background: var(--accent-color-primary); color: white; align-self: flex-start; border-bottom-left-radius: 5px; }
+    .message.user { background: var(--accent-color-user); color: black; align-self: flex-end; border-bottom-right-radius: 5px; }
+    .message-content a { color: inherit; text-decoration: underline; }
+    .message.bot .message-content a { color: #c1eaff; }
+    .message.user .message-content a { color: #004d15; }
+    .message-content p:first-child, .message-content ul:first-child, .message-content ol:first-child { margin-top: 0; }
+    .message-content p:last-child, .message-content ul:last-child, .message-content ol:last-child { margin-bottom: 0; }
+    .message-content ul, .message-content ol { padding-left: 20px; }
+    .timestamp { font-size: 0.7em; color: var(--system-tertiary-label-dark); display: block; margin-top: 6px; text-align: right; }
+    .message.bot .timestamp { color: rgba(255,255,255,0.7); text-align: left; }
+    .message.user .timestamp { color: rgba(0,0,0,0.6); text-align: right; }
+    #typing-indicator { align-self: flex-start; padding: 10px 15px; border-radius: var(--border-radius-messages); border-bottom-left-radius: 5px; background: var(--accent-color-primary); display: none; align-items: center; justify-content: center; margin-bottom: 8px; }
+    #typing-indicator .dot { display: inline-block; width: 8px; height: 8px; border-radius: 50%; background: white; margin: 0 2.5px; animation: typing 1.2s infinite ease-in-out; }
+    #typing-indicator .dot:nth-child(2) { animation-delay: 0.2s; }
+    #typing-indicator .dot:nth-child(3) { animation-delay: 0.4s; }
+    @keyframes typing { 0%, 100% { opacity: 0.4; transform: scale(0.75); } 50% { opacity: 1; transform: scale(1); } }
+    #controls { display: flex; align-items: center; padding: 12px 15px; background: var(--chat-controls-bg); border-top: 1px solid var(--border-subtle); flex-shrink: 0; }
+    #controls input[type="file"] { display: none; }
+    #file-label, #speak-btn, #send-btn { background: transparent; border: none; color: var(--accent-color-primary); padding: 8px; margin-right: 6px; border-radius: var(--border-radius-buttons); cursor: pointer; font-size: 1.5em; display: flex; align-items: center; justify-content: center; transition: background-color 0.2s, color 0.2s; }
+    #file-label:hover, #speak-btn:hover { background-color: rgba(0, 122, 255, 0.1); }
+    #send-btn { color: white; background-color: var(--accent-color-primary); padding: 8px 12px; font-size: 1.2em; }
+    #send-btn:hover { background-color: #0070e0; }
+    #speak-btn[disabled] { color: var(--system-gray-dark); background-color: transparent; cursor: default; }
+    #speak-btn[disabled]:hover { background-color: transparent; }
+    #user-input { flex: 1; padding: 12px 15px; border: 1px solid var(--border-subtle); border-radius: var(--border-radius-buttons); background: var(--input-field-bg); color: var(--text-primary); outline: none; font-size: 0.95em; margin-right: 8px; }
+    #user-input::placeholder { color: var(--text-placeholder); }
+    #user-input:focus { border-color: var(--accent-color-primary); box-shadow: 0 0 0 2px rgba(0, 122, 255, 0.3); }
+    .switch { position: relative; display: inline-block; width: 44px; height: 24px; margin-left: 8px; }
+    .switch input { display: none; }
+    .slider { position: absolute; cursor: pointer; top: 0; left: 0; right: 0; bottom: 0; background-color: var(--system-fill-dark); transition: .3s; border-radius: 34px; }
+    .slider:before { position: absolute; content: ""; height: 20px; width: 20px; left: 2px; bottom: 2px; background-color: white; transition: .3s; border-radius: 50%; box-shadow: 0 1px 2px rgba(0,0,0,0.2); }
+    input:checked + .slider { background-color: var(--system-green-dark); }
+    input:checked + .slider:before { transform: translateX(20px); }
+    #chat-footer { text-align: center; padding: 8px; background: var(--chat-controls-bg); font-size: 0.75em; color: var(--text-secondary); border-top: 1px solid var(--border-subtle); flex-shrink: 0; }
+    #chat-footer a { color: var(--accent-color-primary); text-decoration: none; }
+    #chat-footer a:hover { text-decoration: underline; }
+    ::-webkit-scrollbar { width: 8px; height: 8px; }
+    ::-webkit-scrollbar-track { background: transparent; }
+    ::-webkit-scrollbar-thumb { background: rgba(120, 120, 128, 0.5); border-radius: 4px; }
+    ::-webkit-scrollbar-thumb:hover { background: rgba(120, 120, 128, 0.7); }
+    * { scrollbar-width: thin; scrollbar-color: rgba(120, 120, 128, 0.5) transparent; }
+  </style>
+</head>
+<body>
+  <button id="chat-toggle">💬</button>
+  <div id="app-wrapper">
+    <div id="resize-handle-tl"></div>
+    <div id="sidebar">
+      <div id="sidebar-header"><button id="new-chat-btn">+ New Conversation</button></div>
+      <ul id="thread-list"></ul>
+      <div id="sidebar-footer">
+        <label for="model-selector" id="model-selector-label">AI Model:</label>
+        <select id="model-selector">
+          <option value="gemini">Gemini</option>
+          <option value="chatgpt">ChatGPT</option>
+          <option value="claude">Claude</option>
+          <option value="deepseek">DeepSeek</option>
+          <option value="perplexity">Perplexity</option>
+          <option value="genspark">GenSpark</option>
+          <option value="google">Google</option>
+        </select>
+      </div>
+    </div>
+    <div id="main-chat-area">
+      <div id="chat-container">
+        <div id="chat-header">NoFriction Assistant <span id="current-thread-model"></span></div>
+        <div id="messages">
+            <div id="typing-indicator" class="message">
+                <span class="dot"></span><span class="dot"></span><span class="dot"></span>
+            </div>
+        </div>
+        <div id="controls">
+          <label id="file-label" title="Attach File">📎<input type="file" id="file-btn" style="display: none;"></label>
+          <button id="speak-btn" disabled title="Speak Message (Mic)">🎤</button>
+          <input type="text" id="user-input" placeholder="Type a message..." autocomplete="off">
+          <button id="send-btn" title="Send Message">➤</button>
+          <label class="switch" title="Enable/Disable Voice Output">
+            <input type="checkbox" id="audio-enable">
+            <span class="slider"></span>
+          </label>
+        </div>
+        <div id="chat-footer">Powered by <a href="https://www.nofriction.io" target="_blank">NoFriction</a></div>
+      </div>
+    </div>
+  </div>
+  <script>
+    const N8N_WEBHOOK_BASE = 'https://caseyp.app.n8n.cloud/webhook/';
+    const CHAT_ENDPOINT = N8N_WEBHOOK_BASE + 'nofrictionchatbot';
+    const appWrapper = document.getElementById('app-wrapper');
+    const chatToggleBtn = document.getElementById('chat-toggle');
+    const resizeHandleTL = document.getElementById('resize-handle-tl');
+    const newChatBtn = document.getElementById('new-chat-btn');
+    const threadListEl = document.getElementById('thread-list');
+    const modelSelector = document.getElementById('model-selector');
+    const currentThreadModelEl = document.getElementById('current-thread-model');
+    const msgsContainer = document.getElementById('messages');
+    const userInput = document.getElementById('user-input');
+    const sendBtn = document.getElementById('send-btn');
+    const fileInput = document.getElementById('file-btn');
+    const speakBtn = document.getElementById('speak-btn');
+    const audioChk = document.getElementById('audio-enable');
+    const typingIndicator = document.getElementById('typing-indicator');
+    let currentThreadId = null;
+    let currentThreadMessages = [];
+    let allThreadsMetadata = [];
+    let currentSelectedModel = modelSelector.value;
+    let isResizingTL = false;
+    let initialMouseX, initialMouseY, initialWrapperLeft, initialWrapperTop, initialWrapperWidth, initialWrapperHeight;
+    let appInitialized = false;
+
+    if (window.joypixels) {
+      joypixels.emojiSize = '64';
+      joypixels.imagePathPNG = 'https://cdn.jsdelivr.net/npm/emoji-toolkit@8.0.0/extras/png/64/';
+      joypixels.sprites = false;
+      joypixels.emojiVersion = "latest";
+    }
+
+    chatToggleBtn.addEventListener('click', toggleChatApp);
+    newChatBtn.addEventListener('click', startNewThread);
+    modelSelector.addEventListener('change', handleModelSelectionChange);
+    
+    // DEBUG: Add event listener for send button
+    sendBtn.addEventListener('click', () => {
+        console.log("Send button clicked via direct listener."); // DEBUG
+        sendMessage();
+    });
+    userInput.addEventListener('keypress', e => { if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); console.log("Enter key pressed in input."); sendMessage(); } });
+    
+    fileInput.addEventListener('change', handleFileUpload);
+    audioChk.addEventListener('change', () => {
+        speakBtn.disabled = !audioChk.checked;
+        if (!audioChk.checked && window.speechSynthesis) window.speechSynthesis.cancel();
+    });
+    resizeHandleTL.addEventListener('mousedown', startResizeTL);
+
+    function toggleChatApp() {
+        const isOpen = appWrapper.style.display === 'flex';
+        if (isOpen) { appWrapper.style.display = 'none'; chatToggleBtn.textContent = '💬'; }
+        else {
+            appWrapper.style.display = 'flex'; chatToggleBtn.textContent = '✕';
+            loadPersistedWindowPosition();
+            if (!appInitialized) { initializeApp(); appInitialized = true; }
+            else if (currentThreadId) scrollToBottom();
+        }
+    }
+    function initializeApp(){
+        console.log("Initializing app with Apple style...");
+        loadAndDisplayThreads(); setupSpeechRecognition();
+        speakBtn.disabled = !audioChk.checked;
+    }
+    function loadPersistedWindowPosition() {
+        const savedPosition = localStorage.getItem('nofriction_chat_window_pos_apple');
+        if (savedPosition) {
+            try {
+                const pos = JSON.parse(savedPosition);
+                appWrapper.style.top = pos.top; appWrapper.style.left = pos.left;
+                appWrapper.style.width = pos.width; appWrapper.style.height = pos.height;
+                appWrapper.style.transform = 'none'; 
+            } catch(e) { setDefaultWindowPosition(); }
+        } else setDefaultWindowPosition();
+    }
+    function setDefaultWindowPosition() {
+        appWrapper.style.top = '50%'; appWrapper.style.left = '50%';
+        appWrapper.style.width = '850px'; appWrapper.style.height = '75vh';
+        appWrapper.style.transform = 'translate(-50%, -50%)';
+    }
+    function startResizeTL(e){
+        e.preventDefault(); isResizingTL = true;
+        initialMouseX = e.clientX; initialMouseY = e.clientY;
+        const rect = appWrapper.getBoundingClientRect();
+        initialWrapperLeft = rect.left; initialWrapperTop = rect.top;
+        initialWrapperWidth = rect.width; initialWrapperHeight = rect.height;
+        document.addEventListener('mousemove', doResizeTL);
+        document.addEventListener('mouseup', stopResizeTL);
+    }
+    function doResizeTL(e){
+        if(!isResizingTL) return;
+        const deltaX = e.clientX - initialMouseX; const deltaY = e.clientY - initialMouseY;
+        let newWidth = initialWrapperWidth - deltaX; let newHeight = initialWrapperHeight - deltaY;
+        let newLeft = initialWrapperLeft + deltaX; let newTop = initialWrapperTop + deltaY;
+        const minWidth = parseInt(getComputedStyle(appWrapper).minWidth, 10) || 600;
+        const minHeight = parseInt(getComputedStyle(appWrapper).minHeight, 10) || 400;
+        if(newWidth < minWidth){ newWidth = minWidth; newLeft = initialWrapperLeft + (initialWrapperWidth - minWidth); }
+        if(newHeight < minHeight){ newHeight = minHeight; newTop = initialWrapperTop + (initialWrapperHeight - minHeight); }
+        appWrapper.style.width = `${newWidth}px`; appWrapper.style.height = `${newHeight}px`;
+        appWrapper.style.left = `${newLeft}px`; appWrapper.style.top = `${newTop}px`;
+    }
+    function stopResizeTL(){
+        isResizingTL = false;
+        document.removeEventListener('mousemove', doResizeTL);
+        document.removeEventListener('mouseup', stopResizeTL);
+        localStorage.setItem('nofriction_chat_window_pos_apple', JSON.stringify({
+            top: appWrapper.style.top, left: appWrapper.style.left,
+            width: appWrapper.style.width, height: appWrapper.style.height
+        }));
+    }
+    function loadAndDisplayThreads(){
+        showTypingIndicatorCustomText('Loading conversations...');
+        allThreadsMetadata = JSON.parse(localStorage.getItem('nofriction_threads') || '[]');
+        allThreadsMetadata.sort((a,b) => new Date(b.lastUpdated) - new Date(a.lastUpdated));
+        renderThreadList();
+        const lastActiveId = localStorage.getItem('nofriction_last_active_thread_id');
+        if(lastActiveId && allThreadsMetadata.some(t => t.id === lastActiveId)) loadThread(lastActiveId);
+        else if(allThreadsMetadata.length > 0) loadThread(allThreadsMetadata[0].id);
+        else startNewThread();
+        hideTypingIndicator();
+    }
+    function renderThreadList(){
+        threadListEl.innerHTML = '';
+        if (allThreadsMetadata.length === 0) {
+            threadListEl.innerHTML = '<li style="color: var(--text-secondary); text-align: center; padding: 20px 0; font-size: 0.9em;">No conversations yet.</li>'; return;
+        }
+        allThreadsMetadata.forEach(t => {
+            const li = document.createElement('li'); li.dataset.threadId = t.id; // Corrected to use dataset.threadId
+            li.className = t.id === currentThreadId ? 'active-thread' : '';
+            li.innerHTML = `<span class="thread-title">${t.title || "Chat"}</span><span class="thread-details">${t.model || "Default"} | ${new Date(t.lastUpdated).toLocaleDateString([], {month:'short', day:'numeric', hour:'2-digit', minute:'2-digit'})}</span>`;
+            li.onclick = () => loadThread(t.id);
+            threadListEl.appendChild(li);
+        });
+    }
+    function startNewThread(){
+        currentThreadId = 't_' + Date.now() + Math.random().toString(16).slice(2);
+        currentThreadMessages = []; currentSelectedModel = modelSelector.value;
+        const newThreadMeta = {id: currentThreadId, title: 'New Conversation', lastUpdated: new Date().toISOString(), model: currentSelectedModel};
+        allThreadsMetadata.unshift(newThreadMeta);
+        saveAllThreadsMetadata(); localStorage.setItem('nofriction_last_active_thread_id', currentThreadId);
+        renderThreadList(); renderMessages(); addInitialBotGreetingIfNeeded();
+        userInput.focus(); currentThreadModelEl.textContent = `(${currentSelectedModel})`;
+    }
+    function loadThread(id){
+        console.log("Loading thread:", id); // DEBUG
+        currentThreadId = id;
+        currentThreadMessages = JSON.parse(localStorage.getItem(`nofriction_msgs_${id}`) || '[]');
+        const meta = allThreadsMetadata.find(t => t.id === id);
+        if(meta){
+            currentSelectedModel = meta.model; modelSelector.value = meta.model;
+            currentThreadModelEl.textContent = `(${meta.model})`;
+            localStorage.setItem('nofriction_last_active_thread_id', currentThreadId);
+        } else { console.warn("Meta not found for thread:", id); startNewThread(); return; } // Fallback if meta is missing
+        renderThreadList(); renderMessages(); addInitialBotGreetingIfNeeded(); scrollToBottom();
+    }
+    function handleModelSelectionChange(e) {
+      currentSelectedModel = e.target.value;
+      if (currentThreadId) {
+        const activeThreadMeta = allThreadsMetadata.find(t => t.id === currentThreadId);
+        if (activeThreadMeta) {
+            activeThreadMeta.model = currentSelectedModel;
+            activeThreadMeta.lastUpdated = new Date().toISOString(); // Update timestamp
+            saveAllThreadsMetadata(); renderThreadList();
+        }
+        currentThreadModelEl.textContent = `(${currentSelectedModel})`;
+      }
+    }
+    function updateThreadMetadataOnInteraction(isNewMessage, firstUserMsgContent = null) {
+        if (!currentThreadId) { console.warn("updateThreadMetadataOnInteraction called with no currentThreadId"); return; }
+        const meta = allThreadsMetadata.find(t => t.id === currentThreadId);
+        if (meta) {
+            meta.lastUpdated = new Date().toISOString(); meta.model = currentSelectedModel;
+            if (isNewMessage && firstUserMsgContent && (meta.title === 'New Conversation' || meta.title === 'Chat')) {
+                meta.title = firstUserMsgContent.substring(0, 30) + (firstUserMsgContent.length > 30 ? '...' : '');
+            }
+            allThreadsMetadata.sort((a,b) => new Date(b.lastUpdated) - new Date(a.lastUpdated));
+            saveAllThreadsMetadata(); renderThreadList();
+            currentThreadModelEl.textContent = `(${currentSelectedModel})`;
+        } else {
+            console.warn("Meta not found in updateThreadMetadataOnInteraction for ID:", currentThreadId);
+        }
+    }
+    function renderMessages(){
+        const messageElements = msgsContainer.querySelectorAll('.message:not(#typing-indicator)');
+        messageElements.forEach(el => el.remove());
+        currentThreadMessages.forEach(m => appendMessageToDOM(m));
+        scrollToBottom();
+    }
+    function appendMessageToDOM(message){
+        const div = document.createElement('div'); div.className = 'message ' + message.role;
+        const contentDiv = document.createElement('div'); contentDiv.className = 'message-content';
+        let htmlContent = message.content || "";
+        if (window.marked) {
+            try { marked.use({ breaks: true, gfm: true }); htmlContent = marked.parse(htmlContent, { sanitize: false }); }
+            catch (e) { htmlContent = message.content.replace(/\n/g, '<br>'); }
+        }
+        if (window.joypixels) htmlContent = joypixels.toImage(htmlContent);
+        contentDiv.innerHTML = htmlContent; div.appendChild(contentDiv);
+        const timeSpan = document.createElement('span'); timeSpan.className = 'timestamp';
+        timeSpan.textContent = new Date(message.timestamp).toLocaleTimeString([], {hour:'2-digit', minute:'2-digit'});
+        div.appendChild(timeSpan);
+        msgsContainer.insertBefore(div, typingIndicator); scrollToBottom();
+        if(message.role === 'bot' && audioChk.checked && message.content) {
+            let textToSpeak = contentDiv.textContent || contentDiv.innerText || "";
+            if (window.joypixels) textToSpeak = joypixels.shortnameToUnicode(joypixels.imageToShortname(textToSpeak));
+            speak(textToSpeak);
+        }
+    }
+    async function sendMessage(){
+        console.log("sendMessage function started."); // DEBUG
+        const txt = userInput.value.trim();
+        console.log("Input text:", `"${txt}"`); // DEBUG
+        if(!txt) { console.log("No text, returning from sendMessage."); return; }
+
+        const userMessage = {role:'user', content:txt, timestamp: new Date().toISOString()};
+        currentThreadMessages.push(userMessage); appendMessageToDOM(userMessage);
+        updateThreadMetadataOnInteraction(true, txt); saveCurrentThreadMessages();
+        userInput.value = ''; showTypingIndicatorDots();
+
+        const modelForAPI = currentSelectedModel;
+        let endpointToUse = CHAT_ENDPOINT;
+        let requestBody;
+        let requestOptions = { method: 'POST', headers: { 'Content-Type': 'application/json' } };
+        
+        // Use the full currentThreadMessages array for the 'messages' field, as per your original working JS
+        const messagesForBackend = currentThreadMessages; 
+
+        if (modelForAPI.toLowerCase() === 'gemini') {
+            console.log("Preparing to fetch for Gemini..."); // DEBUG
+            requestBody = JSON.stringify({ messages: messagesForBackend, threadId: currentThreadId, model: modelForAPI });
+        } else {
+            console.warn(`Preparing for conceptual fetch for ${modelForAPI}. This requires backend changes.`); // DEBUG
+            requestBody = JSON.stringify({ messages: messagesForBackend, threadId: currentThreadId, model: modelForAPI });
+        }
+        requestOptions.body = requestBody;
+        console.log("Request body:", requestBody); // DEBUG
+
+        try {
+            const response = await fetch(endpointToUse, requestOptions);
+            console.log("Fetch response status:", response.status); // DEBUG
+            if(!response.ok){
+                const errorText = await response.text();
+                console.error("API Error Text:", errorText); // DEBUG
+                throw new Error(`API Error (${response.status}): ${errorText || response.statusText}`);
+            }
+            const jsonResponse = await response.json();
+            console.log("API JSON Response:", jsonResponse); // DEBUG
+            if (!jsonResponse.reply && typeof jsonResponse.reply !== 'string') throw new Error("Received invalid or empty reply from bot.");
+
+
+            const botMessage = {role:'bot', content:jsonResponse.reply, timestamp:new Date().toISOString(), modelUsed: jsonResponse.modelUsed || modelForAPI};
+            currentThreadMessages.push(botMessage); appendMessageToDOM(botMessage);
+            updateThreadMetadataOnInteraction(false); saveCurrentThreadMessages();
+        } catch(e){
+            console.error("Error in sendMessage fetch/processing:", e); // DEBUG
+            const errorMessage = {role:'bot', content:'Error: ' + e.message, timestamp:new Date().toISOString(), modelUsed: modelForAPI};
+            currentThreadMessages.push(errorMessage); appendMessageToDOM(errorMessage);
+            saveCurrentThreadMessages();
+        } finally { hideTypingIndicator(); }
+    }
+    async function handleFileUpload(ev){
+        const file = ev.target.files[0]; if(!file) return;
+        const userMessageText = `Uploaded: ${file.name} (${(file.size/1024).toFixed(1)} KB)`;
+        const userMessage = {role:'user', content:userMessageText, timestamp:new Date().toISOString()};
+        currentThreadMessages.push(userMessage); appendMessageToDOM(userMessage);
+        updateThreadMetadataOnInteraction(true, userMessageText); saveCurrentThreadMessages();
+        showTypingIndicatorDots();
+
+        const formData = new FormData(); formData.append('file', file);
+        let endpointToUse = CHAT_ENDPOINT;
+
+        console.log(`File upload for model: ${currentSelectedModel}`); // DEBUG
+        // If your backend needs model/threadId for file uploads, add them to formData
+        // formData.append('model', currentSelectedModel);
+        // formData.append('threadId', currentThreadId);
+
+        try {
+            const response = await fetch(endpointToUse, {method:'POST', body:formData});
+            if(!response.ok){ const errorText = await response.text(); throw new Error(`Upload error (${response.status}): ${errorText || response.statusText}`); }
+            const jsonResponse = await response.json();
+            if (!jsonResponse.reply && typeof jsonResponse.reply !== 'string') throw new Error("Received invalid or empty reply for file upload.");
+
+            const botMessage = {role:'bot', content:jsonResponse.reply, timestamp:new Date().toISOString(), modelUsed: jsonResponse.modelUsed || currentSelectedModel};
+            currentThreadMessages.push(botMessage); appendMessageToDOM(botMessage);
+            updateThreadMetadataOnInteraction(false); saveCurrentThreadMessages();
+        } catch(e){
+            console.error("Error in handleFileUpload fetch/processing:", e);
+            const errorMessage = {role:'bot', content:'Upload error: ' + e.message, timestamp:new Date().toISOString(), modelUsed: currentSelectedModel};
+            currentThreadMessages.push(errorMessage); appendMessageToDOM(errorMessage);
+            saveCurrentThreadMessages();
+        } finally { hideTypingIndicator(); ev.target.value = ''; }
+    }
+    function saveCurrentThreadMessages(){ localStorage.setItem(`nofriction_msgs_${currentThreadId}`, JSON.stringify(currentThreadMessages)); }
+    function saveAllThreadsMetadata(){ localStorage.setItem('nofriction_threads', JSON.stringify(allThreadsMetadata)); }
+    function addInitialBotGreetingIfNeeded() {
+        if (currentThreadId && currentThreadMessages.length === 0) {
+            const greeting = { role: 'bot', content: 'Hello! How can I assist you today?', timestamp: new Date().toISOString(), modelUsed: currentSelectedModel };
+            currentThreadMessages.push(greeting); appendMessageToDOM(greeting);
+        }
+    }
+    function showTypingIndicatorDots(){
+        typingIndicator.innerHTML = '<span class="dot"></span><span class="dot"></span><span class="dot"></span>';
+        typingIndicator.style.display = 'flex'; scrollToBottom();
+    }
+    function showTypingIndicatorCustomText(text) {
+        typingIndicator.innerHTML = `<span style="font-size:0.9em; color:var(--text-secondary); padding: 5px 0;">${text}</span>`;
+        typingIndicator.style.display = 'flex'; scrollToBottom();
+    }
+    function hideTypingIndicator(){ typingIndicator.style.display = 'none'; }
+    function scrollToBottom(){ setTimeout(() => { msgsContainer.scrollTop = msgsContainer.scrollHeight; }, 50); }
+    function addSystemMessage(text) {
+        const systemMessage = { role: 'bot', content: `ℹ️ System: ${text}`, timestamp: new Date().toISOString(), modelUsed: 'System' };
+        appendMessageToDOM(systemMessage);
+    }
+    function setupSpeechRecognition(){
+        const Rec = window.SpeechRecognition || window.webkitSpeechRecognition;
+        if(!Rec){ speakBtn.style.display = 'none'; console.warn("Speech Recognition not supported."); return; }
+        const recognition = new Rec();
+        recognition.continuous = false; recognition.lang = 'en-US'; recognition.interimResults = false;
+        recognition.onresult = e => { userInput.value += (e.results[0][0].transcript + ' '); };
+        recognition.onerror = e => { console.error("Speech recognition error:", e.error); addSystemMessage("Speech error: " + e.error); speakBtn.textContent = '🎤'; speakBtn.style.backgroundColor = ''; };
+        recognition.onend = () => { speakBtn.textContent = '🎤'; speakBtn.style.backgroundColor = ''; recognition.isStarted = false; };
+        recognition.onstart = () => { recognition.isStarted = true; };
+        speakBtn.addEventListener('click', () => {
+            if (speakBtn.disabled || (recognition && recognition.isStarted)) return;
+            try { recognition.start(); speakBtn.textContent = '🎙️'; speakBtn.style.backgroundColor = 'var(--system-green-dark)'; }
+            catch(err) { console.error("Could not start recognition:", err); speakBtn.textContent = '🎤'; speakBtn.style.backgroundColor = ''; }
+        });
+    }
+    function speak(txt){
+        if(!audioChk.checked || !txt || !window.speechSynthesis) return;
+        const utterance = new SpeechSynthesisUtterance(txt);
+        window.speechSynthesis.cancel(); window.speechSynthesis.speak(utterance);
+    }
+  </script>
+</body>
+</html>

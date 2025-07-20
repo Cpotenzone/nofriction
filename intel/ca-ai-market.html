@@ -1,0 +1,553 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LLM-to-SLM Vertical Opportunity Expansion Benchmark | CriticalAsset</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Barlow:wght@500;600;700;800&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@2.5.0/fonts/remixicon.css" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background: #FAFAFC;
+            color: #1E1E1E;
+            line-height: 1.6;
+        }
+        
+        h1, h2, h3, h4, .logo {
+            font-family: 'Barlow', sans-serif;
+        }
+        
+        .bg-primary {
+            background: linear-gradient(135deg, #FF5A00 0%, #E64A00 100%);
+        }
+        
+        .text-primary {
+            color: #FF5A00;
+        }
+        
+        .border-primary {
+            border-color: #FF5A00;
+        }
+        
+        .btn-primary {
+            background: #FF5A00;
+            color: white;
+            transition: all 0.3s ease;
+        }
+        
+        .btn-primary:hover {
+            background: #E64A00;
+            transform: translateY(-2px);
+        }
+
+        .feature-card {
+            transition: transform .3s, box-shadow .3s;
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.05);
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        
+        th {
+            background-color: #f8f8f8;
+            text-align: left;
+            padding: 12px;
+            font-weight: 600;
+        }
+        
+        td {
+            padding: 12px;
+            border-bottom: 1px solid #e5e5e5;
+        }
+        
+        .score-pill {
+            display: inline-block;
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            color: white;
+            text-align: center;
+            line-height: 28px;
+            font-weight: 600;
+        }
+        
+        .score-1 { background-color: #dc2626; }
+        .score-2 { background-color: #ea580c; }
+        .score-3 { background-color: #f59e0b; }
+        .score-4 { background-color: #65a30d; }
+        .score-5 { background-color: #16a34a; }
+        
+        .section-divider {
+            height: 4px;
+            background: linear-gradient(90deg, #FF5A00 0%, #FF5A00 30%, transparent 30%);
+            margin: 2rem 0;
+        }
+    </style>
+</head>
+<body class="min-h-screen">
+    <!-- Header with logo -->
+    <header class="bg-white shadow-sm sticky top-0 z-50">
+        <div class="container mx-auto px-4 py-4 flex justify-between items-center">
+            <div class="logo text-primary text-2xl font-extrabold">
+                <i class="ri-building-line mr-2"></i>CriticalAsset
+            </div>
+            <div class="text-sm text-gray-500">
+                Market Analysis by <span class="font-bold">No Friction</span>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Banner -->
+    <section class="bg-primary text-white py-16">
+        <div class="container mx-auto px-4 text-center">
+            <h1 class="text-4xl md:text-5xl font-extrabold mb-4">LLM-to-SLM Vertical Opportunity <span class="block text-yellow-100">Expansion Benchmark</span></h1>
+            <p class="text-lg max-w-3xl mx-auto opacity-90 mb-6">
+                Strategic analysis for CriticalAsset.com to unlock high-ROI opportunities across new verticals through time-series and geo-contextual models (2025-2027)
+            </p>
+        </div>
+    </section>
+
+    <!-- Main Content -->
+    <main class="container mx-auto px-4 py-12 bg-white shadow-sm my-8 rounded-lg">
+        <!-- Executive Summary -->
+        <section class="mb-12">
+            <h2 class="text-3xl font-bold mb-4">Executive Summary</h2>
+            <div class="section-divider"></div>
+            
+            <div class="bg-gray-50 p-6 rounded-lg border-l-4 border-primary mb-8">
+                <h3 class="text-xl font-semibold mb-3">Strategic Reframing</h3>
+                <p class="text-lg">
+                    CriticalAsset is positioned to evolve from a building management platform into a <strong>Geo-Temporal Intelligence Platform for the Built Environment</strong> – delivering predictive insights through spatial-aware, time-series small language models that transform traditional MEP infrastructure into dynamic, contextual decision support systems for high-value physical assets.
+                </p>
+            </div>
+            
+            <p class="mb-4">
+                As AI transitions from general-purpose language models to specialized small language models (SLMs), CriticalAsset has a unique opportunity to leverage its robust infrastructure data foundation to create vertical-specific intelligence solutions.
+            </p>
+            <p>
+                This analysis identifies high-potential verticals where CriticalAsset's time-series data capabilities and geo-contextual understanding can deliver exceptional ROI and create defensible market positions.
+            </p>
+        </section>
+        
+        <!-- Opportunity Index -->
+        <section class="mb-12">
+            <h2 class="text-3xl font-bold mb-4">Opportunity Index (2025-2027)</h2>
+            <div class="section-divider"></div>
+            
+            <div class="overflow-x-auto">
+                <table class="min-w-full">
+                    <thead>
+                        <tr class="bg-gray-100">
+                            <th>Vertical</th>
+                            <th>NAICS</th>
+                            <th>Fit Score</th>
+                            <th>SLM Use Case Fit</th>
+                            <th>AI Growth<br>(2025-2027)</th>
+                            <th>Commercial ROI</th>
+                            <th>Exit / Buyer Potential</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="font-semibold">Data Centers</td>
+                            <td>518210</td>
+                            <td class="text-center"><span class="score-pill score-5">5</span></td>
+                            <td>Predictive cooling, power optimization</td>
+                            <td>37% CAGR</td>
+                            <td>High</td>
+                            <td>Cloud providers, infrastructure REITs</td>
+                        </tr>
+                        <tr>
+                            <td class="font-semibold">Manufacturing</td>
+                            <td>31-33</td>
+                            <td class="text-center"><span class="score-pill score-4">4</span></td>
+                            <td>Equipment failure prediction, energy efficiency</td>
+                            <td>29% CAGR</td>
+                            <td>High</td>
+                            <td>Industrial IoT platforms, Siemens, ABB</td>
+                        </tr>
+                        <tr>
+                            <td class="font-semibold">Critical Infrastructure</td>
+                            <td>22111, 22112</td>
+                            <td class="text-center"><span class="score-pill score-5">5</span></td>
+                            <td>Grid resilience, disaster response</td>
+                            <td>33% CAGR</td>
+                            <td>Medium-High</td>
+                            <td>Utilities, gov't contractors</td>
+                        </tr>
+                        <tr>
+                            <td class="font-semibold">Logistics & Warehousing</td>
+                            <td>493110</td>
+                            <td class="text-center"><span class="score-pill score-4">4</span></td>
+                            <td>HVAC optimization, spatial utilization</td>
+                            <td>26% CAGR</td>
+                            <td>Medium-High</td>
+                            <td>Supply chain platforms, REITs</td>
+                        </tr>
+                        <tr>
+                            <td class="font-semibold">Life Sciences</td>
+                            <td>3254, 54171</td>
+                            <td class="text-center"><span class="score-pill score-5">5</span></td>
+                            <td>Lab environment control, compliance</td>
+                            <td>41% CAGR</td>
+                            <td>High</td>
+                            <td>Healthcare IT, pharma tech providers</td>
+                        </tr>
+                        <tr>
+                            <td class="font-semibold">Retail</td>
+                            <td>44-45</td>
+                            <td class="text-center"><span class="score-pill score-3">3</span></td>
+                            <td>Energy management, traffic flow</td>
+                            <td>24% CAGR</td>
+                            <td>Medium</td>
+                            <td>Retail tech, property management</td>
+                        </tr>
+                        <tr>
+                            <td class="font-semibold">Hospitality</td>
+                            <td>721110</td>
+                            <td class="text-center"><span class="score-pill score-3">3</span></td>
+                            <td>Comfort optimization, maintenance</td>
+                            <td>22% CAGR</td>
+                            <td>Medium</td>
+                            <td>Hospitality management platforms</td>
+                        </tr>
+                        <tr>
+                            <td class="font-semibold">Smart Cities</td>
+                            <td>92</td>
+                            <td class="text-center"><span class="score-pill score-4">4</span></td>
+                            <td>Infrastructure monitoring, resource allocation</td>
+                            <td>31% CAGR</td>
+                            <td>Medium-High</td>
+                            <td>Urban tech providers, consultancies</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+        
+        <!-- Detailed Vertical Analysis -->
+        <section class="mb-12">
+            <h2 class="text-3xl font-bold mb-4">Detailed Vertical Analysis</h2>
+            <div class="section-divider"></div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <!-- Data Centers -->
+                <div class="bg-white p-6 rounded-lg shadow-sm border border-gray-100 feature-card">
+                    <div class="flex items-center mb-4">
+                        <i class="ri-database-2-line text-primary text-2xl mr-3"></i>
+                        <h3 class="text-xl font-bold">Data Centers</h3>
+                    </div>
+                    <p class="mb-3"><strong>NAICS:</strong> 518210</p>
+                    <p class="mb-3">
+                        Data centers represent an ideal vertical for CriticalAsset's capabilities due to their critical MEP infrastructure, high-density equipment layouts, and immediate ROI potential from even minor efficiency improvements.
+                    </p>
+                    <p class="mb-3">
+                        <strong>Key SLM Use Cases:</strong> Predictive cooling optimization, power chain fault prediction, capacity planning, and thermal mapping with spatial awareness.
+                    </p>
+                    <p class="mb-3">
+                        <strong>Why CriticalAsset fits:</strong> The platform's existing MEP documentation capabilities align perfectly with data center infrastructure needs, while the geo-spatial component enables rack-level precision for thermal and power models.
+                    </p>
+                    <p>
+                        <strong>Exit path examples:</strong> Cloud infrastructure providers (AWS, Azure), data center REITs (Digital Realty, Equinix), or infrastructure management platforms seeking AI capabilities.
+                    </p>
+                </div>
+                
+                <!-- Manufacturing -->
+                <div class="bg-white p-6 rounded-lg shadow-sm border border-gray-100 feature-card">
+                    <div class="flex items-center mb-4">
+                        <i class="ri-tools-fill text-primary text-2xl mr-3"></i>
+                        <h3 class="text-xl font-bold">Manufacturing</h3>
+                    </div>
+                    <p class="mb-3"><strong>NAICS:</strong> 31-33</p>
+                    <p class="mb-3">
+                        Modern manufacturing facilities with high-value equipment require precision maintenance and efficiency optimization across complex spatial environments.
+                    </p>
+                    <p class="mb-3">
+                        <strong>Key SLM Use Cases:</strong> Equipment failure prediction based on maintenance history and sensor data, energy management, regulatory compliance documentation, and production line optimization.
+                    </p>
+                    <p class="mb-3">
+                        <strong>Why CriticalAsset fits:</strong> Manufacturing facilities already collect extensive time-series data but lack spatial context and integration. CriticalAsset bridges this gap by connecting physical asset locations with operational data.
+                    </p>
+                    <p>
+                        <strong>Exit path examples:</strong> Industrial IoT platforms (PTC, Siemens), manufacturing execution systems, or industrial equipment OEMs looking to add AI services.
+                    </p>
+                </div>
+                
+                <!-- Critical Infrastructure -->
+                <div class="bg-white p-6 rounded-lg shadow-sm border border-gray-100 feature-card">
+                    <div class="flex items-center mb-4">
+                        <i class="ri-plug-line text-primary text-2xl mr-3"></i>
+                        <h3 class="text-xl font-bold">Critical Infrastructure</h3>
+                    </div>
+                    <p class="mb-3"><strong>NAICS:</strong> 22111, 22112</p>
+                    <p class="mb-3">
+                        Utilities and critical infrastructure face increasing resilience demands, regulatory requirements, and efficiency pressures while managing broadly distributed physical assets.
+                    </p>
+                    <p class="mb-3">
+                        <strong>Key SLM Use Cases:</strong> Grid resilience planning, maintenance prioritization based on criticality, disaster response coordination, and compliance documentation.
+                    </p>
+                    <p class="mb-3">
+                        <strong>Why CriticalAsset fits:</strong> The platform's geo-spatial capabilities allow for mapping distributed infrastructure while integrating time-series data from sensors and maintenance records to predict failures and optimize operations.
+                    </p>
+                    <p>
+                        <strong>Exit path examples:</strong> Utility software providers, government contractors specializing in infrastructure, or smart city platform developers.
+                    </p>
+                </div>
+                
+                <!-- Life Sciences -->
+                <div class="bg-white p-6 rounded-lg shadow-sm border border-gray-100 feature-card">
+                    <div class="flex items-center mb-4">
+                        <i class="ri-flask-line text-primary text-2xl mr-3"></i>
+                        <h3 class="text-xl font-bold">Life Sciences</h3>
+                    </div>
+                    <p class="mb-3"><strong>NAICS:</strong> 3254, 54171</p>
+                    <p class="mb-3">
+                        Pharmaceutical manufacturers and research labs require precise environmental control, stringent compliance documentation, and ultra-reliable infrastructure for critical research and production.
+                    </p>
+                    <p class="mb-3">
+                        <strong>Key SLM Use Cases:</strong> Environmental condition monitoring and prediction, compliance documentation, contamination risk analysis, and equipment maintenance scheduling.
+                    </p>
+                    <p class="mb-3">
+                        <strong>Why CriticalAsset fits:</strong> Life sciences facilities have strict regulatory requirements that align with CriticalAsset's documentation capabilities, while the SLM approach can provide predictive insights for critical environments.
+                    </p>
+                    <p>
+                        <strong>Exit path examples:</strong> Healthcare IT providers, pharmaceutical technology companies, or lab management software platforms seeking to add AI capabilities.
+                    </p>
+                </div>
+            </div>
+        </section>
+        
+        <!-- SLM Kit Productization -->
+        <section class="mb-12">
+            <h2 class="text-3xl font-bold mb-4">SLM Kit Productization</h2>
+            <div class="section-divider"></div>
+            
+            <p class="mb-6">
+                CriticalAsset can package its capabilities into vertical-specific "SLM Kits" that combine data ingestion, model training, and output generation for specific industry needs:
+            </p>
+            
+            <div class="space-y-6">
+                <!-- SLM Kit 1 -->
+                <div class="bg-white p-6 rounded-lg shadow-sm border border-gray-100">
+                    <h3 class="text-xl font-bold mb-3">ThermalGuard SLM Kit</h3>
+                    <div class="grid md:grid-cols-2 gap-4">
+                        <div>
+                            <p class="font-semibold text-primary mb-1">Required Inputs</p>
+                            <ul class="list-disc list-inside ml-2 mb-4 text-sm">
+                                <li>Facility floor plans/blueprints</li>
+                                <li>HVAC system specifications</li>
+                                <li>Temperature sensor data (time-series)</li>
+                                <li>Maintenance logs and history</li>
+                                <li>Equipment location and specifications</li>
+                            </ul>
+                            
+                            <p class="font-semibold text-primary mb-1">Expected Outputs</p>
+                            <ul class="list-disc list-inside ml-2 text-sm">
+                                <li>Thermal cascade predictions</li>
+                                <li>HVAC failure risk assessments</li>
+                                <li>Cooling optimization recommendations</li>
+                                <li>Capacity planning insights</li>
+                                <li>Energy efficiency improvement paths</li>
+                            </ul>
+                        </div>
+                        
+                        <div>
+                            <p class="font-semibold text-primary mb-1">Integration Model</p>
+                            <p class="text-sm mb-4">API-based integration with monitoring systems, with edge deployment options for sensitive environments. Dashboard visualization with geospatial heatmaps.</p>
+                            
+                            <p class="font-semibold text-primary mb-1">Example Workflow</p>
+                            <ol class="list-decimal list-inside ml-2 text-sm">
+                                <li>Ingest building layouts and HVAC specifications</li>
+                                <li>Map sensor data to spatial coordinates</li>
+                                <li>Train thermal propagation model on historical data</li>
+                                <li>Generate predictive alerts for cooling anomalies</li>
+                                <li>Suggest preventative maintenance actions</li>
+                            </ol>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- SLM Kit 2 -->
+                <div class="bg-white p-6 rounded-lg shadow-sm border border-gray-100">
+                    <h3 class="text-xl font-bold mb-3">PowerChain SLM Kit</h3>
+                    <div class="grid md:grid-cols-2 gap-4">
+                        <div>
+                            <p class="font-semibold text-primary mb-1">Required Inputs</p>
+                            <ul class="list-disc list-inside ml-2 mb-4 text-sm">
+                                <li>Electrical system schematics</li>
+                                <li>Power distribution unit data</li>
+                                <li>Load monitoring time-series data</li>
+                                <li>Electrical component specifications</li>
+                                <li>Maintenance and replacement records</li>
+                            </ul>
+                            
+                            <p class="font-semibold text-primary mb-1">Expected Outputs</p>
+                            <ul class="list-disc list-inside ml-2 text-sm">
+                                <li>Power chain failure predictions</li>
+                                <li>Equipment end-of-life forecasts</li>
+                                <li>Redundancy recommendations</li>
+                                <li>Load balancing optimization</li>
+                                <li>Cascade failure scenario modeling</li>
+                            </ul>
+                        </div>
+                        
+                        <div>
+                            <p class="font-semibold text-primary mb-1">Integration Model</p>
+                            <p class="text-sm mb-4">Secure API with BMS/BAS integration and optional on-premises deployment for critical infrastructure. Mobile alerts for maintenance teams.</p>
+                            
+                            <p class="font-semibold text-primary mb-1">Example Workflow</p>
+                            <ol class="list-decimal list-inside ml-2 text-sm">
+                                <li>Map electrical infrastructure components spatially</li>
+                                <li>Analyze voltage/current anomalies over time</li>
+                                <li>Correlate maintenance events with performance</li>
+                                <li>Predict component degradation timelines</li>
+                                <li>Generate prioritized maintenance actions</li>
+                            </ol>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- SLM Kit 3 -->
+                <div class="bg-white p-6 rounded-lg shadow-sm border border-gray-100">
+                    <h3 class="text-xl font-bold mb-3">ComplianceGuardian SLM Kit</h3>
+                    <div class="grid md:grid-cols-2 gap-4">
+                        <div>
+                            <p class="font-semibold text-primary mb-1">Required Inputs</p>
+                            <ul class="list-disc list-inside ml-2 mb-4 text-sm">
+                                <li>Regulatory requirement documentation</li>
+                                <li>Inspection and certification records</li>
+                                <li>Asset maintenance history</li>
+                                <li>Environmental monitoring data</li>
+                                <li>Building code requirements</li>
+                            </ul>
+                            
+                            <p class="font-semibold text-primary mb-1">Expected Outputs</p>
+                            <ul class="list-disc list-inside ml-2 text-sm">
+                                <li>Compliance risk assessments</li>
+                                <li>Inspection scheduling recommendations</li>
+                                <li>Certification expiration alerts</li>
+                                <li>Regulatory documentation generation</li>
+                                <li>Compliance-driven maintenance forecasts</li>
+                            </ul>
+                        </div>
+                        
+                        <div>
+                            <p class="font-semibold text-primary mb-1">Integration Model</p>
+                            <p class="text-sm mb-4">Cloud and on-premises hybrid deployment with secure document management integration. Automated reporting with blockchain verification for sensitive industries.</p>
+                            
+                            <p class="font-semibold text-primary mb-1">Example Workflow</p>
+                            <ol class="list-decimal list-inside ml-2 text-sm">
+                                <li>Ingest regulatory requirements and deadlines</li>
+                                <li>Map assets to compliance requirements</li>
+                                <li>Track certification status across facilities</li>
+                                <li>Predict compliance risks using SLM analysis</li>
+                                <li>Generate proactive compliance action plans</li>
+                            </ol>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Go To Market Strategy -->
+        <section class="mb-8">
+            <h2 class="text-3xl font-bold mb-4">Revised Go-To-Market Strategy</h2>
+            <div class="section-divider"></div>
+            
+            <div class="bg-gray-50 p-6 rounded-lg border-l-4 border-primary mb-6">
+                <h3 class="text-xl font-semibold mb-2">New Positioning Statement</h3>
+                <p class="text-lg italic">
+                    "CriticalAsset: The Geo-Temporal Intelligence Platform transforming physical infrastructure into predictive decision engines through specialized small language models."
+                </p>
+            </div>
+            
+            <h4 class="text-xl font-bold mb-4">Business Development Motion</h4>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div>
+                    <h5 class="font-bold text-lg mb-3">Channel Partners & Integration</h5>
+                    <ul class="space-y-2">
+                        <li class="flex items-start">
+                            <i class="ri-check-line text-primary mr-2 mt-1"></i>
+                            <span>Partner with BMS/BAS providers (Johnson Controls, Honeywell, Schneider) to integrate SLM Kits into existing building management platforms</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="ri-check-line text-primary mr-2 mt-1"></i>
+                            <span>Develop integration plugins for leading CMMS and EAM systems to enable rapid deployment</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="ri-check-line text-primary mr-2 mt-1"></i>
+                            <span>Create VAR program for specialty MEP engineering firms to sell SLM Kits to their existing clients</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="ri-check-line text-primary mr-2 mt-1"></i>
+                            <span>Partner with IoT sensor providers to create bundled hardware + SLM intelligence offerings</span>
+                        </li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h5 class="font-bold text-lg mb-3">Industry Alliances & Market Entry</h5>
+                    <ul class="space-y-2">
+                        <li class="flex items-start">
+                            <i class="ri-check-line text-primary mr-2 mt-1"></i>
+                            <span>Join industry consortiums for target verticals (Uptime Institute, Life Sciences associations, Manufacturing alliances)</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="ri-check-line text-primary mr-2 mt-1"></i>
+                            <span>Develop vertical-specific pilot programs with ROI guarantees to reduce adoption friction</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="ri-check-line text-primary mr-2 mt-1"></i>
+                            <span>Create an "SLM Partner Ecosystem" allowing vertical experts to build on the CriticalAsset platform</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="ri-check-line text-primary mr-2 mt-1"></i>
+                            <span>Establish co-marketing relationships with leading MEP contractors in each vertical</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="mt-8">
+                <h5 class="font-bold text-lg mb-3">Implementation & Rollout Strategy</h5>
+                <ol class="list-decimal list-inside space-y-2 ml-4">
+                    <li class="mb-2">
+                        <span class="font-semibold">Phase 1 (Q1-Q2 2025):</span> Launch Data Center and Critical Infrastructure SLM Kits with 3-5 lighthouse customers in each vertical
+                    </li>
+                    <li class="mb-2">
+                        <span class="font-semibold">Phase 2 (Q3-Q4 2025):</span> Expand to Manufacturing and Life Sciences verticals while refining SLM models with production data
+                    </li>
+                    <li class="mb-2">
+                        <span class="font-semibold">Phase 3 (2026):</span> Scale through channel partners and establish CriticalAsset as the leading geo-temporal intelligence platform
+                    </li>
+                    <li class="mb-2">
+                        <span class="font-semibold">Phase 4 (2027):</span> Expand into adjacent markets and position for strategic acquisition
+                    </li>
+                </ol>
+            </div>
+        </section>
+    </main>
+    
+    <!-- Footer -->
+    <footer class="bg-white py-8 border-t border-gray-200">
+        <div class="container mx-auto px-4 text-center">
+            <div class="mb-4">
+                <span class="text-xl font-bold text-gray-700">Market Analysis by</span>
+                <div class="text-2xl font-extrabold text-primary mt-1">No Friction</div>
+            </div>
+            <p class="text-sm text-gray-500">
+                Strategic recommendations for CriticalAsset.com (2025-2027)
+            </p>
+        </div>
+    </footer>
+</body>
+</html>

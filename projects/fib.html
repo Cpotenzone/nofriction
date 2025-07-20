@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fibonacci Rain</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-900 overflow-hidden">
+    <div id="fibonacci-rain" class="absolute inset-0"> </div>
+
+    <style>
+      @keyframes rain {
+        0% {
+          transform: translateY(-50px); /* Start slightly off-screen */
+          opacity: 0;
+        }
+        100% {
+          transform: translateY(calc(100vh + 50px)); /* Go past the bottom */
+          opacity: 1;
+        }
+      }
+
+      .animate-rain {
+        animation: rain 4s linear infinite; /* Adjust duration for falling speed*/
+      }
+      /* Ensure elements don't affect layout */
+      #fibonacci-rain > * {
+         position: absolute;  /* Important: makes elements position relative to the container */
+      }
+    </style>
+
+    <script>
+        const rainContainer = document.getElementById('fibonacci-rain');
+        let a = 1, b = 1;
+
+        setInterval(() => {
+            const c = a + b;
+            a = b;
+            b = c;
+
+            const numElement = document.createElement('div');
+            numElement.textContent = c;
+            numElement.className = `animate-rain text-white font-bold`; // Added some basic Tailwind classes
+            const fontSize = Math.min(10 + (Math.log2(c)), 60);
+            numElement.style.fontSize = fontSize + 'px';
+            numElement.style.left = Math.random() * (window.innerWidth - 50) + 'px';
+
+            rainContainer.appendChild(numElement);
+
+            const elementsToRemove = [];
+            rainContainer.querySelectorAll('.animate-rain').forEach(el => {
+                if (el.getBoundingClientRect().top > window.innerHeight) {
+                    elementsToRemove.push(el);
+                }
+            });
+            elementsToRemove.forEach(el => el.remove());
+        }, 500);
+    </script>
+
+</body>
+</html>

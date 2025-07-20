@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>NoFriction Chatbot</title>
+  <style>
+    :root {
+      --bg-color: #0a0a0a;
+      --container-bg: #1a1a1a;
+      --accent-color: #00bcd4;
+      --text-color: #f5f5f5;
+      --bot-color: #9ecfff;
+      --user-color: #00e5ff;
+      --input-bg: #2a2a2a;
+      --input-text: #fff;
+      --border-color: #00bcd4;
+    }
+    body {
+      margin: 0;
+      font-family: 'Inter', sans-serif;
+      background: var(--bg-color);
+      color: var(--text-color);
+    }
+    #chat-toggle {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      width: 60px;
+      height: 60px;
+      background: var(--accent-color);
+      color: #fff;
+      border: none;
+      border-radius: 50%;
+      font-size: 24px;
+      cursor: pointer;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+      z-index: 1000;
+    }
+    #chat-container {
+      position: fixed;
+      bottom: 90px;
+      right: 20px;
+      width: 360px;
+      max-height: 500px;
+      display: none;
+      flex-direction: column;
+      background: var(--container-bg);
+      border: 2px solid var(--border-color);
+      border-radius: 12px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.4);
+      overflow: hidden;
+      z-index: 999;
+    }
+    #chat-container.open { display: flex; }
+    #chat-header {
+      background: var(--accent-color);
+      padding: 8px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      color: #fff;
+      font-weight: 600;
+    }
+    #chat-header img { height: 20px; }
+    #messages {
+      flex: 1;
+      padding: 12px;
+      overflow-y: auto;
+    }
+    .message {
+      margin-bottom: 10px;
+      word-break: break-word;
+    }
+    .bot { color: var(--bot-color); }
+    .user { color: var(--user-color); text-align: right; }
+    #controls {
+      display: flex;
+      align-items: center;
+      padding: 8px;
+      background: var(--input-bg);
+    }
+    #controls input[type="file"] { display: none; }
+    #file-label, #speak-btn, #send-btn {
+      background: var(--accent-color);
+      border: none;
+      color: #fff;
+      padding: 6px;
+      margin-right: 6px;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+    #user-input {
+      flex: 1;
+      padding: 6px;
+      border: 1px solid var(--border-color);
+      border-radius: 4px;
+      background: var(--container-bg);
+      color: var(--input-text);
+      outline: none;
+    }
+    /* Styled Toggle Switch */
+    .switch {
+      position: relative;
+      display: inline-block;
+      width: 40px;
+      height: 20px;
+      margin-left: 6px;
+    }
+    .switch input { display: none; }
+    .slider {
+      position: absolute;
+      cursor: pointer;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background-color: #ccc;
+      transition: .4s;
+      border-radius: 20px;
+    }
+    .slider:before {
+      position: absolute;
+      content: "";
+      height: 16px;
+      width: 16px;
+      left: 2px;
+      bottom: 2px;
+      background-color: white;
+      transition: .4s;
+      border-radius: 50%;
+    }
+    input:checked + .slider { background-color: var(--accent-color); }
+    input:checked + .slider:before { transform: translateX(20px); }
+    #chat-footer {
+      text-align: center;
+      padding: 4px;
+      background: var(--input-bg);
+      font-size: 10px;
+      color: #888;
+    }
+    #chat-footer a { color: var(--accent-color); text-decoration: none; }
+  </style>
+</head>
+<body>
+  <button id="chat-toggle">💬</button>
+  <div id="chat-container">
+    <div id="chat-header">
+      <!-- Ignored logo as requested -->
+      NoFriction Assistant
+    </div>
+    <div id="messages"></div>
+    <div id="controls">
+      <label id="file-label">📎<input type="file" id="file-btn"></label>
+      <button id="speak-btn" disabled>🎤</button>
+      <input type="text" id="user-input" placeholder="Type your message..." autocomplete="off">
+      <button id="send-btn">Send</button>
+      <label class="switch">
+        <input type="checkbox" id="audio-enable">
+        <span class="slider"></span>
+      </label>
+    </div>
+    <div id="chat-footer">Powered by <a href="https://www.nofriction.io" target="_blank">NoFriction</a></div>
+  </div>
+
+  <script>
+    const toggleBtn = document.getElementById('chat-toggle');
+    const chatBox = document.getElementById('chat-container');
+    toggleBtn.addEventListener('click', () => chatBox.classList.toggle('open'));
+
+    const msgs = document.getElementById('messages');
+    const userInput = document.getElementById('user-input');
+    const sendBtn = document.getElementById('send-btn');
+    const fileBtn = document.getElementById('file-btn');
+    const speakBtn = document.getElementById('speak-btn');
+    const audioChk = document.getElementById('audio-enable');
+
+    function addMessage(txt, cls) {
+      const div = document.createElement('div');
+      div.className = 'message ' + cls;
+      div.textContent = txt;
+      msgs.appendChild(div);
+      msgs.scrollTop = msgs.scrollHeight;
+      if (cls === 'bot' && audioChk.checked) speak(txt);
+    }
+
+    function sendText() {
+      const txt = userInput.value.trim();
+      if (!txt) return;
+      addMessage(txt, 'user');
+      userInput.value = '';
+      fetch('https://caseyp.app.n8n.cloud/webhook/nofrictionchatbot', {
+        method: 'POST', headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ message: txt })
+      }).then(res => res.json())
+        .then(j => addMessage(j.reply || 'No reply', 'bot'))
+        .catch(() => addMessage('Error connecting', 'bot'));
+    }
+
+    sendBtn.addEventListener('click', sendText);
+    userInput.addEventListener('keypress', e => { if (e.key === 'Enter') sendText(); });
+
+    fileBtn.addEventListener('change', e => {
+      const f = e.target.files[0]; if (!f) return;
+      addMessage('Uploaded: ' + f.name, 'user');
+      const fd = new FormData(); fd.append('file', f);
+      fetch('https://caseyp.app.n8n.cloud/webhook/nofrictionchatbot', { method: 'POST', body: fd })
+        .then(res => res.json())
+        .then(j => addMessage(j.reply || 'No reply', 'bot'))
+        .catch(() => addMessage('Error connecting', 'bot'));
+    });
+
+    const Rec = window.SpeechRecognition || window.webkitSpeechRecognition;
+    if (Rec) {
+      const rec = new Rec(); rec.continuous = false; rec.lang = 'en-US';
+      audioChk.addEventListener('change', () => speakBtn.disabled = !audioChk.checked);
+      speakBtn.addEventListener('click', () => rec.start());
+      rec.addEventListener('result', e => { userInput.value = e.results[0][0].transcript; });
+      rec.addEventListener('error', () => {});
+    }
+
+    function speak(txt) { const u = new SpeechSynthesisUtterance(txt); window.speechSynthesis.speak(u); }
+
+        // Initialize speak button disabled by default
+    speakBtn.disabled = true;
+    audioChk.addEventListener('change', () => {
+      const enabled = audioChk.checked;
+      speakBtn.disabled = !enabled;
+    });
+
+    // Initial greeting
+    addMessage('🤖 Hello! How can I help you today?', 'bot');
+  </script>
+</body>
+</html>

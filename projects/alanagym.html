@@ -1,0 +1,564 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Foundational Fitness Reset Program | No Friction Intelligence</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 100%);
+            color: #e0e0e0;
+            line-height: 1.6;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+        
+        .header {
+            text-align: center;
+            margin-bottom: 60px;
+            border-bottom: 2px solid #333;
+            padding-bottom: 30px;
+        }
+        
+        h1 {
+            font-size: 3.5em;
+            font-weight: 700;
+            background: linear-gradient(135deg, #00d4ff 0%, #0099cc 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 20px;
+        }
+        
+        .subtitle {
+            font-size: 1.3em;
+            color: #888;
+            font-weight: 300;
+            margin-bottom: 30px;
+        }
+        
+        .principles {
+            background: rgba(0, 212, 255, 0.1);
+            border-left: 4px solid #00d4ff;
+            padding: 25px;
+            margin-bottom: 50px;
+            border-radius: 8px;
+        }
+        
+        .principles h3 {
+            color: #00d4ff;
+            margin-bottom: 15px;
+            font-size: 1.4em;
+        }
+        
+        .principles ul {
+            list-style: none;
+            padding-left: 0;
+        }
+        
+        .principles li {
+            padding: 8px 0;
+            position: relative;
+            padding-left: 25px;
+        }
+        
+        .principles li:before {
+            content: "▸";
+            color: #00d4ff;
+            font-weight: bold;
+            position: absolute;
+            left: 0;
+        }
+        
+        .workout-section {
+            margin-bottom: 60px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 12px;
+            padding: 40px;
+            border: 1px solid #333;
+        }
+        
+        h2 {
+            font-size: 2.2em;
+            color: #00d4ff;
+            text-align: center;
+            margin-bottom: 30px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+        
+        .exercise {
+            margin-bottom: 40px;
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 8px;
+            padding: 25px;
+            border-left: 4px solid #0099cc;
+        }
+        
+        h3 {
+            color: #fff;
+            font-size: 1.6em;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+            font-weight: 600;
+        }
+        
+        .exercise-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+        }
+        
+        .exercise-type {
+            background: rgba(255, 255, 255, 0.08);
+            padding: 20px;
+            border-radius: 6px;
+            border: 1px solid #444;
+            transition: all 0.3s ease;
+        }
+        
+        .exercise-type:hover {
+            background: rgba(0, 212, 255, 0.1);
+            border-color: #00d4ff;
+            transform: translateY(-2px);
+        }
+        
+        .exercise-type h4 {
+            color: #00d4ff;
+            font-size: 1.1em;
+            margin-bottom: 10px;
+            font-weight: 600;
+        }
+        
+        .exercise-type p {
+            color: #ccc;
+            font-size: 0.95em;
+            line-height: 1.5;
+        }
+        
+        .tracking-section {
+            background: linear-gradient(135deg, rgba(0, 212, 255, 0.1) 0%, rgba(0, 153, 204, 0.1) 100%);
+            border-radius: 12px;
+            padding: 40px;
+            margin-top: 60px;
+            border: 2px solid #00d4ff;
+        }
+        
+        .tracking-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin-top: 30px;
+        }
+        
+        .tracking-item {
+            background: rgba(0, 0, 0, 0.3);
+            padding: 20px;
+            border-radius: 8px;
+            border: 1px solid #333;
+        }
+        
+        .tracking-item h4 {
+            color: #00d4ff;
+            margin-bottom: 10px;
+            font-size: 1.2em;
+        }
+        
+        .tracking-item p {
+            color: #aaa;
+            font-size: 0.9em;
+        }
+        
+        .metrics {
+            margin-top: 30px;
+        }
+        
+        .metrics h4 {
+            color: #fff;
+            margin-bottom: 15px;
+            font-size: 1.3em;
+        }
+        
+        .metrics ul {
+            list-style: none;
+            padding-left: 0;
+        }
+        
+        .metrics li {
+            padding: 8px 0;
+            color: #ccc;
+            position: relative;
+            padding-left: 25px;
+        }
+        
+        .metrics li:before {
+            content: "📊";
+            position: absolute;
+            left: 0;
+        }
+        
+        .footer-note {
+            text-align: center;
+            margin-top: 50px;
+            padding: 30px;
+            background: rgba(0, 212, 255, 0.05);
+            border-radius: 8px;
+            color: #888;
+            font-style: italic;
+        }
+        
+        @media (max-width: 768px) {
+            h1 { font-size: 2.5em; }
+            h2 { font-size: 1.8em; }
+            .container { padding: 20px 15px; }
+            .exercise-grid { grid-template-columns: 1fr; }
+            .tracking-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🏋️‍♀️ FOUNDATIONAL FITNESS RESET PROGRAM</h1>
+            <div class="subtitle">3x Week | 45 Minutes | Progressive & Flexible</div>
+        </div>
+
+        <div class="principles">
+            <h3>Key Principles (from No Friction health insights):</h3>
+            <ul>
+                <li>Establish baseline measurements (weight, BMI, waist circumference)</li>
+                <li>Track progress to reduce chronic disease risk</li>
+                <li>Progressive overload for sustainable results</li>
+            </ul>
+        </div>
+
+        <div class="workout-section">
+            <h2>WORKOUT A: UPPER BODY FOUNDATION (Monday)</h2>
+            
+            <div class="exercise">
+                <h3>1. CHEST PRESS</h3>
+                <div class="exercise-grid">
+                    <div class="exercise-type">
+                        <h4>Weights</h4>
+                        <p>Dumbbell Press - 12-15 lbs each | 3 sets x 10-12 reps</p>
+                    </div>
+                    <div class="exercise-type">
+                        <h4>Cables</h4>
+                        <p>Chest Fly - 20-30 lbs | 3 sets x 12-15 reps</p>
+                    </div>
+                    <div class="exercise-type">
+                        <h4>Bodyweight</h4>
+                        <p>Push-ups (knees) - 3 sets x 8-12 reps</p>
+                    </div>
+                    <div class="exercise-type">
+                        <h4>Freestyle</h4>
+                        <p>Resistance band chest press - 3 sets x 15 reps</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="exercise">
+                <h3>2. BACK ROWS</h3>
+                <div class="exercise-grid">
+                    <div class="exercise-type">
+                        <h4>Weights</h4>
+                        <p>Seated Row - 30-40 lbs | 3 sets x 10-12 reps</p>
+                    </div>
+                    <div class="exercise-type">
+                        <h4>Cables</h4>
+                        <p>Cable Row - 40-50 lbs | 3 sets x 12-15 reps</p>
+                    </div>
+                    <div class="exercise-type">
+                        <h4>Bodyweight</h4>
+                        <p>Inverted rows - 3 sets x 6-10 reps</p>
+                    </div>
+                    <div class="exercise-type">
+                        <h4>Freestyle</h4>
+                        <p>Resistance band rows - 3 sets x 15 reps</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="exercise">
+                <h3>3. SHOULDER PRESS</h3>
+                <div class="exercise-grid">
+                    <div class="exercise-type">
+                        <h4>Weights</h4>
+                        <p>Dumbbell Press - 8-12 lbs each | 3 sets x 10-12 reps</p>
+                    </div>
+                    <div class="exercise-type">
+                        <h4>Cables</h4>
+                        <p>Cable Shoulder Press - 15-25 lbs | 3 sets x 12 reps</p>
+                    </div>
+                    <div class="exercise-type">
+                        <h4>Bodyweight</h4>
+                        <p>Pike push-ups - 3 sets x 5-8 reps</p>
+                    </div>
+                    <div class="exercise-type">
+                        <h4>Freestyle</h4>
+                        <p>Wall handstand hold - 3 sets x 20-30 seconds</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="exercise">
+                <h3>4. BICEP CURLS</h3>
+                <div class="exercise-grid">
+                    <div class="exercise-type">
+                        <h4>Weights</h4>
+                        <p>Dumbbell Curls - 8-12 lbs | 3 sets x 12-15 reps</p>
+                    </div>
+                    <div class="exercise-type">
+                        <h4>Cables</h4>
+                        <p>Cable Curls - 20-30 lbs | 3 sets x 12-15 reps</p>
+                    </div>
+                    <div class="exercise-type">
+                        <h4>Bodyweight</h4>
+                        <p>Chin-up negatives - 3 sets x 3-5 reps</p>
+                    </div>
+                    <div class="exercise-type">
+                        <h4>Freestyle</h4>
+                        <p>Water jug curls - 3 sets x 15 reps</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="workout-section">
+            <h2>WORKOUT B: LOWER BODY POWER (Wednesday)</h2>
+            
+            <div class="exercise">
+                <h3>1. SQUATS</h3>
+                <div class="exercise-grid">
+                    <div class="exercise-type">
+                        <h4>Weights</h4>
+                        <p>Goblet Squat - 15-25 lb dumbbell | 3 sets x 12-15 reps</p>
+                    </div>
+                    <div class="exercise-type">
+                        <h4>Cables</h4>
+                        <p>Cable Squats - 30-40 lbs | 3 sets x 12-15 reps</p>
+                    </div>
+                    <div class="exercise-type">
+                        <h4>Bodyweight</h4>
+                        <p>Air Squats - 3 sets x 15-20 reps</p>
+                    </div>
+                    <div class="exercise-type">
+                        <h4>Freestyle</h4>
+                        <p>Jump squats - 3 sets x 8-12 reps</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="exercise">
+                <h3>2. DEADLIFTS</h3>
+                <div class="exercise-grid">
+                    <div class="exercise-type">
+                        <h4>Weights</h4>
+                        <p>Romanian Deadlift - 30-45 lbs | 3 sets x 10-12 reps</p>
+                    </div>
+                    <div class="exercise-type">
+                        <h4>Cables</h4>
+                        <p>Cable Pull-through - 40-50 lbs | 3 sets x 12-15 reps</p>
+                    </div>
+                    <div class="exercise-type">
+                        <h4>Bodyweight</h4>
+                        <p>Single-leg deadlift - 3 sets x 8-10 each leg</p>
+                    </div>
+                    <div class="exercise-type">
+                        <h4>Freestyle</h4>
+                        <p>Good mornings - 3 sets x 12-15 reps</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="exercise">
+                <h3>3. LUNGES</h3>
+                <div class="exercise-grid">
+                    <div class="exercise-type">
+                        <h4>Weights</h4>
+                        <p>Walking Lunges - 10-15 lbs each hand | 3 sets x 10 each leg</p>
+                    </div>
+                    <div class="exercise-type">
+                        <h4>Cables</h4>
+                        <p>Cable Lunges - 20-30 lbs | 3 sets x 10 each leg</p>
+                    </div>
+                    <div class="exercise-type">
+                        <h4>Bodyweight</h4>
+                        <p>Reverse Lunges - 3 sets x 12 each leg</p>
+                    </div>
+                    <div class="exercise-type">
+                        <h4>Freestyle</h4>
+                        <p>Jumping lunges - 3 sets x 6-8 each leg</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="exercise">
+                <h3>4. CALF RAISES</h3>
+                <div class="exercise-grid">
+                    <div class="exercise-type">
+                        <h4>Weights</h4>
+                        <p>Dumbbell Calf Raises - 15-20 lbs | 3 sets x 15-20 reps</p>
+                    </div>
+                    <div class="exercise-type">
+                        <h4>Cables</h4>
+                        <p>Cable Calf Raises - 30-40 lbs | 3 sets x 15-20 reps</p>
+                    </div>
+                    <div class="exercise-type">
+                        <h4>Bodyweight</h4>
+                        <p>Standing Calf Raises - 3 sets x 20-25 reps</p>
+                    </div>
+                    <div class="exercise-type">
+                        <h4>Freestyle</h4>
+                        <p>Single-leg hops - 3 sets x 10 each leg</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="workout-section">
+            <h2>WORKOUT C: CORE & FUNCTIONAL (Friday)</h2>
+            
+            <div class="exercise">
+                <h3>1. PLANKS</h3>
+                <div class="exercise-grid">
+                    <div class="exercise-type">
+                        <h4>Weights</h4>
+                        <p>Weighted plank - 10-15 lb plate | 3 sets x 30-45 seconds</p>
+                    </div>
+                    <div class="exercise-type">
+                        <h4>Cables</h4>
+                        <p>Cable plank pulls - 20-30 lbs | 3 sets x 10 each side</p>
+                    </div>
+                    <div class="exercise-type">
+                        <h4>Bodyweight</h4>
+                        <p>Standard plank - 3 sets x 45-60 seconds</p>
+                    </div>
+                    <div class="exercise-type">
+                        <h4>Freestyle</h4>
+                        <p>Plank to downward dog - 3 sets x 10 reps</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="exercise">
+                <h3>2. RUSSIAN TWISTS</h3>
+                <div class="exercise-grid">
+                    <div class="exercise-type">
+                        <h4>Weights</h4>
+                        <p>Medicine ball twists - 8-12 lbs | 3 sets x 20 total</p>
+                    </div>
+                    <div class="exercise-type">
+                        <h4>Cables</h4>
+                        <p>Cable wood chops - 15-25 lbs | 3 sets x 10 each side</p>
+                    </div>
+                    <div class="exercise-type">
+                        <h4>Bodyweight</h4>
+                        <p>Seated twists - 3 sets x 20 total</p>
+                    </div>
+                    <div class="exercise-type">
+                        <h4>Freestyle</h4>
+                        <p>Bicycle crunches - 3 sets x 20 total</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="exercise">
+                <h3>3. LEG RAISES</h3>
+                <div class="exercise-grid">
+                    <div class="exercise-type">
+                        <h4>Weights</h4>
+                        <p>Ankle weights - 2-5 lbs | 3 sets x 10-12 reps</p>
+                    </div>
+                    <div class="exercise-type">
+                        <h4>Cables</h4>
+                        <p>Cable leg raises - 10-20 lbs | 3 sets x 10-12 reps</p>
+                    </div>
+                    <div class="exercise-type">
+                        <h4>Bodyweight</h4>
+                        <p>Lying leg raises - 3 sets x 12-15 reps</p>
+                    </div>
+                    <div class="exercise-type">
+                        <h4>Freestyle</h4>
+                        <p>Flutter kicks - 3 sets x 20 total</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="exercise">
+                <h3>4. GLUTE BRIDGES</h3>
+                <div class="exercise-grid">
+                    <div class="exercise-type">
+                        <h4>Weights</h4>
+                        <p>Hip thrust - 25-45 lbs | 3 sets x 12-15 reps</p>
+                    </div>
+                    <div class="exercise-type">
+                        <h4>Cables</h4>
+                        <p>Cable hip thrust - 30-40 lbs | 3 sets x 12-15 reps</p>
+                    </div>
+                    <div class="exercise-type">
+                        <h4>Bodyweight</h4>
+                        <p>Bridge hold - 3 sets x 30-45 seconds</p>
+                    </div>
+                    <div class="exercise-type">
+                        <h4>Freestyle</h4>
+                        <p>Single-leg glute bridge - 3 sets x 8-10 each</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="tracking-section">
+            <h2>📊 PROGRESS TRACKING</h2>
+            <p style="text-align: center; color: #888; margin-bottom: 30px;">(Based on No Friction health baseline principles)</p>
+            
+            <div class="tracking-grid">
+                <div class="tracking-item">
+                    <h4>Week 1-2</h4>
+                    <p>Focus on form, use lower weights</p>
+                </div>
+                <div class="tracking-item">
+                    <h4>Week 3-4</h4>
+                    <p>Increase weights by 5-10%</p>
+                </div>
+                <div class="tracking-item">
+                    <h4>Week 5-6</h4>
+                    <p>Add extra set or reps</p>
+                </div>
+                <div class="tracking-item">
+                    <h4>Week 7-8</h4>
+                    <p>Introduce more challenging variations</p>
+                </div>
+            </div>
+
+            <div class="metrics">
+                <h4>Key Metrics to Track:</h4>
+                <ul>
+                    <li>Body weight & measurements</li>
+                    <li>Strength progression</li>
+                    <li>Energy levels</li>
+                    <li>Sleep quality</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="footer-note">
+            <p>This program offers maximum flexibility - choose any exercise variation based on available equipment while maintaining progressive overload for optimal results!</p>
+            <p style="margin-top: 20px; font-size: 0.9em; color: #666;">
+                Powered by No Friction Intelligence | Health data integration from No Friction knowledge base
+            </p>
+        </div>
+    </div>
+</body>
+</html>

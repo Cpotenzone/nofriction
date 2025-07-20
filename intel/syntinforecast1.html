@@ -1,0 +1,1122 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SYNTIN.AI 5-Year VAR Revenue Forecast</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@3.9.1/dist/chart.min.js"></script>
+    <style>
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            color: #1a202c;
+            background-color: #f7fafc;
+            line-height: 1.6;
+            padding-bottom: 4rem;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1.5rem;
+        }
+        .header-gradient {
+            background: linear-gradient(90deg, #2563eb 0%, #3b82f6 100%);
+            color: white;
+        }
+        .card {
+            background-color: white;
+            border-radius: 0.5rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+            overflow: hidden;
+            margin-bottom: 1.5rem;
+            padding: 1.5rem;
+        }
+        .metric-card {
+            background-color: white;
+            border-radius: 0.5rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+            padding: 1.25rem;
+            transition: transform 0.2s;
+        }
+        .metric-card:hover {
+            transform: translateY(-5px);
+        }
+        .metric-value {
+            font-size: 1.875rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            color: #2563eb;
+        }
+        .metric-label {
+            font-size: 0.875rem;
+            color: #4b5563;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+        .chart-container {
+            position: relative;
+            height: 300px;
+            width: 100%;
+            margin-bottom: 1.5rem;
+        }
+        .large-chart-container {
+            position: relative;
+            height: 400px;
+            width: 100%;
+            margin-bottom: 1.5rem;
+        }
+        .table-container {
+            overflow-x: auto;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        th {
+            background-color: #f3f4f6;
+            text-align: left;
+            padding: 0.75rem 1rem;
+            font-weight: 600;
+        }
+        td {
+            padding: 0.75rem 1rem;
+            border-bottom: 1px solid #e5e7eb;
+        }
+        .negative {
+            color: #dc2626;
+        }
+        .positive {
+            color: #059669;
+        }
+        .section-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            color: #1a202c;
+        }
+        .subsection-title {
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            margin-top: 2rem;
+            color: #374151;
+        }
+        .blue-highlight {
+            background: rgba(37, 99, 235, 0.1);
+            border-left: 4px solid #2563eb;
+            padding: 1rem;
+            margin-bottom: 1.5rem;
+        }
+        .flex-grid {
+            display: flex;
+            flex-wrap: wrap;
+            margin: -0.75rem;
+        }
+        .flex-grid > div {
+            padding: 0.75rem;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <div class="header-gradient py-12 mb-8">
+        <div class="container">
+            <h1 class="text-4xl font-bold mb-4">SYNTIN.AI 5-Year VAR Revenue Forecast</h1>
+            <p class="text-xl opacity-90">Comprehensive analysis of growth from $4.2M to $255M</p>
+        </div>
+    </div>
+
+    <div class="container">
+        <!-- Executive Summary -->
+        <section class="mb-12">
+            <h2 class="section-title">Executive Summary</h2>
+            <div class="blue-highlight">
+                <p class="mb-2">This report presents a comprehensive 5-year revenue forecast for SYNTIN.AI, demonstrating how the company can grow from <strong>$4.2M in Year 1</strong> to <strong>$255M by Year 5</strong> through strategic VAR partnerships and optimized growth strategies.</p>
+                <p>Starting with 25 customers in Year 1, the model shows exponential growth in both customer base and revenue while maintaining strong unit economics and improving profitability metrics.</p>
+            </div>
+            
+            <div class="flex-grid">
+                <div class="w-full md:w-1/4">
+                    <div class="metric-card">
+                        <div class="metric-value">179.1%</div>
+                        <div class="metric-label">5-Year CAGR</div>
+                    </div>
+                </div>
+                <div class="w-full md:w-1/4">
+                    <div class="metric-card">
+                        <div class="metric-value">$255M</div>
+                        <div class="metric-label">Year 5 Revenue</div>
+                    </div>
+                </div>
+                <div class="w-full md:w-1/4">
+                    <div class="metric-card">
+                        <div class="metric-value">756%</div>
+                        <div class="metric-label">Customer Growth</div>
+                    </div>
+                </div>
+                <div class="w-full md:w-1/4">
+                    <div class="metric-card">
+                        <div class="metric-value">14.8%</div>
+                        <div class="metric-label">Year 5 Net Margin</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Revenue Growth Analysis -->
+        <section class="mb-12">
+            <h2 class="section-title">Revenue Growth Analysis</h2>
+            <div class="card">
+                <h3 class="subsection-title">5-Year Revenue Trajectory</h3>
+                <div class="large-chart-container">
+                    <canvas id="revenueGrowthChart"></canvas>
+                </div>
+                <p class="mt-4">The revenue growth trajectory shows a consistent expansion pattern with strong year-over-year growth rates: <span class="font-semibold">221.4%</span> in Year 2, <span class="font-semibold">211.1%</span> in Year 3, <span class="font-semibold">173.8%</span> in Year 4, and <span class="font-semibold">121.7%</span> in Year 5. This growth pattern demonstrates a compound annual growth rate (CAGR) of <span class="font-semibold">179.1%</span> over the 5-year period.</p>
+            </div>
+
+            <div class="card">
+                <h3 class="subsection-title">Revenue by VAR Tier</h3>
+                <div class="chart-container">
+                    <canvas id="varTierRevenueChart"></canvas>
+                </div>
+                <p class="mt-4">Revenue distribution across VAR tiers shows the growing importance of higher-tier partnerships. By Year 5, the Premium and Strategic VAR tiers contribute over 75% of total revenue, highlighting the effectiveness of the tiered partnership strategy in driving revenue growth.</p>
+            </div>
+
+            <div class="card">
+                <h3 class="subsection-title">Revenue by Customer Segment</h3>
+                <div class="chart-container">
+                    <canvas id="customerSegmentRevenueChart"></canvas>
+                </div>
+                <p class="mt-4">Enterprise customers remain the dominant revenue segment throughout the forecast period, contributing approximately 70% of total revenue by Year 5. The Mid-Market segment maintains a consistent 22-25% contribution, while Small Business accounts for 5-8% of revenue.</p>
+            </div>
+        </section>
+
+        <!-- Customer Analysis -->
+        <section class="mb-12">
+            <h2 class="section-title">Customer Analysis</h2>
+            <div class="card">
+                <h3 class="subsection-title">Customer Growth</h3>
+                <div class="chart-container">
+                    <canvas id="customerGrowthChart"></canvas>
+                </div>
+                <p class="mt-4">Starting with 25 customers in Year 1, SYNTIN.AI's customer base grows to over 200 by Year 5. This growth is driven by both increasing acquisition rates and improving customer retention, with new customer acquisition accelerating in Years 3-5 as the VAR channel strategy matures.</p>
+            </div>
+
+            <div class="card">
+                <h3 class="subsection-title">Customer Retention & LTV</h3>
+                <div class="flex-grid">
+                    <div class="w-full md:w-1/2">
+                        <div class="chart-container">
+                            <canvas id="retentionRateChart"></canvas>
+                        </div>
+                    </div>
+                    <div class="w-full md:w-1/2">
+                        <div class="chart-container">
+                            <canvas id="ltvCacRatioChart"></canvas>
+                        </div>
+                    </div>
+                </div>
+                <p class="mt-4">Customer retention rates improve steadily from 88% in Year 1 to 94% by Year 5, reflecting increasing product stickiness and customer satisfaction. This improvement, combined with expanding deal sizes, drives exceptional LTV:CAC ratios that exceed 50x by Year 3, indicating highly efficient customer acquisition.</p>
+            </div>
+        </section>
+
+        <!-- Sales Force Analysis -->
+        <section class="mb-12">
+            <h2 class="section-title">Sales Force Analysis</h2>
+            <div class="card">
+                <h3 class="subsection-title">Sales Force Growth & Composition</h3>
+                <div class="chart-container">
+                    <canvas id="salesForceChart"></canvas>
+                </div>
+                <p class="mt-4">The sales organization scales from approximately 4.3 representatives in Year 1 to 72.6 in Year 5, representing a 1,600% increase. The composition gradually shifts toward a higher proportion of Junior reps (from 37% to 45%) as the sales process becomes more standardized and efficient.</p>
+            </div>
+
+            <div class="card">
+                <h3 class="subsection-title">Sales Productivity Metrics</h3>
+                <div class="flex-grid">
+                    <div class="w-full md:w-1/2">
+                        <div class="chart-container">
+                            <canvas id="revenuePerRepChart"></canvas>
+                        </div>
+                    </div>
+                    <div class="w-full md:w-1/2">
+                        <div class="chart-container">
+                            <canvas id="salesCycleChart"></canvas>
+                        </div>
+                    </div>
+                </div>
+                <p class="mt-4">Revenue per rep increases steadily from $985K in Year 1 to $3.5M by Year 5, reflecting growing sales efficiency and the impact of larger deal sizes. This productivity improvement coincides with decreasing sales cycles, particularly in the Enterprise segment where cycles shorten from 173 days to 115 days.</p>
+            </div>
+        </section>
+
+        <!-- Pricing & Margin Analysis -->
+        <section class="mb-12">
+            <h2 class="section-title">Pricing & Margin Analysis</h2>
+            <div class="card">
+                <h3 class="subsection-title">Margin Rates by VAR Tier</h3>
+                <div class="chart-container">
+                    <canvas id="marginRatesChart"></canvas>
+                </div>
+                <p class="mt-4">The forecast model maintains strong margins across all VAR tiers, with higher tiers commanding premium margins. Premium VAR partnerships achieve margins exceeding 55% by Year 5, compared to 40% for Basic VAR partnerships.</p>
+            </div>
+
+            <div class="card">
+                <h3 class="subsection-title">Pricing Components Evolution</h3>
+                <div class="table-container">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>VAR Tier</th>
+                                <th>Component</th>
+                                <th>Year 1</th>
+                                <th>Year 3</th>
+                                <th>Year 5</th>
+                                <th>Growth</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td rowspan="3">Basic VAR</td>
+                                <td>Base Price</td>
+                                <td>$138,141</td>
+                                <td>$151,955</td>
+                                <td>$167,151</td>
+                                <td class="positive">+21%</td>
+                            </tr>
+                            <tr>
+                                <td>EPS Fee</td>
+                                <td>12.0%</td>
+                                <td>12.0%</td>
+                                <td>12.5%</td>
+                                <td class="positive">+4.2%</td>
+                            </tr>
+                            <tr>
+                                <td>DPS Fee</td>
+                                <td>25.0%</td>
+                                <td>25.5%</td>
+                                <td>26.0%</td>
+                                <td class="positive">+4.0%</td>
+                            </tr>
+                            <tr>
+                                <td rowspan="3">Premium VAR</td>
+                                <td>Base Price</td>
+                                <td>$386,794</td>
+                                <td>$425,474</td>
+                                <td>$468,021</td>
+                                <td class="positive">+21%</td>
+                            </tr>
+                            <tr>
+                                <td>EPS Fee</td>
+                                <td>6.0%</td>
+                                <td>6.2%</td>
+                                <td>6.5%</td>
+                                <td class="positive">+8.3%</td>
+                            </tr>
+                            <tr>
+                                <td>DPS Fee</td>
+                                <td>15.0%</td>
+                                <td>15.3%</td>
+                                <td>15.8%</td>
+                                <td class="positive">+5.3%</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <p class="mt-4">The pricing model evolves gradually over the forecast period with modest price increases that maintain competitiveness while expanding margins. Base prices increase approximately 21% over five years, while the EPS and DPS fee structures see smaller adjustments designed to optimize for both customer value and SYNTIN.AI profitability.</p>
+            </div>
+        </section>
+
+        <!-- P&L Analysis -->
+        <section class="mb-12">
+            <h2 class="section-title">Financial Performance</h2>
+            <div class="card">
+                <h3 class="subsection-title">5-Year P&L Summary</h3>
+                <div class="table-container">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>P&L Item</th>
+                                <th>Year 1</th>
+                                <th>Year 2</th>
+                                <th>Year 3</th>
+                                <th>Year 4</th>
+                                <th>Year 5</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>Revenue</strong></td>
+                                <td>$4,200,000</td>
+                                <td>$13,500,000</td>
+                                <td>$42,000,000</td>
+                                <td>$115,000,000</td>
+                                <td>$255,000,000</td>
+                            </tr>
+                            <tr>
+                                <td>COGS</td>
+                                <td>$2,064,715</td>
+                                <td>$6,587,842</td>
+                                <td>$20,509,742</td>
+                                <td>$56,354,493</td>
+                                <td>$124,594,048</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Gross Profit</strong></td>
+                                <td>$2,135,285</td>
+                                <td>$6,912,158</td>
+                                <td>$21,490,258</td>
+                                <td>$58,645,507</td>
+                                <td>$130,405,952</td>
+                            </tr>
+                            <tr>
+                                <td>Sales & Marketing</td>
+                                <td>$1,270,045</td>
+                                <td>$2,587,896</td>
+                                <td>$6,284,435</td>
+                                <td>$15,135,487</td>
+                                <td>$28,354,782</td>
+                            </tr>
+                            <tr>
+                                <td>Research & Development</td>
+                                <td>$756,000</td>
+                                <td>$2,025,000</td>
+                                <td>$5,250,000</td>
+                                <td>$12,650,000</td>
+                                <td>$25,500,000</td>
+                            </tr>
+                            <tr>
+                                <td>General & Administrative</td>
+                                <td>$630,000</td>
+                                <td>$1,687,500</td>
+                                <td>$4,620,000</td>
+                                <td>$11,500,000</td>
+                                <td>$20,400,000</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Operating Expenses</strong></td>
+                                <td>$2,656,045</td>
+                                <td>$6,300,396</td>
+                                <td>$16,154,435</td>
+                                <td>$39,285,487</td>
+                                <td>$74,254,782</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Operating Income (EBIT)</strong></td>
+                                <td class="negative">($520,760)</td>
+                                <td>$611,762</td>
+                                <td>$5,335,823</td>
+                                <td>$19,360,020</td>
+                                <td>$56,151,170</td>
+                            </tr>
+                            <tr>
+                                <td>Taxes</td>
+                                <td>$0</td>
+                                <td>$152,941</td>
+                                <td>$1,333,956</td>
+                                <td>$4,840,005</td>
+                                <td>$14,037,792</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Net Income</strong></td>
+                                <td class="negative">($520,760)</td>
+                                <td>$458,822</td>
+                                <td>$4,001,867</td>
+                                <td>$14,520,015</td>
+                                <td>$42,113,377</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <p class="mt-4">The P&L forecast shows SYNTIN.AI reaching profitability in Year 2, with rapidly accelerating profitability thereafter. Despite initial investments in Year 1 resulting in a small net loss, by Year 5 the company achieves a healthy 16.5% net profit margin on $255M in revenue.</p>
+            </div>
+
+            <div class="card">
+                <h3 class="subsection-title">Profitability Metrics Evolution</h3>
+                <div class="chart-container">
+                    <canvas id="profitabilityMetricsChart"></canvas>
+                </div>
+                <p class="mt-4">Gross margin remains relatively stable throughout the forecast period at approximately 51%, while operating margin improves dramatically from -12.4% in Year 1 to 22.0% by Year 5 as operating leverage increases. Net margin follows a similar trajectory, reaching 16.5% by Year 5.</p>
+            </div>
+        </section>
+
+        <!-- Key Observations -->
+        <section class="mb-12">
+            <h2 class="section-title">Key Observations & Insights</h2>
+            <div class="card">
+                <ol class="list-decimal pl-5 space-y-4">
+                    <li><strong>VAR Tier Strategy:</strong> The Premium and Strategic VAR tiers deliver the highest revenue and margins. Focusing resources on these tiers will maximize growth.</li>
+                    <li><strong>Customer Retention Impact:</strong> The improvement from 88% to 94% retention dramatically increases customer lifetime value and reduces the acquisition burden for sustainable growth.</li>
+                    <li><strong>Sales Productivity:</strong> The 3.5x increase in revenue per rep from Year 1 to Year 5 is a key driver of profitability. Continued investments in sales enablement will maintain this trajectory.</li>
+                    <li><strong>Operating Leverage:</strong> Despite 60x revenue growth, operating expenses grow by only 28x, creating significant operating leverage that drives margin expansion.</li>
+                    <li><strong>Enterprise Focus:</strong> The Enterprise segment provides both the highest growth rate and best unit economics, justifying continued emphasis in go-to-market strategies.</li>
+                </ol>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer class="text-center text-gray-500 text-sm mt-16">
+            <p>SYNTIN.AI 5-Year VAR Revenue Forecast Analysis</p>
+            <p>Based on detailed financial modeling with actual data from var_5year_forecast_comprehensive.csv</p>
+        </footer>
+    </div>
+
+    <script>
+        // Utility function for formatting currency
+        function formatCurrency(value) {
+            if (value >= 1000000) {
+                return '$' + (value / 1000000).toFixed(1) + 'M';
+            } else if (value >= 1000) {
+                return '$' + (value / 1000).toFixed(1) + 'K';
+            } else {
+                return '$' + value.toFixed(2);
+            }
+        }
+
+        // Color palette
+        const colors = {
+            primary: '#2563eb',
+            secondary: '#3b82f6',
+            tertiary: '#60a5fa',
+            quaternary: '#93c5fd',
+            quinary: '#bfdbfe',
+            success: '#059669',
+            danger: '#dc2626',
+            warning: '#d97706',
+            info: '#0369a1',
+            enterprise: '#2563eb',
+            midMarket: '#6366f1',
+            smallBusiness: '#a855f7',
+            basicVar: '#3b82f6',
+            solutionVar: '#6366f1', 
+            strategicVar: '#8b5cf6',
+            financialVar: '#a855f7',
+            healthcareVar: '#d946ef',
+            premiumVar: '#ec4899'
+        };
+
+        // Chart.js global defaults
+        Chart.defaults.font.family = "'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif";
+        Chart.defaults.color = '#4b5563';
+        Chart.defaults.plugins.title.font.weight = 'bold';
+        Chart.defaults.plugins.tooltip.backgroundColor = 'rgba(0, 0, 0, 0.8)';
+        Chart.defaults.plugins.legend.labels.usePointStyle = true;
+        Chart.defaults.elements.line.tension = 0.4;
+
+        // Revenue Growth Chart
+        const revenueGrowthCtx = document.getElementById('revenueGrowthChart').getContext('2d');
+        const revenueGrowthChart = new Chart(revenueGrowthCtx, {
+            type: 'line',
+            data: {
+                labels: ['Year 1', 'Year 2', 'Year 3', 'Year 4', 'Year 5'],
+                datasets: [{
+                    label: 'Revenue',
+                    data: [4.2, 13.5, 42.0, 115.0, 255.0],
+                    backgroundColor: colors.primary,
+                    borderColor: colors.primary,
+                    borderWidth: 3,
+                    pointRadius: 6,
+                    pointHoverRadius: 8
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    title: {
+                        display: false,
+                        text: '5-Year Revenue Trajectory'
+                    },
+                    tooltip: {
+                        callbacks: {
+                            label: function(context) {
+                                const value = context.raw;
+                                let growthRate = '';
+                                if (context.dataIndex > 0) {
+                                    const prevValue = context.dataset.data[context.dataIndex - 1];
+                                    const growth = ((value - prevValue) / prevValue * 100).toFixed(1);
+                                    growthRate = ` (${growth}% YoY growth)`;
+                                }
+                                return `Revenue: $${value}M${growthRate}`;
+                            }
+                        }
+                    },
+                    annotation: {
+                        annotations: {
+                            // Growth rate annotations would go here if using the annotation plugin
+                        }
+                    }
+                },
+                scales: {
+                    x: {
+                        grid: {
+                            display: false
+                        }
+                    },
+                    y: {
+                        beginAtZero: true,
+                        ticks: {
+                            callback: function(value) {
+                                return '$' + value + 'M';
+                            }
+                        },
+                        title: {
+                            display: true,
+                            text: 'Revenue (in millions)'
+                        }
+                    }
+                }
+            }
+        });
+
+        // VAR Tier Revenue Chart
+        const varTierRevenueCtx = document.getElementById('varTierRevenueChart').getContext('2d');
+        const varTierRevenueChart = new Chart(varTierRevenueCtx, {
+            type: 'bar',
+            data: {
+                labels: ['Year 1', 'Year 2', 'Year 3', 'Year 4', 'Year 5'],
+                datasets: [
+                    {
+                        label: 'Basic VAR',
+                        data: [0.32, 1.03, 3.21, 8.77, 19.42],
+                        backgroundColor: colors.basicVar
+                    },
+                    {
+                        label: 'Solution VAR',
+                        data: [0.50, 1.61, 5.01, 13.71, 30.34],
+                        backgroundColor: colors.solutionVar
+                    },
+                    {
+                        label: 'Strategic VAR',
+                        data: [0.70, 2.25, 7.00, 19.16, 42.41],
+                        backgroundColor: colors.strategicVar
+                    },
+                    {
+                        label: 'Industry VAR (Financial)',
+                        data: [0.84, 2.70, 8.40, 22.99, 50.89],
+                        backgroundColor: colors.financialVar
+                    },
+                    {
+                        label: 'Industry VAR (Healthcare)',
+                        data: [0.68, 2.18, 6.79, 18.59, 41.15],
+                        backgroundColor: colors.healthcareVar
+                    },
+                    {
+                        label: 'Premium VAR',
+                        data: [1.16, 3.73, 11.59, 31.78, 70.79],
+                        backgroundColor: colors.premiumVar
+                    }
+                ]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    title: {
+                        display: false,
+                        text: 'Revenue by VAR Tier'
+                    },
+                    tooltip: {
+                        callbacks: {
+                            label: function(context) {
+                                const value = context.raw;
+                                return `${context.dataset.label}: $${value.toFixed(2)}M`;
+                            }
+                        }
+                    }
+                },
+                scales: {
+                    x: {
+                        stacked: true,
+                        grid: {
+                            display: false
+                        }
+                    },
+                    y: {
+                        stacked: true,
+                        ticks: {
+                            callback: function(value) {
+                                return '$' + value + 'M';
+                            }
+                        },
+                        title: {
+                            display: true,
+                            text: 'Revenue (in millions)'
+                        }
+                    }
+                }
+            }
+        });
+
+        // Customer Segment Revenue Chart
+        const customerSegmentRevenueCtx = document.getElementById('customerSegmentRevenueChart').getContext('2d');
+        const customerSegmentRevenueChart = new Chart(customerSegmentRevenueCtx, {
+            type: 'bar',
+            data: {
+                labels: ['Year 1', 'Year 2', 'Year 3', 'Year 4', 'Year 5'],
+                datasets: [
+                    {
+                        label: 'Enterprise',
+                        data: [2.94, 9.45, 29.40, 80.50, 178.50],
+                        backgroundColor: colors.enterprise
+                    },
+                    {
+                        label: 'Mid-Market',
+                        data: [1.05, 3.38, 10.50, 28.75, 63.75],
+                        backgroundColor: colors.midMarket
+                    },
+                    {
+                        label: 'Small Business',
+                        data: [0.21, 0.68, 2.10, 5.75, 12.75],
+                        backgroundColor: colors.smallBusiness
+                    }
+                ]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    title: {
+                        display: false,
+                        text: 'Revenue by Customer Segment'
+                    },
+                    tooltip: {
+                        callbacks: {
+                            label: function(context) {
+                                const value = context.raw;
+                                return `${context.dataset.label}: $${value.toFixed(2)}M`;
+                            }
+                        }
+                    }
+                },
+                scales: {
+                    x: {
+                        stacked: true,
+                        grid: {
+                            display: false
+                        }
+                    },
+                    y: {
+                        stacked: true,
+                        ticks: {
+                            callback: function(value) {
+                                return '$' + value + 'M';
+                            }
+                        },
+                        title: {
+                            display: true,
+                            text: 'Revenue (in millions)'
+                        }
+                    }
+                }
+            }
+        });
+
+        // Customer Growth Chart
+        const customerGrowthCtx = document.getElementById('customerGrowthChart').getContext('2d');
+        const customerGrowthChart = new Chart(customerGrowthCtx, {
+            type: 'bar',
+            data: {
+                labels: ['Year 1', 'Year 2', 'Year 3', 'Year 4', 'Year 5'],
+                datasets: [
+                    {
+                        label: 'New Customers',
+                        data: [17, 3, 30, 66, 98],
+                        backgroundColor: colors.primary
+                    },
+                    {
+                        label: 'Retained Customers',
+                        data: [0, 17, 20, 50, 116],
+                        backgroundColor: colors.secondary
+                    }
+                ]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    title: {
+                        display: false,
+                        text: 'Customer Growth'
+                    }
+                },
+                scales: {
+                    x: {
+                        stacked: true,
+                        grid: {
+                            display: false
+                        }
+                    },
+                    y: {
+                        stacked: true,
+                        title: {
+                            display: true,
+                            text: 'Number of Customers'
+                        }
+                    }
+                }
+            }
+        });
+
+        // Retention Rate Chart
+        const retentionRateCtx = document.getElementById('retentionRateChart').getContext('2d');
+        const retentionRateChart = new Chart(retentionRateCtx, {
+            type: 'line',
+            data: {
+                labels: ['Year 1', 'Year 2', 'Year 3', 'Year 4', 'Year 5'],
+                datasets: [{
+                    label: 'Retention Rate',
+                    data: [88, 90, 92, 93, 94],
+                    borderColor: colors.success,
+                    backgroundColor: 'rgba(5, 150, 105, 0.1)',
+                    fill: true,
+                    borderWidth: 2,
+                    pointRadius: 4
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    title: {
+                        display: true,
+                        text: 'Customer Retention Rate'
+                    }
+                },
+                scales: {
+                    y: {
+                        min: 80,
+                        max: 100,
+                        ticks: {
+                            callback: function(value) {
+                                return value + '%';
+                            }
+                        }
+                    }
+                }
+            }
+        });
+
+        // LTV:CAC Ratio Chart
+        const ltvCacRatioCtx = document.getElementById('ltvCacRatioChart').getContext('2d');
+        const ltvCacRatioChart = new Chart(ltvCacRatioCtx, {
+            type: 'line',
+            data: {
+                labels: ['Year 1', 'Year 2', 'Year 3', 'Year 4', 'Year 5'],
+                datasets: [{
+                    label: 'LTV:CAC Ratio',
+                    data: [58.63, 146.32, 284.75, 528.93, 889.05],
+                    borderColor: colors.info,
+                    backgroundColor: 'rgba(3, 105, 161, 0.1)',
+                    fill: true,
+                    borderWidth: 2,
+                    pointRadius: 4
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    title: {
+                        display: true,
+                        text: 'LTV:CAC Ratio'
+                    }
+                },
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        title: {
+                            display: true,
+                            text: 'Ratio (x)'
+                        }
+                    }
+                }
+            }
+        });
+
+        // Sales Force Chart
+        const salesForceCtx = document.getElementById('salesForceChart').getContext('2d');
+        const salesForceChart = new Chart(salesForceCtx, {
+            type: 'bar',
+            data: {
+                labels: ['Year 1', 'Year 2', 'Year 3', 'Year 4', 'Year 5'],
+                datasets: [
+                    {
+                        label: 'Junior Reps',
+                        data: [1.57, 2.65, 7.24, 18.47, 32.69],
+                        backgroundColor: colors.tertiary
+                    },
+                    {
+                        label: 'Senior Reps',
+                        data: [1.96, 2.03, 5.43, 12.09, 25.42],
+                        backgroundColor: colors.secondary
+                    },
+                    {
+                        label: 'Enterprise Reps',
+                        data: [0.73, 0.93, 2.58, 6.60, 14.53],
+                        backgroundColor: colors.primary
+                    }
+                ]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    title: {
+                        display: false,
+                        text: 'Sales Force Composition'
+                    }
+                },
+                scales: {
+                    x: {
+                        stacked: true,
+                        grid: {
+                            display: false
+                        }
+                    },
+                    y: {
+                        stacked: true,
+                        title: {
+                            display: true,
+                            text: 'Number of Sales Representatives'
+                        }
+                    }
+                }
+            }
+        });
+
+        // Revenue Per Rep Chart
+        const revenuePerRepCtx = document.getElementById('revenuePerRepChart').getContext('2d');
+        const revenuePerRepChart = new Chart(revenuePerRepCtx, {
+            type: 'line',
+            data: {
+                labels: ['Year 1', 'Year 2', 'Year 3', 'Year 4', 'Year 5'],
+                datasets: [{
+                    label: 'Revenue Per Rep',
+                    data: [0.985, 2.402, 2.754, 3.094, 3.511],
+                    borderColor: colors.primary,
+                    backgroundColor: 'rgba(37, 99, 235, 0.1)',
+                    fill: true,
+                    borderWidth: 2,
+                    pointRadius: 4
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    title: {
+                        display: true,
+                        text: 'Revenue Per Rep'
+                    },
+                    tooltip: {
+                        callbacks: {
+                            label: function(context) {
+                                const value = context.raw;
+                                return `Revenue Per Rep: $${value.toFixed(2)}M`;
+                            }
+                        }
+                    }
+                },
+                scales: {
+                    y: {
+                        ticks: {
+                            callback: function(value) {
+                                return '$' + value + 'M';
+                            }
+                        }
+                    }
+                }
+            }
+        });
+
+        // Sales Cycle Chart
+        const salesCycleCtx = document.getElementById('salesCycleChart').getContext('2d');
+        const salesCycleChart = new Chart(salesCycleCtx, {
+            type: 'line',
+            data: {
+                labels: ['Year 1', 'Year 2', 'Year 3', 'Year 4', 'Year 5'],
+                datasets: [
+                    {
+                        label: 'Enterprise',
+                        data: [173, 152, 138, 124, 115],
+                        borderColor: colors.enterprise,
+                        backgroundColor: 'rgba(37, 99, 235, 0.1)',
+                        borderWidth: 2,
+                        pointRadius: 4
+                    },
+                    {
+                        label: 'Mid-Market',
+                        data: [126, 114, 102, 92, 85],
+                        borderColor: colors.midMarket,
+                        backgroundColor: 'rgba(99, 102, 241, 0.1)',
+                        borderWidth: 2,
+                        pointRadius: 4
+                    },
+                    {
+                        label: 'Small Business',
+                        data: [95, 87, 78, 70, 65],
+                        borderColor: colors.smallBusiness,
+                        backgroundColor: 'rgba(168, 85, 247, 0.1)',
+                        borderWidth: 2,
+                        pointRadius: 4
+                    }
+                ]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    title: {
+                        display: true,
+                        text: 'Sales Cycle Length'
+                    }
+                },
+                scales: {
+                    y: {
+                        title: {
+                            display: true,
+                            text: 'Days'
+                        }
+                    }
+                }
+            }
+        });
+
+        // Margin Rates Chart
+        const marginRatesCtx = document.getElementById('marginRatesChart').getContext('2d');
+        const marginRatesChart = new Chart(marginRatesCtx, {
+            type: 'line',
+            data: {
+                labels: ['Year 1', 'Year 2', 'Year 3', 'Year 4', 'Year 5'],
+                datasets: [
+                    {
+                        label: 'Basic VAR',
+                        data: [40.0, 42.0, 44.0, 45.0, 46.0],
+                        borderColor: colors.basicVar,
+                        borderWidth: 2,
+                        pointRadius: 4
+                    },
+                    {
+                        label: 'Solution VAR',
+                        data: [45.0, 46.5, 48.0, 49.5, 51.0],
+                        borderColor: colors.solutionVar,
+                        borderWidth: 2,
+                        pointRadius: 4
+                    },
+                    {
+                        label: 'Strategic VAR',
+                        data: [50.0, 51.5, 52.5, 53.5, 55.0],
+                        borderColor: colors.strategicVar,
+                        borderWidth: 2,
+                        pointRadius: 4
+                    },
+                    {
+                        label: 'Premium VAR',
+                        data: [55.0, 55.5, 56.0, 56.5, 57.0],
+                        borderColor: colors.premiumVar,
+                        borderWidth: 2,
+                        pointRadius: 4
+                    }
+                ]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    title: {
+                        display: false,
+                        text: 'Margin Rates by VAR Tier'
+                    },
+                    tooltip: {
+                        callbacks: {
+                            label: function(context) {
+                                const value = context.raw;
+                                return `${context.dataset.label}: ${value}%`;
+                            }
+                        }
+                    }
+                },
+                scales: {
+                    y: {
+                        min: 35,
+                        max: 60,
+                        ticks: {
+                            callback: function(value) {
+                                return value + '%';
+                            }
+                        },
+                        title: {
+                            display: true,
+                            text: 'Margin Rate (%)'
+                        }
+                    }
+                }
+            }
+        });
+
+        // Profitability Metrics Chart
+        const profitabilityMetricsCtx = document.getElementById('profitabilityMetricsChart').getContext('2d');
+        const profitabilityMetricsChart = new Chart(profitabilityMetricsCtx, {
+            type: 'line',
+            data: {
+                labels: ['Year 1', 'Year 2', 'Year 3', 'Year 4', 'Year 5'],
+                datasets: [
+                    {
+                        label: 'Gross Margin',
+                        data: [50.8, 51.2, 51.2, 51.0, 51.1],
+                        borderColor: colors.primary,
+                        borderWidth: 3,
+                        pointRadius: 5
+                    },
+                    {
+                        label: 'Operating Margin',
+                        data: [-12.4, 4.5, 12.7, 16.8, 22.0],
+                        borderColor: colors.info,
+                        borderWidth: 3,
+                        pointRadius: 5
+                    },
+                    {
+                        label: 'Net Margin',
+                        data: [-12.4, 3.4, 9.5, 12.6, 16.5],
+                        borderColor: colors.success,
+                        borderWidth: 3,
+                        pointRadius: 5
+                    }
+                ]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    title: {
+                        display: false,
+                        text: 'Profitability Metrics'
+                    },
+                    tooltip: {
+                        callbacks: {
+                            label: function(context) {
+                                const value = context.raw;
+                                return `${context.dataset.label}: ${value}%`;
+                            }
+                        }
+                    }
+                },
+                scales: {
+                    y: {
+                        ticks: {
+                            callback: function(value) {
+                                return value + '%';
+                            }
+                        },
+                        title: {
+                            display: true,
+                            text: 'Margin (%)'
+                        }
+                    }
+                }
+            }
+        });
+    </script>
+</body>
+</html>

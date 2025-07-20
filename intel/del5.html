@@ -1,0 +1,1152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+<script type="text/javascript" src="https://app.secureprivacy.ai/script/6832a781a32b1bf9b5b2a7ab.js"></script>
+
+<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-T3MZ43V4');</script>
+<!-- End Google Tag Manager -->
+
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-8M3X5312PN"></script>
+
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-8M3X5312PN');
+</script>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SYNTIN.AI | MCP Orchestration & Distillation Technology</title>
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Michroma&family=Open+Sans:wght@300;400;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Libraries -->
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.2/dist/gsap.min.js"></script>
+    
+    <style>
+        :root {
+            --syntin-primary: #EB6B23;
+            --syntin-secondary: #B44200;
+            --syntin-dark: #050505;
+            --syntin-light: #FCFCFC;
+        }
+        
+        body {
+            font-family: 'Open Sans', sans-serif;
+            background-color: var(--syntin-dark);
+            color: var(--syntin-light);
+            line-height: 1.6;
+        }
+        
+        h1, h2, h3, h4, .brand-text {
+            font-family: 'Michroma', sans-serif;
+            letter-spacing: -0.02em;
+        }
+        
+        .syntin-primary {
+            color: var(--syntin-primary);
+        }
+        
+        .syntin-primary-bg {
+            background-color: var(--syntin-primary);
+        }
+        
+        .syntin-secondary {
+            color: var(--syntin-secondary);
+        }
+        
+        .syntin-secondary-bg {
+            background-color: var(--syntin-secondary);
+        }
+        
+        .syntin-dark {
+            color: var(--syntin-dark);
+        }
+        
+        .syntin-dark-bg {
+            background-color: var(--syntin-dark);
+        }
+        
+        .syntin-light {
+            color: var(--syntin-light);
+        }
+        
+        .syntin-light-bg {
+            background-color: var(--syntin-light);
+        }
+        
+        .header {
+            min-height: 70vh;
+            background: linear-gradient(135deg, var(--syntin-primary) 0%, var(--syntin-secondary) 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+        }
+        
+        .section {
+            padding: 6rem 0;
+        }
+        
+        .card {
+            border-radius: 8px;
+            overflow: hidden;
+            background-color: rgba(5, 5, 5, 0.8);
+            border: 1px solid var(--syntin-primary);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(235, 107, 35, 0.3);
+        }
+        
+        .btn-syntin {
+            background-color: var(--syntin-primary);
+            color: var(--syntin-light);
+            transition: all 0.3s ease;
+            font-family: 'Michroma', sans-serif;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+        }
+        
+        .btn-syntin:hover {
+            background-color: var(--syntin-secondary);
+            box-shadow: 0 5px 15px rgba(235, 107, 35, 0.4);
+        }
+        
+        .nav-link {
+            color: var(--syntin-light);
+            position: relative;
+            text-transform: uppercase;
+            font-family: 'Michroma', sans-serif;
+            font-size: 0.9rem;
+            letter-spacing: 1px;
+        }
+        
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -3px;
+            left: 0;
+            background-color: var(--syntin-primary);
+            transition: width 0.3s ease;
+        }
+        
+        .nav-link:hover::after {
+            width: 100%;
+        }
+
+        /* Flip Card Styles */
+        .flip-card {
+            perspective: 1000px;
+            height: 300px;
+            cursor: pointer;
+            margin-bottom: 1.5rem;
+        }
+        
+        .flip-card-inner {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            transition: transform 0.8s;
+            transform-style: preserve-3d;
+        }
+        
+        .flip-card:hover .flip-card-inner,
+        .flip-card.flipped .flip-card-inner {
+            transform: rotateY(180deg);
+        }
+        
+        .flip-card-front, .flip-card-back {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            backface-visibility: hidden;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 2rem;
+            border-radius: 8px;
+            border: 1px solid var(--syntin-primary);
+        }
+        
+        .flip-card-front {
+            background-color: rgba(5, 5, 5, 0.9);
+            color: var(--syntin-light);
+        }
+        
+        .flip-card-back {
+            background-color: var(--syntin-primary);
+            color: var(--syntin-light);
+            transform: rotateY(180deg);
+        }
+
+        /* Animation Styles */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.8s ease, transform 0.8s ease;
+        }
+        
+        .fade-in.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Dimensional Space Visualization */
+        .dimensional-space {
+            position: relative;
+            width: 100%;
+            height: 400px;
+            background-color: rgba(5, 5, 5, 0.8);
+            border-radius: 8px;
+            overflow: hidden;
+        }
+        
+        .dimension-point {
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            background-color: var(--syntin-primary);
+            border-radius: 50%;
+            opacity: 0.7;
+        }
+        
+        .blackhole {
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            background: radial-gradient(circle, var(--syntin-primary) 0%, rgba(5, 5, 5, 0) 70%);
+            border-radius: 50%;
+            animation: pulse 2s infinite alternate;
+        }
+        
+        @keyframes pulse {
+            0% { transform: scale(1); opacity: 0.8; }
+            100% { transform: scale(1.5); opacity: 0.4; }
+        }
+
+        /* MCP Animation */
+        .mcp-container {
+            position: relative;
+            width: 100%;
+            height: 500px;
+            background-color: rgba(5, 5, 5, 0.8);
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        .agent {
+            position: absolute;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--syntin-light);
+            font-weight: bold;
+            z-index: 10;
+        }
+
+        .agent-1 { background-color: var(--syntin-primary); }
+        .agent-2 { background-color: var(--syntin-secondary); }
+        .agent-3 { background-color: #4A90E2; }
+        .agent-4 { background-color: #50E3C2; }
+        .agent-5 { background-color: #F5A623; }
+
+        .data-path {
+            position: absolute;
+            height: 2px;
+            background-color: rgba(235, 107, 35, 0.5);
+            transform-origin: left center;
+        }
+
+        /* Table Styles */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 2rem 0;
+        }
+        
+        table th {
+            background-color: var(--syntin-primary);
+            color: var(--syntin-light);
+            text-align: left;
+            padding: 1rem;
+            font-family: 'Michroma', sans-serif;
+        }
+        
+        table td {
+            padding: 1rem;
+            border-bottom: 1px solid rgba(235, 107, 35, 0.2);
+        }
+
+        /* Supply-Demand-Promotion Framework */
+        .framework-container {
+            position: relative;
+            width: 100%;
+            max-width: 800px;
+            margin: 0 auto;
+            height: 400px;
+        }
+
+        .framework-element {
+            position: absolute;
+            width: 220px;
+            height: 120px;
+            border-radius: 8px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 1rem;
+            text-align: center;
+        }
+
+        .framework-supply {
+            top: 50px;
+            left: 50px;
+            background-color: rgba(235, 107, 35, 0.9);
+        }
+
+        .framework-demand {
+            top: 50px;
+            right: 50px;
+            background-color: rgba(180, 66, 0, 0.9);
+        }
+
+        .framework-promotion {
+            bottom: 30px;
+            left: calc(50% - 110px);
+            background-color: rgba(5, 5, 5, 0.9);
+            border: 2px solid var(--syntin-primary);
+        }
+
+        .framework-line {
+            position: absolute;
+            height: 2px;
+            background-color: var(--syntin-light);
+            z-index: 1;
+        }
+
+        /* Responsive tweaks */
+        @media (max-width: 768px) {
+            .framework-container {
+                height: 600px;
+            }
+            
+            .framework-element {
+                width: 180px;
+            }
+            
+            .framework-supply {
+                top: 30px;
+                left: calc(50% - 90px);
+            }
+            
+            .framework-demand {
+                top: 180px;
+                right: calc(50% - 90px);
+            }
+            
+            .framework-promotion {
+                bottom: 30px;
+                left: calc(50% - 90px);
+            }
+        }
+    </style>
+</head>
+
+<body>
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-T3MZ43V4"
+height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
+    <!-- Header Navigation -->
+    <nav class="fixed top-0 w-full z-50 bg-opacity-90 syntin-dark-bg border-b border-syntin-primary" style="backdrop-filter: blur(8px);">
+        <div class="container mx-auto px-4 py-4 flex justify-between items-center">
+            <div class="text-2xl syntin-primary brand-text">SYNTIN.AI</div>
+            <div class="hidden md:flex space-x-6">
+                <a href="#technology" class="nav-link">Technology</a>
+                <a href="#distillation" class="nav-link">Distillation</a>
+                <a href="#framework" class="nav-link">Framework</a>
+                <a href="#applications" class="nav-link">Applications</a>
+            </div>
+            <button class="btn-syntin">Contact Us</button>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <header class="header pt-20">
+        <div class="container mx-auto px-4 text-center">
+            <h1 class="text-5xl md:text-7xl font-bold mb-6 syntin-light">AI for the Here and Now</h1>
+            <p class="text-xl md:text-2xl max-w-3xl mx-auto mb-8">
+                Transform large models into powerful, compact agents for real-time decision intelligence
+            </p>
+            <div class="flex flex-wrap justify-center gap-4 mb-12">
+                <button class="btn-syntin">Learn More</button>
+                <button class="btn-syntin" style="background-color: var(--syntin-dark); border: 1px solid var(--syntin-primary);">
+                    Request Demo
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Introduction Section -->
+    <section id="technology" class="section syntin-dark-bg">
+        <div class="container mx-auto px-4">
+            <div class="text-center max-w-4xl mx-auto mb-16 fade-in">
+                <h2 class="text-3xl md:text-5xl font-bold mb-6 syntin-primary">SYNTIN Model Context Protocol</h2>
+                <p class="text-lg md:text-xl">
+                    SYNTIN empowers organizations to enter the AI arms race without requiring millions in infrastructure investment. Our revolutionary model distillation technology transforms complex, resource-intensive AI systems into compact, efficient agents that deliver powerful insights at the precise moment they hold the greatest value.
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-16">
+                <div class="card p-6 fade-in">
+                    <div class="text-3xl syntin-primary mb-4">
+                        <i class="fas fa-brain"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">Smart Models as Superpowers</h3>
+                    <p>SYNTIN turns compact, distilled models into enterprise-grade intelligence, matching or exceeding traditional massive AI systems at a fraction of the cost.</p>
+                </div>
+
+                <div class="card p-6 fade-in">
+                    <div class="text-3xl syntin-primary mb-4">
+                        <i class="fas fa-chart-line"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">Reasonable Scaling Costs</h3>
+                    <p>Deploy powerful AI capabilities across your organization with 80-90% lower operational costs and standard hardware instead of specialized GPU clusters.</p>
+                </div>
+
+                <div class="card p-6 fade-in">
+                    <div class="text-3xl syntin-primary mb-4">
+                        <i class="fas fa-bolt"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">Real-Time Intelligence</h3>
+                    <p>Get actionable insights in milliseconds instead of seconds or minutes, enabling truly responsive decision-making for time-critical applications.</p>
+                </div>
+            </div>
+
+            <!-- MCP Animation -->
+            <div class="mb-16 fade-in">
+                <h3 class="text-2xl md:text-3xl font-bold mb-6 text-center syntin-primary">AI Superpowers through Multi-agent Orchestration</h3>
+                <p class="text-lg text-center max-w-4xl mx-auto mb-8">
+                    SYNTIN creates and orchestrates distilled AI super agents to work cooperatively with MCP, identifying valuable patterns in data and dynamically allocating resources to investigate and act upon these discoveries.
+                </p>
+
+                <div class="mcp-container" id="mcpAnimation">
+                    <!-- Agents and data paths will be added via JavaScript -->
+                </div>
+
+                <div class="mt-8 text-center">
+                    <h4 class="text-xl font-bold mb-3 syntin-primary">How MCP Works</h4>
+                    <ol class="max-w-2xl mx-auto text-left space-y-3">
+                        <li><span class="syntin-primary font-bold">1.</span> SYNTIN Core continuously analyzes incoming data streams through 780-dimensional mapping</li>
+                        <li><span class="syntin-primary font-bold">2.</span> When significant patterns ("blackholes") are detected, specialized agents are activated</li>
+                        <li><span class="syntin-primary font-bold">3.</span> Each agent receives only the resources needed for its specific task</li>
+                        <li><span class="syntin-primary font-bold">4.</span> Agents work cooperatively, sharing insights and building on each other's discoveries</li>
+                        <li><span class="syntin-primary font-bold">5.</span> Results are consolidated and delivered through the publishing layer</li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Distillation Section -->
+    <section id="distillation" class="section" style="background-color: #080808;">
+        <div class="container mx-auto px-4">
+            <div class="text-center max-w-4xl mx-auto mb-16 fade-in">
+                <h2 class="text-3xl md:text-5xl font-bold mb-6 syntin-primary">Knowledge Distillation: The Core Technology</h2>
+                <p class="text-lg md:text-xl">
+                    SYNTIN's model distillation approach enables the transfer of intelligence from large, complex "teacher" models to smaller, efficient "student" models without sacrificing critical capabilities. This transforms how organizations can deploy AI at scale.
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-16">
+                <div class="fade-in">
+                    <div class="card p-6 h-full">
+                        <h3 class="text-2xl font-bold mb-4 syntin-primary">Teacher Model</h3>
+                        <p class="mb-3">Large, Complex AI</p>
+                        <ul class="space-y-2 mb-4">
+                            <li><span class="syntin-primary">•</span> Billions of parameters</li>
+                            <li><span class="syntin-primary">•</span> Comprehensive knowledge</li>
+                            <li><span class="syntin-primary">•</span> High computational needs</li>
+                            <li><span class="syntin-primary">•</span> Significant energy consumption</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="fade-in">
+                    <div class="card p-6 h-full">
+                        <h3 class="text-2xl font-bold mb-4 syntin-primary">Student Model</h3>
+                        <p class="mb-3">Compact, Efficient AI</p>
+                        <ul class="space-y-2 mb-4">
+                            <li><span class="syntin-primary">•</span> Millions of parameters</li>
+                            <li><span class="syntin-primary">•</span> Focused expertise</li>
+                            <li><span class="syntin-primary">•</span> Low resource requirements</li>
+                            <li><span class="syntin-primary">•</span> Energy efficient</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-16">
+                <div class="card p-6 fade-in">
+                    <h4 class="text-xl font-bold mb-3 syntin-primary">Teacher Training</h4>
+                    <p>Develop comprehensive model with full data repository</p>
+                </div>
+                
+                <div class="card p-6 fade-in">
+                    <h4 class="text-xl font-bold mb-3 syntin-primary">Knowledge Transfer</h4>
+                    <p>Extract patterns through soft targets, intermediate representations</p>
+                </div>
+                
+                <div class="card p-6 fade-in">
+                    <h4 class="text-xl font-bold mb-3 syntin-primary">Student Training</h4>
+                    <p>Teach compact model to mimic teacher's intelligence</p>
+                </div>
+                
+                <div class="card p-6 fade-in">
+                    <h4 class="text-xl font-bold mb-3 syntin-primary">Optimization</h4>
+                    <p>Fine-tune for deployment efficiency and accuracy</p>
+                </div>
+            </div>
+
+            <div class="mb-16 fade-in">
+                <h3 class="text-2xl md:text-3xl font-bold mb-6 text-center syntin-primary">Distillation Benefits</h3>
+                <p class="text-lg text-center max-w-4xl mx-auto mb-8">
+                    SYNTIN's advanced distillation technology delivers transformative advantages:
+                </p>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
+                    <div class="card p-6">
+                        <h4 class="text-xl font-bold mb-2 syntin-primary">90% Size Reduction</h4>
+                        <p>Dramatically smaller models that retain 95% of capabilities</p>
+                    </div>
+
+                    <div class="card p-6">
+                        <h4 class="text-xl font-bold mb-2 syntin-primary">Deployment Flexibility</h4>
+                        <p>Run on edge devices, mobile platforms, or standard servers</p>
+                    </div>
+
+                    <div class="card p-6">
+                        <h4 class="text-xl font-bold mb-2 syntin-primary">Speed & Responsiveness</h4>
+                        <p>Achieve millisecond-level inference for real-time applications</p>
+                    </div>
+
+                    <div class="card p-6">
+                        <h4 class="text-xl font-bold mb-2 syntin-primary">Cost Efficiency</h4>
+                        <p>Operate without expensive specialized hardware</p>
+                    </div>
+
+                    <div class="card p-6">
+                        <h4 class="text-xl font-bold mb-2 syntin-primary">Privacy & Security</h4>
+                        <p>Process sensitive data locally without external transmission</p>
+                    </div>
+
+                    <div class="card p-6">
+                        <h4 class="text-xl font-bold mb-2 syntin-primary">Linear Scaling</h4>
+                        <p>Predictable costs as you expand AI deployment</p>
+                    </div>
+                </div>
+
+                <table class="w-full">
+                    <thead>
+                        <tr>
+                            <th>Feature</th>
+                            <th>SYNTIN Distilled Model</th>
+                            <th>Traditional Large Model</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Model Size</td>
+                            <td>Tens to hundreds of MB</td>
+                            <td>Tens to hundreds of GB</td>
+                        </tr>
+                        <tr>
+                            <td>Inference Speed</td>
+                            <td>&lt;100ms response time</td>
+                            <td>Seconds to minutes</td>
+                        </tr>
+                        <tr>
+                            <td>Hardware Requirements</td>
+                            <td>Standard CPU/limited GPU</td>
+                            <td>High-end GPU clusters</td>
+                        </tr>
+                        <tr>
+                            <td>Operating Costs</td>
+                            <td>80-90% lower</td>
+                            <td>$500K-$1M+ annually</td>
+                        </tr>
+                        <tr>
+                            <td>Deployment Options</td>
+                            <td>Edge, mobile, cloud, on-prem</td>
+                            <td>Primarily cloud-based</td>
+                        </tr>
+                        <tr>
+                            <td>Scaling Economics</td>
+                            <td>Linear, predictable</td>
+                            <td>Exponential growth</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- Dimensional Analysis -->
+            <div class="mb-16 fade-in">
+                <h3 class="text-2xl md:text-3xl font-bold mb-6 text-center syntin-primary">780-Dimensional Pattern Discovery</h3>
+                <p class="text-lg text-center max-w-4xl mx-auto mb-8">
+                    At the heart of SYNTIN's technology is its ability to map data relationships into a sophisticated 780-dimensional space, identifying "blackhole" patterns that represent significant opportunities or insights that would remain invisible to traditional analytics.
+                </p>
+
+                <div class="dimensional-space" id="dimensionalSpace">
+                    <!-- Points and blackholes will be added via JavaScript -->
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mt-8">
+                    <div>
+                        <h4 class="text-xl font-bold mb-4 syntin-primary">Dimension Categories</h4>
+                        <ul class="space-y-3">
+                            <li><span class="syntin-primary font-bold">Dimensions 1-120:</span> Entity attributes and characteristics</li>
+                            <li><span class="syntin-primary font-bold">Dimensions 121-340:</span> Behavioral and transactional features</li>
+                            <li><span class="syntin-primary font-bold">Dimensions 341-520:</span> Temporal and sequential patterns</li>
+                            <li><span class="syntin-primary font-bold">Dimensions 521-650:</span> Relational and network attributes</li>
+                            <li><span class="syntin-primary font-bold">Dimensions 651-780:</span> Contextual and environmental factors</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h4 class="text-xl font-bold mb-4 syntin-primary">Blackhole Characteristics</h4>
+                        <ul class="space-y-3">
+                            <li><span class="syntin-primary">•</span> High data density regions indicating significant patterns</li>
+                            <li><span class="syntin-primary">•</span> Strong correlations between previously unconnected variables</li>
+                            <li><span class="syntin-primary">•</span> Significant predictive potential for outcomes</li>
+                            <li><span class="syntin-primary">•</span> Centers of causal relationships and influence</li>
+                            <li><span class="syntin-primary">•</span> Critical decision points with high value leverage</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Pattern Classification -->
+            <div class="fade-in">
+                <h3 class="text-2xl md:text-3xl font-bold mb-6 text-center syntin-primary">Pattern Classification System</h3>
+                <p class="text-lg text-center max-w-4xl mx-auto mb-8">
+                    SYNTIN automatically categorizes discovered patterns to determine which specialized agents should be deployed:
+                </p>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    <div class="card p-6">
+                        <h4 class="text-xl font-bold mb-2 syntin-primary">Anomaly Patterns</h4>
+                        <p>Unusual data relationships requiring investigation</p>
+                    </div>
+                    <div class="card p-6">
+                        <h4 class="text-xl font-bold mb-2 syntin-primary">Opportunity Patterns</h4>
+                        <p>Potential for optimization or value creation</p>
+                    </div>
+                    <div class="card p-6">
+                        <h4 class="text-xl font-bold mb-2 syntin-primary">Emergent Patterns</h4>
+                        <p>Newly forming relationships with increasing significance</p>
+                    </div>
+                    <div class="card p-6">
+                        <h4 class="text-xl font-bold mb-2 syntin-primary">Causal Patterns</h4>
+                        <p>Cause-effect relationships that can be leveraged</p>
+                    </div>
+                    <div class="card p-6">
+                        <h4 class="text-xl font-bold mb-2 syntin-primary">Risk Patterns</h4>
+                        <p>Potential issues requiring preventive action</p>
+                    </div>
+                </div>
+
+                <p class="mt-6 text-center">Each pattern is evaluated on multiple dimensions including gravity (significance), confidence, novelty, actionability, and time sensitivity.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Foundation Elements -->
+    <section class="section syntin-dark-bg">
+        <div class="container mx-auto px-4">
+            <div class="text-center max-w-4xl mx-auto mb-16 fade-in">
+                <h2 class="text-3xl md:text-5xl font-bold mb-6 syntin-primary">Foundational Data Points</h2>
+                <p class="text-lg md:text-xl">
+                    SYNTIN's technology is built on these key foundational elements that enable its intelligent agent orchestration capabilities. Click each card to learn more about these core components.
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-16">
+                <div class="flip-card fade-in" onclick="this.classList.toggle('flipped')">
+                    <div class="flip-card-inner">
+                        <div class="flip-card-front">
+                            <h4 class="text-xl font-bold mb-4 syntin-primary">780-Dimensional Analysis</h4>
+                            <p>SYNTIN maps data into a high-dimensional space for pattern discovery</p>
+                        </div>
+                        <div class="flip-card-back">
+                            <h4 class="text-xl font-bold mb-4">780-Dimensional Analysis</h4>
+                            <p>SYNTIN processes data through proprietary mathematical theorems to map relationships into a 780-dimensional space. This high-dimensional mapping enables the identification of complex patterns and relationships that would be impossible to detect in traditional lower-dimensional analytics.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="flip-card fade-in" onclick="this.classList.toggle('flipped')">
+                    <div class="flip-card-inner">
+                        <div class="flip-card-front">
+                            <h4 class="text-xl font-bold mb-4 syntin-primary">Blackhole Pattern Detection</h4>
+                            <p>Automated discovery of high-gravity data patterns</p>
+                        </div>
+                        <div class="flip-card-back">
+                            <h4 class="text-xl font-bold mb-4">Blackhole Pattern Detection</h4>
+                            <p>Within the high-dimensional space, SYNTIN identifies "blackholes" - regions of high data density and significance that warrant focused attention. These patterns are evaluated based on gravity (significance), confidence, novelty, actionability, and time sensitivity.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="flip-card fade-in" onclick="this.classList.toggle('flipped')">
+                    <div class="flip-card-inner">
+                        <div class="flip-card-front">
+                            <h4 class="text-xl font-bold mb-4 syntin-primary">LLM-to-SLM Pipeline</h4>
+                            <p>Conversion of large models into specialized small models</p>
+                        </div>
+                        <div class="flip-card-back">
+                            <h4 class="text-xl font-bold mb-4">LLM-to-SLM Pipeline</h4>
+                            <p>SYNTIN's core pipeline transforms the broad knowledge of Large Language Models (LLMs) into highly focused Small Language Models (SLMs) for specific domains and tasks. This distillation creates specialized, efficient models that require a fraction of the computational resources while maintaining performance.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="flip-card fade-in" onclick="this.classList.toggle('flipped')">
+                    <div class="flip-card-inner">
+                        <div class="flip-card-front">
+                            <h4 class="text-xl font-bold mb-4 syntin-primary">Specialized Agent Types</h4>
+                            <p>Purpose-built agents for specific analytical tasks</p>
+                        </div>
+                        <div class="flip-card-back">
+                            <h4 class="text-xl font-bold mb-4">Specialized Agent Types</h4>
+                            <p>MCP employs multiple agent types: Analysis Agents perform statistical analysis, Visualization Agents create visual representations, Explanation Agents generate natural language descriptions, Action Agents recommend or execute actions, and Research Agents explore related data sources.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="flip-card fade-in" onclick="this.classList.toggle('flipped')">
+                    <div class="flip-card-inner">
+                        <div class="flip-card-front">
+                            <h4 class="text-xl font-bold mb-4 syntin-primary">Dynamic Segmentation</h4>
+                            <p>Intelligent audience and data categorization</p>
+                        </div>
+                        <div class="flip-card-back">
+                            <h4 class="text-xl font-bold mb-4">Dynamic Segmentation</h4>
+                            <p>SYNTIN's dynamic segmentation uses Digitized Trade Areas (granular location contexts) and Dynamic Sectors (algorithmically defined micro-segments) to identify emerging behaviors and needs. This enables highly targeted actions and personalized experiences at scale.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="flip-card fade-in" onclick="this.classList.toggle('flipped')">
+                    <div class="flip-card-inner">
+                        <div class="flip-card-front">
+                            <h4 class="text-xl font-bold mb-4 syntin-primary">Orbiting Data Keys</h4>
+                            <p>Privacy-preserving data linkage technology</p>
+                        </div>
+                        <div class="flip-card-back">
+                            <h4 class="text-xl font-bold mb-4">Orbiting Data Keys</h4>
+                            <p>SYNTIN's proprietary Orbiting Data Keys technology enables secure, privacy-preserving data linking across systems without exposing personal information. This allows different parties to link and leverage data without sharing raw identifiers, ensuring GDPR/CCPA compliance while maximizing analytical value.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="flip-card fade-in" onclick="this.classList.toggle('flipped')">
+                    <div class="flip-card-inner">
+                        <div class="flip-card-front">
+                            <h4 class="text-xl font-bold mb-4 syntin-primary">Pattern Classification System</h4>
+                            <p>Automatic categorization of data patterns</p>
+                        </div>
+                        <div class="flip-card-back">
+                            <h4 class="text-xl font-bold mb-4">Pattern Classification System</h4>
+                            <p>SYNTIN classifies discovered patterns into categories including Anomaly Patterns (unusual relationships), Opportunity Patterns (value creation potential), Emergent Patterns (developing significance), Causal Patterns (cause-effect relationships), and Risk Patterns (potential issues).</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="flip-card fade-in" onclick="this.classList.toggle('flipped')">
+                    <div class="flip-card-inner">
+                        <div class="flip-card-front">
+                            <h4 class="text-xl font-bold mb-4 syntin-primary">Jupyter Integration</h4>
+                            <p>Seamless publishing of AI insights</p>
+                        </div>
+                        <div class="flip-card-back">
+                            <h4 class="text-xl font-bold mb-4">Jupyter Integration</h4>
+                            <p>SYNTIN integrates deeply with Jupyter notebooks through native extensions, enabling seamless publishing and sharing of discovered insights. The system includes Pattern Viewer, Agent Dashboard, Pattern Query Language, Dimensional Explorer, and Agent Editor components for interactive exploration.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Supply, Demand, Promotion Framework -->
+    <section id="framework" class="section" style="background-color: #080808;">
+        <div class="container mx-auto px-4">
+            <div class="text-center max-w-4xl mx-auto mb-16 fade-in">
+                <h2 class="text-3xl md:text-5xl font-bold mb-6 syntin-primary">Supply, Demand & Promotion Framework</h2>
+                <p class="text-lg md:text-xl">
+                    SYNTIN operates on the principles of supply, demand, and promotion, where promotion represents the ability to manipulate the scales of supply and demand to create optimal outcomes and value.
+                </p>
+            </div>
+
+            <div class="framework-container fade-in">
+                <!-- Framework visualization will be added via JavaScript -->
+                <div class="framework-element framework-supply">
+                    <h4 class="text-xl font-bold mb-2">Supply</h4>
+                    <p>Raw data, computing infrastructure, AI capabilities</p>
+                </div>
+                <div class="framework-element framework-demand">
+                    <h4 class="text-xl font-bold mb-2">Demand</h4>
+                    <p>Business intelligence needs, optimization requirements</p>
+                </div>
+                <div class="framework-element framework-promotion">
+                    <h4 class="text-xl font-bold mb-2 syntin-primary">Promotion</h4>
+                    <p>SYNTIN's ability to balance and optimize</p>
+                </div>
+            </div>
+
+            <div class="mt-16 grid grid-cols-1 md:grid-cols-3 gap-8 fade-in">
+                <div>
+                    <h3 class="text-2xl font-bold mb-4 syntin-primary">Supply</h3>
+                    <p class="mb-4">The availability of data, computational resources, and AI capabilities that organizations can access.</p>
+                    <ul class="space-y-2">
+                        <li><span class="syntin-primary">•</span> Raw data assets</li>
+                        <li><span class="syntin-primary">•</span> Computing infrastructure</li>
+                        <li><span class="syntin-primary">•</span> AI model capabilities</li>
+                        <li><span class="syntin-primary">•</span> Data science expertise</li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h3 class="text-2xl font-bold mb-4 syntin-primary">Demand</h3>
+                    <p class="mb-4">The business need for insights, predictions, optimizations, and automated decision-making.</p>
+                    <ul class="space-y-2">
+                        <li><span class="syntin-primary">•</span> Business intelligence needs</li>
+                        <li><span class="syntin-primary">•</span> Operational optimization requirements</li>
+                        <li><span class="syntin-primary">•</span> Customer experience expectations</li>
+                        <li><span class="syntin-primary">•</span> Competitive market pressures</li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h3 class="text-2xl font-bold mb-4 syntin-primary">Promotion</h3>
+                    <p class="mb-4">SYNTIN's ability to manipulate the balance by making advanced AI accessible and actionable.</p>
+                    <ul class="space-y-2">
+                        <li><span class="syntin-primary">•</span> Model distillation technology</li>
+                        <li><span class="syntin-primary">•</span> Agent orchestration system</li>
+                        <li><span class="syntin-primary">•</span> Intelligent resource allocation</li>
+                        <li><span class="syntin-primary">•</span> Value-driven pattern discovery</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="mt-12 mx-auto max-w-4xl fade-in">
+                <h3 class="text-2xl font-bold mb-6 text-center syntin-primary">The Promotion Effect</h3>
+                <p class="text-lg mb-8">
+                    By distilling large models into compact, efficient ones and orchestrating them through MCP, SYNTIN effectively "promotes" AI capabilities, making them available to organizations that previously couldn't access them due to computational or expertise constraints. This fundamentally changes the economics of AI deployment:
+                </p>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <div class="card p-6">
+                        <h4 class="text-xl font-bold mb-3">Traditional Approach</h4>
+                        <ul class="space-y-2">
+                            <li><span class="syntin-primary">•</span> $1-5M+ in specialized AI infrastructure</li>
+                            <li><span class="syntin-primary">•</span> $500K-$1M+ annual operational costs</li>
+                            <li><span class="syntin-primary">•</span> Specialized ML team required</li>
+                            <li><span class="syntin-primary">•</span> Complex scaling challenges</li>
+                        </ul>
+                    </div>
+
+                    <div class="card p-6">
+                        <h4 class="text-xl font-bold mb-3">SYNTIN MCP Approach</h4>
+                        <ul class="space-y-2">
+                            <li><span class="syntin-primary">•</span> Run on standard hardware</li>
+                            <li><span class="syntin-primary">•</span> 80-90% lower operational costs</li>
+                            <li><span class="syntin-primary">•</span> Minimal specialized expertise needed</li>
+                            <li><span class="syntin-primary">•</span> Linear, predictable scaling</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Applications Section -->
+    <section id="applications" class="section syntin-dark-bg">
+        <div class="container mx-auto px-4">
+            <div class="text-center max-w-4xl mx-auto mb-16 fade-in">
+                <h2 class="text-3xl md:text-5xl font-bold mb-6 syntin-primary">Real-World Applications</h2>
+                <p class="text-lg md:text-xl">
+                    SYNTIN's technology is powering transformative AI applications across industries, delivering "AI for the Here and Now" through efficient, intelligent agent orchestration.
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-16">
+                <div class="card p-6 fade-in">
+                    <h3 class="text-xl font-bold mb-3 syntin-primary">Retail Intelligence</h3>
+                    <p class="mb-4">Comprehensive retail analytics, including inventory optimization, dynamic pricing, customer segmentation, and personalized marketing.</p>
+                    <p class="font-bold">Impact: <span class="syntin-primary">15-30% increase in sales, 20-40% reduction in overstock</span></p>
+                </div>
+
+                <div class="card p-6 fade-in">
+                    <h3 class="text-xl font-bold mb-3 syntin-primary">Predictive Maintenance</h3>
+                    <p class="mb-4">Specialized agents identify potential equipment failures before they occur, dramatically reducing downtime and maintenance costs.</p>
+                    <p class="font-bold">Impact: <span class="syntin-primary">30-50% reduction in downtime, 20-35% lower maintenance costs</span></p>
+                </div>
+
+                <div class="card p-6 fade-in">
+                    <h3 class="text-xl font-bold mb-3 syntin-primary">"Unreasonable Hospitality"</h3>
+                    <p class="mb-4">AI-powered personalization that anticipates needs and delivers exceptional customer experiences through high-touch service at scale.</p>
+                    <p class="font-bold">Impact: <span class="syntin-primary">40-60% higher satisfaction, 25-45% improved retention</span></p>
+                </div>
+
+                <div class="card p-6 fade-in">
+                    <h3 class="text-xl font-bold mb-3 syntin-primary">Infrastructure Intelligence</h3>
+                    <p class="mb-4">Geo-temporal agents monitor building systems and infrastructure, predicting failures and optimizing energy usage through pattern analysis.</p>
+                    <p class="font-bold">Impact: <span class="syntin-primary">15-30% energy savings, 40-60% faster issue resolution</span></p>
+                </div>
+
+                <div class="card p-6 fade-in">
+                    <h3 class="text-xl font-bold mb-3 syntin-primary">ERP Intelligence</h3>
+                    <p class="mb-4">Distilled models that transform complex enterprise systems into powerful AI agents for sales, operations, and customer service.</p>
+                    <p class="font-bold">Impact: <span class="syntin-primary">25-40% operational efficiency gain, 15-30% cost reduction</span></p>
+                </div>
+
+                <div class="card p-6 fade-in">
+                    <h3 class="text-xl font-bold mb-3 syntin-primary">Security & Risk Analytics</h3>
+                    <p class="mb-4">Pattern detection agents that identify anomalies, potential threats, and risk factors across physical and digital environments.</p>
+                    <p class="font-bold">Impact: <span class="syntin-primary">30-50% faster threat detection, 20-40% improved prevention</span></p>
+                </div>
+            </div>
+
+            <div class="mb-16 fade-in">
+                <h3 class="text-2xl md:text-3xl font-bold mb-6 text-center syntin-primary">Transforming MEP Infrastructure Management</h3>
+                <p class="text-lg text-center max-w-4xl mx-auto mb-8">
+                    One powerful application of SYNTIN's technology is in the management and monitoring of Mechanical, Electrical, and Plumbing (MEP) infrastructure in commercial buildings. By creating a comprehensive "walled garden" of MEP knowledge, organizations can achieve:
+                </p>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    <div class="card p-6">
+                        <h4 class="text-xl font-bold mb-2 syntin-primary">Predictive Maintenance</h4>
+                        <p>Identifies potential failures before they occur</p>
+                    </div>
+                    <div class="card p-6">
+                        <h4 class="text-xl font-bold mb-2 syntin-primary">Optimized Energy Usage</h4>
+                        <p>Through pattern analysis and anomaly detection</p>
+                    </div>
+                    <div class="card p-6">
+                        <h4 class="text-xl font-bold mb-2 syntin-primary">Enhanced Safety</h4>
+                        <p>Improved regulatory compliance</p>
+                    </div>
+                    <div class="card p-6">
+                        <h4 class="text-xl font-bold mb-2 syntin-primary">Reduced Costs</h4>
+                        <p>Extended equipment lifespans</p>
+                    </div>
+                    <div class="card p-6">
+                        <h4 class="text-xl font-bold mb-2 syntin-primary">Data-Driven Insurance</h4>
+                        <p>Better risk management through intelligence</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="section" style="background: linear-gradient(135deg, var(--syntin-primary) 0%, var(--syntin-secondary) 100%);">
+        <div class="container mx-auto px-4 text-center">
+            <h2 class="text-3xl md:text-5xl font-bold mb-6 syntin-light">Entering the AI Arms Race Affordably</h2>
+            <p class="text-xl md:text-2xl max-w-3xl mx-auto mb-8 syntin-light">
+                SYNTIN's technology democratizes access to advanced AI capabilities, allowing organizations of all sizes to deploy sophisticated intelligence at scale without massive infrastructure investments.
+            </p>
+            <div class="mb-12">
+                <h3 class="text-2xl md:text-3xl font-bold mb-6 syntin-light">Smart Models as Superpowers</h3>
+                <p class="text-lg md:text-xl max-w-3xl mx-auto syntin-light">
+                    SYNTIN transforms AI from an expensive luxury to an accessible superpower, enabling organizations to compete and thrive in an increasingly AI-driven world.
+                </p>
+            </div>
+            <div class="text-3xl md:text-4xl font-bold mb-8 syntin-light brand-text">
+                AI for the Here and Now
+            </div>
+            <div>
+                <button class="btn-syntin bg-white text-syntin-primary hover:bg-gray-100">Contact Us</button>
+                <button class="btn-syntin ml-4 border-2 border-white hover:bg-syntin-secondary">Request Demo</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="py-12 syntin-dark-bg border-t border-syntin-primary">
+        <div class="container mx-auto px-4">
+            <div class="flex flex-col md:flex-row justify-between items-center">
+                <div class="text-2xl syntin-primary brand-text mb-6 md:mb-0">SYNTIN.AI</div>
+                <div class="flex space-x-6">
+                    <a href="#" class="syntin-light hover:syntin-primary">Privacy Policy</a>
+                    <a href="#" class="syntin-light hover:syntin-primary">Terms of Service</a>
+                    <a href="#" class="syntin-light hover:syntin-primary">Contact</a>
+                </div>
+            </div>
+            <div class="text-center mt-8">
+                <p class="text-sm text-gray-500">© 2025 SYNTIN.AI. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Observer for fade-in animations
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                }
+            });
+        }, { threshold: 0.1 });
+
+        document.querySelectorAll('.fade-in').forEach(element => {
+            observer.observe(element);
+        });
+
+        // Create dimensional space visualization
+        const dimensionalSpace = document.getElementById('dimensionalSpace');
+        function createDimensionalSpace() {
+            // Create random dimension points
+            for (let i = 0; i < 200; i++) {
+                const point = document.createElement('div');
+                point.className = 'dimension-point';
+                point.style.left = `${Math.random() * 100}%`;
+                point.style.top = `${Math.random() * 100}%`;
+                point.style.opacity = Math.random() * 0.8 + 0.2;
+                dimensionalSpace.appendChild(point);
+            }
+            
+            // Create blackholes
+            for (let i = 0; i < 5; i++) {
+                const blackhole = document.createElement('div');
+                blackhole.className = 'blackhole';
+                blackhole.style.left = `${Math.random() * 90 + 5}%`;
+                blackhole.style.top = `${Math.random() * 90 + 5}%`;
+                blackhole.style.width = `${Math.random() * 30 + 20}px`;
+                blackhole.style.height = blackhole.style.width;
+                blackhole.style.animationDelay = `${Math.random() * 2}s`;
+                dimensionalSpace.appendChild(blackhole);
+            }
+        }
+        
+        // Create MCP animation
+        const mcpAnimation = document.getElementById('mcpAnimation');
+        function createMcpAnimation() {
+            // Create a center node
+            const centralNode = document.createElement('div');
+            centralNode.className = 'agent';
+            centralNode.style.background = '#EB6B23';
+            centralNode.style.left = '50%';
+            centralNode.style.top = '50%';
+            centralNode.style.transform = 'translate(-50%, -50%)';
+            centralNode.style.width = '60px';
+            centralNode.style.height = '60px';
+            centralNode.textContent = 'MCP';
+            centralNode.style.zIndex = '20';
+            mcpAnimation.appendChild(centralNode);
+            
+            // Create agents
+            const agentPositions = [
+                { left: '20%', top: '30%', class: 'agent-1', text: 'A1' },
+                { left: '80%', top: '30%', class: 'agent-2', text: 'A2' },
+                { left: '30%', top: '70%', class: 'agent-3', text: 'A3' },
+                { left: '70%', top: '70%', class: 'agent-4', text: 'A4' },
+                { left: '50%', top: '20%', class: 'agent-5', text: 'A5' }
+            ];
+            
+            // Create agents and connect to central node
+            agentPositions.forEach(pos => {
+                const agent = document.createElement('div');
+                agent.className = `agent ${pos.class}`;
+                agent.style.left = pos.left;
+                agent.style.top = pos.top;
+                agent.textContent = pos.text;
+                mcpAnimation.appendChild(agent);
+                
+                // Create connecting line
+                createDataPath(centralNode, agent);
+            });
+            
+            // Create connections between agents
+            for (let i = 0; i < agentPositions.length; i++) {
+                for (let j = i + 1; j < agentPositions.length; j++) {
+                    if (Math.random() > 0.5) { // Only connect some agents
+                        const agent1 = mcpAnimation.querySelector(`.${agentPositions[i].class}`);
+                        const agent2 = mcpAnimation.querySelector(`.${agentPositions[j].class}`);
+                        createDataPath(agent1, agent2, 0.3);
+                    }
+                }
+            }
+        }
+        
+        function createDataPath(from, to, opacity = 0.6) {
+            // Get positions
+            const fromRect = from.getBoundingClientRect();
+            const toRect = to.getBoundingClientRect();
+            const mcpRect = mcpAnimation.getBoundingClientRect();
+            
+            // Calculate relative positions
+            const fromX = fromRect.left + fromRect.width / 2 - mcpRect.left;
+            const fromY = fromRect.top + fromRect.height / 2 - mcpRect.top;
+            const toX = toRect.left + toRect.width / 2 - mcpRect.left;
+            const toY = toRect.top + toRect.height / 2 - mcpRect.top;
+            
+            // Calculate length and angle
+            const length = Math.sqrt(Math.pow(toX - fromX, 2) + Math.pow(toY - fromY, 2));
+            const angle = Math.atan2(toY - fromY, toX - fromX) * 180 / Math.PI;
+            
+            // Create path element
+            const path = document.createElement('div');
+            path.className = 'data-path';
+            path.style.width = `${length}px`;
+            path.style.left = `${fromX}px`;
+            path.style.top = `${fromY}px`;
+            path.style.transform = `rotate(${angle}deg)`;
+            path.style.opacity = opacity;
+            
+            mcpAnimation.appendChild(path);
+        }
+        
+        // Initialize visualizations when DOM is loaded
+        document.addEventListener('DOMContentLoaded', function() {
+            createDimensionalSpace();
+            createMcpAnimation();
+            
+            // Make cards clickable
+            document.querySelectorAll('.flip-card').forEach(card => {
+                card.addEventListener('click', function() {
+                    this.classList.toggle('flipped');
+                });
+            });
+        });
+    </script>
+</body>
+</html>

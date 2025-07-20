@@ -1,0 +1,1393 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-8M3X5312PN"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-8M3X5312PN');
+</script>
+<!-- Hotjar Tracking Code for https://www.nofriction.io -->
+<script>
+    (function(h,o,t,j,a,r){
+        h.hj=h.hj||function(){(h.hj.q=h.hj.q||[]).push(arguments)};
+        h._hjSettings={hjid:6414675,hjsv:6};
+        a=o.getElementsByTagName('head')[0];
+        r=o.createElement('script');r.async=1;
+        r.src=t+h._hjSettings.hjid+j+h._hjSettings.hjsv;
+        a.appendChild(r);
+    })(window,document,'https://static.hotjar.com/c/hotjar-','.js?sv=');
+</script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Agent Wallace Brand & Design Style Guide</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600;700&display=swap">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Proxima+Nova:wght@400;500;600;700&display=swap">
+    <style>
+        :root {
+            --color-orange: #FF9E2C;
+            --color-navy: #162B4B;
+            --color-sky-blue: #88CCEE;
+            --color-white: #FFFFFF;
+            --color-black: #202020;
+            --color-light-gray: #F5F5F5;
+            --color-medium-gray: #D1D1D1;
+            --color-dark-gray: #707070;
+        }
+        
+        body {
+            font-family: 'Proxima Nova', Arial, sans-serif;
+            color: var(--color-black);
+            background-color: var(--color-white);
+            line-height: 1.6;
+        }
+        
+        h1, h2, h3, h4, h5 {
+            font-family: 'Quicksand', sans-serif;
+            font-weight: 600;
+        }
+        
+        .section-title {
+            position: relative;
+            color: var(--color-navy);
+            padding-bottom: 0.5rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        .section-title::after {
+            content: "";
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 60px;
+            height: 4px;
+            background-color: var(--color-orange);
+        }
+        
+        .color-swatch {
+            width: 100%;
+            height: 120px;
+            border-radius: 8px;
+            margin-bottom: 10px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        
+        .code-block {
+            background-color: var(--color-light-gray);
+            border-left: 4px solid var(--color-orange);
+            padding: 1rem;
+            margin: 1rem 0;
+            border-radius: 0 4px 4px 0;
+            overflow-x: auto;
+            font-family: monospace;
+        }
+        
+        .component-example {
+            border: 1px solid var(--color-medium-gray);
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin: 1rem 0;
+            background-color: var(--color-white);
+        }
+
+        .grid-demo {
+            background-color: var(--color-light-gray);
+            border: 1px dashed var(--color-medium-gray);
+            padding: 1rem;
+            height: 100%;
+            text-align: center;
+        }
+        
+        .button-primary {
+            background-color: var(--color-orange);
+            color: white;
+            padding: 10px 24px;
+            border-radius: 50px;
+            font-weight: 600;
+            display: inline-block;
+            transition: all 0.3s ease;
+        }
+        
+        .button-primary:hover {
+            background-color: #E88F1C;
+            transform: translateY(-2px);
+        }
+        
+        .button-secondary {
+            background-color: var(--color-navy);
+            color: white;
+            padding: 10px 24px;
+            border-radius: 50px;
+            font-weight: 600;
+            display: inline-block;
+            transition: all 0.3s ease;
+        }
+        
+        .button-secondary:hover {
+            background-color: #0E1B31;
+            transform: translateY(-2px);
+        }
+        
+        .button-text {
+            color: var(--color-navy);
+            padding: 10px 0;
+            font-weight: 600;
+            display: inline-block;
+            position: relative;
+            transition: all 0.3s ease;
+        }
+        
+        .button-text::after {
+            content: "";
+            position: absolute;
+            bottom: 5px;
+            left: 0;
+            width: 0%;
+            height: 2px;
+            background-color: var(--color-orange);
+            transition: width 0.3s ease;
+        }
+        
+        .button-text:hover {
+            color: var(--color-orange);
+        }
+        
+        .button-text:hover::after {
+            width: 100%;
+        }
+        
+        .alert {
+            padding: 1rem;
+            border-radius: 8px;
+            margin: 1rem 0;
+            display: flex;
+            align-items: center;
+        }
+        
+        .alert-success {
+            background-color: rgba(136, 204, 238, 0.2);
+            border-left: 4px solid var(--color-sky-blue);
+        }
+        
+        .alert-warning {
+            background-color: rgba(255, 158, 44, 0.2);
+            border-left: 4px solid var(--color-orange);
+        }
+        
+        .alert-danger {
+            background-color: rgba(255, 99, 71, 0.2);
+            border-left: 4px solid tomato;
+        }
+        
+        .device-mockup {
+            background-color: var(--color-light-gray);
+            border-radius: 20px;
+            padding: 20px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+        
+        .logo-container {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+        
+        .logo-img {
+            max-width: 200px;
+            height: auto;
+        }
+        
+        .usage-example {
+            margin: 1rem 0;
+            padding: 1.5rem;
+            border-radius: 8px;
+            background-color: var(--color-light-gray);
+        }
+        
+        @media print {
+            .page-break {
+                page-break-before: always;
+            }
+        }
+        
+        /* Grid System */
+        .aw-container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 15px;
+        }
+        
+        .aw-row {
+            display: flex;
+            flex-wrap: wrap;
+            margin-left: -15px;
+            margin-right: -15px;
+        }
+        
+        .aw-col {
+            padding-left: 15px;
+            padding-right: 15px;
+            flex: 1 0 0%;
+        }
+        
+        .aw-col-6 {
+            padding-left: 15px;
+            padding-right: 15px;
+            flex: 0 0 50%;
+            max-width: 50%;
+        }
+        
+        .aw-col-4 {
+            padding-left: 15px;
+            padding-right: 15px;
+            flex: 0 0 33.333333%;
+            max-width: 33.333333%;
+        }
+        
+        .aw-col-3 {
+            padding-left: 15px;
+            padding-right: 15px;
+            flex: 0 0 25%;
+            max-width: 25%;
+        }
+        
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .aw-col-6, .aw-col-4, .aw-col-3 {
+                flex: 0 0 100%;
+                max-width: 100%;
+            }
+        }
+    </style>
+</head>
+<body class="bg-white">
+    <div class="container mx-auto px-4 py-8 max-w-6xl">
+        <!-- Header -->
+        <header class="text-center mb-16">
+            <div class="logo-container">
+                <img src="https://cdn1.genspark.ai/user-upload-image/gpt_image_edited/9c46bed5-2f52-459b-b676-0d3fa71bff87_wm" alt="Agent Wallace Logo" class="logo-img mx-auto">
+            </div>
+            <h1 class="text-5xl font-bold text-navy mb-4">AGENT WALLACE</h1>
+            <p class="text-2xl text-gray-600">Your Family's Loyal Digital Guardian</p>
+            <div class="w-20 h-1 bg-orange mx-auto mt-8"></div>
+        </header>
+
+        <!-- Brand Essence -->
+        <section class="mb-24">
+            <h2 class="section-title text-3xl">Brand Essence</h2>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mt-8">
+                <div>
+                    <h3 class="text-2xl font-bold text-navy mb-4">Brand Story</h3>
+                    <p class="mb-6">Agent Wallace represents the perfect fusion of cutting-edge technology and the timeless loyalty of man's best friend. Inspired by the playful nature, unwavering loyalty, and intuitive sense of your own dog, we've created a digital companion that embodies these qualities in the digital realm. In an increasingly complex world, Agent Wallace stands guard over what matters most—your family.</p>
+                    
+                    <h3 class="text-2xl font-bold text-navy mb-4">Brand Purpose</h3>
+                    <p>To provide families with uncompromising protection through technology that feels as approachable and trustworthy as your favorite family pet.</p>
+                </div>
+                
+                <div>
+                    <h3 class="text-2xl font-bold text-navy mb-4">Brand Promise</h3>
+                    <p class="mb-6">Smart protection with personality. Agent Wallace delivers peace of mind through intelligent security that fits your family's lifestyle with a friendly, approachable presence.</p>
+                    
+                    <h3 class="text-2xl font-bold text-navy mb-4">Core Values</h3>
+                    <ul class="list-disc pl-6">
+                        <li class="mb-2"><strong>Playful Protection</strong>: Security doesn't have to feel serious to be effective</li>
+                        <li class="mb-2"><strong>Intuitive Intelligence</strong>: Smart enough to detect threats, wise enough to know when to alert</li>
+                        <li class="mb-2"><strong>Familiar Companion</strong>: Security that feels like a friend, not a system</li>
+                        <li class="mb-2"><strong>Adaptive Guardian</strong>: Growing with your family and evolving with changing needs</li>
+                        <li><strong>Trustworthy Friend</strong>: A reliable presence that becomes part of the family fabric</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- Logo Guidelines -->
+        <section class="mb-24">
+            <h2 class="section-title text-3xl">Logo Guidelines</h2>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div>
+                    <div class="text-center mb-6">
+                        <img src="https://cdn1.genspark.ai/user-upload-image/gpt_image_edited/9c46bed5-2f52-459b-b676-0d3fa71bff87_wm" alt="Agent Wallace Logo" class="mx-auto" style="max-width: 250px;">
+                    </div>
+                    
+                    <h3 class="text-xl font-bold mb-3">Primary Logo</h3>
+                    <p>The Agent Wallace logo features a friendly, stylized dog with tech-inspired elements. The design balances playfulness with protection, using bold geometric shapes and a vibrant orange color scheme.</p>
+                </div>
+                
+                <div>
+                    <h3 class="text-xl font-bold mb-3">Logo Clear Space</h3>
+                    <p class="mb-4">Always maintain a minimum clear space around the logo. This space should be equal to the height of the letter "A" in "AGENT".</p>
+                    
+                    <h3 class="text-xl font-bold mb-3 mt-6">Minimum Size</h3>
+                    <p class="mb-4">To maintain legibility, never reproduce the logo smaller than 30px in height for digital applications or 0.5 inches in print.</p>
+                    
+                    <h3 class="text-xl font-bold mb-3 mt-6">Logo Misuse</h3>
+                    <ul class="list-disc pl-6">
+                        <li>Do not alter the colors</li>
+                        <li>Do not distort or stretch</li>
+                        <li>Do not rotate</li>
+                        <li>Do not add effects like shadows or gradients</li>
+                        <li>Do not place on busy backgrounds without sufficient contrast</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Color Palette -->
+        <section class="mb-24">
+            <h2 class="section-title text-3xl">Color Palette</h2>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8">
+                <div>
+                    <p class="mb-6">The Agent Wallace color palette balances vibrant energy with trustworthy stability. The primary orange represents friendliness and warmth, inspired by the brand's canine mascot, while the supporting blues and neutrals add technological sophistication and reliability.</p>
+                    
+                    <h3 class="text-xl font-bold mb-3">Color Usage</h3>
+                    <p>Use the primary orange as the leading color for buttons, highlights, and important UI elements. The navy blue serves as an anchor for headers and footers. White and light gray provide breathing room, while black is reserved for text and outlines.</p>
+                </div>
+                
+                <div class="code-block">
+                    <p class="mb-2">/* CSS Variables */</p>
+                    <pre>:root {
+  --color-orange: #FF9E2C;
+  --color-navy: #162B4B;
+  --color-sky-blue: #88CCEE;
+  --color-white: #FFFFFF;
+  --color-black: #202020;
+  --color-light-gray: #F5F5F5;
+  --color-medium-gray: #D1D1D1;
+  --color-dark-gray: #707070;
+}</pre>
+                </div>
+            </div>
+            
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
+                <div>
+                    <div class="color-swatch" style="background-color: #FF9E2C;"></div>
+                    <p class="text-lg font-bold">Vibrant Orange</p>
+                    <p class="text-sm mb-1">#FF9E2C</p>
+                    <p class="text-sm mb-1">RGB: 255, 158, 44</p>
+                    <p class="text-sm">CMYK: 0, 38, 83, 0</p>
+                </div>
+                
+                <div>
+                    <div class="color-swatch" style="background-color: #162B4B;"></div>
+                    <p class="text-lg font-bold">Deep Navy</p>
+                    <p class="text-sm mb-1">#162B4B</p>
+                    <p class="text-sm mb-1">RGB: 22, 43, 75</p>
+                    <p class="text-sm">CMYK: 71, 43, 0, 71</p>
+                </div>
+                
+                <div>
+                    <div class="color-swatch" style="background-color: #88CCEE;"></div>
+                    <p class="text-lg font-bold">Sky Blue</p>
+                    <p class="text-sm mb-1">#88CCEE</p>
+                    <p class="text-sm mb-1">RGB: 136, 204, 238</p>
+                    <p class="text-sm">CMYK: 43, 14, 0, 7</p>
+                </div>
+                
+                <div>
+                    <div class="color-swatch" style="background-color: #202020;"></div>
+                    <p class="text-lg font-bold">Night Black</p>
+                    <p class="text-sm mb-1">#202020</p>
+                    <p class="text-sm mb-1">RGB: 32, 32, 32</p>
+                    <p class="text-sm">CMYK: 0, 0, 0, 87</p>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Typography -->
+        <section class="mb-24">
+            <h2 class="section-title text-3xl">Typography</h2>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8">
+                <div>
+                    <h3 class="text-2xl font-bold" style="font-family: Quicksand, sans-serif;">Quicksand</h3>
+                    <p class="mb-4">Primary font for headlines, branding, and display text. This friendly, geometric sans-serif with rounded terminals feels approachable yet refined.</p>
+                    
+                    <div class="mt-6">
+                        <p style="font-family: Quicksand, sans-serif; font-weight: 300; font-size: 18px;">Quicksand Light 300</p>
+                        <p style="font-family: Quicksand, sans-serif; font-weight: 400; font-size: 18px;">Quicksand Regular 400</p>
+                        <p style="font-family: Quicksand, sans-serif; font-weight: 500; font-size: 18px;">Quicksand Medium 500</p>
+                        <p style="font-family: Quicksand, sans-serif; font-weight: 600; font-size: 18px;">Quicksand Semi-Bold 600</p>
+                        <p style="font-family: Quicksand, sans-serif; font-weight: 700; font-size: 18px;">Quicksand Bold 700</p>
+                    </div>
+                    
+                    <h4 class="text-lg font-bold mt-4 mb-2">Web-safe Alternative</h4>
+                    <p>Arial Rounded MT Bold, Avenir, sans-serif</p>
+                </div>
+                
+                <div>
+                    <h3 class="text-2xl font-bold">Proxima Nova</h3>
+                    <p class="mb-4">Secondary font for body copy and interface elements. This versatile sans-serif balances readability with personality.</p>
+                    
+                    <div class="mt-6">
+                        <p style="font-family: 'Proxima Nova', Arial, sans-serif; font-weight: 400; font-size: 18px;">Proxima Nova Regular 400</p>
+                        <p style="font-family: 'Proxima Nova', Arial, sans-serif; font-weight: 500; font-size: 18px;">Proxima Nova Medium 500</p>
+                        <p style="font-family: 'Proxima Nova', Arial, sans-serif; font-weight: 600; font-size: 18px;">Proxima Nova Semi-Bold 600</p>
+                        <p style="font-family: 'Proxima Nova', Arial, sans-serif; font-weight: 700; font-size: 18px;">Proxima Nova Bold 700</p>
+                    </div>
+                    
+                    <h4 class="text-lg font-bold mt-4 mb-2">Web-safe Alternative</h4>
+                    <p>Arial, Helvetica, sans-serif</p>
+                </div>
+            </div>
+            
+            <div class="code-block">
+                <p class="mb-2">/* Typography CSS */</p>
+                <pre>/* Import fonts */
+@import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600;700&display=swap');
+
+/* Font hierarchy */
+body {
+  font-family: 'Proxima Nova', Arial, Helvetica, sans-serif;
+  font-weight: 400;
+  line-height: 1.6;
+  color: var(--color-black);
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Quicksand', 'Arial Rounded MT Bold', Avenir, sans-serif;
+  font-weight: 600;
+  line-height: 1.2;
+  color: var(--color-navy);
+}
+
+/* Font sizes */
+h1 { font-size: 2.5rem; }
+h2 { font-size: 2rem; }
+h3 { font-size: 1.5rem; }
+h4 { font-size: 1.25rem; }
+h5 { font-size: 1rem; }
+.subtitle { font-size: 1.25rem; font-weight: 400; }
+.body-large { font-size: 1.125rem; }
+.body-small { font-size: 0.875rem; }
+.caption { font-size: 0.75rem; }</pre>
+            </div>
+        </section>
+        
+        <!-- Grid System -->
+        <section class="mb-24">
+            <h2 class="section-title text-3xl">Grid System & Layout</h2>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8">
+                <div>
+                    <p class="mb-6">Agent Wallace uses a flexible 12-column grid system that provides structure while allowing for creative layouts. The system accommodates various screen sizes through responsive breakpoints.</p>
+                    
+                    <h3 class="text-xl font-bold mb-3">Key Specifications</h3>
+                    <ul class="list-disc pl-6 mb-6">
+                        <li>12-column grid</li>
+                        <li>30px gutters (15px on each side)</li>
+                        <li>1200px max container width</li>
+                        <li>20px padding on mobile</li>
+                    </ul>
+                    
+                    <h3 class="text-xl font-bold mb-3">Breakpoints</h3>
+                    <ul class="mb-6">
+                        <li><strong>Mobile:</strong> < 768px</li>
+                        <li><strong>Tablet:</strong> 768px - 1024px</li>
+                        <li><strong>Desktop:</strong> > 1024px</li>
+                    </ul>
+                </div>
+                
+                <div class="code-block">
+                    <p class="mb-2">/* Grid System CSS */</p>
+                    <pre>.aw-container {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 15px;
+}
+
+.aw-row {
+  display: flex;
+  flex-wrap: wrap;
+  margin-left: -15px;
+  margin-right: -15px;
+}
+
+.aw-col {
+  padding-left: 15px;
+  padding-right: 15px;
+  flex: 1 0 0%;
+}
+
+.aw-col-6 {
+  padding-left: 15px;
+  padding-right: 15px;
+  flex: 0 0 50%;
+  max-width: 50%;
+}
+
+.aw-col-4 {
+  padding-left: 15px;
+  padding-right: 15px;
+  flex: 0 0 33.333333%;
+  max-width: 33.333333%;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .aw-col-6, .aw-col-4 {
+    flex: 0 0 100%;
+    max-width: 100%;
+  }
+}</pre>
+                </div>
+            </div>
+            
+            <!-- Grid demonstration -->
+            <div class="mb-8">
+                <h3 class="text-xl font-bold mb-3">Grid Demonstration</h3>
+                
+                <div class="aw-row mb-4">
+                    <div class="aw-col">
+                        <div class="grid-demo">1 Column</div>
+                    </div>
+                </div>
+                
+                <div class="aw-row mb-4">
+                    <div class="aw-col-6">
+                        <div class="grid-demo">2 Columns</div>
+                    </div>
+                    <div class="aw-col-6">
+                        <div class="grid-demo">2 Columns</div>
+                    </div>
+                </div>
+                
+                <div class="aw-row mb-4">
+                    <div class="aw-col-4">
+                        <div class="grid-demo">3 Columns</div>
+                    </div>
+                    <div class="aw-col-4">
+                        <div class="grid-demo">3 Columns</div>
+                    </div>
+                    <div class="aw-col-4">
+                        <div class="grid-demo">3 Columns</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- UI Components -->
+        <section class="mb-24">
+            <h2 class="section-title text-3xl">UI Components</h2>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div>
+                    <h3 class="text-xl font-bold mb-3">Buttons</h3>
+                    
+                    <div class="component-example">
+                        <button class="button-primary mr-4 mb-4">Primary Button</button>
+                        <button class="button-secondary mr-4 mb-4">Secondary Button</button>
+                        <a href="#" class="button-text mb-4">Text Link</a>
+                        
+                        <div class="code-block mt-6">
+                            <pre>&lt;button class="button-primary"&gt;Primary Button&lt;/button&gt;
+&lt;button class="button-secondary"&gt;Secondary Button&lt;/button&gt;
+&lt;a href="#" class="button-text"&gt;Text Link&lt;/a&gt;</pre>
+                        </div>
+                    </div>
+                    
+                    <h3 class="text-xl font-bold mb-3 mt-8">Notifications</h3>
+                    
+                    <div class="component-example">
+                        <div class="alert alert-success mb-4">
+                            <i class="fas fa-check-circle mr-3" style="color: var(--color-sky-blue)"></i>
+                            <p>Your home is secure and being monitored.</p>
+                        </div>
+                        
+                        <div class="alert alert-warning mb-4">
+                            <i class="fas fa-exclamation-circle mr-3" style="color: var(--color-orange)"></i>
+                            <p>Unknown person detected at the front door.</p>
+                        </div>
+                        
+                        <div class="alert alert-danger">
+                            <i class="fas fa-exclamation-triangle mr-3" style="color: tomato"></i>
+                            <p>Smoke detected in kitchen area.</p>
+                        </div>
+                        
+                        <div class="code-block mt-6">
+                            <pre>&lt;div class="alert alert-success"&gt;
+  &lt;i class="fas fa-check-circle mr-3"&gt;&lt;/i&gt;
+  &lt;p&gt;Your home is secure and being monitored.&lt;/p&gt;
+&lt;/div&gt;</pre>
+                        </div>
+                    </div>
+                </div>
+                
+                <div>
+                    <h3 class="text-xl font-bold mb-3">Cards</h3>
+                    
+                    <div class="component-example">
+                        <div class="bg-white rounded-lg shadow-md p-6 mb-4" style="border: 1px solid var(--color-medium-gray);">
+                            <h4 class="font-bold mb-3" style="color: var(--color-navy);">Security Report</h4>
+                            <p class="mb-4">All systems functioning normally. No unusual activity detected in the last 24 hours.</p>
+                            <div class="flex justify-end">
+                                <button class="button-text">View Details</button>
+                            </div>
+                        </div>
+                        
+                        <div class="code-block mt-6">
+                            <pre>&lt;div class="bg-white rounded-lg shadow-md p-6"&gt;
+  &lt;h4 class="font-bold mb-3"&gt;Security Report&lt;/h4&gt;
+  &lt;p class="mb-4"&gt;All systems functioning normally.&lt;/p&gt;
+  &lt;div class="flex justify-end"&gt;
+    &lt;button class="button-text"&gt;View Details&lt;/button&gt;
+  &lt;/div&gt;
+&lt;/div&gt;</pre>
+                        </div>
+                    </div>
+                    
+                    <h3 class="text-xl font-bold mb-3 mt-8">Form Elements</h3>
+                    
+                    <div class="component-example">
+                        <div class="mb-4">
+                            <label class="block text-sm font-semibold mb-2" style="color: var(--color-navy);">Email Address</label>
+                            <input type="email" class="w-full px-4 py-2 border rounded-lg" style="border-color: var(--color-medium-gray);" placeholder="your@email.com">
+                        </div>
+                        
+                        <div class="mb-4">
+                            <label class="block text-sm font-semibold mb-2" style="color: var(--color-navy);">Security Level</label>
+                            <select class="w-full px-4 py-2 border rounded-lg" style="border-color: var(--color-medium-gray);">
+                                <option>Standard</option>
+                                <option>Enhanced</option>
+                                <option>Maximum</option>
+                            </select>
+                        </div>
+                        
+                        <div class="mb-4">
+                            <label class="flex items-center">
+                                <input type="checkbox" class="mr-2">
+                                <span class="text-sm">Enable notifications</span>
+                            </label>
+                        </div>
+                        
+                        <div class="code-block mt-6">
+                            <pre>&lt;div class="mb-4"&gt;
+  &lt;label class="block text-sm font-semibold mb-2"&gt;Email Address&lt;/label&gt;
+  &lt;input type="email" class="w-full px-4 py-2 border rounded-lg" 
+    placeholder="your@email.com"&gt;
+&lt;/div&gt;</pre>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Voice & Tone -->
+        <section class="mb-24">
+            <h2 class="section-title text-3xl">Voice & Tone</h2>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div>
+                    <h3 class="text-xl font-bold mb-3">Brand Personality</h3>
+                    <ul class="list-disc pl-6 mb-6">
+                        <li><strong>Friendly:</strong> Approachable and conversational</li>
+                        <li><strong>Watchful:</strong> Alert without being intrusive</li>
+                        <li><strong>Clever:</strong> Smart without being complicated</li>
+                        <li><strong>Playful:</strong> Bringing joy to security</li>
+                        <li><strong>Reassuring:</strong> Confidently protective without alarming</li>
+                    </ul>
+                    
+                    <h3 class="text-xl font-bold mb-3">Key Messages</h3>
+                    <p class="mb-2"><strong>Primary Message:</strong> "Protection with a Heart"</p>
+                    <p class="mb-6"><strong>Supporting Messages:</strong></p>
+                    <ul class="list-disc pl-6">
+                        <li>"Security that fits your family's lifestyle"</li>
+                        <li>"The watchful companion that's always there"</li>
+                        <li>"Smart protection with personality"</li>
+                        <li>"The guardian that feels like family"</li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h3 class="text-xl font-bold mb-3">Tone Examples</h3>
+                    
+                    <div class="component-example">
+                        <h4 class="font-semibold mb-2">Standard Alert</h4>
+                        <p class="mb-4 p-3 bg-gray-100 rounded">❌ "INTRUDER ALERT: Unknown person detected. Threat level high. System activated."</p>
+                        <p class="mb-6 p-3 bg-gray-100 rounded">✅ "I noticed someone at your door. It's not a familiar face. Would you like me to respond?"</p>
+                        
+                        <h4 class="font-semibold mb-2">Status Update</h4>
+                        <p class="mb-4 p-3 bg-gray-100 rounded">❌ "System scan complete. No anomalies detected in specified time range."</p>
+                        <p class="mb-6 p-3 bg-gray-100 rounded">✅ "Your home has been secure all day. The children arrived safely at 3:15 PM."</p>
+                        
+                        <h4 class="font-semibold mb-2">Emergency Notification</h4>
+                        <p class="mb-4 p-3 bg-gray-100 rounded">❌ "DANGER: Smoke detector triggered in kitchen. Emergency protocol initiated."</p>
+                        <p class="p-3 bg-gray-100 rounded">✅ "Unusual smoke levels detected in the kitchen. Emergency services have been notified. Moving to monitor the situation."</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Campaign Concepts -->
+        <section class="mb-24">
+            <h2 class="section-title text-3xl">Campaign Concepts: "Family's Best Friend"</h2>
+            
+            <div class="mb-8">
+                <h3 class="text-xl font-bold mb-3">Campaign Overview</h3>
+                <p>"Family's Best Friend" positions Agent Wallace as the digital evolution of man's best friend. The campaign features the playful yet protective character of Agent Wallace seamlessly integrating into family life, bringing both security and smiles to everyday moments.</p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div>
+                    <h3 class="text-lg font-bold mb-3">Digital Video: "Meet Wallace"</h3>
+                    <div class="bg-gray-100 p-4 rounded-lg">
+                        <p class="text-sm mb-4">30-second spot introducing Agent Wallace as a character who becomes part of the family. The stylized dog moves around the house, checking on sleeping children, alerting to a delivery person, and settling down in "guard mode" at night, all with personality and charm.</p>
+                        
+                        <div class="mt-4">
+                            <p class="text-xs text-gray-600 uppercase font-semibold">TAGLINE</p>
+                            <p class="font-bold">"Always There. Always Aware."</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div>
+                    <h3 class="text-lg font-bold mb-3">Print Series: "Family's Best Friend"</h3>
+                    <div class="bg-gray-100 p-4 rounded-lg">
+                        <p class="text-sm mb-4">A series of visually striking ads showing Agent Wallace in various family scenarios:</p>
+                        <ul class="text-sm list-disc pl-5 mb-4">
+                            <li>"Nightwatch" - Character glowing softly in a hallway as children sleep</li>
+                            <li>"Welcome Committee" - Character alerting to visitors with friendly but alert posture</li>
+                            <li>"Home Team" - Character as part of family movie night, still vigilant but relaxed</li>
+                        </ul>
+                        
+                        <div class="mt-4">
+                            <p class="text-xs text-gray-600 uppercase font-semibold">TAGLINE</p>
+                            <p class="font-bold">"Protection with a Heart"</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div>
+                    <h3 class="text-lg font-bold mb-3">Social Campaign: "Wallace Moments"</h3>
+                    <div class="bg-gray-100 p-4 rounded-lg">
+                        <p class="text-sm mb-4">Shareable, short animations showing Agent Wallace reacting to different home scenarios with personality and humor while still performing its security functions.</p>
+                        
+                        <p class="text-sm mb-4">Interactive content will encourage families to share their own "Wallace Moments" to build a community around the brand.</p>
+                        
+                        <div class="mt-4">
+                            <p class="text-xs text-gray-600 uppercase font-semibold">HASHTAG</p>
+                            <p class="font-bold">#WallaceMoments</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Application Examples -->
+        <section class="mb-24">
+            <h2 class="section-title text-3xl">Application Examples</h2>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8">
+                <div>
+                    <h3 class="text-xl font-bold mb-3">Digital Applications</h3>
+                    <div class="device-mockup">
+                        <h4 class="text-lg mb-3">Mobile App Interface</h4>
+                        <div class="bg-white p-4 rounded-lg shadow-sm" style="border: 1px solid var(--color-medium-gray);">
+                            <div class="flex items-center justify-between mb-4 pb-2" style="border-bottom: 1px solid var(--color-light-gray);">
+                                <div class="flex items-center">
+                                    <div style="width: 32px; height: 32px; background-color: var(--color-orange); border-radius: 8px;"></div>
+                                    <span class="ml-2 font-bold" style="color: var(--color-navy);">Agent Wallace</span>
+                                </div>
+                                <div>
+                                    <i class="fas fa-cog" style="color: var(--color-dark-gray);"></i>
+                                </div>
+                            </div>
+                            
+                            <div class="mb-4 p-3 rounded-lg" style="background-color: var(--color-light-gray);">
+                                <div class="flex justify-between items-center">
+                                    <div>
+                                        <p class="font-bold mb-1">Home Status: Secure</p>
+                                        <p class="text-sm" style="color: var(--color-dark-gray);">Last updated: 2 min ago</p>
+                                    </div>
+                                    <div style="width: 16px; height: 16px; background-color: #4CAF50; border-radius: 50%;"></div>
+                                </div>
+                            </div>
+                            
+                            <div class="grid grid-cols-2 gap-3 mb-4">
+                                <div class="p-3 rounded-lg" style="border: 1px solid var(--color-medium-gray);">
+                                    <i class="fas fa-shield-alt mb-2" style="color: var(--color-navy);"></i>
+                                    <p class="text-sm font-semibold">Security</p>
+                                </div>
+                                <div class="p-3 rounded-lg" style="border: 1px solid var(--color-medium-gray);">
+                                    <i class="fas fa-video mb-2" style="color: var(--color-navy);"></i>
+                                    <p class="text-sm font-semibold">Cameras</p>
+                                </div>
+                                <div class="p-3 rounded-lg" style="border: 1px solid var(--color-medium-gray);">
+                                    <i class="fas fa-user-friends mb-2" style="color: var(--color-navy);"></i>
+                                    <p class="text-sm font-semibold">Family</p>
+                                </div>
+                                <div class="p-3 rounded-lg" style="border: 1px solid var(--color-medium-gray);">
+                                    <i class="fas fa-history mb-2" style="color: var(--color-navy);"></i>
+                                    <p class="text-sm font-semibold">History</p>
+                                </div>
+                            </div>
+                            
+                            <button class="button-primary w-full">Enable Guard Mode</button>
+                        </div>
+                    </div>
+                </div>
+                
+                <div>
+                    <h3 class="text-xl font-bold mb-3">Physical Applications</h3>
+                    <div class="device-mockup">
+                        <h4 class="text-lg mb-3">Product Packaging</h4>
+                        <div class="bg-white p-4 rounded-lg shadow-sm" style="border: 1px solid var(--color-medium-gray);">
+                            <div class="mb-4 text-center">
+                                <div class="inline-block mb-3" style="width: 80px; height: 80px;">
+                                    <img src="https://cdn1.genspark.ai/user-upload-image/gpt_image_edited/9c46bed5-2f52-459b-b676-0d3fa71bff87_wm" alt="Agent Wallace Logo" style="width: 100%; height: auto;">
+                                </div>
+                                <h4 class="font-bold text-xl" style="color: var(--color-navy);">AGENT WALLACE</h4>
+                                <p class="text-sm" style="color: var(--color-dark-gray);">Your Family's Loyal Digital Guardian</p>
+                            </div>
+                            
+                            <div class="flex justify-between mb-4">
+                                <div style="height: 30px; width: 30px; background-color: var(--color-orange); border-radius: 6px;"></div>
+                                <div style="height: 30px; width: 30px; background-color: var(--color-navy); border-radius: 6px;"></div>
+                                <div style="height: 30px; width: 30px; background-color: var(--color-sky-blue); border-radius: 6px;"></div>
+                                <div style="height: 30px; width: 30px; background-color: var(--color-white); border: 1px solid var(--color-medium-gray); border-radius: 6px;"></div>
+                            </div>
+                            
+                            <div class="p-3 rounded-lg text-center" style="background-color: var(--color-light-gray);">
+                                <p class="text-sm font-semibold mb-2">Package Contents:</p>
+                                <ul class="text-xs text-left list-disc pl-5">
+                                    <li>Agent Wallace Smart Guardian Device</li>
+                                    <li>Charging Base</li>
+                                    <li>Power Adapter</li>
+                                    <li>Quick Start Guide</li>
+                                    <li>2-Year Limited Warranty</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div>
+                    <h3 class="text-xl font-bold mb-3">Social Media</h3>
+                    <div class="device-mockup">
+                        <h4 class="text-lg mb-3">Instagram Post</h4>
+                        <div class="bg-white p-4 rounded-lg shadow-sm" style="border: 1px solid var(--color-medium-gray);">
+                            <div class="flex items-center mb-3">
+                                <div style="width: 36px; height: 36px; border-radius: 50%; background-color: var(--color-orange); display: flex; align-items: center; justify-content: center;">
+                                    <span style="color: white; font-weight: bold; font-size: 14px;">A</span>
+                                </div>
+                                <span class="ml-2 font-semibold">agentwallace</span>
+                            </div>
+                            
+                            <div class="mb-3 rounded-lg" style="background-color: var(--color-light-gray); height: 200px; display: flex; align-items: center; justify-content: center;">
+                                <div class="text-center">
+                                    <div style="width: 60px; height: 60px; margin: 0 auto;">
+                                        <img src="https://cdn1.genspark.ai/user-upload-image/gpt_image_edited/9c46bed5-2f52-459b-b676-0d3fa71bff87_wm" alt="Agent Wallace Logo" style="width: 100%; height: auto;">
+                                    </div>
+                                    <p class="mt-2 font-semibold" style="color: var(--color-navy);">Image Placeholder</p>
+                                </div>
+                            </div>
+                            
+                            <div class="mb-2">
+                                <p class="text-sm"><strong>agentwallace</strong> Meet your family's newest guardian! Agent Wallace keeps watch while you rest easy. #FamilyProtection #SmartHome #WallaceMoments</p>
+                            </div>
+                            
+                            <div style="font-size: 12px; color: var(--color-dark-gray);">View all 24 comments</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div>
+                    <h3 class="text-xl font-bold mb-3">Marketing Collateral</h3>
+                    <div class="device-mockup">
+                        <h4 class="text-lg mb-3">Brochure Design</h4>
+                        <div class="bg-white p-4 rounded-lg shadow-sm" style="border: 1px solid var(--color-medium-gray);">
+                            <div class="flex justify-between items-center mb-4 pb-2" style="border-bottom: 1px solid var(--color-light-gray);">
+                                <div>
+                                    <div style="width: 50px; height: 50px;">
+                                        <img src="https://cdn1.genspark.ai/user-upload-image/gpt_image_edited/9c46bed5-2f52-459b-b676-0d3fa71bff87_wm" alt="Agent Wallace Logo" style="width: 100%; height: auto;">
+                                    </div>
+                                </div>
+                                <div class="text-right">
+                                    <h4 class="font-bold" style="color: var(--color-navy);">AGENT WALLACE</h4>
+                                    <p class="text-xs" style="color: var(--color-dark-gray);">Your Family's Loyal Digital Guardian</p>
+                                </div>
+                            </div>
+                            
+                            <h5 class="text-lg font-bold mb-2" style="color: var(--color-navy);">Introducing a New Kind of Protection</h5>
+                            
+                            <p class="text-sm mb-3">Agent Wallace combines advanced security technology with the friendly presence of a family pet. It's not just a device—it's a guardian with personality.</p>
+                            
+                            <div class="grid grid-cols-2 gap-3 mb-4">
+                                <div class="p-2 text-center rounded" style="background-color: var(--color-light-gray);">
+                                    <i class="fas fa-shield-alt mb-1" style="color: var(--color-orange);"></i>
+                                    <p class="text-xs font-semibold">Smart Protection</p>
+                                </div>
+                                <div class="p-2 text-center rounded" style="background-color: var(--color-light-gray);">
+                                    <i class="fas fa-bell mb-1" style="color: var(--color-orange);"></i>
+                                    <p class="text-xs font-semibold">Intelligent Alerts</p>
+                                </div>
+                                <div class="p-2 text-center rounded" style="background-color: var(--color-light-gray);">
+                                    <i class="fas fa-mobile-alt mb-1" style="color: var(--color-orange);"></i>
+                                    <p class="text-xs font-semibold">Mobile Control</p>
+                                </div>
+                                <div class="p-2 text-center rounded" style="background-color: var(--color-light-gray);">
+                                    <i class="fas fa-heart mb-1" style="color: var(--color-orange);"></i>
+                                    <p class="text-xs font-semibold">Family-Friendly</p>
+                                </div>
+                            </div>
+                            
+                            <div class="text-center">
+                                <button class="button-primary text-sm">Learn More</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- CSS Implementation Guide -->
+        <section class="mb-16">
+            <h2 class="section-title text-3xl">CSS Implementation Guide</h2>
+            
+            <div class="mb-8">
+                <h3 class="text-xl font-bold mb-3">Complete CSS Framework</h3>
+                <p class="mb-4">Below is a comprehensive CSS framework that can be used to implement the Agent Wallace brand consistently across digital platforms.</p>
+                
+                <div class="code-block" style="max-height: 500px; overflow-y: auto;">
+                    <pre>/* AGENT WALLACE - Brand Style Framework */
+
+/* Color Variables */
+:root {
+  --color-orange: #FF9E2C;
+  --color-navy: #162B4B;
+  --color-sky-blue: #88CCEE;
+  --color-white: #FFFFFF;
+  --color-black: #202020;
+  --color-light-gray: #F5F5F5;
+  --color-medium-gray: #D1D1D1;
+  --color-dark-gray: #707070;
+  
+  /* Font Sizes */
+  --font-size-xs: 0.75rem;    /* 12px */
+  --font-size-sm: 0.875rem;   /* 14px */
+  --font-size-base: 1rem;     /* 16px */
+  --font-size-lg: 1.125rem;   /* 18px */
+  --font-size-xl: 1.25rem;    /* 20px */
+  --font-size-2xl: 1.5rem;    /* 24px */
+  --font-size-3xl: 1.875rem;  /* 30px */
+  --font-size-4xl: 2.25rem;   /* 36px */
+  --font-size-5xl: 3rem;      /* 48px */
+  
+  /* Spacing */
+  --space-1: 0.25rem;  /* 4px */
+  --space-2: 0.5rem;   /* 8px */
+  --space-3: 0.75rem;  /* 12px */
+  --space-4: 1rem;     /* 16px */
+  --space-5: 1.5rem;   /* 24px */
+  --space-6: 2rem;     /* 32px */
+  --space-8: 2.5rem;   /* 40px */
+  --space-10: 3rem;    /* 48px */
+  
+  /* Borders */
+  --border-radius-sm: 4px;
+  --border-radius-md: 8px;
+  --border-radius-lg: 12px;
+  --border-radius-full: 9999px;
+}
+
+/* Typography */
+html {
+  font-size: 16px;
+}
+
+body {
+  font-family: 'Proxima Nova', Arial, Helvetica, sans-serif;
+  font-weight: 400;
+  line-height: 1.6;
+  color: var(--color-black);
+  background-color: var(--color-white);
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Quicksand', 'Arial Rounded MT Bold', Avenir, sans-serif;
+  font-weight: 600;
+  line-height: 1.2;
+  color: var(--color-navy);
+  margin-top: 0;
+}
+
+h1 { font-size: var(--font-size-5xl); }
+h2 { font-size: var(--font-size-4xl); }
+h3 { font-size: var(--font-size-2xl); }
+h4 { font-size: var(--font-size-xl); }
+h5 { font-size: var(--font-size-lg); }
+h6 { font-size: var(--font-size-base); }
+
+.subtitle {
+  font-size: var(--font-size-xl);
+  font-weight: 400;
+}
+
+.text-xs { font-size: var(--font-size-xs); }
+.text-sm { font-size: var(--font-size-sm); }
+.text-base { font-size: var(--font-size-base); }
+.text-lg { font-size: var(--font-size-lg); }
+.text-xl { font-size: var(--font-size-xl); }
+.text-2xl { font-size: var(--font-size-2xl); }
+
+.font-light { font-weight: 300; }
+.font-normal { font-weight: 400; }
+.font-medium { font-weight: 500; }
+.font-semibold { font-weight: 600; }
+.font-bold { font-weight: 700; }
+
+/* Colors */
+.text-orange { color: var(--color-orange); }
+.text-navy { color: var(--color-navy); }
+.text-sky-blue { color: var(--color-sky-blue); }
+.text-white { color: var(--color-white); }
+.text-black { color: var(--color-black); }
+.text-dark-gray { color: var(--color-dark-gray); }
+
+.bg-orange { background-color: var(--color-orange); }
+.bg-navy { background-color: var(--color-navy); }
+.bg-sky-blue { background-color: var(--color-sky-blue); }
+.bg-white { background-color: var(--color-white); }
+.bg-black { background-color: var(--color-black); }
+.bg-light-gray { background-color: var(--color-light-gray); }
+
+/* Layout */
+.aw-container {
+  width: 100%;
+  max-width: 1200px;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 1rem;
+  padding-right: 1rem;
+}
+
+.aw-row {
+  display: flex;
+  flex-wrap: wrap;
+  margin-left: -15px;
+  margin-right: -15px;
+}
+
+.aw-col {
+  padding-left: 15px;
+  padding-right: 15px;
+  flex: 1 0 0%;
+}
+
+.aw-col-12 { flex: 0 0 100%; max-width: 100%; }
+.aw-col-6 { flex: 0 0 50%; max-width: 50%; }
+.aw-col-4 { flex: 0 0 33.333333%; max-width: 33.333333%; }
+.aw-col-3 { flex: 0 0 25%; max-width: 25%; }
+
+/* Spacing */
+.m-0 { margin: 0; }
+.m-1 { margin: var(--space-1); }
+.m-2 { margin: var(--space-2); }
+.m-3 { margin: var(--space-3); }
+.m-4 { margin: var(--space-4); }
+.m-5 { margin: var(--space-5); }
+
+.mt-1 { margin-top: var(--space-1); }
+.mt-2 { margin-top: var(--space-2); }
+.mt-3 { margin-top: var(--space-3); }
+.mt-4 { margin-top: var(--space-4); }
+.mt-5 { margin-top: var(--space-5); }
+
+.mb-1 { margin-bottom: var(--space-1); }
+.mb-2 { margin-bottom: var(--space-2); }
+.mb-3 { margin-bottom: var(--space-3); }
+.mb-4 { margin-bottom: var(--space-4); }
+.mb-5 { margin-bottom: var(--space-5); }
+.mb-8 { margin-bottom: var(--space-8); }
+.mb-10 { margin-bottom: var(--space-10); }
+
+.p-0 { padding: 0; }
+.p-1 { padding: var(--space-1); }
+.p-2 { padding: var(--space-2); }
+.p-3 { padding: var(--space-3); }
+.p-4 { padding: var(--space-4); }
+.p-5 { padding: var(--space-5); }
+
+.py-1 { padding-top: var(--space-1); padding-bottom: var(--space-1); }
+.py-2 { padding-top: var(--space-2); padding-bottom: var(--space-2); }
+.py-3 { padding-top: var(--space-3); padding-bottom: var(--space-3); }
+.py-4 { padding-top: var(--space-4); padding-bottom: var(--space-4); }
+.py-5 { padding-top: var(--space-5); padding-bottom: var(--space-5); }
+
+.px-1 { padding-left: var(--space-1); padding-right: var(--space-1); }
+.px-2 { padding-left: var(--space-2); padding-right: var(--space-2); }
+.px-3 { padding-left: var(--space-3); padding-right: var(--space-3); }
+.px-4 { padding-left: var(--space-4); padding-right: var(--space-4); }
+.px-5 { padding-left: var(--space-5); padding-right: var(--space-5); }
+
+/* Buttons */
+.button-primary {
+  display: inline-block;
+  background-color: var(--color-orange);
+  color: white;
+  font-family: 'Quicksand', 'Arial Rounded MT Bold', Avenir, sans-serif;
+  font-weight: 600;
+  padding: 10px 24px;
+  border-radius: var(--border-radius-full);
+  text-align: center;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  border: none;
+  cursor: pointer;
+}
+
+.button-primary:hover {
+  background-color: #E88F1C;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+.button-secondary {
+  display: inline-block;
+  background-color: var(--color-navy);
+  color: white;
+  font-family: 'Quicksand', 'Arial Rounded MT Bold', Avenir, sans-serif;
+  font-weight: 600;
+  padding: 10px 24px;
+  border-radius: var(--border-radius-full);
+  text-align: center;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  border: none;
+  cursor: pointer;
+}
+
+.button-secondary:hover {
+  background-color: #0E1B31;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+.button-outline {
+  display: inline-block;
+  background-color: transparent;
+  color: var(--color-navy);
+  font-family: 'Quicksand', 'Arial Rounded MT Bold', Avenir, sans-serif;
+  font-weight: 600;
+  padding: 9px 23px;
+  border-radius: var(--border-radius-full);
+  text-align: center;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  border: 1px solid var(--color-navy);
+  cursor: pointer;
+}
+
+.button-outline:hover {
+  background-color: rgba(22, 43, 75, 0.05);
+  transform: translateY(-2px);
+}
+
+.button-text {
+  display: inline-block;
+  background-color: transparent;
+  color: var(--color-navy);
+  font-family: 'Quicksand', 'Arial Rounded MT Bold', Avenir, sans-serif;
+  font-weight: 600;
+  padding: 10px 0;
+  text-align: center;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  border: none;
+  cursor: pointer;
+  position: relative;
+}
+
+.button-text::after {
+  content: "";
+  position: absolute;
+  bottom: 5px;
+  left: 0;
+  width: 0%;
+  height: 2px;
+  background-color: var(--color-orange);
+  transition: width 0.3s ease;
+}
+
+.button-text:hover {
+  color: var(--color-orange);
+}
+
+.button-text:hover::after {
+  width: 100%;
+}
+
+/* Cards */
+.card {
+  background-color: var(--color-white);
+  border-radius: var(--border-radius-md);
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+  padding: var(--space-4);
+  margin-bottom: var(--space-4);
+  border: 1px solid var(--color-medium-gray);
+}
+
+.card-title {
+  font-family: 'Quicksand', 'Arial Rounded MT Bold', Avenir, sans-serif;
+  font-weight: 600;
+  font-size: var(--font-size-xl);
+  color: var(--color-navy);
+  margin-top: 0;
+  margin-bottom: var(--space-3);
+}
+
+/* Alerts */
+.alert {
+  padding: var(--space-4);
+  border-radius: var(--border-radius-md);
+  margin: var(--space-4) 0;
+  display: flex;
+  align-items: center;
+}
+
+.alert-success {
+  background-color: rgba(136, 204, 238, 0.2);
+  border-left: 4px solid var(--color-sky-blue);
+}
+
+.alert-warning {
+  background-color: rgba(255, 158, 44, 0.2);
+  border-left: 4px solid var(--color-orange);
+}
+
+.alert-danger {
+  background-color: rgba(255, 99, 71, 0.2);
+  border-left: 4px solid tomato;
+}
+
+.alert-icon {
+  margin-right: var(--space-3);
+}
+
+/* Forms */
+.form-group {
+  margin-bottom: var(--space-4);
+}
+
+.form-label {
+  display: block;
+  font-size: var(--font-size-sm);
+  font-weight: 600;
+  color: var(--color-navy);
+  margin-bottom: var(--space-2);
+}
+
+.form-control {
+  display: block;
+  width: 100%;
+  padding: 10px var(--space-3);
+  font-size: var(--font-size-base);
+  line-height: 1.6;
+  color: var(--color-black);
+  background-color: var(--color-white);
+  border: 1px solid var(--color-medium-gray);
+  border-radius: var(--border-radius-md);
+  transition: border-color 0.15s ease-in-out;
+}
+
+.form-control:focus {
+  border-color: var(--color-orange);
+  outline: 0;
+  box-shadow: 0 0 0 3px rgba(255, 158, 44, 0.2);
+}
+
+.form-select {
+  display: block;
+  width: 100%;
+  padding: 10px var(--space-3);
+  font-size: var(--font-size-base);
+  line-height: 1.6;
+  color: var(--color-black);
+  background-color: var(--color-white);
+  border: 1px solid var(--color-medium-gray);
+  border-radius: var(--border-radius-md);
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='%23212529' viewBox='0 0 16 16'%3E%3Cpath d='M8 11.5l-5.5-5.5h11l-5.5 5.5z'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 12px center;
+  background-size: 16px 12px;
+}
+
+.form-checkbox {
+  display: inline-block;
+  vertical-align: middle;
+  margin-right: var(--space-2);
+}
+
+/* Utilities */
+.flex { display: flex; }
+.items-center { align-items: center; }
+.justify-between { justify-content: space-between; }
+.justify-center { justify-content: center; }
+.flex-col { flex-direction: column; }
+.flex-wrap { flex-wrap: wrap; }
+.flex-grow { flex-grow: 1; }
+
+.text-center { text-align: center; }
+.text-left { text-align: left; }
+.text-right { text-align: right; }
+
+.rounded-sm { border-radius: var(--border-radius-sm); }
+.rounded-md { border-radius: var(--border-radius-md); }
+.rounded-lg { border-radius: var(--border-radius-lg); }
+.rounded-full { border-radius: var(--border-radius-full); }
+
+.shadow-sm { box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05); }
+.shadow { box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06); }
+.shadow-md { box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06); }
+.shadow-lg { box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05); }
+
+.w-full { width: 100%; }
+.h-full { height: 100%; }
+
+.border { border: 1px solid var(--color-medium-gray); }
+.border-t { border-top: 1px solid var(--color-medium-gray); }
+.border-r { border-right: 1px solid var(--color-medium-gray); }
+.border-b { border-bottom: 1px solid var(--color-medium-gray); }
+.border-l { border-left: 1px solid var(--color-medium-gray); }
+
+.hidden { display: none; }
+.block { display: block; }
+.inline-block { display: inline-block; }
+
+/* Responsive */
+@media (max-width: 768px) {
+  .aw-col-6, .aw-col-4, .aw-col-3 {
+    flex: 0 0 100%;
+    max-width: 100%;
+  }
+  
+  h1 { font-size: 2.25rem; }
+  h2 { font-size: 1.875rem; }
+  h3 { font-size: 1.5rem; }
+  
+  .mobile-hidden { display: none; }
+  .mobile-block { display: block; }
+}</pre>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Footer -->
+        <footer class="text-center py-8 text-sm text-gray-600 border-t border-gray-200">
+            <p>© 2023 Agent Wallace. Your Family's Loyal Digital Guardian.</p>
+            <p class="mt-2">For implementation questions, contact brand@agentwallace.com</p>
+        </footer>
+    </div>
+</body>
+</html>

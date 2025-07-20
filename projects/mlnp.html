@@ -1,0 +1,649 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Agent MLNP: Privacy-First AI for Sex Education</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            color: #333;
+            line-height: 1.6;
+        }
+        .gradient-bg {
+            background: linear-gradient(135deg, #ff758c 0%, #ff7eb3 100%);
+        }
+        .section {
+            padding: 4rem 0;
+        }
+        .feature-card {
+            transition: all 0.3s ease;
+        }
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+        .timeline-item {
+            padding-bottom: 2rem;
+            border-left: 2px solid #ff758c;
+            position: relative;
+            padding-left: 20px;
+            margin-left: 10px;
+        }
+        .timeline-item:before {
+            content: '';
+            width: 12px;
+            height: 12px;
+            background: #ff758c;
+            border-radius: 50%;
+            position: absolute;
+            left: -7px;
+            top: 0;
+        }
+        .timeline-item:last-child {
+            border-left: none;
+        }
+        .mlnp-pink {
+            color: #ff758c;
+        }
+        .mlnp-bg {
+            background-color: #ff758c;
+        }
+    </style>
+</head>
+<body class="bg-gray-50">
+    <!-- Navigation -->
+    <nav class="bg-white shadow-sm py-4">
+        <div class="container mx-auto flex justify-between items-center px-4">
+            <div class="flex items-center">
+                <img src="https://d9hhrg4mnvzow.cloudfront.net/www.makelovenotporn.academy/5a915bd6-001_10lu05x000000000000028.png" alt="MLNP Logo" class="h-10 mr-3">
+                <span class="font-bold text-xl mlnp-pink">Agent MLNP</span>
+            </div>
+            <div>
+                <button class="mlnp-bg text-white px-4 py-2 rounded-lg font-medium shadow-md hover:opacity-90 transition">Contact Us</button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <header class="gradient-bg text-white py-20">
+        <div class="container mx-auto px-4 flex flex-col items-center">
+            <h1 class="text-4xl md:text-5xl font-bold text-center leading-tight mb-6">Introducing Agent MLNP</h1>
+            <p class="text-xl md:text-2xl text-center max-w-3xl mb-10">A privacy-first AI assistant designed specifically for Make Love Not Porn Academy, empowering safe, inclusive, and age-appropriate sex education globally.</p>
+            <div class="flex flex-col sm:flex-row gap-4">
+                <button class="bg-white text-pink-500 px-6 py-3 rounded-lg font-semibold shadow-lg hover:bg-gray-100 transition">Learn More</button>
+                <button class="bg-transparent border-2 border-white text-white px-6 py-3 rounded-lg font-semibold hover:bg-white hover:text-pink-500 transition">Request Demo</button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Vision -->
+    <section class="section bg-white">
+        <div class="container mx-auto px-4">
+            <div class="max-w-3xl mx-auto text-center mb-16">
+                <h2 class="text-3xl font-bold mb-6">Our Shared Vision</h2>
+                <p class="text-lg text-gray-600">Agent MLNP aligns perfectly with Make Love Not Porn Academy's mission to provide accessible, fact-based, and non-judgmental sex education globally. By combining AI technology with privacy-first design, we can dramatically scale the impact of your human-curated content while preserving the trust and safety your community expects.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Problem Statement -->
+    <section class="section bg-gray-50">
+        <div class="container mx-auto px-4">
+            <div class="flex flex-col md:flex-row items-center gap-10">
+                <div class="md:w-1/2">
+                    <h2 class="text-3xl font-bold mb-6">The Challenge</h2>
+                    <div class="space-y-4 text-gray-600">
+                        <p class="text-lg">Today's sex education landscape faces significant barriers:</p>
+                        <ul class="list-disc pl-5 space-y-2">
+                            <li><span class="font-medium">Limited Access:</span> Quality sex education remains inaccessible to many people globally</li>
+                            <li><span class="font-medium">Privacy Concerns:</span> Many avoid seeking information due to privacy and confidentiality fears</li>
+                            <li><span class="font-medium">Content Filtering:</span> Finding age-appropriate content remains difficult for parents and educators</li>
+                            <li><span class="font-medium">Cultural Limitations:</span> Most resources lack cultural sensitivity and contextual awareness</li>
+                            <li><span class="font-medium">Scaling Human Expertise:</span> Human curation is valuable but difficult to scale to meet global demand</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="md:w-1/2 flex justify-center">
+                    <div class="bg-white p-6 rounded-xl shadow-lg max-w-md">
+                        <h3 class="text-xl font-semibold mb-4 mlnp-pink">What MLNP Academy Users Are Saying:</h3>
+                        <div class="space-y-4">
+                            <blockquote class="italic border-l-4 border-pink-300 pl-4 py-2">
+                                "My kids need MLNP Academy because there will always be more curiosity and questions - long after they want to hear it from me. They need a reliable source, because bad information and pressure will always be loud by default."
+                            </blockquote>
+                            <p class="text-right font-medium">- Karen Hsu, Parent</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Solution Overview -->
+    <section class="section bg-white">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl font-bold mb-12 text-center">The Solution: Agent MLNP</h2>
+            <div class="grid md:grid-cols-3 gap-8">
+                <div class="bg-gray-50 rounded-xl p-6 shadow-md feature-card">
+                    <div class="w-14 h-14 bg-pink-100 rounded-full flex items-center justify-center mb-4">
+                        <i class="fas fa-shield-alt text-2xl mlnp-pink"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-3">Privacy-First Design</h3>
+                    <p class="text-gray-600">Zero-knowledge architecture ensures user queries remain private and secure, fostering trust while providing valuable education.</p>
+                </div>
+                <div class="bg-gray-50 rounded-xl p-6 shadow-md feature-card">
+                    <div class="w-14 h-14 bg-pink-100 rounded-full flex items-center justify-center mb-4">
+                        <i class="fas fa-brain text-2xl mlnp-pink"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-3">RAG-Powered Intelligence</h3>
+                    <p class="text-gray-600">Advanced AI retrieves from human-curated content sources without exposing private information, ensuring accuracy and trust.</p>
+                </div>
+                <div class="bg-gray-50 rounded-xl p-6 shadow-md feature-card">
+                    <div class="w-14 h-14 bg-pink-100 rounded-full flex items-center justify-center mb-4">
+                        <i class="fas fa-globe text-2xl mlnp-pink"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-3">Cultural Inclusivity</h3>
+                    <p class="text-gray-600">Content tailored to diverse age groups, cultural contexts, and comfort levels, making education more accessible worldwide.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Core Features -->
+    <section class="section bg-gray-50">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl font-bold mb-4 text-center">Core Features</h2>
+            <p class="text-center text-gray-600 max-w-3xl mx-auto mb-12">Agent MLNP expands MLNP Academy's reach and effectiveness through these key capabilities:</p>
+            
+            <div class="space-y-8">
+                <!-- Feature 1 -->
+                <div class="bg-white rounded-xl shadow-md overflow-hidden">
+                    <div class="md:flex">
+                        <div class="md:w-1/3 bg-pink-100 p-6 flex flex-col justify-center">
+                            <h3 class="text-xl font-bold mlnp-pink mb-2">Age-Appropriate Content Navigation</h3>
+                            <p class="text-gray-700">Smart filtering system delivers precisely the right content for each age group.</p>
+                        </div>
+                        <div class="md:w-2/3 p-6">
+                            <div class="space-y-4">
+                                <div class="flex items-start">
+                                    <i class="fas fa-check-circle mlnp-pink mt-1 mr-3"></i>
+                                    <p>Filter content by specific age ranges (6-8, 9-12, 13-15, 16-18, adult)</p>
+                                </div>
+                                <div class="flex items-start">
+                                    <i class="fas fa-check-circle mlnp-pink mt-1 mr-3"></i>
+                                    <p>Automatically adjust content depth and terminology based on developmental stages</p>
+                                </div>
+                                <div class="flex items-start">
+                                    <i class="fas fa-check-circle mlnp-pink mt-1 mr-3"></i>
+                                    <p>Allow parents and teachers to preview content before sharing with children</p>
+                                </div>
+                                <div class="flex items-start">
+                                    <i class="fas fa-check-circle mlnp-pink mt-1 mr-3"></i>
+                                    <p>Create progressive learning paths that grow with understanding</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Feature 2 -->
+                <div class="bg-white rounded-xl shadow-md overflow-hidden">
+                    <div class="md:flex">
+                        <div class="md:w-1/3 bg-pink-100 p-6 flex flex-col justify-center">
+                            <h3 class="text-xl font-bold mlnp-pink mb-2">Cultural Context Engine</h3>
+                            <p class="text-gray-700">Adapts content to cultural sensitivities and regional contexts.</p>
+                        </div>
+                        <div class="md:w-2/3 p-6">
+                            <div class="space-y-4">
+                                <div class="flex items-start">
+                                    <i class="fas fa-check-circle mlnp-pink mt-1 mr-3"></i>
+                                    <p>Tailor content based on cultural and religious contexts while maintaining factual accuracy</p>
+                                </div>
+                                <div class="flex items-start">
+                                    <i class="fas fa-check-circle mlnp-pink mt-1 mr-3"></i>
+                                    <p>Provide culturally sensitive explanations and terminology</p>
+                                </div>
+                                <div class="flex items-start">
+                                    <i class="fas fa-check-circle mlnp-pink mt-1 mr-3"></i>
+                                    <p>Support multiple languages and regionally specific resources</p>
+                                </div>
+                                <div class="flex items-start">
+                                    <i class="fas fa-check-circle mlnp-pink mt-1 mr-3"></i>
+                                    <p>Connect users with educators from similar cultural backgrounds</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Feature 3 -->
+                <div class="bg-white rounded-xl shadow-md overflow-hidden">
+                    <div class="md:flex">
+                        <div class="md:w-1/3 bg-pink-100 p-6 flex flex-col justify-center">
+                            <h3 class="text-xl font-bold mlnp-pink mb-2">Educator Resources</h3>
+                            <p class="text-gray-700">Comprehensive tools for teachers and sex educators.</p>
+                        </div>
+                        <div class="md:w-2/3 p-6">
+                            <div class="space-y-4">
+                                <div class="flex items-start">
+                                    <i class="fas fa-check-circle mlnp-pink mt-1 mr-3"></i>
+                                    <p>Access curriculum-aligned teaching resources and lesson plans</p>
+                                </div>
+                                <div class="flex items-start">
+                                    <i class="fas fa-check-circle mlnp-pink mt-1 mr-3"></i>
+                                    <p>Provide discussion guides for navigating sensitive topics</p>
+                                </div>
+                                <div class="flex items-start">
+                                    <i class="fas fa-check-circle mlnp-pink mt-1 mr-3"></i>
+                                    <p>Offer evidence-based teaching methodologies and approaches</p>
+                                </div>
+                                <div class="flex items-start">
+                                    <i class="fas fa-check-circle mlnp-pink mt-1 mr-3"></i>
+                                    <p>Suggest responses to common student questions and concerns</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Feature 4 -->
+                <div class="bg-white rounded-xl shadow-md overflow-hidden">
+                    <div class="md:flex">
+                        <div class="md:w-1/3 bg-pink-100 p-6 flex flex-col justify-center">
+                            <h3 class="text-xl font-bold mlnp-pink mb-2">AI Chatbot Interface</h3>
+                            <p class="text-gray-700">Natural language interaction with privacy-preserving design.</p>
+                        </div>
+                        <div class="md:w-2/3 p-6">
+                            <div class="space-y-4">
+                                <div class="flex items-start">
+                                    <i class="fas fa-check-circle mlnp-pink mt-1 mr-3"></i>
+                                    <p>Natural language understanding of educational queries with age-appropriate responses</p>
+                                </div>
+                                <div class="flex items-start">
+                                    <i class="fas fa-check-circle mlnp-pink mt-1 mr-3"></i>
+                                    <p>Clear indication of human-verified vs. AI-generated content</p>
+                                </div>
+                                <div class="flex items-start">
+                                    <i class="fas fa-check-circle mlnp-pink mt-1 mr-3"></i>
+                                    <p>Content warnings before discussing sensitive topics</p>
+                                </div>
+                                <div class="flex items-start">
+                                    <i class="fas fa-check-circle mlnp-pink mt-1 mr-3"></i>
+                                    <p>Option for anonymous interaction with no conversation history</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Privacy Architecture -->
+    <section class="section bg-white">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl font-bold mb-4 text-center">Privacy-First Architecture</h2>
+            <p class="text-center text-gray-600 max-w-3xl mx-auto mb-12">Agent MLNP is built with privacy as its foundation, not as an afterthought:</p>
+            
+            <div class="grid md:grid-cols-2 gap-8">
+                <div class="bg-gray-50 p-6 rounded-xl shadow-md">
+                    <h3 class="text-xl font-semibold mb-4">Zero-Knowledge Architecture</h3>
+                    <ul class="space-y-3">
+                        <li class="flex items-start">
+                            <i class="fas fa-lock mlnp-pink mt-1 mr-3"></i>
+                            <p>Content processing occurs in isolated, ephemeral environments</p>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-lock mlnp-pink mt-1 mr-3"></i>
+                            <p>No staff member can access user queries under any circumstances</p>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-lock mlnp-pink mt-1 mr-3"></i>
+                            <p>Original queries exist only transiently during processing</p>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-lock mlnp-pink mt-1 mr-3"></i>
+                            <p>System administrators cannot bypass protections due to architectural constraints</p>
+                        </li>
+                    </ul>
+                </div>
+                
+                <div class="bg-gray-50 p-6 rounded-xl shadow-md">
+                    <h3 class="text-xl font-semibold mb-4">RAG-Enhanced Privacy</h3>
+                    <ul class="space-y-3">
+                        <li class="flex items-start">
+                            <i class="fas fa-database mlnp-pink mt-1 mr-3"></i>
+                            <p>Keeps user queries separate from the core AI model</p>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-database mlnp-pink mt-1 mr-3"></i>
+                            <p>Retrieves information only when needed for specific questions</p>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-database mlnp-pink mt-1 mr-3"></i>
+                            <p>Processes retrieval in secure, isolated environments</p>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-database mlnp-pink mt-1 mr-3"></i>
+                            <p>No retention of query data after generating responses</p>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="mt-10 bg-pink-50 p-6 rounded-xl shadow-md">
+                <h3 class="text-xl font-semibold mb-4 text-center">Data Minimization & Protection</h3>
+                <div class="grid md:grid-cols-3 gap-6">
+                    <div>
+                        <h4 class="font-semibold mb-2">User Queries</h4>
+                        <p class="text-sm text-gray-600">Processed in-memory only, not stored after session</p>
+                    </div>
+                    <div>
+                        <h4 class="font-semibold mb-2">User Preferences</h4>
+                        <p class="text-sm text-gray-600">Stored only until session end or account deletion</p>
+                    </div>
+                    <div>
+                        <h4 class="font-semibold mb-2">Interaction History</h4>
+                        <p class="text-sm text-gray-600">Optional, user-controlled, fully deletable</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Market Opportunity -->
+    <section class="section bg-gray-50">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl font-bold mb-4 text-center">Market Opportunity</h2>
+            <p class="text-center text-gray-600 max-w-3xl mx-auto mb-12">Agent MLNP addresses a significant and growing global need for accessible sex education:</p>
+            
+            <div class="grid md:grid-cols-2 gap-8 mb-10">
+                <div class="bg-white p-6 rounded-xl shadow-md">
+                    <h3 class="text-xl font-semibold mb-4">Market Size</h3>
+                    <div class="space-y-4">
+                        <div>
+                            <p class="font-medium">Global Digital Sex Education Market:</p>
+                            <p class="text-2xl font-bold mlnp-pink">$1.2 billion</p>
+                            <p class="text-sm text-gray-500">Projected to reach $3.5 billion by 2028</p>
+                        </div>
+                        <div>
+                            <p class="font-medium">Annual Growth Rate:</p>
+                            <p class="text-2xl font-bold mlnp-pink">24.5% CAGR</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="bg-white p-6 rounded-xl shadow-md">
+                    <h3 class="text-xl font-semibold mb-4">Key Market Drivers</h3>
+                    <ul class="space-y-2">
+                        <li class="flex items-start">
+                            <i class="fas fa-arrow-trend-up mlnp-pink mt-1 mr-3"></i>
+                            <p>Digital transformation of educational resources</p>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-arrow-trend-up mlnp-pink mt-1 mr-3"></i>
+                            <p>Growing awareness about data privacy in sensitive topics</p>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-arrow-trend-up mlnp-pink mt-1 mr-3"></i>
+                            <p>Challenges accessing comprehensive sex education globally</p>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-arrow-trend-up mlnp-pink mt-1 mr-3"></i>
+                            <p>Parental demand for supplemental educational resources</p>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="bg-white p-6 rounded-xl shadow-md">
+                <h3 class="text-xl font-semibold mb-4">Target Audience & Revenue Potential</h3>
+                
+                <div class="overflow-x-auto">
+                    <table class="w-full text-left">
+                        <thead>
+                            <tr class="bg-gray-100">
+                                <th class="p-3">Target Segment</th>
+                                <th class="p-3">Estimated Size</th>
+                                <th class="p-3">Subscription Tier</th>
+                                <th class="p-3">Monthly Price</th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-gray-200">
+                            <tr>
+                                <td class="p-3">Individual Learners</td>
+                                <td class="p-3">42M (US)</td>
+                                <td class="p-3">Individual</td>
+                                <td class="p-3">$4.99/month</td>
+                            </tr>
+                            <tr>
+                                <td class="p-3">Parents & Families</td>
+                                <td class="p-3">85M (US)</td>
+                                <td class="p-3">Family</td>
+                                <td class="p-3">$9.99/month</td>
+                            </tr>
+                            <tr>
+                                <td class="p-3">Educators</td>
+                                <td class="p-3">3.2M (US)</td>
+                                <td class="p-3">Educator</td>
+                                <td class="p-3">$14.99/month</td>
+                            </tr>
+                            <tr>
+                                <td class="p-3">Schools & Organizations</td>
+                                <td class="p-3">130,000 (US)</td>
+                                <td class="p-3">Institution</td>
+                                <td class="p-3">Custom pricing</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                
+                <div class="mt-6 p-4 bg-gray-50 rounded-lg">
+                    <p class="font-semibold mb-2">Projected Revenue Growth:</p>
+                    <div class="grid grid-cols-3 gap-4 text-center">
+                        <div>
+                            <p class="text-sm text-gray-500">Year 1</p>
+                            <p class="text-xl font-bold mlnp-pink">$8 million</p>
+                        </div>
+                        <div>
+                            <p class="text-sm text-gray-500">Year 3</p>
+                            <p class="text-xl font-bold mlnp-pink">$80 million</p>
+                        </div>
+                        <div>
+                            <p class="text-sm text-gray-500">Year 5</p>
+                            <p class="text-xl font-bold mlnp-pink">$200 million</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Implementation Timeline -->
+    <section class="section bg-white">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl font-bold mb-4 text-center">Implementation Timeline</h2>
+            <p class="text-center text-gray-600 max-w-3xl mx-auto mb-12">Our projected timeline for bringing Agent MLNP to MLNP Academy:</p>
+            
+            <div class="max-w-3xl mx-auto">
+                <div class="timeline-item">
+                    <h3 class="text-xl font-semibold mlnp-pink">Q2-Q3 2025: Design & Architecture</h3>
+                    <p class="mt-2 text-gray-600">UI/UX design finalization, technical architecture documentation, privacy framework development, and RAG system design</p>
+                </div>
+                
+                <div class="timeline-item">
+                    <h3 class="text-xl font-semibold mlnp-pink">Q3 2025: Core Development</h3>
+                    <p class="mt-2 text-gray-600">Privacy infrastructure implementation, RAG system development, core feature development, content integration, and user interface implementation</p>
+                </div>
+                
+                <div class="timeline-item">
+                    <h3 class="text-xl font-semibold mlnp-pink">Q3-Q4 2025: Testing & QA</h3>
+                    <p class="mt-2 text-gray-600">Security testing and auditing, privacy validation, content accuracy verification, functional testing, and beta testing program</p>
+                </div>
+                
+                <div class="timeline-item">
+                    <h3 class="text-xl font-semibold mlnp-pink">Q4 2025: Launch Preparation</h3>
+                    <p class="mt-2 text-gray-600">Marketing materials preparation, launch plan finalization, support training, final pre-launch testing, and content verification</p>
+                </div>
+                
+                <div class="timeline-item">
+                    <h3 class="text-xl font-semibold mlnp-pink">Q4 2025: Public Launch</h3>
+                    <p class="mt-2 text-gray-600">Official release of Agent MLNP v1.0, marketing campaign execution, user onboarding, and initial support phase</p>
+                </div>
+            </div>
+            
+            <div class="mt-12">
+                <h3 class="text-xl font-semibold mb-4 text-center">Feature Roadmap</h3>
+                <div class="overflow-x-auto">
+                    <table class="w-full text-left">
+                        <thead>
+                            <tr class="bg-gray-100">
+                                <th class="p-3">Core Feature</th>
+                                <th class="p-3">v1.0 (Q4 2025)</th>
+                                <th class="p-3">v1.5 (Q2 2026)</th>
+                                <th class="p-3">v2.0 (Q4 2026)</th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-gray-200">
+                            <tr>
+                                <td class="p-3 font-medium">Age-Appropriate Content</td>
+                                <td class="p-3">Basic age filtering, content categorization</td>
+                                <td class="p-3">+ Interactive content, learning paths</td>
+                                <td class="p-3">+ Advanced personalization, adaptive content</td>
+                            </tr>
+                            <tr>
+                                <td class="p-3 font-medium">Cultural Context Engine</td>
+                                <td class="p-3">Basic cultural filters, language options</td>
+                                <td class="p-3">+ Expanded cultural contexts, community input</td>
+                                <td class="p-3">+ Dynamic cultural adaptation, regional customization</td>
+                            </tr>
+                            <tr>
+                                <td class="p-3 font-medium">Educator Resources</td>
+                                <td class="p-3">Basic lesson plans, teaching guides</td>
+                                <td class="p-3">+ Interactive teaching tools, resource customization</td>
+                                <td class="p-3">+ Collaborative creation, institution-specific content</td>
+                            </tr>
+                            <tr>
+                                <td class="p-3 font-medium">RAG AI Chatbot</td>
+                                <td class="p-3">Basic Q&A, age-appropriate responses</td>
+                                <td class="p-3">+ Context awareness, multi-modal responses</td>
+                                <td class="p-3">+ Advanced personalization, learning continuity</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Perfect Alignment -->
+    <section class="section bg-gray-50">
+        <div class="container mx-auto px-4 max-w-3xl">
+            <h2 class="text-3xl font-bold mb-6 text-center">Perfect Alignment with MLNP Academy's Mission</h2>
+            
+            <div class="bg-white p-6 rounded-xl shadow-md mb-8">
+                <div class="flex items-start mb-4">
+                    <i class="fas fa-quote-left text-3xl mlnp-pink mr-4 mt-1"></i>
+                    <blockquote class="text-lg">
+                        "An aggregator hub for the best of the world's sex education content all in one place, searchable by age appropriateness, cultural sensibility, and personal comfort level."
+                    </blockquote>
+                </div>
+                <p class="text-right font-medium">- MLNP Academy mission statement</p>
+            </div>
+            
+            <div class="space-y-6">
+                <div class="flex items-start">
+                    <div class="w-10 h-10 rounded-full bg-pink-100 flex items-center justify-center mr-4 mt-1 flex-shrink-0">
+                        <i class="fas fa-check mlnp-pink"></i>
+                    </div>
+                    <div>
+                        <h3 class="text-lg font-semibold">Human-Curated, AI-Powered</h3>
+                        <p class="text-gray-600">Agent MLNP maintains MLNP Academy's commitment to 100% human-curated content, using AI only to make this content more accessible and personalized.</p>
+                    </div>
+                </div>
+                
+                <div class="flex items-start">
+                    <div class="w-10 h-10 rounded-full bg-pink-100 flex items-center justify-center mr-4 mt-1 flex-shrink-0">
+                        <i class="fas fa-check mlnp-pink"></i>
+                    </div>
+                    <div>
+                        <h3 class="text-lg font-semibold">Global Accessibility</h3>
+                        <p class="text-gray-600">Our AI system dramatically scales the reach of MLNP Academy's mission, making culturally appropriate, sensitive sex education available worldwide.</p>
+                    </div>
+                </div>
+                
+                <div class="flex items-start">
+                    <div class="w-10 h-10 rounded-full bg-pink-100 flex items-center justify-center mr-4 mt-1 flex-shrink-0">
+                        <i class="fas fa-check mlnp-pink"></i>
+                    </div>
+                    <div>
+                        <h3 class="text-lg font-semibold">Platform for Educators</h3>
+                        <p class="text-gray-600">Agent MLNP provides a new distribution channel for the "brilliant sex educators currently blocked, censored and de-platformed everywhere."</p>
+                    </div>
+                </div>
+                
+                <div class="flex items-start">
+                    <div class="w-10 h-10 rounded-full bg-pink-100 flex items-center justify-center mr-4 mt-1 flex-shrink-0">
+                        <i class="fas fa-check mlnp-pink"></i>
+                    </div>
+                    <div>
+                        <h3 class="text-lg font-semibold">Privacy & Safety Focus</h3>
+                        <p class="text-gray-600">Our privacy-first architecture ensures users can access vital information without fear of judgment or exposure, aligning with MLNP's values.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="gradient-bg text-white py-16">
+        <div class="container mx-auto px-4 text-center">
+            <h2 class="text-3xl font-bold mb-6">Ready to Transform Sex Education?</h2>
+            <p class="text-xl max-w-2xl mx-auto mb-8">Let's discuss how Agent MLNP can help Make Love Not Porn Academy reach more people with privacy-protected, inclusive sex education.</p>
+            <div class="flex flex-col sm:flex-row justify-center gap-4">
+                <button class="bg-white text-pink-500 px-8 py-3 rounded-lg font-semibold shadow-lg hover:bg-gray-100 transition">Schedule a Demo</button>
+                <button class="bg-transparent border-2 border-white text-white px-8 py-3 rounded-lg font-semibold hover:bg-white hover:text-pink-500 transition">Contact Us</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-white py-12">
+        <div class="container mx-auto px-4">
+            <div class="flex flex-col md:flex-row justify-between">
+                <div class="mb-6 md:mb-0">
+                    <div class="flex items-center">
+                        <img src="https://d9hhrg4mnvzow.cloudfront.net/www.makelovenotporn.academy/5a915bd6-001_10lu05x000000000000028.png" alt="MLNP Logo" class="h-10 mr-3 invert">
+                        <span class="font-bold text-xl">Agent MLNP</span>
+                    </div>
+                    <p class="mt-3 max-w-md text-gray-400">Privacy-first AI for comprehensive sex education. Making accurate information accessible to everyone, everywhere.</p>
+                </div>
+                <div>
+                    <h3 class="text-lg font-semibold mb-4">Contact Us</h3>
+                    <p class="text-gray-400"><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="1e777078715e7f797b706a5352504e307d7173">[email&#160;protected]</a></p>
+                    <div class="mt-4 flex space-x-4">
+                        <a href="#" class="text-gray-400 hover:text-white">
+                            <i class="fab fa-twitter"></i>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-white">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-white">
+                            <i class="fab fa-linkedin"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="mt-10 pt-6 border-t border-gray-700 text-center text-gray-400">
+                <p>&copy; 2025 Agent MLNP. A proposed technology for Make Love Not Porn Academy.</p>
+            </div>
+        </div>
+    </footer>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script></body>
+</html>

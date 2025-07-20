@@ -1,0 +1,447 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-8M3X5312PN"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-8M3X5312PN');
+</script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Support Alt-Hall's Programs - Fundraising Campaign</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;900&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background-color: #000;
+            color: #fff;
+        }
+        .hero {
+            background-image: linear-gradient(to bottom, rgba(0,0,0,0.7), rgba(0,0,0,0.9)), url('http://www.nofriction.io/images/althall.png');
+            background-size: cover;
+            background-position: center;
+        }
+        .donation-btn {
+            transition: all 0.3s ease;
+        }
+        .donation-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(255, 255, 255, 0.2);
+        }
+        .program-card {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.3s ease;
+        }
+        .program-card:hover {
+            background: rgba(255, 255, 255, 0.1);
+            transform: translateY(-5px);
+        }
+        .accent-text {
+            color: #ff3d00;
+        }
+        .impact-metric {
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+        .impact-metric:hover {
+            transform: scale(1.05);
+        }
+        .impact-metric::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg, transparent, rgba(255, 61, 0, 0.2), transparent);
+            transform: rotate(45deg);
+            transition: all 0.5s ease;
+        }
+        .impact-metric:hover::before {
+            animation: shine 1.5s infinite;
+        }
+        @keyframes shine {
+            0% {
+                left: -50%;
+                top: -50%;
+            }
+            100% {
+                left: 100%;
+                top: 100%;
+            }
+        }
+        .quote {
+            border-left: 4px solid #ff3d00;
+        }
+        .alt-btn {
+            background-color: #ff3d00;
+            transition: all 0.3s ease;
+        }
+        .alt-btn:hover {
+            background-color: #ff6333;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(255, 61, 0, 0.4);
+        }
+        .container {
+            max-width: 1200px;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="fixed top-0 w-full z-50 bg-black bg-opacity-90 shadow-lg">
+        <div class="container mx-auto px-4 py-3 flex justify-between items-center">
+            <div class="flex items-center">
+                <img src="https://pbs.twimg.com/profile_images/1759348067042742272/7NBc8PSl_400x400.jpg" alt="Alt-Hall Logo" class="h-12 w-12 mr-3">
+                <h1 class="text-xl font-bold">ALTERNATIVE MUSIC<br><span class="text-sm">HALL OF FAME</span></h1>
+            </div>
+            <nav class="hidden md:block">
+                <ul class="flex space-x-6">
+                    <li><a href="#about" class="hover:text-gray-300">About</a></li>
+                    <li><a href="#programs" class="hover:text-gray-300">Programs</a></li>
+                    <li><a href="#impact" class="hover:text-gray-300">Impact</a></li>
+                    <li><a href="#donate" class="alt-btn px-4 py-2 rounded-full font-bold">Donate Now</a></li>
+                </ul>
+            </nav>
+            <div class="md:hidden">
+                <button class="text-white text-2xl">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero min-h-screen flex items-center pt-16">
+        <div class="container mx-auto px-4 py-16 md:py-32">
+            <div class="max-w-3xl mx-auto text-center">
+                <div class="inline-block bg-black bg-opacity-70 p-4 rounded-lg mb-6">
+                    <h2 class="text-4xl md:text-6xl font-black mb-4">FUND THE <span class="accent-text">FUTURE</span> OF ALTERNATIVE MUSIC</h2>
+                </div>
+                <p class="text-xl md:text-2xl mb-8 bg-black bg-opacity-70 p-4 rounded-lg">Support the next generation of alternative artists through Alt-Hall's "A Place for Everyone" Young Musicians Resource Center</p>
+                <div class="flex flex-wrap justify-center gap-4 mb-8">
+                    <a href="#donate" class="alt-btn px-8 py-4 rounded-full text-xl font-bold tracking-wider">DONATE NOW</a>
+                    <a href="#programs" class="bg-white bg-opacity-10 border border-white px-8 py-4 rounded-full text-xl font-bold tracking-wider hover:bg-opacity-20 transition">OUR PROGRAMS</a>
+                </div>
+                <div class="bg-black bg-opacity-70 p-4 rounded-lg">
+                    <p class="text-lg">Your support directly funds mentorship, resources, and opportunities for emerging alternative artists</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="py-16 bg-black">
+        <div class="container mx-auto px-4">
+            <div class="max-w-4xl mx-auto">
+                <h2 class="text-3xl md:text-4xl font-bold mb-8 text-center">AMPLIFYING <span class="accent-text">OPPORTUNITY</span>, CREATING <span class="accent-text">LEGACY</span></h2>
+                
+                <div class="flex flex-col md:flex-row gap-8 items-center mb-12">
+                    <div class="md:w-1/2">
+                        <blockquote class="quote pl-4 py-1 italic text-xl">
+                            "Leaving alternative artists and alternative music community better than we found them."
+                        </blockquote>
+                        <p class="mt-6">The Alternative Music Hall of Fame (Alt-Hall) is dedicated to honoring legends of alternative music while creating transformative opportunities for emerging artists and the wider music community.</p>
+                        <p class="mt-4">Through our flagship initiative, the <strong>"A Place for Everyone" Young Musicians Resource Center</strong>, Alt-Hall provides comprehensive programming designed to create meaningful connections between industry veterans and emerging artists.</p>
+                    </div>
+                    <div class="md:w-1/2">
+                        <img src="https://img1.wsimg.com/isteam/ip/cbf72cd4-3139-494d-ac53-8d4d66bc986b/blob-7e304de.png" alt="Alt Hall Vision" class="rounded-lg shadow-2xl w-full">
+                    </div>
+                </div>
+
+                <div class="text-center max-w-2xl mx-auto mt-12">
+                    <h3 class="text-2xl font-bold mb-4">WE NEED YOUR SUPPORT</h3>
+                    <p>We are seeking donated resources to fund our programs – not our physical building – but the vital administrative costs, program development, and community outreach initiatives that make our mission possible.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Programs Section -->
+    <section id="programs" class="py-16 bg-gradient-to-b from-black to-gray-900">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl md:text-4xl font-bold mb-2 text-center">YOUR DONATIONS <span class="accent-text">FUND</span> THESE PROGRAMS</h2>
+            <p class="text-center max-w-2xl mx-auto mb-12">Every dollar contributed directly supports our "A Place for Everyone" Young Musicians Resource Center and its seven core programs</p>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- Program 1 -->
+                <div class="program-card p-6 rounded-lg">
+                    <div class="text-accent-text text-4xl mb-3">
+                        <i class="fas fa-guitar"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-2">Instruments and Equipment Acquisition</h3>
+                    <p>Providing access to quality instruments and equipment for young musicians who may not have the financial means to purchase their own.</p>
+                </div>
+                
+                <!-- Program 2 -->
+                <div class="program-card p-6 rounded-lg">
+                    <div class="text-accent-text text-4xl mb-3">
+                        <i class="fas fa-music"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-2">Rehearsal Spaces and Studio Resources</h3>
+                    <p>Creating partnerships with studios and venues to provide affordable or free rehearsal and recording spaces for developing artists.</p>
+                </div>
+                
+                <!-- Program 3 -->
+                <div class="program-card p-6 rounded-lg">
+                    <div class="text-accent-text text-4xl mb-3">
+                        <i class="fas fa-microphone-alt"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-2">Recording Workshops & Engineer Mentoring</h3>
+                    <p>Offering hands-on training with industry professionals to develop technical skills in recording, mixing, and production.</p>
+                </div>
+                
+                <!-- Program 4 -->
+                <div class="program-card p-6 rounded-lg">
+                    <div class="text-accent-text text-4xl mb-3">
+                        <i class="fas fa-gavel"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-2">Legal/Contractual Advocacy</h3>
+                    <p>Providing guidance on management, touring, streaming, and label contracts to help artists protect their interests and rights.</p>
+                </div>
+                
+                <!-- Program 5 -->
+                <div class="program-card p-6 rounded-lg">
+                    <div class="text-accent-text text-4xl mb-3">
+                        <i class="fas fa-users"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-2">Industry Veteran Summits & Mentoring</h3>
+                    <p>Facilitating meaningful mentoring relationships between established artists and newcomers to share knowledge and experience.</p>
+                </div>
+                
+                <!-- Program 6 -->
+                <div class="program-card p-6 rounded-lg">
+                    <div class="text-accent-text text-4xl mb-3">
+                        <i class="fas fa-laptop"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-2">Recording Equipment and Software Workshops</h3>
+                    <p>Training the next generation of recording professionals through hands-on workshops with industry-standard tools.</p>
+                </div>
+                
+                <!-- Program 7 -->
+                <div class="program-card p-6 rounded-lg col-span-1 md:col-span-2 lg:col-span-1">
+                    <div class="text-accent-text text-4xl mb-3">
+                        <i class="fas fa-heart"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-2">Mental Wellness for Musicians</h3>
+                    <p>Addressing the unique mental health challenges that musicians face with specialized resources, workshops, and support groups led by professionals.</p>
+                </div>
+            </div>
+            
+            <div class="mt-12 text-center">
+                <a href="#donate" class="alt-btn px-8 py-4 rounded-full text-xl font-bold inline-block">SUPPORT THESE PROGRAMS</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Impact Section -->
+    <section id="impact" class="py-16 bg-black">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl md:text-4xl font-bold mb-2 text-center">MEASURABLE <span class="accent-text">IMPACT</span></h2>
+            <p class="text-center max-w-2xl mx-auto mb-12">Our programs are designed to achieve these measurable outcomes in our community:</p>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                <div class="impact-metric bg-black p-6 rounded-lg border border-gray-800 text-center">
+                    <div class="text-5xl mb-4 accent-text">
+                        <i class="fas fa-users"></i>
+                    </div>
+                    <h3 class="font-bold text-xl mb-2">Decreased Social Isolation</h3>
+                    <p class="text-gray-300">Building meaningful connections in the music community</p>
+                </div>
+                
+                <div class="impact-metric bg-black p-6 rounded-lg border border-gray-800 text-center">
+                    <div class="text-5xl mb-4 accent-text">
+                        <i class="fas fa-heart"></i>
+                    </div>
+                    <h3 class="font-bold text-xl mb-2">Increased Social Wellness</h3>
+                    <p class="text-gray-300">Fostering a supportive environment for creative growth</p>
+                </div>
+                
+                <div class="impact-metric bg-black p-6 rounded-lg border border-gray-800 text-center">
+                    <div class="text-5xl mb-4 accent-text">
+                        <i class="fas fa-hands-helping"></i>
+                    </div>
+                    <h3 class="font-bold text-xl mb-2">Enhanced Support Networks</h3>
+                    <p class="text-gray-300">Creating stronger safety nets for at-risk artists</p>
+                </div>
+                
+                <div class="impact-metric bg-black p-6 rounded-lg border border-gray-800 text-center">
+                    <div class="text-5xl mb-4 accent-text">
+                        <i class="fas fa-gamepad"></i>
+                    </div>
+                    <h3 class="font-bold text-xl mb-2">Reduced "Bunkerism"</h3>
+                    <p class="text-gray-300">Decreasing over-indulgence in virtual reality among youth</p>
+                </div>
+                
+                <div class="impact-metric bg-black p-6 rounded-lg border border-gray-800 text-center">
+                    <div class="text-5xl mb-4 accent-text">
+                        <i class="fas fa-music"></i>
+                    </div>
+                    <h3 class="font-bold text-xl mb-2">Diverse Music Appreciation</h3>
+                    <p class="text-gray-300">Expanding awareness of various musical styles and performances</p>
+                </div>
+                
+                <div class="impact-metric bg-black p-6 rounded-lg border border-gray-800 text-center">
+                    <div class="text-5xl mb-4 accent-text">
+                        <i class="fas fa-globe-americas"></i>
+                    </div>
+                    <h3 class="font-bold text-xl mb-2">Cross-Cultural Awareness</h3>
+                    <p class="text-gray-300">Building bridges between different cultural expressions</p>
+                </div>
+                
+                <div class="impact-metric bg-black p-6 rounded-lg border border-gray-800 text-center md:col-span-2 lg:col-span-2">
+                    <div class="text-5xl mb-4 accent-text">
+                        <i class="fas fa-handshake"></i>
+                    </div>
+                    <h3 class="font-bold text-xl mb-2">Intergenerational Understanding</h3>
+                    <p class="text-gray-300">Fostering respect and knowledge sharing between music veterans and emerging artists</p>
+                </div>
+            </div>
+            
+            <div class="mt-16 max-w-3xl mx-auto">
+                <div class="flex flex-col md:flex-row gap-8 items-center">
+                    <div class="md:w-1/2">
+                        <img src="https://www.tiffin.edu/wp-content/uploads/2022/07/Ochenduski-2-1024x683.jpg" alt="Mentoring in action" class="rounded-lg shadow-xl">
+                    </div>
+                    <div class="md:w-1/2">
+                        <blockquote class="quote pl-4 py-1 italic text-xl mb-6">
+                            "We at AltHall.org produce spaces to recognize established artists who have set the stage for young artists through experience, education, engagement, resources, and the healing power of music."
+                        </blockquote>
+                        <p>Your donation enables us to continue our mission of being a sound board that tunes and amplifies opportunities for the alternative music community.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Donation Section -->
+    <section id="donate" class="py-16 bg-gradient-to-b from-gray-900 to-black">
+        <div class="container mx-auto px-4">
+            <div class="max-w-4xl mx-auto text-center">
+                <h2 class="text-3xl md:text-5xl font-bold mb-6">SUPPORT <span class="accent-text">ALT-HALL</span> PROGRAMS</h2>
+                <p class="text-xl mb-12">Your contribution directly funds our mission to support alternative artists across generations</p>
+                
+                <div class="bg-black bg-opacity-70 p-8 rounded-xl shadow-2xl border border-gray-800">
+                    <h3 class="text-2xl font-bold mb-6">SELECT YOUR DONATION AMOUNT</h3>
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-10">
+                        <div class="donation-option">
+                            <button class="donation-btn w-full py-6 px-4 bg-white bg-opacity-5 border-2 border-gray-700 hover:border-accent-text rounded-xl flex flex-col items-center justify-center transition">
+                                <span class="text-3xl font-bold mb-2">$25</span>
+                                <span class="text-sm text-gray-300">SUPPORTER</span>
+                                <div class="mt-4 text-sm">
+                                    Helps provide workshop materials for young musicians
+                                </div>
+                            </button>
+                        </div>
+                        
+                        <div class="donation-option">
+                            <button class="donation-btn w-full py-6 px-4 bg-white bg-opacity-10 border-2 border-gray-600 hover:border-accent-text rounded-xl flex flex-col items-center justify-center transition">
+                                <span class="text-4xl font-bold mb-2">$50</span>
+                                <span class="text-sm text-gray-300">ADVOCATE</span>
+                                <div class="mt-4 text-sm">
+                                    Sponsors a mentoring session with an industry veteran
+                                </div>
+                            </button>
+                        </div>
+                        
+                        <div class="donation-option">
+                            <button class="donation-btn w-full py-6 px-4 bg-white bg-opacity-15 border-2 border-gray-500 hover:border-accent-text rounded-xl flex flex-col items-center justify-center transition">
+                                <span class="text-5xl font-bold mb-2">$100</span>
+                                <span class="text-sm text-gray-300">CHAMPION</span>
+                                <div class="mt-4 text-sm">
+                                    Provides recording studio time for an emerging artist
+                                </div>
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <div class="mb-8">
+                        <button class="w-full py-4 px-4 bg-white bg-opacity-5 border-2 border-accent-text rounded-xl flex items-center justify-center transition hover:bg-white hover:bg-opacity-10">
+                            <i class="fas fa-phone mr-2"></i>
+                            <span class="text-xl font-bold">CALL US TO DISCUSS LARGER DONATIONS</span>
+                        </button>
+                    </div>
+                    
+                    <p class="text-sm text-gray-400 mb-6">All donations are tax-deductible to the extent allowed by law.</p>
+                    
+                    <div class="alt-btn py-4 px-8 rounded-full inline-block text-xl font-bold tracking-wider cursor-pointer">
+                        DONATE NOW
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Final CTA -->
+    <section class="py-16 bg-black">
+        <div class="container mx-auto px-4">
+            <div class="max-w-3xl mx-auto text-center">
+                <h2 class="text-3xl md:text-4xl font-bold mb-6">JOIN OUR <span class="accent-text">MISSION</span></h2>
+                <p class="text-xl mb-8">As we build a hall of fame that honors the past while creating new opportunities for the future, we invite you to be part of this transformative journey.</p>
+                <p class="italic text-2xl mb-10">"May the Music Live within you!"</p>
+                <a href="#donate" class="alt-btn px-8 py-4 rounded-full text-xl font-bold inline-block">SUPPORT ALT-HALL TODAY</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="py-10 bg-black border-t border-gray-800">
+        <div class="container mx-auto px-4">
+            <div class="flex flex-col md:flex-row justify-between items-center">
+                <div class="flex items-center mb-6 md:mb-0">
+                    <img src="https://pbs.twimg.com/profile_images/1759348067042742272/7NBc8PSl_400x400.jpg" alt="Alt-Hall Logo" class="h-12 w-12 mr-3">
+                    <div>
+                        <h3 class="font-bold">ALTERNATIVE MUSIC HALL OF FAME</h3>
+                        <p class="text-sm text-gray-400">© 2024 Alt-Hall. All Rights Reserved.</p>
+                    </div>
+                </div>
+                <div class="flex space-x-4">
+                    <a href="#" class="w-10 h-10 rounded-full bg-white bg-opacity-10 flex items-center justify-center hover:bg-opacity-20 transition">
+                        <i class="fab fa-twitter"></i>
+                    </a>
+                    <a href="#" class="w-10 h-10 rounded-full bg-white bg-opacity-10 flex items-center justify-center hover:bg-opacity-20 transition">
+                        <i class="fab fa-instagram"></i>
+                    </a>
+                    <a href="#" class="w-10 h-10 rounded-full bg-white bg-opacity-10 flex items-center justify-center hover:bg-opacity-20 transition">
+                        <i class="fab fa-facebook-f"></i>
+                    </a>
+                    <a href="#" class="w-10 h-10 rounded-full bg-white bg-opacity-10 flex items-center justify-center hover:bg-opacity-20 transition">
+                        <i class="fab fa-youtube"></i>
+                    </a>
+                </div>
+            </div>
+            <div class="mt-8 text-center text-sm text-gray-500">
+                <p>Thank you to Jeff Kravitz Photography | FilmMagic.com for donating usage of his photos.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Simple button functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            const donationBtns = document.querySelectorAll('.donation-btn');
+            donationBtns.forEach(btn => {
+                btn.addEventListener('click', function() {
+                    donationBtns.forEach(item => {
+                        item.classList.remove('border-accent-text');
+                        item.classList.add('border-gray-700');
+                    });
+                    this.classList.remove('border-gray-700');
+                    this.classList.add('border-accent-text');
+                });
+            });
+        });
+    </script>
+</body>
+</html>

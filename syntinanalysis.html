@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-8M3X5312PN"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-8M3X5312PN');
+</script>
+<!-- Hotjar Tracking Code for https://www.nofriction.io -->
+<script>
+    (function(h,o,t,j,a,r){
+        h.hj=h.hj||function(){(h.hj.q=h.hj.q||[]).push(arguments)};
+        h._hjSettings={hjid:6414675,hjsv:6};
+        a=o.getElementsByTagName('head')[0];
+        r=o.createElement('script');r.async=1;
+        r.src=t+h._hjSettings.hjid+j+h._hjSettings.hjsv;
+        a.appendChild(r);
+    })(window,document,'https://static.hotjar.com/c/hotjar-','.js?sv=');
+</script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>No Friction | Shipment Data Analysis Report</title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.0.0/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Barlow:wght@400;600;800&family=Inter:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Inter', sans-serif;
+      background-color: #F8F9FA;
+      color: #2D3748;
+    }
+    h1, h2, h3, h4 {
+      font-family: 'Barlow', sans-serif;
+    }
+    .brand-orange { color: #FF5A00; }
+    .brand-navy { color: #051F3C; }
+    .brand-bg-orange { background-color: #FF5A00; }
+    .brand-bg-navy { background-color: #051F3C; }
+    .header-gradient {
+      background-image: linear-gradient(to right, #FF5A00, #051F3C);
+      color: white;
+    }
+    .no-friction-badge {
+      font-family: 'Barlow', sans-serif;
+      font-weight: 800;
+      font-size: 0.875rem;
+      background: #FF5A00;
+      color: white;
+      padding: 0.25rem 0.75rem;
+      border-radius: 9999px;
+      display: inline-block;
+      margin-bottom: 0.5rem;
+    }
+    .card {
+      background-color: white;
+      border-radius: 0.75rem;
+      box-shadow: 0 10px 15px rgba(0,0,0,0.04);
+      padding: 1.5rem;
+    }
+    .metric-value {
+      font-size: 2rem;
+      font-weight: 600;
+    }
+    .gradient-text {
+      background: linear-gradient(to right, #FF5A00, #051F3C);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    .section-heading {
+      font-size: 1.75rem;
+      font-weight: 700;
+      margin-bottom: 1.5rem;
+    }
+    .visualization {
+      max-width: 100%;
+      height: auto;
+    }
+    .highlight-blue { border-left: 4px solid #3B82F6; background-color: #EFF6FF; }
+    .highlight-red { border-left: 4px solid #EF4444; background-color: #FEF2F2; }
+    .highlight-green { border-left: 4px solid #10B981; background-color: #ECFDF5; }
+    .data-table th {
+      background-color: #E2E8F0;
+    }
+    .data-table td, .data-table th {
+      padding: 0.75rem 1rem;
+      border: 1px solid #CBD5E0;
+    }
+    .page-break { page-break-before: always; }
+    @media print {
+      .no-break { page-break-inside: avoid; }
+    }
+  </style>
+</head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shipment Data Analysis Dashboard</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.0.0/css/all.min.css">
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f5f7fa;
+        }
+        .card {
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+        }
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
+        }
+        .metric-value {
+            font-size: 2rem;
+            font-weight: bold;
+        }
+        .insight-card {
+            border-left: 4px solid #3b82f6;
+        }
+        .risk-card {
+            border-left: 4px solid #ef4444;
+        }
+        .opportunity-card {
+            border-left: 4px solid #10b981;
+        }
+        .visualization {
+            max-width: 100%;
+            height: auto;
+        }
+        .gradient-text {
+            background-image: linear-gradient(45deg, #3b82f6, #10b981);
+            background-clip: text;
+            color: transparent;
+        }
+        @media print {
+            .page-break {
+                margin-top: 2rem;
+            }
+            .no-break {
+                page-break-inside: avoid;
+            }
+        }
+    </style>
+</head>
+<body class="min-h-screen">
+  <header class="header-gradient py-8 px-6">
+    <div class="max-w-7xl mx-auto">
+      <p class="no-friction-badge">No Friction Work Product</p>
+      <h1 class="text-4xl font-extrabold">Shipment Data Analysis Dashboard</h1>
+      <p class="text-xl mt-2">Prepared by No Friction — The Technology Editor</p>
+      <p class="text-sm mt-1 opacity-80">February 2025 Supply Chain Engagement | Confidential Output</p>
+    </div>
+  </header>
+    <!-- Dashboard Overview -->
+    <div class="container mx-auto px-4 md:px-8 py-8">
+        <!-- Main Dashboard Image -->
+        <div class="card p-4 mb-8">
+            <img src="https://gensparkpublicblob.blob.core.windows.net/user-upload-image/generate_and_execute_python_tool_call/tooluse__457GF1bQaqL42LH4VzUbA/python_result_images/shipment_data_analysis_dashboard.png" 
+                 alt="Shipment Data Analysis Dashboard" 
+                 class="visualization mx-auto">
+        </div>
+
+        <!-- Key Metrics -->
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-4 mb-8">
+            <div class="card p-6 text-center">
+                <p class="text-gray-500 text-sm uppercase tracking-wider">Total Shipments</p>
+                <p class="metric-value text-blue-600">3,750+</p>
+                <p class="text-sm text-gray-600">Across 9 distribution centers</p>
+            </div>
+            <div class="card p-6 text-center">
+                <p class="text-gray-500 text-sm uppercase tracking-wider">Total Weight Shipped</p>
+                <p class="metric-value text-blue-600">105M+ lbs</p>
+                <p class="text-sm text-gray-600">High-volume distribution</p>
+            </div>
+            <div class="card p-6 text-center">
+                <p class="text-gray-500 text-sm uppercase tracking-wider">Total Savings</p>
+                <p class="metric-value text-green-600">$845K+</p>
+                <p class="text-sm text-gray-600">Through strategic logistics</p>
+            </div>
+            <div class="card p-6 text-center">
+                <p class="text-gray-500 text-sm uppercase tracking-wider">Avg Savings per Shipment</p>
+                <p class="metric-value text-green-600">$225</p>
+                <p class="text-sm text-gray-600">With significant optimization potential</p>
+            </div>
+        </div>
+
+        <!-- Executive Summary -->
+        <div class="card p-6 mb-8 no-break">
+            <h2 class="text-2xl font-bold mb-4 gradient-text">Executive Summary</h2>
+            <p class="mb-4">This dashboard analyzes shipping operations for February 2025, providing insights into transportation methods, vendor relationships, geographical patterns, and delivery timing. The analysis reveals opportunities to improve logistics efficiency, optimize shipping methods, and enhance vendor relationships.</p>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mt-6">
+                <div class="insight-card bg-blue-50 p-4">
+                    <h3 class="font-bold text-blue-700"><i class="fas fa-lightbulb mr-2"></i>Key Insight</h3>
+                    <p>'Logistics & Managed' shipments represent only 26% of volume but generate 73% of all savings.</p>
+                </div>
+                <div class="risk-card bg-red-50 p-4">
+                    <h3 class="font-bold text-red-700"><i class="fas fa-exclamation-triangle mr-2"></i>Risk Area</h3>
+                    <p>'MFR Arranged' shipments (44% of total) yield almost no savings, representing significant missed opportunity.</p>
+                </div>
+                <div class="opportunity-card bg-green-50 p-4">
+                    <h3 class="font-bold text-green-700"><i class="fas fa-chart-line mr-2"></i>Opportunity</h3>
+                    <p>Shifting 30% of 'MFR Arranged' to 'Logistics & Managed' could yield additional $500K+ annual savings.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Shipment Methods Analysis -->
+        <div class="page-break no-break">
+            <h2 class="text-2xl font-bold mb-6 gradient-text">Shipment Methods Analysis</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8">
+                <div class="card p-4">
+                    <h3 class="text-lg font-semibold mb-2 text-center">Average Savings by Shipment Method</h3>
+                    <img src="https://gensparkpublicblob.blob.core.windows.net/user-upload-image/generate_and_execute_python_tool_call/tooluse__457GF1bQaqL42LH4VzUbA/python_result_images/average_savings_by_shipment_method.png" 
+                         alt="Average Savings by Shipment Method" 
+                         class="visualization mx-auto">
+                </div>
+                <div class="card p-4">
+                    <h3 class="text-lg font-semibold mb-2 text-center">Relative Frequency of Shipment Methods</h3>
+                    <img src="https://gensparkpublicblob.blob.core.windows.net/user-upload-image/generate_and_execute_python_tool_call/tooluse__457GF1bQaqL42LH4VzUbA/python_result_images/relative_frequency_of_shipment_methods.png" 
+                         alt="Relative Frequency of Shipment Methods" 
+                         class="visualization mx-auto">
+                </div>
+            </div>
+
+            <div class="card p-6 mb-8 bg-gray-50">
+                <h3 class="text-xl font-bold mb-3 text-gray-800">Key Findings & Recommendations</h3>
+                <ul class="list-disc pl-5 space-y-2">
+                    <li><span class="font-semibold">Method Disparity:</span> 'Logistics & Managed' shipments average $631 in savings per load compared to just $5 for 'MFR Arranged'.</li>
+                    <li><span class="font-semibold">Volume vs. Value:</span> Despite making up only 26% of shipments, 'Logistics & Managed' generates 73% of all savings.</li>
+                    <li><span class="font-semibold">Back Haul Efficiency:</span> 'Back Haul' shipments offer moderate savings ($423 per load) and should be expanded where possible.</li>
+                    <li><span class="font-semibold">Recommendation:</span> Shift higher-weight shipments from 'MFR Arranged' to 'Logistics & Managed' for an estimated $1.5M annual savings opportunity.</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Weight & Savings Analysis -->
+        <div class="page-break no-break">
+            <h2 class="text-2xl font-bold mb-6 gradient-text">Weight & Savings Relationships</h2>
+            <div class="card p-4 mb-8">
+                <h3 class="text-lg font-semibold mb-2 text-center">Relationship Between Shipment Weight and Savings</h3>
+                <img src="https://gensparkpublicblob.blob.core.windows.net/user-upload-image/generate_and_execute_python_tool_call/tooluse__457GF1bQaqL42LH4VzUbA/python_result_images/relationship_between_shipment_weight_and_savings.png" 
+                     alt="Relationship Between Shipment Weight and Savings" 
+                     class="visualization mx-auto">
+            </div>
+
+            <div class="card p-6 mb-8 bg-gray-50">
+                <h3 class="text-xl font-bold mb-3 text-gray-800">Key Findings & Recommendations</h3>
+                <ul class="list-disc pl-5 space-y-2">
+                    <li><span class="font-semibold">Weight-Savings Correlation:</span> Higher weight shipments generally offer greater savings potential, especially in the 35,000-45,000 lb range.</li>
+                    <li><span class="font-semibold">Efficiency Threshold:</span> Shipments under 10,000 lbs rarely generate significant savings, suggesting consolidation opportunity.</li>
+                    <li><span class="font-semibold">Outlier Performance:</span> Several 40,000+ lb shipments achieve $8,000+ savings—these are primarily 'Logistics & Managed' with key vendors.</li>
+                    <li><span class="font-semibold">Recommendation:</span> Implement minimum shipment weight policies (aim for 25,000+ lbs when possible) and consolidate smaller orders.</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Vendor Analysis -->
+        <div class="page-break no-break">
+            <h2 class="text-2xl font-bold mb-6 gradient-text">Vendor Performance Analysis</h2>
+            <div class="card p-4 mb-8">
+                <h3 class="text-lg font-semibold mb-2 text-center">Top Vendors by Total Shipment Weight</h3>
+                <img src="https://gensparkpublicblob.blob.core.windows.net/user-upload-image/generate_and_execute_python_tool_call/tooluse__457GF1bQaqL42LH4VzUbA/python_result_images/top_vendors_by_total_shipment_weight.png" 
+                     alt="Top Vendors by Total Shipment Weight" 
+                     class="visualization mx-auto">
+            </div>
+
+            <div class="card p-6 mb-8 bg-gray-50">
+                <h3 class="text-xl font-bold mb-3 text-gray-800">Key Findings & Recommendations</h3>
+                <ul class="list-disc pl-5 space-y-2">
+                    <li><span class="font-semibold">Vendor Concentration:</span> Top 10 vendors account for over 65% of total shipment weight, offering leverage for negotiation.</li>
+                    <li><span class="font-semibold">High-Expense Outliers:</span> LAMB-WESTON and MARKON consistently have the highest shipping expenses (often $5,000-13,000 per load).</li>
+                    <li><span class="font-semibold">Contract Inconsistency:</span> Many vendors show inconsistent shipping methods across their orders. For example, TYSON FOODS ships via both 'MFR Arranged' ($0 savings) and 'Logistics & Managed' (high savings).</li>
+                    <li><span class="font-semibold">Vendor Opportunities:</span> Focus renegotiation efforts on MCCAIN FOODS, LAMB-WESTON, and MARKON to shift more volume to 'Logistics & Managed'.</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Time-Based Analysis -->
+        <div class="page-break no-break">
+            <h2 class="text-2xl font-bold mb-6 gradient-text">Delivery Timing Analysis</h2>
+            <div class="card p-4 mb-8">
+                <h3 class="text-lg font-semibold mb-2 text-center">Daily Delivery Volume - February 2025</h3>
+                <img src="https://gensparkpublicblob.blob.core.windows.net/user-upload-image/generate_and_execute_python_tool_call/tooluse__457GF1bQaqL42LH4VzUbA/python_result_images/daily_delivery_volume_february_2025.png" 
+                     alt="Daily Delivery Volume - February 2025" 
+                     class="visualization mx-auto">
+            </div>
+
+            <div class="card p-6 mb-8 bg-gray-50">
+                <h3 class="text-xl font-bold mb-3 text-gray-800">Key Findings & Recommendations</h3>
+                <ul class="list-disc pl-5 space-y-2">
+                    <li><span class="font-semibold">Extreme Volume Concentration:</span> First two weeks of each month show 80% of all shipments, with nearly zero weekend activity.</li>
+                    <li><span class="font-semibold">Weekday Patterns:</span> Mondays and Tuesdays show the highest volume, creating operational bottlenecks and potential overtime costs.</li>
+                    <li><span class="font-semibold">Resource Underutilization:</span> Weekends and latter half of month show minimal activity, indicating poor asset utilization.</li>
+                    <li><span class="font-semibold">Recommendation:</span> Implement delivery rebalancing to shift 30% of first-week volume to weeks 3-4 and explore weekend delivery options for high-priority customers.</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Geographic Analysis -->
+        <div class="page-break no-break">
+            <h2 class="text-2xl font-bold mb-6 gradient-text">Geographic Distribution Analysis</h2>
+            <div class="card p-4 mb-8">
+                <h3 class="text-lg font-semibold mb-2 text-center">Origin-Destination State Pairs by Frequency</h3>
+                <img src="https://gensparkpublicblob.blob.core.windows.net/user-upload-image/generate_and_execute_python_tool_call/tooluse__457GF1bQaqL42LH4VzUbA/python_result_images/origin_destination_state_pairs_by_frequency.png" 
+                     alt="Origin-Destination State Pairs by Frequency" 
+                     class="visualization mx-auto">
+            </div>
+
+            <div class="card p-6 mb-8 bg-gray-50">
+                <h3 class="text-xl font-bold mb-3 text-gray-800">Key Findings & Recommendations</h3>
+                <ul class="list-disc pl-5 space-y-2">
+                    <li><span class="font-semibold">Texas-Centric Network:</span> TX→TX shipments dominate the network (40%+ of all shipments), forming a hub-and-spoke system centered on Dallas/Fort Worth.</li>
+                    <li><span class="font-semibold">High-Efficiency Corridors:</span> Intra-Texas routes average $0.001-0.01/lb shipping cost, while cross-country routes cost $0.03-0.09/lb.</li>
+                    <li><span class="font-semibold">Optimization Target:</span> GA→TX, NE→TX, and CA→OK routes have particularly high expenses but are frequently shipped via 'MFR Arranged'.</li>
+                    <li><span class="font-semibold">Recommendation:</span> Consolidate smaller out-of-state shipments into full truckloads and negotiate standard 'Logistics & Managed' contracts for high-volume routes from GA, CA, and ID.</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Actionable Recommendations -->
+        <div class="page-break">
+            <h2 class="text-2xl font-bold mb-6 gradient-text">Strategic Recommendations</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+                <div class="card p-6 border-t-4 border-blue-500">
+                    <h3 class="text-xl font-bold mb-3 text-blue-800">Short-Term Actions (0-3 Months)</h3>
+                    <ol class="list-decimal pl-5 space-y-3">
+                        <li><span class="font-semibold">Immediate Contract Review:</span> Identify top 20 vendors currently using 'MFR Arranged' shipping with weights over 25,000 lbs and convert to 'Logistics & Managed'.</li>
+                        <li><span class="font-semibold">Load Consolidation Policy:</span> Implement minimum shipment weight thresholds and combine smaller orders to reduce partial truckloads.</li>
+                        <li><span class="font-semibold">Delivery Rebalancing:</span> Shift 20% of Monday/Tuesday deliveries to Thursday/Friday to balance weekly volume and reduce labor spikes.</li>
+                        <li><span class="font-semibold">Vendor Score Cards:</span> Develop logistics efficiency scorecards for top 50 vendors and share results to drive improvement.</li>
+                    </ol>
+                </div>
+                <div class="card p-6 border-t-4 border-green-500">
+                    <h3 class="text-xl font-bold mb-3 text-green-800">Long-Term Strategy (3-12 Months)</h3>
+                    <ol class="list-decimal pl-5 space-y-3">
+                        <li><span class="font-semibold">Transport Mode Optimization:</span> Develop multi-modal shipping strategies for long-haul routes (CA→TX, ID→FL) to reduce expenses.</li>
+                        <li><span class="font-semibold">Contract Renegotiation:</span> Target MARKON, MCCAIN FOODS, and LAMB-WESTON for comprehensive logistics program overhauls.</li>
+                        <li><span class="font-semibold">Monthly Delivery Balancing:</span> Implement incentives to spread volume more evenly throughout each month, reducing first-half concentration.</li>
+                        <li><span class="font-semibold">Regional Hub Strategy:</span> Evaluate potential for regional consolidation centers to optimize long-haul efficiency from high-volume origins.</li>
+                    </ol>
+                </div>
+            </div>
+
+            <!-- Savings Impact Calculator -->
+            <div class="card p-6 mb-8 bg-blue-50">
+                <h3 class="text-xl font-bold mb-4 text-blue-800">Potential Annual Savings Impact</h3>
+                <div class="overflow-x-auto">
+                    <table class="min-w-full bg-white border">
+                        <thead>
+                            <tr class="bg-blue-100">
+                                <th class="py-2 px-4 border text-left">Optimization Strategy</th>
+                                <th class="py-2 px-4 border text-left">Estimated Annual Savings</th>
+                                <th class="py-2 px-4 border text-left">Implementation Timeline</th>
+                                <th class="py-2 px-4 border text-left">Complexity</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td class="py-2 px-4 border">MFR Arranged → Logistics & Managed conversion</td>
+                                <td class="py-2 px-4 border font-semibold text-green-700">$1.2M - $1.5M</td>
+                                <td class="py-2 px-4 border">1-3 months</td>
+                                <td class="py-2 px-4 border">Medium</td>
+                            </tr>
+                            <tr>
+                                <td class="py-2 px-4 border">Load consolidation & minimum weight policies</td>
+                                <td class="py-2 px-4 border font-semibold text-green-700">$400K - $600K</td>
+                                <td class="py-2 px-4 border">1-2 months</td>
+                                <td class="py-2 px-4 border">Low</td>
+                            </tr>
+                            <tr>
+                                <td class="py-2 px-4 border">Weekly/monthly delivery rebalancing</td>
+                                <td class="py-2 px-4 border font-semibold text-green-700">$300K - $450K</td>
+                                <td class="py-2 px-4 border">2-4 months</td>
+                                <td class="py-2 px-4 border">Medium</td>
+                            </tr>
+                            <tr>
+                                <td class="py-2 px-4 border">Route optimization & lane consolidation</td>
+                                <td class="py-2 px-4 border font-semibold text-green-700">$550K - $800K</td>
+                                <td class="py-2 px-4 border">3-6 months</td>
+                                <td class="py-2 px-4 border">High</td>
+                            </tr>
+                            <tr class="bg-blue-50">
+                                <td class="py-2 px-4 border font-bold">Total Potential Annual Savings</td>
+                                <td class="py-2 px-4 border font-bold text-green-800">$2.45M - $3.35M</td>
+                                <td class="py-2 px-4 border">6-12 months (full realization)</td>
+                                <td class="py-2 px-4 border"></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <!-- Conclusion -->
+        <div class="card p-6 mb-8 bg-gradient-to-r from-blue-50 to-green-50">
+            <h2 class="text-2xl font-bold mb-4 gradient-text">Conclusion</h2>
+            <p class="mb-4">The shipment data analysis reveals significant opportunities to optimize logistics operations and drive cost savings. By focusing on shipping method selection, load consolidation, delivery timing, and vendor management, the organization can potentially realize $2.45M - $3.35M in annual savings.</p>
+            <p class="mb-4">The most impactful single strategy is converting 'MFR Arranged' shipments to 'Logistics & Managed' for high-weight loads, which could yield up to $1.5M in annual savings with relatively straightforward implementation. This should be prioritized alongside load consolidation efforts to maximize near-term impact.</p>
+            <p>Implementing these recommendations would not only reduce direct shipping costs but also improve operational efficiency, reduce labor bottlenecks, and strengthen vendor relationships through more standardized logistics practices.</p>
+        </div>
+        
+        <!-- Footer -->
+        <footer class="text-center text-gray-500 text-sm pt-6 pb-8">
+            <p>Shipment Data Analysis Dashboard | Based on February 2025 Data</p>
+        </footer>
+    </div>
+
+    <!-- Simple print functionality -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Add any interactive functionality here
+            const cards = document.querySelectorAll('.card');
+            cards.forEach(card => {
+                card.addEventListener('click', function() {
+                    this.classList.toggle('bg-blue-50');
+                });
+            });
+        });
+    </script>
+</body>
+</html>
+
+  </main>
+</body>
+</html>

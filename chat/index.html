@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NoFriction Chat</title>
+    <link rel="stylesheet" href="../css/chatbot.css">
+    <!-- Link to JoyPixels CSS if you use its assets directly, or rely on JS replacements -->
+    <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/emoji-toolkit@8.0.0/extras/css/joypixels.min.css"/> -->
+</head>
+<body>
+    <!-- The main wrapper for your chatbot application -->
+    <div id="app-wrapper">
+        <!-- Panel for thread list and model selection -->
+        <div id="left-panel">
+            <div class="panel-header">
+                <h3>Conversations</h3>
+                <button id="new-chat-btn" title="Start New Conversation">New Chat</button>
+            </div>
+            <ul id="thread-list">
+                <!-- Thread items will be populated by JavaScript -->
+            </ul>
+            <div class="model-selection-area">
+                 <label for="model-selector">Model:</label>
+                 <select id="model-selector">
+                    <!-- Updated Model Options -->
+                    <option value="gemini">Gemini</option>
+                    <option value="chatgpt">ChatGPT</option>
+                    <option value="claude">Claude</option>
+                    <option value="deepseek">DeepSeek</option>
+                    <option value="perplexity">Perplexity</option>
+                    <option value="Mistral">Mistral</option>
+                    <option value="ollama">Ollama</option>
+                 </select>
+            </div>
+        </div>
+
+        <!-- Main chat interface area -->
+        <div id="chat-area">
+            <div id="chat-header">
+                <span id="current-chat-title">Chat</span>
+                <span id="current-thread-model">(Gemini)</span> <!-- Default model display, JS will update -->
+            </div>
+            <div id="messages">
+                <!-- Typing indicator will be appended here by JavaScript -->
+                <div id="typing-indicator" style="display: none;">
+                    <!-- Dots or text will be injected by JS -->
+                </div>
+            </div>
+            <div id="input-area">
+                 <button id="file-btn-wrapper" title="Attach File">
+                    📎
+                    <!-- Actual file input, visually hidden but functional -->
+                    <input type="file" id="file-btn" accept="image/*,application/pdf,.txt,.md,.csv,.json,.xml,.html,.css,.js,.ts,.py,.java,.c,.cpp,.cs,.go,.rb,.php,.swift,.kt,.dart,.rs,.sh,.text/*,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document,application/vnd.ms-excel,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet,application/vnd.ms-powerpoint,application/vnd.openxmlformats-officedocument.presentationml.presentation">
+                </button>
+                <textarea id="user-input" placeholder="Type your message or paste an image... (Shift+Enter for new line)" rows="1"></textarea>
+                <button id="send-btn" title="Send Message (Enter)">➤</button>
+                <button id="speak-btn" title="Speak Message (Requires Audio Enable)" disabled>🎤</button>
+                <div class="audio-toggle">
+                    <input type="checkbox" id="audio-enable" title="Enable/Disable Audio Output">
+                    <label for="audio-enable" title="Enable/Disable Audio Output">🔊</label>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- External Libraries -->
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/emoji-toolkit@8.0.0/lib/js/joypixels.min.js"></script>
+
+    <!-- Your Chatbot JavaScript -->
+    <script src="../js/chatbot2.js"></script>
+</body>
+</html>

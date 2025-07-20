@@ -1,0 +1,1711 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NoFriction Chat - Intel</title>
+
+    <!-- External Libraries CSS -->
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet"> <!-- Kept for utility classes if needed -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/emoji-toolkit@8.0.0/extras/css/joypixels.min.css"/>
+
+    <style>
+        /* NoFriction Intel Style Theme */
+        :root {
+            --nf-font-primary: 'Montserrat', sans-serif;
+            
+            /* Core Palette - Professional & Tech-focused */
+            --nf-blue-deep: #1A2B42; /* Deep navy for backgrounds or accents */
+            --nf-blue-medium: #2D64A5; /* Primary interactive color */
+            --nf-blue-light: #5D9CEC;  /* Lighter accent or hover state */
+            --nf-blue-pale: #EBF4FF;   /* Very light blue for backgrounds/highlights */
+
+            --nf-grey-darkest: #2d3748; /* Tailwind gray-800 - For primary text */
+            --nf-grey-dark: #4a5568;   /* Tailwind gray-700 - For secondary text */
+            --nf-grey-medium: #a0aec0; /* Tailwind gray-500 - For borders, placeholders */
+            --nf-grey-light: #e2e8f0;  /* Tailwind gray-300 - For lighter borders, dividers */
+            --nf-grey-lightest: #f7fafc;/* Tailwind gray-100 - For backgrounds */
+            
+            --nf-white: #ffffff;
+            --nf-black: #000000;
+
+            --nf-success: #019147; /* Green from InsureMEP, can be adapted */
+            --nf-error: #c1202f;   /* Red from InsureMEP, can be adapted */
+            --nf-warning: #f59e0b; /* Tailwind amber-500 */
+
+            /* Semantic variables for easier application */
+            --nf-bg-page: var(--nf-grey-lightest);
+            --nf-bg-panel: var(--nf-white);
+            --nf-bg-header: var(--nf-white);
+            --nf-bg-messages-area: var(--nf-grey-lightest);
+            --nf-bg-input-controls: var(--nf-white);
+            --nf-bg-input-field: var(--nf-white);
+            
+            --nf-text-primary: var(--nf-grey-darkest);
+            --nf-text-secondary: var(--nf-grey-dark);
+            --nf-text-placeholder: var(--nf-grey-medium);
+            --nf-text-on-accent: var(--nf-white);
+
+            --nf-border-primary: var(--nf-grey-light);
+            --nf-border-secondary: var(--nf-grey-medium);
+            --nf-border-input: var(--nf-grey-medium);
+            --nf-border-input-focus: var(--nf-blue-medium);
+
+            --nf-accent-primary: var(--nf-blue-medium);
+            --nf-accent-primary-hover: var(--nf-blue-light);
+            --nf-accent-destructive: var(--nf-error);
+            --nf-accent-destructive-hover: #a71b28; /* Darker red */
+
+            --nf-user-message-bg: var(--nf-blue-medium);
+            --nf-user-message-text: var(--nf-white);
+            --nf-bot-message-bg: var(--nf-blue-pale);
+            --nf-bot-message-text: var(--nf-grey-darkest);
+
+            --nf-shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+            --nf-shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            --nf-shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+        }
+        
+        body {
+            font-family: var(--nf-font-primary);
+            overflow-x: hidden; 
+            color: var(--nf-text-primary); 
+            background-color: var(--nf-bg-page);
+            line-height: 1.6;
+        }
+        
+        /* General Button Style (can be overridden by specific chatbot buttons) */
+        .btn-nf { 
+            transition: all 0.2s ease-in-out;
+            padding: 0.625rem 1.25rem; 
+            border-radius: 0.375rem; 
+            font-weight: 600; 
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            border: 1px solid transparent;
+        }
+        .btn-nf:hover {
+            transform: translateY(-1px);
+        }
+        .btn-nf-primary {
+            background-color: var(--nf-accent-primary);
+            color: var(--nf-text-on-accent);
+            border-color: var(--nf-accent-primary);
+        }
+        .btn-nf-primary:hover {
+            background-color: var(--nf-accent-primary-hover);
+            border-color: var(--nf-accent-primary-hover);
+        }
+        .btn-nf-secondary {
+            background-color: var(--nf-grey-light);
+            color: var(--nf-text-primary);
+            border-color: var(--nf-grey-light);
+        }
+        .btn-nf-secondary:hover {
+            background-color: var(--nf-grey-medium);
+            border-color: var(--nf-grey-medium);
+        }
+
+        /* General Form Input Style (can be overridden) */
+        .form-input-nf {
+            transition: all 0.2s ease-in-out;
+            width: 100%;
+            padding: 0.625rem 0.875rem; 
+            border-radius: 0.375rem; 
+            border: 1px solid var(--nf-border-input);
+            background-color: var(--nf-bg-input-field);
+            color: var(--nf-text-primary);
+        }
+        .form-input-nf:focus {
+            border-color: var(--nf-border-input-focus); 
+            box-shadow: 0 0 0 2px rgba(var(--nf-blue-medium-rgb, 45, 100, 165), 0.25); /* Assuming --nf-blue-medium-rgb for box-shadow */
+            outline: none;
+        }
+        /* --- End of NoFriction Intel General Styles --- */
+
+
+        /* Chatbot Specific Styles - Adapted for NoFriction Intel Theme */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html, body { 
+            height: 100%;
+            width: 100%;
+            overflow: hidden; 
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            font-size: 15px; /* Base size, can adjust with media queries */
+        }
+
+        #app-wrapper { 
+            display: flex;
+            height: 100vh; 
+            width: 100vw;  
+            font-family: var(--nf-font-primary); 
+            color: var(--nf-text-primary); 
+            position: relative; 
+            overflow-x: hidden; 
+        }
+
+        #sidebar {
+            width: 280px;
+            min-width: 250px; 
+            max-width: 320px;
+            background-color: var(--nf-bg-panel);
+            border-right: 1px solid var(--nf-border-primary);
+            display: flex;
+            flex-direction: column;
+            padding: 1rem; 
+            overflow-y: auto; 
+            transition: transform 0.3s ease-in-out; 
+            z-index: 20; 
+            box-shadow: var(--nf-shadow-md);
+        }
+
+        #sidebar #sidebar-header { 
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid var(--nf-border-secondary);
+        }
+
+        #new-chat-btn {
+            background-color: var(--nf-accent-primary);
+            color: var(--nf-text-on-accent); 
+            border: none;
+            padding: 0.625rem 1rem; 
+            border-radius: 0.375rem; 
+            cursor: pointer;
+            font-size: 0.875rem; 
+            font-weight: 600; 
+            transition: background-color 0.15s ease;
+            width: 100%; 
+            text-align: center;
+        }
+        #new-chat-btn:hover {
+            background-color: var(--nf-accent-primary-hover);
+        }
+
+        #thread-list {
+            list-style: none;
+            margin: 0 0 1rem 0;
+            flex-grow: 1;
+            overflow-y: auto;
+            -webkit-overflow-scrolling: touch;
+        }
+        #thread-list::-webkit-scrollbar { width: 6px; }
+        #thread-list::-webkit-scrollbar-thumb { background-color: var(--nf-grey-medium); border-radius: 3px; }
+        
+        #thread-list .no-threads-message { 
+             text-align: center;
+             color: var(--nf-text-secondary);
+             padding: 1.25rem 0.625rem; 
+             font-size: 0.875rem; 
+        }
+        #thread-list li {
+            padding: 0.75rem 0.625rem; 
+            margin-bottom: 0.3125rem; 
+            border-radius: 0.375rem; 
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start; 
+            transition: background-color 0.15s ease, border-color 0.15s ease;
+            border: 1px solid transparent;
+        }
+        #thread-list li:hover { background-color: var(--nf-grey-lightest); border-color: var(--nf-border-secondary); }
+        #thread-list li.active-thread { 
+            background-color: var(--nf-accent-primary); 
+            color: var(--nf-text-on-accent); 
+            border-color: var(--nf-accent-primary-hover);
+        }
+        #thread-list li.active-thread .thread-title, 
+        #thread-list li.active-thread .thread-details { color: var(--nf-text-on-accent); } 
+        #thread-list li.active-thread .delete-thread-btn { color: rgba(255,255,255,0.7); } 
+        #thread-list li.active-thread .delete-thread-btn:hover { color: var(--nf-white); background-color: rgba(255,255,255,0.1); }
+
+        .thread-info-container { 
+            flex-grow: 1;
+            overflow: hidden;
+            margin-right: 0.5rem; 
+        }
+        .thread-title { 
+            font-size: 0.875rem; 
+            font-weight: 600; 
+            display: block;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            margin-bottom: 0.1875rem; 
+        }
+        .thread-details { 
+            font-size: 0.75rem; 
+            color: var(--nf-text-secondary); 
+            display: block;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+        #thread-list li.active-thread .thread-details { color: rgba(255,255,255,0.85); }
+
+
+        .delete-thread-btn { 
+            background: none; border: none;
+            color: var(--nf-text-secondary); cursor: pointer;
+            font-size: 1rem; padding: 0.3125rem; border-radius: 50%;
+            line-height: 1; margin-left: auto; flex-shrink: 0;
+            transition: background-color 0.15s ease, color 0.15s ease;
+        }
+        .delete-thread-btn:hover { color: var(--nf-accent-destructive); background-color: rgba(193, 32, 47, 0.08); }
+        
+        #sidebar #sidebar-footer { 
+            padding-top: 1rem;
+            border-top: 1px solid var(--nf-border-secondary);
+        }
+        #sidebar #sidebar-footer #model-selector-label { 
+            display: block; font-size: 0.8125rem; 
+            font-weight: 500; 
+            color: var(--nf-text-secondary); margin-bottom: 0.5rem;
+        }
+        #model-selector { 
+            width: 100%; padding: 0.625rem 0.75rem; 
+            border-radius: 0.375rem; 
+            border: 1px solid var(--nf-border-input);
+            background-color: var(--nf-bg-input-field);
+            font-size: 0.875rem; 
+            color: var(--nf-text-primary);
+            -webkit-appearance: none; -moz-appearance: none; appearance: none;
+            background-image: url('data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22292.4%22%20height%3D%22292.4%22%3E%3Cpath%20fill%3D%22%236c757d%22%20d%3D%22M287%2069.4a17.6%2017.6%200%200%200-13-5.4H18.4c-5%200-9.3%201.8-12.9%205.4A17.6%2017.6%200%200%200%200%2082.2c0%205%201.8%209.3%205.4%2012.9l128%20127.9c3.6%203.6%207.8%205.4%2012.8%205.4s9.2-1.8%2012.8-5.4L287%2095c3.5-3.5%205.4-7.8%205.4-12.8%200-5-1.9-9.4-5.4-12.8z%22%2F%3E%3C%2Fsvg%3E');
+            background-repeat: no-repeat; background-position: right 0.75rem center;
+            background-size: 10px auto; cursor: pointer;
+            transition: border-color 0.2s ease, box-shadow 0.2s ease;
+        }
+        #model-selector:focus {
+            outline: none; border-color: var(--nf-border-input-focus);
+            box-shadow: 0 0 0 2px rgba(var(--nf-blue-medium-rgb, 45, 100, 165), 0.2);
+        }
+
+        #main-chat-area { 
+            flex-grow: 1; display: flex; flex-direction: column;
+            background-color: var(--nf-bg-messages-area); 
+            width: 100%; 
+        }
+        
+        #chat-container { 
+            display: flex;
+            flex-direction: column;
+            height: 100%; 
+        }
+
+        #chat-header { 
+            padding: 0.75rem 1rem; 
+            background-color: var(--nf-bg-header); 
+            border-bottom: 1px solid var(--nf-border-primary);
+            display: flex; 
+            align-items: center; 
+            flex-shrink: 0; height: 56px; 
+            font-size: 1.05rem; /* Slightly larger header title */
+            font-weight: 600; /* Semibold */
+            color: var(--nf-text-primary);
+            position: relative; 
+        }
+        #chat-header-title {
+            flex-grow: 1; 
+            text-align: center; 
+        }
+        #current-thread-model { 
+            font-size: 0.75rem; 
+            color: var(--nf-text-secondary);
+            background-color: var(--nf-grey-lightest);
+            border: 1px solid var(--nf-border-secondary);
+            padding: 0.2rem 0.4rem; 
+            border-radius: 0.25rem; 
+            margin-left: 0.5rem; 
+        }
+        #mobile-sidebar-toggle {
+            display: none; 
+            background: none;
+            border: none;
+            font-size: 1.5rem; 
+            color: var(--nf-text-primary);
+            cursor: pointer;
+            padding: 0.5rem;
+            margin-right: 0.5rem; 
+            position: absolute; 
+            left: 0.75rem;
+            top: 50%;
+            transform: translateY(-50%);
+            z-index: 30;
+        }
+
+
+        #messages { 
+            flex-grow: 1; padding: 1rem; 
+            overflow-y: auto;
+            display: flex; flex-direction: column;
+            -webkit-overflow-scrolling: touch;
+            background-color: var(--nf-bg-messages-area); 
+        }
+        #messages::-webkit-scrollbar { width: 6px; }
+        #messages::-webkit-scrollbar-thumb { background-color: var(--nf-grey-medium); border-radius: 3px; }
+
+
+        .message { 
+            max-width: 78%; /* Slightly more width */
+            padding: 0.6rem 0.9rem; 
+            border-radius: 0.75rem; /* Less rounded than before, more modern */
+            margin-bottom: 0.75rem; 
+            line-height: 1.5;
+            word-wrap: break-word; font-size: 0.9rem; 
+            box-shadow: var(--nf-shadow-sm);
+            color: var(--nf-text-primary); 
+        }
+        .message .message-content p:last-child { margin-bottom: 0; }
+        .message .message-content pre {
+            background-color: var(--nf-grey-darkest); 
+            color: var(--nf-grey-lightest); 
+            padding: 0.75rem 1rem; border-radius: 0.375rem; 
+            overflow-x: auto; font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, Courier, monospace;
+            font-size: 0.85rem; 
+            margin: 0.625rem 0;
+            border: 1px solid var(--nf-grey-dark); 
+        }
+        .message .message-content pre code { background: none; padding: 0; border-radius: 0; font-size: inherit; }
+        .message .message-content code:not(pre code) {
+            background-color: var(--nf-grey-light);
+            padding: 0.2em 0.4em; border-radius: 0.25rem; 
+            font-size: 0.88em; color: var(--nf-text-primary); 
+            border: 1px solid var(--nf-border-secondary);
+        }
+        .message.user {
+            background-color: var(--nf-user-message-bg); color: var(--nf-user-message-text); 
+            align-self: flex-end; border-bottom-right-radius: 0.25rem; 
+        }
+        .message.bot {
+            background-color: var(--nf-bot-message-bg); color: var(--nf-bot-message-text); 
+            align-self: flex-start; border-bottom-left-radius: 0.25rem; 
+            border: 1px solid var(--nf-grey-light);
+        }
+        .message .timestamp { 
+            display: block; font-size: 0.6875rem; 
+            text-align: right; margin-top: 0.375rem; 
+            opacity: 0.7;
+        }
+        .message.user .timestamp { color: rgba(255, 255, 255, 0.8); }
+        .message.bot .timestamp { color: var(--nf-text-secondary); opacity: 0.8; }
+
+        .message-file-attachment {
+            display: flex;
+            align-items: center;
+            background-color: var(--nf-grey-lightest);
+            border: 1px solid var(--nf-border-secondary);
+            border-radius: 0.375rem; 
+            padding: 0.5rem 0.75rem; 
+            margin-top: 0.5rem;
+            font-size: 0.8125rem; 
+        }
+        .message.user .message-file-attachment { 
+             background-color: rgba(255,255,255,0.15);
+             border-color: rgba(255,255,255,0.25);
+        }
+        .message-file-icon {
+            font-size: 1.25rem; 
+            margin-right: 0.5rem; 
+            width: 20px; 
+            text-align: center;
+            color: var(--nf-accent-primary);
+        }
+        .message.user .message-file-icon {
+            color: var(--nf-white);
+        }
+        .message-file-info span {
+            display: block;
+        }
+        .message-file-name {
+            font-weight: 500; 
+            word-break: break-all;
+        }
+        .message-file-size {
+            font-size: 0.75rem; 
+            opacity: 0.8;
+        }
+
+
+        #typing-indicator { 
+            display: none; 
+            align-items: center;
+            padding: 0.625rem 0 0.625rem 0.9375rem; 
+            align-self: flex-start;
+            margin-bottom: 0.75rem;
+        }
+        #typing-indicator .dot { 
+            width: 7px; height: 7px; 
+            background-color: var(--nf-text-secondary);
+            border-radius: 50%; margin: 0 2px;
+            animation: typing-dot-animation 1.4s infinite ease-in-out both;
+        }
+        #typing-indicator .dot:nth-child(1) { animation-delay: -0.32s; }
+        #typing-indicator .dot:nth-child(2) { animation-delay: -0.16s; }
+        @keyframes typing-dot-animation { 0%, 80%, 100% { transform: scale(0); } 40% { transform: scale(1.0); } }
+        #typing-indicator .typing-text { 
+            font-size: 0.8125rem; color: var(--nf-text-secondary);
+            font-style: italic;
+        }
+
+        #controls { 
+            display: flex; align-items: center; 
+            padding: 0.625rem 0.75rem; /* Adjusted padding */
+            border-top: 1px solid var(--nf-border-primary);
+            background-color: var(--nf-bg-input-controls);
+            min-height: 56px; 
+            flex-shrink: 0;
+            gap: 0.375rem; 
+        }
+        
+        #input-wrapper { 
+            display: flex;
+            flex-direction: column; 
+            flex-grow: 1; 
+            margin: 0 0.375rem; 
+            position: relative; 
+        }
+
+        #staged-files-preview-container {
+            display: flex;
+            flex-wrap: wrap; 
+            gap: 0.375rem; 
+            margin-bottom: 0.375rem; 
+            max-height: 120px; /* Adjusted */
+            overflow-y: auto;
+            padding: 0.25rem;
+            background-color: var(--nf-grey-lightest);
+            border-radius: 0.25rem;
+        }
+        #staged-files-preview-container::-webkit-scrollbar { width: 4px; }
+        #staged-files-preview-container::-webkit-scrollbar-thumb { background-color: var(--nf-grey-medium); border-radius: 2px; }
+
+
+        .staged-file-item {
+            display: flex;
+            align-items: center;
+            background-color: var(--nf-white);
+            border: 1px solid var(--nf-border-secondary);
+            border-radius: 0.25rem; 
+            padding: 0.375rem 0.5rem; 
+            font-size: 0.8125rem; 
+            position: relative;
+            max-width: 170px; 
+            box-shadow: var(--nf-shadow-sm);
+        }
+        .staged-file-thumbnail {
+            width: 30px;
+            height: 30px;
+            object-fit: cover;
+            border-radius: 0.125rem; 
+            margin-right: 0.375rem; 
+        }
+        .staged-file-icon {
+            font-size: 1.125rem; 
+            margin-right: 0.375rem; 
+            width: 18px; 
+            text-align: center;
+            color: var(--nf-accent-primary);
+        }
+        .staged-file-info {
+            flex-grow: 1;
+            overflow: hidden; 
+        }
+        .staged-file-name {
+            display: block;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            font-weight: 500; 
+        }
+        .staged-file-size {
+            display: block;
+            font-size: 0.6875rem; 
+            color: var(--nf-text-secondary);
+        }
+        .remove-staged-file-btn {
+            background: none;
+            border: none;
+            color: var(--nf-accent-destructive);
+            font-size: 1rem;
+            font-weight: bold;
+            cursor: pointer;
+            padding: 0 0 0 0.375rem; 
+            line-height: 1;
+            margin-left: auto; 
+        }
+        .remove-staged-file-btn:hover {
+            color: var(--nf-accent-destructive-hover);
+        }
+        
+        #user-input { 
+            width: 100%; 
+            padding: 0.625rem 0.9375rem; 
+            border: 1px solid var(--nf-border-input);
+            border-radius: 0.5rem; /* More standard input radius */
+            font-size: 0.9rem; 
+            resize: none; 
+            min-height: 40px; 
+            max-height: 100px; 
+            overflow-y: auto; 
+            background-color: var(--nf-bg-input-field);
+            line-height: 1.5; color: var(--nf-text-primary); 
+            transition: border-color 0.2s ease, box-shadow 0.2s ease;
+        }
+        #user-input::placeholder { color: var(--nf-text-placeholder); }
+        #user-input:focus { 
+            outline: none; border-color: var(--nf-border-input-focus);
+            box-shadow: 0 0 0 2px rgba(var(--nf-blue-medium-rgb, 45, 100, 165), 0.2); 
+        }
+
+        #controls button, #controls #file-label { 
+            background: none; border: none; padding: 0;
+            font-size: 1.2rem; 
+            cursor: pointer; color: var(--nf-text-secondary); 
+            border-radius: 50%; width: 38px; height: 38px; 
+            display: flex; align-items: center; justify-content: center;
+            transition: color 0.15s ease, background-color 0.15s ease;
+            flex-shrink: 0;
+            margin: 0 0.125rem; 
+        }
+        #controls button:hover:not(:disabled), #controls #file-label:hover {
+            color: var(--nf-accent-primary); background-color: var(--nf-blue-pale); 
+        }
+        #controls button:disabled { opacity: 0.5; cursor: not-allowed; }
+
+        #send-btn { color: var(--nf-accent-primary); font-size: 1.3rem; } 
+        #send-btn:hover:not(:disabled) { color: var(--nf-accent-primary-hover); background-color: var(--nf-blue-pale); }
+
+        #speak-btn.speaking { color: var(--nf-accent-destructive); } 
+
+        #file-btn { display: none; } 
+
+
+        #controls .switch { 
+            position: relative;
+            display: inline-block;
+            width: 38px; 
+            height: 20px; 
+            margin-left: 0.25rem; 
+        }
+        #controls .switch input#audio-enable { 
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+        #controls .switch .slider { 
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: var(--nf-grey-medium); 
+            transition: .4s;
+            border-radius: 20px; 
+        }
+        #controls .switch .slider:before {
+            position: absolute;
+            content: "";
+            height: 14px; 
+            width: 14px;  
+            left: 3px;    
+            bottom: 3px;  
+            background-color: white;
+            transition: .4s;
+            border-radius: 50%;
+        }
+        #controls .switch input#audio-enable:checked + .slider {
+            background-color: var(--nf-accent-primary); 
+        }
+        #controls .switch input#audio-enable:focus + .slider {
+            box-shadow: 0 0 0 2px rgba(var(--nf-blue-medium-rgb, 45, 100, 165), 0.25); 
+        }
+        #controls .switch input#audio-enable:checked + .slider:before {
+            transform: translateX(18px); 
+        }
+        
+        #chat-footer { 
+            padding: 0.5rem 0.75rem; 
+            text-align: center;
+            font-size: 0.75rem; 
+            color: var(--nf-text-secondary);
+            border-top: 1px solid var(--nf-border-primary);
+            background-color: var(--nf-bg-input-controls); 
+            flex-shrink: 0;
+        }
+        #chat-footer a {
+            color: var(--nf-accent-primary);
+            text-decoration: none;
+            font-weight: 500;
+        }
+        #chat-footer a:hover {
+            text-decoration: underline;
+        }
+
+        .joypixels { 
+            width: 1.1em; 
+            height: 1.1em;
+            vertical-align: -0.15em; 
+        }
+
+        /* Custom Confirmation Modal Styles */
+        .confirm-modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.65); 
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1050; 
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.2s ease, visibility 0.2s ease;
+        }
+        .confirm-modal-overlay.visible {
+            opacity: 1;
+            visibility: visible;
+        }
+        .confirm-modal-content {
+            background-color: var(--nf-white);
+            padding: 1.5rem; 
+            border-radius: 0.5rem; 
+            box-shadow: var(--nf-shadow-lg);
+            width: 90%;
+            max-width: 400px; 
+            text-align: left; /* Align text left for more professional feel */
+        }
+        .confirm-modal-content h3 {
+            font-size: 1.15rem; 
+            font-weight: 600; 
+            color: var(--nf-text-primary);
+            margin-bottom: 0.75rem; 
+        }
+        .confirm-modal-content p {
+            font-size: 0.9rem; 
+            color: var(--nf-text-secondary);
+            margin-bottom: 1.5rem; 
+            line-height: 1.6;
+        }
+        .confirm-modal-buttons {
+            display: flex;
+            justify-content: flex-end; /* Align buttons to the right */
+            gap: 0.75rem; 
+        }
+        .confirm-modal-btn {
+            padding: 0.5rem 1rem; 
+            border: 1px solid transparent;
+            border-radius: 0.375rem; 
+            font-size: 0.875rem; 
+            font-weight: 500; /* Medium weight */
+            cursor: pointer;
+            transition: background-color 0.2s ease, transform 0.1s ease, border-color 0.2s ease;
+        }
+        .confirm-modal-btn:active {
+            transform: scale(0.98);
+        }
+        #confirm-delete-action-btn {
+            background-color: var(--nf-accent-destructive);
+            color: var(--nf-white);
+            border-color: var(--nf-accent-destructive);
+        }
+        #confirm-delete-action-btn:hover {
+            background-color: var(--nf-accent-destructive-hover);
+            border-color: var(--nf-accent-destructive-hover);
+        }
+        #cancel-delete-action-btn {
+            background-color: transparent;
+            color: var(--nf-text-secondary);
+            border-color: var(--nf-border-secondary);
+        }
+        #cancel-delete-action-btn:hover {
+            background-color: var(--nf-grey-lightest);
+            border-color: var(--nf-grey-medium);
+        }
+
+        /* Mobile Responsiveness - Breakpoint e.g., 768px */
+        @media (max-width: 768px) {
+            #sidebar {
+                position: absolute;
+                top: 0;
+                left: 0;
+                height: 100%;
+                transform: translateX(-100%); 
+                border-right: 1px solid var(--nf-border-primary); 
+                box-shadow: 2px 0 5px rgba(0,0,0,0.1); 
+            }
+            #sidebar.visible {
+                transform: translateX(0); 
+            }
+            #main-chat-area {
+                width: 100%; 
+            }
+            #mobile-sidebar-toggle {
+                display: block; 
+            }
+            #chat-header-title {
+                 margin-left: 2.5rem; 
+                 text-align: left; 
+            }
+             #current-thread-model {
+                font-size: 0.6875rem; 
+                padding: 0.15rem 0.3rem;
+            }
+
+            .confirm-modal-buttons {
+                flex-direction: row; /* Keep side-by-side on mobile too if space allows */
+                justify-content: flex-end;
+            }
+             .message {
+                max-width: 90%; /* Allow slightly more width on mobile */
+                font-size: 0.85rem;
+            }
+            #controls {
+                padding: 0.5rem;
+                gap: 0.125rem;
+            }
+            #controls button, #controls #file-label {
+                width: 34px;
+                height: 34px;
+                font-size: 1.05rem;
+            }
+            #user-input {
+                font-size: 0.85rem;
+                min-height: 34px;
+                padding: 0.4rem 0.6rem;
+            }
+            #staged-files-preview-container {
+                max-height: 80px;
+            }
+            .staged-file-item {
+                padding: 0.25rem 0.375rem;
+                font-size: 0.75rem;
+            }
+            .staged-file-thumbnail, .staged-file-icon {
+                width: 24px; height: 24px; font-size: 1rem; margin-right: 0.25rem;
+            }
+        }
+
+
+    </style>
+</head>
+<body>
+
+    <div id="app-wrapper">
+        <div id="sidebar"> <!-- Sidebar content -->
+          <div id="sidebar-header">
+            <button id="new-chat-btn" class="btn-nf btn-nf-primary">+ New Conversation</button>
+          </div>
+          <ul id="thread-list">
+          </ul>
+          <div id="sidebar-footer">
+            <label for="model-selector" id="model-selector-label">AI Model:</label>
+            <select id="model-selector" class="form-input-nf"> 
+              <option value="gemini">Gemini</option>
+              <option value="chatgpt">ChatGPT</option>
+              <option value="claude">Claude</option>
+              <option value="deepseek">DeepSeek</option>
+              <option value="perplexity">Perplexity</option>
+              <option value="Mistral">Mistral</option>
+              <option value="ollama">Ollama</option>
+            </select>
+          </div>
+        </div>
+
+        <div id="main-chat-area">
+          <div id="chat-container">
+            <div id="chat-header">
+                <button id="mobile-sidebar-toggle" aria-label="Toggle sidebar">
+                    <i class="fas fa-bars"></i>
+                </button>
+                <span id="chat-header-title">NoFriction Intel Chat</span> 
+                <span id="current-thread-model">(Gemini)</span>
+            </div>
+            <div id="messages">
+                <div id="typing-indicator" class="message" style="display: none;">
+                </div>
+            </div>
+            <div id="controls">
+              <label id="file-label" title="Attach Files">📎
+                <input type="file" id="file-btn" multiple> 
+              </label>
+              <button id="speak-btn" title="Speak Message (Mic)" disabled>🎤</button>
+              <div id="input-wrapper"> 
+                <div id="staged-files-preview-container">
+                </div>
+                <input type="text" id="user-input" class="form-input-nf" placeholder="Type a message or paste images..." autocomplete="off">
+              </div>
+              <button id="send-btn" title="Send Message">➤</button>
+              <label class="switch" title="Enable/Disable Voice Output">
+                <input type="checkbox" id="audio-enable">
+                <span class="slider"></span>
+              </label>
+            </div>
+            <div id="chat-footer">Powered by <a href="https://www.nofriction.io" target="_blank">NoFriction</a></div>
+          </div>
+        </div>
+    </div>
+
+    <!-- Custom Confirmation Modal for Deleting Threads -->
+    <div id="custom-confirm-modal" class="confirm-modal-overlay">
+        <div class="confirm-modal-content">
+            <h3 id="confirm-modal-title">Confirm Deletion</h3>
+            <p id="confirm-modal-text">Are you sure?</p>
+            <div class="confirm-modal-buttons">
+                <button id="cancel-delete-action-btn" class="confirm-modal-btn">Cancel</button>
+                <button id="confirm-delete-action-btn" class="confirm-modal-btn">Delete</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/emoji-toolkit@8.0.0/lib/js/joypixels.min.js"></script>
+
+    <script>
+// js/chatbot.js - Chatbot Functionality with Mobile Responsiveness
+
+// --- CONSTANTS AND DOM ELEMENTS (Global Scope) ---
+const chatbot_CHAT_ENDPOINT = 'https://caseyp.app.n8n.cloud/webhook/nofrictionchatbot'; 
+
+const MAX_FILES_COUNT = 10;
+const MAX_FILE_SIZE_MB = 5;
+const MAX_FILE_SIZE_BYTES = MAX_FILE_SIZE_MB * 1024 * 1024;
+
+// DOM elements
+let chatbot_appWrapper;
+let chatbot_newChatBtn;
+let chatbot_threadListEl;
+let chatbot_modelSelector;
+let chatbot_currentThreadModelEl;
+let chatbot_msgsContainer;
+let chatbot_controls;
+let chatbot_sendBtn;
+let chatbot_fileInput;
+let chatbot_speakBtn;
+let chatbot_audioChk;
+let chatbot_typingIndicator;
+let chatbot_userInput; 
+let chatbot_stagedFilesPreviewContainer; 
+let chatbot_sidebar; 
+let chatbot_mobileSidebarToggleBtn; 
+
+// Custom Confirm Modal Elements
+let chatbot_customConfirmModal;
+let chatbot_confirmModalText;
+let chatbot_confirmDeleteActionBtn;
+let chatbot_cancelDeleteActionBtn;
+let chatbot_threadIdToDeleteGlobally = null; 
+
+// --- STATE VARIABLES (Global Scope) ---
+let chatbot_currentThreadId = null;
+let chatbot_currentThreadMessages = [];
+let chatbot_allThreadsMetadata = [];
+let chatbot_currentSelectedModel; 
+let chatbot_appInitialized = false;
+let chatbot_stagedFiles = []; 
+
+
+// --- CORE UTILITY & RENDERING FUNCTIONS (Defined early) ---
+
+/**
+ * Scrolls the messages container to the bottom.
+ */
+function chatbot_scrollToBottom(){ 
+    setTimeout(() => { 
+        if(chatbot_msgsContainer) chatbot_msgsContainer.scrollTop = chatbot_msgsContainer.scrollHeight; 
+    }, 50); 
+}
+
+/**
+ * Appends a message object to the DOM.
+ * @param {object} message - The message object to append.
+ */
+function chatbot_appendMessageToDOM(message) {
+    if (!chatbot_msgsContainer || !chatbot_typingIndicator) {
+        console.error("Chatbot: Message container or typing indicator not found for appendMessageToDOM.");
+        return;
+    }
+    const div = document.createElement('div');
+    div.className = 'message ' + message.role; 
+    
+    if (message.files && message.files.length > 0) {
+        message.files.forEach(fileInfo => {
+            const fileDiv = document.createElement('div');
+            fileDiv.className = 'message-file-attachment';
+
+            const icon = document.createElement('i');
+            icon.className = `message-file-icon ${fileInfo.isImage ? chatbot_getFileIconClass(fileInfo.type) : chatbot_getFileIconClass(fileInfo.type)}`;
+            
+            if (fileInfo.isImage && fileInfo.dataUrl) { 
+                const imgThumb = document.createElement('img');
+                imgThumb.src = fileInfo.dataUrl;
+                imgThumb.alt = fileInfo.name;
+                imgThumb.style.width = '32px';
+                imgThumb.style.height = '32px';
+                imgThumb.style.objectFit = 'cover';
+                imgThumb.style.marginRight = '0.5rem';
+                imgThumb.style.borderRadius = '0.25rem';
+                fileDiv.appendChild(imgThumb);
+            } else {
+                fileDiv.appendChild(icon);
+            }
+
+            const fileInfoDiv = document.createElement('div');
+            fileInfoDiv.className = 'message-file-info';
+            const fileNameSpan = document.createElement('span');
+            fileNameSpan.className = 'message-file-name';
+            fileNameSpan.textContent = fileInfo.name;
+            const fileSizeSpan = document.createElement('span');
+            fileSizeSpan.className = 'message-file-size';
+            fileSizeSpan.textContent = `${(fileInfo.size / 1024 / 1024).toFixed(2)} MB`;
+            
+            fileInfoDiv.appendChild(fileNameSpan);
+            fileInfoDiv.appendChild(fileSizeSpan);
+            fileDiv.appendChild(fileInfoDiv);
+            div.appendChild(fileDiv);
+        });
+    }
+
+    const contentDiv = document.createElement('div');
+    contentDiv.className = 'message-content'; 
+    let htmlContent = message.content || ""; 
+
+    if (window.marked && typeof window.marked.parse === 'function') {
+        try {
+            marked.use({ breaks: true, gfm: true }); 
+            htmlContent = marked.parse(htmlContent, { sanitize: false }); 
+        } catch (e) {
+            console.warn("Chatbot: Error parsing markdown, falling back to plain text.", e);
+            htmlContent = (message.content || "").replace(/\n/g, '<br>');
+        }
+    } else {
+        htmlContent = (message.content || "").replace(/\n/g, '<br>');
+    }
+
+    if (window.joypixels && typeof window.joypixels.toImage === 'function') {
+        htmlContent = joypixels.toImage(htmlContent);
+    }
+
+    contentDiv.innerHTML = htmlContent;
+    div.appendChild(contentDiv);
+
+    const timeSpan = document.createElement('span');
+    timeSpan.className = 'timestamp';
+    timeSpan.textContent = new Date(message.timestamp).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+    div.appendChild(timeSpan);
+    
+    chatbot_msgsContainer.insertBefore(div, chatbot_typingIndicator);
+    chatbot_scrollToBottom();
+
+    if (message.role === 'bot' && chatbot_audioChk && chatbot_audioChk.checked && message.content) {
+        let textToSpeak = contentDiv.textContent || contentDiv.innerText || ""; 
+        if (window.joypixels && typeof joypixels.imageToShortname === 'function' && typeof joypixels.shortnameToUnicode === 'function') {
+            textToSpeak = joypixels.shortnameToUnicode(joypixels.imageToShortname(textToSpeak));
+        }
+        chatbot_speak(textToSpeak);
+    }
+}
+
+/**
+ * Renders all messages for the current thread.
+ */
+function chatbot_renderMessages() {
+    if (!chatbot_msgsContainer) {
+        console.error("Chatbot: Message container not found for renderMessages.");
+        return;
+    }
+    const messageElements = chatbot_msgsContainer.querySelectorAll('.message:not(#typing-indicator)');
+    messageElements.forEach(el => el.remove());
+
+    chatbot_currentThreadMessages.forEach(m => chatbot_appendMessageToDOM(m));
+    chatbot_scrollToBottom();
+}
+
+
+// --- INITIALIZATION ---
+function initializeGlobalJoypixelsConfig() {
+    if (window.joypixels) {
+      joypixels.emojiSize = '64'; 
+      joypixels.imagePathPNG = 'https://cdn.jsdelivr.net/npm/emoji-toolkit@8.0.0/extras/png/64/';
+    }
+}
+
+function chatbot_assignDOMelements() {
+    chatbot_appWrapper = document.getElementById('app-wrapper');
+    chatbot_newChatBtn = document.getElementById('new-chat-btn');
+    chatbot_threadListEl = document.getElementById('thread-list');
+    chatbot_modelSelector = document.getElementById('model-selector');
+    chatbot_currentThreadModelEl = document.getElementById('current-thread-model');
+    chatbot_msgsContainer = document.getElementById('messages');
+    chatbot_controls = document.getElementById('controls');
+    chatbot_sendBtn = document.getElementById('send-btn');
+    chatbot_fileInput = document.getElementById('file-btn'); 
+    chatbot_speakBtn = document.getElementById('speak-btn');
+    chatbot_audioChk = document.getElementById('audio-enable');
+    chatbot_typingIndicator = document.getElementById('typing-indicator');
+    chatbot_stagedFilesPreviewContainer = document.getElementById('staged-files-preview-container');
+    chatbot_sidebar = document.getElementById('sidebar'); 
+    chatbot_mobileSidebarToggleBtn = document.getElementById('mobile-sidebar-toggle'); 
+
+    chatbot_customConfirmModal = document.getElementById('custom-confirm-modal');
+    chatbot_confirmModalText = document.getElementById('confirm-modal-text');
+    chatbot_confirmDeleteActionBtn = document.getElementById('confirm-delete-action-btn');
+    chatbot_cancelDeleteActionBtn = document.getElementById('cancel-delete-action-btn');
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+    chatbot_assignDOMelements(); 
+    initializeGlobalJoypixelsConfig(); 
+
+    if (chatbot_appWrapper) { 
+        chatbot_appWrapper.style.display = 'flex'; 
+        if (!chatbot_appInitialized) { 
+            chatbot_initializeApp(); 
+            chatbot_appInitialized = true; 
+        }
+    } else {
+        console.error("Chatbot Error: #app-wrapper not found. Chatbot cannot initialize.");
+    }
+});
+
+function chatbot_initializeApp(){
+    console.log("Chatbot: Initializing app with NoFriction Intel style...");
+    if (!chatbot_modelSelector || !chatbot_newChatBtn || !chatbot_stagedFilesPreviewContainer || !chatbot_customConfirmModal || !chatbot_sidebar || !chatbot_mobileSidebarToggleBtn) {
+        console.error("Chatbot: One or more essential DOM elements are missing. Initialization cannot proceed.");
+        chatbot_assignDOMelements(); 
+        if (!chatbot_modelSelector || !chatbot_customConfirmModal || !chatbot_sidebar || !chatbot_mobileSidebarToggleBtn) { 
+             console.error("Chatbot: Critical elements still missing after re-assign.");
+             return; 
+        }
+    }
+    
+    chatbot_currentSelectedModel = chatbot_modelSelector.value; 
+    if (chatbot_currentThreadModelEl) { 
+        chatbot_currentThreadModelEl.textContent = `(${chatbot_currentSelectedModel})`;
+    }
+
+    chatbot_setupEnhancedInput(); 
+    chatbot_addEventListeners(); 
+    chatbot_loadAndDisplayThreads(); 
+    chatbot_setupSpeechRecognition();
+    if (chatbot_speakBtn && chatbot_audioChk) { 
+        chatbot_speakBtn.disabled = !chatbot_audioChk.checked;
+    }
+}
+
+function chatbot_setupEnhancedInput() {
+    const originalInput = document.getElementById('user-input');
+    if (!originalInput) {
+        console.error('Chatbot Error: Could not find element with id="user-input"');
+        return;
+    }
+    chatbot_userInput = originalInput;
+}
+
+function chatbot_addEventListeners() {
+    if (chatbot_newChatBtn) chatbot_newChatBtn.addEventListener('click', chatbot_startNewThread);
+    if (chatbot_modelSelector) chatbot_modelSelector.addEventListener('change', chatbot_handleModelSelectionChange);
+    
+    if (chatbot_sendBtn) chatbot_sendBtn.addEventListener('click', (e) => { e.preventDefault(); chatbot_sendMessage(); });
+    
+    if (chatbot_userInput) {
+        chatbot_userInput.addEventListener('keydown', e => { if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); chatbot_sendMessage(); } });
+        chatbot_userInput.addEventListener('paste', chatbot_handlePaste);
+    } else {
+        console.warn("Chatbot: chatbot_userInput is not defined. Some event listeners not attached.");
+    }
+    
+    if (chatbot_fileInput) chatbot_fileInput.addEventListener('change', chatbot_handleFileUpload);
+    
+    if (chatbot_audioChk && chatbot_speakBtn) {
+        chatbot_audioChk.addEventListener('change', () => { 
+            chatbot_speakBtn.disabled = !chatbot_audioChk.checked; 
+            if (!chatbot_audioChk.checked && window.speechSynthesis) {
+                window.speechSynthesis.cancel(); 
+            }
+        });
+    }
+
+    if (chatbot_mobileSidebarToggleBtn && chatbot_sidebar) {
+        chatbot_mobileSidebarToggleBtn.addEventListener('click', () => {
+            chatbot_sidebar.classList.toggle('visible');
+        });
+    }
+
+    if (chatbot_confirmDeleteActionBtn) {
+        chatbot_confirmDeleteActionBtn.addEventListener('click', () => {
+            const threadIdToDelete = chatbot_threadIdToDeleteGlobally; 
+            
+            if(chatbot_customConfirmModal) chatbot_customConfirmModal.classList.remove('visible');
+            chatbot_threadIdToDeleteGlobally = null; 
+
+            if (threadIdToDelete) {
+                chatbot_deleteThread(threadIdToDelete); 
+            }
+        });
+    }
+    if (chatbot_cancelDeleteActionBtn) {
+        chatbot_cancelDeleteActionBtn.addEventListener('click', () => {
+            if(chatbot_customConfirmModal) chatbot_customConfirmModal.classList.remove('visible');
+            chatbot_threadIdToDeleteGlobally = null; 
+        });
+    }
+    if (chatbot_customConfirmModal) {
+        chatbot_customConfirmModal.addEventListener('click', (event) => {
+            if (event.target === chatbot_customConfirmModal) {
+                chatbot_customConfirmModal.classList.remove('visible');
+                chatbot_threadIdToDeleteGlobally = null; 
+            }
+        });
+    }
+}
+
+// --- FILE HANDLING LOGIC (Multiple Files) ---
+function chatbot_getFileIconClass(fileType) {
+    if (fileType.startsWith('image/')) return 'fas fa-file-image';
+    if (fileType === 'application/pdf') return 'fas fa-file-pdf';
+    if (fileType.includes('wordprocessingml') || fileType === 'application/msword') return 'fas fa-file-word';
+    if (fileType.includes('presentationml') || fileType === 'application/vnd.ms-powerpoint') return 'fas fa-file-powerpoint';
+    if (fileType.includes('spreadsheetml') || fileType === 'application/vnd.ms-excel') return 'fas fa-file-excel';
+    if (fileType === 'text/plain') return 'fas fa-file-alt';
+    if (fileType.startsWith('audio/')) return 'fas fa-file-audio';
+    if (fileType.startsWith('video/')) return 'fas fa-file-video';
+    if (fileType === 'application/zip' || fileType === 'application/x-rar-compressed') return 'fas fa-file-archive';
+    return 'fas fa-file'; 
+}
+
+function chatbot_handleFileUpload(event) {
+    const files = event.target.files;
+    if (!files) return;
+
+    for (let i = 0; i < files.length; i++) {
+        if (chatbot_stagedFiles.length >= MAX_FILES_COUNT) {
+            alert(`You can upload a maximum of ${MAX_FILES_COUNT} files.`);
+            break; 
+        }
+        const file = files[i];
+        if (file.size > MAX_FILE_SIZE_BYTES) {
+            alert(`File "${file.name}" is too large (max ${MAX_FILE_SIZE_MB}MB).`);
+            continue; 
+        }
+        chatbot_addStagedFile(file);
+    }
+    event.target.value = ''; 
+}
+
+function chatbot_handlePaste(event) {
+    const items = (event.clipboardData || window.clipboardData).items;
+    let imagePasted = false;
+    for (const item of items) {
+        if (item.type.startsWith('image/')) {
+            if (chatbot_stagedFiles.length >= MAX_FILES_COUNT) {
+                alert(`You can attach a maximum of ${MAX_FILES_COUNT} files/images.`);
+                break;
+            }
+            const blob = item.getAsFile();
+            if (blob) {
+                if (blob.size > MAX_FILE_SIZE_BYTES) {
+                    alert(`Pasted image "${blob.name || 'image'}" is too large (max ${MAX_FILE_SIZE_MB}MB).`);
+                    continue;
+                }
+                chatbot_addStagedFile(blob);
+                imagePasted = true;
+            }
+        }
+    }
+    if (imagePasted) {
+        event.preventDefault(); 
+    }
+}
+
+function chatbot_addStagedFile(fileObject) {
+    const isImage = fileObject.type.startsWith('image/');
+    const fileData = {
+        name: fileObject.name || `pasted_image_${Date.now()}.${fileObject.type.split('/')[1] || 'png'}`, 
+        type: fileObject.type,
+        size: fileObject.size,
+        isImage: isImage,
+        fileObject: fileObject, 
+        dataUrl: null 
+    };
+
+    if (isImage) {
+        const reader = new FileReader();
+        reader.onload = (e) => {
+            fileData.dataUrl = e.target.result;
+            chatbot_stagedFiles.push(fileData);
+            chatbot_renderStagedFilesPreview();
+        };
+        reader.onerror = (error) => {
+            console.error("Chatbot: Error reading image file for staging:", error);
+        };
+        reader.readAsDataURL(fileObject);
+    } else {
+        chatbot_stagedFiles.push(fileData);
+        chatbot_renderStagedFilesPreview();
+    }
+}
+
+function chatbot_renderStagedFilesPreview() {
+    if (!chatbot_stagedFilesPreviewContainer) return;
+    chatbot_stagedFilesPreviewContainer.innerHTML = ''; 
+
+    chatbot_stagedFiles.forEach((fileData, index) => {
+        const itemDiv = document.createElement('div');
+        itemDiv.className = 'staged-file-item';
+
+        let previewElement;
+        if (fileData.isImage && fileData.dataUrl) {
+            previewElement = document.createElement('img');
+            previewElement.src = fileData.dataUrl;
+            previewElement.alt = fileData.name;
+            previewElement.className = 'staged-file-thumbnail';
+        } else {
+            previewElement = document.createElement('i');
+            previewElement.className = `staged-file-icon ${chatbot_getFileIconClass(fileData.type)}`;
+        }
+        itemDiv.appendChild(previewElement);
+
+        const infoDiv = document.createElement('div');
+        infoDiv.className = 'staged-file-info';
+        
+        const nameSpan = document.createElement('span');
+        nameSpan.className = 'staged-file-name';
+        nameSpan.textContent = fileData.name;
+        infoDiv.appendChild(nameSpan);
+
+        const sizeSpan = document.createElement('span');
+        sizeSpan.className = 'staged-file-size';
+        sizeSpan.textContent = `${(fileData.size / 1024 / 1024).toFixed(2)} MB`;
+        infoDiv.appendChild(sizeSpan);
+        itemDiv.appendChild(infoDiv);
+
+        const removeBtn = document.createElement('button');
+        removeBtn.className = 'remove-staged-file-btn';
+        removeBtn.innerHTML = '&times;';
+        removeBtn.title = 'Remove file';
+        removeBtn.onclick = () => chatbot_removeStagedFile(index);
+        itemDiv.appendChild(removeBtn);
+
+        chatbot_stagedFilesPreviewContainer.appendChild(itemDiv);
+    });
+}
+
+function chatbot_removeStagedFile(index) {
+    chatbot_stagedFiles.splice(index, 1);
+    chatbot_renderStagedFilesPreview();
+}
+
+function chatbot_clearAllStagedFiles() {
+    chatbot_stagedFiles = [];
+    if (chatbot_stagedFilesPreviewContainer) {
+        chatbot_stagedFilesPreviewContainer.innerHTML = '';
+    }
+    if (chatbot_fileInput) chatbot_fileInput.value = ''; 
+}
+
+
+// --- CORE CHATBOT LOGIC (SENDING MESSAGES) ---
+async function chatbot_sendMessage() {
+    if (!chatbot_userInput) {
+        console.error("Chatbot: User input element not found. Cannot send message.");
+        return;
+    }
+    const text = chatbot_userInput.value.trim();
+    if (!text && chatbot_stagedFiles.length === 0) return;
+
+    const filesForHistory = chatbot_stagedFiles.map(sf => ({
+        name: sf.name,
+        type: sf.type,
+        size: sf.size,
+        isImage: sf.isImage,
+        dataUrl: sf.isImage ? sf.dataUrl : null 
+    }));
+
+    const userMessageContent = text || `Sent ${chatbot_stagedFiles.length} file(s)`;
+    const userMessage = { 
+        role: 'user', 
+        content: userMessageContent, 
+        timestamp: new Date().toISOString(), 
+        files: filesForHistory 
+    };
+    
+    chatbot_currentThreadMessages.push(userMessage);
+    chatbot_appendMessageToDOM(userMessage); 
+    chatbot_updateThreadMetadataOnInteraction(true, userMessageContent);
+    chatbot_saveCurrentThreadMessages();
+
+    const modelForAPI = chatbot_currentSelectedModel;
+    const messagesForBackend = chatbot_currentThreadMessages.map(msg => {
+        const { files, ...restOfMsg } = msg; 
+        return restOfMsg;
+    });
+
+    chatbot_userInput.value = '';
+    
+    chatbot_showTypingIndicatorDots();
+
+    const formData = new FormData();
+    if (text) formData.append('text', text);
+    
+    chatbot_stagedFiles.forEach((stagedFile, index) => {
+        formData.append(`file${index}`, stagedFile.fileObject, stagedFile.name);
+    });
+    formData.append('fileCount', chatbot_stagedFiles.length); 
+
+    chatbot_clearAllStagedFiles(); 
+
+    formData.append('threadId', chatbot_currentThreadId);
+    formData.append('model', modelForAPI);
+    formData.append('messages', JSON.stringify(messagesForBackend)); 
+
+    try {
+        const response = await fetch(chatbot_CHAT_ENDPOINT, { method: 'POST', body: formData });
+        if (!response.ok) {
+            let errorBodyText = "Could not retrieve error body.";
+            try {
+                errorBodyText = await response.text(); 
+            } catch (parseError) {
+                console.warn("Chatbot: Could not parse error response body:", parseError);
+            }
+            console.error("Chatbot API Error Response Body:", errorBodyText);
+            throw new Error(`API Error (${response.status}): ${response.statusText}. Body: ${errorBodyText.substring(0, 200)}`);
+        }
+        const jsonResponse = await response.json();
+        if (!jsonResponse.reply && typeof jsonResponse.reply !== 'string') { 
+            console.error("Chatbot: Invalid or empty reply from bot. Full response:", jsonResponse); // Log the full response
+            throw new Error("The bot's response was unclear. Please try again or rephrase your message. (Details logged to console)");
+        }
+        const botMessage = { 
+            role: 'bot', 
+            content: jsonResponse.reply, 
+            timestamp: new Date().toISOString(), 
+            modelUsed: jsonResponse.modelUsed || modelForAPI 
+        };
+        chatbot_currentThreadMessages.push(botMessage);
+        chatbot_appendMessageToDOM(botMessage);
+        chatbot_updateThreadMetadataOnInteraction(false); 
+        chatbot_saveCurrentThreadMessages();
+    } catch (e) {
+        console.error("Chatbot: Error in sendMessage (fetch or subsequent processing):", e);
+        if (e instanceof TypeError && e.message.toLowerCase().includes("failed to fetch")) { 
+            console.error("Chatbot: The 'Failed to fetch' error often indicates a network issue, DNS problem, or CORS policy blocking the request. Please check the N8N webhook's CORS configuration to ensure it allows requests from the origin this page is served from. Also, verify network connectivity to the endpoint:", chatbot_CHAT_ENDPOINT);
+            const corsErrorMessage = { role: 'bot', content: 'Error: Could not connect to the server. This might be a CORS issue or network problem. Please check console for details.', timestamp: new Date().toISOString() };
+            chatbot_appendMessageToDOM(corsErrorMessage);
+        } else {
+            const errorMessage = { role: 'bot', content: e.message, timestamp: new Date().toISOString() }; // Display the specific error message
+            chatbot_appendMessageToDOM(errorMessage);
+        }
+    } finally {
+        chatbot_hideTypingIndicator();
+    }
+}
+
+
+// --- THREAD MANAGEMENT AND OTHER UTILITIES ---
+function chatbot_loadAndDisplayThreads(){ 
+    chatbot_showTypingIndicatorCustomText('Loading conversations...'); 
+    chatbot_allThreadsMetadata = JSON.parse(localStorage.getItem('nofriction_threads') || '[]'); 
+    chatbot_allThreadsMetadata.sort((a,b) => new Date(b.lastUpdated) - new Date(a.lastUpdated)); 
+    chatbot_renderThreadList(); 
+    const lastActiveId = localStorage.getItem('nofriction_last_active_thread_id'); 
+    let threadToLoad = null; 
+    if (lastActiveId && chatbot_allThreadsMetadata.some(t => t.id === lastActiveId)) { 
+        if (localStorage.getItem(`nofriction_msgs_${lastActiveId}`)) { 
+            threadToLoad = lastActiveId; 
+        } else { 
+            localStorage.removeItem('nofriction_last_active_thread_id'); 
+        } 
+    } 
+    if (!threadToLoad && chatbot_allThreadsMetadata.length > 0) { 
+        threadToLoad = chatbot_allThreadsMetadata[0].id; 
+    } 
+    
+    // Ensure renderMessages is defined before calling loadThread or startNewThread
+    if (typeof chatbot_renderMessages !== 'function') {
+        console.error('CRITICAL: chatbot_renderMessages is not defined before initial thread load/start!');
+        chatbot_hideTypingIndicator();
+        return;
+    }
+
+    if (threadToLoad) { 
+        chatbot_loadThread(threadToLoad); 
+    } else { 
+        chatbot_startNewThread(); 
+    } 
+    chatbot_hideTypingIndicator(); 
+}
+
+function chatbot_renderThreadList(){ 
+    if (!chatbot_threadListEl) return; 
+    chatbot_threadListEl.innerHTML = ''; 
+    if (chatbot_allThreadsMetadata.length === 0) { 
+        chatbot_threadListEl.innerHTML = '<li class="no-threads-message">No conversations yet.</li>'; return; 
+    } 
+    chatbot_allThreadsMetadata.forEach(t => { 
+        const li = document.createElement('li'); 
+        li.dataset.threadId = t.id; 
+        li.className = t.id === chatbot_currentThreadId ? 'active-thread' : ''; 
+        
+        const threadInfoContainer = document.createElement('div');
+        threadInfoContainer.className = 'thread-info-container'; 
+        threadInfoContainer.innerHTML = `<span class="thread-title">${t.title || "Chat"}</span><span class="thread-details">${t.model || "Default"} | ${new Date(t.lastUpdated).toLocaleDateString([], {month:'short', day:'numeric', hour:'2-digit', minute:'2-digit'})}</span>`; 
+        threadInfoContainer.addEventListener('click', (e) => { 
+            e.stopPropagation(); 
+            chatbot_loadThread(t.id); 
+        }); 
+        li.appendChild(threadInfoContainer); 
+        
+        const deleteBtn = document.createElement('button'); 
+        deleteBtn.className = 'delete-thread-btn'; 
+        deleteBtn.innerHTML = '&#x1F5D1;'; 
+        deleteBtn.title = `Delete conversation: "${t.title || "Chat"}"`; 
+        deleteBtn.addEventListener('click', (e) => { 
+            e.stopPropagation(); 
+            chatbot_confirmDeleteThread(t.id, t.title || "Chat"); 
+        }); 
+        li.appendChild(deleteBtn); 
+        chatbot_threadListEl.appendChild(li); 
+    }); 
+}
+
+/**
+ * Shows a custom confirmation modal for deleting a thread.
+ * @param {string} threadId - The ID of the thread to be deleted.
+ * @param {string} threadTitle - The title of the thread for the confirmation message.
+ */
+function chatbot_confirmDeleteThread(threadId, threadTitle) {
+    if (!chatbot_customConfirmModal || !chatbot_confirmModalText) {
+        console.error("Custom confirm modal elements not found. Falling back to window.confirm (which might be blocked).");
+        // Fallback, though likely won't work in the target environment
+        if (window.confirm(`Are you sure you want to delete the conversation: "${threadTitle}"?\nThis action cannot be undone.`)) {
+            chatbot_deleteThread(threadId);
+        }
+        return;
+    }
+    chatbot_threadIdToDeleteGlobally = threadId; // Store for the confirm button
+    chatbot_confirmModalText.textContent = `Are you sure you want to delete the conversation: "${threadTitle || 'this chat'}"? This action cannot be undone.`;
+    chatbot_customConfirmModal.classList.add('visible');
+}
+
+
+function chatbot_deleteThread(threadIdToDelete) { 
+    console.log("Chatbot: Deleting thread:", threadIdToDelete); 
+    chatbot_allThreadsMetadata = chatbot_allThreadsMetadata.filter(thread => thread.id !== threadIdToDelete); 
+    chatbot_saveAllThreadsMetadata(); 
+    localStorage.removeItem(`nofriction_msgs_${threadIdToDelete}`); 
+    if (localStorage.getItem('nofriction_last_active_thread_id') === threadIdToDelete) { 
+        localStorage.removeItem('nofriction_last_active_thread_id'); 
+    } 
+    if (chatbot_currentThreadId === threadIdToDelete) { 
+        chatbot_currentThreadId = null; 
+        chatbot_currentThreadMessages = []; 
+        if (chatbot_msgsContainer) {
+            const msgElements = chatbot_msgsContainer.querySelectorAll('.message:not(#typing-indicator)'); 
+            msgElements.forEach(el => el.remove()); 
+        }
+        if (chatbot_allThreadsMetadata.length > 0) { 
+            chatbot_loadThread(chatbot_allThreadsMetadata[0].id); 
+        } else { 
+            chatbot_startNewThread(); 
+        } 
+    } else { 
+        chatbot_renderThreadList(); 
+    } 
+}
+
+function chatbot_startNewThread(){ 
+    console.log("Chatbot: Starting new thread."); 
+    chatbot_currentThreadId = 't_' + Date.now() + Math.random().toString(16).slice(2); 
+    chatbot_currentThreadMessages = []; 
+    if (chatbot_modelSelector) chatbot_currentSelectedModel = chatbot_modelSelector.value; 
+    const newThreadMeta = {id: chatbot_currentThreadId, title: 'New Conversation', lastUpdated: new Date().toISOString(), model: chatbot_currentSelectedModel}; 
+    chatbot_allThreadsMetadata.unshift(newThreadMeta); 
+    chatbot_saveAllThreadsMetadata(); 
+    localStorage.setItem('nofriction_last_active_thread_id', chatbot_currentThreadId); 
+    chatbot_renderThreadList(); 
+    
+    if (typeof chatbot_renderMessages === 'function') {
+        chatbot_renderMessages(); 
+    } else {
+        console.error('CRITICAL: chatbot_renderMessages is not a function in chatbot_startNewThread!');
+    }
+
+    chatbot_addInitialBotGreetingIfNeeded(); 
+    if(chatbot_userInput) chatbot_userInput.focus(); 
+    if(chatbot_currentThreadModelEl) chatbot_currentThreadModelEl.textContent = `(${chatbot_currentSelectedModel})`; 
+    chatbot_saveCurrentThreadMessages(); 
+}
+
+function chatbot_loadThread(id){ 
+    console.log("Chatbot: Loading thread:", id); 
+    chatbot_currentThreadId = id; 
+    chatbot_currentThreadMessages = JSON.parse(localStorage.getItem(`nofriction_msgs_${id}`) || '[]'); 
+    const meta = chatbot_allThreadsMetadata.find(t => t.id === id); 
+    if(meta){ 
+        chatbot_currentSelectedModel = meta.model; 
+        if(chatbot_modelSelector) chatbot_modelSelector.value = meta.model; 
+        if(chatbot_currentThreadModelEl) chatbot_currentThreadModelEl.textContent = `(${meta.model})`; 
+        localStorage.setItem('nofriction_last_active_thread_id', chatbot_currentThreadId); 
+    } else { 
+        console.warn("Chatbot: Meta not found for thread:", id, ". Starting new thread or loading first available."); 
+        const firstThread = chatbot_allThreadsMetadata[0];
+        if (firstThread) {
+            chatbot_loadThread(firstThread.id); 
+        } else {
+            chatbot_startNewThread(); 
+        }
+        return; 
+    } 
+    chatbot_renderThreadList(); 
+
+    if (typeof chatbot_renderMessages === 'function') {
+        chatbot_renderMessages(); 
+    } else {
+        console.error('CRITICAL: chatbot_renderMessages is not a function in chatbot_loadThread!');
+    }
+
+    chatbot_addInitialBotGreetingIfNeeded(); 
+    chatbot_scrollToBottom(); 
+}
+
+function chatbot_handleModelSelectionChange(e) { 
+    chatbot_currentSelectedModel = e.target.value; 
+    if (chatbot_currentThreadId) { 
+        const activeThreadMeta = chatbot_allThreadsMetadata.find(t => t.id === chatbot_currentThreadId); 
+        if (activeThreadMeta) { 
+            activeThreadMeta.model = chatbot_currentSelectedModel; 
+            activeThreadMeta.lastUpdated = new Date().toISOString(); 
+            chatbot_allThreadsMetadata.sort((a,b) => new Date(b.lastUpdated) - new Date(a.lastUpdated)); 
+            chatbot_saveAllThreadsMetadata(); 
+            chatbot_renderThreadList(); 
+        } 
+        if(chatbot_currentThreadModelEl) chatbot_currentThreadModelEl.textContent = `(${chatbot_currentSelectedModel})`; 
+    } 
+}
+
+function chatbot_updateThreadMetadataOnInteraction(isNewMessage, firstUserMsgContent = null) { 
+    if (!chatbot_currentThreadId) return; 
+    const meta = chatbot_allThreadsMetadata.find(t => t.id === chatbot_currentThreadId); 
+    if (meta) { 
+        meta.lastUpdated = new Date().toISOString(); 
+        meta.model = chatbot_currentSelectedModel; 
+        if (isNewMessage && firstUserMsgContent && (meta.title === 'New Conversation' || meta.title === 'Chat' || !meta.title)) { 
+            meta.title = firstUserMsgContent.substring(0, 30) + (firstUserMsgContent.length > 30 ? '...' : ''); 
+        } 
+        chatbot_allThreadsMetadata.sort((a,b) => new Date(b.lastUpdated) - new Date(a.lastUpdated)); 
+        chatbot_saveAllThreadsMetadata(); 
+        chatbot_renderThreadList(); 
+        if(chatbot_currentThreadModelEl) chatbot_currentThreadModelEl.textContent = `(${chatbot_currentSelectedModel})`; 
+    } 
+}
+
+function chatbot_saveCurrentThreadMessages(){ 
+    if(chatbot_currentThreadId) {
+        localStorage.setItem(`nofriction_msgs_${chatbot_currentThreadId}`, JSON.stringify(chatbot_currentThreadMessages)); 
+    }
+}
+function chatbot_saveAllThreadsMetadata(){ 
+    localStorage.setItem('nofriction_threads', JSON.stringify(chatbot_allThreadsMetadata)); 
+}
+
+function chatbot_addInitialBotGreetingIfNeeded() { 
+    if (chatbot_currentThreadId && chatbot_currentThreadMessages.length === 0) { 
+        const greeting = { 
+            role: 'bot', 
+            content: 'Hello! How can I assist you today?', 
+            timestamp: new Date().toISOString(), 
+            modelUsed: chatbot_currentSelectedModel 
+        }; 
+        chatbot_currentThreadMessages.push(greeting); 
+        chatbot_appendMessageToDOM(greeting); 
+    } 
+}
+
+function chatbot_showTypingIndicatorDots(){ 
+    if(!chatbot_typingIndicator) return; 
+    chatbot_typingIndicator.innerHTML = '<span class="dot"></span><span class="dot"></span><span class="dot"></span>'; 
+    chatbot_typingIndicator.style.display = 'flex'; 
+    chatbot_scrollToBottom(); 
+}
+function chatbot_showTypingIndicatorCustomText(text) { 
+    if(!chatbot_typingIndicator) return; 
+    chatbot_typingIndicator.innerHTML = `<span class="typing-text">${text}</span>`; 
+    chatbot_typingIndicator.style.display = 'flex'; 
+    chatbot_scrollToBottom(); 
+}
+function chatbot_hideTypingIndicator(){ 
+    if(!chatbot_typingIndicator) return; 
+    chatbot_typingIndicator.style.display = 'none'; 
+}
+
+
+function chatbot_setupSpeechRecognition(){ 
+    if(!chatbot_speakBtn) return; 
+    const Rec = window.SpeechRecognition || window.webkitSpeechRecognition; 
+    if(!Rec){ 
+        chatbot_speakBtn.style.display = 'none'; 
+        console.warn("Chatbot: Speech Recognition not supported."); 
+        return; 
+    } 
+    const recognition = new Rec(); 
+    recognition.continuous = false; 
+    recognition.lang = 'en-US'; 
+    recognition.interimResults = false; 
+    
+    recognition.onresult = e => { 
+        if (chatbot_userInput) {
+            chatbot_userInput.value += (e.results[0][0].transcript + ' '); 
+            chatbot_userInput.focus(); 
+        }
+    }; 
+    recognition.onerror = e => { 
+        console.error("Chatbot: Speech recognition error:", e.error); 
+        chatbot_appendMessageToDOM({role: 'system', content: 'Speech recognition error: ' + e.error, timestamp: new Date().toISOString() });
+        chatbot_speakBtn.classList.remove('speaking'); 
+    }; 
+    recognition.onend = () => { 
+        chatbot_speakBtn.classList.remove('speaking');
+        if(recognition.isStarted) recognition.isStarted = false; 
+    }; 
+    recognition.onstart = () => { 
+        recognition.isStarted = true; 
+    }; 
+    
+    chatbot_speakBtn.addEventListener('click', () => { 
+        if (chatbot_speakBtn.disabled || (recognition && recognition.isStarted)) return; 
+        try { 
+            recognition.start(); 
+            chatbot_speakBtn.classList.add('speaking');
+        } catch(err) { 
+            console.error("Chatbot: Could not start recognition:", err); 
+            chatbot_speakBtn.classList.remove('speaking');
+        } 
+    }); 
+}
+
+function chatbot_speak(txt){ 
+    if(!chatbot_audioChk || !chatbot_audioChk.checked || !txt || !window.speechSynthesis) return; 
+    const utterance = new SpeechSynthesisUtterance(txt); 
+    window.speechSynthesis.cancel(); 
+    window.speechSynthesis.speak(utterance); 
+}
+    </script>
+    
+</body>
+</html>
